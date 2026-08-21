@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EACO Web3 AI Pay 2026</title>
+<meta name="description" content="EACO Web3 AI Pay 2026：AI Agent 自动支付、Solana、USDC/EACO、x402、MCP、Agent Wallet、北美开发者生态与90天路线图。">
+<style>
+:root{--bg:#07111f;--card:#0d1b2a;--card2:#10243a;--text:#eaf2f8;--muted:#9fb2c5;--accent:#66e3b4;--accent2:#6bb7ff;--warn:#ffd166;--line:#20364d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#06101c,#091726 45%,#06101c);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+a{color:var(--accent2);text-decoration:none}.wrap{max-width:1180px;margin:auto;padding:0 22px}
+.hero{padding:74px 0 55px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 80% 10%,rgba(102,227,180,.12),transparent 30%),radial-gradient(circle at 20% 0,rgba(107,183,255,.12),transparent 28%)}
+.badge{display:inline-block;border:1px solid #2e526e;border-radius:999px;padding:5px 12px;color:var(--accent);font-size:13px}
+h1{font-size:clamp(40px,7vw,76px);line-height:1.03;margin:18px 0 14px;letter-spacing:-2px}
+h2{font-size:30px;margin-top:0}h3{font-size:20px}.lead{font-size:20px;color:#c7d6e3;max-width:900px}.notice{margin-top:25px;padding:17px 20px;border-left:4px solid var(--warn);background:#1a1b17;border-radius:10px;color:#f6e8b7}
+nav{position:sticky;top:0;z-index:10;background:rgba(6,16,28,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:18px;overflow:auto;padding-top:12px;padding-bottom:12px}nav a{white-space:nowrap;font-size:14px;color:#bfd0df}
+section{padding:58px 0;border-bottom:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:linear-gradient(145deg,var(--card),#0a1726);border:1px solid var(--line);border-radius:16px;padding:22px}.card strong{color:var(--accent)}
+.kpi{font-size:34px;font-weight:800}.small{font-size:14px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--accent);background:#0b1928}
+.code{background:#050d16;border:1px solid #1d3144;border-radius:14px;padding:20px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#cce9ff;white-space:pre-wrap}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.node{padding:11px 15px;border:1px solid #31506b;border-radius:12px;background:#0b1a2a}.arrow{color:var(--accent)}
+.timeline{border-left:2px solid #31506b;padding-left:22px}.step{margin:0 0 25px}.step b{color:var(--accent)}
+ul{padding-left:22px}.risk{border-left:4px solid #e9a93a}.good{border-left:4px solid var(--accent)}
+footer{padding:45px 0;color:var(--muted);font-size:13px}
+@media(max-width:800px){.grid,.grid2{grid-template-columns:1fr}h1{letter-spacing:-1px}.hero{padding-top:50px}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap">
+<span class="badge">EACO · WEB3 · AI · PAYMENTS · 2026</span>
+<h1>EACO Web3 AI Pay</h1>
+<p class="lead">面向 AI Agent 自动支付、Solana 微支付、x402、MCP、Agent Wallet 与北美开发者生态的产品与增长蓝图。</p>
+<div class="notice"><b>重要合规声明：</b>本文是产品战略与技术规划，不构成美国证券、税务、货币传输、AML/KYC 或投资建议。2026-08-18 SEC 的相关内容属于拟议规则（proposed rules），不是“EACO 已获 SEC 批准”，也不能据此直接宣布 EACO 可以融资 500 万或 7500 万美元。正式实施前应由美国证券律师、会计师及合规顾问逐项确认。</div>
+</div>
+</header>
+
+<nav><div class="wrap">
+<a href="#vision">愿景</a><a href="#sec">SEC背景</a><a href="#architecture">技术架构</a><a href="#wallet">Agent Wallet</a><a href="#x402">x402 + MCP</a><a href="#products">产品</a><a href="#northamerica">北美社区</a><a href="#roadmap">90天</a><a href="#compliance">合规</a>
+</div></nav>
+
+<main>
+<section id="vision"><div class="wrap">
+<h2>01 · 核心定位</h2>
+<div class="grid">
+<div class="card"><div class="kpi">AI Agent</div><h3>让 AI 能行动</h3><p>从“回答问题”走向“发现服务 → 判断价格 → 获得授权 → 自动付款 → 获取结果 → 继续工作”。</p></div>
+<div class="card"><div class="kpi">Payment</div><h3>让 AI 能支付</h3><p>为每个 Agent 配置独立钱包、预算、权限、白名单、额度与交易审计。</p></div>
+<div class="card"><div class="kpi">Economy</div><h3>让 Agent 能交易</h3><p>形成 Agent-to-API、Agent-to-Service、Agent-to-Agent 的机器经济。</p></div>
+</div>
+<p style="margin-top:22px;font-size:19px"><b>建议定位：</b>“EACO = payment infrastructure for autonomous agents”。重点不是把 EACO 包装成“又一个 AI 币”，而是把 EACO 生态建设成可编程、可审计、标准兼容的 AI Agent 支付层。</p>
+</div></section>
+
+<section id="sec"><div class="wrap">
+<h2>02 · 2026-08-18 SEC：如何理解 $5M / $20M / $75M</h2>
+<div class="grid">
+<div class="card"><div class="kpi">$5M</div><h3>Startup Exemption</h3><p>拟议的创业融资豁免：符合条件时，四年期间累计上限 500 万美元。不是“每年 500 万”。</p></div>
+<div class="card"><div class="kpi">$20M</div><h3>Fundraising Tier 1</h3><p>拟议的第一层融资通道：12个月上限 2000万美元，并附有资格、披露等条件。</p></div>
+<div class="card"><div class="kpi">$75M</div><h3>Fundraising Tier 2</h3><p>拟议的第二层融资通道：12个月上限 7500万美元，披露、财务与持续报告要求更高。</p></div>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>关键理解</h3>
+<ul>
+<li><b>$75M 不是“SEC 给 Web3 项目的免费额度”。</b>它是拟议监管框架中的融资上限，必须满足发行人资格、披露、财务、持续报告等条件。</li>
+<li>Tier 1 / Tier 2 的 $20M / $75M 与现有 Regulation A 的两层资本形成框架存在明显对应关系。</li>
+<li>Safe Harbor 的重点不是“免监管卖币”，而是针对满足条件的 crypto asset / investment contract 情形，处理关键 managerial efforts 结束后的证券属性问题。</li>
+<li><b>Proposed ≠ Final。</b>在最终规则生效前，不应对外宣传“EACO 已获得 SEC 允许融资 $5M/$75M”。</li>
+</ul>
+<p class="small">建议核验：SEC Newsroom（2026-08-18）、SEC Proposed Rule 文本、最终 Federal Register 公布文本及后续解释。</p>
+</div>
+</div></section>
+
+<section id="architecture"><div class="wrap">
+<h2>03 · EACO AI Payment Architecture</h2>
+<div class="flow">
+<div class="node">Human</div><span class="arrow">→</span><div class="node">EACO Agent Wallet</div><span class="arrow">→</span><div class="node">Agent Policy</div><span class="arrow">→</span><div class="node">x402 / MCP</div><span class="arrow">→</span><div class="node">API / Service</div><span class="arrow">→</span><div class="node">Settlement</div>
+</div>
+<div class="grid2" style="margin-top:22px">
+<div class="card">
+<h3>支付资产层</h3>
+<table><tr><th>资产</th><th>建议角色</th></tr>
+<tr><td>USDC</td><td>稳定计价、结算、开发者最容易接受的第一支付方式</td></tr>
+<tr><td>USDT</td><td>全球 crypto 流动性入口；是否可在特定美国业务中使用需单独合规判断</td></tr>
+<tr><td>SOL</td><td>Solana 网络原生资产、Gas/生态结算</td></tr>
+<tr><td>wBNB</td><td>跨链/BNB Chain 生态资产；需独立处理跨链、托管与合规问题</td></tr>
+<tr><td>eCNH</td><td>应单独研究发行主体、储备、跨境支付、外汇与中国/香港相关规则，不能默认与 USDC 等同</td></tr>
+<tr><td>EACO</td><td>生态资产、支付/激励/服务折扣等真实 utility；具体证券属性须法律分析</td></tr>
+</table>
+</div>
+<div class="card">
+<h3>推荐的分层模型</h3>
+<div class="code">USDC / SOL / 其他支持资产
+          ↓
+Multi-Asset Payment Rails
+          ↓
+EACO Agent Payment Layer
+          ↓
+Agent Wallet + Spending Policy
+          ↓
+x402 / MCP
+          ↓
+AI API / Data / Compute / Storage
+          ↓
+On-chain Settlement + Audit Trail</div>
+<p>原则：不要一开始强迫开发者购买 EACO 才能使用产品。先用稳定币建立真实支付需求，再逐步增加 EACO 的生态用途。</p>
+</div>
+</div>
+</div></section>
+
+<section id="wallet"><div class="wrap">
+<h2>04 · EACO Agent Wallet：最先做的核心产品</h2>
+<div class="grid">
+<div class="card"><h3>独立身份</h3><p>每个 Agent 拥有 Agent ID、钱包、信誉、交易记录和服务权限。</p></div>
+<div class="card"><h3>预算控制</h3><p>月度、日度、单笔额度；例如月度 $100、每日 $5、单笔 $1。</p></div>
+<div class="card"><h3>策略控制</h3><p>允许 AI API、数据、计算；禁止高风险合约、任意转账；新地址或新合约需人工批准。</p></div>
+</div>
+<div class="card good" style="margin-top:18px">
+<h3>示例 Policy</h3>
+<div class="code">Agent: ResearchBot-001
+Wallet: Solana wallet
+Monthly limit: $100
+Daily limit: $5
+Max transaction: $1
+
+Allowed:
+✓ AI API
+✓ Data API
+✓ Cloud Compute
+✓ Search
+
+Restricted:
+△ New contract → human approval
+△ New recipient → human approval
+
+Blocked:
+✗ Gambling
+✗ Unknown high-risk contracts
+✗ Unbounded transfers</div>
+</div>
+</div></section>
+
+<section id="x402"><div class="wrap">
+<h2>05 · x402 + MCP：不要重新发明标准</h2>
+<div class="grid2">
+<div class="card">
+<h3>x402</h3>
+<p>HTTP 层的程序化支付模式：客户端请求资源 → 服务端返回 402 与支付条件 → Agent 钱包签名付款 → 再次请求 → 服务端验证并返回资源。</p>
+<div class="code">Agent
+ ↓ request
+API
+ ↓ HTTP 402 + price
+Agent Wallet
+ ↓ sign payment
+Solana / USDC / EACO
+ ↓
+API verifies
+ ↓
+Service result</div>
+</div>
+<div class="card">
+<h3>MCP</h3>
+<p>把 AI Agent 与工具连接起来。EACO 可以建设“EACO MCP Payment Server”，让 Agent 发现工具、读取价格并按策略自动支付。</p>
+<div class="code">Claude / GPT / Agent
+       ↓
+EACO MCP
+       ↓
+Tool discovery
+       ↓
+Price / policy
+       ↓
+Agent payment
+       ↓
+Tool result</div>
+</div>
+</div>
+<p style="margin-top:18px"><b>战略原则：</b>兼容 x402、Solana、MCP，而不是创造一个与主流生态隔离的新协议。</p>
+</div></section>
+
+<section id="products"><div class="wrap">
+<h2>06 · EACO 五大产品</h2>
+<div class="grid">
+<div class="card"><strong>01</strong><h3>EACO Agent Wallet</h3><p>AI 的钱包、预算、权限、交易审计。</p></div>
+<div class="card"><strong>02</strong><h3>EACO AgentPay</h3><p>让 AI 自动支付 API、数据、计算、存储等服务。</p></div>
+<div class="card"><strong>03</strong><h3>EACO MCP</h3><p>让 AI 通过 MCP 发现并购买付费工具。</p></div>
+<div class="card"><strong>04</strong><h3>EACO Agent Marketplace</h3><p>把 AI 能力变成按次计费的服务市场。</p></div>
+<div class="card"><strong>05</strong><h3>Agent-to-Agent Network</h3><p>让 Agent 之间自动发现、协商、支付和交付。</p></div>
+<div class="card"><strong>长期</strong><h3>Machine Economy</h3><p>形成 AI Agent 的微支付、服务交换和自动结算网络。</p></div>
+</div>
+<h3 style="margin-top:35px">Marketplace 示例</h3>
+<table><tr><th>服务</th><th>示例价格</th><th>支付方式</th></tr>
+<tr><td>Research Agent</td><td>$0.005 / request</td><td>USDC / EACO</td></tr>
+<tr><td>Translation Agent</td><td>$0.001 / 1K tokens</td><td>USDC / EACO</td></tr>
+<tr><td>Image Agent</td><td>$0.03 / image</td><td>USDC / EACO</td></tr>
+<tr><td>Search Agent</td><td>$0.002 / search</td><td>USDC / EACO</td></tr>
+<tr><td>Code Review Agent</td><td>$0.05 / review</td><td>USDC / EACO</td></tr>
+</table>
+<p class="small">以上价格只是产品设计示例，不代表市场报价。</p>
+</div></section>
+
+<section id="northamerica"><div class="wrap">
+<h2>07 · 北美英语开发者增长</h2>
+<div class="card">
+<h3>EACO North America → EACO Agent Builders</h3>
+<p>不要把第一社区定位成“投资群”，而是定位成 AI/Web3 Builders 社区。</p>
+<div class="grid">
+<div><b>开发者</b><br>Solana、MCP、AI、API、Web3</div>
+<div><b>创业者</b><br>AI startup、agent SaaS、payment infrastructure</div>
+<div><b>创作者</b><br>教程、Demo、技术内容、社区运营</div>
+</div>
+</div>
+<div class="grid2" style="margin-top:18px">
+<div class="card"><h3>社区主题</h3><ul><li>EACO Agent Builders</li><li>Solana Agent Payments</li><li>x402 + MCP workshops</li><li>Agent-to-Agent Economy</li><li>Open-source bounties</li></ul></div>
+<div class="card"><h3>30天挑战</h3><p><b>EACO Agent Challenge 30</b></p><p>目标：100 名参与者、20–100 个 Demo、至少 1 个可公开运行的自动支付 Agent。</p><p>奖励可采用 USDC/EACO 或开发者 grant，但不要宣传代币升值或投资回报。</p></div>
+</div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+<h2>08 · 90天执行路线</h2>
+<div class="timeline">
+<div class="step"><b>Day 1–30 · MVP</b><p>EACO Agent Wallet；Solana + USDC；x402；MCP；一个收费 API；Agent 自动支付 Demo；GitHub SDK。</p></div>
+<div class="step"><b>Day 31–60 · Marketplace</b><p>上线 Agent Marketplace；招募约 50 个开发者；每个开发者部署一个可收费 AI 服务；形成服务目录和交易数据。</p></div>
+<div class="step"><b>Day 61–90 · North America</b><p>EACO Agent Builders North America；X/Discord/Telegram/GitHub；每周 Demo；Hackathon；技术内容；开发者 bounty；目标 500–1,000 名英语开发者/参与者。</p></div>
+</div>
+<div class="card good">
+<h3>30天唯一技术验收标准</h3>
+<p style="font-size:20px"><b>一个 AI Agent 能在无人点击的情况下，使用受限钱包，通过 x402/Solana 自动支付约 $0.001–$0.01 USDC，购买真实 API 服务，并把结果返回给用户。</b></p>
+</div>
+</div></section>
+
+<section id="compliance"><div class="wrap">
+<h2>09 · 合规与融资：技术先行，融资分层</h2>
+<div class="grid2">
+<div class="card risk">
+<h3>不要这样做</h3>
+<ul>
+<li>不要宣传“SEC 已批准 EACO”。</li>
+<li>不要宣传“EACO 可以直接融资 $75M”。</li>
+<li>不要把代币升值、100倍回报作为 AI 产品卖点。</li>
+<li>不要把社区空投、贡献奖励自动当成“无证券风险”。</li>
+<li>不要把 USDC、USDT、SOL、wBNB、eCNH 的监管属性视为相同。</li>
+</ul>
+</div>
+<div class="card good">
+<h3>建议这样做</h3>
+<ul>
+<li>美国证券律师进行 Howey / investment-contract / token taxonomy 分析。</li>
+<li>建立 EACO US operating/foundation structure 的法律方案。</li>
+<li>建立 Treasury + on-chain/off-chain accounting ledger。</li>
+<li>明确每笔 consideration、USD fair value、用途和投资者/贡献者身份。</li>
+<li>若未来采用拟议融资路径，分别评估 $5M、$20M、$75M 的资格与披露要求。</li>
+</ul>
+</div>
+</div>
+<h3 style="margin-top:30px">融资路线的建议顺序</h3>
+<div class="flow"><div class="node">Legal / Token Classification</div><span class="arrow">→</span><div class="node">North America Builders</div><span class="arrow">→</span><div class="node">Real Utility</div><span class="arrow">→</span><div class="node">$5M Path*</div><span class="arrow">→</span><div class="node">$20M / $75M Path*</div></div>
+<p class="small">* 仅表示战略研究路径；是否可用、何时可用、如何计算额度和采用何种发行文件，必须依据最终 SEC 规则及律师意见。</p>
+</div></section>
+
+<section><div class="wrap">
+<h2>10 · EACO 的长期叙事</h2>
+<div class="card" style="text-align:center;padding:35px">
+<p style="font-size:28px;margin:0"><b>Human → Agent → Service → Payment → Result → Agent</b></p>
+<p style="font-size:20px;color:#b9cad8">从“AI 会回答”走向“AI 会行动”；从“人操作支付”走向“受控的机器经济”。</p>
+<p style="font-size:25px;color:var(--accent)"><b>EACO Agent Economy</b></p>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<p><b>EACO Web3 AI Pay 2026</b></p>
+<p>参考方向：SEC 2026-08-18 Regulation Crypto Assets 拟议规则；Solana Agentic Payments / x402；Coinbase x402；MCP。正式上线、融资或面向美国公众营销前，应以最新官方文件和专业法律意见为准。</p>
+<p>Token CA（用户提供）：DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+</div></footer>
+</body>
+</html>
