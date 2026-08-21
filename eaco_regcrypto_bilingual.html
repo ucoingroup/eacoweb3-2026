@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO × SEC Regulation Crypto Assets — 战略解读 / Strategic Briefing</title>
+<style>
+  :root{
+    --bg:#0a0f0d; --bg2:#0e1512; --card:#121a16; --card2:#16201b;
+    --line:#22332a; --txt:#e8f0ea; --dim:#93a89c; --dim2:#6d8276;
+    --acc:#3ddc84; --acc2:#2bb673; --gold:#e8c56a; --blue:#6ab0e8;
+    --red:#e87a6a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.75;font-size:16px}
+  header{position:sticky;top:0;z-index:50;background:rgba(10,15,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .hwrap{max-width:980px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .logo{font-weight:800;letter-spacing:.5px}
+  .logo .g{color:var(--acc)}
+  .langbtn{background:linear-gradient(135deg,var(--acc2),var(--acc));color:#06281a;border:none;padding:8px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:14px;transition:transform .15s}
+  .langbtn:hover{transform:scale(1.05)}
+  main{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+  .hero{padding:34px 6px 26px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .tag{display:inline-block;background:rgba(61,220,132,.12);color:var(--acc);border:1px solid rgba(61,220,132,.35);padding:3px 12px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:16px}
+  h1{font-size:clamp(26px,4.5vw,40px);line-height:1.25;margin-bottom:12px}
+  h1 .g{color:var(--acc)}
+  .sub{color:var(--dim);font-size:17px;max-width:760px}
+  .meta{margin-top:14px;color:var(--dim2);font-size:13.5px;display:flex;flex-wrap:wrap;gap:8px 18px}
+  .meta b{color:var(--txt)}
+  .ca{font-family:Consolas,monospace;color:var(--gold);background:var(--card);border:1px solid var(--line);padding:2px 8px;border-radius:6px;font-size:12.5px;word-break:break-all}
+  section{margin:34px 0}
+  h2{font-size:22px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--acc);color:#06281a;width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
+  h3{font-size:17px;color:var(--acc);margin:18px 0 8px}
+  p{margin:8px 0;color:var(--txt)}
+  .dim{color:var(--dim)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:6px 0}
+  li b{color:var(--acc)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:var(--acc);font-weight:700}
+  tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+  .num{color:var(--gold);font-weight:800}
+  .hl{background:linear-gradient(135deg,rgba(61,220,132,.15),rgba(232,197,106,.1));border:1px solid rgba(61,220,132,.3)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .kpi{text-align:center;padding:18px 10px}
+  .kpi .v{font-size:30px;font-weight:800;color:var(--acc)}
+  .kpi .l{color:var(--dim);font-size:13px;margin-top:4px}
+  .red{color:var(--red);font-weight:600}
+  .quote{border-left:3px solid var(--acc);padding:10px 16px;background:var(--card2);border-radius:0 10px 10px 0;font-style:italic;color:var(--dim);margin:14px 0}
+  .check li{list-style:none;position:relative;padding-left:26px}
+  .check li::before{content:"✓";position:absolute;left:0;color:var(--acc);font-weight:800}
+  .disc{font-size:13px;color:var(--dim2);border-top:1px solid var(--line);padding-top:16px;margin-top:40px}
+  footer{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--dim2);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="logo">🌍 EACO <span class="g">×</span> SEC <span style="font-weight:400;color:var(--dim)">Regulation Crypto Assets</span></div>
+    <button class="langbtn" id="langBtn" onclick="toggleLang()">English</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <span class="tag" data-i18n="heroTag">📢 2026-08-18 美国SEC重大提案</span>
+    <h1 data-i18n="heroTitle">EACO × SEC《加密资产条例》<br><span class="g">Regulation Crypto Assets</span></h1>
+    <p class="sub" data-i18n="heroSub">战略解读与行动方案 — 社区增长 · 合规融资 · 多币种通道（SOL + USDT + USDC + wBNB + eCNH）</p>
+    <div class="meta">
+      <span data-i18n="metaDate"><b>事件时间：</b>2026-08-18 华盛顿</span>
+      <span data-i18n="metaDoc"><b>文档：</b>中英双语 · 2026-08-21</span>
+      <span><b>CA:</b> <span class="ca">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span></span>
+    </div>
+  </div>
+
+  <!-- 1 NEWS -->
+  <section>
+    <h2><span class="n">1</span><span data-i18n="s1t">8月18日 SEC 新闻核心内容</span></h2>
+    <div class="card">
+      <p data-i18n="s1p1">2026年8月18日（周二），美国证券交易委员会（SEC）正式发布 <b>《加密资产条例》（Regulation Crypto Assets, "Reg Crypto"）</b> 提案，为涉及加密资产的"投资合同"建立量身定制的发行制度。</p>
+      <div class="quote" data-i18n="s1q">SEC主席 Paul Atkins：该提案"旨在为加密资产创业者与市场参与者提供在联邦证券法下清晰的资本募集路径"。</div>
+      <h3 data-i18n="s1h1">四大核心机制</h3>
+      <ul>
+        <li data-i18n="s1l1"><b>小型豁免 Tier 1：</b>4年内最高募资 <span class="num">$500万</span>，无需传统证券注册</li>
+        <li data-i18n="s1l2"><b>大型豁免 Tier 2：</b>12个月内最高募资 <span class="num">$7500万</span>，需财务报表 + 持续报告</li>
+        <li data-i18n="s1l3"><b>条件式安全港：</b>发行方完成/放弃"核心管理行为"后，代币可脱离证券法管辖</li>
+        <li data-i18n="s1l4"><b>州法优先：</b>豁免发行及部分二级交易免于50州各自注册，统一联邦监管</li>
+      </ul>
+      <h3 data-i18n="s1h2">其他要点</h3>
+      <ul>
+        <li data-i18n="s1l5">两种豁免均要求 <b>基于原则的叙述性披露</b>（加密版白皮书 + 风险披露）</li>
+        <li data-i18n="s1l6">《联邦公报》公布后开放 <b>60天公众评议期</b>，之后 SEC 可修订定稿</li>
+        <li data-i18n="s1l7">背景：原定8/14会议推迟；属主席 Atkins 的 "Project Crypto" 计划；CLARITY 法案在参议院搁浅，SEC 先行</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2 BASIS -->
+  <section>
+    <h2><span class="n">2</span><span data-i18n="s2t">"$500万 / $7500万" 的依据</span></h2>
+    <div class="card">
+      <p data-i18n="s2p1">这两个数字<b>直接来自 SEC 提案本身</b>，是面向加密发行人的两个豁免通道：</p>
+      <table>
+        <tr><th data-i18n="s2th1">通道</th><th data-i18n="s2th2">额度上限</th><th data-i18n="s2th3">期限</th><th data-i18n="s2th4">附加要求</th><th data-i18n="s2th5">对标</th></tr>
+        <tr><td data-i18n="s2r1c1">豁免一 (Tier 1)</td><td class="num">$500万</td><td data-i18n="s2r1c3">4年</td><td data-i18n="s2r1c4">原则性叙述披露</td><td data-i18n="s2r1c5">轻量通道，服务早期项目</td></tr>
+        <tr><td data-i18n="s2r2c1">豁免二 (Tier 2)</td><td class="num">$7500万</td><td data-i18n="s2r2c3">12个月</td><td data-i18n="s2r2c4">财务报表 + 持续报告</td><td data-i18n="s2r2c5">与 Reg A Tier 2 上限一致</td></tr>
+      </table>
+      <ul>
+        <li data-i18n="s2l1"><b>$500万/4年：</b>为早期小型/社区代币设计的轻量通道，降低合规成本门槛</li>
+        <li data-i18n="s2l2"><b>$7500万/12个月：</b>与美国现行 <b>Regulation A Tier 2（Reg A+）</b> 上限完全一致——加密融资正接入美国现有资本市场体系</li>
+        <li data-i18n="s2l3"><b>信息来源：</b>SEC 2026-08-18 官方新闻稿，Barron's/WSJ、crypto.news、edgeX 等交叉确认</li>
+      </ul>
+    </div>
+    <div class="grid2">
+      <div class="card kpi hl"><div class="v">$5M</div><div class="l" data-i18n="s2k1">Tier 1 · 4年内 · 轻量披露</div></div>
+      <div class="card kpi hl"><div class="v">$75M</div><div class="l" data-i18n="s2k2">Tier 2 · 12个月 · 审计财报+持续报告</div></div>
+    </div>
+  </section>
+
+  <!-- 3 COMMUNITY -->
+  <section>
+    <h2><span class="n">3</span><span data-i18n="s3t">借势发展北美英语小组（社区增长计划）</span></h2>
+    <div class="card">
+      <p data-i18n="s3p1">核心逻辑：把 <b>"美国合规路线图"</b> 变成北美社区的招募主题与信任资产——抢占 <b>"EACO = 合规社区币"</b> 心智。</p>
+      <h3 data-i18n="s3h1">组织架构</h3>
+      <ul>
+        <li data-i18n="s3l1"><b>EACO North America 官方社区：</b>Telegram + Discord + X + Reddit 四阵地</li>
+        <li data-i18n="s3l2"><b>社区大使计划：</b>首批 10–20 名北美大使（KOL / 开发者 / 金融从业者）</li>
+        <li data-i18n="s3l3"><b>北美合规委员会：</b>证券律师 + 合规顾问 + 社区代表</li>
+      </ul>
+      <h3 data-i18n="s3h2">内容与增长杠杆</h3>
+      <ul>
+        <li data-i18n="s3l4">每周《Reg Crypto Watch》英语周报 + 每月 X Space / Discord AMA</li>
+        <li data-i18n="s3l5">白皮书 V2 新增"美国合规与 Reg Crypto 路线图"章节 + 英文版合规路线图 PDF</li>
+        <li data-i18n="s3l6">与北美加密法律/合规 KOL、高校区块链社团合作</li>
+        <li data-i18n="s3l7">与稳定币 / eCNH 生态联合活动（跨境支付 + RWA 叙事）；纽约/旧金山/奥斯汀/迈阿密线下 Meetup</li>
+      </ul>
+      <div class="grid2">
+        <div class="card kpi"><div class="v">5,000+</div><div class="l" data-i18n="s3k1">90天 · 北美英语小组真实成员</div></div>
+        <div class="card kpi"><div class="v">10,000+</div><div class="l" data-i18n="s3k2">180天 · 覆盖美加主要城市</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 FUNDRAISING -->
+  <section>
+    <h2><span class="n">4</span><span data-i18n="s4t">利用该规则合规融资（多币种）</span></h2>
+    <div class="card">
+      <h3 data-i18n="s4h1">合规前提（现在就做）</h3>
+      <ul>
+        <li data-i18n="s4l1"><b>法律架构：</b>聘请美国证券律师，建议特拉华州实体作为发行主体</li>
+        <li data-i18n="s4l2"><b>披露文件：</b>起草《EACO Offering Disclosure》（白皮书 + 风险因素 + 代币经济学）</li>
+        <li data-i18n="s4l3"><b>代币定性切割：</b>定位生态/治理/支付用途，"核心管理行为"设计为可完结条款，满足安全港脱钩条件</li>
+      </ul>
+      <h3 data-i18n="s4h2">多币种接受方案</h3>
+      <table>
+        <tr><th data-i18n="s4th1">币种</th><th data-i18n="s4th2">角色定位</th><th data-i18n="s4th3">说明</th></tr>
+        <tr><td><b>USDC / USDT</b></td><td data-i18n="s4r1c2">美元计价合规稳定币</td><td data-i18n="s4r1c3">主结算与计价币</td></tr>
+        <tr><td><b>SOL</b></td><td data-i18n="s4r2c2">Solana 原生结算</td><td data-i18n="s4r2c3">EACO 部署主链，生态协同</td></tr>
+        <tr><td><b>wBNB</b></td><td data-i18n="s4r3c2">BSC 生态入口</td><td data-i18n="s4r3c3">覆盖 BNB 链社区投资者</td></tr>
+        <tr><td><b>eCNH</b></td><td data-i18n="s4r4c2">离岸人民币通道</td><td data-i18n="s4r4c3">RWA / 跨境贸易叙事，亚太资金入口</td></tr>
+      </table>
+      <h3 data-i18n="s4h3">通道策略与时间表</h3>
+      <ul>
+        <li data-i18n="s4l4"><b>阶段一（过渡期）：</b>Reg D 506(c) 私募（合格投资者）→ 规则生效后切换</li>
+        <li data-i18n="s4l5"><b>阶段二：</b>Tier 1（$500万/4年）起步验证 → 升级 Tier 2（$7500万/12个月）</li>
+        <li data-i18n="s4l6"><b>eCNH 组合拳：</b>双代币合规叙事 + 人民币资产代币化 RWA 实验</li>
+      </ul>
+      <p class="red" data-i18n="s4warn">⚠ 合规红线：提案仍在60天评议期，不可宣称"已获SEC批准"；现在应提交公众评议 + 合规预演；面向美国投资者的募资须等最终规则生效或走现行豁免；严禁"承诺回报"式表述。</p>
+    </div>
+  </section>
+
+  <!-- 5 ACTION -->
+  <section>
+    <h2><span class="n">5</span><span data-i18n="s5t">30天快速行动清单</span></h2>
+    <div class="card">
+      <ul class="check">
+        <li data-i18n="s5l1"><b>今天：</b>发布《EACO × SEC Reg Crypto》中英双语解读（本文档 + 英文版 + 双语网站）</li>
+        <li data-i18n="s5l2"><b>本周：</b>建立北美英语小组（TG / Discord）；咨询美国证券律师</li>
+        <li data-i18n="s5l3"><b>本月：</b>提交 SEC 公众评议；发布合规路线图；招募首批北美大使</li>
+        <li data-i18n="s5l4"><b>60天：</b>完成披露文件草案；与 eCNH 生态联合活动</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="disc" data-i18n="disc">免责声明：本文为信息整理与战略参考，不构成法律或投资建议。SEC 规则尚在提案阶段，最终以正式生效规则为准。加密货币投资有风险，请自行评估。</div>
+</main>
+
+<footer>🌍 EACO (Earth's Best Coin) — The only $eaco in the universe and the earth ｜ 官网 linktr.ee/eacocc ｜ X: @eacocc</footer>
+
+<script>
+const I18N = {
+  zh: {
+    heroTag:"📢 2026-08-18 美国SEC重大提案",
+    heroTitle:"EACO × SEC《加密资产条例》<br><span class=\"g\">Regulation Crypto Assets</span>",
+    heroSub:"战略解读与行动方案 — 社区增长 · 合规融资 · 多币种通道（SOL + USDT + USDC + wBNB + eCNH）",
+    metaDate:"<b>事件时间：</b>2026-08-18 华盛顿",
+    metaDoc:"<b>文档：</b>中英双语 · 2026-08-21",
+    s1t:"8月18日 SEC 新闻核心内容",
+    s1p1:"2026年8月18日（周二），美国证券交易委员会（SEC）正式发布 <b>《加密资产条例》（Regulation Crypto Assets, \"Reg Crypto\"）</b> 提案，为涉及加密资产的\"投资合同\"建立量身定制的发行制度。",
+    s1q:"SEC主席 Paul Atkins：该提案\"旨在为加密资产创业者与市场参与者提供在联邦证券法下清晰的资本募集路径\"。",
+    s1h1:"四大核心机制",
+    s1l1:"<b>小型豁免 Tier 1：</b>4年内最高募资 <span class=\"num\">$500万</span>，无需传统证券注册",
+    s1l2:"<b>大型豁免 Tier 2：</b>12个月内最高募资 <span class=\"num\">$7500万</span>，需财务报表 + 持续报告",
+    s1l3:"<b>条件式安全港：</b>发行方完成/放弃\"核心管理行为\"后，代币可脱离证券法管辖",
+    s1l4:"<b>州法优先：</b>豁免发行及部分二级交易免于50州各自注册，统一联邦监管",
+    s1h2:"其他要点",
+    s1l5:"两种豁免均要求 <b>基于原则的叙述性披露</b>（加密版白皮书 + 风险披露）",
+    s1l6:"《联邦公报》公布后开放 <b>60天公众评议期</b>，之后 SEC 可修订定稿",
+    s1l7:"背景：原定8/14会议推迟；属主席 Atkins 的 \"Project Crypto\" 计划；CLARITY 法案在参议院搁浅，SEC 先行",
+    s2t:"\"$500万 / $7500万\" 的依据",
+    s2p1:"这两个数字<b>直接来自 SEC 提案本身</b>，是面向加密发行人的两个豁免通道：",
+    s2th1:"通道",s2th2:"额度上限",s2th3:"期限",s2th4:"附加要求",s2th5:"对标",
+    s2r1c1:"豁免一 (Tier 1)",s2r1c3:"4年",s2r1c4:"原则性叙述披露",s2r1c5:"轻量通道，服务早期项目",
+    s2r2c1:"豁免二 (Tier 2)",s2r2c3:"12个月",s2r2c4:"财务报表 + 持续报告",s2r2c5:"与 Reg A Tier 2 上限一致",
+    s2l1:"<b>$500万/4年：</b>为早期小型/社区代币设计的轻量通道，降低合规成本门槛",
+    s2l2:"<b>$7500万/12个月：</b>与美国现行 <b>Regulation A Tier 2（Reg A+）</b> 上限完全一致——加密融资正接入美国现有资本市场体系",
+    s2l3:"<b>信息来源：</b>SEC 2026-08-18 官方新闻稿，Barron's/WSJ、crypto.news、edgeX 等交叉确认",
+    s2k1:"Tier 1 · 4年内 · 轻量披露",
+    s2k2:"Tier 2 · 12个月 · 审计财报+持续报告",
+    s3t:"借势发展北美英语小组（社区增长计划）",
+    s3p1:"核心逻辑：把 <b>\"美国合规路线图\"</b> 变成北美社区的招募主题与信任资产——抢占 <b>\"EACO = 合规社区币\"</b> 心智。",
+    s3h1:"组织架构",
+    s3l1:"<b>EACO North America 官方社区：</b>Telegram + Discord + X + Reddit 四阵地",
+    s3l2:"<b>社区大使计划：</b>首批 10–20 名北美大使（KOL / 开发者 / 金融从业者）",
+    s3l3:"<b>北美合规委员会：</b>证券律师 + 合规顾问 + 社区代表",
+    s3h2:"内容与增长杠杆",
+    s3l4:"每周《Reg Crypto Watch》英语周报 + 每月 X Space / Discord AMA",
+    s3l5:"白皮书 V2 新增\"美国合规与 Reg Crypto 路线图\"章节 + 英文版合规路线图 PDF",
+    s3l6:"与北美加密法律/合规 KOL、高校区块链社团合作",
+    s3l7:"与稳定币 / eCNH 生态联合活动（跨境支付 + RWA 叙事）；纽约/旧金山/奥斯汀/迈阿密线下 Meetup",
+    s3k1:"90天 · 北美英语小组真实成员",
+    s3k2:"180天 · 覆盖美加主要城市",
+    s4t:"利用该规则合规融资（多币种）",
+    s4h1:"合规前提（现在就做）",
+    s4l1:"<b>法律架构：</b>聘请美国证券律师，建议特拉华州实体作为发行主体",
+    s4l2:"<b>披露文件：</b>起草《EACO Offering Disclosure》（白皮书 + 风险因素 + 代币经济学）",
+    s4l3:"<b>代币定性切割：</b>定位生态/治理/支付用途，\"核心管理行为\"设计为可完结条款，满足安全港脱钩条件",
+    s4h2:"多币种接受方案",
+    s4th1:"币种",s4th2:"角色定位",s4th3:"说明",
+    s4r1c2:"美元计价合规稳定币",s4r1c3:"主结算与计价币",
+    s4r2c2:"Solana 原生结算",s4r2c3:"EACO 部署主链，生态协同",
+    s4r3c2:"BSC 生态入口",s4r3c3:"覆盖 BNB 链社区投资者",
+    s4r4c2:"离岸人民币通道",s4r4c3:"RWA / 跨境贸易叙事，亚太资金入口",
+    s4h3:"通道策略与时间表",
+    s4l4:"<b>阶段一（过渡期）：</b>Reg D 506(c) 私募（合格投资者）→ 规则生效后切换",
+    s4l5:"<b>阶段二：</b>Tier 1（$500万/4年）起步验证 → 升级 Tier 2（$7500万/12个月）",
+    s4l6:"<b>eCNH 组合拳：</b>双代币合规叙事 + 人民币资产代币化 RWA 实验",
+    s4warn:"⚠ 合规红线：提案仍在60天评议期，不可宣称\"已获SEC批准\"；现在应提交公众评议 + 合规预演；面向美国投资者的募资须等最终规则生效或走现行豁免；严禁\"承诺回报\"式表述。",
+    s5t:"30天快速行动清单",
+    s5l1:"<b>今天：</b>发布《EACO × SEC Reg Crypto》中英双语解读（本文档 + 英文版 + 双语网站）",
+    s5l2:"<b>本周：</b>建立北美英语小组（TG / Discord）；咨询美国证券律师",
+    s5l3:"<b>本月：</b>提交 SEC 公众评议；发布合规路线图；招募首批北美大使",
+    s5l4:"<b>60天：</b>完成披露文件草案；与 eCNH 生态联合活动",
+    disc:"免责声明：本文为信息整理与战略参考，不构成法律或投资建议。SEC 规则尚在提案阶段，最终以正式生效规则为准。加密货币投资有风险，请自行评估。"
+  },
+  en: {
+    heroTag:"📢 Major SEC Proposal — Aug 18, 2026",
+    heroTitle:"EACO × SEC <span class=\"g\">Regulation Crypto Assets</span>",
+    heroSub:"Strategic briefing & action plan — Community growth · Compliant fundraising · Multi-currency lanes (SOL + USDT + USDC + wBNB + eCNH)",
+    metaDate:"<b>Event:</b> 2026-08-18 Washington, D.C.",
+    metaDoc:"<b>Doc:</b> Bilingual · 2026-08-21",
+    s1t:"What the SEC announced on August 18",
+    s1p1:"On Tuesday, August 18, 2026, the SEC proposed <b>\"Regulation Crypto Assets\" (\"Reg Crypto\")</b> — a tailored offering framework for certain investment contracts involving crypto assets.",
+    s1q:"SEC Chair Paul Atkins: the proposal \"seeks to provide crypto asset entrepreneurs and market participants with clear pathways to raise capital under the federal securities laws.\"",
+    s1h1:"Four key mechanisms",
+    s1l1:"<b>Tier 1 exemption:</b> up to <span class=\"num\">$5M</span> over 4 years, no traditional registration",
+    s1l2:"<b>Tier 2 exemption:</b> up to <span class=\"num\">$75M</span> in 12 months, financials + ongoing reporting",
+    s1l3:"<b>Conditional safe harbor:</b> tokens can shed securities status once \"essential managerial efforts\" end",
+    s1l4:"<b>State preemption:</b> covered offerings & secondary trades escape 50-state registration — one federal regime",
+    s1h2:"Other key points",
+    s1l5:"Both tiers require <b>principles-based narrative disclosures</b> (crypto whitepaper + risk disclosure)",
+    s1l6:"<b>60-day public comment period</b> after Federal Register publication; SEC may revise before finalizing",
+    s1l7:"Background: Aug 14 meeting postponed; flagship of Chair Atkins' \"Project Crypto\"; CLARITY Act stalled in Senate — SEC acted first",
+    s2t:"Basis for the $5M / $75M figures",
+    s2p1:"These figures come <b>directly from the SEC proposal</b> — two exemption lanes for crypto issuers:",
+    s2th1:"Lane",s2th2:"Cap",s2th3:"Period",s2th4:"Requirements",s2th5:"Benchmark",
+    s2r1c1:"Exemption 1 (Tier 1)",s2r1c3:"4 years",s2r1c4:"principles-based disclosures",s2r1c5:"lightweight lane for early-stage",
+    s2r2c1:"Exemption 2 (Tier 2)",s2r2c3:"12 months",s2r2c4:"financials + ongoing reporting",s2r2c5:"matches Reg A Tier 2 cap",
+    s2l1:"<b>$5M / 4 years:</b> a light-touch lane for early-stage & community tokens, cutting compliance costs",
+    s2l2:"<b>$75M / 12 months:</b> identical to the existing <b>Regulation A Tier 2 (Reg A+)</b> cap — crypto fundraising is being wired into the U.S. capital-markets system",
+    s2l3:"<b>Sources:</b> SEC official press release 2026-08-18; confirmed by Barron's/WSJ, crypto.news, edgeX",
+    s2k1:"Tier 1 · 4 years · light disclosure",
+    s2k2:"Tier 2 · 12 months · audited financials + reporting",
+    s3t:"Leveraging it: EACO North America English Community",
+    s3p1:"Core thesis: turn the <b>\"U.S. compliance roadmap\"</b> into a recruiting engine and trust asset — own the <b>\"EACO = the compliant community coin\"</b> narrative.",
+    s3h1:"Structure",
+    s3l1:"<b>Official EACO North America:</b> Telegram + Discord + X + Reddit",
+    s3l2:"<b>Ambassador Program:</b> 10–20 NA ambassadors (KOLs, devs, finance professionals)",
+    s3l3:"<b>Compliance Circle:</b> securities counsel + compliance advisors + community reps",
+    s3h2:"Content & growth levers",
+    s3l4:"Weekly \"Reg Crypto Watch\" newsletter + monthly X Space / Discord AMA",
+    s3l5:"Whitepaper V2: \"U.S. Compliance & Reg Crypto Roadmap\" chapter + EN roadmap PDF",
+    s3l6:"Partner with crypto-law/compliance KOLs & university blockchain clubs",
+    s3l7:"Co-events with stablecoin / eCNH ecosystems (cross-border + RWA); meetups in NYC/SF/Austin/Miami",
+    s3k1:"90 days · genuine NA group members",
+    s3k2:"180 days · coverage across US/Canada cities",
+    s4t:"Compliant fundraising under the rule (multi-currency)",
+    s4h1:"Compliance prerequisites (start now)",
+    s4l1:"<b>Legal structure:</b> U.S. securities counsel; Delaware entity as issuer",
+    s4l2:"<b>Disclosure:</b> draft the EACO Offering Disclosure (whitepaper + risk factors + tokenomics)",
+    s4l3:"<b>Token characterization:</b> utility/governance/payment positioning; terminable \"essential managerial efforts\" for safe-harbor exit",
+    s4h2:"Multi-currency acceptance",
+    s4th1:"Currency",s4th2:"Role",s4th3:"Notes",
+    s4r1c2:"USD-denominated compliant stablecoins",s4r1c3:"primary settlement & pricing",
+    s4r2c2:"Solana native settlement",s4r2c3:"EACO's home chain, ecosystem synergy",
+    s4r3c2:"BSC ecosystem on-ramp",s4r3c3:"covers BNB-community investors",
+    s4r4c2:"Offshore RMB channel",s4r4c3:"RWA / cross-border narrative, APAC capital entry",
+    s4h3:"Lane strategy & timeline",
+    s4l4:"<b>Phase 1 (interim):</b> Reg D 506(c) private placement (accredited) → switch when rule is final",
+    s4l5:"<b>Phase 2:</b> start Tier 1 ($5M/4yr) to prove compliance → scale to Tier 2 ($75M/12mo)",
+    s4l6:"<b>eCNH combo:</b> dual-token compliance narrative + RMB-asset tokenization RWA experiments",
+    s4warn:"⚠ Red lines: proposal is in a 60-day comment window — do NOT claim \"SEC approval\"; submit public comments + run a compliance rehearsal now; no U.S.-facing fundraising until final rules (or use existing exemptions); never use \"guaranteed returns\" language.",
+    s5t:"30-Day Action Checklist",
+    s5l1:"<b>Today:</b> publish the bilingual EACO × SEC Reg Crypto briefing (this page + docs)",
+    s5l2:"<b>This week:</b> launch NA English groups (TG/Discord); consult U.S. securities counsel",
+    s5l3:"<b>This month:</b> submit SEC public comment; publish compliance roadmap; recruit first NA ambassadors",
+    s5l4:"<b>60 days:</b> disclosure draft complete; joint events with eCNH ecosystem",
+    disc:"Disclaimer: informational & strategic reference only; not legal or investment advice. The SEC rule is still a proposal — final terms will govern. Crypto investment carries risk."
+  }
+};
+let lang = "zh";
+function applyLang(){
+  const d = I18N[lang];
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(d[k]!==undefined) el.innerHTML = d[k];
+  });
+  document.getElementById("langBtn").textContent = lang === "zh" ? "English" : "中文";
+}
+function toggleLang(){ lang = lang === "zh" ? "en" : "zh"; applyLang(); }
+applyLang();
+</script>
+</body>
+</html>
