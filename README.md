@@ -44,6 +44,24 @@ EACO（Earth's best Coin）是一个宏大的Web3教育生态项目，致力于�
 - **功能**: 课程、VR/AR、AI导师、社区DAO、NFT学位认证
 - **技术**: Solana/多链、React/Next.js、Python AI
 
+
+美国证券关于web3数字货币在8月18日发布的新闻,具体内容是什么?
+
+500万，7500万美元的 依据是什么？
+
+eaco如何借助这些机会 尽快 在北美发展eaco英语小组？
+
+EACO(Earth's best Coin)
+
+The only $eaco in the universe and the earth
+EACO ($e) is an innovative currency, the only $eaco in the universe and the earth.
+
+Contract Address (CA)
+
+DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+
+EACO如何利用该规则进行合规融资SOL+USDT+USDC+wBNB + eCNH 等等?
+
 ---
 
 ## 📁 仓库完整结构
