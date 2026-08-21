@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Pool DAO | 流动池 DAO | Liquidity Pool DAO</title>
+<meta name="description" content="EACO Pool DAO - Earth's Best Coin 流动性池 DAO，三档流动池，季度奖励，动态股东探索，星际文明共生">
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-deep: #050814;
+  --bg-mid: #0a0f24;
+  --bg-card: rgba(15, 22, 48, 0.75);
+  --bg-card-hover: rgba(20, 30, 65, 0.85);
+  --accent-cyan: #00d4ff;
+  --accent-purple: #a855f7;
+  --accent-gold: #ffd700;
+  --accent-green: #00ff88;
+  --accent-orange: #ff8c42;
+  --accent-pink: #ff6b9d;
+  --text-primary: #e8edf5;
+  --text-secondary: #9ba8c4;
+  --text-muted: #5a6a8a;
+  --border-glow: rgba(0, 212, 255, 0.25);
+  --border-subtle: rgba(168, 85, 247, 0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; scroll-padding-top: 70px; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ========== Starfield Background ========== */
+#starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+#meteorCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.bg-gradient {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(0, 255, 136, 0.04) 0%, transparent 50%);
+}
+.nebula {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none; opacity: 0.4;
+  background: radial-gradient(circle at 15% 50%, rgba(168, 85, 247, 0.12) 0%, transparent 30%),
+              radial-gradient(circle at 85% 20%, rgba(0, 212, 255, 0.10) 0%, transparent 30%),
+              radial-gradient(circle at 50% 80%, rgba(255, 215, 0, 0.06) 0%, transparent 25%);
+}
+
+/* ========== Navbar ========== */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: rgba(5, 8, 20, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glow);
+  padding: 0.625rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.nav-logo {
+  font-size: 1.1rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+.nav-links { display: flex; gap: 1.25rem; list-style: none; align-items: center; flex-wrap: wrap; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
+  transition: var(--transition); position: relative; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--accent-cyan); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--accent-cyan); transition: var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-controls { display: flex; gap: 0.75rem; align-items: center; }
+.lang-toggle {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border: none; padding: 0.4rem 1rem; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: var(--transition);
+  white-space: nowrap;
+}
+.lang-toggle:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+.version-badge {
+  font-size: 0.7rem; color: var(--accent-gold); border: 1px solid var(--accent-gold);
+  padding: 0.15rem 0.5rem; border-radius: 12px; white-space: nowrap;
+}
+.menu-toggle {
+  display: none; background: transparent; border: 1px solid var(--border-glow);
+  color: var(--accent-cyan); font-size: 1.2rem; padding: 0.3rem 0.6rem;
+  border-radius: 8px; cursor: pointer; transition: var(--transition);
+}
+.menu-toggle:hover { background: rgba(0, 212, 255, 0.1); }
+
+/* ========== Layout ========== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+section { padding: 4rem 0; position: relative; z-index: 1; }
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem; text-align: center;
+}
+.section-subtitle { text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2.5rem; }
+
+/* ========== CA Bar ========== */
+.ca-bar {
+  position: relative; z-index: 1;
+  background: rgba(10, 15, 36, 0.9); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border-glow); border-bottom: 1px solid var(--border-glow);
+  padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: center;
+  gap: 0.75rem; flex-wrap: wrap;
+}
+.ca-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.ca-address {
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace; font-size: 0.8rem;
+  color: var(--accent-cyan); word-break: break-all; max-width: 400px;
+}
+.ca-copy-btn {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border: none; padding: 0.35rem 0.9rem; border-radius: 12px;
+  font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: var(--transition); white-space: nowrap;
+}
+.ca-copy-btn:hover { transform: scale(1.05); box-shadow: 0 0 12px rgba(0, 212, 255, 0.4); }
+.ca-copy-btn.copied { background: var(--accent-green); }
+
+/* ========== Hero ========== */
+.hero {
+  min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center; padding-top: 6rem; padding-bottom: 2rem;
+}
+.hero-badge {
+  display: inline-block; background: rgba(0, 212, 255, 0.1); border: 1px solid var(--border-glow);
+  border-radius: 20px; padding: 0.3rem 1rem; font-size: 0.75rem; color: var(--accent-cyan);
+  margin-bottom: 1.5rem; letter-spacing: 1px;
+}
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem; line-height: 1.3;
+}
+.hero-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); max-width: 700px; margin-bottom: 2rem; }
+.hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
+.hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.hero-meta-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-cyan); }
+.hero-meta-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 2rem; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-block;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border: none;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 212, 255, 0.35); }
+.btn-secondary {
+  background: transparent; color: var(--accent-cyan);
+  border: 1px solid var(--border-glow);
+}
+.btn-secondary:hover { background: rgba(0, 212, 255, 0.1); border-color: var(--accent-cyan); }
+
+/* ========== Pool Cards ========== */
+.pool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+.pool-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  padding: 2rem; transition: var(--transition); position: relative; overflow: hidden;
+}
+.pool-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  opacity: 0.8;
+}
+.pool-card.tier1::before { background: linear-gradient(90deg, var(--accent-cyan), transparent); }
+.pool-card.tier2::before { background: linear-gradient(90deg, var(--accent-purple), transparent); }
+.pool-card.tier3::before { background: linear-gradient(90deg, var(--accent-gold), transparent); }
+.pool-card:hover {
+  background: var(--bg-card-hover); transform: translateY(-4px);
+  border-color: var(--border-glow); box-shadow: 0 10px 40px rgba(0, 212, 255, 0.15);
+}
+.pool-tier-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+.pool-tier-name { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; }
+.pool-card.tier1 .pool-tier-name { color: var(--accent-cyan); }
+.pool-card.tier2 .pool-tier-name { color: var(--accent-purple); }
+.pool-card.tier3 .pool-tier-name { color: var(--accent-gold); }
+.pool-amount { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.25rem; }
+.pool-amount-currency { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+.pool-reward-box {
+  background: rgba(0, 0, 0, 0.3); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1rem;
+}
+.pool-reward-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
+.pool-reward-value { font-size: 1.4rem; font-weight: 700; }
+.pool-card.tier1 .pool-reward-value { color: var(--accent-cyan); }
+.pool-card.tier2 .pool-reward-value { color: var(--accent-purple); }
+.pool-card.tier3 .pool-reward-value { color: var(--accent-gold); }
+.pool-features { list-style: none; }
+.pool-features li { padding: 0.4rem 0; font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: start; gap: 0.5rem; }
+.pool-features li::before { content: '◆'; color: var(--accent-cyan); font-size: 0.6rem; margin-top: 0.35rem; flex-shrink: 0; }
+
+/* ========== Reward Calculator ========== */
+.calculator-box {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  padding: 2rem; margin-top: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.calc-input-group { margin-bottom: 1.5rem; }
+.calc-label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+.calc-input {
+  width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); color: var(--text-primary); padding: 0.75rem 1rem;
+  font-size: 1rem; transition: var(--transition);
+}
+.calc-input:focus { outline: none; border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); }
+.calc-result {
+  background: rgba(0, 212, 255, 0.08); border: 1px solid var(--border-glow); border-radius: var(--radius-sm);
+  padding: 1.25rem; text-align: center; margin-top: 1rem;
+}
+.calc-result-value { font-size: 2rem; font-weight: 800; color: var(--accent-cyan); }
+.calc-result-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.3rem; }
+
+/* ========== Terms Section ========== */
+.terms-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  padding: 2rem; margin-bottom: 1.5rem;
+}
+.terms-card h4 { color: var(--accent-cyan); font-size: 1.1rem; margin-bottom: 0.75rem; }
+.terms-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.terms-card .highlight { color: var(--accent-gold); font-weight: 600; }
+.contact-box {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+  border: 1px solid var(--border-glow); border-radius: var(--radius); padding: 1.5rem; text-align: center;
+}
+.contact-box h4 { color: var(--accent-cyan); margin-bottom: 0.5rem; }
+.contact-email {
+  font-family: "SF Mono", monospace; font-size: 1.1rem; color: var(--accent-gold);
+  background: rgba(0, 0, 0, 0.3); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; margin-top: 0.5rem;
+}
+
+/* ========== Dynamic Shareholder ========== */
+.shareholder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.shareholder-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  padding: 1.75rem; transition: var(--transition); text-align: center;
+}
+.shareholder-card:hover {
+  background: var(--bg-card-hover); transform: translateY(-3px);
+  border-color: var(--border-glow);
+}
+.shareholder-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.shareholder-card h4 { color: var(--accent-cyan); font-size: 1.05rem; margin-bottom: 0.75rem; }
+.shareholder-card p { color: var(--text-secondary); font-size: 0.85rem; }
+
+/* ========== Quantum Robot ========== */
+.quantum-box {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(168, 85, 247, 0.05));
+  border: 1px solid var(--border-glow); border-radius: var(--radius); padding: 2.5rem; text-align: center;
+}
+.quantum-title { font-size: 1.5rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 1rem; }
+.quantum-range {
+  font-size: 2rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.quantum-desc { color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 0.9rem; }
+
+/* ========== Links Section ========== */
+.links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.link-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  padding: 1.25rem; text-decoration: none; color: var(--text-primary); transition: var(--transition);
+  display: flex; align-items: center; gap: 1rem;
+}
+.link-card:hover {
+  background: var(--bg-card-hover); border-color: var(--border-glow);
+  transform: translateX(4px); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
+}
+.link-icon {
+  width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 700; flex-shrink: 0;
+}
+.link-icon.dex { background: rgba(0, 212, 255, 0.15); color: var(--accent-cyan); }
+.link-icon.info { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+.link-icon.social { background: rgba(0, 255, 136, 0.15); color: var(--accent-green); }
+.link-text { flex: 1; min-width: 0; }
+.link-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.15rem; }
+.link-url { font-size: 0.7rem; color: var(--text-muted); word-break: break-all; }
+.link-arrow { color: var(--accent-cyan); font-size: 1.2rem; flex-shrink: 0; }
+
+/* ========== Loop Chain ========== */
+.loop-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; align-items: center; }
+.loop-node {
+  background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 50%;
+  width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;
+  text-align: center; font-size: 0.8rem; font-weight: 600; color: var(--accent-cyan);
+  transition: var(--transition); position: relative; cursor: default;
+}
+.loop-node:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); border-color: var(--accent-cyan); }
+.loop-arrow { color: var(--accent-purple); font-size: 1.5rem; flex-shrink: 0; }
+.loop-desc { text-align: center; color: var(--text-secondary); font-size: 0.85rem; max-width: 700px; margin: 1.5rem auto 0; }
+
+/* ========== Vision Banner ========== */
+.vision-banner {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.08), rgba(255, 215, 0, 0.05));
+  border: 1px solid var(--border-glow); border-radius: var(--radius); padding: 3rem 2rem; text-align: center;
+}
+.vision-target { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0;
+}
+.vision-text { color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+
+/* ========== Footer ========== */
+.footer {
+  background: rgba(5, 8, 20, 0.9); border-top: 1px solid var(--border-glow);
+  padding: 2.5rem 1.5rem 1.5rem; position: relative; z-index: 1;
+}
+.footer-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+.footer-logo {
+  font-size: 1.3rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.footer-slogan { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem; }
+.footer-ca { font-family: "SF Mono", monospace; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 1rem; }
+.footer-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+.footer-links a { color: var(--text-secondary); font-size: 0.8rem; text-decoration: none; transition: var(--transition); }
+.footer-links a:hover { color: var(--accent-cyan); }
+.footer-copy { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ========== Back to Top ========== */
+.back-to-top {
+  position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px;
+  border-radius: 50%; border: 1px solid var(--border-glow);
+  background: rgba(5, 8, 20, 0.85); backdrop-filter: blur(10px);
+  color: var(--accent-cyan); font-size: 1.4rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: var(--transition); z-index: 98;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: rgba(0, 212, 255, 0.15); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3); }
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(5, 8, 20, 0.95); padding: 1rem 1.5rem; gap: 0.75rem; }
+  .menu-toggle { display: block; }
+  .loop-node { width: 80px; height: 80px; font-size: 0.7rem; }
+  .loop-arrow { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+  .pool-card { padding: 1.5rem; }
+  .loop-node { width: 65px; height: 65px; font-size: 0.6rem; }
+  .hero-meta { gap: 1rem; }
+  .hero-meta-value { font-size: 1.2rem; }
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<canvas id="meteorCanvas"></canvas>
+<div class="bg-gradient"></div>
+<div class="nebula"></div>
+
+<!-- ========== Navbar ========== -->
+<nav class="navbar">
+  <div class="nav-logo">EACO Pool DAO</div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#pools" data-zh="流动池" data-en="Pools">流动池</a></li>
+    <li><a href="#calculator" data-zh="奖励计算" data-en="Calculator">奖励计算</a></li>
+    <li><a href="#terms" data-zh="合作条款" data-en="Terms">合作条款</a></li>
+    <li><a href="#shareholder" data-zh="动态股东" data-en="Shareholders">动态股东</a></li>
+    <li><a href="#quantum" data-zh="量化机器人" data-en="Quantum Bot">量化机器人</a></li>
+    <li><a href="#links" data-zh="交易链接" data-en="Links">交易链接</a></li>
+    <li><a href="#loop" data-zh="闭环链路" data-en="Loop">闭环链路</a></li>
+    <li><a href="eaco-dao-academy.html" data-zh="EACO学院" data-en="Academy">EACO学院</a></li>
+  </ul>
+  <div class="nav-controls">
+    <span class="version-badge">v0.01</span>
+    <button class="lang-toggle" onclick="toggleLang()">EN</button>
+  </div>
+</nav>
+
+<!-- ========== CA Bar ========== -->
+<div class="ca-bar">
+  <span class="ca-label">CA</span>
+  <span class="ca-address" id="caDisplay">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+  <button class="ca-copy-btn" onclick="copyCA()" id="caCopyBtn" data-zh="复制" data-en="Copy">复制</button>
+</div>
+
+<!-- ========== Hero ========== -->
+<section class="hero">
+  <div class="hero-badge" data-zh="Earth's Best Coin | SOL 链上流动性 DAO" data-en="Earth's Best Coin | SOL On-Chain Liquidity DAO">Earth's Best Coin | SOL 链上流动性 DAO</div>
+  <h1 class="hero-title" data-zh="EACO Pool DAO" data-en="EACO Pool DAO">EACO Pool DAO</h1>
+  <p class="hero-subtitle" data-zh="三档流动池合作方案 | 季度奖励 2‰-5‰-8‰ EACO | 1-2-3年合作期 | 动态股东探索 | 星际文明共生" data-en="3-Tier Liquidity Pools | Quarterly Rewards 2‰-5‰-8‰ EACO | 1-2-3 Year Partnership | Dynamic Shareholder | Interstellar Symbiosis">三档流动池合作方案 | 季度奖励 2‰-5‰-8‰ EACO | 1-2-3年合作期 | 动态股东探索 | 星际文明共生</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">3</span>
+      <span class="hero-meta-label" data-zh="池档位" data-en="Pool Tiers">池档位</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">1-2-3<span style="font-size:0.8rem">Y</span></span>
+      <span class="hero-meta-label" data-zh="合作期" data-en="Period">合作期</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">Q</span>
+      <span class="hero-meta-label" data-zh="季度奖励" data-en="Quarterly">季度奖励</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">$0.01</span>
+      <span class="hero-meta-label" data-zh="目标价格" data-en="Target">目标价格</span>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="#pools" class="btn-primary" data-zh="查看流动池" data-en="View Pools">查看流动池</a>
+    <a href="https://t.me/e_eacocc" target="_blank" class="btn-secondary" data-zh="加入社区" data-en="Join Community">加入社区</a>
+  </div>
+</section>
+
+<!-- ========== Pool Tiers ========== -->
+<section id="pools">
+  <div class="container">
+    <h2 class="section-title" data-zh="三档流动池" data-en="Three-Tier Liquidity Pools">三档流动池</h2>
+    <p class="section-subtitle" data-zh="不同资金量级对应不同季度奖励比例，EACO(SOL) 海外流动性增强" data-en="Different capital tiers correspond to quarterly reward rates. EACO(SOL) overseas liquidity enhancement.">不同资金量级对应不同季度奖励比例，EACO(SOL) 海外流动性增强</p>
+    <div class="pool-grid">
+      <!-- Tier 1 -->
+      <div class="pool-card tier1">
+        <div class="pool-tier-label">Tier 1</div>
+        <div class="pool-tier-name" data-zh="初级池" data-en="Starter Pool">初级池</div>
+        <div class="pool-amount">2,000</div>
+        <div class="pool-amount-currency">USDT</div>
+        <div class="pool-reward-box">
+          <div class="pool-reward-label" data-zh="季度奖励" data-en="Quarterly Reward">季度奖励</div>
+          <div class="pool-reward-value">0.2% (2‰) EACO</div>
+        </div>
+        <ul class="pool-features">
+          <li data-zh="适合个人投资者入门" data-en="Suitable for individual investors">适合个人投资者入门</li>
+          <li data-zh="季度发放 EACO 奖励" data-en="Quarterly EACO reward distribution">季度发放 EACO 奖励</li>
+          <li data-zh="1-2-3年合作期" data-en="1-2-3 year partnership">1-2-3年合作期</li>
+          <li data-zh="志愿者驱动模式" data-en="Volunteer-driven model">志愿者驱动模式</li>
+        </ul>
+      </div>
+      <!-- Tier 2 -->
+      <div class="pool-card tier2">
+        <div class="pool-tier-label">Tier 2</div>
+        <div class="pool-tier-name" data-zh="进阶池" data-en="Growth Pool">进阶池</div>
+        <div class="pool-amount">5,000</div>
+        <div class="pool-amount-currency">USDT</div>
+        <div class="pool-reward-box">
+          <div class="pool-reward-label" data-zh="季度奖励" data-en="Quarterly Reward">季度奖励</div>
+          <div class="pool-reward-value">0.5% (5‰) EACO</div>
+        </div>
+        <ul class="pool-features">
+          <li data-zh="适合中小型合作伙伴" data-en="For small-medium partners">适合中小型合作伙伴</li>
+          <li data-zh="季度再平衡机制" data-en="Quarterly rebalancing">季度再平衡机制</li>
+          <li data-zh="池子份额权重" data-en="Pool share weight">池子份额权重</li>
+          <li data-zh="跨境共识参与权" data-en="Cross-border consensus">跨境共识参与权</li>
+        </ul>
+      </div>
+      <!-- Tier 3 -->
+      <div class="pool-card tier3">
+        <div class="pool-tier-label">Tier 3</div>
+        <div class="pool-tier-name" data-zh="旗舰池" data-en="Flagship Pool">旗舰池</div>
+        <div class="pool-amount">8,000</div>
+        <div class="pool-amount-currency">USDT</div>
+        <div class="pool-reward-box">
+          <div class="pool-reward-label" data-zh="季度奖励" data-en="Quarterly Reward">季度奖励</div>
+          <div class="pool-reward-value">0.8% (8‰) EACO</div>
+        </div>
+        <ul class="pool-features">
+          <li data-zh="适合战略级合作伙伴" data-en="For strategic partners">适合战略级合作伙伴</li>
+          <li data-zh="最高季度奖励比例" data-en="Highest quarterly rate">最高季度奖励比例</li>
+          <li data-zh="动态股东优先权" data-en="Shareholder priority">动态股东优先权</li>
+          <li data-zh="星际文明共生节点" data-en="Symbiosis node">星际文明共生节点</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Reward Calculator ========== -->
+<section id="calculator" style="padding-top: 2rem;">
+  <div class="container">
+    <h2 class="section-title" data-zh="奖励计算器" data-en="Reward Calculator">奖励计算器</h2>
+    <p class="section-subtitle" data-zh="输入 USDT 金额，估算季度 EACO 奖励" data-en="Enter USDT amount to estimate quarterly EACO reward">输入 USDT 金额，估算季度 EACO 奖励</p>
+    <div class="calculator-box">
+      <div class="calc-input-group">
+        <label class="calc-label" data-zh="投入金额 (USDT)" data-en="Amount (USDT)">投入金额 (USDT)</label>
+        <input type="number" class="calc-input" id="calcAmount" placeholder="2000 / 5000 / 8000" min="0" oninput="calculateReward()">
+      </div>
+      <div class="calc-result">
+        <div class="calc-result-value" id="calcResult">—</div>
+        <div class="calc-result-label" data-zh="季度 EACO 奖励（估算）" data-en="Quarterly EACO Reward (Est.)">季度 EACO 奖励（估算）</div>
+      </div>
+      <p style="text-align:center; margin-top:1rem; font-size:0.75rem; color: var(--text-muted);" data-zh="* 估算仅供参考，实际奖励以 DAO 共识为准" data-en="* Estimate only; actual rewards subject to DAO consensus">* 估算仅供参考，实际奖励以 DAO 共识为准</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Cooperation Terms ========== -->
+<section id="terms">
+  <div class="container">
+    <h2 class="section-title" data-zh="合作条款" data-en="Cooperation Terms">合作条款</h2>
+    <p class="section-subtitle" data-zh="EACO Pool DAO 动态股东合作方案" data-en="EACO Pool DAO Dynamic Shareholder Partnership">EACO Pool DAO 动态股东合作方案</p>
+    <div class="terms-card">
+      <h4 data-zh="合作期限" data-en="Partnership Period">合作期限</h4>
+      <p data-zh="<span class='highlight'>1-2-3年</span>长期合作，季度评估，可续约" data-en="<span class='highlight'>1-2-3 years</span> long-term partnership, quarterly review, renewable"><span class='highlight'>1-2-3年</span>长期合作，季度评估，可续约</p>
+    </div>
+    <div class="terms-card">
+      <h4 data-zh="运营主体" data-en="Operating Body">运营主体</h4>
+      <p data-zh="<span class='highlight'>九村eaco海外web3外贸兑换小组</span> — 负责池子管理、奖励发放、跨境协调" data-en="<span class='highlight'>Jiucun EACO Overseas Web3 Trade Exchange Group</span> — manages pools, distributes rewards, coordinates cross-border"><span class='highlight'>九村eaco海外web3外贸兑换小组</span> — 负责池子管理、奖励发放、跨境协调</p>
+    </div>
+    <div class="terms-card">
+      <h4 data-zh="奖励机制" data-en="Reward Mechanism">奖励机制</h4>
+      <p data-zh="按季度发放 EACO 奖励，比例依据池档位：<span class='highlight'>2‰ / 5‰ / 8‰</span>" data-en="Quarterly EACO rewards based on pool tier: <span class='highlight'>2‰ / 5‰ / 8‰</span>">按季度发放 EACO 奖励，比例依据池档位：<span class='highlight'>2‰ / 5‰ / 8‰</span></p>
+    </div>
+    <div class="terms-card">
+      <h4 data-zh="志愿者模式" data-en="Volunteer Model">志愿者模式</h4>
+      <p data-zh="As a Volunteer — 社区志愿者驱动，共建星际文明共生生态" data-en="As a Volunteer — Community-driven, building interstellar symbiosis">As a Volunteer — 社区志愿者驱动，共建星际文明共生生态</p>
+    </div>
+    <div class="contact-box">
+      <h4 data-zh="联系邮箱" data-en="Contact Email">联系邮箱</h4>
+      <p style="color: var(--text-secondary); font-size: 0.85rem;" data-zh="九村eaco海外web3外贸兑换小组" data-en="Jiucun EACO Overseas Web3 Trade Exchange Group">九村eaco海外web3外贸兑换小组</p>
+      <div class="contact-email">eaco2cc@gmail.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Dynamic Shareholder ========== -->
+<section id="shareholder">
+  <div class="container">
+    <h2 class="section-title" data-zh="动态股东探索" data-en="Dynamic Shareholder Exploration">动态股东探索</h2>
+    <p class="section-subtitle" data-zh="四个方向探索 EACO Pool DAO 动态股东合作方案" data-en="Exploring four directions for EACO Pool DAO dynamic shareholder partnership">四个方向探索 EACO Pool DAO 动态股东合作方案</p>
+    <div class="shareholder-grid">
+      <div class="shareholder-card">
+        <div class="shareholder-icon">1</div>
+        <h4 data-zh="池子份额" data-en="Pool Share">池子份额</h4>
+        <p data-zh="按投入比例分配池子份额，份额决定奖励权重和治理投票权" data-en="Allocate pool shares by contribution; shares determine reward weight and governance voting power">按投入比例分配池子份额，份额决定奖励权重和治理投票权</p>
+      </div>
+      <div class="shareholder-card">
+        <div class="shareholder-icon">2</div>
+        <h4 data-zh="季度再平衡" data-en="Quarterly Rebalancing">季度再平衡</h4>
+        <p data-zh="每季度评估池子表现，动态调整份额与奖励比例，保持生态平衡" data-en="Quarterly pool performance review, dynamically adjust shares and reward rates for ecosystem balance">每季度评估池子表现，动态调整份额与奖励比例，保持生态平衡</p>
+      </div>
+      <div class="shareholder-card">
+        <div class="shareholder-icon">3</div>
+        <h4 data-zh="跨境共识" data-en="Cross-border Consensus">跨境共识</h4>
+        <p data-zh="海外 Web3 外贸兑换小组协调跨境共识，多区域协同治理" data-en="Overseas Web3 trade group coordinates cross-border consensus, multi-region collaborative governance">海外 Web3 外贸兑换小组协调跨境共识，多区域协同治理</p>
+      </div>
+      <div class="shareholder-card">
+        <div class="shareholder-icon">4</div>
+        <h4 data-zh="志愿者驱动" data-en="Volunteer-Driven">志愿者驱动</h4>
+        <p data-zh="As a Volunteer — 社区志愿者自发参与建设，贡献即获得 DAO 治理权" data-en="As a Volunteer — Community volunteers participate spontaneously; contribution earns DAO governance rights">As a Volunteer — 社区志愿者自发参与建设，贡献即获得 DAO 治理权</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Quantum Robot ========== -->
+<section id="quantum">
+  <div class="container">
+    <h2 class="section-title" data-zh="量化机器人" data-en="Quantitative Robot">量化机器人</h2>
+    <p class="section-subtitle" data-zh="自动化做市策略，增强流动性" data-en="Automated market-making strategy for liquidity enhancement">自动化做市策略，增强流动性</p>
+    <div class="quantum-box">
+      <div class="quantum-title" data-zh="做差价量级" data-en="Arbitrage Range">做差价量级</div>
+      <div class="quantum-range">5,000 - 50,000</div>
+      <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem;">SOL / USDC / USDT</p>
+      <p class="quantum-desc" data-zh="量化机器人可在 5,000 至 50,000 SOL/USDC/USDT 量级范围内执行自动化做差价策略，通过多 DEX 套利、动态做市和流动性管理增强 EACO 池子效率。机器人参与方需与 DAO 签署志愿者协议。" data-en="Quantitative robots can execute automated arbitrage strategies within the 5,000-50,000 SOL/USDC/USDT range, enhancing EACO pool efficiency through multi-DEX arbitrage, dynamic market-making, and liquidity management. Robot operators must sign a volunteer agreement with the DAO.">量化机器人可在 5,000 至 50,000 SOL/USDC/USDT 量级范围内执行自动化做差价策略，通过多 DEX 套利、动态做市和流动性管理增强 EACO 池子效率。机器人参与方需与 DAO 签署志愿者协议。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Links ========== -->
+<section id="links">
+  <div class="container">
+    <h2 class="section-title" data-zh="交易与信息链接" data-en="Trading & Info Links">交易与信息链接</h2>
+    <p class="section-subtitle" data-zh="13个外部链接：DEX 交易 / Token 信息 / 社交" data-en="13 external links: DEX / Token Info / Social">13个外部链接：DEX 交易 / Token 信息 / 社交</p>
+
+    <!-- DEX Links -->
+    <h3 style="color: var(--accent-cyan); font-size: 1rem; margin-bottom: 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-cyan);" data-zh="DEX 交易" data-en="DEX Trading">DEX 交易</h3>
+    <div class="links-grid">
+      <a href="https://app.meteora.ag/dlmm/6ZfCi3qzhgDN1ygHVYXvfsfrwz8ZhQ7hD5mJtjeuUDyE" target="_blank" class="link-card">
+        <div class="link-icon dex">M</div>
+        <div class="link-text">
+          <div class="link-name">Meteora DLMM #1</div>
+          <div class="link-url">app.meteora.ag/dlmm/6ZfCi...</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://app.meteora.ag/dlmm/GsDB4iKELP7KDVjn5ZcHsJhWRY8J3HqTxvE86zyDhV34" target="_blank" class="link-card">
+        <div class="link-icon dex">M</div>
+        <div class="link-text">
+          <div class="link-name">Meteora DLMM #2</div>
+          <div class="link-url">app.meteora.ag/dlmm/GsDB4...</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://raydium.io/swap/?inputMint=sol&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+        <div class="link-icon dex">R</div>
+        <div class="link-text">
+          <div class="link-name">Raydium Swap</div>
+          <div class="link-url">raydium.io/swap</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://www.orca.so/pools?tokens=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+        <div class="link-icon dex">O</div>
+        <div class="link-text">
+          <div class="link-name">Orca Pools</div>
+          <div class="link-url">orca.so/pools</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://pancakeswap.finance/swap?inputCurrency=SOL&chain=sol&outputCurrency=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH&chainOut=sol" target="_blank" class="link-card">
+        <div class="link-icon dex">P</div>
+        <div class="link-text">
+          <div class="link-name">PancakeSwap</div>
+          <div class="link-url">pancakeswap.finance/swap</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://app.uniswap.org/explore/tokens/solana/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+        <div class="link-icon dex">U</div>
+        <div class="link-text">
+          <div class="link-name">Uniswap</div>
+          <div class="link-url">app.uniswap.org/explore</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://web3.okx.com/token/solana/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+        <div class="link-icon dex">O</div>
+        <div class="link-text">
+          <div class="link-name">OKX Web3</div>
+          <div class="link-url">web3.okx.com/token</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://coinmarketcap.com/dexscan/solana/7cmAfsKJrvcbMLWoXDTX5uZ2C8udBjzsKEgaxeweKMMU/" target="_blank" class="link-card">
+        <div class="link-icon dex">C</div>
+        <div class="link-text">
+          <div class="link-name">CMC DEXScan</div>
+          <div class="link-url">coinmarketcap.com/dexscan</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Token Info Links -->
+    <h3 style="color: var(--accent-purple); font-size: 1rem; margin: 2rem 0 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-purple);" data-zh="Token 信息" data-en="Token Info">Token 信息</h3>
+    <div class="links-grid">
+      <a href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+        <div class="link-icon info">S</div>
+        <div class="link-text">
+          <div class="link-name">Solscan</div>
+          <div class="link-url">solscan.io/token</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+        <div class="link-icon info">O</div>
+        <div class="link-text">
+          <div class="link-name">ORB Markets</div>
+          <div class="link-url">orbmarkets.io/token</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://github.com/eacocc/eaco" target="_blank" class="link-card">
+        <div class="link-icon info">G</div>
+        <div class="link-text">
+          <div class="link-name">GitHub</div>
+          <div class="link-url">github.com/eacocc/eaco</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://coinmarketcap.com" target="_blank" class="link-card">
+        <div class="link-icon info">C</div>
+        <div class="link-text">
+          <div class="link-name">CoinMarketCap</div>
+          <div class="link-url">coinmarketcap.com</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Social Links -->
+    <h3 style="color: var(--accent-green); font-size: 1rem; margin: 2rem 0 1rem; padding-left: 0.5rem; border-left: 3px solid var(--accent-green);" data-zh="社交" data-en="Social">社交</h3>
+    <div class="links-grid">
+      <a href="https://x.com/eacocc" target="_blank" class="link-card">
+        <div class="link-icon social">X</div>
+        <div class="link-text">
+          <div class="link-name">X (@eacocc)</div>
+          <div class="link-url">x.com/eacocc</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://t.me/e_eacocc" target="_blank" class="link-card">
+        <div class="link-icon social">T</div>
+        <div class="link-text">
+          <div class="link-name">Telegram (@e_eacocc)</div>
+          <div class="link-url">t.me/e_eacocc</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Loop Chain ========== -->
+<section id="loop">
+  <div class="container">
+    <h2 class="section-title" data-zh="闭环链路" data-en="Closed-Loop Chain">闭环链路</h2>
+    <p class="section-subtitle" data-zh="EACO 星际文明完整闭环：祈愿 → 校准 → 感恩 → 利他 → 聚合共振 → 共生 → 接纳 → 显化 → 回流 → 再祈愿" data-en="EACO Interstellar Civilization Complete Loop">EACO 星际文明完整闭环</p>
+    <div class="loop-container" id="loopContainer">
+      <div class="loop-node" data-zh="祈愿" data-en="Wish">祈愿</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="校准" data-en="Calibrate">校准</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="感恩" data-en="Gratitude">感恩</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="利他" data-en="Altruism">利他</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="聚合共振" data-en="Resonance">聚合共振</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="共生" data-en="Symbiosis">共生</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="接纳" data-en="Acceptance">接纳</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="显化" data-en="Manifestation">显化</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="回流" data-en="Return">回流</div>
+      <span class="loop-arrow">→</span>
+      <div class="loop-node" data-zh="再祈愿" data-en="Re-wish">再祈愿</div>
+    </div>
+    <p class="loop-desc" data-zh="从祈愿出发，经过校准与感恩，以利他之心聚合共振，实现共生与接纳，显化价值后回流，再启新一轮祈愿 — 形成永不终结的星际文明能量闭环。" data-en="From wishing, through calibration and gratitude, with altruistic resonance, achieving symbiosis and acceptance, manifesting value then returning, to begin a new wish — forming an infinite interstellar energy loop.">从祈愿出发，经过校准与感恩，以利他之心聚合共振，实现共生与接纳，显化价值后回流，再启新一轮祈愿 — 形成永不终结的星际文明能量闭环。</p>
+  </div>
+</section>
+
+<!-- ========== Vision Banner ========== -->
+<section style="padding-top: 2rem;">
+  <div class="container">
+    <div class="vision-banner">
+      <h3 style="color: var(--accent-cyan); font-size: 1.2rem;" data-zh="EACO 星际文明愿景" data-en="EACO Interstellar Vision">EACO 星际文明愿景</h3>
+      <div class="vision-target">$0.01</div>
+      <p class="vision-text" data-zh="目标：EACO 抵达 0.01 美元，实现星际文明共生。EACO(Earth's Best Coin) — Earth's best AI + RWA + WEB3 coin，以流动性为基石，以 DAO 为共识，以星际文明为远方。" data-en="Goal: EACO reaches $0.01, achieving interstellar civilization symbiosis. EACO(Earth's Best Coin) — Earth's best AI + RWA + WEB3 coin, with liquidity as foundation, DAO as consensus, and interstellar civilization as the horizon.">目标：EACO 抵达 0.01 美元，实现星际文明共生。EACO(Earth's Best Coin) — Earth's best AI + RWA + WEB3 coin，以流动性为基石，以 DAO 为共识，以星际文明为远方。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Footer ========== -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">EACO Pool DAO</div>
+    <p class="footer-slogan" data-zh="EACO(SOL) Overseas Increased Liquidity | As a Volunteer" data-en="EACO(SOL) Overseas Increased Liquidity | As a Volunteer">EACO(SOL) Overseas Increased Liquidity | As a Volunteer</p>
+    <div class="footer-ca">CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</div>
+    <div class="footer-links">
+      <a href="eaco-dao-academy.html" data-zh="EACO学院" data-en="Academy">EACO学院</a>
+      <a href="https://x.com/eacocc" target="_blank">X</a>
+      <a href="https://t.me/e_eacocc" target="_blank">Telegram</a>
+      <a href="https://github.com/eacocc/eaco" target="_blank">GitHub</a>
+      <a href="mailto:eaco2cc@gmail.com">Email</a>
+    </div>
+    <p class="footer-copy" data-zh="© 2024-2026 EACO DAO. 九村eaco海外web3外贸兑换小组. 仅供研究参考。" data-en="© 2024-2026 EACO DAO. Jiucun EACO Overseas Web3 Group. For research reference only.">© 2024-2026 EACO DAO. 九村eaco海外web3外贸兑换小组. 仅供研究参考。</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<script>
+// ========== Starfield ==========
+(function(){
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resize() {
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    stars = [];
+    const count = Math.floor((canvas.width * canvas.height) / 8000);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        r: Math.random() * 1.2, o: Math.random(), s: Math.random() * 0.02 + 0.005,
+        tw: Math.random() * Math.PI * 2
+      });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const st of stars) {
+      st.tw += st.s;
+      const op = 0.3 + Math.abs(Math.sin(st.tw)) * 0.7;
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, Math.max(0.3, st.r), 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(200, 220, 255, ' + op + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  resize(); draw();
+  window.addEventListener('resize', resize);
+})();
+
+// ========== Meteors ==========
+(function(){
+  const canvas = document.getElementById('meteorCanvas');
+  const ctx = canvas.getContext('2d');
+  let meteors = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  function spawnMeteor() {
+    if (Math.random() > 0.3) return;
+    meteors.push({
+      x: Math.random() * canvas.width, y: -10,
+      vx: (Math.random() - 0.3) * 3 + 1, vy: Math.random() * 3 + 4,
+      len: Math.random() * 80 + 40, life: 1, op: Math.random() * 0.5 + 0.3
+    });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = meteors.length - 1; i >= 0; i--) {
+      const m = meteors[i];
+      m.x += m.vx; m.y += m.vy; m.life -= 0.008;
+      if (m.life <= 0 || m.y > canvas.height) { meteors.splice(i, 1); continue; }
+      const grad = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * m.len / 5, m.y - m.vy * m.len / 5);
+      grad.addColorStop(0, 'rgba(0, 212, 255, ' + (m.op * m.life) + ')');
+      grad.addColorStop(0.5, 'rgba(168, 85, 247, ' + (m.op * m.life * 0.5) + ')');
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(m.x, m.y);
+      ctx.lineTo(m.x - m.vx * m.len / 5, m.y - m.vy * m.len / 5);
+      ctx.stroke();
+    }
+    spawnMeteor();
+    requestAnimationFrame(draw);
+  }
+  resize(); draw();
+  window.addEventListener('resize', resize);
+})();
+
+// ========== Language Toggle ==========
+let currentLang = 'zh';
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  document.documentElement.setAttribute('data-lang', currentLang);
+  document.documentElement.setAttribute('lang', currentLang === 'zh' ? 'zh-CN' : 'en');
+  const elements = document.querySelectorAll('[data-zh][data-en]');
+  elements.forEach(function(el) {
+    const txt = el.getAttribute('data-' + currentLang);
+    if (txt) el.innerHTML = txt;
+  });
+  const toggleBtn = document.querySelector('.lang-toggle');
+  if (toggleBtn) toggleBtn.textContent = currentLang === 'zh' ? 'EN' : '中文';
+}
+// Init with zh
+(function initLang() {
+  const elements = document.querySelectorAll('[data-zh][data-en]');
+  elements.forEach(function(el) {
+    el.innerHTML = el.getAttribute('data-zh');
+  });
+})();
+
+// ========== CA Copy ==========
+function copyCA() {
+  const ca = 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(ca).then(function() {
+      const btn = document.getElementById('caCopyBtn');
+      btn.classList.add('copied');
+      const orig = btn.textContent;
+      btn.textContent = currentLang === 'zh' ? '已复制' : 'Copied';
+      setTimeout(function() { btn.classList.remove('copied'); btn.textContent = orig; }, 2000);
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = ca; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+    const btn = document.getElementById('caCopyBtn');
+    btn.classList.add('copied');
+    const orig = btn.textContent;
+    btn.textContent = currentLang === 'zh' ? '已复制' : 'Copied';
+    setTimeout(function() { btn.classList.remove('copied'); btn.textContent = orig; }, 2000);
+  }
+}
+
+// ========== Reward Calculator ==========
+function calculateReward() {
+  const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
+  let rate = 0;
+  if (amount >= 8000) rate = 0.008;
+  else if (amount >= 5000) rate = 0.005;
+  else if (amount >= 2000) rate = 0.002;
+  else if (amount > 0) rate = 0;
+  const reward = amount * rate;
+  const resultEl = document.getElementById('calcResult');
+  if (amount <= 0) {
+    resultEl.textContent = '—';
+  } else if (rate === 0) {
+    resultEl.textContent = currentLang === 'zh' ? '未达最低档 (2000 USDT)' : 'Below min tier (2000 USDT)';
+  } else {
+    resultEl.textContent = (reward.toFixed(2)) + ' EACO';
+  }
+}
+
+// ========== Menu Toggle ==========
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('active');
+}
+
+// ========== Back to Top ==========
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('backToTop');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+</script>
+</body>
+</html>

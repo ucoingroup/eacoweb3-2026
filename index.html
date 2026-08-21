@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0f7a4d" />
+<title>EACO — Earth's best Coin ($e / $eaco)</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>" />
+<style>
+  :root{
+    --green:#0f7a4d; --green2:#15a06a; --dark:#06281b; --bg:#f3faf6;
+    --card:#ffffff; --muted:#5b6b63; --line:#d8e8e0; --accent:#ffce3a;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:#10231b;line-height:1.6}
+  header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+  .logo{font-weight:800;font-size:20px;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+  .logo .e{background:var(--accent);color:#1a1a1a;border-radius:8px;padding:0 8px;font-weight:900}
+  .spacer{flex:1}
+  .lang{display:flex;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden}
+  .lang button{border:0;background:transparent;color:#fff;padding:6px 12px;font-weight:700;cursor:pointer;font-size:14px}
+  .lang button.on{background:#fff;color:var(--green)}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .hero{background:var(--card);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 4px 18px rgba(15,122,77,.08);border:1px solid var(--line)}
+  .hero h1{margin:0 0 6px;font-size:26px}
+  .hero .tag{color:var(--green);font-weight:700}
+  .hero p{color:var(--muted);margin:10px 0 0}
+  .ca{margin-top:14px;background:#f0f7f3;border:1px dashed var(--green);border-radius:12px;padding:10px 12px;font-size:13px;word-break:break-all;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ca code{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--dark)}
+  .copy{border:0;background:var(--green);color:#fff;border-radius:8px;padding:6px 12px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .copy:active{transform:scale(.96)}
+  section{background:var(--card);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 4px 18px rgba(15,122,77,.07);border:1px solid var(--line)}
+  h2{font-size:20px;margin:0 0 10px;color:var(--green)}
+  h3{font-size:16px;margin:14px 0 6px;color:var(--dark)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:10px}
+  .pill{background:#eef7f1;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-weight:700;color:var(--green)}
+  .sec-card{background:#f0f7f3;border-left:4px solid var(--green);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .sec-card b{color:var(--dark)}
+  .search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:10px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--muted);font-weight:600}
+  .chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .qa{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+  .qa .q{width:100%;text-align:left;border:0;background:#fff;padding:14px;font-weight:700;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;color:#10231b}
+  .qa .q .ic{color:var(--green);font-weight:900}
+  .qa .a{max-height:0;overflow:hidden;transition:max-height .25s ease;background:#f7fbf9;color:var(--muted)}
+  .qa .a div{padding:14px;border-top:1px solid var(--line)}
+  .qa.open .a{max-height:600px}
+  .disclaimer{background:#fff7e6;border:1px solid #ffd98a;border-radius:14px;padding:14px;font-size:13px;color:#7a5b13;margin:16px 0}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+  .badge{display:inline-block;background:var(--accent);color:#1a1a1a;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800;margin-left:6px}
+  a.link{color:var(--green);font-weight:700;text-decoration:none}
+  .install{position:fixed;bottom:14px;right:14px;z-index:30;background:var(--green);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-weight:800;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span class="e">e</span> EACO</div>
+  <div class="spacer"></div>
+  <div class="lang">
+    <button id="btnEn" class="on" onclick="setLang('en')">EN</button>
+    <button id="btnZh" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1 data-en="EACO (Earth's best Coin)" data-zh="EACO（地球上最好的币）">EACO (Earth's best Coin)</h1>
+    <div class="tag" data-en="The only $eaco in the universe and the earth" data-zh="宇宙与地球上唯一的 $eaco">The only $eaco in the universe and the earth</div>
+    <p data-en="A community-driven meme token for the global village. Ticker: $e / $eaco. 'eaco for earth'." data-zh="面向全球村的社区型 meme 代币。代号：$e / $eaco。「eaco for earth」。" >A community-driven meme token for the global village. Ticker: $e / $eaco. 'eaco for earth'.</p>
+    <div class="ca">
+      <span data-en="Solana CA:" data-zh="Solana 合约：">Solana CA:</span>
+      <code id="caText">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+      <button class="copy" onclick="copyCA()" data-en="Copy" data-zh="复制">Copy</button>
+    </div>
+  </div>
+
+  <section>
+    <h2 data-en="🌍 Mission & Community" data-zh="🌍 使命与社区">🌍 Mission & Community</h2>
+    <p data-en="EACO exists for people and the planet — 'eaco for earth'. It is the global villagers' own MEME, connecting netizens across regions through a common token and culture. Community is value: the project moves forward with its members." data-zh="EACO 为人性与地球而生——「eaco for earth」。它是全球村民自己的 MEME，用共同的代币与文化连接各地网民。社区即价值：项目与成员一同前行。">EACO exists for people and the planet...</p>
+    <div class="grid">
+      <div class="pill" data-en="Earth's best Coin" data-zh="地球上最好的币">Earth's best Coin</div>
+      <div class="pill" data-en="Global village MEME" data-zh="全球村 MEME">Global village MEME</div>
+      <div class="pill" data-en="Community-owned" data-zh="社区共有">Community-owned</div>
+      <div class="pill" data-en="Protect the Earth" data-zh="守护地球">Protect the Earth</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-en="📜 SEC News — Aug 18, 2026" data-zh="📜 SEC 新闻 — 2026年8月18日">📜 SEC News — Aug 18, 2026</h2>
+    <p data-en="On Aug 18, 2026 the U.S. SEC proposed 'Regulation Crypto Assets' (Release 33-11434) — its first tailored offering framework for crypto investment contracts. Built on the March 17, 2026 interpretation. IMPORTANT: it is a proposal, not final law (60-day comment period after Federal Register)." data-zh="2026年8月18日，美国 SEC 提出《Regulation Crypto Assets（加密资产监管条例）》（发布编号 33‑11434）——首个针对加密资产投资合同的专门发币框架，建立在 2026年3月17日解释之上。重要：这只是提案，并非生效法律（联邦公报刊发后 60 天评议期）。">On Aug 18, 2026 the U.S. SEC proposed...</p>
+    <div class="sec-card"><b data-en="Startup Exemption — $5M (500万)" data-zh="创业公司豁免 — $5M（500万）">Startup Exemption — $5M (500万)</b><br><span data-en="Raise up to $5 million over 4 years, one-time, principles-based disclosure, no audited financials, public solicitation allowed." data-zh="4 年内累计募资至多 $5M，一次性，原则性披露，无审计财报，允许公开募集。">Raise up to $5 million over 4 years...</span></div>
+    <div class="sec-card"><b data-en="Fundraising Exemption — $75M (7500万)" data-zh="融资豁免 — $75M（7500万）">Fundraising Exemption — $75M (7500万)</b><br><span data-en="Modeled on Reg A+: Tier 1 up to $20M / 12mo, Tier 2 up to $75M / 12mo, with financial statements and ongoing reporting." data-zh="对标 Reg A+：Tier 1 为 12 个月 $20M，Tier 2 为 12 个月 $75M，需财报与持续披露。">Modeled on Reg A+...</span></div>
+    <div class="sec-card"><b data-en="Safe Harbor + State Preemption" data-zh="安全港 + 州法预emption">Safe Harbor + State Preemption</b><br><span data-en="An asset can exit the 'investment contract' definition once managerial efforts are complete; state 'blue sky' rules are preempted." data-zh="资产在完成管理性工作后可脱离「投资合同」定义；各州「蓝天法」被预emption。">An asset can exit the 'investment contract' definition...</span></div>
+    <p style="font-size:13px;color:var(--muted)" data-en="Where do 500万 / 7500万美元 come from? They are the exact caps in the SEC proposal: $5M (startup) and $75M (fundraising Tier 2) — not EACO's own numbers." data-zh="500万 / 7500万美元 从何而来？正是 SEC 提案里的两个上限：$5M（创业）与 $75M（融资 Tier 2），并非 EACO 自身数据。">Where do 500万 / 7500万美元 come from?...</p>
+  </section>
+
+  <section>
+    <h2 data-en="🇺🇸 North America English Group" data-zh="🇺🇸 北美英语小组">🇺🇸 North America English Group</h2>
+    <p data-en="The NA / English chapter of Earth villagers — the hub for English content, AMAs, and local meetups in top crypto cities (NY, LA, Toronto, Miami, Seattle…). The new U.S. tailwind ('Crypto Capital of the World', onshoring innovation) is a positive narrative for building now. Grow with honest community work; never promise returns." data-zh="地球村民的北美/英语分群——英文内容、AMA 与重点 crypto 城市（纽约、洛杉矶、多伦多、迈阿密、西雅图…）本地聚会的枢纽。美国新政风向（「全球 crypto 之都」、创新留在本土）是当下建设的正面叙事。以诚实社区工作成长，绝不承诺收益。">The NA / English chapter of Earth villagers...</p>
+    <div class="sec-card"><b data-en="How EACO leverages the opportunity" data-zh="EACO 如何借势">How EACO leverages the opportunity</b><br><span data-en="1) Frame as community meme + Earth values; 2) build bilingual hub (this app); 3) submit a community comment in the 60-day window; 4) host X Spaces / campus clubs; 5) expand city chapters." data-zh="1) 定位社区 meme + 地球价值；2) 建双语枢纽（本 APP）；3) 在 60 天窗口提交社区评议；4) 办 X Spaces / 校园社团；5) 扩展城市分群。">1) Frame as community meme + Earth values...</span></div>
+  </section>
+
+  <section>
+    <h2 data-en="❓ 100 Q&A" data-zh="❓ 100 问答"><span data-en="❓ 100 Q&A" data-zh="❓ 100 问答">❓ 100 Q&A</span></h2>
+    <input class="search" id="qaSearch" placeholder="Search…" oninput="renderQA()" data-en-ph="Search questions…" />
+    <div class="chips" id="qaChips"></div>
+    <div id="qaList"></div>
+  </section>
+
+  <div class="disclaimer">
+    <b data-en="Disclaimer" data-zh="免责声明">Disclaimer</b>:
+    <span data-en="EACO is an experimental, high-risk community meme token and is NOT registered with the SEC or any regulator. This site is educational/community information, not financial, legal, or tax advice. Crypto can lose all value. Verify the contract address and do your own research (DYOR)." data-zh="EACO 是实验性、高风险的社区 meme 代币，未在 SEC 或任何监管机构注册。本网站为教育/社区信息，非金融、法律或税务建议。加密资产可能归零，请核对合约地址并自行研究（DYOR）。">EACO is an experimental...</span>
+  </div>
+
+  <footer>
+    <span data-en="eaco for earth — one authentic $eaco for the global village." data-zh="eaco for earth——全球村一枚真品 $eaco。">eaco for earth — one authentic $eaco for the global village.</span><br>
+    © 2026 EACO Community
+  </footer>
+</div>
+
+<button class="install" id="installBtn" onclick="installApp()">📲 Install App</button>
+
+<script src="qa-data.js"></script>
+<script>
+var LANG = 'en';
+var UI = {
+  en:{ search:"Search questions…", all:"All", copyOk:"Copied!" },
+  zh:{ search:"搜索问题…", all:"全部", copyOk:"已复制！" }
+};
+function t(key){ return UI[LANG][key]; }
+
+function setLang(l){
+  LANG = l;
+  document.documentElement.lang = (l==='zh')?'zh-CN':'en';
+  document.getElementById('btnEn').classList.toggle('on', l==='en');
+  document.getElementById('btnZh').classList.toggle('on', l==='zh');
+  // toggle data-en/data-zh text
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    el.textContent = (l==='zh') ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+  });
+  // placeholders
+  document.getElementById('qaSearch').placeholder = t('search');
+  renderQA();
+}
+
+function copyCA(){
+  var ca = document.getElementById('caText').textContent;
+  navigator.clipboard && navigator.clipboard.writeText(ca);
+  var btn = event.target; var old = btn.textContent;
+  btn.textContent = t('copyOk'); setTimeout(function(){btn.textContent=old;},1200);
+}
+
+// ---- Q&A rendering ----
+var CATS = {};
+var activeCat = 'All';
+EACO_QA.forEach(function(i){ if(!CATS[i.cat]) CATS[i.cat]=true; });
+
+function buildChips(){
+  var wrap = document.getElementById('qaChips');
+  var cats = ['All'].concat(Object.keys(CATS));
+  wrap.innerHTML = '';
+  cats.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'chip' + (c===activeCat?' on':'');
+    b.textContent = (LANG==='zh'?catZh(c):c);
+    b.onclick = function(){ activeCat=c; buildChips(); renderQA(); };
+    wrap.appendChild(b);
+  });
+}
+function catZh(c){
+  var m={Basics:"基础",Tokenomics:"代币与经济",Buying:"购买与钱包",Community:"社区与使命",Brand:"品牌与梗",Security:"安全与防骗",Regulation:"监管与SEC",NorthAmerica:"北美英语小组",Roadmap:"路线与发展",Risks:"风险与免责"};
+  return m[c]||c;
+}
+
+function renderQA(){
+  var q = (document.getElementById('qaSearch').value||'').toLowerCase();
+  var list = document.getElementById('qaList');
+  list.innerHTML = '';
+  EACO_QA.forEach(function(item){
+    if(activeCat!=='All' && item.cat!==activeCat) return;
+    var qtext = (LANG==='zh')?item.zh_q:item.en_q;
+    var atext = (LANG==='zh')?item.zh_a:item.en_a;
+    if(q && qtext.toLowerCase().indexOf(q)===-1 && atext.toLowerCase().indexOf(q)===-1) return;
+    var d = document.createElement('div'); d.className='qa';
+    d.innerHTML = '<button class="q">'+qtext+' <span class="ic">+</span></button><div class="a"><div>'+atext+'</div></div>';
+    d.querySelector('.q').onclick = function(){
+      d.classList.toggle('open');
+      d.querySelector('.ic').textContent = d.classList.contains('open')?'−':'+';
+    };
+    list.appendChild(d);
+  });
+  if(!list.children.length){
+    list.innerHTML = '<p style="color:var(--muted)">'+(LANG==='zh'?'无匹配结果。':'No matches.')+'</p>';
+  }
+}
+
+// ---- PWA install ----
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredPrompt=e; document.getElementById('installBtn').style.display='block'; });
+function installApp(){ if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(function(){ deferredPrompt=null; document.getElementById('installBtn').style.display='none'; }); } }
+
+buildChips();
+renderQA();
+</script>
+</body>
+</html>

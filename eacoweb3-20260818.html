@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0f7a4d" />
+<title>EACO — Earth's best Coin ($e / $eaco)</title>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>" />
+<style>
+  :root{
+    --green:#0f7a4d; --green2:#15a06a; --dark:#06281b; --bg:#f3faf6;
+    --card:#ffffff; --muted:#5b6b63; --line:#d8e8e0; --accent:#ffce3a;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:#10231b;line-height:1.6}
+  header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+  .logo{font-weight:800;font-size:20px;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+  .logo .e{background:var(--accent);color:#1a1a1a;border-radius:8px;padding:0 8px;font-weight:900}
+  .spacer{flex:1}
+  .lang{display:flex;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden}
+  .lang button{border:0;background:transparent;color:#fff;padding:6px 12px;font-weight:700;cursor:pointer;font-size:14px}
+  .lang button.on{background:#fff;color:var(--green)}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .hero{background:var(--card);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 4px 18px rgba(15,122,77,.08);border:1px solid var(--line)}
+  .hero h1{margin:0 0 6px;font-size:26px}
+  .hero .tag{color:var(--green);font-weight:700}
+  .hero p{color:var(--muted);margin:10px 0 0}
+  .ca{margin-top:14px;background:#f0f7f3;border:1px dashed var(--green);border-radius:12px;padding:10px 12px;font-size:13px;word-break:break-all;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ca code{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--dark)}
+  .copy{border:0;background:var(--green);color:#fff;border-radius:8px;padding:6px 12px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .copy:active{transform:scale(.96)}
+  section{background:var(--card);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 4px 18px rgba(15,122,77,.07);border:1px solid var(--line)}
+  h2{font-size:20px;margin:0 0 10px;color:var(--green)}
+  h3{font-size:16px;margin:14px 0 6px;color:var(--dark)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:10px}
+  .pill{background:#eef7f1;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-weight:700;color:var(--green)}
+  .sec-card{background:#f0f7f3;border-left:4px solid var(--green);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .sec-card b{color:var(--dark)}
+  .search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:10px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--muted);font-weight:600}
+  .chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .qa{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+  .qa .q{width:100%;text-align:left;border:0;background:#fff;padding:14px;font-weight:700;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;color:#10231b}
+  .qa .q .ic{color:var(--green);font-weight:900}
+  .qa .a{max-height:0;overflow:hidden;transition:max-height .25s ease;background:#f7fbf9;color:var(--muted)}
+  .qa .a div{padding:14px;border-top:1px solid var(--line)}
+  .qa.open .a{max-height:600px}
+  .disclaimer{background:#fff7e6;border:1px solid #ffd98a;border-radius:14px;padding:14px;font-size:13px;color:#7a5b13;margin:16px 0}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+  .badge{display:inline-block;background:var(--accent);color:#1a1a1a;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800;margin-left:6px}
+  a.link{color:var(--green);font-weight:700;text-decoration:none}
+  .install{position:fixed;bottom:14px;right:14px;z-index:30;background:var(--green);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-weight:800;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span class="e">e</span> EACO</div>
+  <div class="spacer"></div>
+  <div class="lang">
+    <button id="btnEn" class="on" onclick="setLang('en')">EN</button>
+    <button id="btnZh" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1 data-en="EACO (Earth's best Coin)" data-zh="EACO（地球上最好的币）">EACO (Earth's best Coin)</h1>
+    <div class="tag" data-en="The only $eaco in the universe and the earth" data-zh="宇宙与地球上唯一的 $eaco">The only $eaco in the universe and the earth</div>
+    <p data-en="A community-driven meme token for the global village. Ticker: $e / $eaco. 'eaco for earth'." data-zh="面向全球村的社区型 meme 代币。代号：$e / $eaco。「eaco for earth」。" >A community-driven meme token for the global village. Ticker: $e / $eaco. 'eaco for earth'.</p>
+    <div class="ca">
+      <span data-en="Solana CA:" data-zh="Solana 合约：">Solana CA:</span>
+      <code id="caText">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+      <button class="copy" onclick="copyCA()" data-en="Copy" data-zh="复制">Copy</button>
+    </div>
+  </div>
+
+  <section>
+    <h2 data-en="🌍 Mission & Community" data-zh="🌍 使命与社区">🌍 Mission & Community</h2>
+    <p data-en="EACO exists for people and the planet — 'eaco for earth'. It is the global villagers' own MEME, connecting netizens across regions through a common token and culture. Community is value: the project moves forward with its members." data-zh="EACO 为人性与地球而生——「eaco for earth」。它是全球村民自己的 MEME，用共同的代币与文化连接各地网民。社区即价值：项目与成员一同前行。">EACO exists for people and the planet...</p>
+    <div class="grid">
+      <div class="pill" data-en="Earth's best Coin" data-zh="地球上最好的币">Earth's best Coin</div>
+      <div class="pill" data-en="Global village MEME" data-zh="全球村 MEME">Global village MEME</div>
+      <div class="pill" data-en="Community-owned" data-zh="社区共有">Community-owned</div>
+      <div class="pill" data-en="Protect the Earth" data-zh="守护地球">Protect the Earth</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-en="📜 SEC News — Aug 18, 2026" data-zh="📜 SEC 新闻 — 2026年8月18日">📜 SEC News — Aug 18, 2026</h2>
+    <p data-en="On Aug 18, 2026 the U.S. SEC proposed 'Regulation Crypto Assets' (Release 33-11434) — its first tailored offering framework for crypto investment contracts. Built on the March 17, 2026 interpretation. IMPORTANT: it is a proposal, not final law (60-day comment period after Federal Register)." data-zh="2026年8月18日，美国 SEC 提出《Regulation Crypto Assets（加密资产监管条例）》（发布编号 33‑11434）——首个针对加密资产投资合同的专门发币框架，建立在 2026年3月17日解释之上。重要：这只是提案，并非生效法律（联邦公报刊发后 60 天评议期）。">On Aug 18, 2026 the U.S. SEC proposed...</p>
+    <div class="sec-card"><b data-en="Startup Exemption — $5M (500万)" data-zh="创业公司豁免 — $5M（500万）">Startup Exemption — $5M (500万)</b><br><span data-en="Raise up to $5 million over 4 years, one-time, principles-based disclosure, no audited financials, public solicitation allowed." data-zh="4 年内累计募资至多 $5M，一次性，原则性披露，无审计财报，允许公开募集。">Raise up to $5 million over 4 years...</span></div>
+    <div class="sec-card"><b data-en="Fundraising Exemption — $75M (7500万)" data-zh="融资豁免 — $75M（7500万）">Fundraising Exemption — $75M (7500万)</b><br><span data-en="Modeled on Reg A+: Tier 1 up to $20M / 12mo, Tier 2 up to $75M / 12mo, with financial statements and ongoing reporting." data-zh="对标 Reg A+：Tier 1 为 12 个月 $20M，Tier 2 为 12 个月 $75M，需财报与持续披露。">Modeled on Reg A+...</span></div>
+    <div class="sec-card"><b data-en="Safe Harbor + State Preemption" data-zh="安全港 + 州法预emption">Safe Harbor + State Preemption</b><br><span data-en="An asset can exit the 'investment contract' definition once managerial efforts are complete; state 'blue sky' rules are preempted." data-zh="资产在完成管理性工作后可脱离「投资合同」定义；各州「蓝天法」被预emption。">An asset can exit the 'investment contract' definition...</span></div>
+    <p style="font-size:13px;color:var(--muted)" data-en="Where do 500万 / 7500万美元 come from? They are the exact caps in the SEC proposal: $5M (startup) and $75M (fundraising Tier 2) — not EACO's own numbers." data-zh="500万 / 7500万美元 从何而来？正是 SEC 提案里的两个上限：$5M（创业）与 $75M（融资 Tier 2），并非 EACO 自身数据。">Where do 500万 / 7500万美元 come from?...</p>
+  </section>
+
+  <section>
+    <h2 data-en="🇺🇸 North America English Group" data-zh="🇺🇸 北美英语小组">🇺🇸 North America English Group</h2>
+    <p data-en="The NA / English chapter of Earth villagers — the hub for English content, AMAs, and local meetups in top crypto cities (NY, LA, Toronto, Miami, Seattle…). The new U.S. tailwind ('Crypto Capital of the World', onshoring innovation) is a positive narrative for building now. Grow with honest community work; never promise returns." data-zh="地球村民的北美/英语分群——英文内容、AMA 与重点 crypto 城市（纽约、洛杉矶、多伦多、迈阿密、西雅图…）本地聚会的枢纽。美国新政风向（「全球 crypto 之都」、创新留在本土）是当下建设的正面叙事。以诚实社区工作成长，绝不承诺收益。">The NA / English chapter of Earth villagers...</p>
+    <div class="sec-card"><b data-en="How EACO leverages the opportunity" data-zh="EACO 如何借势">How EACO leverages the opportunity</b><br><span data-en="1) Frame as community meme + Earth values; 2) build bilingual hub (this app); 3) submit a community comment in the 60-day window; 4) host X Spaces / campus clubs; 5) expand city chapters." data-zh="1) 定位社区 meme + 地球价值；2) 建双语枢纽（本 APP）；3) 在 60 天窗口提交社区评议；4) 办 X Spaces / 校园社团；5) 扩展城市分群。">1) Frame as community meme + Earth values...</span></div>
+  </section>
+
+  <section>
+    <h2 data-en="❓ 100 Q&A" data-zh="❓ 100 问答"><span data-en="❓ 100 Q&A" data-zh="❓ 100 问答">❓ 100 Q&A</span></h2>
+    <input class="search" id="qaSearch" placeholder="Search…" oninput="renderQA()" data-en-ph="Search questions…" />
+    <div class="chips" id="qaChips"></div>
+    <div id="qaList"></div>
+  </section>
+
+  <div class="disclaimer">
+    <b data-en="Disclaimer" data-zh="免责声明">Disclaimer</b>:
+    <span data-en="EACO is an experimental, high-risk community meme token and is NOT registered with the SEC or any regulator. This site is educational/community information, not financial, legal, or tax advice. Crypto can lose all value. Verify the contract address and do your own research (DYOR)." data-zh="EACO 是实验性、高风险的社区 meme 代币，未在 SEC 或任何监管机构注册。本网站为教育/社区信息，非金融、法律或税务建议。加密资产可能归零，请核对合约地址并自行研究（DYOR）。">EACO is an experimental...</span>
+  </div>
+
+  <footer>
+    <span data-en="eaco for earth — one authentic $eaco for the global village." data-zh="eaco for earth——全球村一枚真品 $eaco。">eaco for earth — one authentic $eaco for the global village.</span><br>
+    © 2026 EACO Community
+  </footer>
+</div>
+
+<button class="install" id="installBtn" onclick="installApp()">📲 Install App</button>
+
+<script>
+// EACO ($e / $eaco) — Official Bilingual Q&A Data (100 items)
+// Canonical source: English + 华语. Consumed by index.html and build-qa-md.js.
+// NOTE: Market/price figures are live third-party estimates and must be verified.
+// EACO is a community meme token, not registered with the SEC, not investment advice.
+
+var EACO_QA = [
+  // ---------------- 1. Basics & Identity ----------------
+  { id: 1, cat: "Basics", en_q: "What is EACO?", en_a: "EACO (Earth's best Coin) is a community-driven meme token on Solana with the ticker $e / $eaco. Its mission is 'eaco for earth' — a digital asset for the global village.", zh_q: "EACO 是什么？", zh_a: "EACO（Earth's best Coin，地球上最好的币）是 Solana 上的社区型 meme 代币，代号为 $e / $eaco，使命是「eaco for earth」，做全球村民自己的数字资产。" },
+  { id: 2, cat: "Basics", en_q: "What does EACO stand for?", en_a: "EACO stands for 'Earth's best Coin'. It is also stylized as $eaco and $e.", zh_q: "EACO 代表什么？", zh_a: "EACO 是「Earth's best Coin（地球上最好的币）」的缩写，也写作 $eaco 或 $e。" },
+  { id: 3, cat: "Basics", en_q: "What is the ticker?", en_a: "The ticker is $e and $eaco. Both refer to the same EACO token.", zh_q: "代号是什么？", zh_a: "代号是 $e 与 $eaco，两者指向同一个 EACO 代币。" },
+  { id: 4, cat: "Basics", en_q: "Is EACO a coin or a token?", en_a: "EACO is a token issued on the Solana blockchain (an SPL token), not a standalone coin with its own chain.", zh_q: "EACO 是币还是代币？", zh_a: "EACO 是发行在 Solana 区块链上的代币（SPL 代币），并非独立公链的原生币。" },
+  { id: 5, cat: "Basics", en_q: "Which blockchain is EACO on?", en_a: "The primary, verified contract is on Solana. Community efforts also explore drc20 / asc20 / brc20 versions.", zh_q: "EACO 在哪条链上？", zh_a: "已验证的主合约在 Solana 上。社区也在探索 drc20 / asc20 / brc20 版本。" },
+  { id: 6, cat: "Basics", en_q: "Who created EACO?", en_a: "EACO was started by an open, community-minded team and grows through global villagers. There is no centralized company behind it.", zh_q: "谁创造了 EACO？", zh_a: "EACO 由开放、社区导向的团队发起，靠全球村民共同成长，背后没有中心化公司。" },
+  { id: 7, cat: "Basics", en_q: "When was EACO launched?", en_a: "EACO launched as a fair, community-first meme token. Exact dates are shared by the community as milestones are reached.", zh_q: "EACO 何时上线？", zh_a: "EACO 作为公平、社区优先的 meme 代币上线，具体日期随社区里程碑同步公布。" },
+  { id: 8, cat: "Basics", en_q: "What makes EACO unique?", en_a: "Its 'Earth + global village' emotional value, the only $eaco in the universe and the earth, and a community-owned growth model.", zh_q: "EACO 的独特之处？", zh_a: "独特的「地球 + 全球村」情感价值、「宇宙与地球上唯一的 $eaco」，以及社区共有的成长模式。" },
+  { id: 9, cat: "Basics", en_q: "Is EACO a memecoin?", en_a: "Yes. EACO describes itself as 'the global villagers' own MEME' — a culture and community token, not a utility/security product.", zh_q: "EACO 是 meme 币吗？", zh_a: "是的。EACO 自称「全球村民自己的 MEME」，是一个文化与社区代币，而非效用/证券型产品。" },
+  { id: 10, cat: "Basics", en_q: "What does 'the only $eaco in the universe and the earth' mean?", en_a: "It is EACO's brand line: there is exactly one authentic $eaco. Always verify the contract address to avoid fakes.", zh_q: "「宇宙与地球上唯一的 $eaco」是什么意思？", zh_a: "这是 EACO 的品牌口号：真正的 $eaco 只有一个。务必核对合约地址，谨防仿冒。" },
+
+  // ---------------- 2. Tokenomics & Contract ----------------
+  { id: 11, cat: "Tokenomics", en_q: "What is the contract address (CA)?", en_a: "Solana CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH. This is the only verified primary address. Always copy from official channels.", zh_q: "合约地址（CA）是什么？", zh_a: "Solana 主合约：DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH。这是唯一已验证的主地址，请始终从官方渠道复制。" },
+  { id: 12, cat: "Tokenomics", en_q: "How do I verify the official CA?", en_a: "Copy the Solana CA above, paste it into Solscan or the official site, and confirm it matches exactly. Never trust CAs sent in DMs.", zh_q: "如何验证官方 CA？", zh_a: "复制上方 Solana CA，粘贴到 Solscan 或官网核对是否完全一致；切勿相信私信发来的地址。" },
+  { id: 13, cat: "Tokenomics", en_q: "What is the total / max supply?", en_a: "Per third-party trackers, the Solana supply is about 1.34 billion $e. Multi-chain versions are community experiments. Verify live figures before relying on them.", zh_q: "总量/最大供应量是多少？", zh_a: "据第三方追踪，Solana 上约 13.4 亿枚 $e；多链版本属社区实验。依赖前请以实时数据为准。" },
+  { id: 14, cat: "Tokenomics", en_q: "What is the circulating supply?", en_a: "Circulating supply tracks total supply on Solana (community-held). Live numbers change and should be checked on a block explorer.", zh_q: "流通量是多少？", zh_a: "在 Solana 上流通量约等于总量（社区持有）。实时数字会变，请以区块浏览器为准。" },
+  { id: 15, cat: "Tokenomics", en_q: "What is the current price and market cap?", en_a: "These are live, third-party estimates (e.g. a few hundredths of a cent with a very small cap at launch). Always verify on a tracker; never trade on outdated numbers.", zh_q: "当前价格与市值？", zh_a: "均为第三方实时估算（早期极小的市值）。务必在追踪器核实，切勿依据过时数字交易。" },
+  { id: 16, cat: "Tokenomics", en_q: "Does EACO have a burn mechanism?", en_a: "Burn/deflation mechanics are evaluated by the community. Any change is announced officially and never requested via DM.", zh_q: "EACO 有销毁机制吗？", zh_a: "销毁/通缩机制由社区评估。任何变动都会官方公告，绝不会通过私信要求。" },
+  { id: 17, cat: "Tokenomics", en_q: "Are there taxes or fees on transactions?", en_a: "EACO aims for a simple, fair model. Confirm current on-chain fee settings via the contract/explorer rather than trusting rumors.", zh_q: "交易有税/手续费吗？", zh_a: "EACO 力争简单公平。请以合约/浏览器上的实际链上设置为准，勿信传言。" },
+  { id: 18, cat: "Tokenomics", en_q: "Is the liquidity locked?", en_a: "Liquidity status should be verified on the DEX/pair page. The community prioritizes transparent, locked liquidity where applicable.", zh_q: "流动性是否锁仓？", zh_a: "请在 DEX/交易对页面核实流动性状态。社区优先采用透明、可锁的流动性。" },
+  { id: 19, cat: "Tokenomics", en_q: "Is there a team allocation or vesting?", en_a: "EACO is community-first with no aggressive team dump. Any allocation/vesting is disclosed transparently by the community.", zh_q: "有团队分配或锁仓释放吗？", zh_a: "EACO 以社区优先，杜绝团队砸盘。任何分配/释放都由社区透明披露。" },
+  { id: 20, cat: "Tokenomics", en_q: "Does EACO exist on multiple chains?", en_a: "The verified primary is Solana. drc20 / asc20 / brc20 efforts reflect the 'Earth across chains' vision and are community experiments, not the primary CA.", zh_q: "EACO 有多链版本吗？", zh_a: "已验证主网是 Solana。drc20 / asc20 / brc20 体现「地球跨链」愿景，属社区实验，非主合约。" },
+
+  // ---------------- 3. Buying & Wallets ----------------
+  { id: 21, cat: "Buying", en_q: "How do I buy EACO?", en_a: "Set up a Solana wallet, fund it with SOL, then swap on a Solana DEX using the official CA. Never send funds to a person.", zh_q: "如何购买 EACO？", zh_a: "准备好 Solana 钱包并充入 SOL，然后在 Solana DEX 用官方 CA 兑换。切勿把钱转给个人。" },
+  { id: 22, cat: "Buying", en_q: "Which wallet do I need?", en_a: "Any Solana wallet works (e.g. Phantom, Solflare, Backpack). Download only from official app stores/sites.", zh_q: "需要什么钱包？", zh_a: "任意 Solana 钱包均可（如 Phantom、Solflare、Backpack）。只从官方应用商店/网站下载。" },
+  { id: 23, cat: "Buying", en_q: "Which DEX can I use?", en_a: "Use a Solana DEX that lists $e (e.g. Raydium, Jupiter aggregation). Paste the official CA to find the pair.", zh_q: "可以用哪个 DEX？", zh_a: "使用已上架 $e 的 Solana DEX（如 Raydium、Jupiter 聚合器），粘贴官方 CA 查找交易对。" },
+  { id: 24, cat: "Buying", en_q: "What is a DEX?", en_a: "A decentralized exchange — a smart contract that swaps tokens peer-to-peer without a central company holding your funds.", zh_q: "什么是 DEX？", zh_a: "去中心化交易所——以智能合约实现点对点兑换，没有中心化公司托管你的资金。" },
+  { id: 25, cat: "Buying", en_q: "How do I add EACO to my wallet?", en_a: "In your wallet, choose 'Add token / custom token' and paste the Solana CA. The token should appear with the correct name and supply.", zh_q: "如何把 EACO 添加到钱包？", zh_a: "在钱包中选择「添加代币/自定义代币」，粘贴 Solana CA，代币会显示正确的名称与数量。" },
+  { id: 26, cat: "Buying", en_q: "What is slippage?", en_a: "Slippage is the max price change you accept on a swap. For thin liquidity, set a modest slippage (e.g. 1–5%) and avoid extreme values.", zh_q: "什么是滑点？", zh_a: "滑点是你愿意接受的价格偏差上限。流动性薄时设适中滑点（如 1–5%），避免过高。" },
+  { id: 27, cat: "Buying", en_q: "What is the minimum to start?", en_a: "You can start with a small amount of SOL. Only use what you can afford to lose — EACO is high-risk.", zh_q: "最少要买多少？", zh_a: "用少量 SOL 即可起步。只投入你亏得起的部分——EACO 风险很高。" },
+  { id: 28, cat: "Buying", en_q: "Can I buy with a credit card?", en_a: "Usually you first buy SOL via an on-ramp (card/fiat), then swap to $e on a DEX. Use reputable on-ramp providers only.", zh_q: "可以用信用卡买吗？", zh_a: "通常先用法币通道（卡/法币）买 SOL，再到 DEX 换 $e。只用法币通道里信誉好的服务商。" },
+  { id: 29, cat: "Buying", en_q: "How do I sell EACO?", en_a: "Sell by swapping $e back to SOL on the same DEX, then withdraw. Watch liquidity and slippage.", zh_q: "如何卖出 EACO？", zh_a: "在同一 DEX 把 $e 换回 SOL 再提现，注意流动性与滑点。" },
+  { id: 30, cat: "Buying", en_q: "What network fees apply?", en_a: "Solana transactions use a tiny SOL network fee. You need a small SOL balance to cover it.", zh_q: "有哪些网络费？", zh_a: "Solana 交易只收极少的 SOL 网络费，需留少量 SOL 余额支付。" },
+
+  // ---------------- 4. Community & Mission ----------------
+  { id: 31, cat: "Community", en_q: "What is EACO's mission?", en_a: "To realize value exchange for the global village ('eaco for earth'), calculate labor value and quantify Earth's resources, and build the world's most promising community.", zh_q: "EACO 的使命是什么？", zh_a: "实现全球村的价值交换（「eaco for earth」），计量劳动价值、量化地球资源，建设全球最有潜力的社区。" },
+  { id: 32, cat: "Community", en_q: "What does 'eaco for earth' mean?", en_a: "It means EACO exists for people and the planet — a shared, community-owned asset that celebrates Earth and connection.", zh_q: "「eaco for earth」是什么意思？", zh_a: "意为 EACO 为人性与地球而生——一个共享、社区共有的资产，礼赞地球与连接。" },
+  { id: 33, cat: "Community", en_q: "What is the 'global village' concept?", en_a: "The world is one village; EACO is 'the global villagers' own MEME' — connecting netizens across regions through a common token and culture.", zh_q: "「全球村」概念是什么？", zh_a: "世界是一个村落；EACO 是「全球村民自己的 MEME」，用共同的代币与文化连接各地网民。" },
+  { id: 34, cat: "Community", en_q: "How is EACO community-driven?", en_a: "Growth, content, translation, and outreach come from villagers. 'Community is value' — the project moves forward with its members.", zh_q: "EACO 如何做到社区驱动？", zh_a: "成长、内容、翻译、推广都来自村民。「社区即价值」，项目与成员一同前行。" },
+  { id: 35, cat: "Community", en_q: "How can I join the community?", en_a: "Join the official Telegram/Discord/X groups, follow the official accounts, and use this bilingual site/app as your hub.", zh_q: "如何加入社区？", zh_a: "加入官方 Telegram/Discord/X 群组，关注官方账号，并把本双语网站/APP 当作枢纽。" },
+  { id: 36, cat: "Community", en_q: "What social channels exist?", en_a: "Official Telegram, Discord, X (Twitter), and regional groups (e.g. North America English Group). Links are shared only via official channels.", zh_q: "有哪些社交渠道？", zh_a: "官方 Telegram、Discord、X（Twitter）及地区群组（如北美英语小组）。链接只通过官方渠道发布。" },
+  { id: 37, cat: "Community", en_q: "How can I contribute?", en_a: "Translate, make memes/art, host AMAs, run local chapters, or help with education. Every villager can add value.", zh_q: "我如何贡献？", zh_a: "翻译、做表情包/美术、办 AMA、运营本地分群或参与教育。每位村民都能创造价值。" },
+  { id: 38, cat: "Community", en_q: "What is 'calculate labor value and quantify Earth's resources'?", en_a: "A long-term vision: recognize human labor and natural wealth as value, and explore how a community token can reflect that exchange.", zh_q: "「计量劳动价值、量化地球资源」是什么？", zh_a: "长远愿景：把人类劳动与自然财富视为价值，探索社区代币如何映射这种交换。" },
+  { id: 39, cat: "Community", en_q: "Is EACO eco / environment focused?", en_a: "Yes — protecting the Earth is a shared emotional value proposition of the community, expressed through culture and outreach.", zh_q: "EACO 关注环保吗？", zh_a: "是的——保护地球是社区共同的情感价值主张，通过文化与传播表达。" },
+  { id: 40, cat: "Community", en_q: "What is the 'Earth Chain'?", en_a: "'Earth Chain / 地球链' is the community's name for EACO's global-network vision — connecting people and regions like one planetary chain.", zh_q: "「地球链」是什么？", zh_a: "「Earth Chain / 地球链」是社区对 EACO 全球网络愿景的称呼——像一条行星级链条连接人群与地区。" },
+
+  // ---------------- 5. Brand & Meme Culture ----------------
+  { id: 41, cat: "Brand", en_q: "What is $e / $eaco?", en_a: "The ticker and brand of EACO. '$e' is the short form; '$eaco' is the full form. Both are the same token.", zh_q: "$e / $eaco 是什么？", zh_a: "EACO 的代号与品牌。$e 是简写，$eaco 是全写，指向同一代币。" },
+  { id: 42, cat: "Brand", en_q: "What is 'eaco is Earth's best friend'?", en_a: "A community slogan expressing that EACO stands with the Earth and its people as a friendly, global meme.", zh_q: "「eaco 是地球最好的朋友」是什么？", zh_a: "社区口号，表达 EACO 作为友好、全球性的 meme，与地球及人类站在一起。" },
+  { id: 43, cat: "Brand", en_q: "What is the EACO vibe/mascot?", en_a: "Warm, earthy, community meme energy — celebrating the planet and global friendship rather than hype or greed.", zh_q: "EACO 的风格/吉祥物？", zh_a: "温暖、接地、社区 meme 气质——礼赞地球与全球友谊，而非炒作贪婪。" },
+  { id: 44, cat: "Brand", en_q: "How do I use the hashtag?", en_a: "Use #eaco #eaco地球链 #earth and #e when posting. Keep it positive and on-brand.", zh_q: "如何使用话题标签？", zh_a: "发帖时用 #eaco #eaco地球链 #earth #e，保持正面、贴合品牌。" },
+  { id: 45, cat: "Brand", en_q: "What memes does EACO use?", en_a: "Earth, global village, villagers, 'from earth and universe' themes. Community-created memes are welcome and shared.", zh_q: "EACO 用什么梗？", zh_a: "地球、全球村、村民、「来自地球与宇宙」等主题。欢迎并分享社区创作的梗。" },
+  { id: 46, cat: "Brand", en_q: "What is 'EACO Earth Chain'?", en_a: "Another name for the community's planetary network vision — EACO linking Earth's people as one chain.", zh_q: "「EACO Earth Chain」是什么？", zh_a: "社区行星级网络愿景的别称——EACO 把地球人类连成一条链。" },
+  { id: 47, cat: "Brand", en_q: "Who are '地球村民' (Earth villagers)?", en_a: "'Earth villagers' are EACO community members worldwide — netizens who share the global-village value.", zh_q: "「地球村民」是谁？", zh_a: "「地球村民」是遍布全球的 EACO 社区成员——共享全球村价值的网民。" },
+  { id: 48, cat: "Brand", en_q: "What is 'e(eaco) from earth and universe'?", en_a: "A poetic brand line: $e originates from and belongs to Earth and the universe — one authentic token for all.", zh_q: "「e(eaco) from earth and universe」是什么？", zh_a: "诗意品牌语：$e 源自并属于地球与宇宙——一枚属于所有人的真品代币。" },
+  { id: 49, cat: "Brand", en_q: "How do I make EACO content?", en_a: "Create memes, art, threads, or videos using official branding and the hashtags. Share in community channels.", zh_q: "如何制作 EACO 内容？", zh_a: "用官方品牌与话题标签制作表情包、美术、推文或视频，在社区渠道分享。" },
+  { id: 50, cat: "Brand", en_q: "Can I create EACO fan art?", en_a: "Yes! Fan art is encouraged. Tag the community and use #eaco. Just don't imply official endorsement falsely.", zh_q: "可以做 EACO 同人图吗？", zh_a: "可以！欢迎同人创作，@社区并带 #eaco，但勿虚假声称官方背书。" },
+
+  // ---------------- 6. Security & Scams ----------------
+  { id: 51, cat: "Security", en_q: "How do I avoid fake EACO?", en_a: "Only trust the verified Solana CA on this site/official channels. Scammers deploy copycat tokens with similar names.", zh_q: "如何避免假 EACO？", zh_a: "只信任本网站/官方渠道上的已验证 Solana CA。骗子会发名字相似的仿冒代币。" },
+  { id: 52, cat: "Security", en_q: "What if someone DMs me about EACO?", en_a: "Treat unexpected DMs as suspicious. Real team/mods never DM first or ask for funds/seeds. Block and report.", zh_q: "有人私信我谈 EACO 怎么办？", zh_a: "把陌生私信视为可疑。真正的团队/管理员不会主动私信或索要资金/助记词，请拉黑举报。" },
+  { id: 53, cat: "Security", en_q: "Are there impersonator accounts?", en_a: "Yes, impersonators exist. Verify handles via official channels and pinned messages only.", zh_q: "有冒充账号吗？", zh_a: "有，存在冒充者。只通过官方渠道与置顶消息核实账号。" },
+  { id: 54, cat: "Security", en_q: "Will the EACO team ask for my seed phrase?", en_a: "Never. No one legitimate will ever ask for your seed phrase or private key. Whoever does is a scammer.", zh_q: "EACO 团队会问我要助记词吗？", zh_a: "绝不会。任何合法方都不会索要助记词或私钥，索要者必是骗子。" },
+  { id: 55, cat: "Security", en_q: "How do I spot scams?", en_a: "Red flags: DM first, 'guaranteed' returns, fake CAs, urgent pressure, asking for seeds. Slow down and verify.", zh_q: "如何识别骗局？", zh_a: "危险信号：主动私信、「保证」收益、假 CA、紧迫施压、索要助记词。放慢脚步并核实。" },
+  { id: 56, cat: "Security", en_q: "Is EACO audited?", en_a: "Audit/security status should be verified via official announcements. Community prioritizes transparency; rely on official sources only.", zh_q: "EACO 经过审计吗？", zh_a: "审计/安全状态请以官方公告为准。社区优先透明，只信官方来源。" },
+  { id: 57, cat: "Security", en_q: "What is a rug pull?", en_a: "When insiders abandon a project and drain liquidity, leaving holders with worthless tokens. EACO favors transparent, community-held liquidity.", zh_q: "什么是 rug pull（拉地毯）？", zh_a: "指内部人员抛弃项目并抽干流动性，让持有者只剩废纸。EACO 倾向透明、社区持有的流动性。" },
+  { id: 58, cat: "Security", en_q: "How should I store EACO safely?", en_a: "Use a non-custodial wallet you control; never share your seed. Consider a hardware wallet for larger amounts.", zh_q: "如何安全存放 EACO？", zh_a: "用你自己掌控的非托管钱包，绝不泄露助记词；金额较大可用硬件钱包。" },
+  { id: 59, cat: "Security", en_q: "What if I sent to the wrong address?", en_a: "Crypto transfers are final. Contact the receiving platform if applicable; otherwise the funds are likely unrecoverable.", zh_q: "转错地址怎么办？", zh_a: "加密转账不可逆。如转至平台可联系对方；否则资金通常无法找回。" },
+  { id: 60, cat: "Security", en_q: "How do I report scams?", en_a: "Report impersonator accounts to the platform and alert official EACO mods. Never engage or send funds to scammers.", zh_q: "如何举报骗局？", zh_a: "向平台举报冒充账号并告知 EACO 官方管理员。切勿与骗子互动或转账。" },
+
+  // ---------------- 7. Regulation & SEC ----------------
+  { id: 61, cat: "Regulation", en_q: "What SEC news came out on Aug 18, 2026?", en_a: "On Aug 18, 2026 the SEC proposed 'Regulation Crypto Assets' (Release 33-11434) — its first tailored offering framework for crypto investment contracts.", zh_q: "2026年8月18日 SEC 发布了什么新闻？", zh_a: "2026年8月18日，SEC 提出《Regulation Crypto Assets（加密资产监管条例）》（发布编号 33‑11434），这是首个针对加密资产投资合同的专门发币框架。" },
+  { id: 62, cat: "Regulation", en_q: "What is 'Regulation Crypto Assets'?", en_a: "A proposed SEC rule creating two exemptions (startup $5M / fundraising $75M), a safe harbor, and state-law preemption for certain crypto offerings.", zh_q: "「Regulation Crypto Assets」是什么？", zh_a: "一项 SEC 提案规则，设两项豁免（创业 $5M / 融资 $75M）、安全港及州法预emption，适用于特定加密发行。" },
+  { id: 63, cat: "Regulation", en_q: "What is the $5 million startup exemption?", en_a: "A one-time exemption letting issuers raise up to $5M over 4 years with principles-based disclosure, no audited financials, and allowed public solicitation.", zh_q: "500万美元的创业公司豁免是什么？", zh_a: "一次性豁免，允许发行方 4 年内募资至多 $5M，只需原则性披露、无审计财报，并允许公开募集。" },
+  { id: 64, cat: "Regulation", en_q: "What is the $75 million fundraising exemption?", en_a: "Modeled on Reg A+: Tier 1 up to $20M/12mo, Tier 2 up to $75M/12mo, requiring financial statements and ongoing reporting.", zh_q: "7500万美元的融资豁免是什么？", zh_a: "对标 Reg A+：Tier 1 为 12 个月 $20M，Tier 2 为 12 个月 $75M，需财报与持续披露。" },
+  { id: 65, cat: "Regulation", en_q: "Where do the 500万 / 7500万美元 figures come from?", en_a: "They are the exact dollar caps in the SEC's Aug 18, 2026 proposal: $5M (startup) and $75M (fundraising Tier 2). Not EACO's own numbers.", zh_q: "500万 / 7500万美元 数字从哪来？", zh_a: "正是 SEC 2026年8月18日提案里的两个上限：$5M（创业）与 $75M（融资 Tier 2），并非 EACO 自身数据。" },
+  { id: 66, cat: "Regulation", en_q: "Is the SEC rule final?", en_a: "No. It is a proposal. After Federal Register publication there is a 60-day comment period; it only takes effect if finalized later.", zh_q: "SEC 规则生效了吗？", zh_a: "没有。这只是提案。联邦公报刊发后有 60 天评议期，之后才可能修定生效。" },
+  { id: 67, cat: "Regulation", en_q: "How does the proposal affect EACO?", en_a: "It signals a more favorable U.S. environment for community tokens and onshoring innovation. EACO is not relying on it yet and must consult counsel.", zh_q: "提案对 EACO 有何影响？", zh_a: "它释放美国对社区代币、把创新留在本土更友好的信号。EACO 尚未依赖该规则，须咨询法律意见。" },
+  { id: 68, cat: "Regulation", en_q: "Is EACO registered with the SEC?", en_a: "No. EACO is a community meme token and is not registered with the SEC or any regulator. Do not assume compliance.", zh_q: "EACO 在 SEC 注册了吗？", zh_a: "没有。EACO 是社区 meme 代币，未在 SEC 或任何监管机构注册，请勿视为已合规。" },
+  { id: 69, cat: "Regulation", en_q: "What is the 'safe harbor'?", en_a: "A proposed off-ramp: once an issuer completes or permanently stops its promised managerial efforts, the asset can exit the 'investment contract' definition.", zh_q: "什么是「安全港」？", zh_a: "提案中的退出通道：发行方「完成或永久停止」其承诺的管理性工作后，资产可脱离「投资合同」定义。" },
+  { id: 70, cat: "Regulation", en_q: "Does EACO provide investment advice?", en_a: "No. EACO and its community do not provide investment, legal, or tax advice. Consult qualified professionals.", zh_q: "EACO 提供投资建议吗？", zh_a: "不提供。EACO 及社区不提供投资、法律或税务建议，请咨询合格专业人士。" },
+
+  // ---------------- 8. North America & English Group ----------------
+  { id: 71, cat: "NorthAmerica", en_q: "What is the EACO English Group?", en_a: "The North America / English-speaking chapter of Earth villagers — the hub for English content, AMAs, and local meetups.", zh_q: "EACO 英语小组是什么？", zh_a: "地球村民的北美/英语分群——英文内容、AMA 与本地聚会的枢纽。" },
+  { id: 72, cat: "NorthAmerica", en_q: "How do I join the NA group?", en_a: "Join via the official English Telegram/Discord shared on this site, and introduce yourself as a new villager.", zh_q: "如何加入北美小组？", zh_a: "通过本网站公布的官方英文 Telegram/Discord 加入，并自我介绍为新星村民。" },
+  { id: 73, cat: "NorthAmerica", en_q: "Which cities are targeted?", en_a: "Major crypto hubs in the 'top 20 crypto cities' (e.g. New York, Los Angeles, Toronto, Miami, Seattle) plus campus towns.", zh_q: "重点发展哪些城市？", zh_a: "「全球前 20 大 crypto 城市」中的主要枢纽（如纽约、洛杉矶、多伦多、迈阿密、西雅图）以及大学城。" },
+  { id: 74, cat: "NorthAmerica", en_q: "How do I start a local chapter?", en_a: "Pick a city, use the official branding and 100 Q&A, host a small meetup/X Space, and register with the community.", zh_q: "如何发起本地分群？", zh_a: "选城市，用官方品牌与 100 问答，办一场小型聚会/X Space，并向社区登记。" },
+  { id: 75, cat: "NorthAmerica", en_q: "How does the SEC news help NA growth?", en_a: "Atkins framed the U.S. as 'Crypto Capital of the World' and wants innovation onshored — a positive narrative for building a NA community now.", zh_q: "SEC 新闻如何助力北美发展？", zh_a: "Atkins 把美国定位为「全球 crypto 之都」并希望创新留在本土——对当下建设北美社区是正面叙事。" },
+  { id: 76, cat: "NorthAmerica", en_q: "Are there NA events / AMAs?", en_a: "Yes — regular X Spaces and AMAs in English. Schedules are posted in the official English group.", zh_q: "有北美活动/AMA 吗？", zh_a: "有——定期的英文 X Spaces 与 AMA，时间表发布在官方英语小组。" },
+  { id: 77, cat: "NorthAmerica", en_q: "How do I promote EACO in English?", en_a: "Share accurate facts, the bilingual site, and the 100 Q&A. Keep claims truthful; never promise returns.", zh_q: "如何用英文推广 EACO？", zh_a: "分享准确事实、双语网站与 100 问答；保持真实，绝不承诺收益。" },
+  { id: 78, cat: "NorthAmerica", en_q: "Can we build campus / student clubs?", en_a: "Yes. Student crypto clubs are a great fit. Use official materials and keep activities educational and compliant.", zh_q: "能建校园/学生社团吗？", zh_a: "可以。学生 crypto 社团非常合适，用官方素材，活动以教育、合规为导向。" },
+  { id: 79, cat: "NorthAmerica", en_q: "What partnerships fit in NA?", en_a: "Crypto meetups, environmental orgs, campuses, and creators who align with the Earth/global-village values.", zh_q: "北美适合哪些合作？", zh_a: "crypto 聚会、环保组织、校园，以及与地球/全球村价值观契合的创作者。" },
+  { id: 80, cat: "NorthAmerica", en_q: "How fast can we grow?", en_a: "Growth depends on consistent, honest community work. Use the new U.S. tailwind, but build trust before hype.", zh_q: "能发展多快？", zh_a: "取决于持续、诚实的社区工作。借美国新政风向，但先建信任再谈热度。" },
+
+  // ---------------- 9. Roadmap & Development ----------------
+  { id: 81, cat: "Roadmap", en_q: "What is the roadmap?", en_a: "Community-led phases: bilingual site/app, 100 Q&A, NA English group, exchange listings, and utility experiments — all member-driven.", zh_q: "路线图是什么？", zh_a: "社区主导的阶段：双语网站/APP、100 问答、北美英语小组、上所、效用实验——都由成员驱动。" },
+  { id: 82, cat: "Roadmap", en_q: "Is there a whitepaper?", en_a: "EACO leads with community docs (this site, the 100 Q&A) over a traditional whitepaper. A light paper may follow.", zh_q: "有白皮书吗？", zh_a: "EACO 以社区文档（本网站、100 问答）为先，轻量白皮书后续可能推出。" },
+  { id: 83, cat: "Roadmap", en_q: "What is being built?", en_a: "The bilingual website/app, education materials, community tooling, and exploration of Earth-themed utility.", zh_q: "正在建设什么？", zh_a: "双语网站/APP、教育素材、社区工具，以及地球主题效用的探索。" },
+  { id: 84, cat: "Roadmap", en_q: "Will there be an app?", en_a: "This bilingual site is built as a PWA (installable app). A native iOS/Android app is a possible later phase.", zh_q: "会有 APP 吗？", zh_a: "本双语网站以 PWA（可安装应用）形式交付。原生 iOS/Android APP 是后续可能的阶段。" },
+  { id: 85, cat: "Roadmap", en_q: "Is there staking or utility?", en_a: "Utility ideas (community rewards, Earth-themed use) are discussed by villagers. Nothing is promised; proposals go through community.", zh_q: "有质押或效用吗？", zh_a: "效用构想（社区奖励、地球主题用途）由村民讨论，不作承诺，提案经社区流程。" },
+  { id: 86, cat: "Roadmap", en_q: "Will EACO list on CoinMarketCap / CoinGecko?", en_a: "Listings are a community goal. Track progress via official channels; beware fake 'listing' scams.", zh_q: "EACO 会上 CoinMarketCap / CoinGecko 吗？", zh_a: "上所是社区目标。进度以官方渠道为准；警惕假「上所」骗局。" },
+  { id: 87, cat: "Roadmap", en_q: "Are CEX listings planned?", en_a: "Centralized-exchange listing is a future community objective, pursued transparently when conditions are right.", zh_q: "有计划上 CEX 吗？", zh_a: "中心化交易所上所是未来社区目标，条件成熟时透明推进。" },
+  { id: 88, cat: "Roadmap", en_q: "Will there be merch / real-world use?", en_a: "Earth-themed merch and real-world community use are explored by villagers as the community grows.", zh_q: "会有周边/现实用途吗？", zh_a: "随着社区成长，村民会探索地球主题周边与现实社区用途。" },
+  { id: 89, cat: "Roadmap", en_q: "How do I track progress?", en_a: "Follow official channels and this site. Milestones are announced by the community, never via DM.", zh_q: "如何跟踪进展？", zh_a: "关注官方渠道与本网站。里程碑由社区公告，绝不通过私信。" },
+  { id: 90, cat: "Roadmap", en_q: "Is there governance?", en_a: "EACO is community-led. Direction is shaped by villagers through discussion, proposals, and contribution — not a central boss.", zh_q: "有治理吗？", zh_a: "EACO 由社区主导。方向由村民通过讨论、提案与贡献形成，而非中心化老板。" },
+
+  // ---------------- 10. Risks, Disclaimers & Misc ----------------
+  { id: 91, cat: "Risks", en_q: "Is EACO an investment?", en_a: "EACO is a community meme token, not an investment product. Participate for culture/community, not as a financial plan.", zh_q: "EACO 是投资吗？", zh_a: "EACO 是社区 meme 代币，非投资产品。请为文化/社区而参与，而非作为理财计划。" },
+  { id: 92, cat: "Risks", en_q: "Can I lose money?", en_a: "Yes. Crypto is highly volatile; you can lose all value. Only use funds you can afford to lose.", zh_q: "我会亏钱吗？", zh_a: "会。加密资产波动极大，可能归零。只投入亏得起的部分。" },
+  { id: 93, cat: "Risks", en_q: "Does EACO promise returns?", en_a: "No. EACO makes no promises of profit or returns. Anyone promising gains is a scammer.", zh_q: "EACO 承诺收益吗？", zh_a: "不承诺。EACO 不做任何利润或回报承诺，承诺收益者必是骗子。" },
+  { id: 94, cat: "Risks", en_q: "What is the risk disclaimer?", en_a: "EACO is experimental, high-risk, and not registered. Nothing here is financial, legal, or tax advice. DYOR.", zh_q: "风险免责声明是什么？", zh_a: "EACO 属实验性、高风险且未注册。本内容不构成金融、法律或税务建议，请自行研究。" },
+  { id: 95, cat: "Risks", en_q: "Are there tax implications?", en_a: "Yes, crypto may be taxable in your jurisdiction. Consult a qualified tax professional for your situation.", zh_q: "有税务影响吗？", zh_a: "有，加密资产在你的辖区可能涉税。请咨询合格税务专业人士。" },
+  { id: 96, cat: "Risks", en_q: "Is this financial advice?", en_a: "No. All EACO content is educational/community information, not financial advice. You are responsible for your decisions.", zh_q: "这是金融建议吗？", zh_a: "不是。所有 EACO 内容均为教育/社区信息，非金融建议，决策由你自负。" },
+  { id: 97, cat: "Risks", en_q: "Are there age / region restrictions?", en_a: "You must be of legal age and permitted to use crypto in your jurisdiction. Respect local laws at all times.", zh_q: "有年龄/地区限制吗？", zh_a: "你必须达到法定年龄且在辖区允许使用加密资产，并始终遵守当地法律。" },
+  { id: 98, cat: "Risks", en_q: "How do I stay safe?", en_a: "Verify the CA, use your own wallet, ignore DMs, never share seeds, and only trust official channels.", zh_q: "如何保持安全？", zh_a: "核对 CA、用自己的钱包、忽略私信、绝不泄露助记词，只信官方渠道。" },
+  { id: 99, cat: "Risks", en_q: "How do I get support?", en_a: "Ask in the official community groups. Mods never DM first. Beware anyone offering 'support' via private message.", zh_q: "如何获得支持？", zh_a: "在官方群组提问。管理员不会主动私信；警惕以私信提供「支持」的人。" },
+  { id: 100, cat: "Risks", en_q: "What is EACO's final message?", en_a: "eaco for earth — one authentic $eaco for the global village. Build community, stay safe, and protect the Earth together.", zh_q: "EACO 的最终寄语？", zh_a: "eaco for earth——全球村一枚真品 $eaco。共建社区、注意安全、一起守护地球。" },
+
+  // ---------------- Compliance deep-dive (added) ----------------
+  { id: 101, cat: "Regulation", en_q: "How can EACO raise funds compliantly under the new SEC proposal?", en_a: "Only if/when 'Regulation Crypto Assets' is finalized. The best fit is the Startup Exemption: file Form NOR on EDGAR, post principles-based disclosures, and raise up to $5M over 4 years with no audited financials and public solicitation allowed. The $75M Fundraising Exemption is heavier (financials + reporting). EACO is NOT registered and must get securities counsel before any offering. This is prospective planning, not current compliance.", zh_q: "EACO 如何按新提案合规融资？", zh_a: "仅当《Regulation Crypto Assets》最终生效时。最契合的是创业公司豁免：在 EDGAR 提交 Form NOR、发布原则性披露，4 年内募资至多 $5M，无审计财报、允许公开募集。$75M 融资豁免更重（财报+持续披露）。EACO 未注册，任何发行前须咨询证券律师。这是前瞻规划，非当前合规。" },
+  { id: 102, cat: "Regulation", en_q: "What is Form NOR and would EACO use it?", en_a: "Form NOR ('notice of reliance') is the filing to enter the Startup Exemption. It certifies intent to complete promised managerial efforts within 4 years. If EACO later uses that route, it would file Form NOR and a transition report (Form TR) on exit. Relevant only after the rule is final and counsel approves.", zh_q: "Form NOR 是什么，EACO 会用吗？", zh_a: "Form NOR（「依赖通知」）是进入创业公司豁免的备案，须承诺 4 年内完成承诺的管理性工作。若 EACO 日后走该路径，会提交 Form NOR，并在退出时提交过渡报告（Form TR）。仅在规则生效且律师批准后相关。" },
+  { id: 103, cat: "Regulation", en_q: "How can EACO ensure its token exits the securities definition?", en_a: "Via the proposed Investment Contract Safe Harbor: once the issuer has completed or permanently ceased all 'essential managerial efforts' promised to buyers, the asset can exit the investment-contract definition and no longer be a security. EACO should stay community-driven, minimize promised central work, document decentralization, and obtain a legal analysis. The safe harbor is only in the proposal — not yet law.", zh_q: "EACO 如何确保代币脱离证券定义？", zh_a: "通过提案中的「投资合同安全港」：发行方「完成或永久停止」向购买者承诺的全部「关键管理性工作」后，资产可脱离投资合同定义，不再属证券。EACO 应保持社区驱动、最小化承诺的中心化工作、记录去中心化证据，并取得法律分析。安全港仅载于提案，尚未生效。" },
+  { id: 104, cat: "Regulation", en_q: "What are 'essential managerial efforts' for EACO?", en_a: "The ongoing work a central team promises buyers will drive the token's value (e.g. development, marketing, ecosystem building). To exit securities status, EACO must finish or permanently stop those efforts and show buyers no longer rely on them for profit. Fewer promises = easier path.", zh_q: "对 EACO 来说「关键管理性工作」指什么？", zh_a: "指中心团队向购买者承诺、用于推动代币价值的持续工作（如开发、营销、生态建设）。要脱离证券属性，EACO 须完成或永久停止这些工作，并证明购买者不再依赖其获利。承诺越少，路径越易。" },
+  { id: 105, cat: "Regulation", en_q: "What should EACO avoid to stay outside securities laws?", en_a: "Avoid Howey red flags: promising profits/returns, implying a team will pump the price, centralized control, or selling as an investment. Emphasize community ownership, Earth/global-village values, and utility — not financial gain. Never give investment advice or guarantee outcomes.", zh_q: "EACO 应避免什么以脱离证券法规？", zh_a: "规避 Howey 危险信号：承诺利润/回报、暗示团队拉盘、中心化控制，或以投资品销售。强调社区共有、地球/全球村价值与效用，而非财务收益。绝不提供投资建议或保证结果。" },
+  { id: 106, cat: "Regulation", en_q: "Can the EACO community comment on the proposal?", en_a: "Yes. After Federal Register publication there is a 60-day public comment period. The community can submit comments supporting community/meme tokens and clearer decentralization criteria — a unique way to help shape the final rule. Submit via the SEC's comment channel; keep it factual.", zh_q: "EACO 社区能对提案提交评议吗？", zh_a: "可以。联邦公报刊发后有 60 天公众评议期。社区可提交评议，支持社区/meme 代币与更清晰的去中心化标准——这是参与塑造最终规则的独特方式。通过 SEC 评议渠道提交，保持事实准确。" }
+];
+
+if (typeof module !== "undefined" && module.exports) { module.exports = EACO_QA; }
+if (typeof window !== "undefined") { window.EACO_QA = EACO_QA; }
+
+</script>
+<script>
+var LANG = 'en';
+var UI = {
+  en:{ search:"Search questions…", all:"All", copyOk:"Copied!" },
+  zh:{ search:"搜索问题…", all:"全部", copyOk:"已复制！" }
+};
+function t(key){ return UI[LANG][key]; }
+
+function setLang(l){
+  LANG = l;
+  document.documentElement.lang = (l==='zh')?'zh-CN':'en';
+  document.getElementById('btnEn').classList.toggle('on', l==='en');
+  document.getElementById('btnZh').classList.toggle('on', l==='zh');
+  // toggle data-en/data-zh text
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    el.textContent = (l==='zh') ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+  });
+  // placeholders
+  document.getElementById('qaSearch').placeholder = t('search');
+  renderQA();
+}
+
+function copyCA(){
+  var ca = document.getElementById('caText').textContent;
+  navigator.clipboard && navigator.clipboard.writeText(ca);
+  var btn = event.target; var old = btn.textContent;
+  btn.textContent = t('copyOk'); setTimeout(function(){btn.textContent=old;},1200);
+}
+
+// ---- Q&A rendering ----
+var CATS = {};
+var activeCat = 'All';
+EACO_QA.forEach(function(i){ if(!CATS[i.cat]) CATS[i.cat]=true; });
+
+function buildChips(){
+  var wrap = document.getElementById('qaChips');
+  var cats = ['All'].concat(Object.keys(CATS));
+  wrap.innerHTML = '';
+  cats.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'chip' + (c===activeCat?' on':'');
+    b.textContent = (LANG==='zh'?catZh(c):c);
+    b.onclick = function(){ activeCat=c; buildChips(); renderQA(); };
+    wrap.appendChild(b);
+  });
+}
+function catZh(c){
+  var m={Basics:"基础",Tokenomics:"代币与经济",Buying:"购买与钱包",Community:"社区与使命",Brand:"品牌与梗",Security:"安全与防骗",Regulation:"监管与SEC",NorthAmerica:"北美英语小组",Roadmap:"路线与发展",Risks:"风险与免责"};
+  return m[c]||c;
+}
+
+function renderQA(){
+  var q = (document.getElementById('qaSearch').value||'').toLowerCase();
+  var list = document.getElementById('qaList');
+  list.innerHTML = '';
+  EACO_QA.forEach(function(item){
+    if(activeCat!=='All' && item.cat!==activeCat) return;
+    var qtext = (LANG==='zh')?item.zh_q:item.en_q;
+    var atext = (LANG==='zh')?item.zh_a:item.en_a;
+    if(q && qtext.toLowerCase().indexOf(q)===-1 && atext.toLowerCase().indexOf(q)===-1) return;
+    var d = document.createElement('div'); d.className='qa';
+    d.innerHTML = '<button class="q">'+qtext+' <span class="ic">+</span></button><div class="a"><div>'+atext+'</div></div>';
+    d.querySelector('.q').onclick = function(){
+      d.classList.toggle('open');
+      d.querySelector('.ic').textContent = d.classList.contains('open')?'−':'+';
+    };
+    list.appendChild(d);
+  });
+  if(!list.children.length){
+    list.innerHTML = '<p style="color:var(--muted)">'+(LANG==='zh'?'无匹配结果。':'No matches.')+'</p>';
+  }
+}
+
+// ---- PWA install ----
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredPrompt=e; document.getElementById('installBtn').style.display='block'; });
+function installApp(){ if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(function(){ deferredPrompt=null; document.getElementById('installBtn').style.display='none'; }); } }
+
+buildChips();
+renderQA();
+</script>
+</body>
+</html>

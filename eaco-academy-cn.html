@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地球文明科学学院 | Earth Civilization Science Academy | 100 Sciences</title>
+<meta name="description" content="100 mainstream sciences self-study, covering 10/20/30/50/100/500/1000 year horizons, primary to university, bilingual.">
+<style>
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-deep: #050814; --bg-mid: #0a0f24;
+  --bg-card: rgba(15, 22, 48, 0.75); --bg-card-hover: rgba(20, 30, 65, 0.85);
+  --accent-cyan: #00d4ff; --accent-purple: #a855f7; --accent-gold: #ffd700;
+  --accent-green: #00ff88; --accent-orange: #ff8c42; --accent-pink: #ff6b9d;
+  --text-primary: #e8edf5; --text-secondary: #9ba8c4; --text-muted: #5a6a8a;
+  --border-glow: rgba(0, 212, 255, 0.25); --border-subtle: rgba(168, 85, 247, 0.15);
+  --radius: 16px; --radius-sm: 10px; --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; scroll-padding-top: 70px; font-size: 16px; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif; background: var(--bg-deep); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+#starfield, #meteorCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at 20% 30%, rgba(0,212,255,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(168,85,247,0.08) 0%, transparent 50%), radial-gradient(ellipse at 50% 100%, rgba(0,255,136,0.04) 0%, transparent 50%); }
+.nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.4; background: radial-gradient(circle at 15% 50%, rgba(168,85,247,0.12) 0%, transparent 30%), radial-gradient(circle at 85% 20%, rgba(0,212,255,0.10) 0%, transparent 30%), radial-gradient(circle at 50% 80%, rgba(255,215,0,0.06) 0%, transparent 25%); }
+.navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(5,8,20,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-glow); padding: 0.625rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.nav-logo { font-size: 1.1rem; font-weight: 700; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; }
+.nav-links { display: flex; gap: 1.25rem; list-style: none; align-items: center; flex-wrap: wrap; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: var(--transition); position: relative; white-space: nowrap; }
+.nav-links a:hover { color: var(--accent-cyan); }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent-cyan); transition: var(--transition); }
+.nav-links a:hover::after { width: 100%; }
+.nav-controls { display: flex; gap: 0.75rem; align-items: center; }
+.lang-toggle { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); color: #000; border: none; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: var(--transition); white-space: nowrap; }
+.lang-toggle:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0,212,255,0.4); }
+.version-badge { font-size: 0.7rem; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 0.15rem 0.5rem; border-radius: 12px; white-space: nowrap; }
+.menu-toggle { display: none; background: transparent; border: 1px solid var(--border-glow); color: var(--accent-cyan); font-size: 1.2rem; padding: 0.3rem 0.6rem; border-radius: 8px; cursor: pointer; }
+.menu-toggle:hover { background: rgba(0,212,255,0.1); }
+.ca-bar { position: relative; z-index: 1; background: rgba(10,15,36,0.9); backdrop-filter: blur(10px); border-top: 1px solid var(--border-glow); border-bottom: 1px solid var(--border-glow); padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+.ca-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.ca-address { font-family: "SF Mono", "Fira Code", monospace; font-size: 0.8rem; color: var(--accent-cyan); word-break: break-all; max-width: 400px; }
+.ca-copy-btn { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); color: #000; border: none; padding: 0.35rem 0.9rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: var(--transition); white-space: nowrap; }
+.ca-copy-btn:hover { transform: scale(1.05); box-shadow: 0 0 12px rgba(0,212,255,0.4); }
+.ca-copy-btn.copied { background: var(--accent-green); }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+section { padding: 4rem 0; position: relative; z-index: 1; }
+.section-title { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; text-align: center; }
+.section-subtitle { text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2.5rem; }
+.hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 6rem; padding-bottom: 2rem; }
+.hero-badge { display: inline-block; background: rgba(0,212,255,0.1); border: 1px solid var(--border-glow); border-radius: 20px; padding: 0.3rem 1rem; font-size: 0.75rem; color: var(--accent-cyan); margin-bottom: 1.5rem; letter-spacing: 1px; }
+.hero-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-gold) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; line-height: 1.3; }
+.hero-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); max-width: 800px; margin-bottom: 2rem; }
+.hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
+.hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.hero-meta-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-cyan); }
+.hero-meta-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.btn-primary, .btn-secondary { padding: 0.75rem 2rem; border-radius: 30px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-block; }
+.btn-primary { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); color: #000; border: none; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,255,0.35); }
+.btn-secondary { background: transparent; color: var(--accent-cyan); border: 1px solid var(--border-glow); }
+.btn-secondary:hover { background: rgba(0,212,255,0.1); border-color: var(--accent-cyan); }
+.filter-bar { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 2rem; }
+.filter-group { margin-bottom: 1rem; }
+.filter-group:last-child { margin-bottom: 0; }
+.filter-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; display: block; }
+.filter-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filter-btn { background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); color: var(--text-secondary); padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: var(--transition); white-space: nowrap; }
+.filter-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+.filter-btn.active { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); color: #000; border-color: transparent; font-weight: 600; }
+.category-section { margin-bottom: 3rem; }
+.category-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle); }
+.category-icon { font-size: 1.5rem; }
+.category-title { font-size: 1.3rem; font-weight: 700; }
+.category-count { font-size: 0.8rem; color: var(--text-muted); margin-left: auto; }
+.subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+.subject-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.5rem; transition: var(--transition); position: relative; }
+.subject-card:hover { background: var(--bg-card-hover); transform: translateY(-3px); border-color: var(--border-glow); box-shadow: 0 8px 30px rgba(0,212,255,0.12); }
+.subject-card.hidden { display: none; }
+.subject-number { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem; font-family: monospace; }
+.subject-name-zh { font-size: 1.05rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.15rem; }
+.subject-name-en { font-size: 0.85rem; color: var(--text-secondary); font-style: italic; margin-bottom: 0.75rem; }
+.subject-stages { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.stage-tag { font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 10px; font-weight: 600; }
+.stage-pri { background: rgba(0,255,136,0.15); color: var(--accent-green); }
+.stage-mid { background: rgba(0,212,255,0.15); color: var(--accent-cyan); }
+.stage-high { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
+.stage-uni { background: rgba(255,215,0,0.15); color: var(--accent-gold); }
+.subject-horizon { font-size: 0.7rem; color: var(--accent-orange); margin-bottom: 0.75rem; }
+.subject-desc-zh, .subject-desc-en { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.75rem; line-height: 1.6; }
+.subject-points-zh, .subject-points-en { font-size: 0.75rem; color: var(--text-muted); }
+.vision-banner { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(168,85,247,0.08), rgba(255,215,0,0.05)); border: 1px solid var(--border-glow); border-radius: var(--radius); padding: 3rem 2rem; text-align: center; }
+.vision-target { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0; }
+.vision-text { color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+.footer { background: rgba(5,8,20,0.9); border-top: 1px solid var(--border-glow); padding: 2.5rem 1.5rem 1.5rem; position: relative; z-index: 1; }
+.footer-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+.footer-logo { font-size: 1.3rem; font-weight: 700; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+.footer-slogan { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem; }
+.footer-ca { font-family: "SF Mono", monospace; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 1rem; }
+.footer-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+.footer-links a { color: var(--text-secondary); font-size: 0.8rem; text-decoration: none; transition: var(--transition); }
+.footer-links a:hover { color: var(--accent-cyan); }
+.footer-copy { font-size: 0.7rem; color: var(--text-muted); }
+.back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border-glow); background: rgba(5,8,20,0.85); backdrop-filter: blur(10px); color: var(--accent-cyan); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: var(--transition); z-index: 98; }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: rgba(0,212,255,0.15); transform: translateY(-3px); }
+@media (max-width: 768px) { .nav-links { display: none; } .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(5,8,20,0.95); padding: 1rem 1.5rem; gap: 0.75rem; } .menu-toggle { display: block; } .hero-meta { gap: 1rem; } .hero-meta-value { font-size: 1.2rem; } }
+@media (max-width: 480px) { .subject-card { padding: 1rem; } .filter-btn { padding: 0.3rem 0.7rem; font-size: 0.75rem; } }
+
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<canvas id="meteorCanvas"></canvas>
+<div class="bg-gradient"></div>
+<div class="nebula"></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-logo">地球文明科学学院</div>
+  <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero" data-zh="首页" data-en="Home">首页</a></li>
+    <li><a href="#overview" data-zh="学科概览" data-en="Overview">学科概览</a></li>
+    <li><a href="#filters" data-zh="筛选" data-en="Filters">筛选</a></li>
+    <li><a href="#subjects" data-zh="100门学科" data-en="100 Subjects">100门学科</a></li>
+    <li><a href="#vision" data-zh="愿景" data-en="Vision">愿景</a></li>
+  </ul>
+  <div class="nav-controls">
+    <span class="version-badge">v0.02</span>
+    <button class="lang-toggle" onclick="toggleLang()">EN</button>
+  </div>
+</nav>
+
+
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-badge" data-zh="从宇宙星际文明到地球村文明 | 面向未来的科学教育" data-en="From Interstellar to Earth Village Civilization | Future Science Education">从宇宙星际文明到地球村文明 | 面向未来的科学教育</div>
+  <h1 class="hero-title" data-zh="地球文明科学学院" data-en="Earth Civilization Science Academy">地球文明科学学院</h1>
+  <p class="hero-subtitle" data-zh="100门主流科学自学课程 | 覆盖未来10/20/30/50/100/500/1000年 | 适合小学至大学 | 中英双语" data-en="100 Mainstream Sciences Self-Study | 10/20/30/50/100/500/1000 yr futures | Primary to University | Bilingual">100门主流科学自学课程 | 覆盖未来10/20/30/50/100/500/1000年 | 适合小学至大学 | 中英双语</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="hero-meta-value">100</span><span class="hero-meta-label" data-zh="学科" data-en="Subjects">学科</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-value">10</span><span class="hero-meta-label" data-zh="领域" data-en="Categories">领域</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-value">7</span><span class="hero-meta-label" data-zh="时间维度" data-en="Time Horizons">时间维度</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-value">4</span><span class="hero-meta-label" data-zh="教育阶段" data-en="Education Levels">教育阶段</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-value">2</span><span class="hero-meta-label" data-zh="双语" data-en="Bilingual">双语</span></div>
+  </div>
+  <div class="hero-cta">
+    <a href="#subjects" class="btn-primary" data-zh="开始学习" data-en="Start Learning">开始学习</a>
+
+  </div>
+</section>
+
+<!-- Overview -->
+<section id="overview" style="padding-top: 2rem;">
+  <div class="container">
+    <h2 class="section-title" data-zh="学科概览" data-en="Subject Overview">学科概览</h2>
+    <p class="section-subtitle" data-zh="从宇宙星际文明与地球村文明维度，编辑100门未来最有用的主流科学" data-en="From interstellar civilization and Earth village perspectives, 100 most useful future sciences">从宇宙星际文明与地球村文明维度，编辑100门未来最有用的主流科学</p>
+    <div class="subject-grid">
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#00d4ff">宇宙天文</div>
+        <div class="subject-name-en">Cosmic & Astronomy</div>
+        <p class="subject-desc-zh" style="text-align:center;">天体物理学 / 宇宙学 / 行星科学 / 空间探测工程 / 天体生物学 / 星系演化 / 高能天体物理 / 空间天气学 / 星际导航 / 戴森球工程</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#a855f7">物理与能源</div>
+        <div class="subject-name-en">Physics & Energy</div>
+        <p class="subject-desc-zh" style="text-align:center;">量子力学 / 核聚变能源 / 相对论 / 量子计算 / 材料物理 / 反物质物理 / 等离子体物理 / 光子学 / 暗能量研究 / 零点能</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#00ff88">生命科学</div>
+        <div class="subject-name-en">Life Sciences</div>
+        <p class="subject-desc-zh" style="text-align:center;">基因组学 / 合成生物学 / 神经科学 / 衰老生物学 / 生态学 / 进化生物学 / 微生物学 / 生物信息学 / 再生医学 / 天体遗传学</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#ffd700">AI与计算</div>
+        <div class="subject-name-en">AI & Computing</div>
+        <p class="subject-desc-zh" style="text-align:center;">人工智能 / 机器学习 / 密码学 / 分布式系统 / 机器人学 / 计算机科学基础 / 脑机接口 / 通用人工智能 / Web工程 / 量子通信</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#ff8c42">地球与环境</div>
+        <div class="subject-name-en">Earth & Environment</div>
+        <p class="subject-desc-zh" style="text-align:center;">气候科学 / 地质学 / 海洋学 / 大气科学 / 环境工程 / 地球物理学 / 可持续发展 / 地球系统科学 / 自然灾害学 / 行星防御</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#ff6b9d">数学与逻辑</div>
+        <div class="subject-name-en">Math & Logic</div>
+        <p class="subject-desc-zh" style="text-align:center;">数学基础 / 概率统计 / 逻辑学 / 拓扑学 / 博弈论 / 信息论 / 微分方程 / 数理逻辑 / 图论 / 范畴论</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#00d4ff">工程与基建</div>
+        <div class="subject-name-en">Engineering</div>
+        <p class="subject-desc-zh" style="text-align:center;">纳米工程 / 能源工程 / 材料工程 / 生物工程 / 交通工程 / 建筑工程 / 半导体工程 / 增材制造 / 太空资源采矿 / 系统工程</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#a855f7">社会与经济</div>
+        <div class="subject-name-en">Social & Economic</div>
+        <p class="subject-desc-zh" style="text-align:center;">经济学 / 数字经济学 / 社会学 / 政治学 / 法律与科技伦理 / 心理学 / 人类学 / 未来学 / 传播学 / 文明研究</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#00ff88">哲学与人文</div>
+        <div class="subject-name-en">Philosophy & Humanities</div>
+        <p class="subject-desc-zh" style="text-align:center;">哲学 / 科学哲学 / 伦理学 / 宇宙哲学 / 语言学 / 历史学 / 认知科学 / 宗教学 / 美学与艺术 / 教育科学</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+      <div class="subject-card" style="text-align:center;">
+        <div class="subject-name-zh" style="color:#ffd700">前沿与交叉</div>
+        <div class="subject-name-en">Frontier & Interdisciplinary</div>
+        <p class="subject-desc-zh" style="text-align:center;">生物计算 / 时空物理 / 意识科学 / 气候工程 / 寿命延长科学 / 星际文明学 / 超材料科学 / 量子生物学 / 数字孪生 / 星际共生学</p>
+        <p style="color:var(--accent-gold); font-size:1.2rem; font-weight:700;">10 门</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Filters -->
+<section id="filters" style="padding-top: 2rem;">
+  <div class="container">
+    <h2 class="section-title" data-zh="筛选学科" data-en="Filter Subjects">筛选学科</h2>
+    <p class="section-subtitle" data-zh="按领域 / 时间维度 / 教育阶段筛选" data-en="Filter by category / time horizon / education level">按领域 / 时间维度 / 教育阶段筛选</p>
+    <div class="filter-bar">
+      <div class="filter-group">
+        <span class="filter-label" data-zh="领域" data-en="Category">领域</span>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter-type="cat" data-filter-val="all" data-zh="全部" data-en="All">全部</button>
+          <button class="filter-btn" data-filter-type="cat" data-filter-val="cosmic" data-zh="宇宙天文" data-en="Cosmic & Astronomy">宇宙天文</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="physics" data-zh="物理与能源" data-en="Physics & Energy">物理与能源</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="bio" data-zh="生命科学" data-en="Life Sciences">生命科学</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="ai" data-zh="AI与计算" data-en="AI & Computing">AI与计算</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="earth" data-zh="地球与环境" data-en="Earth & Environment">地球与环境</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="math" data-zh="数学与逻辑" data-en="Math & Logic">数学与逻辑</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="eng" data-zh="工程与基建" data-en="Engineering">工程与基建</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="social" data-zh="社会与经济" data-en="Social & Economic">社会与经济</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="philo" data-zh="哲学与人文" data-en="Philosophy & Humanities">哲学与人文</button>
+<button class="filter-btn" data-filter-type="cat" data-filter-val="frontier" data-zh="前沿与交叉" data-en="Frontier & Interdisciplinary">前沿与交叉</button>
+
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label" data-zh="时间维度" data-en="Time Horizon">时间维度</span>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter-type="horizon" data-filter-val="all" data-zh="全部" data-en="All">全部</button>
+          <button class="filter-btn" data-filter-type="horizon" data-filter-val="10" data-zh="10年" data-en="10 yrs">10年</button>
+<button class="filter-btn" data-filter-type="horizon" data-filter-val="20" data-zh="20年" data-en="20 yrs">20年</button>
+<button class="filter-btn" data-filter-type="horizon" data-filter-val="30" data-zh="30年" data-en="30 yrs">30年</button>
+<button class="filter-btn" data-filter-type="horizon" data-filter-val="50" data-zh="50年" data-en="50 yrs">50年</button>
+<button class="filter-btn" data-filter-type="horizon" data-filter-val="100" data-zh="100年" data-en="100 yrs">100年</button>
+<button class="filter-btn" data-filter-type="horizon" data-filter-val="500" data-zh="500年" data-en="500 yrs">500年</button>
+<button class="filter-btn" data-filter-type="horizon" data-filter-val="1000" data-zh="1000年" data-en="1000 yrs">1000年</button>
+
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label" data-zh="教育阶段" data-en="Education Level">教育阶段</span>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter-type="stage" data-filter-val="all" data-zh="全部" data-en="All">全部</button>
+          <button class="filter-btn" data-filter-type="stage" data-filter-val="pri" data-zh="小学" data-en="Primary">小学</button>
+<button class="filter-btn" data-filter-type="stage" data-filter-val="mid" data-zh="初中" data-en="Middle">初中</button>
+<button class="filter-btn" data-filter-type="stage" data-filter-val="high" data-zh="高中" data-en="High">高中</button>
+<button class="filter-btn" data-filter-type="stage" data-filter-val="uni" data-zh="大学" data-en="University">大学</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Subjects -->
+<section id="subjects" style="padding-top: 0;">
+  <div class="container">
+    <p class="section-subtitle" id="filterResult" data-zh="显示全部 100 门学科" data-en="Showing all 100 subjects">显示全部 100 门学科</p>
+    <div class="category-section" id="cat-cosmic">
+  <div class="category-header">
+    <span class="category-icon" style="color:#00d4ff">*</span>
+    <h3 class="category-title" style="color:#00d4ff">宇宙天文 / Cosmic & Astronomy</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="cosmic" data-horizon="10-1000" data-stages="high,uni">
+      <div class="subject-number">#1</div>
+      <h4 class="subject-name-zh">天体物理学</h4>
+      <p class="subject-name-en">Astrophysics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">研究恒星、星系、黑洞等天体的物理性质与演化规律</p>
+      <p class="subject-desc-en" style="display:none">Study of physical properties and evolution of stars, galaxies, black holes</p>
+      <div class="subject-points-zh"><strong>要点：</strong>恒星演化 / 引力波 / 暗物质 / 宇宙微波背景</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Stellar evolution / Gravitational waves / Dark matter / CMB</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="100-1000" data-stages="uni">
+      <div class="subject-number">#2</div>
+      <h4 class="subject-name-zh">宇宙学</h4>
+      <p class="subject-name-en">Cosmology</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-1000"></div>
+      <p class="subject-desc-zh">探索宇宙起源、结构、演化和终极命运</p>
+      <p class="subject-desc-en" style="display:none">Explore origin, structure, evolution and ultimate fate of the universe</p>
+      <div class="subject-points-zh"><strong>要点：</strong>大爆炸理论 / 宇宙膨胀 / 多重宇宙 / 热寂</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Big Bang / Cosmic expansion / Multiverse / Heat death</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="10-100" data-stages="mid,high,uni">
+      <div class="subject-number">#3</div>
+      <h4 class="subject-name-zh">行星科学</h4>
+      <p class="subject-name-en">Planetary Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究行星形成、地质、大气和宜居性</p>
+      <p class="subject-desc-en" style="display:none">Study planetary formation, geology, atmosphere and habitability</p>
+      <div class="subject-points-zh"><strong>要点：</strong>系外行星 / 宜居带 / 行星防御 / 地球化</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Exoplanets / Habitable zone / Planetary defense / Terraforming</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#4</div>
+      <h4 class="subject-name-zh">空间探测工程</h4>
+      <p class="subject-name-en">Space Exploration Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">设计建造航天器、空间站和深空探测器</p>
+      <p class="subject-desc-en" style="display:none">Design and build spacecraft, space stations and deep space probes</p>
+      <div class="subject-points-zh"><strong>要点：</strong>火箭推进 / 空间站 / 月球基地 / 火星殖民</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Rocket propulsion / Space station / Lunar base / Mars colony</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="20-500" data-stages="high,uni">
+      <div class="subject-number">#5</div>
+      <h4 class="subject-name-zh">天体生物学</h4>
+      <p class="subject-name-en">Astrobiology</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="20-500"></div>
+      <p class="subject-desc-zh">研究宇宙中生命的起源、分布和演化</p>
+      <p class="subject-desc-en" style="display:none">Study origin, distribution and evolution of life in the universe</p>
+      <div class="subject-points-zh"><strong>要点：</strong>极端生命 / 生物标志物 / 费米悖论 / 德雷克方程</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Extremophiles / Biosignatures / Fermi paradox / Drake equation</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="100-1000" data-stages="uni">
+      <div class="subject-number">#6</div>
+      <h4 class="subject-name-zh">星系演化</h4>
+      <p class="subject-name-en">Galaxy Evolution</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-1000"></div>
+      <p class="subject-desc-zh">研究星系形成、合并、分类和演化过程</p>
+      <p class="subject-desc-en" style="display:none">Study galaxy formation, mergers, classification and evolution</p>
+      <div class="subject-points-zh"><strong>要点：</strong>银河系 / 仙女座 / 暗物质晕 / 星系碰撞</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Milky Way / Andromeda / Dark matter halo / Galaxy collision</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="20-100" data-stages="uni">
+      <div class="subject-number">#7</div>
+      <h4 class="subject-name-zh">高能天体物理</h4>
+      <p class="subject-name-en">High-Energy Astrophysics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="20-100"></div>
+      <p class="subject-desc-zh">研究黑洞、中子星、伽马射线暴等高能现象</p>
+      <p class="subject-desc-en" style="display:none">Study black holes, neutron stars, gamma-ray bursts and high-energy phenomena</p>
+      <div class="subject-points-zh"><strong>要点：</strong>事件视界 / 脉冲星 / 类星体 / 宇宙射线</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Event horizon / Pulsars / Quasars / Cosmic rays</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="10-30" data-stages="high,uni">
+      <div class="subject-number">#8</div>
+      <h4 class="subject-name-zh">空间天气学</h4>
+      <p class="subject-name-en">Space Weather</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">研究太阳活动对地球空间环境的影响</p>
+      <p class="subject-desc-en" style="display:none">Study solar activity impact on Earth space environment</p>
+      <div class="subject-points-zh"><strong>要点：</strong>太阳风 / 磁暴 / 极光 / 卫星防护</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Solar wind / Magnetic storm / Aurora / Satellite protection</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="50-500" data-stages="uni">
+      <div class="subject-number">#9</div>
+      <h4 class="subject-name-zh">星际导航</h4>
+      <p class="subject-name-en">Interstellar Navigation</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-500"></div>
+      <p class="subject-desc-zh">研究跨星系航行的导航与定位技术</p>
+      <p class="subject-desc-en" style="display:none">Navigation and positioning for interstellar travel</p>
+      <div class="subject-points-zh"><strong>要点：</strong>脉冲星导航 / 相对论效应 / 星际坐标 / 自主导航</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Pulsar navigation / Relativistic effects / Interstellar coordinates / Autonomous nav</div>
+    </div>
+    <div class="subject-card" data-cat="cosmic" data-horizon="100-500" data-stages="uni">
+      <div class="subject-number">#10</div>
+      <h4 class="subject-name-zh">戴森球工程</h4>
+      <p class="subject-name-en">Dyson Sphere Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-500"></div>
+      <p class="subject-desc-zh">研究环绕恒星建造能量收集巨构的可行性</p>
+      <p class="subject-desc-en" style="display:none">Feasibility of megastructures around stars for energy collection</p>
+      <div class="subject-points-zh"><strong>要点：</strong>戴森云 / 恒星采矿 / 卡尔达肖夫等级 / 巨构</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Dyson cloud / Stellar mining / Kardashev scale / Megastructure</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-physics">
+  <div class="category-header">
+    <span class="category-icon" style="color:#a855f7">Y</span>
+    <h3 class="category-title" style="color:#a855f7">物理与能源 / Physics & Energy</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="physics" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#11</div>
+      <h4 class="subject-name-zh">量子力学</h4>
+      <p class="subject-name-en">Quantum Mechanics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究微观粒子运动规律与量子现象</p>
+      <p class="subject-desc-en" style="display:none">Study microscopic particle behavior and quantum phenomena</p>
+      <div class="subject-points-zh"><strong>要点：</strong>波粒二象性 / 量子纠缠 / 量子隧穿 / 不确定性原理</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Wave-particle duality / Entanglement / Tunneling / Uncertainty principle</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#12</div>
+      <h4 class="subject-name-zh">核聚变能源</h4>
+      <p class="subject-name-en">Nuclear Fusion Energy</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">利用轻核聚变反应产生清洁能源</p>
+      <p class="subject-desc-en" style="display:none">Generate clean energy from light nuclear fusion reactions</p>
+      <div class="subject-points-zh"><strong>要点：</strong>托卡马克 / 惯性约束 / 氚增殖 / 等离子体</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Tokamak / Inertial confinement / Tritium breeding / Plasma</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#13</div>
+      <h4 class="subject-name-zh">相对论</h4>
+      <p class="subject-name-en">Relativity</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">爱因斯坦的时空理论与引力理论</p>
+      <p class="subject-desc-en" style="display:none">Einstein's spacetime and gravitational theories</p>
+      <div class="subject-points-zh"><strong>要点：</strong>狭义相对论 / 广义相对论 / 时空弯曲 / 引力波</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Special relativity / General relativity / Spacetime curvature / Gravitational waves</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="10-30" data-stages="uni">
+      <div class="subject-number">#14</div>
+      <h4 class="subject-name-zh">量子计算</h4>
+      <p class="subject-name-en">Quantum Computing</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">利用量子叠加和纠缠实现指数级计算加速</p>
+      <p class="subject-desc-en" style="display:none">Use quantum superposition and entanglement for exponential speedup</p>
+      <div class="subject-points-zh"><strong>要点：</strong>量子比特 / 量子算法 / 量子纠错 / 量子霸权</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Qubits / Quantum algorithms / Error correction / Quantum supremacy</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#15</div>
+      <h4 class="subject-name-zh">材料物理</h4>
+      <p class="subject-name-en">Materials Physics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究新型材料的物理性质与设计方法</p>
+      <p class="subject-desc-en" style="display:none">Study physical properties and design of novel materials</p>
+      <div class="subject-points-zh"><strong>要点：</strong>超导材料 / 纳米材料 / 拓扑绝缘体 / 二维材料</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Superconductors / Nanomaterials / Topological insulators / 2D materials</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="50-500" data-stages="uni">
+      <div class="subject-number">#16</div>
+      <h4 class="subject-name-zh">反物质物理</h4>
+      <p class="subject-name-en">Antimatter Physics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-500"></div>
+      <p class="subject-desc-zh">研究反物质的产生、存储和应用</p>
+      <p class="subject-desc-en" style="display:none">Study production, storage and applications of antimatter</p>
+      <div class="subject-points-zh"><strong>要点：</strong>正电子 / 反质子 / 湮灭反应 / 医学成像</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Positrons / Antiprotons / Annihilation / Medical imaging</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#17</div>
+      <h4 class="subject-name-zh">等离子体物理</h4>
+      <p class="subject-name-en">Plasma Physics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究等离子体的性质、行为和应用</p>
+      <p class="subject-desc-en" style="display:none">Study properties, behavior and applications of plasma</p>
+      <div class="subject-points-zh"><strong>要点：</strong>磁约束 / 等离子体推进 / 聚变等离子体 / 空间等离子体</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Magnetic confinement / Plasma propulsion / Fusion plasma / Space plasma</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="10-30" data-stages="high,uni">
+      <div class="subject-number">#18</div>
+      <h4 class="subject-name-zh">光子学</h4>
+      <p class="subject-name-en">Photonics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">研究光的产生、传输、操控和应用</p>
+      <p class="subject-desc-en" style="display:none">Study generation, transmission, manipulation of light</p>
+      <div class="subject-points-zh"><strong>要点：</strong>光纤通信 / 激光 / 光子晶体 / 量子光学</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Fiber optics / Lasers / Photonic crystals / Quantum optics</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="50-1000" data-stages="uni">
+      <div class="subject-number">#19</div>
+      <h4 class="subject-name-zh">暗能量研究</h4>
+      <p class="subject-name-en">Dark Energy Research</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-1000"></div>
+      <p class="subject-desc-zh">探索驱动宇宙加速膨胀的神秘力量</p>
+      <p class="subject-desc-en" style="display:none">Explore the mysterious force driving cosmic acceleration</p>
+      <div class="subject-points-zh"><strong>要点：</strong>宇宙常数 / 真空能 / 修改引力 / 宇宙学红移</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Cosmological constant / Vacuum energy / Modified gravity / Cosmological redshift</div>
+    </div>
+    <div class="subject-card" data-cat="physics" data-horizon="100-500" data-stages="uni">
+      <div class="subject-number">#20</div>
+      <h4 class="subject-name-zh">零点能</h4>
+      <p class="subject-name-en">Zero-Point Energy</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-500"></div>
+      <p class="subject-desc-zh">研究真空量子涨落蕴含的基态能量</p>
+      <p class="subject-desc-en" style="display:none">Study ground-state energy from vacuum quantum fluctuations</p>
+      <div class="subject-points-zh"><strong>要点：</strong>卡西米尔效应 / 真空涨落 / 量子谐振子 / 能量提取</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Casimir effect / Vacuum fluctuations / Quantum oscillator / Energy extraction</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-bio">
+  <div class="category-header">
+    <span class="category-icon" style="color:#00ff88">D</span>
+    <h3 class="category-title" style="color:#00ff88">生命科学 / Life Sciences</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="bio" data-horizon="10-30" data-stages="high,uni">
+      <div class="subject-number">#21</div>
+      <h4 class="subject-name-zh">基因组学</h4>
+      <p class="subject-name-en">Genomics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">研究基因组的结构、功能和进化</p>
+      <p class="subject-desc-en" style="display:none">Study structure, function and evolution of genomes</p>
+      <div class="subject-points-zh"><strong>要点：</strong>CRISPR / 基因测序 / 基因治疗 / 表观遗传</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> CRISPR / Gene sequencing / Gene therapy / Epigenetics</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#22</div>
+      <h4 class="subject-name-zh">合成生物学</h4>
+      <p class="subject-name-en">Synthetic Biology</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">设计和构建人工生物系统</p>
+      <p class="subject-desc-en" style="display:none">Design and construct artificial biological systems</p>
+      <div class="subject-points-zh"><strong>要点：</strong>基因回路 / 合成基因组 / 生物制造 / 生物计算机</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Gene circuits / Synthetic genomes / Bio-manufacturing / Biocomputers</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#23</div>
+      <h4 class="subject-name-zh">神经科学</h4>
+      <p class="subject-name-en">Neuroscience</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究神经系统结构与功能</p>
+      <p class="subject-desc-en" style="display:none">Study structure and function of the nervous system</p>
+      <div class="subject-points-zh"><strong>要点：</strong>脑机接口 / 神经可塑性 / 意识研究 / 神经退行性疾病</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Brain-computer interface / Neuroplasticity / Consciousness / Neurodegeneration</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#24</div>
+      <h4 class="subject-name-zh">衰老生物学</h4>
+      <p class="subject-name-en">Aging Biology</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究衰老机制与寿命延长</p>
+      <p class="subject-desc-en" style="display:none">Study aging mechanisms and life extension</p>
+      <div class="subject-points-zh"><strong>要点：</strong>端粒 / 细胞衰老 / 自噬 / 衰老逆转</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Telomeres / Cellular senescence / Autophagy / Reversing aging</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-100" data-stages="mid,high,uni">
+      <div class="subject-number">#25</div>
+      <h4 class="subject-name-zh">生态学</h4>
+      <p class="subject-name-en">Ecology</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究生物与环境间的相互关系</p>
+      <p class="subject-desc-en" style="display:none">Study interactions between organisms and environment</p>
+      <div class="subject-points-zh"><strong>要点：</strong>生物多样性 / 生态系统 / 气候变化 / 生态恢复</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Biodiversity / Ecosystems / Climate change / Restoration ecology</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-1000" data-stages="high,uni">
+      <div class="subject-number">#26</div>
+      <h4 class="subject-name-zh">进化生物学</h4>
+      <p class="subject-name-en">Evolutionary Biology</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">研究物种起源、演化机制和生物多样性</p>
+      <p class="subject-desc-en" style="display:none">Study species origin, evolution mechanisms and biodiversity</p>
+      <div class="subject-points-zh"><strong>要点：</strong>自然选择 / 基因漂变 / 共同进化 / 物种形成</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Natural selection / Genetic drift / Co-evolution / Speciation</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#27</div>
+      <h4 class="subject-name-zh">微生物学</h4>
+      <p class="subject-name-en">Microbiology</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究微生物的结构、功能和应用</p>
+      <p class="subject-desc-en" style="display:none">Study structure, function and applications of microorganisms</p>
+      <div class="subject-points-zh"><strong>要点：</strong>噬菌体 / 微生物组 / 合成微生物 / 极端微生物</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Bacteriophages / Microbiome / Synthetic microbes / Extremophiles</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-30" data-stages="uni">
+      <div class="subject-number">#28</div>
+      <h4 class="subject-name-zh">生物信息学</h4>
+      <p class="subject-name-en">Bioinformatics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">用计算方法分析生物数据</p>
+      <p class="subject-desc-en" style="display:none">Analyze biological data with computational methods</p>
+      <div class="subject-points-zh"><strong>要点：</strong>序列比对 / 蛋白质折叠 / 系统发生 / AI药物发现</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Sequence alignment / Protein folding / Phylogenetics / AI drug discovery</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#29</div>
+      <h4 class="subject-name-zh">再生医学</h4>
+      <p class="subject-name-en">Regenerative Medicine</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">利用干细胞和组织工程修复损伤组织</p>
+      <p class="subject-desc-en" style="display:none">Repair damaged tissues using stem cells and tissue engineering</p>
+      <div class="subject-points-zh"><strong>要点：</strong>干细胞 / 3D器官打印 / 组织工程 / 器官再生</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Stem cells / 3D organ printing / Tissue engineering / Organ regeneration</div>
+    </div>
+    <div class="subject-card" data-cat="bio" data-horizon="50-500" data-stages="uni">
+      <div class="subject-number">#30</div>
+      <h4 class="subject-name-zh">天体遗传学</h4>
+      <p class="subject-name-en">Astrogenetics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-500"></div>
+      <p class="subject-desc-zh">研究太空环境对生物遗传的影响</p>
+      <p class="subject-desc-en" style="display:none">Study genetic effects of space environment on organisms</p>
+      <div class="subject-points-zh"><strong>要点：</strong>太空突变 / 辐射遗传 / 微重力基因表达 / 星际生物</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Space mutation / Radiation genetics / Microgravity gene expression / Astrobiology</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-ai">
+  <div class="category-header">
+    <span class="category-icon" style="color:#ffd700">A</span>
+    <h3 class="category-title" style="color:#ffd700">AI与计算 / AI & Computing</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="ai" data-horizon="10-50" data-stages="mid,high,uni">
+      <div class="subject-number">#31</div>
+      <h4 class="subject-name-zh">人工智能</h4>
+      <p class="subject-name-en">Artificial Intelligence</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究使机器具备智能行为的方法</p>
+      <p class="subject-desc-en" style="display:none">Methods for machines to exhibit intelligent behavior</p>
+      <div class="subject-points-zh"><strong>要点：</strong>深度学习 / 强化学习 / 大语言模型 / AGI</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Deep learning / Reinforcement learning / LLMs / AGI</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-30" data-stages="high,uni">
+      <div class="subject-number">#32</div>
+      <h4 class="subject-name-zh">机器学习</h4>
+      <p class="subject-name-en">Machine Learning</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">研究算法从数据中学习规律</p>
+      <p class="subject-desc-en" style="display:none">Algorithms that learn patterns from data</p>
+      <div class="subject-points-zh"><strong>要点：</strong>监督学习 / 无监督学习 / 联邦学习 / 迁移学习</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Supervised / Unsupervised / Federated / Transfer learning</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#33</div>
+      <h4 class="subject-name-zh">密码学</h4>
+      <p class="subject-name-en">Cryptography</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究信息加密与安全通信</p>
+      <p class="subject-desc-en" style="display:none">Study of information encryption and secure communication</p>
+      <div class="subject-points-zh"><strong>要点：</strong>公钥加密 / 零知识证明 / 后量子密码 / 同态加密</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Public-key / Zero-knowledge proofs / Post-quantum crypto / Homomorphic encryption</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#34</div>
+      <h4 class="subject-name-zh">分布式系统</h4>
+      <p class="subject-name-en">Distributed Systems</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">去中心化分布式计算技术</p>
+      <p class="subject-desc-en" style="display:none">Decentralized distributed computing technology</p>
+      <div class="subject-points-zh"><strong>要点：</strong>共识机制 / 分布式存储 / 容错 / 边缘计算</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Consensus / Decentralized storage / Fault tolerance / Edge computing</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#35</div>
+      <h4 class="subject-name-zh">机器人学</h4>
+      <p class="subject-name-en">Robotics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">设计制造可自主操作的机器系统</p>
+      <p class="subject-desc-en" style="display:none">Design and build autonomous machine systems</p>
+      <div class="subject-points-zh"><strong>要点：</strong>人形机器人 / 自主导航 / 机器视觉 / 软体机器人</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Humanoid robots / Autonomous navigation / Computer vision / Soft robotics</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-100" data-stages="mid,high,uni">
+      <div class="subject-number">#36</div>
+      <h4 class="subject-name-zh">计算机科学基础</h4>
+      <p class="subject-name-en">Computer Science Foundations</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">计算理论、算法与数据结构</p>
+      <p class="subject-desc-en" style="display:none">Theory of computation, algorithms and data structures</p>
+      <div class="subject-points-zh"><strong>要点：</strong>算法复杂度 / 数据结构 / 计算理论 / 编程范式</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Complexity / Data structures / Computability / Programming paradigms</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-30" data-stages="uni">
+      <div class="subject-number">#37</div>
+      <h4 class="subject-name-zh">脑机接口</h4>
+      <p class="subject-name-en">Brain-Computer Interface</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">连接大脑与外部设备的直接通信通道</p>
+      <p class="subject-desc-en" style="display:none">Direct communication channel between brain and external devices</p>
+      <div class="subject-points-zh"><strong>要点：</strong>神经植入 / 脑电解码 / 意念控制 / 神经反馈</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Neural implants / EEG decoding / Thought control / Neurofeedback</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="20-100" data-stages="uni">
+      <div class="subject-number">#38</div>
+      <h4 class="subject-name-zh">通用人工智能</h4>
+      <p class="subject-name-en">Artificial General Intelligence</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="20-100"></div>
+      <p class="subject-desc-zh">研究具备人类级别通用智能的系统</p>
+      <p class="subject-desc-en" style="display:none">Systems with human-level general intelligence</p>
+      <div class="subject-points-zh"><strong>要点：</strong>认知架构 / 常识推理 / 元学习 / 意识模拟</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Cognitive architecture / Common sense / Meta-learning / Consciousness</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-30" data-stages="high,uni">
+      <div class="subject-number">#39</div>
+      <h4 class="subject-name-zh">Web工程</h4>
+      <p class="subject-name-en">Web Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">网络应用开发与协议设计</p>
+      <p class="subject-desc-en" style="display:none">Web application development and protocol design</p>
+      <div class="subject-points-zh"><strong>要点：</strong>前后端架构 / API设计 / 微服务 / 响应式设计</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Frontend/backend / API design / Microservices / Responsive design</div>
+    </div>
+    <div class="subject-card" data-cat="ai" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#40</div>
+      <h4 class="subject-name-zh">量子通信</h4>
+      <p class="subject-name-en">Quantum Communication</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">利用量子力学原理实现安全通信</p>
+      <p class="subject-desc-en" style="display:none">Secure communication using quantum mechanical principles</p>
+      <div class="subject-points-zh"><strong>要点：</strong>量子密钥分发 / 量子中继 / 量子隐形传态 / 量子网络</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> QKD / Quantum repeater / Teleportation / Quantum network</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-earth">
+  <div class="category-header">
+    <span class="category-icon" style="color:#ff8c42">O</span>
+    <h3 class="category-title" style="color:#ff8c42">地球与环境 / Earth & Environment</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="earth" data-horizon="10-50" data-stages="mid,high,uni">
+      <div class="subject-number">#41</div>
+      <h4 class="subject-name-zh">气候科学</h4>
+      <p class="subject-name-en">Climate Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究气候系统变化与影响</p>
+      <p class="subject-desc-en" style="display:none">Study climate system changes and impacts</p>
+      <div class="subject-points-zh"><strong>要点：</strong>全球变暖 / 碳循环 / 气候模型 / 极端天气</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Global warming / Carbon cycle / Climate models / Extreme weather</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-100" data-stages="mid,high,uni">
+      <div class="subject-number">#42</div>
+      <h4 class="subject-name-zh">地质学</h4>
+      <p class="subject-name-en">Geology</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究地球物质组成、结构与演化</p>
+      <p class="subject-desc-en" style="display:none">Study Earth's composition, structure and evolution</p>
+      <div class="subject-points-zh"><strong>要点：</strong>板块构造 / 矿物学 / 地层学 / 地震学</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Plate tectonics / Mineralogy / Stratigraphy / Seismology</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#43</div>
+      <h4 class="subject-name-zh">海洋学</h4>
+      <p class="subject-name-en">Oceanography</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究海洋的物理、化学和生物过程</p>
+      <p class="subject-desc-en" style="display:none">Study physical, chemical and biological processes of oceans</p>
+      <div class="subject-points-zh"><strong>要点：</strong>洋流 / 深海生态 / 海洋酸化 / 海底采矿</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Ocean currents / Deep sea ecology / Ocean acidification / Seabed mining</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#44</div>
+      <h4 class="subject-name-zh">大气科学</h4>
+      <p class="subject-name-en">Atmospheric Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究大气组成、运动与天气</p>
+      <p class="subject-desc-en" style="display:none">Study atmospheric composition, motion and weather</p>
+      <div class="subject-points-zh"><strong>要点：</strong>气象预报 / 大气化学 / 气候动力学 / 空气质量</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Weather forecasting / Atmospheric chemistry / Climate dynamics / Air quality</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#45</div>
+      <h4 class="subject-name-zh">环境工程</h4>
+      <p class="subject-name-en">Environmental Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">运用工程技术保护与改善环境</p>
+      <p class="subject-desc-en" style="display:none">Engineering solutions for environmental protection</p>
+      <div class="subject-points-zh"><strong>要点：</strong>水处理 / 固废管理 / 碳捕集 / 生态修复</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Water treatment / Waste management / Carbon capture / Ecological restoration</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-100" data-stages="uni">
+      <div class="subject-number">#46</div>
+      <h4 class="subject-name-zh">地球物理学</h4>
+      <p class="subject-name-en">Geophysics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">用物理方法研究地球内部结构</p>
+      <p class="subject-desc-en" style="display:none">Study Earth's interior using physical methods</p>
+      <div class="subject-points-zh"><strong>要点：</strong>地震波 / 地磁场 / 重力测量 / 地热</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Seismic waves / Geomagnetism / Gravimetry / Geothermal</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-100" data-stages="mid,high,uni">
+      <div class="subject-number">#47</div>
+      <h4 class="subject-name-zh">可持续发展</h4>
+      <p class="subject-name-en">Sustainable Development</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">平衡经济发展与环境保护</p>
+      <p class="subject-desc-en" style="display:none">Balance economic development with environmental protection</p>
+      <div class="subject-points-zh"><strong>要点：</strong>循环经济 / 绿色发展 / 碳中和 / 清洁能源</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Circular economy / Green development / Carbon neutrality / Clean energy</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-100" data-stages="uni">
+      <div class="subject-number">#48</div>
+      <h4 class="subject-name-zh">地球系统科学</h4>
+      <p class="subject-name-en">Earth System Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">整体研究地球各圈层相互作用</p>
+      <p class="subject-desc-en" style="display:none">Holistic study of Earth's sphere interactions</p>
+      <div class="subject-points-zh"><strong>要点：</strong>生物地球化学循环 / 反馈机制 / 临界点 / 地球建模</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Biogeochemical cycles / Feedback mechanisms / Tipping points / Earth modeling</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#49</div>
+      <h4 class="subject-name-zh">自然灾害学</h4>
+      <p class="subject-name-en">Natural Disaster Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究自然灾害的成因与减灾</p>
+      <p class="subject-desc-en" style="display:none">Study causes of natural disasters and mitigation</p>
+      <div class="subject-points-zh"><strong>要点：</strong>地震预警 / 火山监测 / 海啸预警 / 灾害建模</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Earthquake early warning / Volcano monitoring / Tsunami warning / Disaster modeling</div>
+    </div>
+    <div class="subject-card" data-cat="earth" data-horizon="20-100" data-stages="uni">
+      <div class="subject-number">#50</div>
+      <h4 class="subject-name-zh">行星防御</h4>
+      <p class="subject-name-en">Planetary Defense</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="20-100"></div>
+      <p class="subject-desc-zh">防御小行星撞击地球的威胁</p>
+      <p class="subject-desc-en" style="display:none">Defend against asteroid impact threats to Earth</p>
+      <div class="subject-points-zh"><strong>要点：</strong>近地天体监测 / 偏转技术 / 撞击后果 / 行星防御协调</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> NEO monitoring / Deflection technology / Impact consequences / Planetary defense coordination</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-math">
+  <div class="category-header">
+    <span class="category-icon" style="color:#ff6b9d">S</span>
+    <h3 class="category-title" style="color:#ff6b9d">数学与逻辑 / Math & Logic</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="math" data-horizon="10-1000" data-stages="pri,mid,high,uni">
+      <div class="subject-number">#51</div>
+      <h4 class="subject-name-zh">数学基础</h4>
+      <p class="subject-name-en">Mathematics Foundations</p>
+      <div class="subject-stages"><span class="stage-tag stage-pri">小学</span><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">数学的核心概念与推理方法</p>
+      <p class="subject-desc-en" style="display:none">Core concepts and reasoning methods of mathematics</p>
+      <div class="subject-points-zh"><strong>要点：</strong>代数 / 几何 / 数论 / 数学证明</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Algebra / Geometry / Number theory / Mathematical proof</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="10-100" data-stages="mid,high,uni">
+      <div class="subject-number">#52</div>
+      <h4 class="subject-name-zh">概率统计</h4>
+      <p class="subject-name-en">Probability & Statistics</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究随机现象规律与数据分析</p>
+      <p class="subject-desc-en" style="display:none">Study random phenomena and data analysis</p>
+      <div class="subject-points-zh"><strong>要点：</strong>贝叶斯推断 / 统计检验 / 随机过程 / 大数定律</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Bayesian inference / Statistical tests / Stochastic processes / Law of large numbers</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="10-1000" data-stages="mid,high,uni">
+      <div class="subject-number">#53</div>
+      <h4 class="subject-name-zh">逻辑学</h4>
+      <p class="subject-name-en">Logic</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">研究有效推理的形式与规则</p>
+      <p class="subject-desc-en" style="display:none">Study of valid reasoning forms and rules</p>
+      <div class="subject-points-zh"><strong>要点：</strong>命题逻辑 / 谓词逻辑 / 模态逻辑 / 非经典逻辑</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Propositional / Predicate / Modal / Non-classical logic</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="50-500" data-stages="uni">
+      <div class="subject-number">#54</div>
+      <h4 class="subject-name-zh">拓扑学</h4>
+      <p class="subject-name-en">Topology</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-500"></div>
+      <p class="subject-desc-zh">研究空间在连续变形下不变的性质</p>
+      <p class="subject-desc-en" style="display:none">Properties invariant under continuous deformation</p>
+      <div class="subject-points-zh"><strong>要点：</strong>同伦 / 纽结理论 / 拓扑不变量 / 拓扑量子场论</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Homotopy / Knot theory / Topological invariants / TQFT</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#55</div>
+      <h4 class="subject-name-zh">博弈论</h4>
+      <p class="subject-name-en">Game Theory</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究策略决策中的数学模型</p>
+      <p class="subject-desc-en" style="display:none">Mathematical models of strategic decision-making</p>
+      <div class="subject-points-zh"><strong>要点：</strong>纳什均衡 / 机制设计 / 演化博弈 / 合作博弈</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Nash equilibrium / Mechanism design / Evolutionary games / Cooperative games</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#56</div>
+      <h4 class="subject-name-zh">信息论</h4>
+      <p class="subject-name-en">Information Theory</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究信息的量化、存储与传输</p>
+      <p class="subject-desc-en" style="display:none">Quantification, storage and transmission of information</p>
+      <div class="subject-points-zh"><strong>要点：</strong>香农熵 / 信道容量 / 编码理论 / 数据压缩</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Shannon entropy / Channel capacity / Coding theory / Data compression</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#57</div>
+      <h4 class="subject-name-zh">微分方程</h4>
+      <p class="subject-name-en">Differential Equations</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">描述变化率的数学方程与应用</p>
+      <p class="subject-desc-en" style="display:none">Mathematical equations describing rates of change</p>
+      <div class="subject-points-zh"><strong>要点：</strong>常微分方程 / 偏微分方程 / 动力系统 / 混沌理论</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> ODE / PDE / Dynamical systems / Chaos theory</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="50-1000" data-stages="uni">
+      <div class="subject-number">#58</div>
+      <h4 class="subject-name-zh">数理逻辑</h4>
+      <p class="subject-name-en">Mathematical Logic</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-1000"></div>
+      <p class="subject-desc-zh">用形式化方法研究数学推理</p>
+      <p class="subject-desc-en" style="display:none">Formal study of mathematical reasoning</p>
+      <div class="subject-points-zh"><strong>要点：</strong>集合论 / 证明论 / 模型论 / 可计算性</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Set theory / Proof theory / Model theory / Computability</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#59</div>
+      <h4 class="subject-name-zh">图论</h4>
+      <p class="subject-name-en">Graph Theory</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究图结构的数学性质与应用</p>
+      <p class="subject-desc-en" style="display:none">Mathematical properties and applications of graphs</p>
+      <div class="subject-points-zh"><strong>要点：</strong>网络科学 / 最短路径 / 图染色 / 社交网络分析</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Network science / Shortest paths / Graph coloring / Social network analysis</div>
+    </div>
+    <div class="subject-card" data-cat="math" data-horizon="100-1000" data-stages="uni">
+      <div class="subject-number">#60</div>
+      <h4 class="subject-name-zh">范畴论</h4>
+      <p class="subject-name-en">Category Theory</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-1000"></div>
+      <p class="subject-desc-zh">研究数学结构之间关系的抽象理论</p>
+      <p class="subject-desc-en" style="display:none">Abstract theory of relationships between mathematical structures</p>
+      <div class="subject-points-zh"><strong>要点：</strong>函子 / 自然变换 / 极限 / 高阶范畴</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Functors / Natural transformations / Limits / Higher categories</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-eng">
+  <div class="category-header">
+    <span class="category-icon" style="color:#00d4ff">E</span>
+    <h3 class="category-title" style="color:#00d4ff">工程与基建 / Engineering</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="eng" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#61</div>
+      <h4 class="subject-name-zh">纳米工程</h4>
+      <p class="subject-name-en">Nanoengineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">纳米尺度材料的设计与制造</p>
+      <p class="subject-desc-en" style="display:none">Design and manufacture at nanoscale</p>
+      <div class="subject-points-zh"><strong>要点：</strong>纳米制造 / 分子机器 / 纳米机器人 / 纳米电子</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Nanofabrication / Molecular machines / Nanorobots / Nanoelectronics</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#62</div>
+      <h4 class="subject-name-zh">能源工程</h4>
+      <p class="subject-name-en">Energy Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">新能源技术开发与能源系统设计</p>
+      <p class="subject-desc-en" style="display:none">New energy technology and energy system design</p>
+      <div class="subject-points-zh"><strong>要点：</strong>太阳能 / 风能 / 储能技术 / 智能电网</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Solar / Wind / Energy storage / Smart grid</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#63</div>
+      <h4 class="subject-name-zh">材料工程</h4>
+      <p class="subject-name-en">Materials Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">新型材料的开发与应用</p>
+      <p class="subject-desc-en" style="display:none">Development and application of novel materials</p>
+      <div class="subject-points-zh"><strong>要点：</strong>超合金 / 复合材料 / 智能材料 / 仿生材料</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Superalloys / Composites / Smart materials / Biomimetic materials</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#64</div>
+      <h4 class="subject-name-zh">生物工程</h4>
+      <p class="subject-name-en">Bioengineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">工程学方法解决生物医学问题</p>
+      <p class="subject-desc-en" style="display:none">Engineering approaches to biomedical problems</p>
+      <div class="subject-points-zh"><strong>要点：</strong>生物传感器 / 生物材料 / 生物制造 / 神经工程</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Biosensors / Biomaterials / Biofabrication / Neural engineering</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#65</div>
+      <h4 class="subject-name-zh">交通工程</h4>
+      <p class="subject-name-en">Transportation Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">未来交通系统规划与技术</p>
+      <p class="subject-desc-en" style="display:none">Future transportation systems planning and technology</p>
+      <div class="subject-points-zh"><strong>要点：</strong>自动驾驶 / 超级高铁 / 飞行汽车 / 真空管运输</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Autonomous vehicles / Hyperloop / Flying cars / Vacuum tube transport</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#66</div>
+      <h4 class="subject-name-zh">建筑工程</h4>
+      <p class="subject-name-en">Architectural Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">未来建筑设计与智能建造</p>
+      <p class="subject-desc-en" style="display:none">Future architecture design and smart construction</p>
+      <div class="subject-points-zh"><strong>要点：</strong>3D打印建筑 / 智能建筑 / 绿色建筑 / 太空建筑</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> 3D printed buildings / Smart buildings / Green architecture / Space architecture</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-30" data-stages="uni">
+      <div class="subject-number">#67</div>
+      <h4 class="subject-name-zh">半导体工程</h4>
+      <p class="subject-name-en">Semiconductor Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">芯片设计与制造技术</p>
+      <p class="subject-desc-en" style="display:none">Chip design and manufacturing technology</p>
+      <div class="subject-points-zh"><strong>要点：</strong>光刻技术 / 芯片架构 / 先进封装 / 硅光子</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Lithography / Chip architecture / Advanced packaging / Silicon photonics</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#68</div>
+      <h4 class="subject-name-zh">增材制造</h4>
+      <p class="subject-name-en">Additive Manufacturing</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">3D打印技术及工业应用</p>
+      <p class="subject-desc-en" style="display:none">3D printing technology and industrial applications</p>
+      <div class="subject-points-zh"><strong>要点：</strong>金属打印 / 生物打印 / 多材料 / 原位制造</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Metal printing / Bioprinting / Multi-material / In-situ manufacturing</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="30-100" data-stages="uni">
+      <div class="subject-number">#69</div>
+      <h4 class="subject-name-zh">太空资源采矿</h4>
+      <p class="subject-name-en">Space Resource Mining</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="30-100"></div>
+      <p class="subject-desc-zh">小行星与月球资源开采技术</p>
+      <p class="subject-desc-en" style="display:none">Asteroid and lunar resource extraction technology</p>
+      <div class="subject-points-zh"><strong>要点：</strong>小行星采矿 / 月球采矿 / 原位利用 / 太空冶炼</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Asteroid mining / Lunar mining / ISRU / Space smelting</div>
+    </div>
+    <div class="subject-card" data-cat="eng" data-horizon="10-100" data-stages="uni">
+      <div class="subject-number">#70</div>
+      <h4 class="subject-name-zh">系统工程</h4>
+      <p class="subject-name-en">Systems Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">复杂系统的设计、集成与管理</p>
+      <p class="subject-desc-en" style="display:none">Design, integration and management of complex systems</p>
+      <div class="subject-points-zh"><strong>要点：</strong>系统架构 / 需求工程 / 可靠性 / 系统优化</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> System architecture / Requirements engineering / Reliability / Optimization</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-social">
+  <div class="category-header">
+    <span class="category-icon" style="color:#a855f7">G</span>
+    <h3 class="category-title" style="color:#a855f7">社会与经济 / Social & Economic</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="social" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#71</div>
+      <h4 class="subject-name-zh">经济学</h4>
+      <p class="subject-name-en">Economics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究资源配置与市场机制</p>
+      <p class="subject-desc-en" style="display:none">Study resource allocation and market mechanisms</p>
+      <div class="subject-points-zh"><strong>要点：</strong>微观经济 / 宏观经济 / 行为经济 / 数字经济</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Microeconomics / Macroeconomics / Behavioral / Digital economy</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#72</div>
+      <h4 class="subject-name-zh">数字经济学</h4>
+      <p class="subject-name-en">Digital Economics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究数字时代的经济模式与变革</p>
+      <p class="subject-desc-en" style="display:none">Study economic models and transformation in the digital age</p>
+      <div class="subject-points-zh"><strong>要点：</strong>平台经济 / 数据要素 / 数字贸易 / 智能商业</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Platform economy / Data factors / Digital trade / Smart business</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#73</div>
+      <h4 class="subject-name-zh">社会学</h4>
+      <p class="subject-name-en">Sociology</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究社会结构与人类行为</p>
+      <p class="subject-desc-en" style="display:none">Study social structures and human behavior</p>
+      <div class="subject-points-zh"><strong>要点：</strong>社会网络 / 社会分层 / 文化变迁 / 数字社会</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Social networks / Stratification / Cultural change / Digital society</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#74</div>
+      <h4 class="subject-name-zh">政治学</h4>
+      <p class="subject-name-en">Political Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究权力、治理与政治制度</p>
+      <p class="subject-desc-en" style="display:none">Study power, governance and political systems</p>
+      <div class="subject-points-zh"><strong>要点：</strong>比较政治 / 国际关系 / 治理理论 / 全球治理</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Comparative politics / International relations / Governance theory / Global governance</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#75</div>
+      <h4 class="subject-name-zh">法律与科技伦理</h4>
+      <p class="subject-name-en">Law & Tech Ethics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">科技发展中的法律与伦理问题</p>
+      <p class="subject-desc-en" style="display:none">Legal and ethical issues in tech development</p>
+      <div class="subject-points-zh"><strong>要点：</strong>AI伦理 / 数据隐私 / 知识产权 / 太空法</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> AI ethics / Data privacy / Intellectual property / Space law</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-100" data-stages="mid,high,uni">
+      <div class="subject-number">#76</div>
+      <h4 class="subject-name-zh">心理学</h4>
+      <p class="subject-name-en">Psychology</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究人类心理与行为模式</p>
+      <p class="subject-desc-en" style="display:none">Study human psychology and behavioral patterns</p>
+      <div class="subject-points-zh"><strong>要点：</strong>认知心理 / 社会心理 / 发展心理 / 积极心理</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Cognitive / Social / Developmental / Positive psychology</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-1000" data-stages="uni">
+      <div class="subject-number">#77</div>
+      <h4 class="subject-name-zh">人类学</h4>
+      <p class="subject-name-en">Anthropology</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">研究人类起源、演化与文化多样性</p>
+      <p class="subject-desc-en" style="display:none">Study human origins, evolution and cultural diversity</p>
+      <div class="subject-points-zh"><strong>要点：</strong>文化人类学 / 考古学 / 语言人类学 / 进化人类学</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Cultural anthropology / Archaeology / Linguistic anthropology / Evolutionary anthropology</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-1000" data-stages="high,uni">
+      <div class="subject-number">#78</div>
+      <h4 class="subject-name-zh">未来学</h4>
+      <p class="subject-name-en">Futurology</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">系统性预测与规划人类未来</p>
+      <p class="subject-desc-en" style="display:none">Systematic prediction and planning of human future</p>
+      <div class="subject-points-zh"><strong>要点：</strong>技术预测 / 情景规划 / 文明演化 / 后稀缺社会</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Technology forecasting / Scenario planning / Civilization evolution / Post-scarcity</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="10-50" data-stages="high,uni">
+      <div class="subject-number">#79</div>
+      <h4 class="subject-name-zh">传播学</h4>
+      <p class="subject-name-en">Communication Studies</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">研究信息传播与社会影响</p>
+      <p class="subject-desc-en" style="display:none">Study information dissemination and social impact</p>
+      <div class="subject-points-zh"><strong>要点：</strong>媒介理论 / 数字传播 / 跨文化传播 / 信息生态</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Media theory / Digital communication / Cross-cultural / Information ecology</div>
+    </div>
+    <div class="subject-card" data-cat="social" data-horizon="50-1000" data-stages="uni">
+      <div class="subject-number">#80</div>
+      <h4 class="subject-name-zh">文明研究</h4>
+      <p class="subject-name-en">Civilization Studies</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-1000"></div>
+      <p class="subject-desc-zh">研究文明的兴衰规律与星际文明</p>
+      <p class="subject-desc-en" style="display:none">Study civilization rise/fall patterns and interstellar civilization</p>
+      <div class="subject-points-zh"><strong>要点：</strong>文明周期 / 大历史 / 星际文明 / 文明分类</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Civilization cycles / Big history / Interstellar civilization / Civilization taxonomy</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-philo">
+  <div class="category-header">
+    <span class="category-icon" style="color:#00ff88">B</span>
+    <h3 class="category-title" style="color:#00ff88">哲学与人文 / Philosophy & Humanities</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="philo" data-horizon="10-1000" data-stages="high,uni">
+      <div class="subject-number">#81</div>
+      <h4 class="subject-name-zh">哲学</h4>
+      <p class="subject-name-en">Philosophy</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">探究存在、知识、价值的根本问题</p>
+      <p class="subject-desc-en" style="display:none">Fundamental questions of existence, knowledge, values</p>
+      <div class="subject-points-zh"><strong>要点：</strong>形而上学 / 认识论 / 伦理学 / 美学</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Metaphysics / Epistemology / Ethics / Aesthetics</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="10-500" data-stages="uni">
+      <div class="subject-number">#82</div>
+      <h4 class="subject-name-zh">科学哲学</h4>
+      <p class="subject-name-en">Philosophy of Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-500"></div>
+      <p class="subject-desc-zh">研究科学方法、理论与知识本质</p>
+      <p class="subject-desc-en" style="display:none">Study scientific methods, theories and nature of knowledge</p>
+      <div class="subject-points-zh"><strong>要点：</strong>可证伪性 / 范式转换 / 科学革命 / 实在论</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Falsifiability / Paradigm shift / Scientific revolution / Realism</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="10-1000" data-stages="high,uni">
+      <div class="subject-number">#83</div>
+      <h4 class="subject-name-zh">伦理学</h4>
+      <p class="subject-name-en">Ethics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">研究道德判断与行为准则</p>
+      <p class="subject-desc-en" style="display:none">Study moral judgment and behavioral principles</p>
+      <div class="subject-points-zh"><strong>要点：</strong>功利主义 / 义务论 / 德性伦理 / 应用伦理</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Utilitarianism / Deontology / Virtue ethics / Applied ethics</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="100-1000" data-stages="uni">
+      <div class="subject-number">#84</div>
+      <h4 class="subject-name-zh">宇宙哲学</h4>
+      <p class="subject-name-en">Cosmic Philosophy</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-1000"></div>
+      <p class="subject-desc-zh">从宇宙尺度思考文明意义与方向</p>
+      <p class="subject-desc-en" style="display:none">Reflect on civilization's meaning at cosmic scale</p>
+      <div class="subject-points-zh"><strong>要点：</strong>人择原理 / 宇宙目的 / 星际伦理 / 终极命运</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Anthropic principle / Cosmic purpose / Interstellar ethics / Ultimate fate</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#85</div>
+      <h4 class="subject-name-zh">语言学</h4>
+      <p class="subject-name-en">Linguistics</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究语言结构与人类沟通</p>
+      <p class="subject-desc-en" style="display:none">Study language structure and human communication</p>
+      <div class="subject-points-zh"><strong>要点：</strong>句法学 / 语义学 / 语用学 / 人工智能语言</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Syntax / Semantics / Pragmatics / AI language</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="10-1000" data-stages="mid,high,uni">
+      <div class="subject-number">#86</div>
+      <h4 class="subject-name-zh">历史学</h4>
+      <p class="subject-name-en">History</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">研究人类过去的事件与规律</p>
+      <p class="subject-desc-en" style="display:none">Study past human events and patterns</p>
+      <div class="subject-points-zh"><strong>要点：</strong>世界史 / 科技史 / 经济史 / 文明比较</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> World history / History of science / Economic history / Civilizational comparison</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#87</div>
+      <h4 class="subject-name-zh">认知科学</h4>
+      <p class="subject-name-en">Cognitive Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">跨学科研究心智与智能</p>
+      <p class="subject-desc-en" style="display:none">Interdisciplinary study of mind and intelligence</p>
+      <div class="subject-points-zh"><strong>要点：</strong>认知架构 / 具身认知 / 心智模型 / 意识理论</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Cognitive architecture / Embodied cognition / Mental models / Consciousness theories</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="50-1000" data-stages="uni">
+      <div class="subject-number">#88</div>
+      <h4 class="subject-name-zh">宗教学</h4>
+      <p class="subject-name-en">Religious Studies</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-1000"></div>
+      <p class="subject-desc-zh">研究宗教现象与信仰体系</p>
+      <p class="subject-desc-en" style="display:none">Study religious phenomena and belief systems</p>
+      <div class="subject-points-zh"><strong>要点：</strong>比较宗教 / 宗教社会学 / 世俗化 / 宇宙灵性</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Comparative religion / Sociology of religion / Secularization / Cosmic spirituality</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="10-1000" data-stages="mid,high,uni">
+      <div class="subject-number">#89</div>
+      <h4 class="subject-name-zh">美学与艺术</h4>
+      <p class="subject-name-en">Aesthetics & Art</p>
+      <div class="subject-stages"><span class="stage-tag stage-mid">初中</span><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-1000"></div>
+      <p class="subject-desc-zh">研究美与艺术创作</p>
+      <p class="subject-desc-en" style="display:none">Study beauty and artistic creation</p>
+      <div class="subject-points-zh"><strong>要点：</strong>艺术理论 / 数字艺术 / 生成艺术 / 宇宙美学</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Art theory / Digital art / Generative art / Cosmic aesthetics</div>
+    </div>
+    <div class="subject-card" data-cat="philo" data-horizon="10-100" data-stages="high,uni">
+      <div class="subject-number">#90</div>
+      <h4 class="subject-name-zh">教育科学</h4>
+      <p class="subject-name-en">Educational Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究学习理论与教育方法</p>
+      <p class="subject-desc-en" style="display:none">Study learning theories and educational methods</p>
+      <div class="subject-points-zh"><strong>要点：</strong>认知学习 / 自适应教育 / 终身学习 / AI辅助教学</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Cognitive learning / Adaptive education / Lifelong learning / AI-assisted teaching</div>
+    </div>
+  </div>
+</div>
+<div class="category-section" id="cat-frontier">
+  <div class="category-header">
+    <span class="category-icon" style="color:#ffd700">F</span>
+    <h3 class="category-title" style="color:#ffd700">前沿与交叉 / Frontier & Interdisciplinary</h3>
+    <span class="category-count">10 门</span>
+  </div>
+  <div class="subject-grid">
+    <div class="subject-card" data-cat="frontier" data-horizon="20-100" data-stages="uni">
+      <div class="subject-number">#91</div>
+      <h4 class="subject-name-zh">生物计算</h4>
+      <p class="subject-name-en">Biological Computing</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="20-100"></div>
+      <p class="subject-desc-zh">利用生物分子进行计算</p>
+      <p class="subject-desc-en" style="display:none">Computing using biological molecules</p>
+      <div class="subject-points-zh"><strong>要点：</strong>DNA计算 / 蛋白质计算 / 细胞计算机 / 生物存储</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> DNA computing / Protein computing / Cellular computers / Biological storage</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="50-1000" data-stages="uni">
+      <div class="subject-number">#92</div>
+      <h4 class="subject-name-zh">时空物理</h4>
+      <p class="subject-name-en">Spacetime Physics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="50-1000"></div>
+      <p class="subject-desc-zh">研究时空本质与量子引力</p>
+      <p class="subject-desc-en" style="display:none">Study nature of spacetime and quantum gravity</p>
+      <div class="subject-points-zh"><strong>要点：</strong>弦理论 / 圈量子引力 / 全息原理 / 时空涌现</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> String theory / Loop quantum gravity / Holographic principle / Spacetime emergence</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="20-100" data-stages="uni">
+      <div class="subject-number">#93</div>
+      <h4 class="subject-name-zh">意识科学</h4>
+      <p class="subject-name-en">Consciousness Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="20-100"></div>
+      <p class="subject-desc-zh">科学研究意识的本质</p>
+      <p class="subject-desc-en" style="display:none">Scientific study of consciousness</p>
+      <div class="subject-points-zh"><strong>要点：</strong>意识相关 / 自由意志 / 意识测量 / 人工意识</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Neural correlates / Free will / Consciousness measurement / Artificial consciousness</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#94</div>
+      <h4 class="subject-name-zh">气候工程</h4>
+      <p class="subject-name-en">Climate Engineering</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">主动干预气候系统以减缓变暖</p>
+      <p class="subject-desc-en" style="display:none">Active intervention in climate system to reduce warming</p>
+      <div class="subject-points-zh"><strong>要点：</strong>太阳辐射管理 / 碳捕集封存 / 海洋施肥 / 生物地球工程</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Solar radiation management / CCS / Ocean fertilization / Bio-geoengineering</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="10-100" data-stages="uni">
+      <div class="subject-number">#95</div>
+      <h4 class="subject-name-zh">寿命延长科学</h4>
+      <p class="subject-name-en">Life Extension Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-100"></div>
+      <p class="subject-desc-zh">研究延长人类健康寿命的方法</p>
+      <p class="subject-desc-en" style="display:none">Methods to extend human healthspan</p>
+      <div class="subject-points-zh"><strong>要点：</strong>衰老时钟 / 基因疗法 / 器官替换 / 意识上传</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Aging clocks / Gene therapy / Organ replacement / Mind upload</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="100-1000" data-stages="uni">
+      <div class="subject-number">#96</div>
+      <h4 class="subject-name-zh">星际文明学</h4>
+      <p class="subject-name-en">Interstellar Civilization Studies</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-1000"></div>
+      <p class="subject-desc-zh">研究星际文明的形态与发展路径</p>
+      <p class="subject-desc-en" style="display:none">Study forms and development paths of interstellar civilization</p>
+      <div class="subject-points-zh"><strong>要点：</strong>卡尔达肖夫等级 / 戴森文明 / 星际通信 / 文明共生</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Kardashev scale / Dyson civilization / Interstellar communication / Symbiosis</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="10-50" data-stages="uni">
+      <div class="subject-number">#97</div>
+      <h4 class="subject-name-zh">超材料科学</h4>
+      <p class="subject-name-en">Metamaterial Science</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-50"></div>
+      <p class="subject-desc-zh">设计自然界不存在的人工材料</p>
+      <p class="subject-desc-en" style="display:none">Design artificial materials not found in nature</p>
+      <div class="subject-points-zh"><strong>要点：</strong>隐身衣 / 超透镜 / 声学超材料 / 可编程物质</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Invisibility cloaks / Superlenses / Acoustic metamaterials / Programmable matter</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="20-100" data-stages="uni">
+      <div class="subject-number">#98</div>
+      <h4 class="subject-name-zh">量子生物学</h4>
+      <p class="subject-name-en">Quantum Biology</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="20-100"></div>
+      <p class="subject-desc-zh">研究生命系统中的量子效应</p>
+      <p class="subject-desc-en" style="display:none">Study quantum effects in living systems</p>
+      <div class="subject-points-zh"><strong>要点：</strong>光合作用量子效率 / 鸟类磁感应 / 量子嗅觉 / DNA突变</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Photosynthetic efficiency / Avian magnetoreception / Quantum olfaction / DNA mutation</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="10-30" data-stages="high,uni">
+      <div class="subject-number">#99</div>
+      <h4 class="subject-name-zh">数字孪生</h4>
+      <p class="subject-name-en">Digital Twin</p>
+      <div class="subject-stages"><span class="stage-tag stage-high">高中</span><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="10-30"></div>
+      <p class="subject-desc-zh">物理实体的虚拟镜像与仿真</p>
+      <p class="subject-desc-en" style="display:none">Virtual mirror and simulation of physical entities</p>
+      <div class="subject-points-zh"><strong>要点：</strong>城市数字孪生 / 工业孪生 / 人体孪生 / 地球孪生</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> City twins / Industrial twins / Human body twins / Earth twin</div>
+    </div>
+    <div class="subject-card" data-cat="frontier" data-horizon="100-1000" data-stages="uni">
+      <div class="subject-number">#100</div>
+      <h4 class="subject-name-zh">星际共生学</h4>
+      <p class="subject-name-en">Interstellar Symbiotics</p>
+      <div class="subject-stages"><span class="stage-tag stage-uni">大学</span></div>
+      <div class="subject-horizon" data-horizon="100-1000"></div>
+      <p class="subject-desc-zh">研究文明间共生与协作的星际框架</p>
+      <p class="subject-desc-en" style="display:none">Interstellar framework for civilization symbiosis and collaboration</p>
+      <div class="subject-points-zh"><strong>要点：</strong>文明对话 / 共生协议 / 能量回流 / 闭环链路</div>
+      <div class="subject-points-en" style="display:none"><strong>Key:</strong> Civilization dialogue / Symbiosis protocols / Energy return / Closed-loop chain</div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<!-- Vision -->
+<section id="vision" style="padding-top: 2rem;">
+  <div class="container">
+    <div class="vision-banner">
+      <h3 style="color: var(--accent-cyan); font-size: 1.2rem;" data-zh="地球文明科学愿景" data-en="Earth Civilization Science Vision">地球文明科学愿景</h3>
+      <div class="vision-target">100年+</div>
+      <p class="vision-text" data-zh="从宇宙星际文明与地球村文明维度，学习100门未来科学，共建地球文明科学学院。科学照亮未来，教育连接星际。" data-en="From interstellar and Earth village perspectives, learn 100 future sciences, co-build Earth Civilization Science Academy. Science illuminates the future, education connects the stars.">从宇宙星际文明与地球村文明维度，学习100门未来科学，共建地球文明科学学院。科学照亮未来，教育连接星际。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">地球文明科学学院</div>
+    <p class="footer-slogan" data-zh="从宇宙星际文明到地球村文明 | 面向未来的科学教育" data-en="From Interstellar to Earth Village | Future Science Education">从宇宙星际文明到地球村文明 | 面向未来的科学教育</p>
+    
+    <div class="footer-links">
+      <a href="https://github.com/eacocc/eaco" target="_blank">GitHub</a>
+      <a href="mailto:eaco2cc@gmail.com">Email</a>
+    </div>
+    <p class="footer-copy" data-zh="© 2024-2026 地球文明科学学院. 仅供教育参考。" data-en="© 2024-2026 Earth Civilization Science Academy. For educational reference only.">© 2024-2026 地球文明科学学院. 仅供教育参考。</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">&uarr;</button>
+
+<script>
+
+// Starfield
+(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];function r(){c.width=window.innerWidth;c.height=window.innerHeight;s=[];var n=Math.floor((c.width*c.height)/8000);for(var i=0;i<n;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2,o:Math.random(),s:Math.random()*0.02+0.005,t:Math.random()*Math.PI*2});}function d(){x.clearRect(0,0,c.width,c.height);for(var i=0;i<s.length;i++){var st=s[i];st.t+=st.s;var op=0.3+Math.abs(Math.sin(st.t))*0.7;x.beginPath();x.arc(st.x,st.y,Math.max(0.3,st.r),0,Math.PI*2);x.fillStyle='rgba(200,220,255,'+op+')';x.fill();}requestAnimationFrame(d);}r();d();window.addEventListener('resize',r);})();
+// Meteors
+(function(){var c=document.getElementById('meteorCanvas'),x=c.getContext('2d'),m=[];function r(){c.width=window.innerWidth;c.height=window.innerHeight;}function sp(){if(Math.random()>0.3)return;m.push({x:Math.random()*c.width,y:-10,vx:(Math.random()-0.3)*3+1,vy:Math.random()*3+4,len:Math.random()*80+40,life:1,op:Math.random()*0.5+0.3});}function d(){x.clearRect(0,0,c.width,c.height);for(var i=m.length-1;i>=0;i--){var p=m[i];p.x+=p.vx;p.y+=p.vy;p.life-=0.008;if(p.life<=0||p.y>c.height){m.splice(i,1);continue;}var g=x.createLinearGradient(p.x,p.y,p.x-p.vx*p.len/5,p.y-p.vy*p.len/5);g.addColorStop(0,'rgba(0,212,255,'+(p.op*p.life)+')');g.addColorStop(0.5,'rgba(168,85,247,'+(p.op*p.life*0.5)+')');g.addColorStop(1,'rgba(0,0,0,0)');x.strokeStyle=g;x.lineWidth=1.5;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x-p.vx*p.len/5,p.y-p.vy*p.len/5);x.stroke();}sp();requestAnimationFrame(d);}r();d();window.addEventListener('resize',r);})();
+// Language Toggle
+var currentLang='zh';
+var horizonLabels={zh:{'10':'10年','20':'20年','30':'30年','50':'50年','100':'100年','500':'500年','1000':'1000年'},en:{'10':'10y','20':'20y','30':'30y','50':'50y','100':'100y','500':'500y','1000':'1000y'}};
+var stageLabels={zh:{pri:'小学',mid:'初中',high:'高中',uni:'大学'},en:{pri:'Primary',mid:'Middle',high:'High',uni:'University'}};
+function toggleLang(){currentLang=currentLang==='zh'?'en':'zh';document.documentElement.setAttribute('data-lang',currentLang);document.documentElement.setAttribute('lang',currentLang==='zh'?'zh-CN':'en');var els=document.querySelectorAll('[data-zh][data-en]');for(var i=0;i<els.length;i++){var t=els[i].getAttribute('data-'+currentLang);if(t)els[i].innerHTML=t;}var cards=document.querySelectorAll('.subject-card[data-cat]');for(var i=0;i<cards.length;i++){var card=cards[i];var zhN=card.querySelector('.subject-name-zh'),enN=card.querySelector('.subject-name-en'),zhD=card.querySelector('.subject-desc-zh'),enD=card.querySelector('.subject-desc-en'),zhP=card.querySelector('.subject-points-zh'),enP=card.querySelector('.subject-points-en');if(currentLang==='en'){if(zhN)zhN.style.display='none';if(enN)enN.style.display='block';if(zhD)zhD.style.display='none';if(enD)enD.style.display='block';if(zhP)zhP.style.display='none';if(enP)enP.style.display='block';}else{if(zhN)zhN.style.display='block';if(enN)enN.style.display='block';if(zhD)zhD.style.display='block';if(enD)enD.style.display='none';if(zhP)zhP.style.display='block';if(enP)enP.style.display='none';}var hEl=card.querySelector('.subject-horizon');if(hEl){var hVal=hEl.getAttribute('data-horizon');var parts=hVal.split('-');var labels=[];for(var j=0;j<parts.length;j++)labels.push(horizonLabels[currentLang][parts[j]]||parts[j]);hEl.textContent=labels.join(' - ');}var tags=card.querySelectorAll('.stage-tag');for(var j=0;j<tags.length;j++){var cls=tags[j].className;var stage='';if(cls.indexOf('pri')>=0)stage='pri';else if(cls.indexOf('mid')>=0)stage='mid';else if(cls.indexOf('high')>=0)stage='high';else if(cls.indexOf('uni')>=0)stage='uni';if(stage)tags[j].textContent=stageLabels[currentLang][stage];}}updateFilterResult();var btn=document.querySelector('.lang-toggle');if(btn)btn.textContent=currentLang==='zh'?'EN':'中文';}
+(function(){var cards=document.querySelectorAll('.subject-card[data-cat]');for(var i=0;i<cards.length;i++){var card=cards[i];var hEl=card.querySelector('.subject-horizon');if(hEl){var hVal=hEl.getAttribute('data-horizon');var parts=hVal.split('-');var labels=[];for(var j=0;j<parts.length;j++)labels.push(horizonLabels['zh'][parts[j]]||parts[j]);hEl.textContent=labels.join(' - ');}}})();
+// Filters
+var activeFilters={cat:'all',horizon:'all',stage:'all'};
+function setFilter(type,val){activeFilters[type]=val;var btns=document.querySelectorAll('[data-filter-type="'+type+'"]');for(var i=0;i<btns.length;i++){btns[i].classList.remove('active');if(btns[i].getAttribute('data-filter-val')===val)btns[i].classList.add('active');}applyFilters();}
+function applyFilters(){var cards=document.querySelectorAll('.subject-card[data-cat]');var visible=0;for(var i=0;i<cards.length;i++){var card=cards[i];var show=true;if(activeFilters.cat!=='all'&&card.getAttribute('data-cat')!==activeFilters.cat)show=false;if(activeFilters.horizon!=='all'){var horizons=card.getAttribute('data-horizon');if(horizons.indexOf(activeFilters.horizon)<0)show=false;}if(activeFilters.stage!=='all'){var stages=card.getAttribute('data-stages');if(stages.indexOf(activeFilters.stage)<0)show=false;}if(show){card.classList.remove('hidden');visible++;}else{card.classList.add('hidden');}}var cats=document.querySelectorAll('.category-section');for(var i=0;i<cats.length;i++){var sec=cats[i];var visCards=sec.querySelectorAll('.subject-card:not(.hidden)');if(visCards.length>0)sec.style.display='';else sec.style.display='none';}updateFilterResult(visible);}
+function updateFilterResult(count){var el=document.getElementById('filterResult');if(!el)return;if(count===undefined)count=document.querySelectorAll('.subject-card:not(.hidden)[data-cat]').length;if(currentLang==='zh')el.textContent='显示 '+count+' 门学科';else el.textContent='Showing '+count+' subjects';}
+(function(){var btns=document.querySelectorAll('.filter-btn');for(var i=0;i<btns.length;i++)btns[i].addEventListener('click',function(){setFilter(this.getAttribute('data-filter-type'),this.getAttribute('data-filter-val'));});})();
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('active');}
+window.addEventListener('scroll',function(){var b=document.getElementById('backToTop');if(window.scrollY>400)b.classList.add('visible');else b.classList.remove('visible');});
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+
+</script>
+</body>
+</html>
