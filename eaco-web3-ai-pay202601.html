@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EACO Web3 AI Pay 2026 | Autonomous Agent Payment Network</title>
+<meta name="description" content="EACO Web3 AI Pay 2026 - AI Agent Wallet, autonomous payment, Solana, x402, MCP and developer ecosystem.">
+<style>
+:root{--bg:#07111f;--panel:#0e2034;--line:#29435b;--text:#eef6ff;--muted:#b5c6d6;--green:#66e3b4}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.6}
+.wrap{max-width:1200px;margin:auto;padding:24px}
+.hero{padding:60px 0;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(38px,6vw,70px)}h2{color:var(--green)}
+nav{position:sticky;top:0;background:#07111fee;border-bottom:1px solid var(--line);z-index:9}
+nav a{color:var(--muted);margin-right:18px;text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+button{background:#122941;color:white;border:1px solid var(--line);padding:8px 14px;border-radius:8px}
+.active{border-color:var(--green);color:var(--green)}
+.flow{background:#030912;padding:20px;border-radius:12px;font-family:monospace;white-space:pre-wrap}
+section{padding:45px 0;border-bottom:1px solid var(--line)}
+.warning{border-left:4px solid #ffd166;padding:15px;background:#17150d}
+.small{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<button id="en" class="active">English</button><button id="zh">中文</button>
+<h1>EACO Web3 AI Pay 2026</h1>
+<p id="subtitle">Infrastructure for autonomous AI Agent payments, Solana micropayments, x402, MCP, Agent Wallets and the North American developer ecosystem.</p>
+<div class="warning" id="warning">Important compliance notice: This document is a technology and business strategy plan, not legal or investment advice.</div>
+</div></header>
+<nav><div class="wrap">
+<a href="#vision">Vision</a><a href="#architecture">Architecture</a><a href="#wallet">Wallet</a><a href="#products">Products</a><a href="#community">Community</a><a href="#roadmap">Roadmap</a><a href="#compliance">Compliance</a><a href="#developer">Developer</a><a href="#security">Security</a>
+</div></nav>
+<main class="wrap">
+<section id="vision"><h2>Vision</h2><div class="grid">
+<div class="card"><h3>AI Agents Can Act</h3><p>Discover services, evaluate tasks and execute authorized actions.</p></div>
+<div class="card"><h3>AI Agents Can Pay</h3><p>Controlled wallets, budgets, permissions and audit trails.</p></div>
+<div class="card"><h3>Machine Economy</h3><p>Agent-to-service and agent-to-agent commerce.</p></div>
+</div></section>
+<section id="architecture"><h2>Payment Architecture</h2>
+<div class="flow">Human
+ ↓
+EACO Agent Wallet
+ ↓
+Policy Engine
+ ↓
+x402 + MCP
+ ↓
+AI API / Data / Compute
+ ↓
+On-chain Settlement</div>
+<div class="card"><h3>Supported Payment Layer</h3><p>USDC · USDT · SOL · wBNB · eCNH (subject to compliance review) · EACO utility layer</p></div>
+</section>
+<section id="wallet"><h2>Agent Wallet</h2><div class="grid">
+<div class="card">Identity & Reputation</div><div class="card">Budget Controls</div><div class="card">Security Policies</div>
+</div></section>
+<section id="products"><h2>Products</h2><div class="grid">
+<div class="card">EACO AgentPay</div><div class="card">EACO MCP Server</div><div class="card">Agent Marketplace</div><div class="card">Agent-to-Agent Network</div>
+</div></section>
+<section id="community"><h2>North America Developer Community</h2><div class="card">EACO Agent Builders: AI developers, Solana builders, MCP developers and Web3 entrepreneurs.</div></section>
+<section id="roadmap"><h2>90 Day Roadmap</h2><div class="card">Day 1-30 MVP → Day 31-60 Marketplace → Day 61-90 Developer Growth</div></section>
+<section id="compliance"><h2>Compliance</h2><div class="card">Token classification, securities review, AML/KYC planning, accounting and legal review.</div></section>
+
+<section id="developer"><h2>Developer Hub</h2><div class="grid">
+<div class="card"><h3>SDK Layer</h3><p>Future SDK: Agent wallet APIs, payment APIs, MCP tools and transaction monitoring.</p></div>
+<div class="card"><h3>API Payment Demo</h3><p>AI Agent requests service → receives payment requirement → signs payment → receives result.</p></div>
+<div class="card"><h3>Marketplace Metrics</h3><p>Track agents, API calls, settlement volume, reputation and usage.</p></div>
+</div></section>
+<section id="security"><h2>Security Loop</h2><div class="flow">Agent Identity → Permission Check → Spending Limit → Payment Approval → Settlement → Audit Record</div></section>
+</main>
+<footer class="wrap small">EACO Web3 AI Pay 2026 · Contract Address: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</footer>
+<script>
+const data={en:{subtitle:"Infrastructure for autonomous AI Agent payments, Solana micropayments, x402, MCP, Agent Wallets and the North American developer ecosystem.",warning:"Important compliance notice: This document is a technology and business strategy plan, not legal or investment advice."},zh:{subtitle:"面向AI Agent自动支付、Solana微支付、x402、MCP、Agent Wallet和北美开发者生态的基础设施。",warning:"重要合规提示：本文为技术和商业战略规划，不构成法律或投资建议。"}};
+function lang(x){subtitle.textContent=data[x].subtitle;warning.textContent=data[x].warning;en.classList.toggle("active",x==="en");zh.classList.toggle("active",x==="zh");}
+en.onclick=()=>lang("en");zh.onclick=()=>lang("zh");lang("en");
+</script>
+</body></html>
