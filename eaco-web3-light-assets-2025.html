@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Web3 Light Assets 2025 | Earth's Best Coin</title>
+<meta name="description" content="EACO Web3 Light Assets 2025 - Top 100 Light Asset Industries & 100 Q&A about EACO Development. Bilingual Chinese/English.">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2332;
+  --accent: #00d9a3;
+  --accent-glow: rgba(0, 217, 163, 0.15);
+  --accent2: #3b82f6;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-bright: #f8fafc;
+  --border: #1e293b;
+  --radius: 12px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--text-bright); text-decoration: underline; }
+
+/* ===== HEADER ===== */
+header {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  background: rgba(10, 14, 26, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display:flex; align-items:center; gap:10px; font-size:18px; font-weight:700; color:var(--text-bright); }
+.logo-icon {
+  width:36px; height:36px; border-radius:50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; color:#fff; font-weight:700;
+}
+.nav-right { display:flex; align-items:center; gap:16px; }
+.nav-links { display:flex; gap:20px; }
+.nav-links a { color:var(--text-dim); font-size:14px; font-weight:500; }
+.nav-links a:hover { color:var(--accent); text-decoration:none; }
+.lang-toggle {
+  background: var(--bg-card); border:1px solid var(--border);
+  border-radius:20px; padding:4px; display:flex; cursor:pointer;
+}
+.lang-btn {
+  padding: 6px 14px; border-radius:16px; font-size:13px; font-weight:600;
+  border:none; background:transparent; color:var(--text-dim); cursor:pointer; transition:all .2s;
+}
+.lang-btn.active { background: var(--accent); color: #0a0e1a; }
+@media(max-width:768px){ .nav-links{ display:none; } }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding: 100px 20px 60px; position:relative;
+  background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: clamp(32px, 6vw, 56px); font-weight:800; color:var(--text-bright);
+  margin-bottom:16px; line-height:1.2;
+}
+.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip:text;
+}
+.hero .subtitle { font-size: clamp(16px, 3vw, 22px); color:var(--text-dim); max-width:700px; margin-bottom:32px; }
+.hero-badges { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:36px; }
+.badge {
+  background: var(--bg-card); border:1px solid var(--border); border-radius:20px;
+  padding:8px 18px; font-size:14px; color:var(--text);
+}
+.badge .dot { color:var(--accent); margin-right:6px; }
+.hero-stats { display:flex; gap:40px; flex-wrap:wrap; justify-content:center; }
+.stat { text-align:center; }
+.stat-num { font-size:36px; font-weight:800; color:var(--accent); }
+.stat-label { font-size:13px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; }
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+.section-title {
+  font-size: clamp(24px, 4vw, 36px); font-weight:700; color:var(--text-bright);
+  margin-bottom:8px; text-align:center;
+}
+.section-desc { text-align:center; color:var(--text-dim); margin-bottom:48px; font-size:16px; }
+
+/* ===== SEARCH ===== */
+.search-box {
+  max-width:500px; margin:0 auto 32px; position:relative;
+}
+.search-box input {
+  width:100%; padding:14px 20px 14px 48px; font-size:15px;
+  background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+  color:var(--text); font-family:var(--font); outline:none; transition:border-color .2s;
+}
+.search-box input:focus { border-color:var(--accent); }
+.search-box input::placeholder { color:var(--text-dim); }
+.search-box .icon {
+  position:absolute; left:16px; top:50%; transform:translateY(-50%);
+  color:var(--text-dim); font-size:18px;
+}
+
+/* ===== INDUSTRY GRID ===== */
+.industry-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px;
+}
+.industry-card {
+  background: var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px; transition:all .2s; cursor:pointer;
+}
+.industry-card:hover { background:var(--bg-card-hover); border-color:var(--accent); transform:translateY(-2px); }
+.industry-card .num {
+  font-size:13px; font-weight:700; color:var(--accent); margin-bottom:6px;
+  font-family:var(--mono);
+}
+.industry-card .name { font-size:16px; font-weight:600; color:var(--text-bright); margin-bottom:8px; }
+.industry-card .desc { font-size:13px; color:var(--text-dim); line-height:1.6; }
+.industry-card .name-en { font-size:12px; color:var(--text-dim); margin-top:2px; opacity:.7; }
+
+/* ===== Q&A ACCORDION ===== */
+.qa-list { max-width:800px; margin:0 auto; }
+.qa-item {
+  background: var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+  margin-bottom:12px; overflow:hidden; transition:border-color .2s;
+}
+.qa-item.active { border-color:var(--accent); }
+.qa-header {
+  padding:18px 24px; cursor:pointer; display:flex; align-items:center; gap:12px;
+  font-size:15px; font-weight:500; color:var(--text-bright); transition:background .2s;
+}
+.qa-header:hover { background:var(--bg-card-hover); }
+.qa-num {
+  flex-shrink:0; width:28px; height:28px; border-radius:50%;
+  background:var(--accent-glow); color:var(--accent); font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+}
+.qa-toggle { margin-left:auto; color:var(--text-dim); transition:transform .3s; flex-shrink:0; }
+.qa-item.active .qa-toggle { transform:rotate(45deg); color:var(--accent); }
+.qa-body {
+  max-height:0; overflow:hidden; transition:max-height .4s ease, padding .4s ease;
+  padding:0 24px;
+}
+.qa-item.active .qa-body { max-height:500px; padding:0 24px 20px; }
+.qa-body p { color:var(--text-dim); font-size:14px; line-height:1.8; }
+
+/* ===== EACO PILLARS ===== */
+.pillars { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
+.pillar {
+  background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:28px 20px; text-align:center; transition:all .2s;
+}
+.pillar:hover { border-color:var(--accent); transform:translateY(-4px); }
+.pillar .letter { font-size:42px; font-weight:800; margin-bottom:8px; }
+.pillar .letter.e{color:#ef4444;} .pillar .letter.a{color:#f59e0b;}
+.pillar .letter.c{color:var(--accent);} .pillar .letter.o{color:var(--accent2);}
+.pillar .word { font-size:18px; font-weight:600; color:var(--text-bright); margin-bottom:6px; }
+.pillar .word-zh { font-size:14px; color:var(--text-dim); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #060912; border-top:1px solid var(--border);
+  padding: 60px 20px 40px; margin-top:40px;
+}
+.footer-inner { max-width:1200px; margin:0 auto; }
+.footer-section { margin-bottom:40px; }
+.footer-section h3 {
+  font-size:16px; font-weight:700; color:var(--text-bright); margin-bottom:8px;
+}
+.footer-section .sub { font-size:14px; color:var(--accent); margin-bottom:16px; font-weight:500; }
+.footer-section .note { font-size:14px; color:var(--text-dim); margin-bottom:16px; font-style:italic; }
+.footer-links { display:flex; flex-wrap:wrap; gap:10px; }
+.footer-link {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--bg-card); border:1px solid var(--border); border-radius:8px;
+  padding:8px 16px; font-size:13px; color:var(--text); transition:all .2s;
+}
+.footer-link:hover { border-color:var(--accent); color:var(--accent); text-decoration:none; transform:translateY(-1px); }
+.footer-link .ext { font-size:10px; opacity:.5; }
+.ca-box {
+  background:var(--bg-card); border:1px solid var(--border); border-radius:8px;
+  padding:12px 16px; margin-top:16px; font-family:var(--mono); font-size:12px;
+  color:var(--text-dim); word-break:break-all; cursor:pointer; transition:border-color .2s;
+}
+.ca-box:hover { border-color:var(--accent); }
+.ca-box .label { color:var(--accent); font-weight:600; }
+.footer-bottom {
+  border-top:1px solid var(--border); margin-top:40px; padding-top:24px;
+  text-align:center; color:var(--text-dim); font-size:13px;
+}
+.footer-bottom .heart { color:var(--accent); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+.fade-in { animation: fadeInUp .6s ease forwards; }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:var(--border); border-radius:4px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--accent); }
+
+/* ===== MOBILE ===== */
+@media(max-width:640px){
+  .hero-stats{ gap:24px; }
+  .stat-num{ font-size:28px; }
+  .industry-grid{ grid-template-columns:1fr; }
+  section{ padding:60px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">E</div>
+    <span>EACO</span>
+  </div>
+  <div class="nav-right">
+    <nav class="nav-links">
+      <a href="#industries" data-i18n="nav_industries">Industries</a>
+      <a href="#qa" data-i18n="nav_qa">Q&A</a>
+      <a href="#pillars" data-i18n="nav_pillars">Pillars</a>
+      <a href="#links" data-i18n="nav_links">Links</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('zh')">ZH</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1><span class="gradient">EACO</span> Web3 Light Assets <span class="gradient">2025</span></h1>
+  <p class="subtitle" data-i18n="hero_sub">Earth EACO Light Asset 2025 - Earth's Best Coin Empowering Global Light Asset Industries</p>
+  <div class="hero-badges">
+    <span class="badge"><span class="dot">&#9679;</span>Solana Blockchain</span>
+    <span class="badge"><span class="dot">&#9679;</span>100+ Industries</span>
+    <span class="badge"><span class="dot">&#9679;</span>100 Q&A</span>
+    <span class="badge"><span class="dot">&#9679;</span>Bilingual ZH/EN</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">100</div><div class="stat-label" data-i18n="stat_industries">Industries</div></div>
+    <div class="stat"><div class="stat-num">100</div><div class="stat-label" data-i18n="stat_qa">Q&A</div></div>
+    <div class="stat"><div class="stat-num">12+</div><div class="stat-label" data-i18n="stat_dex">DEX Platforms</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label" data-i18n="stat_lang">Languages</div></div>
+  </div>
+</div>
+
+<!-- PILLARS -->
+<section id="pillars">
+  <h2 class="section-title" data-i18n="pillars_title">EACO Four Pillars</h2>
+  <p class="section-desc" data-i18n="pillars_desc">Four Core Concepts of EACO</p>
+  <div class="pillars">
+    <div class="pillar"><div class="letter e">E</div><div class="word">Energy</div><div class="word-zh" data-i18n="pillar_e">Energy - The foundation driving everything</div></div>
+    <div class="pillar"><div class="letter a">A</div><div class="word">Attitude</div><div class="word-zh" data-i18n="pillar_a">Attitude - A positive forward spirit</div></div>
+    <div class="pillar"><div class="letter c">C</div><div class="word">Cooperation</div><div class="word-zh" data-i18n="pillar_c">Cooperation - The power of collaboration</div></div>
+    <div class="pillar"><div class="letter o">O</div><div class="word">Optimization</div><div class="word-zh" data-i18n="pillar_o">Optimization - The pursuit of continuous improvement</div></div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <h2 class="section-title" data-i18n="ind_title">Top 100 Light Asset Industries</h2>
+  <p class="section-desc" data-i18n="ind_desc">Top 100 Light Asset Industries in the Global Village</p>
+  <div class="search-box">
+    <span class="icon">&#128269;</span>
+    <input type="text" id="searchInput" data-i18n-ph="ind_search_ph" placeholder="Search industries...">
+  </div>
+  <div class="industry-grid" id="industryGrid"></div>
+</section>
+
+<!-- Q&A -->
+<section id="qa">
+  <h2 class="section-title" data-i18n="qa_title">EACO Light Asset 100 Q&A</h2>
+  <p class="section-desc" data-i18n="qa_desc">100 Q&A about EACO and Light Asset Industries</p>
+  <div class="search-box">
+    <span class="icon">&#128269;</span>
+    <input type="text" id="qaSearchInput" data-i18n-ph="qa_search_ph" placeholder="Search Q&A...">
+  </div>
+  <div class="qa-list" id="qaList"></div>
+</section>
+
+<!-- FOOTER LINKS -->
+<footer id="links">
+  <div class="footer-inner">
+    <!-- Liquidity -->
+    <div class="footer-section">
+      <h3 data-i18n="fl_liq_title">EACO(SOL) Overseas Increased Liquidity</h3>
+      <p class="sub" data-i18n="fl_liq_sub">EACO (Earth's best Coin)</p>
+      <div class="footer-links" id="liqLinks"></div>
+    </div>
+    <!-- Robot note -->
+    <div class="footer-section">
+      <p class="note" data-i18n="fl_robot">Quantitative robots could earn the difference with 5000-50,000 sol/usdc/USDT.</p>
+    </div>
+    <!-- About -->
+    <div class="footer-section">
+      <h3 data-i18n="fl_about_title">About e&eaco</h3>
+      <div class="footer-links" id="aboutLinks"></div>
+    </div>
+    <!-- CA -->
+    <div class="footer-section">
+      <div class="ca-box" onclick="copyCA()">
+        <span class="label">Contract Address (CA):</span><br>
+        DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+      </div>
+    </div>
+    <!-- Volunteer -->
+    <div class="footer-section">
+      <h3 data-i18n="fl_vol_title">As a Volunteer</h3>
+      <div class="footer-links" id="volunteerLinks"></div>
+    </div>
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <p>EACO (c) 2025 - <span data-i18n="footer_rights">Earth's Best Coin - Empowering Global Light Asset Industries</span></p>
+      <p style="margin-top:8px;"><span class="heart">&#9889;</span> <span data-i18n="footer_made">Built with EACO Community</span> - <a href="https://github.com/eacocc/eaco" target="_blank">GitHub</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== DATA =====
+const INDUSTRIES = [{"zh": "SaaS软件即服务", "en": "SaaS (Software as a Service)", "zh_d": "通过云端订阅模式提供软件应用，无需本地安装，代表轻资产数字经济的核心形态。", "en_d": "Cloud-based subscription software delivery, the core form of light-asset digital economy."}, {"zh": "移动应用开发", "en": "Mobile App Development", "zh_d": "为iOS和Android平台开发应用程序，以代码和创意为核心资产。", "en_d": "Developing applications for iOS and Android, with code and creativity as core assets."}, {"zh": "数字内容创作", "en": "Digital Content Creation", "zh_d": "涵盖图文、视频、音频等数字内容的生产与分发，创作者经济的基础。", "en_d": "Production and distribution of text, video, and audio content; foundation of the creator economy."}, {"zh": "在线教育平台", "en": "Online Education Platform", "zh_d": "通过互联网提供课程、培训和认证，打破地理限制的知识传播模式。", "en_d": "Internet-based courses, training, and certification, breaking geographic barriers."}, {"zh": "跨境电商", "en": "Cross-border E-commerce", "zh_d": "利用数字平台进行国际贸易，以供应链整合和品牌运营为核心。", "en_d": "International trade via digital platforms, centered on supply chain integration and brand operations."}, {"zh": "数字营销代理", "en": "Digital Marketing Agency", "zh_d": "为企业提供SEO、SEM、社交媒体等数字营销服务，以专业知识为核心资产。", "en_d": "SEO, SEM, social media marketing services for businesses, with expertise as core asset."}, {"zh": "社交媒体运营", "en": "Social Media Management", "zh_d": "管理品牌社交媒体账号，通过内容策略和社群运营提升品牌影响力。", "en_d": "Managing brand social accounts, boosting influence through content strategy and community building."}, {"zh": "云计算服务", "en": "Cloud Computing Services", "zh_d": "提供IaaS、PaaS、SaaS等云端基础设施和平台服务，数字时代的基石。", "en_d": "IaaS, PaaS, SaaS cloud infrastructure and platform services, the cornerstone of the digital era."}, {"zh": "大数据分析", "en": "Big Data Analytics", "zh_d": "从海量数据中提取洞察，以算法和模型为核心竞争力。", "en_d": "Extracting insights from massive datasets, with algorithms and models as core competitiveness."}, {"zh": "人工智能服务", "en": "AI Services", "zh_d": "提供机器学习、NLP、计算机视觉等AI能力，以数据和模型为资产。", "en_d": "Machine learning, NLP, computer vision capabilities, with data and models as assets."}, {"zh": "区块链开发", "en": "Blockchain Development", "zh_d": "开发智能合约、DApp和区块链协议，以代码和共识机制为核心。", "en_d": "Smart contracts, DApps, and blockchain protocols, with code and consensus mechanisms at the core."}, {"zh": "网络安全咨询", "en": "Cybersecurity Consulting", "zh_d": "为企业提供安全评估、渗透测试和合规咨询，以专业知识为资产。", "en_d": "Security assessment, penetration testing, and compliance consulting for enterprises."}, {"zh": "UI/UX设计", "en": "UI/UX Design", "zh_d": "数字产品的用户界面和用户体验设计，以创意和方法论为核心。", "en_d": "User interface and experience design for digital products, centered on creativity and methodology."}, {"zh": "网站开发", "en": "Web Development", "zh_d": "前端和后端网站开发，以技术能力和代码库为核心资产。", "en_d": "Frontend and backend website development, with technical skills and code libraries as assets."}, {"zh": "视频制作", "en": "Video Production", "zh_d": "企业宣传片、短视频、直播等内容制作，以创意和设备为核心。", "en_d": "Corporate videos, short-form content, livestreaming production, centered on creativity and equipment."}, {"zh": "播客制作", "en": "Podcast Production", "zh_d": "音频内容策划、录制、剪辑和分发，以内容和听众为核心资产。", "en_d": "Audio content planning, recording, editing, and distribution, with content and audience as assets."}, {"zh": "自由撰稿", "en": "Freelance Writing", "zh_d": "为企业和个人提供文案、博客、白皮书等写作服务。", "en_d": "Copywriting, blogging, white papers for businesses and individuals."}, {"zh": "翻译服务", "en": "Translation Services", "zh_d": "多语言翻译和本地化服务，以语言能力和专业知识为核心。", "en_d": "Multilingual translation and localization services, with language skills and expertise at the core."}, {"zh": "在线咨询", "en": "Online Consulting", "zh_d": "管理、战略、财务等领域的在线咨询服务，以专业知识为资产。", "en_d": "Management, strategy, and financial consulting delivered online, with expertise as the asset."}, {"zh": "远程办公工具", "en": "Remote Work Tools", "zh_d": "为分布式团队提供协作、沟通和项目管理工具的软件开发。", "en_d": "Software tools for collaboration, communication, and project management for distributed teams."}, {"zh": "数字出版", "en": "Digital Publishing", "zh_d": "电子书、数字杂志、在线新闻等数字内容出版发行。", "en_d": "E-books, digital magazines, online news publishing and distribution."}, {"zh": "音乐流媒体", "en": "Music Streaming", "zh_d": "数字音乐分发和流媒体平台，以版权和用户为基础。", "en_d": "Digital music distribution and streaming platforms, built on rights and users."}, {"zh": "游戏开发", "en": "Game Development", "zh_d": "电子游戏的开发和发行，以创意、代码和IP为核心资产。", "en_d": "Video game development and publishing, with creativity, code, and IP as core assets."}, {"zh": "电子竞技", "en": "E-sports", "zh_d": "竞技游戏赛事运营、直播和商业化，以赛事IP和观众为基础。", "en_d": "Competitive gaming events, livestreaming, and monetization, built on event IP and audiences."}, {"zh": "虚拟现实内容", "en": "VR Content", "zh_d": "虚拟现实体验和内容的开发，应用于娱乐、教育和培训。", "en_d": "Virtual reality experience and content development for entertainment, education, and training."}, {"zh": "增强现实应用", "en": "AR Applications", "zh_d": "增强现实应用开发，融合数字信息与物理世界。", "en_d": "Augmented reality app development, blending digital information with the physical world."}, {"zh": "物联网解决方案", "en": "IoT Solutions", "zh_d": "为智能家居、工业、城市等提供物联网平台和解决方案。", "en_d": "IoT platforms and solutions for smart homes, industry, and cities."}, {"zh": "智能家居软件", "en": "Smart Home Software", "zh_d": "智能家居控制和管理软件，连接各类智能设备。", "en_d": "Smart home control and management software, connecting various smart devices."}, {"zh": "金融科技", "en": "Fintech", "zh_d": "利用技术创新金融服务，包括支付、借贷、投资等领域的数字化。", "en_d": "Technology-driven financial innovation, including digital payments, lending, and investing."}, {"zh": "支付技术", "en": "Payment Technology", "zh_d": "数字支付解决方案和支付网关开发，以技术和合规为核心。", "en_d": "Digital payment solutions and gateway development, centered on technology and compliance."}, {"zh": "保险科技", "en": "Insurtech", "zh_d": "利用技术革新保险产品定价、核保和理赔流程。", "en_d": "Technology-driven innovation in insurance pricing, underwriting, and claims."}, {"zh": "财富管理平台", "en": "Wealth Management Platform", "zh_d": "数字化财富管理和智能投顾平台，以算法和数据为核心。", "en_d": "Digital wealth management and robo-advisory platforms, powered by algorithms and data."}, {"zh": "P2P借贷平台", "en": "P2P Lending Platform", "zh_d": "点对点借贷平台，以信用评估算法和风控模型为核心资产。", "en_d": "Peer-to-peer lending platforms, with credit algorithms and risk models as core assets."}, {"zh": "众筹平台", "en": "Crowdfunding Platform", "zh_d": "为创意项目和初创企业提供众筹融资平台，以社区和信任为基础。", "en_d": "Crowdfunding platforms for creative projects and startups, built on community and trust."}, {"zh": "数字资产管理", "en": "Digital Asset Management", "zh_d": "管理数字图片、视频、文档等数字资产的软件平台。", "en_d": "Software platforms for managing digital images, videos, and documents."}, {"zh": "加密货币交易", "en": "Cryptocurrency Trading", "zh_d": "数字资产交易平台和做市服务，以技术和流动性为核心。", "en_d": "Digital asset trading platforms and market-making services, centered on technology and liquidity."}, {"zh": "NFT市场", "en": "NFT Marketplace", "zh_d": "非同质化代币的创作、交易和展示平台，连接创作者和收藏者。", "en_d": "NFT creation, trading, and display platforms, connecting creators and collectors."}, {"zh": "DeFi协议", "en": "DeFi Protocols", "zh_d": "去中心化金融协议，提供借贷、交易、衍生品等金融服务，以智能合约为核心。", "en_d": "Decentralized finance protocols for lending, trading, and derivatives, powered by smart contracts."}, {"zh": "元宇宙平台", "en": "Metaverse Platform", "zh_d": "构建虚拟世界和数字空间，以3D内容和虚拟经济为核心。", "en_d": "Building virtual worlds and digital spaces, centered on 3D content and virtual economies."}, {"zh": "数字身份验证", "en": "Digital Identity Verification", "zh_d": "提供KYC、身份认证和反欺诈解决方案，以技术为核心资产。", "en_d": "KYC, identity authentication, and anti-fraud solutions, with technology as the core asset."}, {"zh": "在线医疗", "en": "Telemedicine", "zh_d": "远程医疗咨询和诊断平台，连接医生和患者。", "en_d": "Remote medical consultation and diagnosis platforms, connecting doctors and patients."}, {"zh": "健康管理APP", "en": "Health Management App", "zh_d": "个人健康数据管理和追踪应用，以数据和算法为核心。", "en_d": "Personal health data management and tracking apps, powered by data and algorithms."}, {"zh": "心理健康平台", "en": "Mental Health Platform", "zh_d": "在线心理咨询和心理健康管理平台，以专业服务为核心。", "en_d": "Online psychological counseling and mental health management platforms."}, {"zh": "健身应用", "en": "Fitness App", "zh_d": "数字化健身指导和运动追踪应用，以内容和社区为核心。", "en_d": "Digital fitness guidance and exercise tracking apps, centered on content and community."}, {"zh": "营养咨询", "en": "Nutrition Consulting", "zh_d": "在线营养评估和饮食指导服务，以专业知识为核心资产。", "en_d": "Online nutrition assessment and dietary guidance services, with expertise as the core asset."}, {"zh": "远程诊疗", "en": "Remote Diagnosis", "zh_d": "利用AI和远程技术辅助医疗诊断，以提高诊断效率。", "en_d": "AI and remote technology-assisted medical diagnosis, improving diagnostic efficiency."}, {"zh": "医疗数据分析", "en": "Medical Data Analytics", "zh_d": "分析医疗数据以改善诊疗效果和运营效率。", "en_d": "Analyzing medical data to improve treatment outcomes and operational efficiency."}, {"zh": "电子处方", "en": "E-prescription", "zh_d": "数字化处方开具和管理系统，提高用药安全性和效率。", "en_d": "Digital prescription creation and management systems, improving medication safety and efficiency."}, {"zh": "药品追溯系统", "en": "Drug Traceability System", "zh_d": "利用区块链等技术实现药品全生命周期追溯。", "en_d": "Blockchain-based drug lifecycle traceability systems."}, {"zh": "在线法律咨询", "en": "Online Legal Consulting", "zh_d": "通过数字平台提供法律咨询和文书服务，以专业知识为核心。", "en_d": "Legal consultation and document services via digital platforms, with expertise at the core."}, {"zh": "知识产权服务", "en": "IP Services", "zh_d": "专利、商标、版权的申请、管理和交易服务。", "en_d": "Patent, trademark, and copyright application, management, and trading services."}, {"zh": "合同管理平台", "en": "Contract Management Platform", "zh_d": "数字化合同生命周期管理系统，以流程优化为核心。", "en_d": "Digital contract lifecycle management systems, centered on process optimization."}, {"zh": "在线仲裁", "en": "Online Arbitration", "zh_d": "通过数字平台提供争议解决和仲裁服务。", "en_d": "Dispute resolution and arbitration services via digital platforms."}, {"zh": "企业合规咨询", "en": "Compliance Consulting", "zh_d": "为企业提供法规合规评估和咨询服务，以专业知识为资产。", "en_d": "Regulatory compliance assessment and consulting for enterprises, with expertise as the asset."}, {"zh": "人力资源科技", "en": "HR Tech", "zh_d": "数字化人力资源管理工具，包括招聘、培训、绩效等。", "en_d": "Digital human resource management tools, including recruitment, training, and performance."}, {"zh": "招聘平台", "en": "Recruitment Platform", "zh_d": "在线人才招聘和匹配平台，以算法和数据为核心。", "en_d": "Online talent recruitment and matching platforms, powered by algorithms and data."}, {"zh": "在线培训", "en": "Online Training", "zh_d": "企业员工在线培训和技能提升平台。", "en_d": "Online training and skill development platforms for enterprise employees."}, {"zh": "企业学习管理系统", "en": "LMS (Learning Management System)", "zh_d": "管理企业培训内容、学员进度和效果评估的系统。", "en_d": "Systems managing enterprise training content, learner progress, and effectiveness evaluation."}, {"zh": "绩效管理软件", "en": "Performance Management Software", "zh_d": "数字化员工绩效目标设定、跟踪和评估工具。", "en_d": "Digital employee performance goal-setting, tracking, and evaluation tools."}, {"zh": "员工福利平台", "en": "Employee Benefits Platform", "zh_d": "数字化员工福利管理和灵活福利选择平台。", "en_d": "Digital employee benefits management and flexible benefits selection platforms."}, {"zh": "供应链管理软件", "en": "Supply Chain Management Software", "zh_d": "数字化供应链可视化、协同和优化平台。", "en_d": "Digital supply chain visibility, collaboration, and optimization platforms."}, {"zh": "仓储管理系统", "en": "WMS (Warehouse Management System)", "zh_d": "数字化仓库运营管理，提高仓储效率。", "en_d": "Digital warehouse operations management, improving storage efficiency."}, {"zh": "物流优化平台", "en": "Logistics Optimization", "zh_d": "利用算法优化物流路线、调度和成本。", "en_d": "Algorithm-based logistics route, dispatch, and cost optimization."}, {"zh": "最后一公里配送", "en": "Last-mile Delivery Tech", "zh_d": "末端配送技术解决方案，包括无人配送和智能柜。", "en_d": "Last-mile delivery technology solutions, including autonomous delivery and smart lockers."}, {"zh": "冷链追踪", "en": "Cold Chain Tracking", "zh_d": "冷链物流温度监控和追溯系统，保障食品安全。", "en_d": "Cold chain logistics temperature monitoring and traceability systems for food safety."}, {"zh": "智能客服", "en": "AI Customer Service", "zh_d": "基于AI的自动客服系统，以自然语言处理技术为核心。", "en_d": "AI-powered automated customer service systems, centered on NLP technology."}, {"zh": "CRM系统", "en": "CRM System", "zh_d": "客户关系管理系统，以数据和流程为核心资产。", "en_d": "Customer relationship management systems, with data and processes as core assets."}, {"zh": "ERP系统", "en": "ERP System", "zh_d": "企业资源计划系统，整合企业各业务模块的数据和流程。", "en_d": "Enterprise resource planning systems, integrating data and processes across business modules."}, {"zh": "项目管理工具", "en": "Project Management Tools", "zh_d": "团队协作和项目进度管理工具，以流程和方法论为核心。", "en_d": "Team collaboration and project progress management tools, centered on processes and methodology."}, {"zh": "协作平台", "en": "Collaboration Platform", "zh_d": "团队文档协作、即时通讯和视频会议的综合平台。", "en_d": "Comprehensive platforms for team document collaboration, instant messaging, and video conferencing."}, {"zh": "文档管理", "en": "Document Management", "zh_d": "企业文档的创建、存储、版本控制和共享管理。", "en_d": "Enterprise document creation, storage, version control, and sharing management."}, {"zh": "电子签名", "en": "E-signature", "zh_d": "数字签名和电子合同签署平台，以法律效力和技术为核心。", "en_d": "Digital signature and electronic contract signing platforms, centered on legal validity and technology."}, {"zh": "在线会议", "en": "Video Conferencing", "zh_d": "视频会议和远程协作平台，以音视频技术为核心。", "en_d": "Video conferencing and remote collaboration platforms, centered on audio-video technology."}, {"zh": "即时通讯", "en": "Instant Messaging", "zh_d": "企业级即时通讯工具，以消息处理技术为核心。", "en_d": "Enterprise-grade instant messaging tools, centered on messaging technology."}, {"zh": "社区平台", "en": "Community Platform", "zh_d": "垂直领域在线社区和论坛，以用户生成内容和社区氛围为核心。", "en_d": "Vertical online communities and forums, built on user-generated content and community culture."}, {"zh": "内容管理系统", "en": "CMS (Content Management System)", "zh_d": "网站和数字内容的创建、编辑和发布管理系统。", "en_d": "Systems for creating, editing, and publishing website and digital content."}, {"zh": "搜索引擎优化", "en": "SEO Services", "zh_d": "提升网站在搜索引擎中排名的技术和服务，以方法论为核心。", "en_d": "Technical services to improve website search engine rankings, centered on methodology."}, {"zh": "搜索引擎营销", "en": "SEM", "zh_d": "搜索引擎广告投放和优化服务，以数据和策略为核心。", "en_d": "Search engine advertising and optimization services, centered on data and strategy."}, {"zh": "影响者营销", "en": "Influencer Marketing", "zh_d": "连接品牌与KOL/KOC的营销平台，以影响力和数据为核心。", "en_d": "Platforms connecting brands with KOLs/KOCs, centered on influence and data."}, {"zh": "联盟营销", "en": "Affiliate Marketing", "zh_d": "按效果付费的联盟营销网络和平台。", "en_d": "Performance-based affiliate marketing networks and platforms."}, {"zh": "程序化广告", "en": "Programmatic Advertising", "zh_d": "自动化数字广告投放技术，以算法和数据为核心。", "en_d": "Automated digital ad buying technology, powered by algorithms and data."}, {"zh": "品牌咨询", "en": "Brand Consulting", "zh_d": "品牌定位、视觉识别和策略咨询服务，以专业知识为核心。", "en_d": "Brand positioning, visual identity, and strategy consulting, with expertise at the core."}, {"zh": "公关服务", "en": "PR Services", "zh_d": "企业公关策略和媒体关系管理服务。", "en_d": "Corporate PR strategy and media relations management services."}, {"zh": "市场调研", "en": "Market Research", "zh_d": "利用数字工具进行市场调研和数据分析服务。", "en_d": "Market research and data analysis services using digital tools."}, {"zh": "用户调研", "en": "User Research", "zh_d": "数字产品用户行为研究和体验测试服务。", "en_d": "User behavior research and experience testing for digital products."}, {"zh": "数据可视化", "en": "Data Visualization", "zh_d": "将数据转化为可视化图表和仪表盘的工具和服务。", "en_d": "Tools and services transforming data into visual charts and dashboards."}, {"zh": "商业智能", "en": "Business Intelligence", "zh_d": "企业数据分析和决策支持平台，以数据管道和模型为核心。", "en_d": "Enterprise data analysis and decision support platforms, built on data pipelines and models."}, {"zh": "预测分析", "en": "Predictive Analytics", "zh_d": "利用历史数据预测未来趋势的分析服务，以模型为核心。", "en_d": "Analytical services using historical data to predict future trends, centered on models."}, {"zh": "机器学习平台", "en": "ML Platform", "zh_d": "提供模型训练、部署和管理的机器学习平台服务。", "en_d": "Machine learning platforms for model training, deployment, and management."}, {"zh": "自然语言处理", "en": "NLP Services", "zh_d": "文本分析、语义理解和语言生成服务，以模型为核心资产。", "en_d": "Text analysis, semantic understanding, and language generation services, with models as core assets."}, {"zh": "计算机视觉", "en": "Computer Vision", "zh_d": "图像和视频识别、分析服务，以算法和数据为核心。", "en_d": "Image and video recognition and analysis services, centered on algorithms and data."}, {"zh": "语音识别", "en": "Speech Recognition", "zh_d": "语音转文字和语音指令识别技术，以声学模型为核心。", "en_d": "Speech-to-text and voice command recognition technology, with acoustic models at the core."}, {"zh": "聊天机器人", "en": "Chatbot", "zh_d": "智能对话机器人开发和服务，以NLP和对话管理为核心。", "en_d": "Intelligent conversational bot development and services, centered on NLP and dialog management."}, {"zh": "推荐系统", "en": "Recommendation System", "zh_d": "个性化内容推荐引擎，以协同过滤和深度学习为核心。", "en_d": "Personalized content recommendation engines, centered on collaborative filtering and deep learning."}, {"zh": "个人理财APP", "en": "Personal Finance App", "zh_d": "个人收支管理和理财规划应用，以数据和算法为核心。", "en_d": "Personal income, expense management, and financial planning apps, powered by data and algorithms."}, {"zh": "记账软件", "en": "Accounting Software", "zh_d": "中小企业和个人数字化记账和财务管理工具。", "en_d": "Digital bookkeeping and financial management tools for SMEs and individuals."}, {"zh": "税务计算工具", "en": "Tax Calculation Tool", "zh_d": "自动化税务计算和申报工具，以法规数据库为核心。", "en_d": "Automated tax calculation and filing tools, with regulatory databases at the core."}, {"zh": "发票管理系统", "en": "Invoice Management", "zh_d": "电子发票开具、管理和归档系统。", "en_d": "Electronic invoice creation, management, and archiving systems."}, {"zh": "预算管理", "en": "Budget Management", "zh_d": "企业和个人预算编制、执行和监控工具。", "en_d": "Enterprise and personal budget planning, execution, and monitoring tools."}, {"zh": "投资组合管理", "en": "Portfolio Management", "zh_d": "数字资产投资组合管理和优化工具，以分析模型为核心。", "en_d": "Digital asset portfolio management and optimization tools, centered on analytical models."}];
+const QA_PAIRS = [{"zh_q": "什么是EACO？", "en_q": "What is EACO?", "zh_a": "EACO（Earth's best Coin）是运行在Solana区块链上的数字资产，旨在赋能全球轻资产行业，推动去中心化经济发展。EACO代表Energy（能量）、Attitude（态度）、Cooperation（合作）、Optimization（优化）四大核心理念。", "en_a": "EACO (Earth's best Coin) is a digital asset running on the Solana blockchain, designed to empower global light-asset industries and promote decentralized economic development. EACO represents four core concepts: Energy, Attitude, Cooperation, and Optimization."}, {"zh_q": "EACO如何赋能轻资产行业？", "en_q": "How does EACO empower light-asset industries?", "zh_a": "EACO通过区块链技术为轻资产行业提供去中心化支付、智能合约自动化、全球流动性支持和社区治理机制，降低交易成本，提升效率，并创造新的价值分配模式。", "en_a": "EACO provides light-asset industries with decentralized payments, smart contract automation, global liquidity support, and community governance through blockchain technology, reducing transaction costs, improving efficiency, and creating new value distribution models."}, {"zh_q": "哪些轻资产行业最适合结合EACO？", "en_q": "Which light-asset industries are most suitable for EACO integration?", "zh_a": "数字内容创作、SaaS服务、跨境电商、在线教育、金融科技、游戏开发、NFT市场和DeFi协议等行业天然适合EACO，因为它们本身就是数字化的，与区块链技术高度契合。", "en_a": "Digital content creation, SaaS, cross-border e-commerce, online education, fintech, game development, NFT marketplaces, and DeFi protocols are naturally suited for EACO, as they are already digital and highly compatible with blockchain technology."}, {"zh_q": "SaaS公司如何使用EACO？", "en_q": "How can SaaS companies use EACO?", "zh_a": "SaaS公司可以接受EACO作为订阅支付方式，利用智能合约自动执行订阅和续费逻辑，还可以通过EACO代币激励用户推荐和社区贡献，构建去中心化的用户增长飞轮。", "en_a": "SaaS companies can accept EACO for subscription payments, use smart contracts for automated subscription and renewal logic, and incentivize user referrals and community contributions through EACO tokens, building a decentralized growth flywheel."}, {"zh_q": "EACO可以用于跨境电商吗？", "en_q": "Can EACO be used for cross-border e-commerce?", "zh_a": "完全可以。EACO基于Solana区块链，交易速度快、费用低，非常适合跨境支付场景。商家可以接受EACO支付，买家无需担心汇率波动和高额手续费，实现真正的全球化贸易。", "en_a": "Absolutely. EACO is built on Solana blockchain with fast transaction speeds and low fees, making it ideal for cross-border payments. Merchants can accept EACO, and buyers avoid exchange rate volatility and high fees, enabling truly global trade."}, {"zh_q": "EACO如何帮助数字内容创作者？", "en_q": "How does EACO help digital content creators?", "zh_a": "EACO为内容创作者提供直接变现途径，无需依赖平台分成。创作者可以发行NFT、接受EACO打赏、建立付费社区，实现内容的价值确权和去中介化分发。", "en_a": "EACO provides creators with direct monetization without platform cuts. Creators can mint NFTs, accept EACO tips, and build paid communities, achieving content rights verification and disintermediated distribution."}, {"zh_q": "在线教育平台如何整合EACO？", "en_q": "How can online education platforms integrate EACO?", "zh_a": "教育平台可用EACO作为课程支付货币，通过智能合约发放学历认证NFT，建立链上学分系统，并激励优质内容创作者，打造去中心化的知识经济生态。", "en_a": "Education platforms can use EACO for course payments, issue credential NFTs via smart contracts, build on-chain credit systems, and incentivize quality content creators, creating a decentralized knowledge economy."}, {"zh_q": "EACO在金融科技领域有什么应用？", "en_q": "What are EACO's applications in fintech?", "zh_a": "EACO可以用于去中心化借贷、跨境汇款、支付清算、资产代币化等场景。其Solana链上的高速低费特性使其成为微支付和高频交易的理想选择。", "en_a": "EACO can be used for decentralized lending, cross-border remittances, payment clearing, and asset tokenization. Its high-speed, low-cost nature on Solana makes it ideal for micro-payments and high-frequency trading."}, {"zh_q": "游戏开发者如何利用EACO？", "en_q": "How can game developers leverage EACO?", "zh_a": "游戏开发者可以将EACO作为游戏内经济系统的流通货币，发行游戏资产NFT，建立玩家间的去中心化交易市场，并通过代币激励玩家参与和贡献，打造Play-to-Earn生态。", "en_a": "Game developers can use EACO as in-game currency, mint game asset NFTs, build decentralized player-to-player markets, and incentivize participation through tokens, creating a Play-to-Earn ecosystem."}, {"zh_q": "EACO与DeFi协议如何结合？", "en_q": "How does EACO integrate with DeFi protocols?", "zh_a": "EACO可以作为DeFi协议中的抵押资产、流动性池代币或治理代币。用户可以在Meteora、Raydium等平台上提供EACO流动性，赚取交易手续费收益。", "en_a": "EACO can serve as collateral, liquidity pool token, or governance token in DeFi protocols. Users can provide EACO liquidity on platforms like Meteora and Raydium to earn trading fee rewards."}, {"zh_q": "EACO的交易速度和费用如何？", "en_q": "What are EACO's transaction speed and fees?", "zh_a": "EACO运行在Solana区块链上，理论峰值可达每秒65,000笔交易，平均交易费用低于0.01美元，远优于以太坊等传统区块链，非常适合轻资产行业的高频微支付需求。", "en_a": "EACO runs on Solana blockchain with theoretical peaks of 65,000 TPS and average fees below $0.01, far superior to Ethereum and other traditional blockchains, ideal for high-frequency micro-payments in light-asset industries."}, {"zh_q": "如何购买EACO？", "en_q": "How to buy EACO?", "zh_a": "EACO可以通过多个去中心化交易所购买，包括Meteora、Raydium、Orca、PancakeSwap和Uniswap等。用户需要先准备SOL或USDC/USDT，然后在上述平台的流动性池中兑换EACO。", "en_a": "EACO can be purchased on multiple DEXs including Meteora, Raydium, Orca, PancakeSwap, and Uniswap. Users need SOL or USDC/USDT to swap for EACO in the liquidity pools."}, {"zh_q": "EACO的代币合约地址是什么？", "en_q": "What is EACO's token contract address?", "zh_a": "EACO在Solana链上的合约地址（CA）为：DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH。用户在交易前请务必核对此地址，防范假冒代币。", "en_a": "EACO's contract address (CA) on Solana is: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH. Always verify this address before trading to avoid fake tokens."}, {"zh_q": "EACO如何支持远程办公工具行业？", "en_q": "How does EACO support the remote work tools industry?", "zh_a": "远程办公工具可以集成EACO支付实现按使用付费，利用智能合约管理团队协作激励，并通过链上记录确保工作成果的透明性和可追溯性，为分布式团队提供信任基础。", "en_a": "Remote work tools can integrate EACO for pay-per-use, use smart contracts for team collaboration incentives, and ensure work output transparency and traceability through on-chain records, providing a trust foundation for distributed teams."}, {"zh_q": "EACO对数字营销行业有什么价值？", "en_q": "What value does EACO bring to digital marketing?", "zh_a": "EACO可以实现透明的广告投放追踪、按效果自动结算的联盟营销、去中心化的影响者营销支付，减少中间商抽成，让广告主和创作者直接受益。", "en_a": "EACO enables transparent ad tracking, performance-based affiliate marketing settlements, and decentralized influencer payments, reducing intermediary cuts and benefiting advertisers and creators directly."}, {"zh_q": "如何使用EACO进行量化交易？", "en_q": "How to use EACO for quantitative trading?", "zh_a": "量化机器人可以在Meteora、Raydium等DEX的EACO流动性池中进行做市和套利交易。使用5000-50,000 SOL/USDC/USDT规模的资金，通过自动化策略赚取买卖价差和流动性提供收益。", "en_a": "Quantitative robots can perform market-making and arbitrage in EACO liquidity pools on DEXs like Meteora and Raydium. Using 5,000-50,000 SOL/USDC/USDT capital, automated strategies can earn spreads and liquidity provision rewards."}, {"zh_q": "EACO如何应用于在线医疗？", "en_q": "How is EACO applied in telemedicine?", "zh_a": "在线医疗平台可使用EACO支付诊疗费用，通过智能合约管理患者隐私授权，将医疗记录哈希上链确保不可篡改，并建立去中心化的医生评价和激励机制。", "en_a": "Telemedicine platforms can use EACO for consultation payments, manage patient privacy authorization via smart contracts, hash medical records on-chain for immutability, and build decentralized doctor rating and incentive systems."}, {"zh_q": "EACO对NFT市场有什么影响？", "en_q": "What impact does EACO have on the NFT marketplace?", "zh_a": "EACO可以作为NFT交易的计价和结算货币，降低NFT交易的Gas费用。创作者可以用EACO定价NFT，买家用EACO购买，实现更低成本、更高效率的数字资产交易。", "en_a": "EACO can serve as the pricing and settlement currency for NFT trades, reducing gas costs. Creators can price NFTs in EACO and buyers pay in EACO, achieving lower-cost, higher-efficiency digital asset trading."}, {"zh_q": "EACO如何帮助中小企业数字化转型？", "en_q": "How does EACO help SMEs with digital transformation?", "zh_a": "EACO为中小企业提供低成本的数字支付解决方案，无需传统银行账户即可参与全球贸易。智能合约可自动化合同执行和供应链管理，区块链技术确保数据透明和可信。", "en_a": "EACO provides SMEs with low-cost digital payment solutions, enabling global trade without traditional bank accounts. Smart contracts automate contract execution and supply chain management, while blockchain ensures data transparency and trust."}, {"zh_q": "EACO在供应链管理中有什么作用？", "en_q": "What role does EACO play in supply chain management?", "zh_a": "EACO和区块链技术可实现供应链全流程可追溯，从原材料到最终产品的每个环节都记录在链上。智能合约自动执行付款条件，减少纠纷，提高供应链效率。", "en_a": "EACO and blockchain technology enable end-to-end supply chain traceability, recording every step from raw materials to final products on-chain. Smart contracts auto-execute payment terms, reducing disputes and improving efficiency."}, {"zh_q": "EACO如何支持开源软件生态？", "en_q": "How does EACO support the open source software ecosystem?", "zh_a": "EACO可以建立去中心化的开源贡献激励机制，开发者通过代码贡献获得EACO奖励，社区通过代币投票决定项目方向，实现可持续的开源商业模式。", "en_a": "EACO can establish decentralized open-source contribution incentives, where developers earn EACO for code contributions and communities vote on project direction via tokens, achieving sustainable open-source business models."}, {"zh_q": "EACO与元宇宙有什么关系？", "en_q": "What is the relationship between EACO and the metaverse?", "zh_a": "EACO可以作为元宇宙中的通用货币，用于购买虚拟土地、数字商品和服务。其Solana链上的高速交易能力适合元宇宙中高频、小额的虚拟经济交互。", "en_a": "EACO can serve as a universal currency in the metaverse for purchasing virtual land, digital goods, and services. Its high-speed Solana transactions suit the high-frequency, micro-value virtual economy interactions."}, {"zh_q": "EACO如何应用于HR科技？", "en_q": "How is EACO applied in HR tech?", "zh_a": "HR科技平台可使用EACO发放跨境薪资、管理员工激励代币、验证链上学历和技能认证。智能合约可自动执行绩效奖励和股权激励，降低HR管理成本。", "en_a": "HR tech platforms can use EACO for cross-border payroll, manage employee incentive tokens, and verify on-chain credentials. Smart contracts auto-execute performance bonuses and equity incentives, reducing HR management costs."}, {"zh_q": "EACO对法律科技有什么影响？", "en_q": "What impact does EACO have on legal tech?", "zh_a": "EACO可用于在线法律服务的支付和智能合约存证。电子合同的关键条款可以编码为智能合约自动执行，区块链上的不可篡改记录为法律纠纷提供可靠证据。", "en_a": "EACO can be used for online legal service payments and smart contract evidence. Key contract terms can be coded as auto-executing smart contracts, with immutable blockchain records providing reliable evidence for legal disputes."}, {"zh_q": "EACO如何支持社区平台运营？", "en_q": "How does EACO support community platform operations?", "zh_a": "社区平台可使用EACO建立代币经济系统，优质内容创作者获得EACO奖励，用户用EACO解锁高级内容或服务。代币持有者可参与社区治理投票，形成去中心化自治组织（DAO）。", "en_a": "Community platforms can use EACO to build token economics, rewarding quality content creators with EACO, and unlocking premium content with EACO. Token holders participate in governance votes, forming a DAO."}, {"zh_q": "EACO在保险科技领域的应用前景？", "en_q": "What are EACO's prospects in insurtech?", "zh_a": "EACO可实现去中心化保险产品的保费支付和理赔自动化。智能合约根据预设条件自动触发理赔，减少人为干预和欺诈风险，降低保险运营成本。", "en_a": "EACO enables decentralized insurance premium payments and automated claims. Smart contracts trigger payouts based on preset conditions, reducing human intervention, fraud risk, and operational costs."}, {"zh_q": "如何参与EACO社区？", "en_q": "How to participate in the EACO community?", "zh_a": "你可以通过X(Twitter) @eacocc 和 Telegram @e_eacocc 加入EACO社区。作为志愿者参与社区建设、内容创作、技术开发或推广宣传，共同推动EACO生态发展。", "en_a": "Join the EACO community via X (Twitter) @eacocc and Telegram @e_eacocc. Participate as a volunteer in community building, content creation, development, or promotion to advance the EACO ecosystem."}, {"zh_q": "EACO的流动性如何？", "en_q": "How is EACO's liquidity?", "zh_a": "EACO已在Meteora（两个DLMM池）、Raydium、Orca、PancakeSwap、Uniswap等多个主流DEX上线流动性池，海外流动性持续增长。用户可在这些平台自由买卖EACO。", "en_a": "EACO has liquidity pools on multiple major DEXs including Meteora (two DLMM pools), Raydium, Orca, PancakeSwap, and Uniswap, with growing overseas liquidity. Users can freely trade EACO on these platforms."}, {"zh_q": "EACO如何应用于电子竞技？", "en_q": "How is EACO applied in e-sports?", "zh_a": "EACO可用于电竞赛事奖金池、选手薪资、粉丝打赏和赛事竞猜。区块链确保奖金分配透明公正，智能合约自动执行赛事奖励发放，粉丝可直接支持喜爱的选手。", "en_a": "EACO can be used for e-sports prize pools, player salaries, fan tipping, and event predictions. Blockchain ensures transparent prize distribution, smart contracts auto-execute rewards, and fans can directly support favorite players."}, {"zh_q": "EACO对音乐流媒体行业的影响？", "en_q": "What is EACO's impact on the music streaming industry?", "zh_a": "EACO可以让音乐人直接获得粉丝的EACO打赏和NFT销售收入，绕过传统流媒体平台的高额分成。智能合约自动分配版税给所有参与者，实现公平的音乐价值分配。", "en_a": "EACO enables musicians to receive direct EACO tips and NFT sales revenue, bypassing traditional streaming platform cuts. Smart contracts auto-distribute royalties to all participants, achieving fair music value distribution."}, {"zh_q": "EACO如何应用于智能客服？", "en_q": "How is EACO applied in AI customer service?", "zh_a": "智能客服平台可使用EACO作为服务计费货币，按对话次数或问题解决率自动结算。AI训练数据贡献者可获得EACO奖励，激励高质量数据标注和模型优化。", "en_a": "AI customer service platforms can use EACO for service billing, auto-settling per conversation or resolution rate. AI training data contributors earn EACO rewards, incentivizing quality data labeling and model optimization."}, {"zh_q": "EACO对数据可视化行业的价值？", "en_q": "What value does EACO bring to data visualization?", "zh_a": "数据可视化平台可使用EACO实现数据市场的去中心化交易，数据提供者通过EACO获得报酬，数据使用者在链上留下可追溯的访问记录，保护数据权益。", "en_a": "Data visualization platforms can use EACO for decentralized data marketplace trading, where data providers earn EACO and data consumers leave traceable on-chain access records, protecting data rights."}, {"zh_q": "EACO如何应用于健康管理？", "en_q": "How is EACO applied in health management?", "zh_a": "健康管理APP可使用EACO激励用户坚持健康行为，如运动达标获得EACO奖励。健康数据可加密存储在链上，用户自主控制数据授权和变现。", "en_a": "Health management apps can use EACO to incentivize healthy behaviors, rewarding exercise milestones with EACO. Health data can be encrypted on-chain, with users controlling data authorization and monetization."}, {"zh_q": "EACO对低代码/无代码平台的意义？", "en_q": "What does EACO mean for low-code/no-code platforms?", "zh_a": "低代码平台可集成EACO支付实现按使用量计费，开发者可通过发布模板和组件获得EACO收益，社区通过代币投票筛选优质模板，形成去中心化的应用开发生态。", "en_a": "Low-code platforms can integrate EACO for usage-based billing, developers earn EACO from publishing templates and components, and the community votes on quality templates via tokens, forming a decentralized app development ecosystem."}, {"zh_q": "EACO如何应用于数字身份验证？", "en_q": "How is EACO applied in digital identity verification?", "zh_a": "EACO生态中的数字身份验证服务可使用链上DID（去中心化身份），用户通过EACO支付验证费用，验证记录不可篡改地存储在Solana区块链上，保护隐私的同时确保可信。", "en_a": "Digital identity verification in the EACO ecosystem can use on-chain DID (decentralized identity), where users pay verification fees in EACO and records are immutably stored on Solana, ensuring privacy and trust."}, {"zh_q": "EACO对预测分析行业有什么帮助？", "en_q": "How does EACO help the predictive analytics industry?", "zh_a": "预测分析平台可建立去中心化预测市场，参与者用EACO押注预测结果，准确预测者获得EACO奖励。这种机制汇聚群体智慧，提高预测准确性。", "en_a": "Predictive analytics platforms can build decentralized prediction markets where participants stake EACO on outcomes and accurate predictors earn rewards, aggregating collective wisdom to improve prediction accuracy."}, {"zh_q": "EACO如何应用于电子签名？", "en_q": "How is EACO applied in e-signature?", "zh_a": "电子签名平台可使用EACO作为签署服务费，签名后的文件哈希上链存证，确保签署时间和内容的不可篡改性。智能合约可自动执行合同条款，如到期自动触发付款。", "en_a": "E-signature platforms can use EACO for signing service fees, with signed document hashes recorded on-chain for immutability. Smart contracts can auto-execute contract terms, such as triggering payments on expiry."}, {"zh_q": "EACO如何支持自由职业者经济？", "en_q": "How does EACO support the freelancer economy?", "zh_a": "自由职业者可使用EACO接收跨境付款，避免高额汇款手续费。智能合约托管机制确保工作完成后自动释放付款，保护双方权益，建立信任。", "en_a": "Freelancers can use EACO for cross-border payments, avoiding high remittance fees. Smart contract escrow ensures automatic payment release upon work completion, protecting both parties and building trust."}, {"zh_q": "EACO对推荐系统的价值？", "en_q": "What value does EACO bring to recommendation systems?", "zh_a": "推荐系统可使用EACO激励用户提供高质量反馈数据，用户通过评价和标注获得EACO奖励。去中心化的数据收集避免了平台垄断，算法优化更加公平透明。", "en_a": "Recommendation systems can use EACO to incentivize quality feedback data, rewarding users for reviews and annotations. Decentralized data collection avoids platform monopoly, making algorithm optimization fairer and more transparent."}, {"zh_q": "EACO如何应用于投资组合管理？", "en_q": "How is EACO applied in portfolio management?", "zh_a": "投资组合管理工具可将EACO作为数字资产组合的一部分，提供EACO的价格追踪、风险评估和资产配置建议。用户可使用EACO支付高级分析服务费用。", "en_a": "Portfolio management tools can include EACO in digital asset portfolios, providing price tracking, risk assessment, and allocation advice. Users can pay for premium analytics services with EACO."}, {"zh_q": "EACO对市场调研行业的影响？", "en_q": "What is EACO's impact on market research?", "zh_a": "市场调研平台可使用EACO激励受访者参与调查，确保数据真实性通过链上验证。调研结果可代币化出售，数据购买者用EACO支付，实现数据资产的直接交易。", "en_a": "Market research platforms can use EACO to incentivize survey participation, verifying data authenticity on-chain. Research results can be tokenized and sold, with data buyers paying in EACO, enabling direct data asset trading."}, {"zh_q": "EACO如何应用于品牌咨询？", "en_q": "How is EACO applied in brand consulting?", "zh_a": "品牌咨询服务可使用EACO作为跨境服务支付方式，咨询成果和品牌资产可代币化为NFT，客户通过EACO购买和确权，实现品牌资产的可验证转让。", "en_a": "Brand consulting services can use EACO for cross-border payments, consulting deliverables and brand assets can be tokenized as NFTs, and clients purchase and verify ownership via EACO."}, {"zh_q": "EACO如何影响联盟营销？", "en_q": "How does EACO impact affiliate marketing?", "zh_a": "EACO使联盟营销更加透明高效——每次点击和转化都记录在链上，佣金通过智能合约自动以EACO支付，消除中间商延迟和欺诈，推广者即时获得收益。", "en_a": "EACO makes affiliate marketing more transparent and efficient — every click and conversion is recorded on-chain, commissions are auto-paid in EACO via smart contracts, eliminating intermediary delays and fraud."}, {"zh_q": "EACO对个人理财APP有什么价值？", "en_q": "What value does EACO bring to personal finance apps?", "zh_a": "个人理财APP可集成EACO作为投资和储蓄选项，用户可以定期定投EACO，设置智能合约自动执行理财计划，并通过链上记录追踪所有交易历史。", "en_a": "Personal finance apps can integrate EACO as an investment and savings option, users can dollar-cost average into EACO, set smart contracts for automated financial plans, and track all transaction history on-chain."}, {"zh_q": "EACO如何应用于影响者营销？", "en_q": "How is EACO applied in influencer marketing?", "zh_a": "影响者可通过EACO接收品牌合作报酬，粉丝可用EACO打赏支持。营销效果数据上链可追溯，智能合约根据实际转化率自动调整和释放营销预算。", "en_a": "Influencers can receive brand collaboration payments in EACO, fans can tip with EACO. Marketing effectiveness data is traceable on-chain, and smart contracts auto-adjust and release budgets based on actual conversion rates."}, {"zh_q": "EACO对网络安全咨询的影响？", "en_q": "What is EACO's impact on cybersecurity consulting?", "zh_a": "网络安全咨询服务可使用EACO进行跨境支付，安全审计报告的哈希可上链存证确保不可篡改。漏洞赏金计划可用EACO发放奖励，激励全球安全研究者参与。", "en_a": "Cybersecurity consulting services can use EACO for cross-border payments, security audit report hashes can be stored on-chain for immutability. Bug bounty programs can distribute EACO rewards, incentivizing global security researchers."}, {"zh_q": "EACO如何应用于翻译服务？", "en_q": "How is EACO applied in translation services?", "zh_a": "翻译服务平台可使用EACO进行多语言项目的跨境支付，翻译质量评价记录在链上，优秀译者获得EACO奖励，客户可用EACO按字数或项目支付。", "en_a": "Translation service platforms can use EACO for cross-border multilingual project payments, translation quality evaluations recorded on-chain, excellent translators earn EACO rewards, and clients pay per word or project in EACO."}, {"zh_q": "EACO对VR/AR内容开发的意义？", "en_q": "What does EACO mean for VR/AR content development?", "zh_a": "VR/AR内容开发者可通过EACO进行项目众筹，虚拟资产以NFT形式发行并用EACO定价交易。EACO的高速低费特性适合虚拟世界中频繁的微交易。", "en_a": "VR/AR content developers can crowdfund projects with EACO, virtual assets issued as NFTs priced and traded in EACO. EACO's high-speed, low-cost nature suits frequent micro-transactions in virtual worlds."}, {"zh_q": "EACO如何应用于播客制作？", "en_q": "How is EACO applied in podcast production?", "zh_a": "播客创作者可通过EACO接收听众打赏和订阅付费，独家电台内容可代币化为NFT出售。广告收入可通过智能合约自动分配给所有参与方。", "en_a": "Podcast creators can receive listener tips and subscription payments in EACO, exclusive content can be tokenized as NFTs, and ad revenue can be auto-distributed to all participants via smart contracts."}, {"zh_q": "EACO对程序化广告的影响？", "en_q": "What is EACO's impact on programmatic advertising?", "zh_a": "EACO可实现去中心化的程序化广告投放，广告预算以EACO锁定在智能合约中，根据实际展示和转化自动释放给媒体方。链上数据确保广告投放透明可审计。", "en_a": "EACO enables decentralized programmatic advertising, with budgets locked in smart contracts and auto-released to publishers based on actual impressions and conversions. On-chain data ensures transparent and auditable ad delivery."}, {"zh_q": "EACO如何应用于IoT解决方案？", "en_q": "How is EACO applied in IoT solutions?", "zh_a": "IoT设备可使用EACO进行机器对机器（M2M）微支付，如自动充电付费、数据交易等。区块链确保设备身份和数据交换的可信性，EACO提供高效的结算层。", "en_a": "IoT devices can use EACO for machine-to-machine (M2M) micro-payments, such as auto-charging payments and data trading. Blockchain ensures device identity and data exchange trust, with EACO providing an efficient settlement layer."}, {"zh_q": "EACO对数字出版的影响？", "en_q": "What is EACO's impact on digital publishing?", "zh_a": "数字出版可使用EACO实现按章付费、微订阅和内容打赏。出版物可发行限量NFT版本，读者用EACO购买收藏。版权信息上链确保作者权益的永久保护。", "en_a": "Digital publishing can use EACO for pay-per-chapter, micro-subscriptions, and content tipping. Publications can issue limited NFT editions purchased with EACO. Copyright information on-chain ensures permanent author rights protection."}, {"zh_q": "EACO如何应用于在线仲裁？", "en_q": "How is EACO applied in online arbitration?", "zh_a": "在线仲裁平台可使用EACO支付仲裁费用，仲裁裁决记录在链上不可篡改。智能合约可根据仲裁结果自动执行赔偿支付，提高争议解决效率。", "en_a": "Online arbitration platforms can use EACO for arbitration fees, with awards immutably recorded on-chain. Smart contracts can auto-execute compensation payments based on arbitration results, improving dispute resolution efficiency."}, {"zh_q": "EACO对招聘平台的价值？", "en_q": "What value does EACO bring to recruitment platforms?", "zh_a": "招聘平台可使用EACO发放推荐奖励，人才简历可上链验证防止造假。跨境招聘的薪资可用EACO支付，降低汇率成本。企业可用EACO悬赏招聘高端人才。", "en_a": "Recruitment platforms can use EACO for referral rewards, with resumes verified on-chain to prevent fraud. Cross-border recruitment salaries can be paid in EACO, reducing exchange rate costs. Companies can bounty recruit talent with EACO."}, {"zh_q": "EACO如何应用于企业合规咨询？", "en_q": "How is EACO applied in compliance consulting?", "zh_a": "合规咨询成果可上链存证，合规检查清单可编码为智能合约自动执行。跨境合规服务用EACO支付，确保服务记录的可追溯性和不可篡改性。", "en_a": "Compliance consulting deliverables can be stored on-chain, compliance checklists coded as auto-executing smart contracts. Cross-border compliance services paid in EACO ensure traceable and immutable service records."}, {"zh_q": "EACO对物流优化的帮助？", "en_q": "How does EACO help logistics optimization?", "zh_a": "物流优化平台可使用EACO进行运费结算和司机激励，运输数据上链确保可追溯。智能合约根据配送完成情况自动释放运费，减少结算延迟。", "en_a": "Logistics optimization platforms can use EACO for freight settlement and driver incentives, with transport data on-chain for traceability. Smart contracts auto-release freight payments upon delivery completion, reducing settlement delays."}, {"zh_q": "EACO如何应用于知识产权服务？", "en_q": "How is EACO applied in IP services?", "zh_a": "知识产权可代币化为NFT在链上确权和交易，专利和版权的申请、许可和转让记录在区块链上永久保存。EACO作为IP交易的支付和许可费结算货币。", "en_a": "Intellectual property can be tokenized as NFTs for on-chain verification and trading, with patent and copyright applications, licenses, and transfers permanently recorded on blockchain. EACO serves as the payment and licensing fee settlement currency."}, {"zh_q": "EACO对商业智能（BI）的影响？", "en_q": "What is EACO's impact on business intelligence?", "zh_a": "BI平台可使用EACO实现去中心化数据市场的交易，企业用EACO购买行业数据和洞察报告。数据质量通过链上评价系统保障，优质数据提供者获得更多EACO收益。", "en_a": "BI platforms can use EACO for decentralized data marketplace trading, where enterprises buy industry data and insight reports with EACO. Data quality is ensured through on-chain rating systems, with quality providers earning more EACO."}, {"zh_q": "EACO如何应用于绩效管理？", "en_q": "How is EACO applied in performance management?", "zh_a": "绩效管理系统可使用EACO代币作为员工激励，绩效目标达成后智能合约自动发放EACO奖励。代币持有量反映员工贡献度，可作为晋升和分红依据。", "en_a": "Performance management systems can use EACO tokens as employee incentives, with smart contracts auto-distributing EACO rewards upon goal achievement. Token holdings reflect employee contributions and can serve as promotion and dividend basis."}, {"zh_q": "EACO对计算机视觉服务的价值？", "en_q": "What value does EACO bring to computer vision services?", "zh_a": "计算机视觉服务可使用EACO进行按API调用次数计费，训练数据贡献者获得EACO奖励。模型质量通过链上评价追溯，保护数据提供者和模型开发者的权益。", "en_a": "Computer vision services can use EACO for per-API-call billing, with training data contributors earning EACO. Model quality is traceable through on-chain ratings, protecting data providers' and developers' rights."}, {"zh_q": "EACO如何应用于财富管理？", "en_q": "How is EACO applied in wealth management?", "zh_a": "财富管理平台可将EACO纳入数字资产配置方案，提供EACO相关的理财产品。智能合约自动执行资产再平衡策略，降低管理成本，提高透明度。", "en_a": "Wealth management platforms can include EACO in digital asset allocation, offering EACO-related products. Smart contracts auto-execute rebalancing strategies, reducing costs and improving transparency."}, {"zh_q": "EACO对聊天机器人的影响？", "en_q": "What is EACO's impact on chatbots?", "zh_a": "聊天机器人服务可使用EACO按对话量计费，AI训练贡献者获得EACO激励。对话质量评价上链可追溯，优质对话数据成为可交易的数字资产。", "en_a": "Chatbot services can use EACO for per-conversation billing, with AI training contributors earning EACO. Conversation quality ratings are traceable on-chain, and quality dialogue data becomes tradable digital assets."}, {"zh_q": "EACO如何应用于数字遗产管理？", "en_q": "How is EACO applied in digital legacy management?", "zh_a": "EACO本身就是数字遗产的一部分。用户可通过智能合约设置数字资产继承条件，到期自动将EACO和数字资产转移给指定继承人，确保数字财富的安全传承。", "en_a": "EACO itself is part of digital legacy. Users can set inheritance conditions via smart contracts, auto-transferring EACO and digital assets to designated heirs upon conditions, ensuring secure digital wealth inheritance."}, {"zh_q": "EACO如何支持众筹平台？", "en_q": "How does EACO support crowdfunding platforms?", "zh_a": "众筹平台可使用EACO作为众筹货币，资金通过智能合约托管，达到目标后自动释放给项目方，未达标则自动退还。链上记录确保众筹过程透明可信。", "en_a": "Crowdfunding platforms can use EACO as the crowdfunding currency, with funds escrowed in smart contracts — auto-released to projects upon reaching goals, or auto-refunded if not. On-chain records ensure transparent and trustworthy crowdfunding."}, {"zh_q": "EACO对区块链开发本身的贡献？", "en_q": "What is EACO's contribution to blockchain development itself?", "zh_a": "EACO作为Solana生态中的代币，激励开发者构建更多EACO相关的DApp和工具，形成良性生态循环。开发者通过贡献代码获得EACO资助，推动技术进步。", "en_a": "As a token in the Solana ecosystem, EACO incentivizes developers to build more EACO-related DApps and tools, forming a virtuous ecosystem cycle. Developers earn EACO grants for code contributions, driving technological progress."}, {"zh_q": "EACO如何应用于用户调研？", "en_q": "How is EACO applied in user research?", "zh_a": "用户调研平台可使用EACO激励用户参与调研，调研数据质量通过链上验证。调研结果作为数字资产用EACO定价出售，用户既是数据提供者也是受益者。", "en_a": "User research platforms can use EACO to incentivize participation, with data quality verified on-chain. Research results are priced and sold as digital assets in EACO, making users both data providers and beneficiaries."}, {"zh_q": "EACO对在线培训的价值？", "en_q": "What value does EACO bring to online training?", "zh_a": "在线培训平台可使用EACO作为课程费用支付方式，学员完成课程后获得EACO激励。培训认证以NFT形式发放，永久有效且可在链上验证。", "en_a": "Online training platforms can use EACO for course fee payments, with learners earning EACO upon course completion. Training certifications are issued as NFTs, permanently valid and verifiable on-chain."}, {"zh_q": "EACO如何应用于数据可视化？", "en_q": "How is EACO applied in data visualization?", "zh_a": "数据可视化工具可集成EACO实现模板市场的去中心化交易，设计师发布可视化模板获得EACO收入，用户用EACO购买模板使用权。", "en_a": "Data visualization tools can integrate EACO for decentralized template marketplace trading, where designers earn EACO from publishing templates and users purchase usage rights with EACO."}, {"zh_q": "EACO对语音识别技术的意义？", "en_q": "What does EACO mean for speech recognition technology?", "zh_a": "语音识别服务可用EACO按API调用计费，语音数据贡献者获得EACO奖励。去中心化的数据收集模式保护用户隐私，同时提高模型训练的数据多样性。", "en_a": "Speech recognition services can use EACO for per-API-call billing, with voice data contributors earning EACO. Decentralized data collection protects user privacy while improving model training data diversity."}, {"zh_q": "EACO如何应用于合同管理？", "en_q": "How is EACO applied in contract management?", "zh_a": "合同管理平台可将合同关键条款编码为智能合约，以EACO作为合同履约保证金和执行货币。合同签署、变更和终止记录上链，确保全过程可追溯。", "en_a": "Contract management platforms can encode key terms as smart contracts, using EACO as performance bond and execution currency. Contract signing, modification, and termination records are on-chain, ensuring full traceability."}, {"zh_q": "EACO如何影响公关服务？", "en_q": "How does EACO impact PR services?", "zh_a": "公关服务可用EACO进行跨境服务结算，媒体发布效果数据上链可验证。危机公关的响应时间和服务质量可通过链上记录进行客观评估。", "en_a": "PR services can use EACO for cross-border settlement, with media publication effectiveness data verifiable on-chain. Crisis PR response time and service quality can be objectively assessed through on-chain records."}, {"zh_q": "EACO如何应用于冷链追踪？", "en_q": "How is EACO applied in cold chain tracking?", "zh_a": "冷链追踪系统可使用EACO支付物联网传感器数据上链费用，温度异常自动触发智能合约理赔。全程数据在Solana链上记录，确保食品安全可追溯。", "en_a": "Cold chain tracking systems can use EACO to pay IoT sensor data on-chain fees, with temperature anomalies auto-triggering smart contract claims. Full data is recorded on Solana, ensuring food safety traceability."}, {"zh_q": "EACO对ERP系统的价值？", "en_q": "What value does EACO bring to ERP systems?", "zh_a": "ERP系统可集成EACO实现供应链跨境支付自动化，采购订单的付款条件编码为智能合约，到货验收后自动以EACO结算，降低企业间交易摩擦。", "en_a": "ERP systems can integrate EACO for automated cross-border supply chain payments, with purchase order payment terms encoded as smart contracts that auto-settle in EACO upon delivery acceptance, reducing inter-enterprise transaction friction."}, {"zh_q": "EACO如何应用于最后一公里配送？", "en_q": "How is EACO applied in last-mile delivery?", "zh_a": "最后一公里配送平台可使用EACO支付配送员报酬，配送完成确认后智能合约自动释放EACO。客户可用EACO支付加急配送费，配送数据上链可追溯。", "en_a": "Last-mile delivery platforms can use EACO to pay couriers, with smart contracts auto-releasing EACO upon delivery confirmation. Customers can pay express delivery fees in EACO, with delivery data traceable on-chain."}, {"zh_q": "EACO如何支持心理健康平台？", "en_q": "How does EACO support mental health platforms?", "zh_a": "心理健康平台可使用EACO作为咨询服务支付方式，保护用户隐私的同时确保支付安全。匿名评价系统记录在链上，帮助其他用户选择合适的咨询师。", "en_a": "Mental health platforms can use EACO for consultation payments, protecting user privacy while ensuring payment security. Anonymous rating systems recorded on-chain help other users choose suitable counselors."}, {"zh_q": "EACO对开源软件的商业化有什么启示？", "en_q": "What inspiration does EACO offer for open source commercialization?", "zh_a": "EACO展示了代币经济如何为开源项目提供可持续收入——开发者通过代码贡献获得代币，社区通过代币治理决定项目方向，用户通过持币支持项目发展，形成闭环生态。", "en_a": "EACO demonstrates how token economics can provide sustainable revenue for open source projects — developers earn tokens for contributions, communities govern via tokens, and users support projects by holding tokens, forming a closed-loop ecosystem."}, {"zh_q": "EACO如何应用于记账软件？", "en_q": "How is EACO applied in accounting software?", "zh_a": "记账软件可集成EACO自动记录链上交易，将EACO收支自动分类到对应会计科目。支持EACO的资产估值和损益计算，简化数字资产的会计处理。", "en_a": "Accounting software can integrate EACO to auto-record on-chain transactions, auto-categorizing EACO income and expenses. It supports EACO asset valuation and P&L calculation, simplifying digital asset accounting."}, {"zh_q": "EACO对营养咨询服务的影响？", "en_q": "What is EACO's impact on nutrition consulting?", "zh_a": "营养咨询服务可用EACO进行跨境付费咨询，饮食计划和营养方案可代币化为NFT。用户坚持执行饮食计划可获得EACO激励，提高健康管理的依从性。", "en_a": "Nutrition consulting services can use EACO for cross-border paid consultations, with diet plans tokenized as NFTs. Users earn EACO for adhering to plans, improving health management compliance."}, {"zh_q": "EACO如何应用于企业学习管理系统（LMS）？", "en_q": "How is EACO applied in LMS?", "zh_a": "LMS可使用EACO激励员工完成培训课程，学习成果以NFT认证形式上链。内部讲师发布优质课程获得EACO奖励，形成去中心化的企业知识共享生态。", "en_a": "LMS can use EACO to incentivize course completion, with learning achievements certified as on-chain NFTs. Internal trainers earn EACO for quality courses, forming a decentralized enterprise knowledge-sharing ecosystem."}, {"zh_q": "EACO如何应用于发票管理？", "en_q": "How is EACO applied in invoice management?", "zh_a": "发票管理系统可将电子发票哈希上链确保真实性，EACO用于跨境发票的结算支付。智能合约根据发票状态自动触发付款流程，减少人工审核。", "en_a": "Invoice management systems can hash electronic invoices on-chain for authenticity, with EACO used for cross-border invoice settlement. Smart contracts auto-trigger payment processes based on invoice status, reducing manual review."}, {"zh_q": "EACO对员工福利平台的价值？", "en_q": "What value does EACO bring to employee benefits platforms?", "zh_a": "员工福利平台可使用EACO作为灵活福利积分，员工用EACO选择和购买福利项目。EACO的全球通用性使跨国企业的福利发放更加便捷和统一。", "en_a": "Employee benefits platforms can use EACO as flexible benefit points, with employees selecting and purchasing benefits in EACO. EACO's global nature makes multinational benefit distribution more convenient and unified."}, {"zh_q": "EACO如何应用于自然语言处理（NLP）服务？", "en_q": "How is EACO applied in NLP services?", "zh_a": "NLP服务可使用EACO按API调用量计费，语料标注贡献者获得EACO奖励。去中心化的数据标注市场确保标注质量，同时保护数据提供者权益。", "en_a": "NLP services can use EACO for per-API-call billing, with corpus annotation contributors earning EACO. Decentralized data annotation markets ensure quality while protecting data providers' rights."}, {"zh_q": "EACO对数字资产管理的意义？", "en_q": "What does EACO mean for digital asset management?", "zh_a": "EACO本身就是数字资产管理的重要组成部分。数字资产管理平台可集成EACO作为资产类目之一，提供统一的数字资产追踪、估值和管理界面。", "en_a": "EACO itself is an important component of digital asset management. DAM platforms can integrate EACO as an asset category, providing unified digital asset tracking, valuation, and management interfaces."}, {"zh_q": "EACO如何应用于税务计算？", "en_q": "How is EACO applied in tax calculation?", "zh_a": "税务计算工具可集成EACO交易数据自动计算数字资产相关税费，税法更新以链上预言机方式同步，确保税务计算的准确性和时效性。", "en_a": "Tax calculation tools can integrate EACO transaction data to auto-calculate digital asset taxes, with tax law updates synced via on-chain oracles, ensuring accuracy and timeliness."}, {"zh_q": "EACO如何应用于音乐创作和分发？", "en_q": "How is EACO applied in music creation and distribution?", "zh_a": "音乐人可通过EACO发行音乐NFT，粉丝用EACO购买和收藏。版税通过智能合约自动分配给作词、作曲、编曲等所有参与者，确保公平的收益分配。", "en_a": "Musicians can issue music NFTs via EACO, with fans purchasing and collecting in EACO. Royalties are auto-distributed to lyricists, composers, and arrangers via smart contracts, ensuring fair revenue distribution."}, {"zh_q": "EACO对协作平台的贡献？", "en_q": "What is EACO's contribution to collaboration platforms?", "zh_a": "协作平台可使用EACO实现跨团队、跨企业的价值流转，任务完成后的报酬通过智能合约以EACO自动结算，降低跨组织协作的信任成本。", "en_a": "Collaboration platforms can use EACO for cross-team and cross-enterprise value transfer, with task completion rewards auto-settled in EACO via smart contracts, reducing trust costs in cross-organizational collaboration."}, {"zh_q": "EACO如何应用于远程诊疗？", "en_q": "How is EACO applied in remote diagnosis?", "zh_a": "远程诊疗平台可使用EACO支付诊疗费用，AI辅助诊断结果和医生处方上链存证。患者数据通过加密技术保护，EACO支付确保交易的安全和可追溯。", "en_a": "Telemedicine platforms can use EACO for consultation fees, with AI-assisted diagnosis results and prescriptions stored on-chain. Patient data is protected through encryption, and EACO payments ensure secure and traceable transactions."}, {"zh_q": "EACO如何应用于健身应用？", "en_q": "How is EACO applied in fitness apps?", "zh_a": "健身应用可使用EACO激励用户完成运动目标，运动数据上链确保真实性。健身教练可通过EACO接收在线指导费用，用户用EACO解锁高级训练课程。", "en_a": "Fitness apps can use EACO to incentivize exercise goal completion, with fitness data on-chain for authenticity. Trainers receive online coaching fees in EACO, and users unlock premium courses with EACO."}, {"zh_q": "EACO对跨境电商物流的影响？", "en_q": "What is EACO's impact on cross-border e-commerce logistics?", "zh_a": "EACO可用于跨境电商物流的运费结算，清关数据上链加速通关流程。智能合约根据物流节点状态自动释放运费，降低跨境物流的资金占用。", "en_a": "EACO can be used for cross-border e-commerce logistics freight settlement, with customs data on-chain accelerating clearance. Smart contracts auto-release freight based on logistics node status, reducing cross-border logistics capital occupation."}, {"zh_q": "EACO如何应用于智能家居软件？", "en_q": "How is EACO applied in smart home software?", "zh_a": "智能家居软件可集成EACO实现设备间的微支付，如自动购买电力、数据服务等。设备身份和数据交换记录在区块链上，确保智能家居系统的安全性。", "en_a": "Smart home software can integrate EACO for inter-device micro-payments, such as auto-purchasing electricity or data services. Device identity and data exchange records on blockchain ensure smart home system security."}, {"zh_q": "EACO的未来发展愿景是什么？", "en_q": "What is EACO's future development vision?", "zh_a": "EACO致力于成为全球轻资产行业的首选数字货币，通过持续增加海外流动性、扩大DEX交易对、建设开发者生态和志愿者社区，推动去中心化经济惠及更多人。Earth's best Coin——为地球而生的最佳代币。", "en_a": "EACO aims to become the preferred digital currency for global light-asset industries, by continuously increasing overseas liquidity, expanding DEX trading pairs, building developer ecosystems and volunteer communities, and promoting decentralized economics for more people. Earth's best Coin — the best token for Earth."}, {"zh_q": "EACO如何应用于数字营销代理？", "en_q": "How is EACO applied in digital marketing agencies?", "zh_a": "数字营销代理可使用EACO进行跨境服务结算，广告投放数据上链确保透明可审计。智能合约根据KPI达成率自动释放营销预算，客户与代理之间的信任成本大幅降低。", "en_a": "Digital marketing agencies can use EACO for cross-border service settlement, with ad placement data on-chain for transparent auditing. Smart contracts auto-release marketing budgets based on KPI achievement, dramatically reducing trust costs between clients and agencies."}, {"zh_q": "EACO对云计算服务行业有什么价值？", "en_q": "What value does EACO bring to cloud computing services?", "zh_a": "云计算平台可使用EACO作为微支付结算货币，按资源使用量自动计费。用户无需预付大量费用，智能合约根据实际CPU、内存、带宽消耗实时以EACO结算，降低云服务使用门槛。", "en_a": "Cloud computing platforms can use EACO as a micro-payment settlement currency, auto-billing based on resource usage. Users don't need large prepayments — smart contracts settle in EACO based on actual CPU, memory, and bandwidth consumption, lowering the barrier to cloud service adoption."}, {"zh_q": "EACO如何帮助大数据分析行业？", "en_q": "How does EACO help the big data analytics industry?", "zh_a": "大数据分析平台可使用EACO建立去中心化数据交易市场，数据提供者通过EACO获得报酬，数据购买者在链上留下可追溯的访问记录。这打破了数据孤岛，同时保护了数据所有者权益。", "en_a": "Big data analytics platforms can use EACO to build decentralized data trading markets, where data providers earn EACO and data buyers leave traceable on-chain access records. This breaks data silos while protecting data owners' rights."}, {"zh_q": "EACO如何应用于人工智能服务？", "en_q": "How is EACO applied in AI services?", "zh_a": "AI服务可使用EACO按API调用次数计费，AI模型训练数据贡献者获得EACO奖励。去中心化的AI模型市场让开发者直接向用户出售模型使用权，绕过中间平台的高额佣金。", "en_a": "AI services can use EACO for per-API-call billing, with AI model training data contributors earning EACO rewards. Decentralized AI model marketplaces let developers sell model usage rights directly to users, bypassing intermediary platform commissions."}, {"zh_q": "EACO对区块链开发行业本身的意义？", "en_q": "What does EACO mean for the blockchain development industry?", "zh_a": "EACO作为Solana生态代币，本身就是区块链开发行业的产物。它激励开发者构建更多DApp，通过GitHub开源代码库（github.com/eacocc/eaco）吸引全球开发者参与，形成技术驱动的良性循环。", "en_a": "As a Solana ecosystem token, EACO is itself a product of the blockchain development industry. It incentivizes developers to build more DApps, attracting global developers through the GitHub open-source repository (github.com/eacocc/eaco), forming a virtuous technology-driven cycle."}, {"zh_q": "EACO如何应用于UI/UX设计行业？", "en_q": "How is EACO applied in UI/UX design?", "zh_a": "UI/UX设计师可通过EACO接收跨境设计项目报酬，设计作品可代币化为NFT进行确权和交易。设计模板市场可用EACO定价，买家直接向设计师付费，无需平台中间抽成。", "en_a": "UI/UX designers can receive cross-border project payments in EACO, design works can be tokenized as NFTs for verification and trading. Design template marketplaces can price in EACO, with buyers paying designers directly without platform intermediary cuts."}, {"zh_q": "EACO对网站开发行业的影响？", "en_q": "What is EACO's impact on web development?", "zh_a": "网站开发公司可使用EACO作为跨境项目支付方式，开发成果的代码哈希可上链存证。智能合约根据里程碑完成情况自动释放项目款项，降低开发者和客户之间的信任成本和纠纷风险。", "en_a": "Web development companies can use EACO for cross-border project payments, with code deliverable hashes stored on-chain. Smart contracts auto-release project payments based on milestone completion, reducing trust costs and dispute risks between developers and clients."}, {"zh_q": "EACO如何应用于视频制作行业？", "en_q": "How is EACO applied in video production?", "zh_a": "视频制作团队可通过EACO接收跨境项目报酬，成品视频可发行限量NFT版本。版权信息上链确保创作者权益，广告收入通过智能合约自动分配给制作团队所有参与者。", "en_a": "Video production teams can receive cross-border project payments in EACO, finished videos can issue limited NFT editions. Copyright information on-chain ensures creator rights, and ad revenue is auto-distributed to all production team participants via smart contracts."}, {"zh_q": "EACO如何支持社交媒体运营行业？", "en_q": "How does EACO support social media management?", "zh_a": "社交媒体运营者可通过EACO接收品牌合作报酬，粉丝用EACO打赏支持优质内容。社交媒体数据分析结果可作为数字资产用EACO定价出售，运营效果数据上链确保真实性。", "en_a": "Social media managers can receive brand collaboration payments in EACO, fans can tip quality content with EACO. Social media analytics results can be priced and sold as digital assets in EACO, with performance data on-chain ensuring authenticity."}];
+const FOOTER = {"liquidity": {"links": [{"text": "Meteora DLMM Pool 1", "url": "https://app.meteora.ag/dlmm/6ZfCi3qzhgDN1ygHVYXvfsfrwz8ZhQ7hD5mJtjeuUDyE"}, {"text": "Meteora DLMM Pool 2", "url": "https://app.meteora.ag/dlmm/GsDB4iKELP7KDVjn5ZcHsJhWRY8J3HqTxvE86zyDhV34"}, {"text": "Raydium Swap", "url": "https://raydium.io/swap/?inputMint=sol&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"}, {"text": "Orca Pools", "url": "https://www.orca.so/pools?tokens=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"}]}, "about": {"links": [{"text": "Orb Markets", "url": "https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"}, {"text": "Solscan", "url": "https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"}, {"text": "GitHub", "url": "https://github.com/eacocc/eaco"}, {"text": "CoinMarketCap DexScan", "url": "https://coinmarketcap.com/dexscan/solana/7cmAfsKJrvcbMLWoXDTX5uZ2C8udBjzsKEgaxeweKMMU/"}, {"text": "OKX", "url": "https://web3.okx.com/token/solana/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"}, {"text": "PancakeSwap", "url": "https://pancakeswap.finance/swap?inputCurrency=SOL&chain=sol&outputCurrency=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH&chainOut=sol"}, {"text": "Uniswap", "url": "https://app.uniswap.org/explore/tokens/solana/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"}]}, "volunteer": {"links": [{"text": "X (Twitter) @eacocc", "url": "https://x.com/eacocc"}, {"text": "Telegram @e_eacocc", "url": "https://t.me/e_eacocc"}]}};
+
+// ===== I18N =====
+const i18n = {
+  zh: {
+    nav_industries:"行业", nav_qa:"问答", nav_pillars:"四柱", nav_links:"链接",
+    hero_sub:"地球EACO轻资产2025 - Earth's Best Coin 赋能全球轻资产行业",
+    stat_industries:"轻资产行业", stat_qa:"问答", stat_dex:"DEX平台", stat_lang:"语言",
+    pillars_title:"EACO 四柱", pillars_desc:"EACO 的四大核心理念",
+    pillar_e:"能量 - 驱动一切的基础", pillar_a:"态度 - 积极向前的精神",
+    pillar_c:"合作 - 协同共创的力量", pillar_o:"优化 - 持续改进的追求",
+    ind_title:"地球村前100大轻资产行业", ind_desc:"Top 100 Light Asset Industries in the Global Village",
+    ind_search_ph:"搜索行业名称 / Search industries...",
+    qa_title:"EACO 轻资产 100 问答", qa_desc:"100 Q&A about EACO and Light Asset Industries",
+    qa_search_ph:"搜索问答 / Search Q&A...",
+    fl_liq_title:"EACO(SOL) 海外流动性持续增加", fl_liq_sub:"EACO (Earth's best Coin)",
+    fl_robot:"量化机器人可使用 5,000-50,000 SOL/USDC/USDT 赚取差价收益。",
+    fl_about_title:"关于 e&eaco", fl_vol_title:"成为志愿者",
+    footer_rights:"Earth's Best Coin - 赋能全球轻资产行业",
+    footer_made:"由 EACO 社区共建",
+    copied:"已复制合约地址!",
+  },
+  en: {
+    nav_industries:"Industries", nav_qa:"Q&A", nav_pillars:"Pillars", nav_links:"Links",
+    hero_sub:"Earth EACO Light Asset 2025 - Earth's Best Coin Empowering Global Light Asset Industries",
+    stat_industries:"Industries", stat_qa:"Q&A", stat_dex:"DEX Platforms", stat_lang:"Languages",
+    pillars_title:"EACO Four Pillars", pillars_desc:"Four Core Concepts of EACO",
+    pillar_e:"Energy - The foundation driving everything", pillar_a:"Attitude - A positive forward spirit",
+    pillar_c:"Cooperation - The power of collaboration", pillar_o:"Optimization - The pursuit of continuous improvement",
+    ind_title:"Top 100 Light Asset Industries", ind_desc:"Top 100 Light Asset Industries in the Global Village",
+    ind_search_ph:"Search industries...",
+    qa_title:"EACO Light Asset 100 Q&A", qa_desc:"100 Q&A about EACO and Light Asset Industries",
+    qa_search_ph:"Search Q&A...",
+    fl_liq_title:"EACO(SOL) Overseas Increased Liquidity", fl_liq_sub:"EACO (Earth's best Coin)",
+    fl_robot:"Quantitative robots could earn the difference with 5000-50,000 sol/usdc/USDT.",
+    fl_about_title:"About e&eaco", fl_vol_title:"As a Volunteer",
+    footer_rights:"Earth's Best Coin - Empowering Global Light Asset Industries",
+    footer_made:"Built with EACO Community",
+    copied:"Contract address copied!",
+  }
+};
+
+let currentLang = 'zh';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn')[lang==='zh'?0:1].classList.add('active');
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (i18n[lang][key]) el.placeholder = i18n[lang][key];
+  });
+  renderIndustries();
+  renderQA();
+  renderFooter();
+}
+
+function renderIndustries(filter) {
+  filter = filter || '';
+  var grid = document.getElementById('industryGrid');
+  var list = INDUSTRIES.filter(function(item) {
+    if (!filter) return true;
+    var f = filter.toLowerCase();
+    return item.zh.toLowerCase().indexOf(f) >= 0 || item.en.toLowerCase().indexOf(f) >= 0 ||
+           item.zh_d.toLowerCase().indexOf(f) >= 0 || item.en_d.toLowerCase().indexOf(f) >= 0;
+  });
+  grid.innerHTML = list.map(function(item, idx) {
+    var realIdx = INDUSTRIES.indexOf(item);
+    var name = currentLang==='zh' ? item.zh : item.en;
+    var desc = currentLang==='zh' ? item.zh_d : item.en_d;
+    var subName = currentLang==='zh' ? item.en : item.zh;
+    return '<div class="industry-card fade-in" style="animation-delay:' + (idx*0.02) + 's">' +
+      '<div class="num">#' + String(realIdx+1).padStart(3,'0') + '</div>' +
+      '<div class="name">' + name + '</div>' +
+      '<div class="name-en">' + subName + '</div>' +
+      '<div class="desc">' + desc + '</div>' +
+    '</div>';
+  }).join('');
+  if (list.length === 0) {
+    grid.innerHTML = '<p style="text-align:center;color:var(--text-dim);grid-column:1/-1;">No results / 无结果</p>';
+  }
+}
+
+function renderQA(filter) {
+  filter = filter || '';
+  var list = document.getElementById('qaList');
+  var items = QA_PAIRS.filter(function(item) {
+    if (!filter) return true;
+    var f = filter.toLowerCase();
+    return item.zh_q.toLowerCase().indexOf(f) >= 0 || item.en_q.toLowerCase().indexOf(f) >= 0 ||
+           item.zh_a.toLowerCase().indexOf(f) >= 0 || item.en_a.toLowerCase().indexOf(f) >= 0;
+  });
+  list.innerHTML = items.map(function(item, idx) {
+    var realIdx = QA_PAIRS.indexOf(item);
+    var q = currentLang==='zh' ? item.zh_q : item.en_q;
+    var a = currentLang==='zh' ? item.zh_a : item.en_a;
+    return '<div class="qa-item" data-idx="' + realIdx + '">' +
+      '<div class="qa-header" onclick="toggleQA(this)">' +
+        '<span class="qa-num">' + (realIdx+1) + '</span>' +
+        '<span>' + q + '</span>' +
+        '<span class="qa-toggle">+</span>' +
+      '</div>' +
+      '<div class="qa-body"><p>' + a + '</p></div>' +
+    '</div>';
+  }).join('');
+  if (items.length === 0) {
+    list.innerHTML = '<p style="text-align:center;color:var(--text-dim);">No results / 无结果</p>';
+  }
+}
+
+function toggleQA(header) {
+  var item = header.parentElement;
+  item.classList.toggle('active');
+}
+
+function renderFooter() {
+  document.getElementById('liqLinks').innerHTML = FOOTER.liquidity.links.map(function(l) {
+    return '<a class="footer-link" href="' + l.url + '" target="_blank" rel="noopener">' + l.text + ' <span class="ext">↗</span></a>';
+  }).join('');
+  document.getElementById('aboutLinks').innerHTML = FOOTER.about.links.map(function(l) {
+    return '<a class="footer-link" href="' + l.url + '" target="_blank" rel="noopener">' + l.text + ' <span class="ext">↗</span></a>';
+  }).join('');
+  document.getElementById('volunteerLinks').innerHTML = FOOTER.volunteer.links.map(function(l) {
+    return '<a class="footer-link" href="' + l.url + '" target="_blank" rel="noopener">' + l.text + ' <span class="ext">↗</span></a>';
+  }).join('');
+}
+
+function copyCA() {
+  var ca = 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(ca).then(function() { alert(i18n[currentLang].copied); });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = ca; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    alert(i18n[currentLang].copied);
+  }
+}
+
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  renderIndustries(e.target.value);
+});
+document.getElementById('qaSearchInput').addEventListener('input', function(e) {
+  renderQA(e.target.value);
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+renderIndustries();
+renderQA();
+renderFooter();
+</script>
+</body>
+</html>
