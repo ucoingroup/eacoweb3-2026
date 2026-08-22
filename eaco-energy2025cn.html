@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EACO - 地球与星际能量研究 | Web3 技术平台</title>
+  <meta name="description" content="EACO - 地球与航空航天能源货币，探索宇宙能量奥秘，Web3 技术驱动可持续发展">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.cn/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    body { background: #0a0e1a; color: #fff; overflow-x: hidden; }
+    #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .gradient-text { background: linear-gradient(135deg, #00d4aa 0%, #4f7cff 50%, #ffd700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; transition: all 0.3s ease; }
+    .glass-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(0,212,170,0.3); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,170,0.1); }
+    .section-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; text-align: center; margin-bottom: 1rem; }
+    .section-subtitle { text-align: center; color: #94a3b8; font-size: clamp(0.9rem, 2vw, 1.1rem); max-width: 600px; margin: 0 auto 3rem; }
+    .nav-link { transition: color 0.2s; }
+    .nav-link:hover { color: #00d4aa; }
+    .counter { font-variant-numeric: tabular-nums; }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(0,212,170,0.2); } 50% { box-shadow: 0 0 40px rgba(0,212,170,0.4); } }
+    .glow-pulse { animation: pulse-glow 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .float-anim { animation: float 6s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0e1a]/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#4f7cff] flex items-center justify-center font-bold text-sm">$e</div>
+        <span class="font-bold text-lg hidden sm:block">EACO</span>
+        <span class="text-xs text-gray-500 hidden md:block">中国大陆版</span>
+      </div>
+      <div class="flex items-center gap-4 sm:gap-6 text-sm">
+        <a href="#energy" class="nav-link text-gray-300">能量研究</a>
+        <a href="#laws" class="nav-link text-gray-300">能量定律</a>
+        <a href="#web3" class="nav-link text-gray-300">Web3 技术</a>
+        <a href="#industry" class="nav-link text-gray-300">行业应用</a>
+        <a href="#payment" class="nav-link text-gray-300">自动化支付</a>
+        <a href="#resources" class="nav-link text-gray-300">技术资源</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative z-10 min-h-screen flex items-center justify-center px-4 pt-16">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="float-anim mb-8">
+        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[#00d4aa] via-[#4f7cff] to-[#ffd700] flex items-center justify-center glow-pulse">
+          <span class="text-3xl font-bold">$e</span>
+        </div>
+      </div>
+      <h1 class="text-5xl sm:text-7xl font-black mb-4 gradient-text">EACO</h1>
+      <p class="text-xl sm:text-2xl text-gray-300 mb-2">Earth & Aerospace Energy Currency</p>
+      <p class="text-lg text-gray-400 mb-8">地球与航空航天能源货币 · Web3 技术平台</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
+        <div class="glass-card p-4">
+          <div class="text-xs text-gray-400 mb-1">区块链网络</div>
+          <div class="font-bold text-[#00d4aa]">Solana</div>
+        </div>
+        <div class="glass-card p-4">
+          <div class="text-xs text-gray-400 mb-1">技术方向</div>
+          <div class="font-bold text-[#4f7cff]">Web3 区块链</div>
+        </div>
+        <div class="glass-card p-4">
+          <div class="text-xs text-gray-400 mb-1">研究领域</div>
+          <div class="font-bold text-[#ffd700]">能量科学</div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-500 italic">The only $eaco in the universe and the earth</p>
+    </div>
+  </section>
+
+  <!-- Energy Research Section -->
+  <section id="energy" class="relative z-10 py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">地球与星际能量研究</h2>
+      <p class="section-subtitle">探索宇宙能量的奥秘，从地球到星际文明的能量形态与临界值</p>
+
+      <!-- Earth Energy -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#00d4aa]">地球能源形式与临界值</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="earthEnergyGrid"></div>
+      </div>
+
+      <!-- Interstellar Energy -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#4f7cff]">星际文明能源形态</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="interstellarEnergyGrid"></div>
+      </div>
+
+      <!-- EACO + Energy Integration -->
+      <div class="glass-card p-8 sm:p-12">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#ffd700]">EACO 与地球能量结合</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="integrationGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Energy Laws Section -->
+  <section id="laws" class="relative z-10 py-24 px-4 bg-gradient-to-b from-transparent via-[#0f1729]/50 to-transparent">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">能量前30大定律</h2>
+      <p class="section-subtitle">地球与星际文明宇宙中的能量规则总结</p>
+      <div id="lawsContainer"></div>
+    </div>
+  </section>
+
+  <!-- Web3 Technology Section -->
+  <section id="web3" class="relative z-10 py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">Web3 区块链技术</h2>
+      <p class="section-subtitle">去中心化技术驱动的未来互联网基础设施</p>
+
+      <!-- Core Tech -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#00d4aa]">核心技术栈</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="web3TechGrid"></div>
+      </div>
+
+      <!-- Solana Ecosystem -->
+      <div class="glass-card p-8 sm:p-12 mb-16">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#4f7cff]">Solana 生态优势</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="solanaGrid"></div>
+      </div>
+
+      <!-- DApp Applications -->
+      <div>
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#ffd700]">DApp 应用方向</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="dappGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Applications Section -->
+  <section id="industry" class="relative z-10 py-24 px-4 bg-gradient-to-b from-transparent via-[#0f1729]/50 to-transparent">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">十大行业应用</h2>
+      <p class="section-subtitle">Web3 技术赋能各行各业，推动数字化转型</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="industryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section id="payment" class="relative z-10 py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">Web3 自动化支付</h2>
+      <p class="section-subtitle">智能合约驱动，链上即时结算</p>
+
+      <!-- Features -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" id="paymentFeaturesGrid"></div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16" id="paymentStatsGrid"></div>
+
+      <!-- Flow -->
+      <div class="bg-gradient-to-br from-[#00d4aa]/5 via-transparent to-[#ffd700]/5 border border-white/10 rounded-2xl p-8 sm:p-12 mb-16">
+        <h3 class="text-2xl font-bold text-center mb-10 text-white">支付流程</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="paymentFlowGrid"></div>
+      </div>
+
+      <!-- Trends -->
+      <div>
+        <h3 class="text-2xl font-bold text-center mb-3 text-[#4f7cff]">支付技术发展趋势</h3>
+        <p class="text-center text-gray-400 mb-10">Web3 自动化支付的十大未来趋势</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="paymentTrendsGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources" class="relative z-10 py-24 px-4 bg-gradient-to-b from-transparent via-[#0f1729]/50 to-transparent">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">技术资源</h2>
+      <p class="section-subtitle">探索 EACO 技术生态，参与开源社区建设</p>
+
+      <!-- Ecosystem Links -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold text-center mb-6 text-[#4f7cff]">生态系统</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="ecosystemGrid"></div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="text-center">
+        <h3 class="text-xl font-bold text-center mb-6 text-[#ffd700]">开源代码</h3>
+        <a href="https://github.com/eacocc/eacoweb3-2025" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 glass-card px-8 py-4 hover:border-[#ffd700]/50 transition-all">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <span class="font-medium">GitHub 开源仓库</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative z-10 py-12 px-4 border-t border-white/10">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#4f7cff] flex items-center justify-center font-bold text-sm text-white">$e</div>
+        <span class="font-bold text-lg">EACO</span>
+        <span class="text-xs text-gray-500">中国大陆版</span>
+      </div>
+      <p class="text-gray-400 mb-2 text-sm">CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+      <p class="text-gray-500 text-sm italic">The only $eaco in the universe and the earth</p>
+      <p class="text-gray-600 text-xs mt-4">&copy; 2025 EACO. All rights reserved.</p>
+      <p class="text-gray-700 text-xs mt-2">本站仅展示 Web3 技术研究内容，不构成任何投资建议</p>
+    </div>
+  </footer>
+
+  <script>
+    // ============ STARFIELD ============
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 200; i++) {
+        stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.5 + 0.5, speed: Math.random() * 0.3 + 0.1, opacity: Math.random() * 0.8 + 0.2 });
+      }
+    }
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.opacity})`;
+        ctx.fill();
+        s.y += s.speed;
+        if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+      });
+      requestAnimationFrame(drawStars);
+    }
+    resizeCanvas(); initStars(); drawStars();
+    window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+    // ============ DATA ============
+    const earthEnergy = [
+      { icon: '☀️', name: '太阳能', threshold: '太阳核心温度 1500万°C，地球接收功率 174PW', color: '#ffd700' },
+      { icon: '🌋', name: '地热能', threshold: '地核温度约 6000°C，可开发储量 12.6TW', color: '#ff6b35' },
+      { icon: '💨', name: '风能', threshold: '全球风能总量约 870TW，可利用约 72TW', color: '#87ceeb' },
+      { icon: '🌊', name: '海洋能', threshold: '潮汐能约 3TW，波浪能约 2TW', color: '#4f7cff' },
+      { icon: '⚛️', name: '核能', threshold: '铀-235裂变能量 8.2×10¹³ J/g，聚变 3.4×10¹⁴ J/g', color: '#00d4aa' },
+      { icon: '🔋', name: '化学能', threshold: '化石燃料储量约 5×10²² J，锂电池 250Wh/kg', color: '#a78bfa' },
+      { icon: '🌿', name: '生物质能', threshold: '全球生物质年产约 1.5×10²¹ J', color: '#22c55e' },
+      { icon: '🪐', name: '引力能', threshold: '地球引力势能 2.24×10³² J', color: '#94a3b8' }
+    ];
+
+    const interstellarEnergy = [
+      { icon: '⭐', name: '卡尔达肖夫 I 型', desc: '利用整个行星的全部能量，约 10¹⁶ W', color: '#ffd700' },
+      { icon: '🌟', name: '卡尔达肖夫 II 型', desc: '利用恒星全部能量（戴森球），约 10²⁶ W', color: '#ff6b9d' },
+      { icon: '🌌', name: '卡尔达肖夫 III 型', desc: '利用整个星系的能量，约 10³⁶ W', color: '#a78bfa' },
+      { icon: '💫', name: '反物质能量', desc: '质能转换率 100%，1g 反物质 = 9×10¹³ J', color: '#00d4aa' },
+      { icon: '🔮', name: '真空零点能', desc: '量子真空涨落能量密度 ~10¹¹³ J/m³', color: '#4f7cff' },
+      { icon: '🌀', name: '暗能量', desc: '宇宙加速膨胀的驱动力，占宇宙 68%', color: '#94a3b8' }
+    ];
+
+    const integration = [
+      { icon: '🌍', title: '能源资产化', desc: '将地球各类能源转化为可量化、可追踪的数字资产' },
+      { icon: '🌱', title: '碳信用追踪', desc: '通过区块链技术实现碳信用的透明追踪与管理' },
+      { icon: '💚', title: '绿色技术', desc: 'Web3 技术赋能可持续能源项目的数据透明与协作' }
+    ];
+
+    const energyLaws = [
+      { name: '能量守恒定律', desc: '能量既不能被创造也不能被消灭，只能从一种形式转化为另一种形式' },
+      { name: '熵增定律', desc: '孤立系统的熵只会增加不会减少，能量转化具有方向性' },
+      { name: '质能等价定律', desc: 'E=mc²，质量与能量可以相互转化' },
+      { name: '热传导定律', desc: '热量从高温物体自发传向低温物体' },
+      { name: '电磁感应定律', desc: '变化的磁场产生电场，是发电机的理论基础' },
+      { name: '光电效应定律', desc: '光子能量 E=hv，光可以转化为电能' },
+      { name: '核聚变定律', desc: '轻原子核聚合释放巨大能量，是恒星的能量来源' },
+      { name: '引力势能定律', desc: '质量间引力势能与距离成反比' },
+      { name: '波粒二象性', desc: '能量既表现为波动性又表现为粒子性' },
+      { name: '不确定性原理', desc: '无法同时精确测量粒子的位置和动量' },
+      { name: '黑洞热力学定律', desc: '黑洞视界面积与熵成正比，霍金辐射' },
+      { name: '宇宙膨胀定律', desc: '宇宙空间持续膨胀，星系间距离增大' },
+      { name: '暗能量驱动定律', desc: '暗能量驱动宇宙加速膨胀' },
+      { name: '量子隧穿定律', desc: '粒子可以穿越经典力学中不可逾越的势垒' },
+      { name: '超导零电阻定律', desc: '某些材料在临界温度下电阻为零，能量无损耗传输' },
+      { name: '能量密度梯度定律', desc: '能量总是从高密度区域流向低密度区域' },
+      { name: '共振能量传输定律', desc: '共振频率匹配时能量传输效率最高' },
+      { name: '能量-信息守恒定律', desc: '能量与信息在量子层面存在深层对应关系' },
+      { name: '真空涨落定律', desc: '真空中存在量子涨落，产生虚粒子对' },
+      { name: '反物质湮灭定律', desc: '物质与反物质相遇完全转化为能量' },
+      { name: '戴森球能量采集定律', desc: '包围恒星可采集其全部辐射能量' },
+      { name: '虫洞能量通道定律', desc: '理论上虫洞可作为能量传输的捷径' },
+      { name: '零点能提取定律', desc: '量子真空基态能量理论上可被提取利用' },
+      { name: '宇宙微波背景辐射定律', desc: '宇宙大爆炸遗留的均匀辐射，温度 2.725K' },
+      { name: '恒星核合成定律', desc: '恒星内部合成重元素并释放能量' },
+      { name: '磁约束聚变定律', desc: '强磁场约束等离子体实现可控核聚变' },
+      { name: '去中心化能量网络定律', desc: '分布式能量节点通过区块链实现点对点能量数据交换' },
+      { name: '可持续能量循环定律', desc: '能量利用-回收-再利用的闭环系统是文明可持续发展的基础' },
+      { name: '星际能量传输定律', desc: '通过激光或微波实现星际间能量传输的理论框架' },
+      { name: '技术-能源协同定律', desc: 'Web3 技术优化能源分配效率，降低交易成本' }
+    ];
+
+    const web3Tech = [
+      { icon: '🔗', name: '区块链技术', desc: '分布式账本、共识机制、不可篡改', color: '#00d4aa' },
+      { icon: '📜', name: '智能合约', desc: '自动执行的链上程序，无需信任第三方', color: '#4f7cff' },
+      { icon: '🔐', name: '密码学', desc: '哈希算法、数字签名、零知识证明', color: '#ffd700' },
+      { icon: '🌐', name: '去中心化网络', desc: 'P2P 网络、节点共识、抗审查', color: '#ff6b9d' }
+    ];
+
+    const solana = [
+      { icon: '⚡', name: '高吞吐量', desc: '65,000+ TPS，亚秒级确认', color: '#00d4aa' },
+      { icon: '💰', name: '低交易成本', desc: '每笔交易费用 < $0.001', color: '#4f7cff' },
+      { icon: '🕐', name: 'PoH 共识', desc: '历史证明机制，高效时间排序', color: '#ffd700' },
+      { icon: '🚀', name: '生态繁荣', desc: 'DeFi、NFT、GameFi 生态丰富', color: '#ff6b9d' }
+    ];
+
+    const dapps = [
+      { icon: '🏦', name: 'DeFi 协议', desc: '去中心化借贷、交易、收益聚合', color: '#00d4aa' },
+      { icon: '🎨', name: 'NFT 标准', desc: '数字艺术品、收藏品、凭证', color: '#4f7cff' },
+      { icon: '🏛️', name: 'DAO 治理', desc: '去中心化自治组织，社区投票决策', color: '#ffd700' },
+      { icon: '💾', name: '去中心化存储', desc: 'IPFS、Arweave 永久数据存储', color: '#a78bfa' }
+    ];
+
+    const industries = [
+      { icon: '⚡', name: '能源管理', color: '#00d4aa' },
+      { icon: '📦', name: '供应链追踪', color: '#4f7cff' },
+      { icon: '🆔', name: '数字身份', color: '#ffd700' },
+      { icon: '📊', name: '数据市场', color: '#ff6b9d' },
+      { icon: '🎮', name: '链游', color: '#a78bfa' },
+      { icon: '💬', name: '社交网络', color: '#06b6d4' },
+      { icon: '📚', name: '教育认证', color: '#f97316' },
+      { icon: '🏥', name: '医疗数据', color: '#22c55e' },
+      { icon: '📡', name: '物联网', color: '#8b5cf6' },
+      { icon: '🎨', name: '数字艺术', color: '#ef4444' }
+    ];
+
+    const paymentFeatures = [
+      { icon: '🌍', title: '跨境结算', desc: '基于 Solana 高速网络，全球转账秒级到账' },
+      { icon: '📜', title: '智能合约支付', desc: '条件触发自动执行，无需第三方信任' },
+      { icon: '💱', title: '多资产支持', desc: '支持 SOL、USDT、USDC 等多种数字资产' },
+      { icon: '🏪', title: '商户集成', desc: '提供 API/SDK 快速接入电商和线下场景' },
+      { icon: '🔄', title: '循环支付', desc: '自动化周期性付款，适用于 SaaS 和会员制' },
+      { icon: '🛡️', title: '担保交易', desc: '链上担保机制，确保交易双方权益' }
+    ];
+
+    const paymentStats = [
+      { label: '交易速度', value: '~400ms', color: '#00d4aa' },
+      { label: '手续费', value: '< $0.001', color: '#4f7cff' },
+      { label: '吞吐量', value: '65,000+ TPS', color: '#ffd700' },
+      { label: '可用性', value: '99.99%', color: '#ff6b9d' }
+    ];
+
+    const paymentFlow = [
+      { step: '01', title: '发起交易', desc: '用户选择资产和收款方' },
+      { step: '02', title: '合约验证', desc: '链上自动验证条件' },
+      { step: '03', title: '链上确认', desc: '400ms 内完成确认' },
+      { step: '04', title: '状态更新', desc: '双方收到链上通知' }
+    ];
+
+    const paymentTrends = [
+      { icon: '🤖', name: 'AI 智能路由', desc: 'AI 自动选择最优支付路径' },
+      { icon: '🔗', name: '跨链协议标准化', desc: '多链互操作标准统一' },
+      { icon: '🏛️', name: '资产代币化', desc: '真实资产上链流通' },
+      { icon: '💰', name: '链上清算网络', desc: '去中心化清算基础设施' },
+      { icon: '🔐', name: '隐私计算融合', desc: 'MPC/FHE 保护交易隐私' },
+      { icon: '📡', name: '物联网自动结算', desc: '设备间自主微额结算' },
+      { icon: '📜', name: '条件合约支付', desc: '智能合约条件触发执行' },
+      { icon: '🆔', name: '数字身份支付', desc: 'DID 身份绑定支付能力' },
+      { icon: '🌱', name: '绿色计算支付', desc: '碳足迹追踪与抵消' },
+      { icon: '🏦', name: '合规技术接口', desc: '监管友好型技术架构' }
+    ];
+
+    const ecosystemLinks = [
+      { name: "Earth's Best Coin", url: 'https://ucoingroup.github.io/earths-best-coin/' },
+      { name: 'EACO 50 Rate', url: 'https://ucoingroup.github.io/eaco50rate/' },
+      { name: '100 Ways To Wealth', url: 'https://ucoingroup.github.io/100WaysToWealth/' },
+      { name: 'Earth 100 Friends', url: 'https://ucoingroup.github.io/earth-100-friends/' },
+      { name: 'EACO SWAP', url: 'https://ucoingroup.github.io/eacoSWAP/' },
+      { name: 'Good Books', url: 'https://ucoingroup.github.io/good-books/' },
+      { name: 'EUR-EACO', url: 'https://ucoingroup.github.io/eur-eaco/' },
+      { name: 'AU Trade', url: 'https://ucoingroup.github.io/au-trade/' },
+      { name: 'Mohist Tech', url: 'https://ucoingroup.github.io/Mohist-Tech/' },
+      { name: 'EACO Build World', url: 'https://eaco-build-world.base44.app/' },
+      { name: 'GitHub Repo', url: 'https://github.com/eacocc/eacoweb3-2025' }
+    ];
+
+    // ============ RENDER ============
+    function renderEarthEnergy() {
+      document.getElementById('earthEnergyGrid').innerHTML = earthEnergy.map(e => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${e.icon}</div>
+          <h4 class="font-bold mb-2" style="color:${e.color}">${e.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">${e.threshold}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderInterstellarEnergy() {
+      document.getElementById('interstellarEnergyGrid').innerHTML = interstellarEnergy.map(e => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${e.icon}</div>
+          <h4 class="font-bold mb-2" style="color:${e.color}">${e.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">${e.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderIntegration() {
+      document.getElementById('integrationGrid').innerHTML = integration.map(e => `
+        <div class="text-center">
+          <div class="text-4xl mb-3">${e.icon}</div>
+          <h4 class="font-bold mb-2 text-white">${e.title}</h4>
+          <p class="text-sm text-gray-400">${e.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderLaws() {
+      const groups = [
+        { title: '第 1-10 条：核心基础定律', laws: energyLaws.slice(0, 10), color: '#00d4aa' },
+        { title: '第 11-20 条：扩展定律', laws: energyLaws.slice(10, 20), color: '#4f7cff' },
+        { title: '第 21-30 条：前沿定律', laws: energyLaws.slice(20, 30), color: '#ffd700' }
+      ];
+      document.getElementById('lawsContainer').innerHTML = groups.map(g => `
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-center mb-6" style="color:${g.color}">${g.title}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${g.laws.map((law, i) => `
+              <div class="glass-card p-5">
+                <div class="flex items-start gap-3">
+                  <span class="text-sm font-bold px-2 py-1 rounded" style="background:${g.color}20;color:${g.color}">${groups.indexOf(g) * 10 + i + 1}</span>
+                  <div>
+                    <h4 class="font-bold text-sm text-white mb-1">${law.name}</h4>
+                    <p class="text-xs text-gray-400">${law.desc}</p>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderWeb3Tech() {
+      document.getElementById('web3TechGrid').innerHTML = web3Tech.map(t => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${t.icon}</div>
+          <h4 class="font-bold mb-2" style="color:${t.color}">${t.name}</h4>
+          <p class="text-sm text-gray-400">${t.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderSolana() {
+      document.getElementById('solanaGrid').innerHTML = solana.map(s => `
+        <div class="text-center">
+          <div class="text-3xl mb-3">${s.icon}</div>
+          <h4 class="font-bold text-sm mb-2" style="color:${s.color}">${s.name}</h4>
+          <p class="text-xs text-gray-400">${s.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderDapps() {
+      document.getElementById('dappGrid').innerHTML = dapps.map(d => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${d.icon}</div>
+          <h4 class="font-bold mb-2" style="color:${d.color}">${d.name}</h4>
+          <p class="text-sm text-gray-400">${d.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderIndustries() {
+      document.getElementById('industryGrid').innerHTML = industries.map(ind => `
+        <div class="glass-card p-5 text-center">
+          <div class="text-2xl mb-2">${ind.icon}</div>
+          <h4 class="text-sm font-bold" style="color:${ind.color}">${ind.name}</h4>
+        </div>
+      `).join('');
+    }
+
+    function renderPayment() {
+      document.getElementById('paymentFeaturesGrid').innerHTML = paymentFeatures.map(f => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${f.icon}</div>
+          <h4 class="font-bold mb-2 text-white">${f.title}</h4>
+          <p class="text-sm text-gray-400">${f.desc}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('paymentStatsGrid').innerHTML = paymentStats.map(s => `
+        <div class="glass-card p-4 text-center">
+          <div class="text-xs text-gray-400 mb-1">${s.label}</div>
+          <div class="text-xl font-bold counter" style="color:${s.color}">${s.value}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('paymentFlowGrid').innerHTML = paymentFlow.map((f, i) => `
+        <div class="relative text-center">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#4f7cff] flex items-center justify-center mx-auto mb-4 text-xl font-bold text-white">${f.step}</div>
+          ${i < paymentFlow.length - 1 ? '<div class="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-[#00d4aa]/50 to-transparent"></div>' : ''}
+          <h4 class="text-base font-bold text-white mb-2">${f.title}</h4>
+          <p class="text-sm text-gray-400">${f.desc}</p>
+        </div>
+      `).join('');
+
+      const trendColors = ['#00d4aa', '#4f7cff', '#ffd700', '#ff6b9d', '#a78bfa'];
+      document.getElementById('paymentTrendsGrid').innerHTML = paymentTrends.map((item, i) => `
+        <div class="glass-card p-5">
+          <div class="text-3xl mb-3">${item.icon}</div>
+          <h4 class="text-sm font-bold mb-2" style="color:${trendColors[i % 5]}">${item.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">${item.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderEcosystem() {
+      document.getElementById('ecosystemGrid').innerHTML = ecosystemLinks.map(l => `
+        <a href="${l.url}" target="_blank" rel="noopener noreferrer" class="glass-card p-4 flex items-center justify-between hover:border-[#4f7cff]/50 transition-all">
+          <span class="font-medium text-sm">${l.name}</span>
+          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      `).join('');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Render all
+    renderEarthEnergy();
+    renderInterstellarEnergy();
+    renderIntegration();
+    renderLaws();
+    renderWeb3Tech();
+    renderSolana();
+    renderDapps();
+    renderIndustries();
+    renderPayment();
+    renderEcosystem();
+  </script>
+</body>
+</html>
