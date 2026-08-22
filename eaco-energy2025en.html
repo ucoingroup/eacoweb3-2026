@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EACO ($e) - Earth & Aerospace Energy Currency | Global Web3</title>
+  <meta name="description" content="EACO ($e) - The only $eaco in the universe and the earth. Earth & Aerospace Energy Currency on Solana.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    body { background: #0a0e1a; color: #fff; overflow-x: hidden; }
+    #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .gradient-text { background: linear-gradient(135deg, #00d4aa 0%, #4f7cff 50%, #ffd700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; transition: all 0.3s ease; }
+    .glass-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(0,212,170,0.3); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,170,0.1); }
+    .section-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; text-align: center; margin-bottom: 1rem; }
+    .section-subtitle { text-align: center; color: #94a3b8; font-size: clamp(0.9rem, 2vw, 1.1rem); max-width: 600px; margin: 0 auto 3rem; }
+    .nav-link { transition: color 0.2s; }
+    .nav-link:hover { color: #00d4aa; }
+    .counter { font-variant-numeric: tabular-nums; }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(0,212,170,0.2); } 50% { box-shadow: 0 0 40px rgba(0,212,170,0.4); } }
+    .glow-pulse { animation: pulse-glow 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .float-anim { animation: float 6s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0e1a]/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#4f7cff] flex items-center justify-center font-bold text-sm">$e</div>
+        <span class="font-bold text-lg hidden sm:block">EACO</span>
+        <span class="text-xs text-gray-500 hidden md:block">Global</span>
+      </div>
+      <div class="flex items-center gap-3 sm:gap-5 text-sm">
+        <a href="#energy" class="nav-link text-gray-300">Energy</a>
+        <a href="#laws" class="nav-link text-gray-300">Laws</a>
+        <a href="#token" class="nav-link text-gray-300">Token</a>
+        <a href="#industry" class="nav-link text-gray-300">Industry</a>
+        <a href="#payment" class="nav-link text-gray-300">Payment</a>
+        <a href="#resources" class="nav-link text-gray-300">Resources</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative z-10 min-h-screen flex items-center justify-center px-4 pt-16">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="float-anim mb-8">
+        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[#00d4aa] via-[#4f7cff] to-[#ffd700] flex items-center justify-center glow-pulse">
+          <span class="text-3xl font-bold">$e</span>
+        </div>
+      </div>
+      <h1 class="text-5xl sm:text-7xl font-black mb-4 gradient-text">EACO</h1>
+      <p class="text-xl sm:text-2xl text-gray-300 mb-2">Earth & Aerospace Energy Currency</p>
+      <p class="text-lg text-gray-400 mb-8">The only $eaco in the universe and the earth</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
+        <div class="glass-card p-4">
+          <div class="text-xs text-gray-400 mb-1">Total Supply</div>
+          <div class="font-bold text-[#00d4aa]">1,350,000,000</div>
+        </div>
+        <div class="glass-card p-4">
+          <div class="text-xs text-gray-400 mb-1">Blockchain</div>
+          <div class="font-bold text-[#4f7cff]">Solana</div>
+        </div>
+        <div class="glass-card p-4">
+          <div class="text-xs text-gray-400 mb-1">Contract</div>
+          <div class="font-bold text-[#ffd700] text-xs">DqfoyZH96Rnv...HnDHRH</div>
+        </div>
+      </div>
+      <p class="text-sm text-gray-500 italic">EACO ($e) is an innovative currency, the only $eaco in the universe and the earth</p>
+    </div>
+  </section>
+
+  <!-- Energy Research Section -->
+  <section id="energy" class="relative z-10 py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">Earth & Interstellar Energy Research</h2>
+      <p class="section-subtitle">Exploring the mysteries of cosmic energy, from Earth to interstellar civilizations</p>
+
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#00d4aa]">Earth Energy Forms & Critical Values</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="earthEnergyGrid"></div>
+      </div>
+
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#4f7cff]">Interstellar Civilization Energy</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="interstellarEnergyGrid"></div>
+      </div>
+
+      <div class="glass-card p-8 sm:p-12">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#ffd700]">EACO + Earth Energy Integration</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="integrationGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Energy Laws Section -->
+  <section id="laws" class="relative z-10 py-24 px-4 bg-gradient-to-b from-transparent via-[#0f1729]/50 to-transparent">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">Top 30 Energy Laws</h2>
+      <p class="section-subtitle">Summary of energy rules in Earth and interstellar civilizations</p>
+      <div id="lawsContainer"></div>
+    </div>
+  </section>
+
+  <!-- Token Economics Section -->
+  <section id="token" class="relative z-10 py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">EACO Token Economics</h2>
+      <p class="section-subtitle">1.35 billion total supply, scientific allocation, sustainable development</p>
+
+      <div class="mb-16">
+        <h3 class="text-2xl font-bold text-center mb-8 text-white">Core Sector Allocation</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="coreAllocationGrid"></div>
+      </div>
+
+      <div class="glass-card p-8 sm:p-12">
+        <h3 class="text-2xl font-bold text-center mb-8 text-[#4f7cff]">Distribution Strategy</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="strategyGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Allocation Section -->
+  <section id="industry" class="relative z-10 py-24 px-4 bg-gradient-to-b from-transparent via-[#0f1729]/50 to-transparent">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">Top 10 Industry Allocation</h2>
+      <p class="section-subtitle">13.5 million per industry, covering future core tracks</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="industryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section id="payment" class="relative z-10 py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">EACO Automated Payment</h2>
+      <p class="section-subtitle">Smart contract driven, global instant settlement</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" id="paymentFeaturesGrid"></div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16" id="paymentStatsGrid"></div>
+
+      <div class="bg-gradient-to-br from-[#00d4aa]/5 via-transparent to-[#ffd700]/5 border border-white/10 rounded-2xl p-8 sm:p-12 mb-16">
+        <h3 class="text-2xl font-bold text-center mb-10 text-white">Payment Flow</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="paymentFlowGrid"></div>
+      </div>
+
+      <div>
+        <h3 class="text-2xl font-bold text-center mb-3 text-[#4f7cff]">Payment Development Trends</h3>
+        <p class="text-center text-gray-400 mb-10">Top 10 future trends for EACO automated payments</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="paymentTrendsGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources" class="relative z-10 py-24 px-4 bg-gradient-to-b from-transparent via-[#0f1729]/50 to-transparent">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title gradient-text">EACO Ecosystem Resources</h2>
+      <p class="section-subtitle">Explore the EACO ecosystem, participate in community building</p>
+
+      <!-- ORB Markets -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold text-center mb-6 text-[#00d4aa]">ORB Markets Trading</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="orbMarketsGrid"></div>
+      </div>
+
+      <!-- Ecosystem Links -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold text-center mb-6 text-[#4f7cff]">Ecosystem</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="ecosystemGrid"></div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="text-center">
+        <h3 class="text-xl font-bold text-center mb-6 text-[#ffd700]">Open Source</h3>
+        <a href="https://github.com/eacocc/eacoweb3-2025" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 glass-card px-8 py-4 hover:border-[#ffd700]/50 transition-all">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <span class="font-medium">GitHub Repository</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative z-10 py-12 px-4 border-t border-white/10">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#4f7cff] flex items-center justify-center font-bold text-sm text-white">$e</div>
+        <span class="font-bold text-lg">EACO</span>
+        <span class="text-xs text-gray-500">Global</span>
+      </div>
+      <p class="text-gray-400 mb-2 text-sm">CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+      <p class="text-gray-500 text-sm italic">The only $eaco in the universe and the earth</p>
+      <p class="text-gray-600 text-xs mt-4">&copy; 2025 EACO. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ============ STARFIELD ============
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 200; i++) {
+        stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.5 + 0.5, speed: Math.random() * 0.3 + 0.1, opacity: Math.random() * 0.8 + 0.2 });
+      }
+    }
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.opacity})`;
+        ctx.fill();
+        s.y += s.speed;
+        if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+      });
+      requestAnimationFrame(drawStars);
+    }
+    resizeCanvas(); initStars(); drawStars();
+    window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+    // ============ DATA ============
+    const earthEnergy = [
+      { icon: '☀️', name: 'Solar Energy', threshold: 'Core temp 15M°C, Earth receives 174PW', color: '#ffd700' },
+      { icon: '🌋', name: 'Geothermal', threshold: 'Core temp ~6000°C, exploitable 12.6TW', color: '#ff6b35' },
+      { icon: '💨', name: 'Wind Energy', threshold: 'Total ~870TW, exploitable ~72TW', color: '#87ceeb' },
+      { icon: '🌊', name: 'Ocean Energy', threshold: 'Tidal ~3TW, Wave ~2TW', color: '#4f7cff' },
+      { icon: '⚛️', name: 'Nuclear Energy', threshold: 'U-235 fission 8.2×10¹³ J/g, fusion 3.4×10¹⁴ J/g', color: '#00d4aa' },
+      { icon: '🔋', name: 'Chemical Energy', threshold: 'Fossil ~5×10²² J, Li-battery 250Wh/kg', color: '#a78bfa' },
+      { icon: '🌿', name: 'Biomass Energy', threshold: 'Annual production ~1.5×10²¹ J', color: '#22c55e' },
+      { icon: '🪐', name: 'Gravitational Energy', threshold: 'Earth gravitational PE 2.24×10³² J', color: '#94a3b8' }
+    ];
+
+    const interstellarEnergy = [
+      { icon: '⭐', name: 'Kardashev Type I', desc: 'Harness all planetary energy, ~10¹⁶ W', color: '#ffd700' },
+      { icon: '🌟', name: 'Kardashev Type II', desc: 'Harness stellar energy (Dyson Sphere), ~10²⁶ W', color: '#ff6b9d' },
+      { icon: '🌌', name: 'Kardashev Type III', desc: 'Harness galactic energy, ~10³⁶ W', color: '#a78bfa' },
+      { icon: '💫', name: 'Antimatter Energy', desc: '100% mass-energy conversion, 1g = 9×10¹³ J', color: '#00d4aa' },
+      { icon: '🔮', name: 'Zero-Point Energy', desc: 'Quantum vacuum fluctuation ~10¹¹³ J/m³', color: '#4f7cff' },
+      { icon: '🌀', name: 'Dark Energy', desc: 'Driving cosmic acceleration, 68% of universe', color: '#94a3b8' }
+    ];
+
+    const integration = [
+      { icon: '🌍', title: 'Energy Tokenization', desc: 'Convert all energy types into quantifiable, tradable digital assets' },
+      { icon: '🌱', title: 'Carbon Credit Tokenization', desc: 'Transparent tracking and trading of carbon credits via blockchain' },
+      { icon: '💚', title: 'Green Finance', desc: 'EACO as value anchor and medium for sustainable energy projects' }
+    ];
+
+    const energyLaws = [
+      { name: 'Law of Energy Conservation', desc: 'Energy cannot be created or destroyed, only transformed from one form to another' },
+      { name: 'Law of Entropy Increase', desc: 'Entropy of an isolated system always increases, energy transformation has directionality' },
+      { name: 'Mass-Energy Equivalence', desc: 'E=mc², mass and energy are interchangeable' },
+      { name: 'Law of Heat Conduction', desc: 'Heat spontaneously flows from hot to cold bodies' },
+      { name: 'Electromagnetic Induction', desc: 'Changing magnetic field produces electric field, basis of generators' },
+      { name: 'Photoelectric Effect', desc: 'Photon energy E=hv, light can be converted to electricity' },
+      { name: 'Nuclear Fusion Law', desc: 'Light nuclei fusion releases enormous energy, source of stellar power' },
+      { name: 'Gravitational PE Law', desc: 'Gravitational PE between masses is inversely proportional to distance' },
+      { name: 'Wave-Particle Duality', desc: 'Energy exhibits both wave and particle properties' },
+      { name: 'Uncertainty Principle', desc: 'Cannot simultaneously measure position and momentum precisely' },
+      { name: 'Black Hole Thermodynamics', desc: 'Event horizon area proportional to entropy, Hawking radiation' },
+      { name: 'Cosmic Expansion Law', desc: 'Universe space continuously expands, galaxies move apart' },
+      { name: 'Dark Energy Driving Law', desc: 'Dark energy drives accelerating cosmic expansion' },
+      { name: 'Quantum Tunneling Law', desc: 'Particles can cross classically insurmountable barriers' },
+      { name: 'Superconductivity Law', desc: 'Some materials have zero resistance below critical temperature' },
+      { name: 'Energy Density Gradient Law', desc: 'Energy always flows from high density to low density regions' },
+      { name: 'Resonant Energy Transfer', desc: 'Maximum energy transfer efficiency at resonant frequency match' },
+      { name: 'Energy-Information Conservation', desc: 'Deep correspondence between energy and information at quantum level' },
+      { name: 'Vacuum Fluctuation Law', desc: 'Quantum fluctuations exist in vacuum, producing virtual particle pairs' },
+      { name: 'Antimatter Annihilation', desc: 'Matter and antimatter completely convert to energy upon meeting' },
+      { name: 'Dyson Sphere Collection', desc: 'Enclosing a star can harvest all its radiative energy' },
+      { name: 'Wormhole Energy Channel', desc: 'Theoretically wormholes can serve as energy transmission shortcuts' },
+      { name: 'Zero-Point Energy Extraction', desc: 'Quantum vacuum ground state energy theoretically extractable' },
+      { name: 'CMB Radiation Law', desc: 'Uniform radiation from Big Bang, temperature 2.725K' },
+      { name: 'Stellar Nucleosynthesis', desc: 'Stars synthesize heavy elements and release energy internally' },
+      { name: 'Magnetic Confinement Fusion', desc: 'Strong magnetic fields confine plasma for controlled fusion' },
+      { name: 'Energy-Currency Unification', desc: 'EACO unifies energy value and currency value, 1 EACO anchors specific energy units' },
+      { name: 'Decentralized Energy Network', desc: 'Distributed energy nodes achieve P2P energy trading via blockchain' },
+      { name: 'Sustainable Energy Cycle', desc: 'Energy use-recycle-reuse closed loop is the foundation of sustainable civilization' },
+      { name: 'Interstellar Energy Transfer', desc: 'Theoretical framework for interstellar energy transfer via laser or microwave' }
+    ];
+
+    const coreAllocation = [
+      { icon: '🤖', name: 'AI', amount: '135,000,000', pct: '10%', color: '#00d4aa' },
+      { icon: '⛓️', name: 'WEB3', amount: '135,000,000', pct: '10%', color: '#4f7cff' },
+      { icon: '🏛️', name: 'RWA', amount: '135,000,000', pct: '10%', color: '#ffd700' },
+      { icon: '📈', name: 'Stocks', amount: '135,000,000', pct: '10%', color: '#ff6b9d' },
+      { icon: '💎', name: 'Majors', amount: '135,000,000', pct: '10%', color: '#a78bfa' },
+      { icon: '🥇', name: 'Commodities', amount: '135,000,000', pct: '10%', color: '#22c55e' },
+      { icon: '❤️', name: 'Charity', amount: '13,500,000', pct: '1%', color: '#f97316' }
+    ];
+
+    const strategy = [
+      { icon: '📅', title: 'Phased Release', desc: '3-30 year linear release per sector' },
+      { icon: '🏛️', title: 'DAO Governance', desc: 'Dedicated DAO governance per sector' },
+      { icon: '🤝', title: 'Partnerships', desc: 'Strategic partnerships with industry leaders' },
+      { icon: '💧', title: 'Liquidity', desc: '20% reserved per sector for liquidity mining' }
+    ];
+
+    const industries = [
+      { icon: '🏦', name: 'DeFi', color: '#00d4aa' },
+      { icon: '🎮', name: 'GameFi', color: '#4f7cff' },
+      { icon: '💬', name: 'SocialFi', color: '#ffd700' },
+      { icon: '🌐', name: 'Metaverse/NFT', color: '#ff6b9d' },
+      { icon: '🌱', name: 'Green Energy', color: '#22c55e' },
+      { icon: '📦', name: 'Supply Chain', color: '#a78bfa' },
+      { icon: '📚', name: 'EdTech', color: '#f97316' },
+      { icon: '🏥', name: 'Healthcare', color: '#06b6d4' },
+      { icon: '📡', name: 'IoT', color: '#8b5cf6' },
+      { icon: '🔒', name: 'Security', color: '#ef4444' }
+    ];
+
+    const paymentFeatures = [
+      { icon: '🌍', title: 'Cross-border Payment', desc: 'Solana-based, global transfers in seconds' },
+      { icon: '📜', title: 'Smart Contract Payment', desc: 'Condition-triggered auto execution, trustless' },
+      { icon: '💱', title: 'Multi-currency Support', desc: 'Support EACO, SOL, USDT, USDC and more' },
+      { icon: '🏪', title: 'Merchant Integration', desc: 'API/SDK for quick e-commerce and offline integration' },
+      { icon: '🔄', title: 'Subscription Payment', desc: 'Automated recurring payments for SaaS and memberships' },
+      { icon: '🛡️', title: 'Escrow Trading', desc: "On-chain escrow mechanism, ensuring both parties' rights" }
+    ];
+
+    const paymentStats = [
+      { label: 'Tx Speed', value: '~400ms', color: '#00d4aa' },
+      { label: 'Fee', value: '< $0.001', color: '#4f7cff' },
+      { label: 'Throughput', value: '65,000+ TPS', color: '#ffd700' },
+      { label: 'Uptime', value: '99.99%', color: '#ff6b9d' }
+    ];
+
+    const paymentFlow = [
+      { step: '01', title: 'Initiate', desc: 'User selects asset and recipient' },
+      { step: '02', title: 'Contract Execution', desc: 'On-chain auto verification' },
+      { step: '03', title: 'Instant Settlement', desc: 'Transfer completed within 400ms' },
+      { step: '04', title: 'Confirmation', desc: 'Both parties receive on-chain confirmation' }
+    ];
+
+    const paymentTrends = [
+      { icon: '🤖', name: 'AI Agent Payments', desc: 'AI agents autonomously handle purchases and settlements' },
+      { icon: '🔗', name: 'Cross-chain Payments', desc: 'Seamless multi-chain payments across Solana/ETH/BSC' },
+      { icon: '🏛️', name: 'RWA Asset Payment', desc: 'Pay directly with tokenized real estate and bonds' },
+      { icon: '💰', name: 'DeFi Native Payment', desc: 'Pay while earning, funds never idle' },
+      { icon: '🔐', name: 'ZK Privacy Payment', desc: 'ZK-Proof compliant privacy protection' },
+      { icon: '📡', name: 'IoT Micropayment', desc: 'Autonomous micro-settlements between devices' },
+      { icon: '📜', name: 'Programmable Payment', desc: 'Smart contract condition-triggered execution' },
+      { icon: '💬', name: 'Social Payment', desc: 'Auto settlement for creator economy' },
+      { icon: '🌱', name: 'Green Carbon Payment', desc: 'Auto carbon offset per transaction' },
+      { icon: '🏦', name: 'CBDC Bridge', desc: 'Central bank digital currency compliant channel' }
+    ];
+
+    const orbMarkets = [
+      { name: 'AI (e-USDT)', url: 'https://orbmarkets.io/address/GeF9cBVQm4A15mcBHxcncXWYrojKsn4zgKEXLDYdmEDi' },
+      { name: 'WEB3 (e-SOL)', url: 'https://orbmarkets.io/address/7cmAfsKJrvcbMLWoXDTX5uZ2C8udBjzsKEgaxeweKMMU' },
+      { name: 'RWA (e-USDC)', url: 'https://orbmarkets.io/address/Cm6EkxcYNfvxeYDBQ3TGXFqa9NCWvrFKHz4Cfju91dhr' },
+      { name: 'Stocks (eCNH-e)', url: 'https://orbmarkets.io/address/EeECjxqjUALgDEoT6SW2ebN2RTFvN7ci8S8CMaPrLZHw' },
+      { name: 'Charity (WBNB-e)', url: 'https://orbmarkets.io/address/4ELFtiSCM1Ra8yhVFJemnMZPQC2a8yZ3RhSKmckt5Swx' },
+      { name: 'EACO Token', url: 'https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH' }
+    ];
+
+    const ecosystemLinks = [
+      { name: "Earth's Best Coin", url: 'https://ucoingroup.github.io/earths-best-coin/' },
+      { name: 'EACO 50 Rate', url: 'https://ucoingroup.github.io/eaco50rate/' },
+      { name: '100 Ways To Wealth', url: 'https://ucoingroup.github.io/100WaysToWealth/' },
+      { name: 'Earth 100 Friends', url: 'https://ucoingroup.github.io/earth-100-friends/' },
+      { name: 'EACO SWAP', url: 'https://ucoingroup.github.io/eacoSWAP/' },
+      { name: 'Good Books', url: 'https://ucoingroup.github.io/good-books/' },
+      { name: 'EUR-EACO', url: 'https://ucoingroup.github.io/eur-eaco/' },
+      { name: 'AU Trade', url: 'https://ucoingroup.github.io/au-trade/' },
+      { name: 'Mohist Tech', url: 'https://ucoingroup.github.io/Mohist-Tech/' },
+      { name: 'EACO Build World', url: 'https://eaco-build-world.base44.app/' },
+      { name: 'GitHub Repo', url: 'https://github.com/eacocc/eacoweb3-2025' }
+    ];
+
+    // ============ RENDER ============
+    function renderEarthEnergy() {
+      document.getElementById('earthEnergyGrid').innerHTML = earthEnergy.map(e => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${e.icon}</div>
+          <h4 class="font-bold mb-2" style="color:${e.color}">${e.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">${e.threshold}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderInterstellarEnergy() {
+      document.getElementById('interstellarEnergyGrid').innerHTML = interstellarEnergy.map(e => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${e.icon}</div>
+          <h4 class="font-bold mb-2" style="color:${e.color}">${e.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">${e.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderIntegration() {
+      document.getElementById('integrationGrid').innerHTML = integration.map(e => `
+        <div class="text-center">
+          <div class="text-4xl mb-3">${e.icon}</div>
+          <h4 class="font-bold mb-2 text-white">${e.title}</h4>
+          <p class="text-sm text-gray-400">${e.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderLaws() {
+      const groups = [
+        { title: 'Laws 1-10: Core Foundation', laws: energyLaws.slice(0, 10), color: '#00d4aa' },
+        { title: 'Laws 11-20: Extended Laws', laws: energyLaws.slice(10, 20), color: '#4f7cff' },
+        { title: 'Laws 21-30: Frontier Laws', laws: energyLaws.slice(20, 30), color: '#ffd700' }
+      ];
+      document.getElementById('lawsContainer').innerHTML = groups.map(g => `
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-center mb-6" style="color:${g.color}">${g.title}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${g.laws.map((law, i) => `
+              <div class="glass-card p-5">
+                <div class="flex items-start gap-3">
+                  <span class="text-sm font-bold px-2 py-1 rounded" style="background:${g.color}20;color:${g.color}">${groups.indexOf(g) * 10 + i + 1}</span>
+                  <div>
+                    <h4 class="font-bold text-sm text-white mb-1">${law.name}</h4>
+                    <p class="text-xs text-gray-400">${law.desc}</p>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderCoreAllocation() {
+      document.getElementById('coreAllocationGrid').innerHTML = coreAllocation.map(c => `
+        <div class="glass-card p-6 text-center">
+          <div class="text-3xl mb-2">${c.icon}</div>
+          <h4 class="font-bold text-sm mb-1" style="color:${c.color}">${c.name}</h4>
+          <div class="text-lg font-bold counter" style="color:${c.color}">${c.amount}</div>
+          <div class="text-xs text-gray-400">${c.pct}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderStrategy() {
+      document.getElementById('strategyGrid').innerHTML = strategy.map(s => `
+        <div class="text-center">
+          <div class="text-3xl mb-3">${s.icon}</div>
+          <h4 class="font-bold text-sm mb-2 text-white">${s.title}</h4>
+          <p class="text-xs text-gray-400">${s.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderIndustries() {
+      document.getElementById('industryGrid').innerHTML = industries.map(ind => `
+        <div class="glass-card p-5 text-center">
+          <div class="text-2xl mb-2">${ind.icon}</div>
+          <h4 class="text-sm font-bold mb-1" style="color:${ind.color}">${ind.name}</h4>
+          <p class="text-xs text-gray-400">13,500,000</p>
+        </div>
+      `).join('');
+    }
+
+    function renderPayment() {
+      document.getElementById('paymentFeaturesGrid').innerHTML = paymentFeatures.map(f => `
+        <div class="glass-card p-6">
+          <div class="text-3xl mb-3">${f.icon}</div>
+          <h4 class="font-bold mb-2 text-white">${f.title}</h4>
+          <p class="text-sm text-gray-400">${f.desc}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('paymentStatsGrid').innerHTML = paymentStats.map(s => `
+        <div class="glass-card p-4 text-center">
+          <div class="text-xs text-gray-400 mb-1">${s.label}</div>
+          <div class="text-xl font-bold counter" style="color:${s.color}">${s.value}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('paymentFlowGrid').innerHTML = paymentFlow.map((f, i) => `
+        <div class="relative text-center">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#4f7cff] flex items-center justify-center mx-auto mb-4 text-xl font-bold text-white">${f.step}</div>
+          ${i < paymentFlow.length - 1 ? '<div class="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-[#00d4aa]/50 to-transparent"></div>' : ''}
+          <h4 class="text-base font-bold text-white mb-2">${f.title}</h4>
+          <p class="text-sm text-gray-400">${f.desc}</p>
+        </div>
+      `).join('');
+
+      const trendColors = ['#00d4aa', '#4f7cff', '#ffd700', '#ff6b9d', '#a78bfa'];
+      document.getElementById('paymentTrendsGrid').innerHTML = paymentTrends.map((item, i) => `
+        <div class="glass-card p-5">
+          <div class="text-3xl mb-3">${item.icon}</div>
+          <h4 class="text-sm font-bold mb-2" style="color:${trendColors[i % 5]}">${item.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">${item.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderOrbMarkets() {
+      document.getElementById('orbMarketsGrid').innerHTML = orbMarkets.map(m => `
+        <a href="${m.url}" target="_blank" rel="noopener noreferrer" class="glass-card p-4 flex items-center justify-between hover:border-[#00d4aa]/50 transition-all">
+          <span class="font-medium text-sm">${m.name}</span>
+          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      `).join('');
+    }
+
+    function renderEcosystem() {
+      document.getElementById('ecosystemGrid').innerHTML = ecosystemLinks.map(l => `
+        <a href="${l.url}" target="_blank" rel="noopener noreferrer" class="glass-card p-4 flex items-center justify-between hover:border-[#4f7cff]/50 transition-all">
+          <span class="font-medium text-sm">${l.name}</span>
+          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      `).join('');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Render all
+    renderEarthEnergy();
+    renderInterstellarEnergy();
+    renderIntegration();
+    renderLaws();
+    renderCoreAllocation();
+    renderStrategy();
+    renderIndustries();
+    renderPayment();
+    renderOrbMarkets();
+    renderEcosystem();
+  </script>
+</body>
+</html>
