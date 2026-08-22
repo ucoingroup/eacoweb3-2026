@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>逻辑学自学课程 | Logic Self-Study Course v0.01</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-deep: #050814;
+  --bg-mid: #0a0f24;
+  --bg-card: rgba(15, 22, 48, 0.75);
+  --bg-card-hover: rgba(20, 30, 65, 0.85);
+  --accent-cyan: #00d4ff;
+  --accent-purple: #a855f7;
+  --accent-gold: #ffd700;
+  --accent-green: #00ff88;
+  --accent-orange: #ff8c42;
+  --accent-pink: #ff6b9d;
+  --text-primary: #e8edf5;
+  --text-secondary: #9ba8c4;
+  --text-muted: #5a6a8a;
+  --border-glow: rgba(0, 212, 255, 0.25);
+  --border-subtle: rgba(168, 85, 247, 0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; scroll-padding-top: 70px; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: var(--bg-deep); color: var(--text-primary); line-height: 1.7;
+  overflow-x: hidden; min-height: 100vh;
+}
+#starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.bg-gradient {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(0, 255, 136, 0.04) 0%, transparent 50%);
+}
+
+/* Navbar */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: rgba(5, 8, 20, 0.85); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glow);
+  padding: 0.625rem 1.5rem; display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.nav-logo {
+  font-size: 1.1rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+.nav-links { display: flex; gap: 1.25rem; list-style: none; align-items: center; flex-wrap: wrap; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
+  transition: var(--transition); position: relative; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--accent-cyan); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--accent-cyan); transition: var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-controls { display: flex; gap: 0.75rem; align-items: center; }
+.lang-toggle {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border: none; padding: 0.4rem 1rem; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: var(--transition);
+  white-space: nowrap;
+}
+.lang-toggle:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+.version-badge {
+  font-size: 0.7rem; color: var(--accent-gold); border: 1px solid var(--accent-gold);
+  padding: 0.15rem 0.5rem; border-radius: 12px; white-space: nowrap;
+}
+.menu-toggle {
+  display: none; background: transparent; border: 1px solid var(--border-glow);
+  color: var(--accent-cyan); font-size: 1.2rem; padding: 0.3rem 0.6rem;
+  border-radius: 8px; cursor: pointer; transition: var(--transition);
+}
+.menu-toggle:hover { background: rgba(0, 212, 255, 0.1); }
+.back-to-top {
+  position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px;
+  border-radius: 50%; border: 1px solid var(--border-glow);
+  background: rgba(5, 8, 20, 0.85); backdrop-filter: blur(10px);
+  color: var(--accent-cyan); font-size: 1.4rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: var(--transition); z-index: 98;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: rgba(0, 212, 255, 0.15); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3); }
+
+/* Layout */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+section { padding: 4rem 0; position: relative; z-index: 1; }
+
+/* Hero */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center; padding-top: 5rem;
+}
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem; line-height: 1.3;
+}
+.hero-subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-secondary); max-width: 700px; margin-bottom: 2rem; }
+.hero-meta { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+.hero-meta-item { text-align: center; }
+.hero-meta-value {
+  font-size: 2.2rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-meta-label { font-size: 0.85rem; color: var(--text-secondary); }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border: none; padding: 0.7rem 2rem; border-radius: 25px;
+  font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: var(--transition);
+  display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 25px rgba(0, 212, 255, 0.4); }
+.btn-secondary {
+  background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan);
+  padding: 0.7rem 2rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; transition: var(--transition); display: inline-block;
+}
+.btn-secondary:hover { background: rgba(0, 212, 255, 0.1); }
+
+/* Orbit */
+.orbit-container { position: relative; width: 200px; height: 200px; margin-bottom: 2rem; }
+.orbit-ring { position: absolute; border: 1px solid var(--border-glow); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.orbit-ring:nth-child(1) { width: 200px; height: 200px; animation: spin 20s linear infinite; }
+.orbit-ring:nth-child(2) { width: 150px; height: 150px; animation: spin 15s linear infinite reverse; border-color: var(--border-subtle); }
+.orbit-ring:nth-child(3) { width: 100px; height: 100px; animation: spin 10s linear infinite; }
+.orbit-core {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 40px; height: 40px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-gold) 0%, var(--accent-purple) 70%, transparent 100%);
+  box-shadow: 0 0 40px var(--accent-gold); animation: pulse 3s ease-in-out infinite;
+}
+.orbit-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; top: 0; left: 50%; transform: translateX(-50%); }
+.orbit-ring:nth-child(1) .orbit-dot { background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); }
+.orbit-ring:nth-child(2) .orbit-dot { background: var(--accent-purple); box-shadow: 0 0 10px var(--accent-purple); }
+.orbit-ring:nth-child(3) .orbit-dot { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+@keyframes spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; } }
+
+/* Section Headers */
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-desc { color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 0.95rem; }
+
+/* Progress Bar */
+.progress-bar-container {
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: var(--radius); padding: 1.5rem; margin-bottom: 2rem;
+}
+.progress-bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.progress-bar-label { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+.progress-bar-percent { font-size: 1.2rem; font-weight: 800; color: var(--accent-green); }
+.progress-bar-track {
+  width: 100%; height: 12px; background: rgba(0,0,0,0.3); border-radius: 6px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; width: 0%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-bar-reset {
+  background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted);
+  padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.75rem; cursor: pointer;
+  transition: var(--transition); margin-top: 0.75rem;
+}
+.progress-bar-reset:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+
+/* Stage Card */
+.stage-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; transition: var(--transition);
+}
+.stage-card:hover { border-color: var(--border-glow); }
+.stage-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.stage-icon { font-size: 2.5rem; flex-shrink: 0; }
+.stage-title { font-size: 1.5rem; font-weight: 700; }
+.stage-badge {
+  font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 12px;
+  white-space: nowrap; font-weight: 600;
+}
+.stage-badge.primary { background: rgba(0,255,136,0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+.stage-badge.middle { background: rgba(0,212,255,0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+.stage-badge.high { background: rgba(168,85,247,0.15); color: var(--accent-purple); border: 1px solid var(--accent-purple); }
+.stage-badge.uni { background: rgba(255,215,0,0.15); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
+.stage-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.stage-meta-item { font-size: 0.85rem; color: var(--text-secondary); }
+.stage-meta-item strong { color: var(--text-primary); }
+
+/* Subsection */
+.subsection-title {
+  font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; margin-top: 1.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.subsection-title.cyan { color: var(--accent-cyan); }
+.subsection-title.green { color: var(--accent-green); }
+.subsection-title.gold { color: var(--accent-gold); }
+.subsection-title.purple { color: var(--accent-purple); }
+
+/* Knowledge Points */
+.kp-grid { display: grid; gap: 1rem; }
+.kp-item {
+  background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); padding: 1rem 1.25rem; transition: var(--transition);
+  display: flex; gap: 0.75rem; align-items: flex-start;
+}
+.kp-item:hover { border-color: var(--border-glow); }
+.kp-item.completed { border-color: var(--accent-green); background: rgba(0, 255, 136, 0.05); }
+.kp-checkbox {
+  width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--text-muted);
+  cursor: pointer; flex-shrink: 0; transition: var(--transition);
+  display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: transparent;
+  margin-top: 0.15rem;
+}
+.kp-checkbox.checked { background: var(--accent-green); border-color: var(--accent-green); color: #000; }
+.kp-content { flex: 1; }
+.kp-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem; }
+.kp-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* Exercise */
+.exercise-item {
+  background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); margin-bottom: 0.75rem; overflow: hidden;
+}
+.exercise-header {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1.25rem;
+  cursor: pointer; transition: var(--transition);
+}
+.exercise-header:hover { background: rgba(0, 212, 255, 0.05); }
+.exercise-number {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: #000;
+}
+.exercise-question { flex: 1; font-size: 0.88rem; color: var(--text-primary); }
+.exercise-toggle { font-size: 1.2rem; color: var(--text-muted); transition: var(--transition); flex-shrink: 0; }
+.exercise-item.open .exercise-toggle { transform: rotate(180deg); }
+.exercise-answer {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 1.25rem;
+}
+.exercise-item.open .exercise-answer { max-height: 500px; padding: 0.5rem 1.25rem 1rem; }
+.exercise-answer-content {
+  font-size: 0.85rem; color: var(--accent-green); line-height: 1.6;
+  border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;
+}
+
+/* Resource */
+.resource-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.resource-item {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); transition: var(--transition);
+}
+.resource-item:hover { border-color: var(--border-glow); }
+.resource-icon { font-size: 1.2rem; flex-shrink: 0; }
+.resource-text { font-size: 0.85rem; color: var(--text-secondary); }
+.resource-text strong { color: var(--text-primary); }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 3rem 1.5rem; border-top: 1px solid var(--border-subtle);
+  background: rgba(5, 8, 20, 0.6); position: relative; z-index: 1;
+}
+.footer-slogan {
+  font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.footer-sub { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+.footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Bilingual */
+[data-lang="en"] [data-zh] { display: none; }
+[data-lang="zh"] [data-en] { display: none; }
+[data-lang="en"] [data-en] { display: revert; }
+[data-lang="zh"] [data-zh] { display: revert; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar { padding: 0.5rem 1rem; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none; flex-direction: column; position: fixed; top: 3rem; left: 0;
+    width: 100%; background: rgba(5, 8, 20, 0.98); backdrop-filter: blur(20px);
+    padding: 1rem 1.5rem; gap: 0.75rem; border-bottom: 1px solid var(--border-glow); z-index: 99;
+  }
+  .nav-links.open { display: flex; }
+  section { padding: 2.5rem 0; }
+  .hero { min-height: auto; padding-top: 5rem; padding-bottom: 2rem; }
+  .hero-meta { gap: 1rem; }
+  .hero-meta-value { font-size: 1.5rem; }
+  .stage-card { padding: 1.5rem; }
+  .stage-icon { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="bg-gradient"></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <span data-zh>🧠 逻辑学自学课程</span>
+    <span data-en>🧠 Logic Self-Study</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#primary"><span data-zh>小学</span><span data-en>Primary</span></a></li>
+    <li><a href="#middle"><span data-zh>初中</span><span data-en>Middle</span></a></li>
+    <li><a href="#high"><span data-zh>高中</span><span data-en>High School</span></a></li>
+    <li><a href="#university"><span data-zh>大学</span><span data-en>University</span></a></li>
+    <li><a href="#roadmap"><span data-zh>学习路线</span><span data-en>Roadmap</span></a></li>
+  </ul>
+  <div class="nav-controls">
+    <span class="version-badge">v0.01</span>
+    <button class="lang-toggle" onclick="toggleLang()">
+      <span data-zh>EN</span>
+      <span data-en>中文</span>
+    </button>
+    <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="orbit-container">
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-core"></div>
+  </div>
+  <h1 class="hero-title">
+    <span data-zh>逻辑学自学课程</span>
+    <span data-en>Logic Self-Study Course</span>
+  </h1>
+  <p class="hero-subtitle">
+    <span data-zh>从小学到大学，系统学习逻辑思维。每个阶段都有清晰的学习目标、知识点、练习题和推荐资源</span>
+    <span data-en>From primary school to university, systematically learn logical thinking. Each stage has clear goals, knowledge points, exercises, and recommended resources</span>
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">4</div>
+      <div class="hero-meta-label"><span data-zh>学习阶段</span><span data-en>Stages</span></div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">20+</div>
+      <div class="hero-meta-label"><span data-zh>知识点</span><span data-en>Key Points</span></div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">16+</div>
+      <div class="hero-meta-label"><span data-zh>练习题</span><span data-en>Exercises</span></div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">100%</div>
+      <div class="hero-meta-label"><span data-zh>免费自学</span><span data-en>Free</span></div>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="#primary" class="btn-primary"><span data-zh>开始学习</span><span data-en>Start Learning</span></a>
+    <a href="#roadmap" class="btn-secondary"><span data-zh>查看路线图</span><span data-en>View Roadmap</span></a>
+  </div>
+</section>
+
+<!-- Progress Tracker -->
+<section style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="progress-bar-container">
+      <div class="progress-bar-header">
+        <span class="progress-bar-label">
+          <span data-zh>学习进度</span>
+          <span data-en>Learning Progress</span>
+        </span>
+        <span class="progress-bar-percent" id="progress-percent">0%</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <button class="progress-bar-reset" onclick="resetProgress()">
+        <span data-zh>重置进度</span>
+        <span data-en>Reset Progress</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Primary School -->
+<section id="primary" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>小学阶段</span>
+        <span data-en>Primary School Stage</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>适合 6-12 岁。用趣味故事和图形游戏培养基础逻辑思维，学会区分对错、找规律、做简单推理</span>
+        <span data-en>Ages 6-12. Fun stories and visual games to develop basic logical thinking, distinguish right from wrong, find patterns, and make simple inferences</span>
+      </p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-header">
+        <span class="stage-icon">🌱</span>
+        <span class="stage-title"><span data-zh>趣味逻辑启蒙</span><span data-en>Fun Logic Intro</span></span>
+        <span class="stage-badge primary"><span data-zh>入门</span><span data-en>Beginner</span></span>
+      </div>
+      <div class="stage-meta">
+        <div class="stage-meta-item"><span data-zh>建议年龄</span><span data-en>Age</span>: <strong>6-12</strong></div>
+        <div class="stage-meta-item"><span data-zh>建议学时</span><span data-en>Duration</span>: <strong>4-8 weeks</strong></div>
+        <div class="stage-meta-item"><span data-zh>难度</span><span data-en>Difficulty</span>: <strong>★☆☆☆☆</strong></div>
+      </div>
+
+      <div class="subsection-title green">📋 <span data-zh>学习目标</span><span data-en>Learning Goals</span></div>
+      <div class="kp-grid" id="kp-primary"></div>
+
+      <div class="subsection-title cyan">📝 <span data-zh>练习题</span><span data-en>Exercises</span></div>
+      <div id="ex-primary"></div>
+
+      <div class="subsection-title gold">📚 <span data-zh>推荐资源</span><span data-en>Resources</span></div>
+      <div class="resource-list" id="res-primary"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Middle School -->
+<section id="middle" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>初中阶段</span>
+        <span data-en>Middle School Stage</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>适合 12-15 岁。学习命题逻辑基础、三段论、归纳推理，学会识别常见谬误，提升论证分析能力</span>
+        <span data-en>Ages 12-15. Learn propositional logic basics, syllogisms, inductive reasoning, and identify common fallacies</span>
+      </p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-header">
+        <span class="stage-icon">💧</span>
+        <span class="stage-title"><span data-zh>形式逻辑基础</span><span data-en>Formal Logic Basics</span></span>
+        <span class="stage-badge middle"><span data-zh>基础</span><span data-en>Foundation</span></span>
+      </div>
+      <div class="stage-meta">
+        <div class="stage-meta-item"><span data-zh>建议年龄</span><span data-en>Age</span>: <strong>12-15</strong></div>
+        <div class="stage-meta-item"><span data-zh>建议学时</span><span data-en>Duration</span>: <strong>6-10 weeks</strong></div>
+        <div class="stage-meta-item"><span data-zh>难度</span><span data-en>Difficulty</span>: <strong>★★☆☆☆</strong></div>
+      </div>
+
+      <div class="subsection-title green">📋 <span data-zh>学习目标</span><span data-en>Learning Goals</span></div>
+      <div class="kp-grid" id="kp-middle"></div>
+
+      <div class="subsection-title cyan">📝 <span data-zh>练习题</span><span data-en>Exercises</span></div>
+      <div id="ex-middle"></div>
+
+      <div class="subsection-title gold">📚 <span data-zh>推荐资源</span><span data-en>Resources</span></div>
+      <div class="resource-list" id="res-middle"></div>
+    </div>
+  </div>
+</section>
+
+<!-- High School -->
+<section id="high" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>高中阶段</span>
+        <span data-en>High School Stage</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>适合 15-18 岁。学习谓词逻辑、辩证逻辑入门、谬误体系、批判性思维方法论，为学术写作和考试做准备</span>
+        <span data-en>Ages 15-18. Learn predicate logic, dialectical logic intro, fallacy systems, critical thinking methodology, preparing for academic writing and exams</span>
+      </p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-header">
+        <span class="stage-icon">🔥</span>
+        <span class="stage-title"><span data-zh>批判性思维进阶</span><span data-en>Critical Thinking Advanced</span></span>
+        <span class="stage-badge high"><span data-zh>进阶</span><span data-en>Advanced</span></span>
+      </div>
+      <div class="stage-meta">
+        <div class="stage-meta-item"><span data-zh>建议年龄</span><span data-en>Age</span>: <strong>15-18</strong></div>
+        <div class="stage-meta-item"><span data-zh>建议学时</span><span data-en>Duration</span>: <strong>8-12 weeks</strong></div>
+        <div class="stage-meta-item"><span data-zh>难度</span><span data-en>Difficulty</span>: <strong>★★★☆☆</strong></div>
+      </div>
+
+      <div class="subsection-title green">📋 <span data-zh>学习目标</span><span data-en>Learning Goals</span></div>
+      <div class="kp-grid" id="kp-high"></div>
+
+      <div class="subsection-title cyan">📝 <span data-zh>练习题</span><span data-en>Exercises</span></div>
+      <div id="ex-high"></div>
+
+      <div class="subsection-title gold">📚 <span data-zh>推荐资源</span><span data-en>Resources</span></div>
+      <div class="resource-list" id="res-high"></div>
+    </div>
+  </div>
+</section>
+
+<!-- University -->
+<section id="university" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>大学阶段</span>
+        <span data-en>University Stage</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>适合 18 岁以上。系统学习数理逻辑、非经典逻辑、AI 与逻辑交叉，使用 Coq/Lean 进行形式化验证实践</span>
+        <span data-en>Ages 18+. Systematic study of mathematical logic, non-classical logic, AI-logic intersection, with Coq/Lean formal verification practice</span>
+      </p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-header">
+        <span class="stage-icon">🎓</span>
+        <span class="stage-title"><span data-zh>数理逻辑与 AI 前沿</span><span data-en>Mathematical Logic & AI Frontier</span></span>
+        <span class="stage-badge uni"><span data-zh>专业</span><span data-en>Professional</span></span>
+      </div>
+      <div class="stage-meta">
+        <div class="stage-meta-item"><span data-zh>建议年龄</span><span data-en>Age</span>: <strong>18+</strong></div>
+        <div class="stage-meta-item"><span data-zh>建议学时</span><span data-en>Duration</span>: <strong>12-24 weeks</strong></div>
+        <div class="stage-meta-item"><span data-zh>难度</span><span data-en>Difficulty</span>: <strong>★★★★★</strong></div>
+      </div>
+
+      <div class="subsection-title green">📋 <span data-zh>学习目标</span><span data-en>Learning Goals</span></div>
+      <div class="kp-grid" id="kp-uni"></div>
+
+      <div class="subsection-title cyan">📝 <span data-zh>练习题</span><span data-en>Exercises</span></div>
+      <div id="ex-uni"></div>
+
+      <div class="subsection-title gold">📚 <span data-zh>推荐资源</span><span data-en>Resources</span></div>
+      <div class="resource-list" id="res-uni"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section id="roadmap" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>完整学习路线图</span>
+        <span data-en>Complete Learning Roadmap</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>从零基础到形式化验证，四个阶段循序渐进。建议按顺序学习，每个阶段完成后进入下一阶段</span>
+        <span data-en>From zero to formal verification, four progressive stages. Study in order and advance after completing each stage</span>
+      </p>
+    </div>
+    <div class="kp-grid">
+      <div class="kp-item">
+        <div class="kp-content">
+          <div class="kp-title">🌱 <span data-zh>第 1 阶段：小学启蒙（1-2 月）</span><span data-en>Stage 1: Primary Intro (1-2 months)</span></div>
+          <div class="kp-desc">
+            <span data-zh>用"如果...那么..."造句；玩图形规律游戏；学习分类与排序。目标：建立因果概念，学会区分事实与观点。完成本阶段后，能识别简单的对错推理</span>
+            <span data-en>Practice "if...then..." sentences; play visual pattern games; learn classification and ordering. Goal: establish causality concepts, distinguish facts from opinions. After completion, identify simple correct/incorrect reasoning</span>
+          </div>
+        </div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-content">
+          <div class="kp-title">💧 <span data-zh>第 2 阶段：初中基础（2-3 月）</span><span data-en>Stage 2: Middle School Foundation (2-3 months)</span></div>
+          <div class="kp-desc">
+            <span data-zh>学习命题逻辑的真值表；掌握三段论结构；了解归纳与演绎的区别。目标：能分析简单论证的有效性，识别常见谬误。结合数学证明和语文议论文写作练习</span>
+            <span data-en>Learn truth tables for propositional logic; master syllogism structure; understand deduction vs induction. Goal: analyze simple argument validity, identify common fallacies. Practice with math proofs and essay writing</span>
+          </div>
+        </div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-content">
+          <div class="kp-title">🔥 <span data-zh>第 3 阶段：高中进阶（3-4 月）</span><span data-en>Stage 3: High School Advanced (3-4 months)</span></div>
+          <div class="kp-desc">
+            <span data-zh>学习谓词逻辑量词；了解辩证逻辑三大规律；系统学习谬误分类。目标：能独立撰写结构严谨的论证文章，为学术写作和考试（LSAT/GMAT/考研逻辑）打基础</span>
+            <span data-en>Learn predicate logic quantifiers; understand three dialectical laws; systematically study fallacy taxonomy. Goal: write well-structured argumentative essays, prepare for LSAT/GMAT/graduate entrance logic</span>
+          </div>
+        </div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-content">
+          <div class="kp-title">🎓 <span data-zh>第 4 阶段：大学专业（4-8 月）</span><span data-en>Stage 4: University Professional (4-8 months)</span></div>
+          <div class="kp-desc">
+            <span data-zh>系统学习数理逻辑（集合论/模型论/证明论）；了解哥德尔不完备定理；尝试 Coq 或 Lean 定理证明器。目标：能阅读逻辑学论文，理解 AI 安全中形式化验证的作用</span>
+            <span data-en>Systematically study mathematical logic (set/model/proof theory); understand Godel's incompleteness theorem; try Coq or Lean theorem provers. Goal: read logic papers, understand formal verification in AI safety</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-slogan">
+    <span data-zh>逻辑是思维的科学，科学思维从逻辑开始</span>
+    <span data-en>Logic is the science of thought; scientific thinking begins with logic</span>
+  </div>
+  <p class="footer-sub">
+    <span data-zh>本课程免费开放，适合所有年龄段自学使用</span>
+    <span data-en>This course is free and open for self-study at all ages</span>
+  </p>
+  <p class="footer-copy">
+    <span data-zh>© 2026 逻辑学自学课程 v0.01 · 仅供教育和学习目的</span>
+    <span data-en>© 2026 Logic Self-Study Course v0.01 · For educational purposes only</span>
+  </p>
+</footer>
+
+<script>
+// ========== Data ==========
+const courseData = {
+  primary: {
+    knowledgePoints: [
+      { id: 'p1', titleZh: '区分对与错', titleEn: 'Right vs Wrong', descZh: '学习区分正确和错误的陈述。例："太阳从西边升起"是错的，"太阳从东边升起"是对的', descEn: 'Learn to distinguish correct and incorrect statements. E.g., "The sun rises in the west" is wrong' },
+      { id: 'p2', titleZh: '因果关系', titleEn: 'Cause and Effect', descZh: '理解"因为...所以..."结构。例：因为下雨，所以地面湿了。学习区分原因和结果', descEn: 'Understand "because...therefore..." structure. E.g., Because it rained, the ground is wet' },
+      { id: 'p3', titleZh: '分类与归类', titleEn: 'Classification', descZh: '按共同特征分组。例：把水果按颜色分类（红色：苹果、草莓；黄色：香蕉、芒果）', descEn: 'Group by common features. E.g., classify fruits by color (red: apple, strawberry; yellow: banana, mango)' },
+      { id: 'p4', titleZh: '找规律', titleEn: 'Pattern Finding', descZh: '识别数列和图形中的规律。例：2, 4, 6, 8, ? 下一个是10。红蓝红蓝红? 下一个是蓝', descEn: 'Identify patterns in sequences and shapes. E.g., 2, 4, 6, 8, ? next is 10' },
+      { id: 'p5', titleZh: '简单推理', titleEn: 'Simple Reasoning', descZh: '用已知信息推出新结论。例：所有猫都有尾巴，Tom 是一只猫，所以 Tom 有尾巴', descEn: 'Derive new conclusions from known info. E.g., All cats have tails, Tom is a cat, so Tom has a tail' }
+    ],
+    exercises: [
+      { qZh: '判断对错："月亮是太阳的卫星。"', qEn: 'True or False: "The Moon is a satellite of the Sun."', aZh: '错误。月亮是地球的卫星，不是太阳的卫星。太阳的卫星不存在，太阳是恒星。', aEn: 'False. The Moon is a satellite of the Earth, not the Sun. The Sun is a star and has no satellites.' },
+      { qZh: '完成推理："所有的鸟都会飞，企鹅是鸟，所以____。"', qEn: 'Complete the reasoning: "All birds can fly, penguins are birds, so ____."', aZh: '按照前提"所有鸟都会飞"的逻辑，结论是"企鹅会飞"。但这个前提在现实中是错的（企鹅不会飞），这说明前提错误时推理结论也可能错误——这正是学习逻辑的价值：区分推理形式的有效性和前提的真实性。', aEn: 'Following the premise "all birds can fly," the conclusion is "penguins can fly." But this premise is factually wrong (penguins cannot fly), showing that false premises can lead to false conclusions — this is the value of logic: distinguishing valid reasoning form from true premises.' },
+      { qZh: '找规律：🔴🔵🔴🔵🔴? 下一个是什么颜色？', qEn: 'Find the pattern: Red Blue Red Blue Red ? What color comes next?', aZh: '蓝色。规律是红蓝交替出现。', aEn: 'Blue. The pattern alternates red and blue.' },
+      { qZh: '因果关系题：因为今天停电了，所以____。（写出合理结论）', qEn: 'Cause and effect: Because the power went out today, so ____. (Write a reasonable conclusion)', aZh: '合理结论包括：灯不亮了 / 电视看不了 / 空调不工作了 / 冰箱里的东西可能会化掉。这些都是停电的直接后果。', aEn: 'Reasonable conclusions: lights won\'t turn on / can\'t watch TV / AC won\'t work / food in fridge might melt. These are direct consequences of power outage.' }
+    ],
+    resources: [
+      { icon: '📖', textZh: '《儿童逻辑思维训练》（适合6-9岁）', textEn: 'Children\'s Logic Training (ages 6-9)' },
+      { icon: '🎮', textZh: '数独游戏（4x4 简单版开始）', textEn: 'Sudoku games (start with 4x4 easy version)' },
+      { icon: '🧩', textZh: '图形规律推理桌游', textEn: 'Visual pattern reasoning board games' },
+      { icon: '📺', textZh: '可汗学院少儿逻辑系列（免费视频）', textEn: 'Khan Academy Kids Logic series (free videos)' }
+    ]
+  },
+  middle: {
+    knowledgePoints: [
+      { id: 'm1', titleZh: '命题与真值', titleEn: 'Propositions & Truth Values', descZh: '命题是可判断真假的陈述句。"今天下雨"是命题，"你好吗"不是。真值：真(T)或假(F)', descEn: 'A proposition is a statement that can be true or false. "It rains today" is a proposition; "How are you" is not' },
+      { id: 'm2', titleZh: '逻辑联结词', titleEn: 'Logical Connectives', descZh: '与(AND, ∧)、或(OR, ∨)、非(NOT, ¬)、蕴含(IMPLIES, →)、等价(IFF, ↔)。用真值表确定复合命题真假', descEn: 'AND(∧), OR(∨), NOT(¬), IMPLIES(→), IFF(↔). Use truth tables to determine compound proposition truth values' },
+      { id: 'm3', titleZh: '三段论', titleEn: 'Syllogism', descZh: '大前提+小前提=结论。例：所有人都会死（大前提），苏格拉底是人（小前提），苏格拉底会死（结论）', descEn: 'Major premise + minor premise = conclusion. E.g., All men are mortal; Socrates is a man; Socrates is mortal' },
+      { id: 'm4', titleZh: '归纳推理', titleEn: 'Inductive Reasoning', descZh: '从个别到一般。枚举归纳（观察100只天鹅都是白的→天鹅是白的）。注意：归纳结论不保证为真', descEn: 'From particular to general. Enumerative induction (100 white swans observed -> swans are white). Note: inductive conclusions are not guaranteed true' },
+      { id: 'm5', titleZh: '常见谬误', titleEn: 'Common Fallacies', descZh: '诉诸权威（因为专家说所以对）、诉诸情感（因为感动所以对）、滑坡谬误（如果A则一定导致Z）、稻草人（歪曲对方观点再反驳）', descEn: 'Appeal to authority, appeal to emotion, slippery slope, straw man fallacy' },
+      { id: 'm6', titleZh: '论证分析', titleEn: 'Argument Analysis', descZh: '识别论证结构：前提→推理→结论。评估前提是否为真、推理是否有效、结论是否可靠', descEn: 'Identify argument structure: premise -> inference -> conclusion. Evaluate premise truth, reasoning validity, conclusion soundness' }
+    ],
+    exercises: [
+      { qZh: '判断是否为命题："请关上门。"', qEn: 'Is this a proposition: "Please close the door."', aZh: '不是命题。命题必须是能判断真假的陈述句。祈使句（请关上门）不是命题，因为它没有真假值。', aEn: 'Not a proposition. A proposition must be a declarative statement with a truth value. Imperative sentences ("please close the door") are not propositions.' },
+      { qZh: '用真值表判断：如果 P 为真、Q 为假，那么 (P ∧ Q) ∨ ¬Q 的值是？', qEn: 'Using a truth table: if P is true and Q is false, what is (P AND Q) OR NOT Q?', aZh: 'P=T, Q=F。P∧Q = T∧F = F。¬Q = ¬F = T。(F) ∨ T = T。所以结果为真(T)。', aEn: 'P=T, Q=F. P AND Q = T AND F = F. NOT Q = NOT F = T. F OR T = T. Result is True.' },
+      { qZh: '指出谬误类型："小明说运动有益健康，但他自己从来不运动，所以他说的话不可信。"', qEn: 'Identify the fallacy: "Xiao Ming says exercise is healthy, but he never exercises, so his claim is unreliable."', aZh: '这是"诉诸人身"（Ad Hominem）谬误。攻击说话者本人而非论证内容。运动是否有益健康与说话者是否运动无关，应该看证据本身。', aEn: 'This is an Ad Hominem fallacy — attacking the person rather than the argument. Whether exercise is healthy is independent of whether the speaker exercises.' },
+      { qZh: '分析三段论："所有金属导电，铜是金属，所以铜导电。" 写出大前提、小前提、结论。', qEn: 'Analyze the syllogism: "All metals conduct electricity, copper is a metal, so copper conducts electricity." Identify major premise, minor premise, conclusion.', aZh: '大前提：所有金属导电。小前提：铜是金属。结论：铜导电。这是一个有效的 Barbara 式三段论，形式有效且前提为真，所以结论可靠。', aEn: 'Major premise: All metals conduct electricity. Minor premise: Copper is a metal. Conclusion: Copper conducts electricity. This is a valid Barbara syllogism with true premises, so the conclusion is sound.' }
+    ],
+    resources: [
+      { icon: '📖', textZh: 'Hurley《简明逻辑学导论》前 6 章', textEn: 'Hurley\'s "A Concise Introduction to Logic", chapters 1-6' },
+      { icon: '📖', textZh: '《普通逻辑》（人民大学出版社）', textEn: '"General Logic" (Renmin University Press)' },
+      { icon: '🧩', textZh: 'LSAT 逻辑推理入门 50 题', textEn: 'LSAT Logical Reasoning: 50 beginner problems' },
+      { icon: '💻', textZh: 'Stanford Encyclopedia of Philosophy（免费在线）', textEn: 'Stanford Encyclopedia of Philosophy (free online)' }
+    ]
+  },
+  high: {
+    knowledgePoints: [
+      { id: 'h1', titleZh: '谓词逻辑与量词', titleEn: 'Predicate Logic & Quantifiers', descZh: '全称量词（∀x，"所有x"）与存在量词（∃x，"存在x"）。例：∀x (人(x)→会死(x))；∃x (素数(x) ∧ 偶数(x))', descEn: 'Universal quantifier (∀x, "for all x") and existential quantifier (∃x, "there exists x"). E.g., ∀x (Human(x)→Mortal(x)); ∃x (Prime(x) ∧ Even(x))' },
+      { id: 'h2', titleZh: '辩证逻辑三大规律', titleEn: 'Three Laws of Dialectical Logic', descZh: '对立统一规律（矛盾是事物发展动力）、质量互变规律（量变积累引发质变）、否定之否定规律（发展呈螺旋上升）', descEn: 'Unity of opposites (contradiction drives development), quantitative-qualitative change (quantity accumulation triggers quality leap), negation of negation (spiral development)' },
+      { id: 'h3', titleZh: '谬误体系', titleEn: 'Fallacy Taxonomy', descZh: '形式谬误（肯定后件、否定前件、中项不周延）与非形式谬误（相关性谬误、含混谬误、预设谬误）', descEn: 'Formal fallacies (affirming consequent, denying antecedent, undistributed middle) and informal fallacies (relevance, ambiguity, presupposition)' },
+      { id: 'h4', titleZh: '论证评估方法论', titleEn: 'Argument Evaluation Methodology', descZh: 'ARG 框架：A(Acceptability)前提可接受性、R(Relevance)相关性、G(Grounds)充分性。图尔敏模型：数据-主张-保证-支撑-限定', descEn: 'ARG framework: Acceptability of premises, Relevance to conclusion, Grounds sufficiency. Toulmin model: data-claim-warrant-backing-qualifier' },
+      { id: 'h5', titleZh: '批判性阅读与写作', titleEn: 'Critical Reading & Writing', descZh: '识别文本中的隐含前提、未说明假设、论证结构。撰写结构化议论文：主张+理由+证据+反驳+结论', descEn: 'Identify implicit premises, unstated assumptions, argument structure. Write structured argumentative essays: claim+reasons+evidence+counterargument+conclusion' }
+    ],
+    exercises: [
+      { qZh: '将自然语言翻译为谓词逻辑："每个学生都喜欢至少一门课程。"', qEn: 'Translate to predicate logic: "Every student likes at least one course."', aZh: '设 S(x)=x是学生，C(x)=x是课程，L(x,y)=x喜欢y。翻译：∀x (S(x) → ∃y (C(y) ∧ L(x,y)))。含义：对所有x，如果x是学生，则存在y，y是课程且x喜欢y。', aEn: 'Let S(x)=x is a student, C(x)=x is a course, L(x,y)=x likes y. Translation: ∀x (S(x) → ∃y (C(y) ∧ L(x,y))). Meaning: For all x, if x is a student, there exists y such that y is a course and x likes y.' },
+      { qZh: '指出谬误："如果努力就能成功，他不成功说明他不够努力。"', qEn: 'Identify the fallacy: "If hard work leads to success, his failure means he didn\'t work hard enough."', aZh: '这是"肯定后件"谬误。形式：如果P则Q，非Q，所以非P。这个推理无效。努力→成功，不成功≠不努力，因为成功还需其他条件（机遇、天赋等）。否定后件只能否定前件当且仅当条件为充要条件。', aEn: 'This is the fallacy of "denying the antecedent." Form: If P then Q, not-Q, therefore not-P. Invalid reasoning. Hard work -> success does not mean no success -> no hard work, because success requires other factors (opportunity, talent, etc.).' },
+      { qZh: '用图尔敏模型分析："应该禁止校园手机，因为手机分散注意力，影响成绩。"', qEn: 'Analyze using Toulmin model: "Cellphones should be banned in schools because they distract students and hurt grades."', aZh: '主张：禁止校园手机。数据：手机分散注意力，影响成绩。保证：分散注意力的东西应被禁止。支撑：学校是学习场所，注意力分散降低学习效率。限定：除非用于教学目的。反驳：手机也可用于学习工具。', aEn: 'Claim: Ban cellphones in school. Data: Phones distract and hurt grades. Warrant: Distracting things should be banned. Backing: Schools are for learning; distraction reduces efficiency. Qualifier: Unless used for educational purposes. Rebuttal: Phones can also be learning tools.' },
+      { qZh: '辩论练习：用 A-R-G 框架评估论证"AI 将取代人类工作，所以应该限制 AI 发展。"', qEn: 'Debate exercise: Evaluate using A-R-G framework: "AI will replace human jobs, so AI development should be restricted."', aZh: 'A(可接受性)：前提"AI将取代人类工作"部分可接受但过于绝对——AI也会创造新工作。R(相关性)：前提与结论相关但不够。G(充分性)：从"取代工作"到"限制发展"的跳跃过大，缺少充分理由。论证不够充分。', aEn: 'A(Acceptability): "AI will replace jobs" is partially acceptable but overly absolute — AI also creates new jobs. R(Relevance): Premise relates to conclusion but insufficiently. G(Grounds): The leap from "job replacement" to "restrict development" is too large. Argument is insufficient.' }
+    ],
+    resources: [
+      { icon: '📖', textZh: 'Copi《逻辑学导论》完整版', textEn: 'Copi\'s "Introduction to Logic" (complete)' },
+      { icon: '📖', textZh: '金岳霖《形式逻辑》', textEn: 'Jin Yuelin\'s "Formal Logic"' },
+      { icon: '🧩', textZh: 'LSAT/GMAT 逻辑真题集', textEn: 'LSAT/GMAT official logic problem sets' },
+      { icon: '💻', textZh: 'Coursera: Think Again I-IV（杜克大学）', textEn: 'Coursera: Think Again I-IV (Duke University)' },
+      { icon: '📱', textZh: '考研管理类联考199逻辑真题', textEn: 'Graduate entrance exam (199) logic past papers' }
+    ]
+  },
+  uni: {
+    knowledgePoints: [
+      { id: 'u1', titleZh: '集合论与公理系统', titleEn: 'Set Theory & Axiomatic Systems', descZh: 'ZFC 公理系统、选择公理、连续统假设。集合运算、基数与序数、超限归纳。罗素悖论与类型论的诞生', descEn: 'ZFC axioms, Axiom of Choice, Continuum Hypothesis. Set operations, cardinals and ordinals, transfinite induction. Russell\'s paradox and birth of type theory' },
+      { id: 'u2', titleZh: '模型论与证明论', titleEn: 'Model Theory & Proof Theory', descZh: '哥德尔完备性定理（一阶逻辑）：每个有效公式可证。哥德尔不完备定理：足够强的形式系统包含不可判定命题。塔斯基真理定义', descEn: 'Godel\'s completeness theorem (first-order logic): every valid formula is provable. Godel\'s incompleteness theorem: sufficiently strong systems contain undecidable propositions. Tarski\'s truth definition' },
+      { id: 'u3', titleZh: '可计算性理论', titleEn: 'Computability Theory', descZh: '图灵机模型、丘奇-图灵论题。停机问题不可判定。递归可枚举集与递归集的区别。P vs NP 问题', descEn: 'Turing machine model, Church-Turing thesis. Halting problem undecidability. Recursive enumerability vs recursiveness. P vs NP' },
+      { id: 'u4', titleZh: '非经典逻辑', titleEn: 'Non-Classical Logic', descZh: '模态逻辑（Kripke 语义、可能世界）、直觉主义逻辑（BHK 解释、排中律不成立）、线性逻辑（资源敏感推理）、时态逻辑', descEn: 'Modal logic (Kripke semantics, possible worlds), intuitionistic logic (BHK interpretation, excluded middle rejected), linear logic (resource-sensitive reasoning), temporal logic' },
+      { id: 'u5', titleZh: 'Curry-Howard 对应与类型论', titleEn: 'Curry-Howard Correspondence & Type Theory', descZh: '命题=类型、证明=程序。依赖类型（Agda、Idris）、同伦类型论（HoTT）。Coq 与 Lean 定理证明器的实践', descEn: 'Propositions = types, proofs = programs. Dependent types (Agda, Idris), homotopy type theory (HoTT). Coq and Lean theorem provers in practice' },
+      { id: 'u6', titleZh: 'AI 与逻辑的交叉', titleEn: 'AI & Logic Intersection', descZh: '知识表示（描述逻辑、本体推理）、自动定理证明（Resolution、SAT 求解器）、形式化验证（SMT、模型检测）。AI 安全中的可验证对齐', descEn: 'Knowledge representation (description logic, ontology reasoning), automated theorem proving (Resolution, SAT solvers), formal verification (SMT, model checking). Verifiable alignment in AI safety' }
+    ],
+    exercises: [
+      { qZh: '证明：不存在最大的自然数。（用反证法）', qEn: 'Prove: There is no largest natural number. (Use proof by contradiction)', aZh: '假设存在最大自然数 n。令 m = n + 1。因为 n 是自然数且 1 是自然数，所以 m 是自然数。但 m = n + 1 > n，与 n 是最大自然数矛盾。所以不存在最大自然数。QED。', aEn: 'Assume there exists a largest natural number n. Let m = n + 1. Since n is natural and 1 is natural, m is natural. But m = n + 1 > n, contradicting that n is the largest. Therefore, no largest natural number exists. QED.' },
+      { qZh: '解释哥德尔不完备定理的含义：为什么任何足够强的一致形式系统都包含不可判定命题？', qEn: 'Explain Godel\'s incompleteness theorem: why does any sufficiently strong consistent formal system contain undecidable propositions?', aZh: '哥德尔构造了自指命题 G："G在本系统中不可证"。如果系统能证明G，则G说"不可证"为真→矛盾（系统不一致）。如果系统不能证明G，则G说的"不可证"为真→G为真但不可证→系统不完备。关键：系统的表达力足以编码自指（对角线引理）。', aEn: 'Godel constructed a self-referential proposition G: "G is not provable in this system." If the system proves G, then G\'s claim "unprovable" is true -> contradiction (inconsistent). If not, then G\'s claim is true -> G is true but unprovable -> incomplete. Key: the system can encode self-reference (diagonal lemma).' },
+      { qZh: '停机问题：为什么不存在一个程序能判断任意程序是否会停机？', qEn: 'Halting problem: why can no program determine whether any given program will halt?', aZh: '反证法。假设存在判定程序 H(P,x)：若P(x)停机则返回true，否则false。构造 D(x)：若 H(x,x)=true 则 D 无限循环，否则停机。调用 D(D)：若 H(D,D)=true 即 D(D)停机→D(D)无限循环→矛盾。若 H(D,D)=false 即 D(D)不停机→D(D)停机→矛盾。所以 H 不存在。', aEn: 'By contradiction. Assume H(P,x) exists: returns true if P(x) halts, false otherwise. Construct D(x): if H(x,x)=true then D loops forever, else D halts. Call D(D): if H(D,D)=true meaning D(D) halts -> D(D) loops -> contradiction. If H(D,D)=false -> D(D) halts -> contradiction. So H cannot exist.' },
+      { qZh: '在 Coq 或 Lean 中证明：加法交换律 a + b = b + a 对自然数成立。（简述证明思路）', qEn: 'In Coq or Lean, prove commutativity of addition: a + b = b + a for natural numbers. (Outline the proof strategy)', aZh: '证明思路：(1) 先证引理1：0 + n = n（对n归纳）。(2) 再证引理2：S(m) + n = S(m + n)（对n归纳）。(3) 主定理：m + n = n + m，对m归纳。基础情形：0 + n = n = n + 0（需先证 n + 0 = n）。归纳步骤：假设 m + n = n + m，证 S(m) + n = n + S(m)。利用引理2和 n + S(m) = S(n + m)。', aEn: 'Strategy: (1) Lemma 1: 0 + n = n (induction on n). (2) Lemma 2: S(m) + n = S(m + n) (induction on n). (3) Main theorem: m + n = n + m, induction on m. Base: 0 + n = n = n + 0 (need n + 0 = n first). Inductive: assume m + n = n + m, prove S(m) + n = n + S(m) using Lemma 2 and n + S(m) = S(n + m).' }
+    ],
+    resources: [
+      { icon: '📖', textZh: 'Enderton《数理逻辑导论》（A Mathematical Introduction to Logic）', textEn: 'Enderton\'s "A Mathematical Introduction to Logic"' },
+      { icon: '📖', textZh: '《计算机科学中的逻辑学》（Huth & Ryan）', textEn: '"Logic in Computer Science" by Huth & Ryan' },
+      { icon: '💻', textZh: 'Coq 官方教程：Software Foundations（宾大）', textEn: 'Coq tutorial: Software Foundations (UPenn)' },
+      { icon: '💻', textZh: 'Lean 4 定理证明教程（官方）', textEn: 'Lean 4 Theorem Proving Tutorial (official)' },
+      { icon: '🎥', textZh: 'MIT 18.515: Mathematical Logic（免费公开课）', textEn: 'MIT 18.515: Mathematical Logic (free OCW)' },
+      { icon: '📄', textZh: 'Stanford Encyclopedia: Godel\'s Incompleteness Theorems', textEn: 'Stanford Encyclopedia: Godel\'s Incompleteness Theorems' }
+    ]
+  }
+};
+
+// ========== Language ==========
+function getLang() { return document.documentElement.getAttribute('data-lang') || 'zh'; }
+
+function toggleLang() {
+  const cur = getLang();
+  const next = cur === 'zh' ? 'en' : 'zh';
+  document.documentElement.setAttribute('data-lang', next);
+  reRenderDynamic();
+}
+
+function reRenderDynamic() {
+  renderStage('primary');
+  renderStage('middle');
+  renderStage('high');
+  renderStage('uni');
+  restoreProgress();
+}
+
+// ========== Render ==========
+function renderStage(stage) {
+  const data = courseData[stage];
+  if (!data) return;
+  const lang = getLang();
+  const kpContainer = document.getElementById('kp-' + stage);
+  if (kpContainer) {
+    kpContainer.innerHTML = data.knowledgePoints.map(kp => `
+      <div class="kp-item" data-kp-id="${kp.id}">
+        <div class="kp-checkbox" onclick="toggleKP('${kp.id}')" data-check-id="${kp.id}">✓</div>
+        <div class="kp-content">
+          <div class="kp-title">${lang === 'zh' ? kp.titleZh : kp.titleEn}</div>
+          <div class="kp-desc">${lang === 'zh' ? kp.descZh : kp.descEn}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  const exContainer = document.getElementById('ex-' + stage);
+  if (exContainer) {
+    exContainer.innerHTML = data.exercises.map((ex, i) => `
+      <div class="exercise-item" id="ex-${stage}-${i}">
+        <div class="exercise-header" onclick="toggleExercise('${stage}-${i}')">
+          <div class="exercise-number">${i + 1}</div>
+          <div class="exercise-question">${lang === 'zh' ? ex.qZh : ex.qEn}</div>
+          <div class="exercise-toggle">&#9660;</div>
+        </div>
+        <div class="exercise-answer">
+          <div class="exercise-answer-content">${lang === 'zh' ? ex.aZh : ex.aEn}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  const resContainer = document.getElementById('res-' + stage);
+  if (resContainer) {
+    resContainer.innerHTML = data.resources.map(r => `
+      <div class="resource-item">
+        <span class="resource-icon">${r.icon}</span>
+        <span class="resource-text">${lang === 'zh' ? r.textZh : r.textEn}</span>
+      </div>
+    `).join('');
+  }
+}
+
+function renderAll() {
+  renderStage('primary');
+  renderStage('middle');
+  renderStage('high');
+  renderStage('uni');
+}
+
+// ========== Exercise Toggle ==========
+function toggleExercise(id) {
+  const el = document.getElementById('ex-' + id);
+  if (el) el.classList.toggle('open');
+}
+
+// ========== Knowledge Point Progress ==========
+function toggleKP(id) {
+  const checkbox = document.querySelector(`[data-check-id="${id}"]`);
+  const item = checkbox ? checkbox.closest('.kp-item') : null;
+  if (!checkbox || !item) return;
+  checkbox.classList.toggle('checked');
+  item.classList.toggle('completed');
+  // Save state
+  const allStates = JSON.parse(localStorage.getItem('logic-progress') || '{}');
+  allStates[id] = checkbox.classList.contains('checked');
+  localStorage.setItem('logic-progress', JSON.stringify(allStates));
+  updateProgress();
+}
+
+function restoreProgress() {
+  const allStates = JSON.parse(localStorage.getItem('logic-progress') || '{}');
+  Object.keys(allStates).forEach(id => {
+    const checkbox = document.querySelector(`[data-check-id="${id}"]`);
+    const item = checkbox ? checkbox.closest('.kp-item') : null;
+    if (checkbox && allStates[id]) {
+      checkbox.classList.add('checked');
+      if (item) item.classList.add('completed');
+    }
+  });
+  updateProgress();
+}
+
+function updateProgress() {
+  const allCheckboxes = document.querySelectorAll('.kp-checkbox');
+  const checked = document.querySelectorAll('.kp-checkbox.checked');
+  const total = allCheckboxes.length;
+  const done = checked.length;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  const fill = document.getElementById('progress-fill');
+  const percent = document.getElementById('progress-percent');
+  if (fill) fill.style.width = pct + '%';
+  if (percent) percent.textContent = pct + '%';
+}
+
+function resetProgress() {
+  localStorage.removeItem('logic-progress');
+  document.querySelectorAll('.kp-checkbox').forEach(cb => cb.classList.remove('checked'));
+  document.querySelectorAll('.kp-item').forEach(item => item.classList.remove('completed'));
+  updateProgress();
+}
+
+// ========== Mobile Menu ==========
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  if (navLinks) navLinks.classList.toggle('open');
+}
+function closeMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  if (navLinks) navLinks.classList.remove('open');
+}
+
+// ========== Back to Top ==========
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+// ========== Starfield ==========
+function initStarfield() {
+  const canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    stars = [];
+    const count = Math.floor((w * h) / 8000);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * w, y: Math.random() * h,
+        r: Math.random() * 1.2 + 0.3,
+        speed: Math.random() * 0.15 + 0.05,
+        opacity: Math.random() * 0.8 + 0.2
+      });
+    }
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    for (let s of stars) {
+      s.y += s.speed;
+      if (s.y > h) s.y = 0;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, Math.max(0.1, s.r), 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(200, 220, 255, ' + s.opacity + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// ========== Init ==========
+document.addEventListener('DOMContentLoaded', function() {
+  renderAll();
+  restoreProgress();
+  initStarfield();
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  const backToTopBtn = document.getElementById('backToTop');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) backToTopBtn.classList.add('visible');
+      else backToTopBtn.classList.remove('visible');
+    });
+  }
+});
+</script>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">&#8593;</button>
+
+<noscript>
+  <div style="padding: 2rem; text-align: center; color: #e8edf5; background: #050814;">
+    <p>This course requires JavaScript to display interactive features, exercises, and progress tracking. Please enable JavaScript in your browser.</p>
+  </div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地球与星际能量研究 | Earth & Cosmic Energy Research v0.01</title>
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-deep: #050814;
+  --bg-mid: #0a0f24;
+  --bg-card: rgba(15, 22, 48, 0.75);
+  --bg-card-hover: rgba(20, 30, 65, 0.85);
+  --accent-cyan: #00d4ff;
+  --accent-purple: #a855f7;
+  --accent-gold: #ffd700;
+  --accent-green: #00ff88;
+  --text-primary: #e8edf5;
+  --text-secondary: #9ba8c4;
+  --text-muted: #5a6a8a;
+  --border-glow: rgba(0, 212, 255, 0.25);
+  --border-subtle: rgba(168, 85, 247, 0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; scroll-padding-top: 70px; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ========== Starfield Background ========== */
+#starfield {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+.bg-gradient {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(0, 255, 136, 0.04) 0%, transparent 50%);
+}
+
+/* ========== Navigation ========== */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: rgba(5, 8, 20, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glow);
+  padding: 0.625rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.nav-logo {
+  font-size: 1.1rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex; gap: 1.25rem; list-style: none; align-items: center; flex-wrap: wrap;
+}
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
+  transition: var(--transition); position: relative; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--accent-cyan); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--accent-cyan); transition: var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-controls { display: flex; gap: 0.75rem; align-items: center; }
+.lang-toggle {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border: none; padding: 0.4rem 1rem; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: var(--transition);
+  white-space: nowrap;
+}
+.lang-toggle:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+.version-badge {
+  font-size: 0.7rem; color: var(--accent-gold); border: 1px solid var(--accent-gold);
+  padding: 0.15rem 0.5rem; border-radius: 12px; white-space: nowrap;
+}
+.compliance-badge {
+  font-size: 0.7rem; color: var(--accent-green); border: 1px solid var(--accent-green);
+  padding: 0.15rem 0.5rem; border-radius: 12px; white-space: nowrap;
+}
+
+/* ========== Layout ========== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+section { padding: 4rem 0; position: relative; z-index: 1; }
+
+/* ========== Hero ========== */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center; padding-top: 5rem;
+}
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem; line-height: 1.3;
+}
+.hero-subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-secondary); max-width: 700px; margin-bottom: 2rem; }
+.hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
+.hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.hero-meta-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-cyan); }
+.hero-meta-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 2rem; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-block;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border: none;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); }
+.btn-secondary {
+  background: transparent; color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
+}
+.btn-secondary:hover { background: rgba(0, 212, 255, 0.1); }
+
+/* Orbiting animation */
+.orbit-container {
+  position: relative; width: 200px; height: 200px; margin-bottom: 2rem;
+}
+.orbit-ring {
+  position: absolute; border: 1px solid var(--border-glow); border-radius: 50%;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.orbit-ring:nth-child(1) { width: 200px; height: 200px; animation: spin 20s linear infinite; }
+.orbit-ring:nth-child(2) { width: 150px; height: 150px; animation: spin 15s linear infinite reverse; border-color: var(--border-subtle); }
+.orbit-ring:nth-child(3) { width: 100px; height: 100px; animation: spin 10s linear infinite; }
+.orbit-core {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 40px; height: 40px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-gold) 0%, var(--accent-purple) 70%, transparent 100%);
+  box-shadow: 0 0 40px var(--accent-gold); animation: pulse 3s ease-in-out infinite;
+}
+.orbit-dot {
+  position: absolute; width: 8px; height: 8px; border-radius: 50%; top: 0; left: 50%;
+  transform: translateX(-50%);
+}
+.orbit-ring:nth-child(1) .orbit-dot { background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); }
+.orbit-ring:nth-child(2) .orbit-dot { background: var(--accent-purple); box-shadow: 0 0 10px var(--accent-purple); }
+.orbit-ring:nth-child(3) .orbit-dot { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+@keyframes spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; } }
+
+/* ========== Section Headers ========== */
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-desc { color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 0.95rem; }
+
+/* ========== Cards ========== */
+.card-grid { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
+.card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 1.5rem; transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+  transition: left 0.5s ease;
+}
+.card:hover { border-color: var(--border-glow); background: var(--bg-card-hover); transform: translateY(-4px); }
+.card:hover::before { left: 100%; }
+.card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.card-title { font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan); margin-bottom: 0.5rem; }
+.card-value { font-size: 1.8rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.25rem; }
+.card-unit { font-size: 0.8rem; color: var(--text-muted); }
+.card-desc { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6; }
+
+/* ========== Energy Form Cards ========== */
+.energy-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 1.5rem; transition: var(--transition);
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.energy-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.1); }
+.energy-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.25rem; }
+.energy-card-icon {
+  width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.energy-card-name { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+.energy-card-category { font-size: 0.7rem; color: var(--text-muted); }
+.energy-critical {
+  background: rgba(255, 215, 0, 0.08); border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; margin-top: 0.5rem;
+}
+.energy-critical-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.energy-critical-value { font-size: 0.9rem; color: var(--accent-gold); font-weight: 600; margin-top: 0.15rem; }
+.energy-card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ========== Tabs ========== */
+.tab-container { margin-bottom: 2rem; }
+.tab-buttons { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+.tab-btn {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-secondary);
+  padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer;
+  transition: var(--transition);
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #000; border-color: transparent; font-weight: 600;
+}
+.tab-btn:hover:not(.active) { border-color: var(--border-glow); color: var(--text-primary); }
+.tab-content { display: none; animation: fadeIn 0.4s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ========== Law List ========== */
+.law-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.law-item {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); padding: 1rem 1.25rem; transition: var(--transition);
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+.law-item:hover { border-color: var(--border-glow); background: var(--bg-card-hover); }
+.law-number {
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700; color: #000;
+}
+.law-content { flex: 1; }
+.law-name { font-size: 0.9rem; font-weight: 600; color: var(--accent-cyan); margin-bottom: 0.2rem; }
+.law-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ========== Table ========== */
+.data-table-wrapper { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border-subtle); }
+.data-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+.data-table th, .data-table td { padding: 0.75rem 1rem; text-align: left; }
+.data-table th {
+  background: rgba(0, 212, 255, 0.08); color: var(--accent-cyan);
+  font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-glow);
+}
+.data-table td { border-bottom: 1px solid var(--border-subtle); font-size: 0.85rem; color: var(--text-secondary); }
+.data-table tr:hover td { background: rgba(0, 212, 255, 0.04); color: var(--text-primary); }
+.data-table .highlight { color: var(--accent-gold); font-weight: 600; }
+
+/* ========== Web3 Section ========== */
+.web3-hero {
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: var(--radius); padding: 2.5rem; text-align: center; margin-bottom: 2rem;
+  position: relative; overflow: hidden;
+}
+.web3-hero::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 60%);
+  animation: rotate-bg 20s linear infinite;
+}
+@keyframes rotate-bg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.web3-logo { font-size: 2.5rem; font-weight: 800; position: relative; }
+.web3-logo .web3-symbol {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.web3-tagline { color: var(--text-secondary); font-size: 1rem; margin: 0.5rem 0 1rem; position: relative; }
+
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.info-item { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1rem; }
+.info-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
+.info-value { font-size: 1.1rem; font-weight: 600; color: var(--accent-cyan); }
+
+/* ========== Links ========== */
+.link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.link-card {
+  display: flex; align-items: center; gap: 0.75rem; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  padding: 1rem; text-decoration: none; transition: var(--transition);
+}
+.link-card:hover { border-color: var(--border-glow); transform: translateX(4px); background: var(--bg-card-hover); }
+.link-card-icon { font-size: 1.3rem; flex-shrink: 0; }
+.link-card-text { flex: 1; min-width: 0; }
+.link-card-title { font-size: 0.85rem; color: var(--accent-cyan); font-weight: 500; }
+.link-card-url { font-size: 0.7rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ========== Footer ========== */
+footer {
+  background: rgba(5, 8, 20, 0.95); border-top: 1px solid var(--border-glow);
+  padding: 3rem 1.5rem 2rem; text-align: center; position: relative; z-index: 1;
+}
+.footer-slogan {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.footer-sub { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+.footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; transition: var(--transition); }
+.footer-links a:hover { color: var(--accent-cyan); }
+.footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ========== Update Banner ========== */
+.update-banner {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+  border: 1px solid var(--border-glow); border-radius: var(--radius);
+  padding: 1rem 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.update-banner-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--accent-green);
+  animation: blink 2s ease-in-out infinite; flex-shrink: 0;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.update-banner-text { font-size: 0.85rem; color: var(--text-secondary); }
+.update-banner-text strong { color: var(--accent-cyan); }
+
+/* ========== Mobile Menu ========== */
+.menu-toggle {
+  display: none; background: transparent; border: 1px solid var(--border-glow);
+  color: var(--accent-cyan); font-size: 1.2rem; padding: 0.3rem 0.6rem;
+  border-radius: 8px; cursor: pointer; transition: var(--transition);
+}
+.menu-toggle:hover { background: rgba(0, 212, 255, 0.1); }
+
+/* ========== Back to Top Button ========== */
+.back-to-top {
+  position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px;
+  border-radius: 50%; border: 1px solid var(--border-glow);
+  background: rgba(5, 8, 20, 0.85); backdrop-filter: blur(10px);
+  color: var(--accent-cyan); font-size: 1.4rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: var(--transition); z-index: 98;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: rgba(0, 212, 255, 0.15); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3); }
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .navbar { padding: 0.5rem 1rem; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none; flex-direction: column; position: fixed; top: 3rem; left: 0;
+    width: 100%; background: rgba(5, 8, 20, 0.98); backdrop-filter: blur(20px);
+    padding: 1rem 1.5rem; gap: 0.75rem; border-bottom: 1px solid var(--border-glow);
+    z-index: 99;
+  }
+  .nav-links.open { display: flex; }
+  .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
+  section { padding: 2.5rem 0; }
+  .hero { min-height: auto; padding-top: 5rem; padding-bottom: 2rem; }
+  .hero-meta { gap: 1rem; }
+  .hero-meta-value { font-size: 1.2rem; }
+  .web3-hero { padding: 1.5rem; }
+  .web3-logo { font-size: 1.8rem; }
+}
+@media (max-width: 480px) {
+  .nav-logo { font-size: 0.9rem; }
+  .container { padding: 0 1rem; }
+  .law-item { flex-direction: column; gap: 0.5rem; }
+}
+
+/* ========== Bilingual Support ========== */
+[data-lang="en"] [data-zh] { display: none; }
+[data-lang="zh"] [data-en] { display: none; }
+[data-lang="en"] [data-en] { display: revert; }
+[data-lang="zh"] [data-zh] { display: revert; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+</style>
+</head>
+<body>
+
+<!-- Starfield Canvas -->
+<canvas id="starfield"></canvas>
+<div class="bg-gradient"></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <span data-zh>🌍 地球与星际能量</span>
+    <span data-en>🌍 Earth & Cosmic Energy</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#earth-energy">
+      <span data-zh>地球能源</span>
+      <span data-en>Earth Energy</span>
+    </a></li>
+    <li><a href="#cosmic-energy">
+      <span data-zh>星际能量</span>
+      <span data-en>Cosmic Energy</span>
+    </a></li>
+    <li><a href="#laws">
+      <span data-zh>能量定律</span>
+      <span data-en>Energy Laws</span>
+    </a></li>
+    <li><a href="#web3">
+      <span data-zh>WEB3 技术</span>
+      <span data-en>WEB3 Tech</span>
+    </a></li>
+    <li><a href="#auto-payment">
+      <span data-zh>自动化支付</span>
+      <span data-en>Auto Payment</span>
+    </a></li>
+    <li><a href="#logic">
+      <span data-zh>逻辑学</span>
+      <span data-en>Logic</span>
+    </a></li>
+    <li><a href="#links">
+      <span data-zh>相关链接</span>
+      <span data-en>Links</span>
+    </a></li>
+  </ul>
+  <div class="nav-controls">
+    <span class="compliance-badge">
+      <span data-zh>大陆合规版</span>
+      <span data-en>PRC Compliant</span>
+    </span>
+    <span class="version-badge">v0.01</span>
+    <button class="lang-toggle" onclick="toggleLang()">
+      <span data-zh>EN</span>
+      <span data-en>中文</span>
+    </button>
+    <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="orbit-container">
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-core"></div>
+  </div>
+  <h1 class="hero-title">
+    <span data-zh>地球能量与星际文明宇宙能量研究</span>
+    <span data-en>Earth Energy & Interstellar Cosmic Energy Research</span>
+  </h1>
+  <p class="hero-subtitle">
+    <span data-zh>探索地球与宇宙的能量形式、临界值与基本定律，结合 WEB3 技术构建可持续发展未来</span>
+    <span data-en>Exploring energy forms, critical values and fundamental laws of Earth and the Cosmos, integrated with WEB3 technology for sustainable development</span>
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">10+</div>
+      <div class="hero-meta-label">
+        <span data-zh>地球能源形式</span>
+        <span data-en>Earth Energy Forms</span>
+      </div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">10+</div>
+      <div class="hero-meta-label">
+        <span data-zh>宇宙能源形式</span>
+        <span data-en>Cosmic Energy Forms</span>
+      </div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">30</div>
+      <div class="hero-meta-label">
+        <span data-zh>能量定律</span>
+        <span data-en>Energy Laws</span>
+      </div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">WEB3</div>
+      <div class="hero-meta-label">
+        <span data-zh>技术驱动</span>
+        <span data-en>Technology Driven</span>
+      </div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-value">Auto Pay</div>
+      <div class="hero-meta-label">
+        <span data-zh>自动化支付</span>
+        <span data-en>Auto Payment</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="#earth-energy" class="btn-primary">
+      <span data-zh>开始探索</span>
+      <span data-en>Start Exploring</span>
+    </a>
+    <a href="#web3" class="btn-secondary">
+      <span data-zh>了解 WEB3</span>
+      <span data-en>Learn about WEB3</span>
+    </a>
+  </div>
+</section>
+
+<!-- Earth Energy Section -->
+<section id="earth-energy">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>地球能量研究：能源形式与临界值</span>
+        <span data-en>Earth Energy Research: Forms & Critical Values</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>地球能源可分为可再生能源与不可再生能源两大类，每种能源都有其物理临界值和技术转换效率极限</span>
+        <span data-en>Earth's energy is classified into renewable and non-renewable sources, each with physical critical values and technical conversion efficiency limits</span>
+      </p>
+    </div>
+
+    <!-- Update Banner -->
+    <div class="update-banner">
+      <div class="update-banner-dot"></div>
+      <div class="update-banner-text">
+        <strong>
+          <span data-zh>每周更新</span>
+          <span data-en>Weekly Update</span>
+        </strong>
+        <span data-zh> · 最新数据更新时间：2026-08-21 · 下次更新：2026-08-28</span>
+        <span data-en> · Last updated: 2026-08-21 · Next update: 2026-08-28</span>
+      </div>
+    </div>
+
+    <!-- Renewable Energy Cards -->
+    <h3 style="font-size:1.15rem; color:var(--accent-green); margin-bottom:1.25rem; font-weight:600;">
+      <span data-zh>可再生能源</span>
+      <span data-en>Renewable Energy</span>
+    </h3>
+    <div class="card-grid cols-3" id="renewable-grid"></div>
+
+    <!-- Non-Renewable Energy Cards -->
+    <h3 style="font-size:1.15rem; color:var(--accent-gold); margin-bottom:1.25rem; margin-top:2rem; font-weight:600;">
+      <span data-zh>不可再生能源</span>
+      <span data-en>Non-Renewable Energy</span>
+    </h3>
+    <div class="card-grid cols-3" id="nonrenewable-grid"></div>
+  </div>
+</section>
+
+<!-- Cosmic Energy Section -->
+<section id="cosmic-energy" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>星际文明与宇宙能量研究</span>
+        <span data-en>Interstellar Civilization & Cosmic Energy Research</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>从恒星核聚变到暗能量，从黑洞辐射到量子真空，宇宙中的能量形式远超地球认知</span>
+        <span data-en>From stellar fusion to dark energy, from black hole radiation to quantum vacuum, cosmic energy forms far exceed Earth-based understanding</span>
+      </p>
+    </div>
+
+    <!-- Kardashev Scale -->
+    <div class="card-grid cols-3" style="margin-bottom: 2.5rem;">
+      <div class="card">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">
+          <span data-zh>I 型文明</span>
+          <span data-en>Type I Civilization</span>
+        </div>
+        <div class="card-value">4x10^19 W</div>
+        <div class="card-unit">
+          <span data-zh>临界值：掌握行星全部能源</span>
+          <span data-en>Critical: Mastery of all planetary energy</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>地球目前约 0.73 型，距 I 型文明还差约 100-200 年</span>
+          <span data-en>Earth is currently ~Type 0.73, about 100-200 years from Type I</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">☀️</div>
+        <div class="card-title">
+          <span data-zh>II 型文明</span>
+          <span data-en>Type II Civilization</span>
+        </div>
+        <div class="card-value">4x10^26 W</div>
+        <div class="card-unit">
+          <span data-zh>临界值：掌握恒星全部能源</span>
+          <span data-en>Critical: Mastery of all stellar energy</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>戴森球级技术，可捕获恒星能量的全部输出</span>
+          <span data-en>Dyson sphere technology, capable of capturing full stellar output</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌌</div>
+        <div class="card-title">
+          <span data-zh>III 型文明</span>
+          <span data-en>Type III Civilization</span>
+        </div>
+        <div class="card-value">4x10^37 W</div>
+        <div class="card-unit">
+          <span data-zh>临界值：掌握星系全部能源</span>
+          <span data-en>Critical: Mastery of all galactic energy</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>可在星系尺度自由操控能量和物质</span>
+          <span data-en>Capable of manipulating energy and matter at galactic scale</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cosmic Energy Forms -->
+    <div class="card-grid cols-2" id="cosmic-grid"></div>
+  </div>
+</section>
+
+<!-- Energy Laws Section -->
+<section id="laws" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>地球与宇宙能量定律</span>
+        <span data-en>Earth & Cosmic Energy Laws</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>从热力学到宇宙学，从经典力学到量子场论，30 大定律揭示能量的本质规律</span>
+        <span data-en>From thermodynamics to cosmology, from classical mechanics to quantum field theory, 30 fundamental laws reveal the essence of energy</span>
+      </p>
+    </div>
+
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab('top10')">
+          <span data-zh>前 10 大定律</span>
+          <span data-en>Top 10 Laws</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('top20')">
+          <span data-zh>前 20 大定律</span>
+          <span data-en>Top 20 Laws</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('top30')">
+          <span data-zh>前 30 大定律</span>
+          <span data-en>Top 30 Laws</span>
+        </button>
+      </div>
+      <div class="tab-content active" id="tab-top10"><div class="law-list" id="law-list-10"></div></div>
+      <div class="tab-content" id="tab-top20"><div class="law-list" id="law-list-20"></div></div>
+      <div class="tab-content" id="tab-top30"><div class="law-list" id="law-list-30"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WEB3 Technology Section (Compliant Version - No Crypto Tokens) -->
+<section id="web3" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>WEB3 技术：区块链赋能能源研究</span>
+        <span data-en>WEB3 Technology: Blockchain Empowering Energy Research</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>利用区块链、智能合约和去中心化技术，构建透明可信的能源数据共享与协作平台</span>
+        <span data-en>Leveraging blockchain, smart contracts and decentralized technology to build transparent and trustworthy energy data sharing and collaboration platforms</span>
+      </p>
+    </div>
+
+    <!-- WEB3 Hero -->
+    <div class="web3-hero">
+      <div class="web3-logo">
+        <span class="web3-symbol">WEB3</span>
+      </div>
+      <p class="web3-tagline">
+        <span data-zh>区块链技术赋能地球能源研究与可持续发展</span>
+        <span data-en>Blockchain technology empowering Earth energy research and sustainable development</span>
+      </p>
+    </div>
+
+    <!-- WEB3 Application Areas -->
+    <h3 style="font-size:1.15rem; color:var(--accent-cyan); margin-bottom:1.25rem; font-weight:600;">
+      <span data-zh>WEB3 在能源领域的应用方向</span>
+      <span data-en>WEB3 Application Areas in Energy</span>
+    </h3>
+    <div class="card-grid cols-3">
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">
+          <span data-zh>能源数据溯源</span>
+          <span data-en>Energy Data Traceability</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>利用区块链不可篡改特性，记录能源生产、传输、消费全链路数据，确保数据真实可信</span>
+          <span data-en>Using blockchain immutability to record full-chain energy production, transmission and consumption data, ensuring data authenticity</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔮</div>
+        <div class="card-title">
+          <span data-zh>智能合约自动化</span>
+          <span data-en>Smart Contract Automation</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>通过智能合约自动执行能源交易、碳配额分配和绿色证书发放，提高效率与透明度</span>
+          <span data-en>Smart contracts auto-execute energy trading, carbon quota allocation and green certificate issuance, improving efficiency and transparency</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <div class="card-title">
+          <span data-zh>去中心化能源网络</span>
+          <span data-en>Decentralized Energy Network</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>构建点对点能源交易平台，实现分布式能源生产者与消费者的直接交易</span>
+          <span data-en>Building peer-to-peer energy trading platforms, enabling direct transactions between distributed producers and consumers</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌱</div>
+        <div class="card-title">
+          <span data-zh>绿色能源认证</span>
+          <span data-en>Green Energy Certification</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>链上记录可再生能源发电量，发放可验证的绿色能源证书，防止绿色洗白</span>
+          <span data-en>On-chain recording of renewable energy generation, issuing verifiable green certificates, preventing greenwashing</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📡</div>
+        <div class="card-title">
+          <span data-zh>物联网数据上链</span>
+          <span data-en>IoT Data On-Chain</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>将 IoT 传感器采集的能源数据实时上链，构建可信的能源物联网数据底座</span>
+          <span data-en>Real-time on-chain recording of IoT sensor energy data, building a trustworthy energy IoT data infrastructure</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <div class="card-title">
+          <span data-zh>碳足迹追踪</span>
+          <span data-en>Carbon Footprint Tracking</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>全生命周期碳排放追踪，从源头到终端的碳排放数据链上记录与核验</span>
+          <span data-en>Full-lifecycle carbon emission tracking, from source to terminal, recorded and verified on-chain</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEB3 Tech Stack -->
+    <h3 style="font-size:1.15rem; color:var(--accent-cyan); margin-bottom:1.25rem; font-weight:600; margin-top:2.5rem;">
+      <span data-zh>技术栈概览</span>
+      <span data-en>Technology Stack Overview</span>
+    </h3>
+    <div class="data-table-wrapper" style="margin-bottom: 2rem;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th><span data-zh>技术层</span><span data-en>Layer</span></th>
+            <th><span data-zh>技术</span><span data-en>Technology</span></th>
+            <th><span data-zh>应用场景</span><span data-en>Use Case</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span data-zh>数据层</span>
+              <span data-en>Data Layer</span>
+            </td>
+            <td>IPFS / Arweave</td>
+            <td>
+              <span data-zh>能源研究数据分布式存储</span>
+              <span data-en>Distributed storage of energy research data</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span data-zh>共识层</span>
+              <span data-en>Consensus Layer</span>
+            </td>
+            <td>PoA / PoS</td>
+            <td>
+              <span data-zh>联盟链共识，确保数据一致性</span>
+              <span data-en>Consortium chain consensus, ensuring data consistency</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span data-zh>合约层</span>
+              <span data-en>Contract Layer</span>
+            </td>
+            <td>Solidity / Move</td>
+            <td>
+              <span data-zh>能源交易、碳配额智能合约</span>
+              <span data-en>Energy trading, carbon quota smart contracts</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span data-zh>应用层</span>
+              <span data-en>Application Layer</span>
+            </td>
+            <td>DApp / API</td>
+            <td>
+              <span data-zh>能源数据查询、绿色证书验证</span>
+              <span data-en>Energy data query, green certificate verification</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span data-zh>跨链层</span>
+              <span data-en>Cross-Chain Layer</span>
+            </td>
+            <td>Bridge / Relay</td>
+            <td>
+              <span data-zh>多链数据互通，跨平台能源数据共享</span>
+              <span data-en>Multi-chain data interoperability, cross-platform energy data sharing</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span data-zh>隐私层</span>
+              <span data-en>Privacy Layer</span>
+            </td>
+            <td>ZKP / TEE</td>
+            <td>
+              <span data-zh>零知识证明保护敏感能源数据隐私</span>
+              <span data-en>Zero-knowledge proofs protect sensitive energy data privacy</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- WEB3 Sustainable Development -->
+    <h3 style="font-size:1.15rem; color:var(--accent-green); margin-bottom:1.25rem; font-weight:600; margin-top:2.5rem;">
+      <span data-zh>可持续发展目标</span>
+      <span data-en>Sustainable Development Goals</span>
+    </h3>
+    <div class="card-grid cols-2">
+      <div class="card">
+        <div class="card-title">
+          <span data-zh>能源透明化</span>
+          <span data-en>Energy Transparency</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>通过区块链技术实现能源数据的全链路透明化，确保每一度绿色电力都可追溯、可验证</span>
+          <span data-en>Achieving full-chain transparency of energy data through blockchain, ensuring every kWh of green electricity is traceable and verifiable</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span data-zh>碳中和支持</span>
+          <span data-en>Carbon Neutrality Support</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>链上碳配额管理与碳交易智能合约，助力 2030 碳达峰、2060 碳中和目标</span>
+          <span data-en>On-chain carbon quota management and trading smart contracts, supporting 2030 peak carbon and 2060 carbon neutrality goals</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span data-zh>分布式协作</span>
+          <span data-en>Distributed Collaboration</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>去中心化自治组织（DAO）模式管理能源研究社区，促进全球科研协作</span>
+          <span data-en>DAO governance for energy research communities, promoting global scientific collaboration</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span data-zh>数据资产化</span>
+          <span data-en>Data Assetization</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>能源研究数据确权上链，实现数据要素的合规流通与价值变现</span>
+          <span data-en>Energy research data rights confirmation on-chain, enabling compliant circulation and value realization of data assets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEB3 Automated Payment Technology Section -->
+<section id="auto-payment" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>WEB3 自动化支付技术</span>
+        <span data-en>WEB3 Automated Payment Technology</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>基于区块链智能合约的自动化支付协议，实现条件触发、多方分账、可信结算的技术架构</span>
+        <span data-en>Automated payment protocol based on blockchain smart contracts, enabling condition-triggered, multi-party split, and trusted settlement</span>
+      </p>
+    </div>
+
+    <!-- Development Trends -->
+    <h3 style="font-size:1.15rem; color:var(--accent-cyan); margin-bottom:1.25rem; font-weight:600;">
+      <span data-zh>技术发展趋势</span>
+      <span data-en>Technology Development Trends</span>
+    </h3>
+    <div class="card-grid cols-2">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">
+          <span data-zh>实时高吞吐结算</span>
+          <span data-en>Real-Time High-Throughput Settlement</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>Layer1 并行执行 + Layer2 Rollup 扩容，实现每秒万级交易吞吐。支付确认时间从分钟级降至秒级，满足能源交易高频结算需求</span>
+          <span data-en>L1 parallel execution + L2 Rollup scaling achieves 10K+ TPS. Payment confirmation from minutes to seconds, meeting high-frequency energy trading needs</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌉</div>
+        <div class="card-title">
+          <span data-zh>跨链互操作协议</span>
+          <span data-en>Cross-Chain Interoperability</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>通过跨链消息传递协议（CCIP、IBC）实现异构链间资产与状态同步，构建多链协同的支付网络</span>
+          <span data-en>Cross-chain messaging protocols (CCIP, IBC) enable asset and state synchronization across heterogeneous chains, building multi-chain collaborative payment networks</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">
+          <span data-zh>AI 驱动的智能路由</span>
+          <span data-en>AI-Driven Smart Routing</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>机器学习模型预测网络拥堵与 Gas 波动，自动选择最优支付路径与时间窗口，降低结算成本</span>
+          <span data-en>ML models predict network congestion and gas volatility, auto-selecting optimal payment paths and timing windows, reducing settlement costs</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <div class="card-title">
+          <span data-zh>可编程支付流水线</span>
+          <span data-en>Programmable Payment Pipeline</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>智能合约定义支付条件：时间锁释放、里程碑触发、多方分账。实现复杂业务逻辑的链上自动化编排</span>
+          <span data-en>Smart contracts define payment conditions: time-locked release, milestone triggers, multi-party split. On-chain automation for complex business logic</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <div class="card-title">
+          <span data-zh>账户抽象与无 Gas 体验</span>
+          <span data-en>Account Abstraction & Gasless UX</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>智能合约钱包 + Paymaster 机制，用户无需管理 Gas 代币即可发起交易，降低使用门槛</span>
+          <span data-en>Smart contract wallets + Paymaster mechanism, users can transact without managing gas tokens, lowering adoption barriers</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">
+          <span data-zh>合规可追溯结算</span>
+          <span data-en>Compliant Traceable Settlement</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>链上交易全链路可审计，结合零知识证明实现隐私保护下的合规验证，满足监管要求</span>
+          <span data-en>Full-chain auditable transactions with zero-knowledge proofs for privacy-preserving compliance verification, meeting regulatory requirements</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Architecture -->
+    <h3 style="font-size:1.15rem; color:var(--accent-purple); margin-bottom:1.25rem; font-weight:600; margin-top:2.5rem;">
+      <span data-zh>技术架构分层</span>
+      <span data-en>Technical Architecture Layers</span>
+    </h3>
+    <div class="data-table-wrapper" style="margin-bottom: 2rem;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th><span data-zh>层级</span><span data-en>Layer</span></th>
+            <th><span data-zh>技术</span><span data-en>Technology</span></th>
+            <th><span data-zh>功能</span><span data-en>Function</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span data-zh>用户层</span><span data-en>User Layer</span></td>
+            <td>智能合约钱包 / AA / Social Recovery</td>
+            <td><span data-zh>多签控制、社交恢复、会话密钥</span><span data-en>Multi-sig control, social recovery, session keys</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>路由层</span><span data-en>Routing Layer</span></td>
+            <td>DEX Aggregator / RFQ / AI Router</td>
+            <td><span data-zh>最优路径发现、聚合交易、MEV 保护</span><span data-en>Optimal path discovery, aggregated trading, MEV protection</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>合约层</span><span data-en>Contract Layer</span></td>
+            <td>Solidity / Move / Rust Smart Contracts</td>
+            <td><span data-zh>条件支付、分账、时间锁、批量转账</span><span data-en>Conditional payment, split, time-lock, batch transfer</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>结算层</span><span data-en>Settlement Layer</span></td>
+            <td>Layer1 / Layer2 (Optimistic/ZK Rollup)</td>
+            <td><span data-zh>高吞吐、低延迟、数据可用性保证</span><span data-en>High throughput, low latency, data availability</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>跨链层</span><span data-en>Cross-Chain Layer</span></td>
+            <td>CCIP / IBC / LayerZero</td>
+            <td><span data-zh>多链消息传递、资产桥接、状态同步</span><span data-en>Multi-chain messaging, asset bridging, state sync</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>预言机层</span><span data-en>Oracle Layer</span></td>
+            <td>Chainlink / API3 / Band Protocol</td>
+            <td><span data-zh>价格喂价、链下数据输入、条件触发</span><span data-en>Price feeds, off-chain data input, condition triggers</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>隐私层</span><span data-en>Privacy Layer</span></td>
+            <td>ZKP / TEE / FHE</td>
+            <td><span data-zh>零知识证明保护隐私，同态加密支持密态计算</span><span data-en>ZKP for privacy, FHE for computation on encrypted data</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Application Scenarios -->
+    <h3 style="font-size:1.15rem; color:var(--accent-green); margin-bottom:1.25rem; font-weight:600; margin-top:2.5rem;">
+      <span data-zh>应用场景</span>
+      <span data-en>Application Scenarios</span>
+    </h3>
+    <div class="card-grid cols-3">
+      <div class="card">
+        <div class="card-icon">🏭</div>
+        <div class="card-title">
+          <span data-zh>能源交易自动结算</span>
+          <span data-en>Energy Trading Auto-Settlement</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>光伏电站发电量经物联网设备采集上链，智能合约按实际发电量自动向购电方收款，无需人工对账</span>
+          <span data-en>Solar plant output collected via IoT devices on-chain; smart contracts auto-collect from buyers based on actual generation, no manual reconciliation</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📦</div>
+        <div class="card-title">
+          <span data-zh>供应链自动付款</span>
+          <span data-en>Supply Chain Auto-Payment</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>物流状态触发付款：货物到达、验收通过、签收确认后，智能合约自动向供应商、物流商、仓储方分账</span>
+          <span data-en>Logistics status triggers payment: upon arrival, inspection, and confirmation, smart contract auto-splits to suppliers, logistics, and warehousing</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">♻️</div>
+        <div class="card-title">
+          <span data-zh>碳配额自动交易</span>
+          <span data-en>Carbon Quota Auto-Trading</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>链上碳配额智能合约自动匹配买卖双方，超额排放自动触发购买，结余自动挂售，助力碳中和目标</span>
+          <span data-en>On-chain carbon quota smart contracts auto-match buyers and sellers; excess emissions trigger auto-purchase, surplus auto-listed, supporting carbon neutrality</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logic & Critical Thinking Section -->
+<section id="logic" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>逻辑学与批判性思维</span>
+        <span data-en>Logic & Critical Thinking</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>逻辑学是所有科学的基础工具。从亚里士多德的三段论到现代形式逻辑，从大陆的辩证传统到海外的分析哲学，逻辑训练塑造思维精度</span>
+        <span data-en>Logic is the foundational tool of all sciences. From Aristotelian syllogism to modern formal logic, from Continental dialectical tradition to analytic philosophy, logic training shapes precision of thought</span>
+      </p>
+    </div>
+
+    <!-- Key Content Areas -->
+    <h3 style="font-size:1.15rem; color:var(--accent-cyan); margin-bottom:1.25rem; font-weight:600;">
+      <span data-zh>逻辑学重点内容</span>
+      <span data-en>Key Content of Logic</span>
+    </h3>
+    <div class="card-grid cols-2">
+      <div class="card">
+        <div class="card-icon">📐</div>
+        <div class="card-title">
+          <span data-zh>形式逻辑（演绎推理）</span>
+          <span data-en>Formal Logic (Deductive Reasoning)</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>三段论（大前提-小前提-结论）、命题逻辑（与/或/非/蕴含）、谓词逻辑（全称/存在量词）。核心：有效推理的形式结构，前提为真则结论必为真</span>
+          <span data-en>Syllogism (major-minor-conclusion), propositional logic (AND/OR/NOT/IMPLIES), predicate logic (universal/existential quantifiers). Core: valid inference structure where true premises guarantee true conclusions</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">
+          <span data-zh>归纳逻辑</span>
+          <span data-en>Inductive Logic</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>从个别到一般的推理：枚举归纳、类比推理、因果推理（穆勒五法）。概率与统计推理。休谟问题：归纳的合理性如何证明</span>
+          <span data-en>Reasoning from particular to general: enumerative induction, analogical reasoning, causal reasoning (Mill's methods). Probability and statistical inference. Hume's problem: how to justify induction</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <div class="card-title">
+          <span data-zh>辩证逻辑</span>
+          <span data-en>Dialectical Logic</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>黑格尔与马克思传统：对立统一、质量互变、否定之否定。强调运动发展与矛盾分析，大陆哲学教育的核心方法</span>
+          <span data-en>Hegelian and Marxist tradition: unity of opposites, quantitative-qualitative change, negation of negation. Emphasizes motion, development, and contradiction analysis; core method in Chinese philosophical education</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔢</div>
+        <div class="card-title">
+          <span data-zh>数理逻辑</span>
+          <span data-en>Mathematical Logic</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>集合论、模型论、证明论、可计算性理论。哥德尔不完备定理：任何足够强的形式系统包含不可判定的命题。图灵机与计算边界</span>
+          <span data-en>Set theory, model theory, proof theory, computability. Godel's incompleteness theorem: any sufficiently strong formal system contains undecidable propositions. Turing machine and computational limits</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧩</div>
+        <div class="card-title">
+          <span data-zh>非经典逻辑</span>
+          <span data-en>Non-Classical Logic</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>模态逻辑（必然/可能）、时态逻辑、直觉主义逻辑（排中律不成立）、多值逻辑、模糊逻辑。处理经典二值逻辑无法覆盖的推理场景</span>
+          <span data-en>Modal logic (necessary/possible), tense logic, intuitionistic logic (law of excluded middle rejected), many-valued logic, fuzzy logic. Handling inference beyond classical bivalent logic</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">
+          <span data-zh>谬误识别</span>
+          <span data-en>Fallacy Identification</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>形式谬误（肯定后件、否定前件）与非形式谬误（滑坡、稻草人、诉诸权威、虚假二分）。识别谬误是批判性思维的第一道防线</span>
+          <span data-en>Formal fallacies (affirming consequent, denying antecedent) and informal fallacies (slippery slope, straw man, appeal to authority, false dichotomy). Fallacy identification is the first defense of critical thinking</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">💭</div>
+        <div class="card-title">
+          <span data-zh>批判性思维</span>
+          <span data-en>Critical Thinking</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>论证分析（前提-推理-结论）、证据评估、反事实思考、元认知。培养独立判断能力，抵制信息操纵</span>
+          <span data-en>Argument analysis (premise-inference-conclusion), evidence evaluation, counterfactual thinking, metacognition. Cultivating independent judgment and resistance to information manipulation</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <div class="card-title">
+          <span data-zh>认知科学与逻辑</span>
+          <span data-en>Cognitive Science & Logic</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>认知偏差（确认偏差、可得性启发式、锚定效应）对推理的影响。双重加工理论：系统1直觉与系统2理性的交互</span>
+          <span data-en>Cognitive biases (confirmation bias, availability heuristic, anchoring effect) on reasoning. Dual-process theory: interaction between System 1 intuition and System 2 rationality</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison: Overseas vs Mainland -->
+    <h3 style="font-size:1.15rem; color:var(--accent-gold); margin-bottom:1.25rem; font-weight:600; margin-top:2.5rem;">
+      <span data-zh>海外与大陆的逻辑学学习路径对比</span>
+      <span data-en>Overseas vs Mainland: Logic Learning Paths</span>
+    </h3>
+    <div class="data-table-wrapper" style="margin-bottom: 2rem;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th><span data-zh>维度</span><span data-en>Dimension</span></th>
+            <th><span data-zh>海外路径</span><span data-en>Overseas Path</span></th>
+            <th><span data-zh>大陆路径</span><span data-en>Mainland Path</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span data-zh>哲学传统</span><span data-en>Philosophical Tradition</span></td>
+            <td><span data-zh>分析哲学为主：Russell、Frege、Wittgenstein。强调语言分析、形式化、精确性</span><span data-en>Analytic philosophy: Russell, Frege, Wittgenstein. Emphasis on language analysis, formalization, precision</span></td>
+            <td><span data-zh>辩证唯物主义为主：马克思、恩格斯。强调矛盾分析、发展与对立统一</span><span data-en>Dialectical materialism: Marx, Engels. Emphasis on contradiction analysis, development and unity of opposites</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>入门教材</span><span data-en>Introductory Textbooks</span></td>
+            <td><span data-zh>Copi《逻辑学导论》、Hurley《简明逻辑学导论》、Barwise《信息流逻辑》。注重案例驱动与日常推理</span><span data-en>Copi's Introduction to Logic, Hurley's Concise Introduction, Barwise's Information-Flow Logic. Case-driven, everyday reasoning</span></td>
+            <td><span data-zh>《普通逻辑》（人民大学）、《形式逻辑》（金岳霖）、《辩证逻辑》。注重系统性与哲学框架</span><span data-en>General Logic (Renmin Univ), Formal Logic (Jin Yuelin), Dialectical Logic. Systematic, philosophical framework</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>核心课程</span><span data-en>Core Curriculum</span></td>
+            <td><span data-zh>Critical Thinking + Formal Logic + Philosophy of Language + Decision Theory。多数大学将逻辑列为通识必修</span><span data-en>Critical Thinking + Formal Logic + Philosophy of Language + Decision Theory. Logic is general education requirement in most universities</span></td>
+            <td><span data-zh>形式逻辑 + 辩证逻辑 + 马克思主义哲学原理。逻辑通常在哲学系开设，非哲学专业接触有限</span><span data-en>Formal Logic + Dialectical Logic + Marxist Philosophy. Logic mainly in philosophy departments, limited exposure for non-philosophy majors</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>实践训练</span><span data-en>Practical Training</span></td>
+            <td><span data-zh>辩论赛、LSAT/GMAT 逻辑题、编程验证（Coq/Lean 定理证明器）。强调应用与可验证性</span><span data-en>Debate competitions, LSAT/GMAT logic problems, programming verification (Coq/Lean theorem provers). Application and verifiability</span></td>
+            <td><span data-zh>考研逻辑（管理类联考199）、公务员行测判断推理。偏应试化，近年引入 Python 逻辑编程</span><span data-en>Graduate entrance logic (management exam 199), civil service aptitude test reasoning. Exam-oriented; Python logic programming emerging recently</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>数理逻辑</span><span data-en>Mathematical Logic</span></td>
+            <td><span data-zh>本科即开设，集合论+模型论+证明论。计算机科学深度整合（类型论、Curry-Howard 对应）</span><span data-en>Offered at undergraduate level: set theory + model theory + proof theory. Deep integration with CS (type theory, Curry-Howard correspondence)</span></td>
+            <td><span data-zh>研究生阶段为主，数学系与计算机系开设。近年来本科数学建模与逻辑课程逐步增加</span><span data-en>Mainly graduate level, in math and CS departments. Undergraduate mathematical modeling and logic courses increasing recently</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>AI 与逻辑</span><span data-en>AI & Logic</span></td>
+            <td><span data-zh>知识表示、自动推理、形式化验证。Lean4/Coq 在 AI 安全研究中广泛应用</span><span data-en>Knowledge representation, automated reasoning, formal verification. Lean4/Coq widely used in AI safety research</span></td>
+            <td><span data-zh>近年快速发展：清华、北大、中科院设立逻辑与AI交叉方向。但整体仍处于追赶阶段</span><span data-en>Rapid development recently: Tsinghua, Peking Univ, CAS establishing logic-AI interdisciplinary programs. Still catching up overall</span></td>
+          </tr>
+          <tr>
+            <td><span data-zh>学习建议</span><span data-en>Learning Advice</span></td>
+            <td><span data-zh>从 Copi/Hurley 入手建框架，学 Coq/Lean 做形式化训练，读 Wittgenstein《哲学研究》拓展视野</span><span data-en>Start with Copi/Hurley for framework, learn Coq/Lean for formalization training, read Wittgenstein's Philosophical Investigations for breadth</span></td>
+            <td><span data-zh>先读金岳霖《形式逻辑》建形式基础，再学辩证逻辑掌握方法论，结合考研逻辑题实战训练，用 Python 验证推理</span><span data-en>Start with Jin Yuelin's Formal Logic for foundation, then dialectical logic for methodology, practice with exam logic problems, verify reasoning with Python</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Learning Roadmap -->
+    <h3 style="font-size:1.15rem; color:var(--accent-green); margin-bottom:1.25rem; font-weight:600; margin-top:2.5rem;">
+      <span data-zh>推荐学习路线图</span>
+      <span data-en>Recommended Learning Roadmap</span>
+    </h3>
+    <div class="card-grid cols-3">
+      <div class="card">
+        <div class="card-icon">1️⃣</div>
+        <div class="card-title">
+          <span data-zh>入门阶段（1-3月）</span>
+          <span data-en>Beginner Stage (1-3 months)</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>掌握命题逻辑与三段论；学习谬误识别；完成 LSAT 逻辑推理 100 题。推荐：Hurley《简明逻辑学导论》前 6 章</span>
+          <span data-en>Master propositional logic and syllogism; learn fallacy identification; complete 100 LSAT logical reasoning problems. Recommended: Hurley's Concise Introduction, chapters 1-6</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">2️⃣</div>
+        <div class="card-title">
+          <span data-zh>进阶阶段（3-6月）</span>
+          <span data-en>Intermediate Stage (3-6 months)</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>学习谓词逻辑与模态逻辑；了解哥德尔不完备定理；尝试 Coq/Lean 基本定理证明。推荐：Enderton《数理逻辑导论》</span>
+          <span data-en>Learn predicate and modal logic; understand Godel's incompleteness theorem; try basic Coq/Lean theorem proving. Recommended: Enderton's Mathematical Introduction to Logic</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">3️⃣</div>
+        <div class="card-title">
+          <span data-zh>高级阶段（6月+）</span>
+          <span data-en>Advanced Stage (6+ months)</span>
+        </div>
+        <div class="card-desc">
+          <span data-zh>研究非经典逻辑与哲学逻辑；探索 AI 与逻辑的交叉（知识表示、自动推理）；参与开源形式化验证项目</span>
+          <span data-en>Study non-classical and philosophical logic; explore AI-logic intersection (knowledge representation, automated reasoning); contribute to open-source formal verification projects</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Links Section -->
+<section id="links" style="border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-zh>相关链接</span>
+        <span data-en>Related Links</span>
+      </h2>
+      <p class="section-desc">
+        <span data-zh>WEB3 技术与能源研究相关资源</span>
+        <span data-en>WEB3 technology and energy research resources</span>
+      </p>
+    </div>
+    <div class="link-grid" id="link-grid"></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-slogan">
+    <span data-zh>区块链赋能地球能源可持续发展</span>
+    <span data-en>Blockchain Empowering Sustainable Earth Energy</span>
+  </div>
+  <p class="footer-sub">
+    <span data-zh>WEB3 技术驱动的地球与星际能量研究平台</span>
+    <span data-en>WEB3 technology-driven Earth and Cosmic Energy research platform</span>
+  </p>
+  <div class="footer-links">
+    <a href="https://github.com/eacocc/eacoweb3-2025" target="_blank">GitHub: eacoweb3-2025</a>
+    <a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank">Mohist-Tech</a>
+    <a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank">100WaysToWealth</a>
+    <a href="https://ucoingroup.github.io/good-books/" target="_blank">good-books</a>
+    <a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank">earth-100-friends</a>
+  </div>
+  <p class="footer-copy">
+    <span data-zh>© 2026 地球与星际能量研究 v0.01 · 大陆合规版 · 本网站仅供研究和教育目的</span>
+    <span data-en>© 2026 Earth & Cosmic Energy Research v0.01 · PRC Compliant Version · For research and educational purposes only</span>
+  </p>
+</footer>
+
+<script>
+// ========== Data ==========
+const renewableEnergy = [
+  { icon: '\u2600\ufe0f', iconBg: 'rgba(255,215,0,0.15)', nameZh: '太阳能', nameEn: 'Solar Energy', catZh: '光伏/光热', catEn: 'PV/Thermal', criticalZh: '1.366 kW/m\u00b2 (太阳常数)', criticalEn: '1.366 kW/m\u00b2 (Solar Constant)', descZh: '太阳辐射到达地球大气层顶部的能量密度，地表峰值约 1000 W/m\u00b2', descEn: 'Solar radiation at top of atmosphere; surface peak ~1000 W/m\u00b2' },
+  { icon: '\ud83d\udca8', iconBg: 'rgba(0,212,255,0.15)', nameZh: '风能', nameEn: 'Wind Energy', catZh: '动能/机械能', catEn: 'Kinetic/Mechanical', criticalZh: '12 m/s (额定风速)', criticalEn: '12 m/s (Rated Wind Speed)', descZh: '风力发电机达到额定功率的风速临界值，贝兹极限为 59.3%', descEn: 'Wind speed for rated power; Betz limit is 59.3%' },
+  { icon: '\ud83d\udca7', iconBg: 'rgba(0,100,200,0.15)', nameZh: '水能', nameEn: 'Hydro Energy', catZh: '重力势能', catEn: 'Gravitational Potential', criticalZh: '9.81 m/s\u00b2 (重力加速度)', criticalEn: '9.81 m/s\u00b2 (Gravity)', descZh: '水位差与流量决定发电功率，全球技术可开发量约 15,000 TWh/年', descEn: 'Power determined by head and flow; global potential ~15,000 TWh/yr' },
+  { icon: '\ud83c\udf0b', iconBg: 'rgba(255,100,50,0.15)', nameZh: '地热能', nameEn: 'Geothermal Energy', catZh: '热能', catEn: 'Thermal', criticalZh: '150\u00b0C (发电临界温度)', criticalEn: '150\u00b0C (Power Generation Threshold)', descZh: '地热发电所需最低温度，深井地热可达 300\u00b0C 以上', descEn: 'Minimum temperature for geothermal power; deep wells exceed 300\u00b0C' },
+  { icon: '\ud83c\udf0a', iconBg: 'rgba(0,150,255,0.15)', nameZh: '潮汐能', nameEn: 'Tidal Energy', catZh: '引力/动能', catEn: 'Gravitational/Kinetic', criticalZh: '5 m (潮差临界值)', criticalEn: '5 m (Tidal Range Threshold)', descZh: '潮汐发电的经济可行潮差高度，月地引力产生的周期性水位变化', descEn: 'Economically viable tidal range; periodic water level changes from lunar gravity' },
+  { icon: '\ud83c\udf31', iconBg: 'rgba(0,255,136,0.15)', nameZh: '生物质能', nameEn: 'Biomass Energy', catZh: '化学能', catEn: 'Chemical', criticalZh: '16-20 MJ/kg (热值)', criticalEn: '16-20 MJ/kg (Calorific Value)', descZh: '干生物质的热值范围，光合作用效率约 1-2%', descEn: 'Calorific value of dry biomass; photosynthesis efficiency ~1-2%' },
+  { icon: '\u3030\ufe0f', iconBg: 'rgba(0,200,200,0.15)', nameZh: '波浪能', nameEn: 'Wave Energy', catZh: '机械能', catEn: 'Mechanical', criticalZh: '50 kW/m (波功率密度)', criticalEn: '50 kW/m (Wave Power Density)', descZh: '单位波峰宽度的平均功率，全球波浪能潜力约 32,000 TWh/年', descEn: 'Power per meter of wave crest; global potential ~32,000 TWh/yr' },
+  { icon: '\ud83c\udf21\ufe0f', iconBg: 'rgba(200,100,0,0.15)', nameZh: '海洋温差能', nameEn: 'OTEC', catZh: '热能', catEn: 'Thermal', criticalZh: '20\u00b0C (温差临界值)', criticalEn: '20\u00b0C (Temperature Difference)', descZh: '海洋表层与深层水温差，OTEC 发电所需最低温差', descEn: 'Temperature difference between surface and deep ocean water for OTEC' },
+  { icon: '\u269b\ufe0f', iconBg: 'rgba(0,255,136,0.15)', nameZh: '核聚变能', nameEn: 'Nuclear Fusion', catZh: '核能', catEn: 'Nuclear', criticalZh: '1.5亿\u00b0C (点火温度)', criticalEn: '150M\u00b0C (Ignition Temperature)', descZh: '受控核聚变所需等离子体温度，Q>1 为能量净输出临界', descEn: 'Plasma temperature for controlled fusion; Q>1 is net energy output threshold' },
+  { icon: '\ud83d\udd0b', iconBg: 'rgba(168,85,247,0.15)', nameZh: '氢能', nameEn: 'Hydrogen Energy', catZh: '化学能', catEn: 'Chemical', criticalZh: '120 MJ/kg (质量能量密度)', criticalEn: '120 MJ/kg (Mass Energy Density)', descZh: '氢的质量能量密度最高，是汽油的 2.7 倍', descEn: 'Highest mass energy density, 2.7x that of gasoline' }
+];
+
+const nonRenewableEnergy = [
+  { icon: '\ud83e\udeb8', iconBg: 'rgba(80,80,80,0.2)', nameZh: '煤炭', nameEn: 'Coal', catZh: '化石燃料', catEn: 'Fossil Fuel', criticalZh: '24 MJ/kg (热值)', criticalEn: '24 MJ/kg (Calorific Value)', descZh: '全球储量约 1.07万亿吨，按目前开采速度可用约 139 年', descEn: 'Global reserves ~1.07 trillion tons; ~139 years at current rate' },
+  { icon: '\ud83d\udee0\ufe0f', iconBg: 'rgba(60,60,60,0.2)', nameZh: '石油', nameEn: 'Petroleum', catZh: '化石燃料', catEn: 'Fossil Fuel', criticalZh: '42-46 MJ/kg (热值)', criticalEn: '42-46 MJ/kg (Calorific Value)', descZh: '全球已探明储量约 1.75万亿桶，可用约 50 年', descEn: 'Proven reserves ~1.75 trillion barrels; ~50 years remaining' },
+  { icon: '\ud83d\udd35', iconBg: 'rgba(0,100,150,0.2)', nameZh: '天然气', nameEn: 'Natural Gas', catZh: '化石燃料', catEn: 'Fossil Fuel', criticalZh: '55 MJ/kg (热值)', criticalEn: '55 MJ/kg (Calorific Value)', descZh: '最清洁的化石燃料，全球储量约 7,500万亿立方英尺', descEn: 'Cleanest fossil fuel; reserves ~7,500 trillion cubic feet' },
+  { icon: '\u2622\ufe0f', iconBg: 'rgba(255,200,0,0.15)', nameZh: '核裂变能', nameEn: 'Nuclear Fission', catZh: '核能', catEn: 'Nuclear', criticalZh: '200 MeV/裂变 (铀-235)', criticalEn: '200 MeV/fission (U-235)', descZh: '单个铀-235原子裂变释放能量，1kg铀\u22482700吨煤', descEn: 'Energy per U-235 fission; 1kg uranium \u2248 2700 tons of coal' }
+];
+
+const cosmicEnergy = [
+  { icon: '\u2600\ufe0f', iconBg: 'rgba(255,150,0,0.15)', nameZh: '恒星核聚变能', nameEn: 'Stellar Fusion', catZh: '核能', catEn: 'Nuclear', criticalZh: '3.8\u00d710\u00b2\u2076 W (太阳光度)', criticalEn: '3.8\u00d710\u00b2\u2076 W (Solar Luminosity)', descZh: '恒星通过氢核聚变释放的总功率，太阳每秒消耗 6亿吨氢', descEn: 'Total power from hydrogen fusion; Sun consumes 600M tons H/sec' },
+  { icon: '\ud83c\udf11', iconBg: 'rgba(100,50,150,0.15)', nameZh: '黑洞霍金辐射', nameEn: 'Black Hole Hawking Radiation', catZh: '量子/热辐射', catEn: 'Quantum/Thermal', criticalZh: '6.17\u00d710\u207b\u2078 K\u00b7m (霍金温度)', criticalEn: '6.17\u00d710\u207b\u2078 K\u00b7m (Hawking Temperature)', descZh: 'T = \u210fc\u00b3/(8\u03c0GMk_B)\uff0c\u9ed1\u6d1e\u8d28\u91cf\u8d8a\u5c0f\u6e29\u5ea6\u8d8a\u9ad8', descEn: 'T = \u210fc\u00b3/(8\u03c0GMk_B); smaller black holes are hotter' },
+  { icon: '\ud83c\udf0c', iconBg: 'rgba(168,85,247,0.15)', nameZh: '暗能量', nameEn: 'Dark Energy', catZh: '宇宙学', catEn: 'Cosmological', criticalZh: '6.91\u00d710\u207b\u00b2\u2077 kg/m\u00b3 (密度)', criticalEn: '6.91\u00d710\u207b\u00b2\u2077 kg/m\u00b3 (Density)', descZh: '占宇宙总能量 68.3%，驱动宇宙加速膨胀', descEn: 'Accounts for 68.3% of universe; drives accelerated expansion' },
+  { icon: '\u2b1b', iconBg: 'rgba(80,0,80,0.15)', nameZh: '暗物质', nameEn: 'Dark Matter', catZh: '未知粒子', catEn: 'Unknown Particles', criticalZh: '2.25\u00d710\u207b\u00b2\u2077 kg/m\u00b3 (密度)', criticalEn: '2.25\u00d710\u207b\u00b2\u2077 kg/m\u00b3 (Density)', descZh: '占宇宙物质 26.8%，通过引力效应间接观测', descEn: '26.8% of cosmic matter; detected via gravitational effects' },
+  { icon: '\u26a1', iconBg: 'rgba(255,215,0,0.15)', nameZh: '宇宙射线', nameEn: 'Cosmic Rays', catZh: '高能粒子', catEn: 'High-Energy Particles', criticalZh: '3\u00d710\u00b2\u2070 eV (Oh-My-God粒子)', criticalEn: '3\u00d710\u00b2\u2070 eV (Oh-My-God Particle)', descZh: '已观测最高能宇宙射线，远超LHC加速器能量1亿倍', descEn: 'Highest energy cosmic ray observed; 100M times LHC energy' },
+  { icon: '\ud83d\udcab', iconBg: 'rgba(0,212,255,0.15)', nameZh: '引力波能', nameEn: 'Gravitational Wave Energy', catZh: '时空波动', catEn: 'Spacetime Ripple', criticalZh: '10\u207b\u00b2\u00b9 (应变临界值)', criticalEn: '10\u207b\u00b2\u00b9 (Strain Threshold)', descZh: 'LIGO探测灵敏度临界值，时空应变的极微小变化', descEn: 'LIGO detection sensitivity; tiny spacetime strain changes' },
+  { icon: '\ud83d\udd0e', iconBg: 'rgba(150,0,200,0.15)', nameZh: '量子真空能', nameEn: 'Quantum Vacuum Energy', catZh: '量子场论', catEn: 'Quantum Field Theory', criticalZh: '10\u207b\u2079 J/m\u00b3 (卡西米尔效应)', criticalEn: '10\u207b\u2079 J/m\u00b3 (Casimir Effect)', descZh: '真空零点能的理论密度，可通过卡西米尔效应验证', descEn: 'Theoretical vacuum zero-point energy density; verified via Casimir effect' },
+  { icon: '\ud83d\udca3', iconBg: 'rgba(255,50,50,0.15)', nameZh: '反物质能', nameEn: 'Antimatter Energy', catZh: '湮灭反应', catEn: 'Annihilation', criticalZh: '9\u00d710\u00b9\u2076 J/kg (E=mc\u00b2)', criticalEn: '9\u00d710\u00b9\u2076 J/kg (E=mc\u00b2)', descZh: '物质-反物质完全湮灭释放100%质能，能量密度最高', descEn: '100% mass-to-energy conversion in annihilation; highest density' },
+  { icon: '\ud83c\udf1f', iconBg: 'rgba(255,200,100,0.15)', nameZh: '中子星磁能', nameEn: 'Neutron Star Magnetic Energy', catZh: '电磁/引力', catEn: 'EM/Gravitational', criticalZh: '10\u00b9\u2075 \u9ad8\u65af (磁场临界值)', criticalEn: '10\u00b9\u2075 Gauss (Magnetic Field)', descZh: '磁星表面磁场强度，是地球磁场的10\u00b9\u2075倍', descEn: 'Magnetar surface field; 10\u00b9\u2075 times Earth magnetic field' },
+  { icon: '\ud83d\udce1', iconBg: 'rgba(200,200,200,0.15)', nameZh: '宇宙微波背景', nameEn: 'Cosmic Microwave Background', catZh: '电磁辐射', catEn: 'EM Radiation', criticalZh: '2.725 K (温度)', criticalEn: '2.725 K (Temperature)', descZh: '大爆炸残余辐射，充满整个宇宙的热辐射', descEn: 'Big Bang residual radiation; permeates entire universe' }
+];
+
+const energyLaws = [
+  // 1-10
+  { nameZh: '能量守恒定律（热力学第一定律）', nameEn: 'Law of Conservation of Energy (1st Law of Thermodynamics)', descZh: '能量既不能创造也不能消灭，只能从一种形式转化为另一种形式。宇宙总能量恒定。', descEn: 'Energy can neither be created nor destroyed, only transformed. Total cosmic energy is constant.' },
+  { nameZh: '熵增定律（热力学第二定律）', nameEn: 'Entropy Increase Law (2nd Law of Thermodynamics)', descZh: '孤立系统的熵总是增加，能量转化过程中总有一部分变为不可利用的热能。', descEn: 'Entropy of isolated systems always increases; some energy becomes unavailable heat in transformations.' },
+  { nameZh: '绝对零度不可达定律（热力学第三定律）', nameEn: 'Absolute Zero Unreachable (3rd Law of Thermodynamics)', descZh: '绝对零度（0K = -273.15C）不可通过有限步骤达到，粒子运动不会完全停止。', descEn: 'Absolute zero (0K) cannot be reached in finite steps; particle motion never fully ceases.' },
+  { nameZh: '质能等价定律（E=mc2）', nameEn: 'Mass-Energy Equivalence (E=mc2)', descZh: '爱因斯坦质能方程，质量和能量是同一事物的两种表现，可相互转化。', descEn: 'Einstein equation; mass and energy are two forms of the same entity, convertible.' },
+  { nameZh: '能量量子化定律', nameEn: 'Energy Quantization Law', descZh: '普朗克提出能量以离散量子形式传递，E=hv，颠覆了经典连续能量概念。', descEn: 'Planck proposed energy is transferred in discrete quanta, E=hv, revolutionizing classical physics.' },
+  { nameZh: '测不准原理（能量-时间）', nameEn: 'Uncertainty Principle (Energy-Time)', descZh: 'dE*dt >= hbar/2，能量测量精度与时间精度存在根本限制，允许短暂借取能量。', descEn: 'dE*dt >= hbar/2; fundamental limit between energy and time precision, allows temporary energy borrowing.' },
+  { nameZh: '诺特定理（对称性与守恒）', nameEn: 'Noethers Theorem (Symmetry & Conservation)', descZh: '每一种连续对称性对应一个守恒定律：时间平移对称性对应能量守恒，空间平移对应动量守恒。', descEn: 'Each continuous symmetry corresponds to a conservation law: time symmetry=energy, space symmetry=momentum.' },
+  { nameZh: '最大熵原理', nameEn: 'Maximum Entropy Principle', descZh: '在约束条件下，系统趋向熵最大的宏观态，这是自然界能量分布的基本趋势。', descEn: 'Under constraints, systems evolve toward maximum entropy macrostate; fundamental distribution tendency.' },
+  { nameZh: '最小作用量原理', nameEn: 'Principle of Least Action', descZh: '物理系统的实际演化路径使作用量取极值，能量传递遵循最优路径。', descEn: 'Physical systems evolve along paths that extremize action; energy follows optimal paths.' },
+  { nameZh: '能量均分定理', nameEn: 'Equipartition Theorem', descZh: '热平衡时每个自由度平均分配 kT/2 的能量，是统计力学的基础。', descEn: 'Each degree of freedom gets kT/2 energy at thermal equilibrium; basis of statistical mechanics.' },
+  // 11-20
+  { nameZh: '热力学第零定律', nameEn: 'Zeroth Law of Thermodynamics', descZh: '若两系统分别与第三系统热平衡，则它们彼此也热平衡，定义了温度概念。', descEn: 'Two systems in thermal equilibrium with a third are in equilibrium with each other; defines temperature.' },
+  { nameZh: '卡诺定理', nameEn: 'Carnots Theorem', descZh: '热机最大效率只取决于高温热源和低温热源的温度比，eta = 1 - T2/T1。', descEn: 'Maximum heat engine efficiency depends only on temperature ratio: eta = 1 - T2/T1.' },
+  { nameZh: '基尔霍夫热辐射定律', nameEn: 'Kirchhoffs Law of Thermal Radiation', descZh: '物体的发射率等于吸收率，热平衡时辐射特性与材料无关。', descEn: 'Emissivity equals absorptivity; radiation properties are material-independent at equilibrium.' },
+  { nameZh: '斯特藩-玻尔兹曼定律', nameEn: 'Stefan-Boltzmann Law', descZh: '黑体辐射总功率与温度四次方成正比，P = sigma*T4，恒星辐射的基础。', descEn: 'Total blackbody radiation proportional to T4; P = sigma*T4, basis of stellar radiation.' },
+  { nameZh: '维恩位移定律', nameEn: 'Wiens Displacement Law', descZh: '黑体辐射峰值波长与温度成反比，lambda_max = b/T，恒星颜色由温度决定。', descEn: 'Peak radiation wavelength inversely proportional to temperature; lambda_max = b/T.' },
+  { nameZh: '光电效应定律', nameEn: 'Photoelectric Effect Law', descZh: '光子能量 E=hv 大于逸出功时才能打出电子，光强度不影响截止频率。', descEn: 'Electrons emitted only when photon energy E=hv exceeds work function; intensity does not affect threshold.' },
+  { nameZh: '能量动量关系', nameEn: 'Energy-Momentum Relation', descZh: 'E2 = (pc)2 + (mc2)2，相对论中能量、动量和静止质量的统一关系。', descEn: 'E2 = (pc)2 + (mc2)2; relativistic unification of energy, momentum and rest mass.' },
+  { nameZh: '泡利不相容原理', nameEn: 'Pauli Exclusion Principle', descZh: '费米子不能占据同一量子态，决定了原子结构和简并压力的能量来源。', descEn: 'Fermions cannot occupy same quantum state; determines atomic structure and degeneracy pressure.' },
+  { nameZh: '哈勃定律', nameEn: 'Hubbles Law', descZh: '星系退行速度与距离成正比，v = H0*d，揭示了宇宙膨胀的能量来源。', descEn: 'Galaxy recession velocity proportional to distance; v = H0*d, reveals cosmic expansion energy source.' },
+  { nameZh: '能量最低原理', nameEn: 'Minimum Energy Principle', descZh: '系统自发趋向能量最低的稳定状态，化学键形成和结构稳定的基础。', descEn: 'Systems spontaneously seek lowest energy stable state; basis of chemical bonding and stability.' },
+  // 21-30
+  { nameZh: '测地线定律（广义相对论）', nameEn: 'Geodesic Law (General Relativity)', descZh: '自由落体沿时空测地线运动，引力是时空弯曲的表现，而非传统力。', descEn: 'Free-falling objects follow spacetime geodesics; gravity is spacetime curvature, not a force.' },
+  { nameZh: '能量简并定律', nameEn: 'Energy Degeneracy Law', descZh: '同一能级可对应多个量子态，简并度影响系统的统计行为和能量分布。', descEn: 'Multiple quantum states can share same energy level; degeneracy affects statistical behavior.' },
+  { nameZh: '真空零点能定律', nameEn: 'Vacuum Zero-Point Energy Law', descZh: '量子场的最低能量态仍有 E = hbar*omega/2 的零点能，真空并非空无一物。', descEn: 'Quantum fields retain zero-point energy even in ground state; vacuum is not empty.' },
+  { nameZh: '能量梯度定律（能量梯级利用）', nameEn: 'Energy Cascade Utilization Law', descZh: '高温热源逐级利用到低温，能量品质随温度降低而降低，梯级利用提高效率。', descEn: 'High-temperature sources used stepwise to lower temps; energy quality decreases with temperature.' },
+  { nameZh: '普朗克能量极限', nameEn: 'Planck Energy Limit', descZh: '1.22*10^19 GeV，量子引力的特征能量尺度，当前物理学的能量上限。', descEn: '1.22*10^19 GeV; characteristic quantum gravity energy scale, upper limit of known physics.' },
+  { nameZh: '贝肯斯坦-霍金熵定律', nameEn: 'Bekenstein-Hawking Entropy Law', descZh: '黑洞熵与事件视界面积成正比，S = kA/(4*lp^2)，信息与能量的深层联系。', descEn: 'Black hole entropy proportional to event horizon area; deep info-energy connection.' },
+  { nameZh: '能量品质定律（火用）', nameEn: 'Energy Quality Law (Exergy)', descZh: '能量不仅有量还有质，可做功的部分称为火用（exergy），环境温度决定可用性。', descEn: 'Energy has both quantity and quality; useful work portion is exergy, determined by environment.' },
+  { nameZh: '守恒流定律（连续性方程）', nameEn: 'Conservation Current Law (Continuity Equation)', descZh: 'drho/dt + div(J) = 0，能量密度变化率等于能流散度，局部守恒的数学表达。', descEn: 'drho/dt + div(J) = 0; energy density change equals energy flux divergence; local conservation.' },
+  { nameZh: '宇宙能量密度定律', nameEn: 'Cosmic Energy Density Law', descZh: '宇宙总能量密度接近临界密度 rho_c = 3H2/(8*pi*G)，决定宇宙是平坦的。', descEn: 'Total cosmic density near critical rho_c = 3H2/(8*pi*G), determining flat universe geometry.' },
+  { nameZh: '能量信息等价定律', nameEn: 'Energy-Information Equivalence Law', descZh: '兰道尔原理：擦除1比特信息至少耗散 kT*ln2 能量，信息与能量的根本联系。', descEn: 'Landauers principle: erasing 1 bit dissipates at least kT*ln2 energy; fundamental info-energy link.' }
+];
+
+const links = [
+  { icon: '\ud83d\udcbb', titleZh: 'GitHub: eacoweb3-2025', titleEn: 'GitHub: eacoweb3-2025', url: 'https://github.com/eacocc/eacoweb3-2025' },
+  { icon: '\u2699\ufe0f', titleZh: '墨子科技', titleEn: 'Mohist Tech', url: 'https://ucoingroup.github.io/Mohist-Tech/' },
+  { icon: '\ud83d\udcb0', titleZh: '100 种致富方式', titleEn: '100 Ways to Wealth', url: 'https://ucoingroup.github.io/100WaysToWealth/' },
+  { icon: '\ud83d\udcda', titleZh: '好书推荐', titleEn: 'Good Books', url: 'https://ucoingroup.github.io/good-books/' },
+  { icon: '\ud83e\udd1d', titleZh: '地球 100 朋友', titleEn: 'Earth 100 Friends', url: 'https://ucoingroup.github.io/earth-100-friends/' }
+];
+
+// ========== Render Functions ==========
+function renderEnergyCards(containerId, data) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = data.map(e => `
+    <div class="energy-card">
+      <div class="energy-card-header">
+        <div class="energy-card-icon" style="background:${e.iconBg}">${e.icon}</div>
+        <div>
+          <div class="energy-card-name">
+            <span data-zh>${e.nameZh}</span>
+            <span data-en>${e.nameEn}</span>
+          </div>
+          <div class="energy-card-category">${getLang() === 'zh' ? e.catZh : e.catEn}</div>
+        </div>
+      </div>
+      <div class="energy-critical">
+        <div class="energy-critical-label">
+          <span data-zh>临界值</span>
+          <span data-en>Critical Value</span>
+        </div>
+        <div class="energy-critical-value">${getLang() === 'zh' ? e.criticalZh : e.criticalEn}</div>
+      </div>
+      <div class="energy-card-desc">
+        <span data-zh>${e.descZh}</span>
+        <span data-en>${e.descEn}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCosmicCards(containerId, data) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = data.map(e => `
+    <div class="energy-card">
+      <div class="energy-card-header">
+        <div class="energy-card-icon" style="background:${e.iconBg}">${e.icon}</div>
+        <div>
+          <div class="energy-card-name">
+            <span data-zh>${e.nameZh}</span>
+            <span data-en>${e.nameEn}</span>
+          </div>
+          <div class="energy-card-category">${getLang() === 'zh' ? e.catZh : e.catEn}</div>
+        </div>
+      </div>
+      <div class="energy-critical">
+        <div class="energy-critical-label">
+          <span data-zh>临界值</span>
+          <span data-en>Critical Value</span>
+        </div>
+        <div class="energy-critical-value">${getLang() === 'zh' ? e.criticalZh : e.criticalEn}</div>
+      </div>
+      <div class="energy-card-desc">
+        <span data-zh>${e.descZh}</span>
+        <span data-en>${e.descEn}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLaws(containerId, laws) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = laws.map((law, i) => `
+    <div class="law-item">
+      <div class="law-number">${i + 1}</div>
+      <div class="law-content">
+        <div class="law-name">
+          <span data-zh>${law.nameZh}</span>
+          <span data-en>${law.nameEn}</span>
+        </div>
+        <div class="law-desc">
+          <span data-zh>${law.descZh}</span>
+          <span data-en>${law.descEn}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLinks() {
+  const container = document.getElementById('link-grid');
+  if (!container) return;
+  container.innerHTML = links.map(l => `
+    <a href="${l.url}" target="_blank" class="link-card">
+      <div class="link-card-icon">${l.icon}</div>
+      <div class="link-card-text">
+        <div class="link-card-title">
+          <span data-zh>${l.titleZh}</span>
+          <span data-en>${l.titleEn}</span>
+        </div>
+        <div class="link-card-url">${l.url}</div>
+      </div>
+    </a>
+  `).join('');
+}
+
+// ========== Mobile Menu Toggle ==========
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  if (navLinks) navLinks.classList.toggle('open');
+}
+function closeMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  if (navLinks) navLinks.classList.remove('open');
+}
+
+// ========== Language Toggle ==========
+function getLang() {
+  return document.documentElement.getAttribute('data-lang');
+}
+function toggleLang() {
+  const current = getLang();
+  const newLang = current === 'zh' ? 'en' : 'zh';
+  document.documentElement.setAttribute('data-lang', newLang);
+  document.documentElement.setAttribute('lang', newLang === 'zh' ? 'zh-CN' : 'en');
+  reRenderDynamic();
+}
+function reRenderDynamic() {
+  renderEnergyCards('renewable-grid', renewableEnergy);
+  renderEnergyCards('nonrenewable-grid', nonRenewableEnergy);
+  renderCosmicCards('cosmic-grid', cosmicEnergy);
+}
+
+// ========== Tabs ==========
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+  const btnMap = { 'top10': 0, 'top20': 1, 'top30': 2 };
+  document.querySelectorAll('.tab-btn')[btnMap[tabId]].classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+// ========== Starfield Animation ==========
+function initStarfield() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    const count = Math.floor((w * h) / 8000);
+    stars = [];
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.3,
+        opacity: Math.random() * 0.8 + 0.2,
+        twinkle: Math.random() * 0.02 + 0.005,
+        twinkleDir: Math.random() > 0.5 ? 1 : -1,
+        vx: (Math.random() - 0.5) * 0.05,
+        vy: (Math.random() - 0.5) * 0.05
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    stars.forEach(s => {
+      s.opacity += s.twinkle * s.twinkleDir;
+      if (s.opacity <= 0.15 || s.opacity >= 1) s.twinkleDir *= -1;
+      s.x += s.vx; s.y += s.vy;
+      if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
+      if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200, 220, 255, ${s.opacity})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  draw();
+}
+
+// ========== Init ==========
+document.addEventListener('DOMContentLoaded', function() {
+  renderEnergyCards('renewable-grid', renewableEnergy);
+  renderEnergyCards('nonrenewable-grid', nonRenewableEnergy);
+  renderCosmicCards('cosmic-grid', cosmicEnergy);
+  renderLaws('law-list-10', energyLaws.slice(0, 10));
+  renderLaws('law-list-20', energyLaws.slice(0, 20));
+  renderLaws('law-list-30', energyLaws);
+  renderLinks();
+  initStarfield();
+
+  // Close mobile menu on nav link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Back to top button scroll visibility
+  const backToTopBtn = document.getElementById('backToTop');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+  }
+});
+
+// ========== Back to Top ==========
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">&#8593;</button>
+
+<!-- No Script Fallback -->
+<noscript>
+  <div style="padding: 2rem; text-align: center; color: #e8edf5; background: #050814;">
+    <p>This website requires JavaScript to display energy data, WEB3 technology content, and interactive features. Please enable JavaScript in your browser.</p>
+  </div>
+</noscript>
+
+</body>
+</html>
