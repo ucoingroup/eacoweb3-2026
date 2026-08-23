@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Web3 Beginner Guide | Earth's Best Coin | eaco 202608</title>
+<meta name="description" content="EACO Web3 beginner guide - from first principles through six stations: Wallet, DeFi, Stablecoins, Policy, Tokenization, Web3. Earth's Best Coin. Zero barriers.">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-deep:#050814;--bg-mid:#0a0f24;--bg-card:rgba(15,22,48,.75);--bg-card-hover:rgba(20,30,65,.85);
+  --accent-cyan:#00d4ff;--accent-purple:#a855f7;--accent-gold:#ffd700;--accent-green:#00ff88;
+  --accent-orange:#ff8c42;--accent-pink:#ff6b9d;
+  --text-primary:#e8edf5;--text-secondary:#9ba8c4;--text-muted:#5a6a8a;
+  --border-glow:rgba(0,212,255,.25);--border-subtle:rgba(168,85,247,.15);
+  --radius:16px;--radius-sm:10px;--transition:.3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;scroll-padding-top:120px;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;background:var(--bg-deep);color:var(--text-primary);line-height:1.7;overflow-x:hidden;min-height:100vh}
+#starfield,#meteorCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 20% 30%,rgba(0,212,255,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(168,85,247,.08) 0%,transparent 50%),radial-gradient(ellipse at 50% 100%,rgba(0,255,136,.04) 0%,transparent 50%)}
+.nebula{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.4;background:radial-gradient(circle at 15% 50%,rgba(168,85,247,.12) 0%,transparent 30%),radial-gradient(circle at 85% 20%,rgba(0,212,255,.10) 0%,transparent 30%),radial-gradient(circle at 50% 80%,rgba(255,215,0,.06) 0%,transparent 25%)}
+
+/* Navbar */
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(5,8,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-glow);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.nav-logo{font-size:1rem;font-weight:700;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.nav-links{display:flex;gap:1rem;list-style:none;align-items:center;flex-wrap:wrap}
+.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.8rem;transition:var(--transition);position:relative;white-space:nowrap}
+.nav-links a:hover{color:var(--accent-cyan)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent-cyan);transition:var(--transition)}
+.nav-links a:hover::after{width:100%}
+.lang-bar{display:flex;gap:.3rem;align-items:center;flex-wrap:wrap}
+.lang-btn{background:rgba(0,212,255,.08);color:var(--text-secondary);border:1px solid var(--border-subtle);padding:.2rem .5rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer;transition:var(--transition);white-space:nowrap}
+.lang-btn:hover{background:rgba(0,212,255,.15);color:var(--accent-cyan)}
+.lang-btn.active{background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#000;border-color:transparent}
+.menu-toggle{display:none;background:transparent;border:1px solid var(--border-glow);color:var(--accent-cyan);font-size:1.1rem;padding:.25rem .5rem;border-radius:8px;cursor:pointer;transition:var(--transition)}
+
+/* CA Bar */
+.ca-bar{position:fixed;top:42px;left:0;width:100%;z-index:99;background:rgba(10,15,36,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-glow);padding:.4rem 1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.ca-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+.ca-address{font-family:"SF Mono","Fira Code",monospace;font-size:.72rem;color:var(--accent-cyan);word-break:break-all;max-width:380px}
+.ca-copy-btn{background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#000;border:none;padding:.25rem .7rem;border-radius:8px;font-size:.7rem;font-weight:700;cursor:pointer;transition:var(--transition);white-space:nowrap}
+.ca-copy-btn:hover{transform:scale(1.05);box-shadow:0 0 12px rgba(0,212,255,.4)}
+.ca-copy-btn.copied{background:var(--accent-green)}
+
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+section{padding:3.5rem 0;position:relative;z-index:1}
+.section-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem;text-align:center}
+.section-subtitle{text-align:center;color:var(--text-secondary);font-size:.9rem;margin-bottom:2rem}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:120px;padding-bottom:2rem}
+.hero-badge{display:inline-block;background:rgba(0,212,255,.1);border:1px solid var(--border-glow);border-radius:20px;padding:.3rem 1rem;font-size:.72rem;color:var(--accent-cyan);margin-bottom:1.2rem;letter-spacing:1px}
+.hero-title{font-size:clamp(3rem,10vw,6rem);font-weight:800;background:linear-gradient(135deg,var(--accent-cyan) 0%,var(--accent-purple) 50%,var(--accent-gold) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem;line-height:1.1;letter-spacing:-2px}
+.hero-symbol{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;color:var(--accent-gold);margin-bottom:.5rem}
+.hero-subtitle{font-size:clamp(.9rem,2vw,1.1rem);color:var(--text-secondary);max-width:700px;margin-bottom:1.5rem}
+.hero-desc{font-size:.85rem;color:var(--text-muted);max-width:600px;margin-bottom:2rem;line-height:1.8}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn-primary,.btn-secondary{padding:.7rem 1.8rem;border-radius:30px;font-size:.85rem;font-weight:600;cursor:pointer;transition:var(--transition);text-decoration:none;display:inline-block}
+.btn-primary{background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#000;border:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.35)}
+.btn-secondary{background:transparent;color:var(--accent-cyan);border:1px solid var(--border-glow)}
+.btn-secondary:hover{background:rgba(0,212,255,.1);border-color:var(--accent-cyan)}
+.hero-features{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+.hero-feature{font-size:.75rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem}
+.hero-feature::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent-green)}
+
+/* Intro */
+.intro-content{max-width:800px;margin:0 auto;text-align:center}
+.intro-content p{color:var(--text-secondary);font-size:.95rem;margin-bottom:1.2rem;line-height:1.8}
+.intro-highlight{margin:2rem auto;padding:1.5rem 2rem;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(168,85,247,.08));border:1px solid var(--border-glow);border-radius:var(--radius);text-align:center;max-width:600px}
+.intro-highlight p{font-size:1.1rem;font-weight:600;color:var(--accent-cyan);margin:0}
+.intro-tags{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+.intro-tag{background:rgba(168,85,247,.1);border:1px solid var(--border-subtle);color:var(--accent-purple);padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600}
+
+/* Stations */
+.progress-track{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:2.5rem;flex-wrap:nowrap;overflow-x:auto;padding:.5rem 0}
+.progress-dot{width:36px;height:36px;border-radius:50%;background:rgba(15,22,48,.8);border:2px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--text-muted);transition:var(--transition);flex-shrink:0;cursor:pointer}
+.progress-dot.active{background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));border-color:transparent;color:#000}
+.progress-line{width:30px;height:2px;background:var(--border-subtle);flex-shrink:0}
+.station-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.station-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius);padding:1.5rem;transition:var(--transition);position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.station-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+.station-card[data-s="1"]::before{background:var(--accent-cyan)}
+.station-card[data-s="2"]::before{background:var(--accent-purple)}
+.station-card[data-s="3"]::before{background:var(--accent-green)}
+.station-card[data-s="4"]::before{background:var(--accent-gold)}
+.station-card[data-s="5"]::before{background:var(--accent-orange)}
+.station-card[data-s="6"]::before{background:var(--accent-pink)}
+.station-card:hover{background:var(--bg-card-hover);border-color:var(--border-glow);transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,212,255,.1)}
+.station-header{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.station-num{font-size:1.8rem;font-weight:800;color:var(--text-muted);opacity:.4;line-height:1}
+.station-icon{width:32px;height:32px;flex-shrink:0}
+.station-card h3{font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:.3rem}
+.station-card .station-sub{font-size:.8rem;color:var(--accent-cyan);margin-bottom:.3rem;font-weight:600}
+.station-card .station-desc{font-size:.75rem;color:var(--text-muted);margin-bottom:.8rem}
+.station-card .station-text{font-size:.85rem;color:var(--text-secondary);line-height:1.7}
+.station-card[data-s="1"] .station-sub{color:var(--accent-cyan)}
+.station-card[data-s="2"] .station-sub{color:var(--accent-purple)}
+.station-card[data-s="3"] .station-sub{color:var(--accent-green)}
+.station-card[data-s="4"] .station-sub{color:var(--accent-gold)}
+.station-card[data-s="5"] .station-sub{color:var(--accent-orange)}
+.station-card[data-s="6"] .station-sub{color:var(--accent-pink)}
+
+/* Definitions */
+.def-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.def-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:1.2rem;transition:var(--transition);backdrop-filter:blur(10px)}
+.def-card:hover{border-color:var(--border-glow);background:var(--bg-card-hover);transform:translateY(-2px)}
+.def-term{font-size:1rem;font-weight:700;color:var(--accent-gold);margin-bottom:.4rem}
+.def-meaning{font-size:.8rem;color:var(--text-secondary);line-height:1.6}
+
+/* Ecosystem */
+.eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.eco-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:1.3rem;text-decoration:none;transition:var(--transition);text-align:center;backdrop-filter:blur(10px)}
+.eco-card:hover{border-color:var(--border-glow);background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.1)}
+.eco-card-title{font-size:.9rem;font-weight:700;color:var(--accent-cyan);margin-bottom:.3rem}
+.eco-card-desc{font-size:.72rem;color:var(--text-muted)}
+.loop-closure{text-align:center;padding:2rem;background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(168,85,247,.05));border:1px solid var(--border-glow);border-radius:var(--radius);margin-bottom:2rem}
+.loop-closure h3{font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.loop-closure p{color:var(--text-secondary);font-size:.85rem;max-width:600px;margin:0 auto}
+.ca-repeat{margin:2rem auto;text-align:center;padding:1.2rem;background:rgba(10,15,36,.9);border:1px solid var(--border-glow);border-radius:var(--radius);max-width:600px}
+.ca-repeat-label{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+.ca-repeat-addr{font-family:"SF Mono","Fira Code",monospace;font-size:.78rem;color:var(--accent-cyan);word-break:break-all;margin-bottom:.5rem}
+.ca-repeat-copy{background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#000;border:none;padding:.35rem 1rem;border-radius:8px;font-size:.72rem;font-weight:700;cursor:pointer;transition:var(--transition)}
+.ca-repeat-copy:hover{transform:scale(1.05);box-shadow:0 0 12px rgba(0,212,255,.4)}
+.ca-repeat-copy.copied{background:var(--accent-green)}
+
+/* Footer */
+footer{padding:2.5rem 1.5rem;text-align:center;position:relative;z-index:1;border-top:1px solid var(--border-subtle);background:rgba(5,8,20,.6)}
+.footer-logo{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.footer-text{color:var(--text-muted);font-size:.75rem;line-height:1.8;margin-bottom:.5rem}
+.footer-version{color:var(--accent-gold);font-size:.7rem;border:1px solid var(--accent-gold);padding:.15rem .5rem;border-radius:12px;display:inline-block}
+
+/* Back to top */
+#backToTop{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple));color:#000;border:none;font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:var(--transition);z-index:50;display:flex;align-items:center;justify-content:center}
+#backToTop.show{opacity:1;pointer-events:auto}
+#backToTop:hover{transform:scale(1.1);box-shadow:0 0 20px rgba(0,212,255,.4)}
+
+/* Fade-in animation */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* RTL */
+[dir="rtl"] .station-card::before{left:auto;right:0}
+[dir="rtl"] .progress-track{direction:rtl}
+[dir="rtl"] body{text-align:right}
+
+/* Responsive */
+@media(max-width:768px){
+  .navbar{padding:.4rem .8rem}
+  .nav-links{display:none}
+  .nav-links.show{display:flex;position:absolute;top:100%;left:0;width:100%;background:rgba(5,8,20,.95);backdrop-filter:blur(20px);padding:1rem;flex-direction:column;gap:.8rem;border-bottom:1px solid var(--border-glow)}
+  .menu-toggle{display:block}
+  .ca-bar{top:38px;padding:.3rem .8rem}
+  .ca-label{font-size:.6rem}
+  .ca-address{font-size:.65rem;max-width:200px}
+  .ca-copy-btn{font-size:.65rem;padding:.2rem .5rem}
+  .hero{padding-top:110px}
+  .station-grid{grid-template-columns:1fr}
+  .def-grid{grid-template-columns:1fr}
+  .eco-grid{grid-template-columns:1fr}
+  .lang-bar{gap:.2rem}
+  .lang-btn{font-size:.65rem;padding:.15rem .35rem}
+  .progress-dot{width:28px;height:28px;font-size:.65rem}
+  .progress-line{width:15px}
+  section{padding:2.5rem 0}
+}
+@media(max-width:480px){
+  .hero-title{font-size:2.8rem}
+  .hero-features{gap:.8rem}
+  .hero-feature{font-size:.65rem}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<canvas id="meteorCanvas"></canvas>
+<div class="bg-gradient"></div>
+<div class="nebula"></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-logo">EACO Web3</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#intro" data-i18n="nav_intro">入门</a></li>
+    <li><a href="#stations" data-i18n="nav_stations">六站</a></li>
+    <li><a href="#definitions" data-i18n="nav_def">定义</a></li>
+    <li><a href="#ecosystem" data-i18n="nav_eco">生态</a></li>
+  </ul>
+  <div class="lang-bar">
+    <button class="lang-btn" data-lang="zh">中</button>
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="es">ES</button>
+    <button class="lang-btn" data-lang="fr">FR</button>
+    <button class="lang-btn" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="ar">ع</button>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+</nav>
+
+<!-- CA Bar -->
+<div class="ca-bar">
+  <span class="ca-label" data-i18n="ca_label">合约地址 (CA)</span>
+  <code class="ca-address">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+  <button class="ca-copy-btn" id="copyBtn" data-i18n="copy">复制</button>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge" data-i18n="hero_badge">EACO Web3 入门指南</div>
+  <h1 class="hero-title">EACO</h1>
+  <div class="hero-symbol">$E</div>
+  <p class="hero-subtitle" data-i18n="hero_sub">Earth's Best Coin -- 宇宙唯一，地球唯一</p>
+  <p class="hero-desc" data-i18n="hero_desc">刚接触加密世界？别被术语吓到。从第一性原理开始，零门槛，零先验，只需要开始。</p>
+  <div class="hero-cta">
+    <a href="#intro" class="btn-primary" data-i18n="hero_cta1">开始入门</a>
+    <a href="#stations" class="btn-secondary" data-i18n="hero_cta2">六站通关</a>
+  </div>
+  <div class="hero-features">
+    <span class="hero-feature" data-i18n="feat1">零门槛</span>
+    <span class="hero-feature" data-i18n="feat2">零先验</span>
+    <span class="hero-feature" data-i18n="feat3">六站通关</span>
+    <span class="hero-feature" data-i18n="feat4">多语言</span>
+  </div>
+</section>
+
+<!-- Intro: First Principles -->
+<section id="intro" class="container">
+  <h2 class="section-title fade-in" data-i18n="intro_title">第一性原理</h2>
+  <p class="section-subtitle fade-in" data-i18n="intro_sub">刚接触区块链和数字资产？从这里开始。</p>
+  <div class="intro-content">
+    <p class="fade-in" data-i18n="intro_p1">如果你今天才第一次听说区块链，那么恭喜你——你来得正是时候。</p>
+    <p class="fade-in" data-i18n="intro_p2">EACO 相信，理解 Web3 不需要计算机学位，也不需要金融背景。你只需要回到「第一性原理」：这件事为什么存在？它解决了什么问题？</p>
+    <p class="fade-in" data-i18n="intro_p3">沿着这个思路，我们将一起走过六个关键坐标。这是一张为零基础绘制的地图。起点在这里，终点由你定义。</p>
+  </div>
+  <div class="intro-highlight fade-in">
+    <p data-i18n="intro_highlight">零门槛。零先验。只需要开始。</p>
+  </div>
+  <div class="intro-tags">
+    <span class="intro-tag" data-i18n="tag1">钱包</span>
+    <span class="intro-tag" data-i18n="tag2">DeFi</span>
+    <span class="intro-tag" data-i18n="tag3">稳定币</span>
+    <span class="intro-tag" data-i18n="tag4">政策</span>
+    <span class="intro-tag" data-i18n="tag5">代币化</span>
+    <span class="intro-tag" data-i18n="tag6">Web3</span>
+  </div>
+</section>
+
+<!-- Six Stations -->
+<section id="stations" class="container">
+  <h2 class="section-title fade-in" data-i18n="stations_title">六站通关</h2>
+  <p class="section-subtitle fade-in" data-i18n="stations_sub">钱包 -> DeFi -> 稳定币 -> 政策 -> 代币化 -> Web3</p>
+
+  <div class="progress-track fade-in">
+    <div class="progress-dot active" data-step="1">1</div>
+    <div class="progress-line"></div>
+    <div class="progress-dot" data-step="2">2</div>
+    <div class="progress-line"></div>
+    <div class="progress-dot" data-step="3">3</div>
+    <div class="progress-line"></div>
+    <div class="progress-dot" data-step="4">4</div>
+    <div class="progress-line"></div>
+    <div class="progress-dot" data-step="5">5</div>
+    <div class="progress-line"></div>
+    <div class="progress-dot" data-step="6">6</div>
+  </div>
+
+  <div class="station-grid">
+    <!-- Station 1: Wallet -->
+    <div class="station-card fade-in" data-s="1">
+      <div class="station-header">
+        <span class="station-num">01</span>
+        <svg class="station-icon" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M21 2l-2 2m-7.618 7.618a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.778-7.778zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3"/></svg>
+      </div>
+      <h3 data-i18n="s1_title">钱包</h3>
+      <p class="station-sub" data-i18n="s1_sub">数字资产的「家门钥匙」</p>
+      <p class="station-desc" data-i18n="s1_desc">自己保管，自己负责</p>
+      <p class="station-text" data-i18n="s1_text">钱包是你进入 Web3 世界的第一把钥匙。它不存储你的币，而是保管你的私钥——那串证明「这些资产属于你」的密码。热钱包联网便捷，冷钱包离线安全。在加密世界里，你自己的银行，你自己负责。</p>
+    </div>
+
+    <!-- Station 2: DeFi -->
+    <div class="station-card fade-in" data-s="2">
+      <div class="station-header">
+        <span class="station-num">02</span>
+        <svg class="station-icon" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3 data-i18n="s2_title">DeFi</h3>
+      <p class="station-sub" data-i18n="s2_sub">当银行变成代码</p>
+      <p class="station-desc" data-i18n="s2_desc">借贷、交易、理财在链上自动运行</p>
+      <p class="station-text" data-i18n="s2_text">去中心化金融用智能合约替代传统金融中介。你在链上借贷、交易、提供流动性，不需要银行审批，代码即规则。从 Uniswap 到 Aave，DeFi 正在重塑金融的底层逻辑：开放、透明、无许可。</p>
+    </div>
+
+    <!-- Station 3: Stablecoins -->
+    <div class="station-card fade-in" data-s="3">
+      <div class="station-header">
+        <span class="station-num">03</span>
+        <svg class="station-icon" viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="2"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12l7 4 7-4"/></svg>
+      </div>
+      <h3 data-i18n="s3_title">稳定币</h3>
+      <p class="station-sub" data-i18n="s3_sub">加密世界的「压舱石」</p>
+      <p class="station-desc" data-i18n="s3_desc">让波动变得可预期</p>
+      <p class="station-text" data-i18n="s3_text">稳定币锚定法币（如美元），在波动的加密世界中提供价值的避风港。USDT、USDC 是法币抵押型，DAI 是加密资产超额抵押型。它们既是交易的媒介，也是连接传统金融与链上世界的桥梁。</p>
+    </div>
+
+    <!-- Station 4: Policy -->
+    <div class="station-card fade-in" data-s="4">
+      <div class="station-header">
+        <span class="station-num">04</span>
+        <svg class="station-icon" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h3 data-i18n="s4_title">政策</h3>
+      <p class="station-sub" data-i18n="s4_sub">监管不是敌人，而是规则说明书</p>
+      <p class="station-desc" data-i18n="s4_desc">从 SEC 到 MiCA，全球监管成形</p>
+      <p class="station-text" data-i18n="s4_text">从美国 SEC 的执法监管到欧盟 MiCA 的统一框架，全球加密监管正在成形。合规不是束缚，而是行业走向主流的必经之路。理解规则，才能在规则中找到自由。</p>
+    </div>
+
+    <!-- Station 5: Tokenization -->
+    <div class="station-card fade-in" data-s="5">
+      <div class="station-header">
+        <span class="station-num">05</span>
+        <svg class="station-icon" viewBox="0 0 24 24" fill="none" stroke="#ff8c42" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </div>
+      <h3 data-i18n="s5_title">代币化</h3>
+      <p class="station-sub" data-i18n="s5_sub">RWA 打通两个世界</p>
+      <p class="station-desc" data-i18n="s5_desc">黄金、国债、股票搬上区块链</p>
+      <p class="station-text" data-i18n="s5_text">现实世界资产代币化正在把黄金、国债、房地产搬上区块链。一份资产可以被分割成百万份，24小时全球流通。代币化不是概念，而是传统金融与 DeFi 之间正在铺设的高速公路。EACO 正是 RWA 赛道的先行者。</p>
+    </div>
+
+    <!-- Station 6: Web3 -->
+    <div class="station-card fade-in" data-s="6">
+      <div class="station-header">
+        <span class="station-num">06</span>
+        <svg class="station-icon" viewBox="0 0 24 24" fill="none" stroke="#ff6b9d" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <h3 data-i18n="s6_title">Web3</h3>
+      <p class="station-sub" data-i18n="s6_sub">一场关于所有权的文明升级</p>
+      <p class="station-desc" data-i18n="s6_desc">不止于技术</p>
+      <p class="station-text" data-i18n="s6_text">Web3 不止是区块链技术，而是一场关于「谁拥有数据、谁拥有价值」的范式转移。从 Web1 的「只读」到 Web2 的「读+写」，再到 Web3 的「读+写+拥有」。你在链上的每一次交互，都是在构建一个你真正拥有的数字世界。</p>
+    </div>
+  </div>
+</section>
+
+<!-- EACO Definitions -->
+<section id="definitions" class="container">
+  <h2 class="section-title fade-in" data-i18n="def_title">EACO 的定义</h2>
+  <p class="section-subtitle fade-in" data-i18n="def_sub">eaco 202608, east coin, and more</p>
+  <div class="def-grid">
+    <div class="def-card fade-in"><div class="def-term">EACO</div><div class="def-meaning" data-i18n="def1">Earth's Best Coin -- 地球最佳硬币</div></div>
+    <div class="def-card fade-in"><div class="def-term">$E</div><div class="def-meaning" data-i18n="def2">创新货币符号，宇宙中唯一的 eaco</div></div>
+    <div class="def-card fade-in"><div class="def-term">eaco 202608</div><div class="def-meaning" data-i18n="def3">2026年08月版本，Earth's best Coin August 2026</div></div>
+    <div class="def-card fade-in"><div class="def-term">east coin</div><div class="def-meaning" data-i18n="def4">东方之币，连接东方文明与全球</div></div>
+    <div class="def-card fade-in"><div class="def-term">Earth's best AI coin</div><div class="def-meaning" data-i18n="def5">地球最佳 AI 币，AI 与区块链的交汇</div></div>
+    <div class="def-card fade-in"><div class="def-term">Earth's best RWA coin</div><div class="def-meaning" data-i18n="def6">地球最佳 RWA 币，现实资产代币化先行者</div></div>
+    <div class="def-card fade-in"><div class="def-term">Earth's best Web3 coin</div><div class="def-meaning" data-i18n="def7">地球最佳 Web3 币，所有权革命的推动者</div></div>
+    <div class="def-card fade-in"><div class="def-term">EACO DAO</div><div class="def-meaning" data-i18n="def8">去中心化自治组织，社区共治</div></div>
+    <div class="def-card fade-in"><div class="def-term" data-i18n="def9_term">宇宙唯一，地球唯一</div><div class="def-meaning" data-i18n="def9">The only eaco in the universe and the earth</div></div>
+    <div class="def-card fade-in"><div class="def-term">E = ?</div><div class="def-meaning" data-i18n="def10">Energy(能源) + Equity(权益) + Earth(地球) + Evolution(进化)</div></div>
+    <div class="def-card fade-in"><div class="def-term">EACO</div><div class="def-meaning" data-i18n="def11">Everyone's Access to Crypto Ownership -- 人人可及的加密所有权</div></div>
+    <div class="def-card fade-in"><div class="def-term">EACO</div><div class="def-meaning" data-i18n="def12">Earth's Autonomous Currency Organization -- 地球自治货币组织</div></div>
+  </div>
+</section>
+
+<!-- Ecosystem -->
+<section id="ecosystem" class="container">
+  <h2 class="section-title fade-in" data-i18n="eco_title">EACO 生态</h2>
+  <p class="section-subtitle fade-in" data-i18n="eco_sub">完成闭环 -- 探索 EACO 宇宙</p>
+  <div class="eco-grid">
+    <a href="https://ucoingroup.github.io/earths-best-coin/" class="eco-card fade-in" target="_blank" rel="noopener">
+      <div class="eco-card-title">EACO Community</div>
+      <div class="eco-card-desc" data-i18n="eco_web">社区主页</div>
+    </a>
+    <a href="eaco-pool-dao.html" class="eco-card fade-in">
+      <div class="eco-card-title">Pool DAO</div>
+      <div class="eco-card-desc" data-i18n="eco_pool">流动池 DAO</div>
+    </a>
+    <a href="eaco-dao-academy.html" class="eco-card fade-in">
+      <div class="eco-card-title">DAO Academy</div>
+      <div class="eco-card-desc" data-i18n="eco_academy">100 门学科自学院</div>
+    </a>
+    <a href="eaco-circulation-observer.html" class="eco-card fade-in">
+      <div class="eco-card-title">Circulation Observer</div>
+      <div class="eco-card-desc" data-i18n="eco_circ">流通观测站</div>
+    </a>
+    <a href="eaco-academy-cn.html" class="eco-card fade-in">
+      <div class="eco-card-title">Academy CN</div>
+      <div class="eco-card-desc" data-i18n="eco_cn">华语学院</div>
+    </a>
+    <a href="eaco-academy-overseas.html" class="eco-card fade-in">
+      <div class="eco-card-title">Academy Overseas</div>
+      <div class="eco-card-desc" data-i18n="eco_overseas">海外学院</div>
+    </a>
+  </div>
+
+  <div class="loop-closure fade-in">
+    <h3 data-i18n="loop_title">闭环完成</h3>
+    <p data-i18n="loop_text">这是一张为零基础绘制的地图。起点在这里，终点由你定义。从第一性原理出发，经过六站通关，你已理解了 Web3 的核心坐标。现在，带着这些知识，回到 EACO 的宇宙。</p>
+  </div>
+
+  <div class="ca-repeat fade-in">
+    <div class="ca-repeat-label" data-i18n="ca_label2">合约地址 (CA)</div>
+    <div class="ca-repeat-addr">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</div>
+    <button class="ca-repeat-copy" id="copyBtn2" data-i18n="copy">复制</button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">EACO ($E)</div>
+  <p class="footer-text" data-i18n="footer1">Earth's Best Coin -- 宇宙中唯一的 eaco，地球上唯一的 eaco</p>
+  <p class="footer-text" data-i18n="footer2">eaco 202608 | east coin | Earth's best AI + RWA + Web3 coin</p>
+  <span class="footer-version">eaco 202608</span>
+</footer>
+
+<button id="backToTop" title="Back to top">&#8593;</button>
+
+<script>
+// ========== Starfield ==========
+(function(){
+  const c=document.getElementById('starfield'),x=c.getContext('2d');
+  let w,h,stars=[];
+  function resize(){w=c.width=innerWidth;h=c.height=innerHeight;initStars()}
+  function initStars(){
+    stars=[];
+    const n=Math.min(200,Math.floor(w*h/8000));
+    for(let i=0;i<n;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+0.3,a:Math.random(),s:Math.random()*0.02+0.005,d:Math.random()>0.5?1:-1});
+  }
+  function draw(){
+    x.clearRect(0,0,w,h);
+    for(const s of stars){
+      s.a+=s.s*s.d;
+      if(s.a>1){s.a=1;s.d=-1}
+      if(s.a<0.1){s.a=0.1;s.d=1}
+      x.beginPath();
+      x.arc(s.x,s.y,s.r,0,Math.PI*2);
+      x.fillStyle='rgba(232,237,245,'+s.a+')';
+      x.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',resize);
+  resize();
+  draw();
+})();
+
+// ========== Meteors ==========
+(function(){
+  const c=document.getElementById('meteorCanvas'),x=c.getContext('2d');
+  let w,h,meteors=[];
+  function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+  function spawn(){
+    if(meteors.length<3&&Math.random()<0.015){
+      meteors.push({
+        x:Math.random()*w,y:0,
+        len:Math.random()*80+50,
+        sp:Math.random()*4+3,
+        ang:Math.PI/4+(Math.random()-0.5)*0.3,
+        a:1
+      });
+    }
+  }
+  function draw(){
+    x.clearRect(0,0,w,h);
+    spawn();
+    for(let i=meteors.length-1;i>=0;i--){
+      const m=meteors[i];
+      const dx=Math.cos(m.ang)*m.len,dy=Math.sin(m.ang)*m.len;
+      const g=x.createLinearGradient(m.x,m.y,m.x-dx,m.y-dy);
+      g.addColorStop(0,'rgba(0,212,255,'+m.a+')');
+      g.addColorStop(0.5,'rgba(168,85,247,'+(m.a*0.6)+')');
+      g.addColorStop(1,'rgba(168,85,247,0)');
+      x.strokeStyle=g;x.lineWidth=2;
+      x.beginPath();x.moveTo(m.x,m.y);x.lineTo(m.x-dx,m.y-dy);x.stroke();
+      m.x+=Math.cos(m.ang)*m.sp;
+      m.y+=Math.sin(m.ang)*m.sp;
+      if(m.y>h||m.x>w)meteors.splice(i,1);
+    }
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',resize);
+  resize();
+  draw();
+})();
+
+// ========== Translations ==========
+const T={
+zh:{
+  nav_intro:"入门",nav_stations:"六站",nav_def:"定义",nav_eco:"生态",
+  ca_label:"合约地址 (CA)",copy:"复制",copied:"已复制!",
+  hero_badge:"EACO Web3 入门指南",hero_sub:"Earth's Best Coin -- 宇宙唯一，地球唯一",
+  hero_desc:"刚接触加密世界？别被术语吓到。从第一性原理开始，零门槛，零先验，只需要开始。",
+  hero_cta1:"开始入门",hero_cta2:"六站通关",
+  feat1:"零门槛",feat2:"零先验",feat3:"六站通关",feat4:"多语言",
+  intro_title:"第一性原理",intro_sub:"刚接触区块链和数字资产？从这里开始。",
+  intro_p1:"如果你今天才第一次听说区块链，那么恭喜你——你来得正是时候。",
+  intro_p2:"EACO 相信，理解 Web3 不需要计算机学位，也不需要金融背景。你只需要回到「第一性原理」：这件事为什么存在？它解决了什么问题？",
+  intro_p3:"沿着这个思路，我们将一起走过六个关键坐标。这是一张为零基础绘制的地图。起点在这里，终点由你定义。",
+  intro_highlight:"零门槛。零先验。只需要开始。",
+  tag1:"钱包",tag2:"DeFi",tag3:"稳定币",tag4:"政策",tag5:"代币化",tag6:"Web3",
+  stations_title:"六站通关",stations_sub:"钱包 -> DeFi -> 稳定币 -> 政策 -> 代币化 -> Web3",
+  s1_title:"钱包",s1_sub:"数字资产的「家门钥匙」",s1_desc:"自己保管，自己负责",
+  s1_text:"钱包是你进入 Web3 世界的第一把钥匙。它不存储你的币，而是保管你的私钥——那串证明「这些资产属于你」的密码。热钱包联网便捷，冷钱包离线安全。在加密世界里，你自己的银行，你自己负责。",
+  s2_title:"DeFi",s2_sub:"当银行变成代码",s2_desc:"借贷、交易、理财在链上自动运行",
+  s2_text:"去中心化金融用智能合约替代传统金融中介。你在链上借贷、交易、提供流动性，不需要银行审批，代码即规则。从 Uniswap 到 Aave，DeFi 正在重塑金融的底层逻辑：开放、透明、无许可。",
+  s3_title:"稳定币",s3_sub:"加密世界的「压舱石」",s3_desc:"让波动变得可预期",
+  s3_text:"稳定币锚定法币（如美元），在波动的加密世界中提供价值的避风港。USDT、USDC 是法币抵押型，DAI 是加密资产超额抵押型。它们既是交易的媒介，也是连接传统金融与链上世界的桥梁。",
+  s4_title:"政策",s4_sub:"监管不是敌人，而是规则说明书",s4_desc:"从 SEC 到 MiCA，全球监管成形",
+  s4_text:"从美国 SEC 的执法监管到欧盟 MiCA 的统一框架，全球加密监管正在成形。合规不是束缚，而是行业走向主流的必经之路。理解规则，才能在规则中找到自由。",
+  s5_title:"代币化",s5_sub:"RWA 打通两个世界",s5_desc:"黄金、国债、股票搬上区块链",
+  s5_text:"现实世界资产代币化正在把黄金、国债、房地产搬上区块链。一份资产可以被分割成百万份，24小时全球流通。代币化不是概念，而是传统金融与 DeFi 之间正在铺设的高速公路。EACO 正是 RWA 赛道的先行者。",
+  s6_title:"Web3",s6_sub:"一场关于所有权的文明升级",s6_desc:"不止于技术",
+  s6_text:"Web3 不止是区块链技术，而是一场关于「谁拥有数据、谁拥有价值」的范式转移。从 Web1 的「只读」到 Web2 的「读+写」，再到 Web3 的「读+写+拥有」。你在链上的每一次交互，都是在构建一个你真正拥有的数字世界。",
+  def_title:"EACO 的定义",def_sub:"eaco 202608, east coin, and more",
+  def1:"Earth's Best Coin -- 地球最佳硬币",def2:"创新货币符号，宇宙中唯一的 eaco",
+  def3:"2026年08月版本，Earth's best Coin August 2026",def4:"东方之币，连接东方文明与全球",
+  def5:"地球最佳 AI 币，AI 与区块链的交汇",def6:"地球最佳 RWA 币，现实资产代币化先行者",
+  def7:"地球最佳 Web3 币，所有权革命的推动者",def8:"去中心化自治组织，社区共治",
+  def9_term:"宇宙唯一，地球唯一",def9:"The only eaco in the universe and the earth",
+  def10:"Energy(能源) + Equity(权益) + Earth(地球) + Evolution(进化)",
+  def11:"Everyone's Access to Crypto Ownership -- 人人可及的加密所有权",
+  def12:"Earth's Autonomous Currency Organization -- 地球自治货币组织",
+  eco_title:"EACO 生态",eco_sub:"完成闭环 -- 探索 EACO 宇宙",
+  eco_web:"社区主页",eco_pool:"流动池 DAO",eco_academy:"100 门学科自学院",
+  eco_circ:"流通观测站",eco_cn:"华语学院",eco_overseas:"海外学院",
+  loop_title:"闭环完成",loop_text:"这是一张为零基础绘制的地图。起点在这里，终点由你定义。从第一性原理出发，经过六站通关，你已理解了 Web3 的核心坐标。现在，带着这些知识，回到 EACO 的宇宙。",
+  ca_label2:"合约地址 (CA)",footer1:"Earth's Best Coin -- 宇宙中唯一的 eaco，地球上唯一的 eaco",
+  footer2:"eaco 202608 | east coin | Earth's best AI + RWA + Web3 coin"
+},
+en:{
+  nav_intro:"Intro",nav_stations:"6 Stations",nav_def:"Definitions",nav_eco:"Ecosystem",
+  ca_label:"Contract Address (CA)",copy:"Copy",copied:"Copied!",
+  hero_badge:"EACO Web3 Beginner Guide",hero_sub:"Earth's Best Coin -- The only one in the universe and the earth",
+  hero_desc:"New to crypto? Don't let jargon scare you. Start from first principles. Zero barriers, zero prerequisites, just begin.",
+  hero_cta1:"Get Started",hero_cta2:"Six Stations",
+  feat1:"Zero barriers",feat2:"Zero prerequisites",feat3:"Six stations",feat4:"Multilingual",
+  intro_title:"First Principles",intro_sub:"New to blockchain and digital assets? Start here.",
+  intro_p1:"If today is the first time you've heard of blockchain, congratulations -- you've arrived at exactly the right moment.",
+  intro_p2:"EACO believes that understanding Web3 doesn't require a computer science degree or a finance background. You just need to return to 'first principles': Why does this exist? What problem does it solve?",
+  intro_p3:"Following this thread, we'll walk through six key coordinates together. This is a map drawn for absolute beginners. The starting point is here; the destination is yours to define.",
+  intro_highlight:"Zero barriers. Zero prerequisites. Just begin.",
+  tag1:"Wallet",tag2:"DeFi",tag3:"Stablecoins",tag4:"Policy",tag5:"Tokenization",tag6:"Web3",
+  stations_title:"Six Stations",stations_sub:"Wallet -> DeFi -> Stablecoins -> Policy -> Tokenization -> Web3",
+  s1_title:"Wallet",s1_sub:"Your house key to digital assets",s1_desc:"You hold it, you own it",
+  s1_text:"A wallet is your first key to the Web3 world. It doesn't store your coins -- it safeguards your private keys, the cryptographic proof that these assets belong to you. Hot wallets are convenient; cold wallets are secure. In crypto, you are your own bank.",
+  s2_title:"DeFi",s2_sub:"When banks become code",s2_desc:"Lending, trading, yield on-chain",
+  s2_text:"Decentralized Finance replaces traditional intermediaries with smart contracts. You lend, trade, and provide liquidity on-chain -- no bank approval needed, code is law. From Uniswap to Aave, DeFi is reshaping finance: open, transparent, permissionless.",
+  s3_title:"Stablecoins",s3_sub:"The ballast of crypto",s3_desc:"Making volatility predictable",
+  s3_text:"Stablecoins peg to fiat currencies like the USD, providing a safe harbor in the volatile crypto world. USDT and USDC are fiat-backed; DAI is crypto-collateralized. They serve as both trading media and a bridge between traditional finance and on-chain economies.",
+  s4_title:"Policy",s4_sub:"Regulation is not the enemy",s4_desc:"It's the rulebook",
+  s4_text:"From the US SEC's enforcement approach to the EU's MiCA framework, global crypto regulation is taking shape. Compliance isn't a constraint -- it's the path to mainstream adoption. Understand the rules to find freedom within them.",
+  s5_title:"Tokenization",s5_sub:"RWA bridges two worlds",s5_desc:"Gold, bonds, stocks on-chain",
+  s5_text:"Real World Asset tokenization is putting gold, bonds, and real estate on the blockchain. One asset can be split into millions of fractions, traded 24/7 globally. Tokenization isn't a concept -- it's a highway being built between traditional finance and DeFi. EACO is a pioneer in the RWA space.",
+  s6_title:"Web3",s6_sub:"A civilizational upgrade of ownership",s6_desc:"Beyond technology",
+  s6_text:"Web3 isn't just blockchain technology -- it's a paradigm shift in who owns data and value. From Web1's 'read' to Web2's 'read + write,' to Web3's 'read + write + own.' Every on-chain interaction builds a digital world you truly own.",
+  def_title:"EACO Definitions",def_sub:"eaco 202608, east coin, and more",
+  def1:"Earth's Best Coin",def2:"The innovative currency symbol, the only eaco in the universe",
+  def3:"August 2026 edition",def4:"East Coin -- connecting Eastern civilization to the world",
+  def5:"Earth's best AI coin -- where AI meets blockchain",def6:"Earth's best RWA coin -- pioneer of real-world asset tokenization",
+  def7:"Earth's best Web3 coin -- driver of the ownership revolution",def8:"Decentralized Autonomous Organization, community-governed",
+  def9_term:"Unique in universe and earth",def9:"The only eaco in the universe and the earth",
+  def10:"Energy + Equity + Earth + Evolution",
+  def11:"Everyone's Access to Crypto Ownership",
+  def12:"Earth's Autonomous Currency Organization",
+  eco_title:"EACO Ecosystem",eco_sub:"Complete the loop -- explore the EACO universe",
+  eco_web:"Community",eco_pool:"Liquidity Pool DAO",eco_academy:"100 sciences self-study",
+  eco_circ:"Circulation observer",eco_cn:"Chinese academy",eco_overseas:"Overseas academy",
+  loop_title:"Loop Complete",loop_text:"This is a map drawn for absolute beginners. The starting point is here; the destination is yours to define. From first principles through six stations, you now understand the core coordinates of Web3. Now, return to the EACO universe with this knowledge.",
+  ca_label2:"Contract Address (CA)",footer1:"Earth's Best Coin -- The only eaco in the universe and the earth",
+  footer2:"eaco 202608 | east coin | Earth's best AI + RWA + Web3 coin"
+},
+es:{
+  nav_intro:"Inicio",nav_stations:"6 Estaciones",nav_def:"Definiciones",nav_eco:"Ecosistema",
+  ca_label:"Direccion del Contrato (CA)",copy:"Copiar",copied:"Copiado!",
+  hero_badge:"Guia de inicio EACO Web3",hero_sub:"Earth's Best Coin -- El unico en el universo y la Tierra",
+  hero_desc:"Nuevo en cripto? No te asusten los terminos. Comienza desde los principios fundamentales. Sin barreras, sin requisitos, solo comienza.",
+  hero_cta1:"Comenzar",hero_cta2:"Seis Estaciones",
+  feat1:"Sin barreras",feat2:"Sin requisitos",feat3:"Seis estaciones",feat4:"Multilingue",
+  intro_title:"Principios Fundamentales",intro_sub:"Nuevo en blockchain y activos digitales? Comienza aqui.",
+  intro_p1:"Si hoy es la primera vez que escuchas sobre blockchain, felicidades -- has llegado en el momento exacto.",
+  intro_p2:"EACO cree que entender Web3 no requiere un titulo en informatica ni antecedentes financieros. Solo necesitas volver a los 'primeros principios': Por que existe esto? Que problema resuelve?",
+  intro_p3:"Siguiendo este hilo, recorreremos seis coordenadas clave juntos. Este es un mapa dibujado para principiantes. El punto de partida esta aqui; el destino lo defines tu.",
+  intro_highlight:"Sin barreras. Sin requisitos. Solo comienza.",
+  tag1:"Billetera",tag2:"DeFi",tag3:"Stablecoins",tag4:"Politica",tag5:"Tokenizacion",tag6:"Web3",
+  stations_title:"Seis Estaciones",stations_sub:"Billetera -> DeFi -> Stablecoins -> Politica -> Tokenizacion -> Web3",
+  s1_title:"Billetera",s1_sub:"La llave de tus activos digitales",s1_desc:"Tu la guardas, tu eres responsable",
+  s1_text:"Una billetera es tu primera llave al mundo Web3. No almacena tus monedas -- protege tus claves privadas, la prueba criptografica de que esos activos te pertenecen. Las billeteras calientes son convenientes; las frias son seguras. En cripto, eres tu propio banco.",
+  s2_title:"DeFi",s2_sub:"Cuando los bancos se vuelven codigo",s2_desc:"Prestamos, trading y rendimientos on-chain",
+  s2_text:"Las Finanzas Descentralizadas reemplazan a los intermediarios tradicionales con contratos inteligentes. Prestas, comercias y provees liquidez on-chain -- sin aprobacion bancaria, el codigo es ley. De Uniswap a Aave, DeFi esta remodelando las finanzas: abierto, transparente, sin permisos.",
+  s3_title:"Stablecoins",s3_sub:"El lastre del mundo cripto",s3_desc:"Haciendo la volatilidad predecible",
+  s3_text:"Las stablecoins se anclan a monedas fiduciarias como el dolar, proporcionando un refugio seguro en el volatil mundo cripto. USDT y USDC estan respaldadas por fiat; DAI esta sobregarantizada con cripto. Sirven como medio de intercambio y puente entre finanzas tradicionales y economias on-chain.",
+  s4_title:"Politica",s4_sub:"La regulacion no es enemiga",s4_desc:"Es el libro de reglas",
+  s4_text:"Desde el enfoque de la SEC de EE.UU. hasta el marco MiCA de la UE, la regulacion cripto global esta tomando forma. El cumplimiento no es una restriccion -- es el camino hacia la adopcion masiva. Entiende las reglas para encontrar libertad dentro de ellas.",
+  s5_title:"Tokenizacion",s5_sub:"RWA conecta dos mundos",s5_desc:"Oro, bonos y acciones on-chain",
+  s5_text:"La tokenizacion de activos del mundo real esta poniendo oro, bonos y bienes raices en la blockchain. Un activo puede dividirse en millones de fracciones, comercializandose 24/7 globalmente. La tokenizacion no es un concepto -- es una autopista entre finanzas tradicionales y DeFi. EACO es pionero en RWA.",
+  s6_title:"Web3",s6_sub:"Una evolucion civilizadora de la propiedad",s6_desc:"Mas alla de la tecnologia",
+  s6_text:"Web3 no es solo tecnologia blockchain -- es un cambio de paradigma sobre quien posee los datos y el valor. De 'leer' en Web1 a 'leer + escribir' en Web2, hasta 'leer + escribir + poseer' en Web3. Cada interaccion on-chain construye un mundo digital que verdaderamente te pertenece.",
+  def_title:"Definiciones de EACO",def_sub:"eaco 202608, east coin, y mas",
+  def1:"Earth's Best Coin -- La mejor moneda de la Tierra",def2:"Simbolo de moneda innovadora, el unico eaco en el universo",
+  def3:"Edicion de agosto 2026",def4:"East Coin -- conectando la civilizacion oriental con el mundo",
+  def5:"La mejor moneda AI de la Tierra",def6:"La mejor moneda RWA de la Tierra, pionera en tokenizacion de activos reales",
+  def7:"La mejor moneda Web3 de la Tierra, impulsora de la revolucion de propiedad",def8:"Organizacion Autonoma Descentralizada, gobernada por la comunidad",
+  def9_term:"Unico en el universo y la Tierra",def9:"El unico eaco en el universo y la Tierra",
+  def10:"Energia + Equidad + Tierra + Evolucion",
+  def11:"Acceso de todos a la propiedad cripto",
+  def12:"Organizacion de Moneda Autonoma de la Tierra",
+  eco_title:"Ecosistema EACO",eco_sub:"Completa el ciclo -- explora el universo EACO",
+  eco_web:"Comunidad",eco_pool:"DAO de pool de liquidez",eco_academy:"100 ciencias autoestudio",
+  eco_circ:"Observador de circulacion",eco_cn:"Academia china",eco_overseas:"Academia en el extranjero",
+  loop_title:"Ciclo Completado",loop_text:"Este es un mapa dibujado para principiantes. El punto de partida esta aqui; el destino lo defines tu. Desde los primeros principios hasta seis estaciones, ahora entiendes las coordenadas centrales de Web3. Ahora, regresa al universo EACO con este conocimiento.",
+  ca_label2:"Direccion del Contrato (CA)",footer1:"Earth's Best Coin -- El unico eaco en el universo y la Tierra",
+  footer2:"eaco 202608 | east coin | Earth's best AI + RWA + Web3 coin"
+},
+fr:{
+  nav_intro:"Intro",nav_stations:"6 Etapes",nav_def:"Definitions",nav_eco:"Ecosysteme",
+  ca_label:"Adresse du Contrat (CA)",copy:"Copier",copied:"Copie!",
+  hero_badge:"Guide d'initiation EACO Web3",hero_sub:"Earth's Best Coin -- Le seul dans l'univers et sur Terre",
+  hero_desc:"Nouveau dans la crypto? Ne laissez pas le jargon vous effrayer. Commencez par les premiers principes. Sans barrieres, sans pre-requis, commencez simplement.",
+  hero_cta1:"Commencer",hero_cta2:"Six Etapes",
+  feat1:"Sans barrieres",feat2:"Sans pre-requis",feat3:"Six etapes",feat4:"Multilingue",
+  intro_title:"Premiers Principes",intro_sub:"Nouveau dans la blockchain et les actifs numeriques? Commencez ici.",
+  intro_p1:"Si aujourd'hui vous entendez parler de blockchain pour la premiere fois, felicitations -- vous arrivez au moment exact.",
+  intro_p2:"EACO croit que comprendre le Web3 ne necessite pas de diplome en informatique ni de bagage financier. Il suffit de revenir aux 'premiers principes': Pourquoi cela existe-t-il? Quel probleme resout-il?",
+  intro_p3:"En suivant ce fil, nous traverserons six coordonnees cles ensemble. C'est une carte tracee pour les debutants. Le point de depart est ici; la destination, c'est vous qui la definissez.",
+  intro_highlight:"Sans barrieres. Sans pre-requis. Commencez simplement.",
+  tag1:"Portefeuille",tag2:"DeFi",tag3:"Stablecoins",tag4:"Politique",tag5:"Tokenisation",tag6:"Web3",
+  stations_title:"Six Etapes",stations_sub:"Portefeuille -> DeFi -> Stablecoins -> Politique -> Tokenisation -> Web3",
+  s1_title:"Portefeuille",s1_sub:"La cle de vos actifs numeriques",s1_desc:"Vous le gardez, vous etes responsable",
+  s1_text:"Un portefeuille est votre premiere cle vers le monde Web3. Il ne stocke pas vos pieces -- il protege vos cles privees, la preuve cryptographique que ces actifs vous appartiennent. Les portefeuilles chauds sont pratiques; les froids sont securises. En crypto, vous etes votre propre banque.",
+  s2_title:"DeFi",s2_sub:"Quand les banques deviennent du code",s2_desc:"Prets, trading et rendements on-chain",
+  s2_text:"La Finance Decentralisee remplace les intermediaires traditionnels par des contrats intelligents. Vous pretez, echangez et fournissez de la liquidite on-chain -- sans approbation bancaire, le code est loi. D'Uniswap a Aave, la DeFi refond les finances: ouvert, transparent, sans autorisation.",
+  s3_title:"Stablecoins",s3_sub:"Le lest du monde crypto",s3_desc:"Rendre la volatilite previsible",
+  s3_text:"Les stablecoins sont ancrees aux monnaies fiduciaires comme le dollar, offrant un havre dans le monde crypto volatil. USDT et USDC sont garantis par du fiat; DAI est surgaranti par des cryptos. Ils servent de moyen d'echange et de pont entre la finance traditionnelle et l'economie on-chain.",
+  s4_title:"Politique",s4_sub:"La regulation n'est pas l'ennemie",s4_desc:"C'est le livre de regles",
+  s4_text:"De l'approche de la SEC americaine au cadre MiCA de l'UE, la regulation crypto mondiale se met en place. La conformite n'est pas une contrainte -- c'est le chemin vers l'adoption grand public. Comprendre les regles pour trouver la liberte en leur sein.",
+  s5_title:"Tokenisation",s5_sub:"RWA relie deux mondes",s5_desc:"Or, obligations et actions on-chain",
+  s5_text:"La tokenisation d'actifs du monde reel met l'or, les obligations et l'immobilier sur la blockchain. Un actif peut etre divise en millions de fractions, echangeable 24/7 mondialement. La tokenisation n'est pas un concept -- c'est une autoroute entre la finance traditionnelle et la DeFi. EACO est pionnier dans l'espace RWA.",
+  s6_title:"Web3",s6_sub:"Une evolution civilisationnelle de la propriete",s6_desc:"Au-dela de la technologie",
+  s6_text:"Web3 n'est pas que la technologie blockchain -- c'est un changement de paradigme sur qui possede les donnees et la valeur. Du 'lire' du Web1 au 'lire + ecrire' du Web2, jusqu'au 'lire + ecrire + posseder' du Web3. Chaque interaction on-chain construit un monde numerique qui vous appartient vraiment.",
+  def_title:"Definitions d'EACO",def_sub:"eaco 202608, east coin, et plus",
+  def1:"Earth's Best Coin -- La meilleure piece de la Terre",def2:"Symbole de monnaie innovante, le seul eaco dans l'univers",
+  def3:"Edition d'aout 2026",def4:"East Coin -- connectant la civilisation orientale au monde",
+  def5:"La meilleure piece AI de la Terre",def6:"La meilleure piece RWA de la Terre, pionnier de la tokenisation d'actifs reels",
+  def7:"La meilleure piece Web3 de la Terre, moteur de la revolution de la propriete",def8:"Organisation Autonome Decentralisee, gouvernee par la communaute",
+  def9_term:"Unique dans l'univers et sur Terre",def9:"Le seul eaco dans l'univers et sur Terre",
+  def10:"Energie + Equite + Terre + Evolution",
+  def11:"Acces de tous a la propriete crypto",
+  def12:"Organisation de Monnaie Autonome de la Terre",
+  eco_title:"Ecosysteme EACO",eco_sub:"Completez la boucle -- explorez l'univers EACO",
+  eco_web:"Communaute",eco_pool:"DAO de pool de liquidite",eco_academy:"100 sciences autodidacte",
+  eco_circ:"Observateur de circulation",eco_cn:"Academie chinoise",eco_overseas:"Academie a l'etranger",
+  loop_title:"Boucle Completee",loop_text:"C'est une carte tracee pour les debutants. Le point de depart est ici; la destination, c'est vous qui la definissez. Des premiers principes aux six etapes, vous comprenez maintenant les coordonnees cles du Web3. Maintenant, retournez dans l'univers EACO avec ces connaissances.",
+  ca_label2:"Adresse du Contrat (CA)",footer1:"Earth's Best Coin -- Le seul eaco dans l'univers et sur Terre",
+  footer2:"eaco 202608 | east coin | Earth's best AI + RWA + Web3 coin"
+},
+ru:{
+  nav_intro:"Введение",nav_stations:"6 Станций",nav_def:"Определения",nav_eco:"Экосистема",
+  ca_label:"Адрес контракта (CA)",copy:"Копировать",copied:"Скопировано!",
+  hero_badge:"Руководство по Web3 EACO",hero_sub:"Earth's Best Coin -- Единственный во вселенной и на Земле",
+  hero_desc:"Впервые в крипто? Не пугайтесь терминам. Начните с первопринципов. Без барьеров, без предварительных знаний, просто начните.",
+  hero_cta1:"Начать",hero_cta2:"Шесть станций",
+  feat1:"Без барьеров",feat2:"Без предтребований",feat3:"Шесть станций",feat4:"Многоязычный",
+  intro_title:"Первопринципы",intro_sub:"Впервые слышите о блокчейне и цифровых активах? Начните здесь.",
+  intro_p1:"Если сегодня вы впервые слышите о блокчейне -- поздравляем, вы пришли в нужный момент.",
+  intro_p2:"EACO верит, что для понимания Web3 не нужна степень по информатике или финансовое образование. Нужно лишь вернуться к первопринципам: зачем это существует? Какую проблему решает?",
+  intro_p3:"Следуя этой нити, мы пройдём шесть ключевых координат вместе. Это карта для новичков. Начальная точка здесь; пункт назначения определяете вы.",
+  intro_highlight:"Без барьеров. Без предтребований. Просто начните.",
+  tag1:"Кошелёк",tag2:"DeFi",tag3:"Стейблкоины",tag4:"Регулирование",tag5:"Токенизация",tag6:"Web3",
+  stations_title:"Шесть станций",stations_sub:"Кошелёк -> DeFi -> Стейблкоины -> Регулирование -> Токенизация -> Web3",
+  s1_title:"Кошелёк",s1_sub:"Ключ к вашим цифровым активам",s1_desc:"Вы храните, вы отвечаете",
+  s1_text:"Кошелёк -- ваш первый ключ в мир Web3. Он не хранит монеты -- он защищает ваши приватные ключи, криптографическое доказательство того, что эти активы ваши. Горячие кошельки удобны; холодные -- надёжны. В крипто вы -- свой собственный банк.",
+  s2_title:"DeFi",s2_sub:"Когда банки становятся кодом",s2_desc:"Кредитование, торговля и доходность on-chain",
+  s2_text:"Децентрализованные финансы заменяют посредников смарт-контрактами. Вы кредитуете, торгуете и предоставляете ликвидность on-chain -- без одобрения банка, код есть закон. От Uniswap до Aave, DeFi перестраивает финансы: открыто, прозрачно, без разрешений.",
+  s3_title:"Стейблкоины",s3_sub:"Стабилизатор криптомира",s3_desc:"Делая волатильность предсказуемой",
+  s3_text:"Стейблкоины привязаны к фиатным валютам, таким как доллар, обеспечивая безопасную гавань в волатильном криптомире. USDT и USDC обеспечены фиатом; DAI -- перекредитован криптовалютами. Они служат средством обмена и мостом между традиционными финансами и on-chain экономикой.",
+  s4_title:"Регулирование",s4_sub:"Регулятор -- не враг",s4_desc:"Это свод правил",
+  s4_text:"От подхода SEC США до рамки MiCA ЕС, глобальное крипторегулирование формируется. Соблюдение правил -- не ограничение, а путь к массовому внедрению. Поймите правила, чтобы найти свободу внутри них.",
+  s5_title:"Токенизация",s5_sub:"RWA соединяет два мира",s5_desc:"Золото, облигации и акции on-chain",
+  s5_text:"Токенизация реальных активов переносит золото, облигации и недвижимость в блокчейн. Один актив можно разделить на миллионы долей, торгуемых 24/7 по всему миру. Токенизация -- не концепция, а строящаяся магистраль между традиционными финансами и DeFi. EACO -- пионер в RWA.",
+  s6_title:"Web3",s6_sub:"Цивилизационный сдвиг в собственности",s6_desc:"Больше, чем технология",
+  s6_text:"Web3 -- не просто блокчейн, а смена парадигмы: кто владеет данными и ценностью. От читать в Web1 к читать + писать в Web2, и до читать + писать + владеть в Web3. Каждое on-chain взаимодействие строит цифровой мир, который по-настоящему ваш.",
+  def_title:"Определения EACO",def_sub:"eaco 202608, east coin, и больше",
+  def1:"Earth's Best Coin -- Лучшая монета Земли",def2:"Символ инновационной валюты, единственный eaco во вселенной",
+  def3:"Редакция августа 2026",def4:"East Coin -- соединяя восточную цивилизацию с миром",
+  def5:"Лучшая AI-монета Земли",def6:"Лучшая RWA-монета Земли, пионер токенизации реальных активов",
+  def7:"Лучшая Web3-монета Земли, двигатель революции собственности",def8:"Децентрализованная автономная организация, управляемая сообществом",
+  def9_term:"Единственный во вселенной и на Земле",def9:"Единственный eaco во вселенной и на Земле",
+  def10:"Энергия + Доля + Земля + Эволюция",
+  def11:"Доступ каждого к крипто-собственности",
+  def12:"Автономная валютная организация Земли",
+  eco_title:"Экосистема EACO",eco_sub:"Завершите цикл -- изучите вселенную EACO",
+  eco_web:"Сообщество",eco_pool:"DAO пула ликвидности",eco_academy:"100 наук самообучение",
+  eco_circ:"Наблюдатель циркуляции",eco_cn:"Китайская академия",eco_overseas:"Зарубежная академия",
+  loop_title:"Цикл Завершён",loop_text:"Это карта для новичков. Начальная точка здесь; пункт назначения определяете вы. От первопринципов через шесть станций вы теперь понимаете ключевые координаты Web3. Теперь вернитесь во вселенную EACO с этими знаниями.",
+  ca_label2:"Адрес контракта (CA)",footer1:"Earth's Best Coin -- Единственный eaco во вселенной и на Земле",
+  footer2:"eaco 202608 | east coin | Earth's best AI + RWA + Web3 coin"
+},
+ar:{
+  nav_intro:"مقدمة",nav_stations:"6 محطات",nav_def:"التعريفات",nav_eco:"النظام البيئي",
+  ca_label:"عنوان العقد (CA)",copy:"نسخ",copied:"تم النسخ!",
+  hero_badge:"دليل المبتدئين لـ EACO Web3",hero_sub:"Earth's Best Coin -- الوحيد في الكون وعلى الأرض",
+  hero_desc:"جديد على الكريبتو؟ لا تدع المصطلحات تخيفك. ابدأ من المبادئ الأولى. بدون حواجز، بدون متطلبات مسبقة، فقط ابدأ.",
+  hero_cta1:"ابدأ",hero_cta2:"ست محطات",
+  feat1:"بدون حواجز",feat2:"بدون متطلبات",feat3:"ست محطات",feat4:"متعدد اللغات",
+  intro_title:"المبادئ الأولى",intro_sub:"جديد على البلوكتشين والأصول الرقمية؟ ابدأ من هنا.",
+  intro_p1:"إذا كان اليوم أول مرة تسمع فيها عن البلوكتشين، فتهانينا -- لقد وصلت في الوقت المثالي.",
+  intro_p2:"يعتقد EACO أن فهم Web3 لا يتطلب شهادة في علوم الحاسوب أو خلفية مالية. تحتاج فقط للعودة إلى المبادئ الأولى: لماذا يوجد هذا؟ ما المشكلة التي يحلها؟",
+  intro_p3:"باتباع هذا الخيط، سنجتاز ست إحداثيات رئيسية معاً. هذه خريطة للمبتدئين. نقطة البداية هنا؛ الوجهة تحددها أنت.",
+  intro_highlight:"بدون حواجز. بدون متطلبات مسبقة. فقط ابدأ.",
+  tag1:"المحفظة",tag2:"DeFi",tag3:"العملات المستقرة",tag4:"السياسة",tag5:"الترميز",tag6:"Web3",
+  stations_title:"ست محطات",stations_sub:"المحفظة -> DeFi -> العملات المستقرة -> السياسة -> الترميز -> Web3",
+  s1_title:"المحفظة",s1_sub:"مفتاح أصولك الرقمية",s1_desc:"أنت تحتفظ بها، أنت المسؤول",
+  s1_text:"المحفظة هي مفتاحك الأول لعالم Web3. إنها لا تخزن عملاتك -- بل تحمي مفاتيحك الخاصة، الدليل التشفيري على أن هذه الأصول ملك لك. المحافظ الساخنة مريحة؛ الباردة آمنة. في الكريبتو، أنت بنكك الخاص.",
+  s2_title:"DeFi",s2_sub:"عندما تصبح البنوك أكواداً",s2_desc:"الإقراض والتداول والعائد على السلسلة",
+  s2_text:"التمويل اللامركزي يستبدل الوسطاء التقليديين بالعقود الذكية. تقرض وتتداول وتوفر سيولة على السلسلة -- دون موافقة بنكية، الكود هو القانون. من Uniswap إلى Aave، يعيد DeFi تشكيل المال: مفتوح وشفاف وبدون أذونات.",
+  s3_title:"العملات المستقرة",s3_sub:"صابورة عالم الكريبتو",s3_desc:"جعل التقلب متوقعاً",
+  s3_text:"ترتبط العملات المستقرة بالعملات الورقية كالدولار، مما يوفر ملاذاً آمناً في عالم الكريبتو المتقلب. USDT و USDC مدعومة بالعملات الورقية؛ DAI مدعومة بضمانات مشفرة. تعمل كوسيط للتبادل وجسر بين المال التقليدي والاقتصاد على السلسلة.",
+  s4_title:"السياسة",s4_sub:"التنظيم ليس عدواً",s4_desc:"بل كتاب القواعد",
+  s4_text:"من نهج لجنة الأوراق المالية الأمريكية إلى إطار MiCA الأوروبي، يتشكل التنظيم العالمي للكريبتو. الامتثال ليس قيداً -- بل الطريق نحو التبني الواسع. افهم القواعد لتجد الحرية داخلها.",
+  s5_title:"الترميز",s5_sub:"RWA يربط عالمين",s5_desc:"الذهب والسندات والأسهم على السلسلة",
+  s5_text:"ترميز الأصول الواقعية ينقل الذهب والسندات والعقارات إلى البلوكتشين. يمكن تقسيم أصل واحد إلى ملايين الحصص، قابلة للتداول 24/7 عالمياً. الترميز ليس مفهوماً -- بل طريق سريع يبنى بين المال التقليدي و DeFi. EACO رائد في مجال RWA.",
+  s6_title:"Web3",s6_sub:"تطور حضاري في الملكية",s6_desc:"أكثر من مجرد تقنية",
+  s6_text:"Web3 ليس مجرد تقنية البلوكتشين -- بل تحول جذري في من يملك البيانات والقيمة. من قراءة في Web1 إلى قراءة + كتابة في Web2، وصولاً إلى قراءة + كتابة + امتلاك في Web3. كل تفاعل على السلسلة يبني عالماً رقمياً تملكه حقاً.",
+  def_title:"تعريفات EACO",def_sub:"eaco 202608, east coin, والمزيد",
+  def1:"Earth's Best Coin -- أفضل عملة على الأرض",def2:"رمز العملة المبتكرة، الوحيد eaco في الكون",
+  def3:"إصدار أغسطس 2026",def4:"East Coin -- رابطاً الحضارة الشرقية بالعالم",
+  def5:"أفضل عملة ذكاء اصطناعي على الأرض",def6:"أفضل عملة RWA على الأرض، رائدة في ترميز الأصول الواقعية",
+  def7:"أفضل عملة Web3 على الأرض، محرك ثورة الملكية",def8:"منظمة مستقلة لامركزية، تُدار بالمجتمع",
+  def9_term:"الوحيد في الكون وعلى الأرض",def9:"الوحيد eaco في الكون وعلى الأرض",
+  def10:"طاقة + حقوق + أرض + تطور",
+  def11:"وصول الجميع لملكية الكريبتو",
+  def12:"منظمة العملة المستقلة للأرض",
+  eco_title:"نظام EACO البيئي",eco_sub:"أكمل الحلقة -- استكشف عالم EACO",
+  eco_web:"المجتمع",eco_pool:"DAO لمجمع السيولة",eco_academy:"100 علوم للتعلم الذاتي",
+  eco_circ:"مراقب التداول",eco_cn:"الأكاديمية الصينية",eco_overseas:"الأكاديمية الخارجية",
+  loop_title:"اكتملت الحلقة",loop_text:"هذه خريطة للمبتدئين. نقطة البداية هنا؛ الوجهة تحددها أنت. من المبادئ الأولى عبر ست محطات، أنت الآن تفهم الإحداثيات الأساسية لـ Web3. الآن، عُد إلى عالم EACO بهذه المعرفة.",
+  ca_label2:"عنوان العقد (CA)",footer1:"Earth's Best Coin -- الوحيد eaco في الكون وعلى الأرض",
+  footer2:"eaco 202608 | east coin | Earth's best AI + RWA + Web3 coin"
+}
+};
+
+// ========== Language Switcher ==========
+let currentLang='en';
+function switchLang(lang){
+  currentLang=lang;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=(lang==='ar')?'rtl':'ltr';
+  const dict=T[lang]||T.zh;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const key=el.getAttribute('data-i18n');
+    if(dict[key]!==undefined)el.textContent=dict[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.classList.toggle('active',btn.dataset.lang===lang);
+  });
+  try{localStorage.setItem('eaco-lang',lang)}catch(e){}
+}
+document.querySelectorAll('.lang-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){switchLang(btn.dataset.lang)});
+});
+
+// ========== CA Copy ==========
+function copyCA(btn){
+  const ca='DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(ca).then(function(){
+      btn.classList.add('copied');
+      const orig=btn.textContent;
+      btn.textContent=T[currentLang]?T[currentLang].copied:'Copied!';
+      setTimeout(function(){btn.classList.remove('copied');btn.textContent=orig},1500);
+    });
+  }else{
+    const ta=document.createElement('textarea');
+    ta.value=ca;document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');btn.classList.add('copied');
+      const orig=btn.textContent;
+      btn.textContent=T[currentLang]?T[currentLang].copied:'Copied!';
+      setTimeout(function(){btn.classList.remove('copied');btn.textContent=orig},1500);
+    }catch(e){}
+    document.body.removeChild(ta);
+  }
+}
+document.getElementById('copyBtn').addEventListener('click',function(){copyCA(this)});
+document.getElementById('copyBtn2').addEventListener('click',function(){copyCA(this)});
+
+// ========== Mobile Menu ==========
+document.getElementById('menuToggle').addEventListener('click',function(){
+  document.getElementById('navLinks').classList.toggle('show');
+});
+
+// ========== Intersection Observer ==========
+const observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      // Update progress dots
+      if(entry.target.classList.contains('station-card')){
+        const s=parseInt(entry.target.dataset.s);
+        document.querySelectorAll('.progress-dot').forEach(function(dot){
+          const step=parseInt(dot.dataset.step);
+          dot.classList.toggle('active',step<=s);
+        });
+      }
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el)});
+
+// ========== Back to Top ==========
+const backBtn=document.getElementById('backToTop');
+addEventListener('scroll',function(){
+  backBtn.classList.toggle('show',scrollY>400);
+});
+backBtn.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'})});
+
+// ========== Init ==========
+try{const saved=localStorage.getItem('eaco-lang');if(saved&&T[saved])switchLang(saved);else switchLang('en')}catch(e){switchLang('en')}
+</script>
+</body>
+</html>
