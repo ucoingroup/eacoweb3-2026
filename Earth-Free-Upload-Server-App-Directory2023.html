@@ -1,1 +1,1532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>🌍 全球免费上传 · 服务器/APP 目录2023</title>
+    <!-- Font Awesome 6 (免费图标库) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f4f7fc;
+            color: #1a2634;
+            padding: 20px 16px 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* ===== 头部 ===== */
+        .app-header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-top: 8px;
+        }
+
+        .app-header .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a2b4a;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 12px 28px;
+            border-radius: 60px;
+            box-shadow: 0 4px 20px rgba(0, 20, 50, 0.06);
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+        }
+
+        .app-header .logo i {
+            color: #4a6cf7;
+            font-size: 30px;
+        }
+
+        .app-header .sub {
+            color: #5e6f8d;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            margin-top: 6px;
+        }
+
+        .app-header .sub span {
+            background: #e8edf8;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #2d4370;
+        }
+
+        /* ===== 工具栏 ===== */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            background: #ffffffdd;
+            backdrop-filter: blur(6px);
+            padding: 14px 18px;
+            border-radius: 20px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid #ffffff;
+        }
+
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1 1 auto;
+        }
+
+        .filter-tab {
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: none;
+            background: #eff3fa;
+            color: #3e5270;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-tab i {
+            font-size: 13px;
+        }
+
+        .filter-tab:hover {
+            background: #e3eaf5;
+            transform: translateY(-1px);
+        }
+
+        .filter-tab.active {
+            background: #4a6cf7;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(74, 108, 247, 0.30);
+        }
+
+        .filter-tab .count-badge {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 0 8px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .filter-tab.active .count-badge {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 0 0 220px;
+            min-width: 140px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a9bb8;
+            font-size: 14px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 14px 8px 36px;
+            border-radius: 40px;
+            border: 1.5px solid #e2e9f2;
+            background: #f8faff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.25s;
+            color: #1a2634;
+        }
+
+        .search-box input:focus {
+            border-color: #4a6cf7;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.10);
+        }
+
+        .search-box input::placeholder {
+            color: #a5b6d0;
+        }
+
+        /* ===== 统计 ===== */
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 28px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            color: #4a5e7e;
+            padding: 0 4px;
+        }
+
+        .stats-bar .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stats-bar .stat-item i {
+            color: #4a6cf7;
+            width: 18px;
+            text-align: center;
+        }
+
+        .stats-bar .stat-item strong {
+            color: #1a2b4a;
+            font-weight: 700;
+        }
+
+        /* ===== 卡片网格 ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 4px;
+        }
+
+        /* ===== 卡片 ===== */
+        .service-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 20px 20px 18px;
+            box-shadow: 0 4px 18px rgba(0, 20, 40, 0.05);
+            border: 1px solid #eef3fa;
+            transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            backdrop-filter: blur(2px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(74, 108, 247, 0.10);
+            border-color: #d6e2f5;
+        }
+
+        .service-card .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .service-card .card-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f1e3a;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .service-card .card-name .badge-encrypt {
+            font-size: 11px;
+            background: #eef6ff;
+            color: #2d6b9e;
+            padding: 1px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        .service-card .card-name .badge-encrypt i {
+            font-size: 10px;
+            margin-right: 3px;
+        }
+
+        .service-card .card-category {
+            font-size: 11px;
+            font-weight: 600;
+            color: #4a6cf7;
+            background: #eef3fe;
+            padding: 3px 12px;
+            border-radius: 30px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .service-card .card-desc {
+            font-size: 14px;
+            color: #3f5677;
+            line-height: 1.5;
+            margin: 6px 0 12px;
+            flex: 1;
+        }
+
+        .service-card .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            font-size: 13px;
+            color: #5a6f8f;
+            border-top: 1px solid #eff4fc;
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+
+        .service-card .card-meta .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .service-card .card-meta .meta-item i {
+            color: #7a8fab;
+            font-size: 13px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .service-card .card-meta .meta-item .highlight {
+            font-weight: 600;
+            color: #1f3757;
+        }
+
+        .service-card .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+            margin: 8px 0 4px;
+        }
+
+        .service-card .card-features .feature-tag {
+            font-size: 11px;
+            background: #f2f6fe;
+            color: #3b5a82;
+            padding: 2px 10px;
+            border-radius: 30px;
+            border: 1px solid #e8effa;
+        }
+
+        .service-card .card-actions {
+            margin-top: 14px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .service-card .card-actions .btn-visit {
+            background: #4a6cf7;
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .service-card .card-actions .btn-visit:hover {
+            background: #3b5cdb;
+            transform: scale(1.02);
+        }
+
+        .service-card .card-actions .btn-detail {
+            background: transparent;
+            border: 1.5px solid #d6e2f5;
+            color: #3e5a7e;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .service-card .card-actions .btn-detail:hover {
+            background: #f0f5ff;
+            border-color: #b0c6e8;
+        }
+
+        /* ===== 空状态 ===== */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #6f85a5;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: #c8d6ec;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-weight: 500;
+            color: #2f4870;
+        }
+
+        /* ===== 模态框 ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 20, 40, 0.50);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: 28px;
+            max-width: 540px;
+            width: 100%;
+            padding: 32px 28px 28px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.18);
+            animation: slideUp 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-box .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: #f0f4fc;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            color: #3f5a7c;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-box .modal-close:hover {
+            background: #e4ebf8;
+            transform: rotate(90deg);
+        }
+
+        .modal-box .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f1e3a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-right: 36px;
+        }
+
+        .modal-box .modal-title .badge-encrypt {
+            font-size: 12px;
+            background: #eef6ff;
+            color: #2d6b9e;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .modal-box .modal-category {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a6cf7;
+            background: #eef3fe;
+            padding: 4px 16px;
+            border-radius: 30px;
+            margin: 10px 0 14px;
+        }
+
+        .modal-box .modal-desc {
+            font-size: 15px;
+            color: #2f4870;
+            line-height: 1.7;
+            margin: 8px 0 16px;
+        }
+
+        .modal-box .modal-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+            background: #f7faff;
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin: 12px 0 16px;
+        }
+
+        .modal-box .modal-detail-grid .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .modal-box .modal-detail-grid .detail-item .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #7a8fab;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-box .modal-detail-grid .detail-item .value {
+            font-size: 15px;
+            font-weight: 500;
+            color: #0f1e3a;
+        }
+
+        .modal-box .modal-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+            margin: 12px 0 18px;
+        }
+
+        .modal-box .modal-features .feature-tag {
+            font-size: 13px;
+            background: #f2f6fe;
+            color: #2d4a72;
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 1px solid #e8effa;
+        }
+
+        .modal-box .modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+            border-top: 1px solid #eff4fc;
+            padding-top: 20px;
+        }
+
+        .modal-box .modal-actions .btn-visit {
+            background: #4a6cf7;
+            color: #fff;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .modal-box .modal-actions .btn-visit:hover {
+            background: #3b5cdb;
+            transform: scale(1.02);
+        }
+
+        .modal-box .modal-actions .btn-close-modal {
+            background: #eef3fa;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #3f5a7c;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-box .modal-actions .btn-close-modal:hover {
+            background: #e2e9f5;
+        }
+
+        /* ===== 动画 ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 640px) {
+            body {
+                padding: 12px 10px 40px;
+            }
+
+            .app-header .logo {
+                font-size: 20px;
+                padding: 10px 18px;
+            }
+            .app-header .logo i {
+                font-size: 22px;
+            }
+            .app-header .sub {
+                font-size: 13px;
+            }
+
+            .toolbar {
+                padding: 12px 14px;
+                gap: 12px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-tabs {
+                justify-content: center;
+            }
+            .filter-tab {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+
+            .search-box {
+                flex: 1 1 auto;
+                width: 100%;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .service-card {
+                padding: 16px 16px 14px;
+            }
+            .service-card .card-name {
+                font-size: 16px;
+            }
+
+            .modal-box {
+                padding: 24px 18px 20px;
+                border-radius: 20px;
+                max-height: 95vh;
+            }
+            .modal-box .modal-title {
+                font-size: 20px;
+            }
+            .modal-box .modal-detail-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px 12px;
+                padding: 12px 14px;
+            }
+
+            .stats-bar {
+                font-size: 12px;
+                gap: 8px 16px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .filter-tabs {
+                gap: 5px;
+            }
+            .filter-tab {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            .filter-tab .count-badge {
+                display: none;
+            }
+            .modal-box .modal-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== 滚动条美化 ===== */
+        .modal-box::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-box::-webkit-scrollbar-track {
+            background: #f0f4fc;
+            border-radius: 8px;
+        }
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #c8d6ec;
+            border-radius: 8px;
+        }
+
+        /* ===== 小工具 ===== */
+        .text-muted {
+            color: #7a8fab;
+        }
+        .mt-1 {
+            margin-top: 4px;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="app">
+
+        <!-- ====== 头部 ====== -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>全球免费上传</span>
+            </div>
+            <div class="sub">
+                精选 <span id="totalCount">0</span> 个公开上传服务 · 涵盖 5 大类别
+            </div>
+        </header>
+
+        <!-- ====== 工具栏 ====== -->
+        <div class="toolbar">
+            <div class="filter-tabs" id="filterTabs">
+                <!-- 由 JS 动态生成 -->
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="搜索名称、特点..." />
+            </div>
+        </div>
+
+        <!-- ====== 统计栏 ====== -->
+        <div class="stats-bar" id="statsBar">
+            <span class="stat-item"><i class="fas fa-layer-group"></i> 分类: <strong id="statCategories">0</strong></span>
+            <span class="stat-item"><i class="fas fa-server"></i> 服务: <strong id="statTotal">0</strong></span>
+            <span class="stat-item"><i class="fas fa-lock"></i> 加密支持: <strong id="statEncrypted">0</strong></span>
+            <span class="stat-item"><i class="fas fa-user-secret"></i> 匿名可用: <strong id="statAnonymous">0</strong></span>
+        </div>
+
+        <!-- ====== 卡片网格 ====== -->
+        <div class="cards-grid" id="cardsGrid">
+            <!-- 由 JS 动态渲染 -->
+        </div>
+
+        <!-- ====== 底部 ====== -->
+        <div style="margin-top: 40px; text-align: center; font-size: 13px; color: #8a9bb8; border-top: 1px solid #e8eff8; padding-top: 22px;">
+            <i class="fas fa-sync-alt" style="margin-right: 6px;"></i> 数据实时筛选 · 点击卡片查看详情
+        </div>
+    </div>
+
+    <!-- ====== 模态框 ====== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box" id="modalBox">
+            <button class="modal-close" id="modalCloseBtn"><i class="fas fa-times"></i></button>
+            <div id="modalContent">
+                <!-- 由 JS 动态填充 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ======================================================================
+        //  1. 数据
+        // ======================================================================
+        const SERVICES = [{
+            id: 1,
+            name: 'storage.to',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '25GB',
+            retention: '最长 7 天',
+            features: ['AES-256 加密', '读后即焚', '无需注册'],
+            description: '支持 AES-256 加密，可设置「对方读后即焚」，临时分享大文件首选。',
+            url: 'https://storage.to',
+            encrypted: true,
+            anonymous: true,
+            icon: 'fa-shield-alt'
+        }, {
+            id: 2,
+            name: 'MediaFire',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '4GB / 10GB 空间',
+            retention: '长期 (不活跃可能删除)',
+            features: ['老牌网盘', '无需注册上传', '分享链接'],
+            description: '老牌免费网盘，无需注册即可上传分享，适合长期存储。',
+            url: 'https://www.mediafire.com',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-fire'
+        }, {
+            id: 3,
+            name: 'WeTransfer',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '2GB',
+            retention: '7 天',
+            features: ['邮件发送', '极简界面', '流行度高'],
+            description: '全球流行的临时文件传输工具，通过邮件发送下载链接。',
+            url: 'https://wetransfer.com',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-paper-plane'
+        }, {
+            id: 4,
+            name: 'Send (Firefox)',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '4GB',
+            retention: '一次性或限时',
+            features: ['端到端加密', '开源', '下载次数限制'],
+            description: 'Mozilla 出品，端到端加密，可设置下载次数和有效期。',
+            url: 'https://send.vis.ee',
+            encrypted: true,
+            anonymous: true,
+            icon: 'fa-lock'
+        }, {
+            id: 5,
+            name: 'file.io',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '4GB',
+            retention: '下载一次即删除',
+            features: ['阅后即焚', '极简', '无需注册'],
+            description: '上传后生成链接，文件被下载一次即自动删除，适合敏感分享。',
+            url: 'https://www.file.io',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-trash-alt'
+        }, {
+            id: 6,
+            name: 'Uguu',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '不限 (单文件有限)',
+            retention: '3 天',
+            features: ['轻量级', '无需注册', '一键上传'],
+            description: '轻量级匿名上传服务，界面极简，适合快速分享小文件。',
+            url: 'https://uguu.se',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-bolt'
+        }, {
+            id: 7,
+            name: 'Catbox',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '不限 (单文件有限)',
+            retention: '长期',
+            features: ['支持外链', '社区常用', '无需注册'],
+            description: '社区内较受欢迎的图床和文件托管，支持外链引用。',
+            url: 'https://catbox.moe',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-cat'
+        }, {
+            id: 8,
+            name: 'Pixeldrain',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '不限 (单文件有限)',
+            retention: '长期',
+            features: ['文件预览', '界面干净', '支持外链'],
+            description: '界面简洁，支持图片、视频等文件在线预览。',
+            url: 'https://pixeldrain.com',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-image'
+        }, {
+            id: 9,
+            name: 'GoFile',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '不限 (单文件有限)',
+            retention: '长期',
+            features: ['断点续传', '无需注册', '多文件上传'],
+            description: '支持断点续传，无需注册即可上传大文件。',
+            url: 'https://gofile.io',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-upload'
+        }, {
+            id: 10,
+            name: 'Smash',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '2GB',
+            retention: '7 天',
+            features: ['传输后删除', '无需注册', '简单分享'],
+            description: '文件传输完成后即从服务器删除，确保隐私。',
+            url: 'https://smash.gg',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-bomb'
+        }, {
+            id: 11,
+            name: 'AnonFiles',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '20GB',
+            retention: '长期',
+            features: ['完全匿名', '无需注册', '大文件支持'],
+            description: '完全匿名的文件分享服务，无需任何个人信息。',
+            url: 'https://anonfiles.com',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-user-secret'
+        }, {
+            id: 12,
+            name: 'TransferNow',
+            category: 'anonymous',
+            categoryLabel: '匿名上传',
+            maxSize: '4GB',
+            retention: '15 天',
+            features: ['文件追踪', '无需注册', '邮件通知'],
+            description: '提供简单的文件追踪功能，可查看下载状态。',
+            url: 'https://www.transfernow.net',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-chart-line'
+        }, {
+            id: 13,
+            name: 'MEGA',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '20GB 免费空间',
+            retention: '长期 (需活跃)',
+            features: ['端到端加密', '隐私优先', '跨平台'],
+            description: '以端到端加密和隐私保护著称的云存储服务。',
+            url: 'https://mega.nz',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-database'
+        }, {
+            id: 14,
+            name: 'Google Drive',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '15GB 免费空间',
+            retention: '长期',
+            features: ['谷歌生态', '文档协作', '跨平台'],
+            description: '与 Google 生态深度整合，支持文档、表格等在线协作。',
+            url: 'https://drive.google.com',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-google'
+        }, {
+            id: 15,
+            name: 'OneDrive',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '5GB 免费空间',
+            retention: '长期',
+            features: ['Office 整合', '跨平台', '文件共享'],
+            description: '微软出品，与 Office 生态深度整合，适合办公场景。',
+            url: 'https://onedrive.live.com',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-microsoft'
+        }, {
+            id: 16,
+            name: 'Dropbox',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '2GB 免费空间',
+            retention: '长期',
+            features: ['同步稳定', '跨平台', '分享便捷'],
+            description: '老牌云盘，同步和分享功能非常成熟，稳定性高。',
+            url: 'https://www.dropbox.com',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-box'
+        }, {
+            id: 17,
+            name: 'Box',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '10GB 免费空间',
+            retention: '长期',
+            features: ['企业协作', '安全合规', 'API 支持'],
+            description: '面向企业的云存储，注重协作和安全管理。',
+            url: 'https://www.box.com',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-building'
+        }, {
+            id: 18,
+            name: 'pCloud',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '10GB 免费空间',
+            retention: '长期',
+            features: ['客户端加密 (付费)', '跨平台', '流畅同步'],
+            description: '提供客户端加密选项，欧洲云服务，注重性能。',
+            url: 'https://www.pcloud.com',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-cloud'
+        }, {
+            id: 19,
+            name: 'Koofr',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '10GB 免费空间',
+            retention: '长期',
+            features: ['WebDAV 协议', '欧洲云', '隐私友好'],
+            description: '支持 WebDAV 协议，便于与各种应用集成。',
+            url: 'https://koofr.eu',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-globe-europe'
+        }, {
+            id: 20,
+            name: 'Icedrive',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '10GB 免费空间',
+            retention: '长期',
+            features: ['零知识加密', '现代界面', '跨平台'],
+            description: '界面现代，提供零知识加密，注重隐私保护。',
+            url: 'https://icedrive.net',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-snowflake'
+        }, {
+            id: 21,
+            name: '123云盘',
+            category: 'cloud',
+            categoryLabel: '云盘服务',
+            maxSize: '2TB 免费空间',
+            retention: '长期',
+            features: ['超大空间', '国内访问快', '单文件 100GB'],
+            description: '国内云盘服务，提供超大免费空间，适合国内用户。',
+            url: 'https://www.123pan.com',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-cn'
+        }, {
+            id: 22,
+            name: 'GitHub Pages',
+            category: 'dev',
+            categoryLabel: '开发者工具',
+            maxSize: '代码/网页托管',
+            retention: '长期',
+            features: ['静态网站', '免费 SSL', '与 Git 整合'],
+            description: '程序员首选，可免费托管静态网站，与 GitHub 仓库联动。',
+            url: 'https://pages.github.com',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-code'
+        }, {
+            id: 23,
+            name: 'Gitee Pages',
+            category: 'dev',
+            categoryLabel: '开发者工具',
+            maxSize: '代码/网页托管',
+            retention: '长期',
+            features: ['国内访问快', '与 Gitee 整合', '免费 SSL'],
+            description: 'GitHub Pages 的国内替代方案，访问速度更快。',
+            url: 'https://gitee.com/pages',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-code-branch'
+        }, {
+            id: 24,
+            name: 'Vercel',
+            category: 'dev',
+            categoryLabel: '开发者工具',
+            maxSize: '代码/网页托管',
+            retention: '长期',
+            features: ['现代前端', '自动部署', '免费 SSL'],
+            description: '现代前端开发的热门选择，部署方便，支持 Serverless。',
+            url: 'https://vercel.com',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-vercel'
+        }, {
+            id: 25,
+            name: 'ImgBB',
+            category: 'dev',
+            categoryLabel: '开发者工具',
+            maxSize: '图床 (单文件有限)',
+            retention: '长期',
+            features: ['API 上传', '多种嵌入代码', '免费'],
+            description: '专业图床服务，支持 API 上传，生成多种嵌入代码。',
+            url: 'https://imgbb.com',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-images'
+        }, {
+            id: 26,
+            name: 'PostImage',
+            category: 'dev',
+            categoryLabel: '开发者工具',
+            maxSize: '图床 (单文件有限)',
+            retention: '长期',
+            features: ['论坛友好', '可设过期时间', '免费'],
+            description: '专为论坛和社区设计的图床，支持设置图片过期时间。',
+            url: 'https://postimages.org',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-comment'
+        }, {
+            id: 27,
+            name: 'Imgbox',
+            category: 'dev',
+            categoryLabel: '开发者工具',
+            maxSize: '单文件 10MB',
+            retention: '长期',
+            features: ['简单图床', '无广告', '直接链接'],
+            description: '简洁的图床服务，单文件限制 10MB，无广告干扰。',
+            url: 'https://imgbox.com',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-photo-video'
+        }, {
+            id: 28,
+            name: 'Internxt Send',
+            category: 'privacy',
+            categoryLabel: '隐私保护',
+            maxSize: '5GB',
+            retention: '15 天',
+            features: ['端到端加密', '零知识证明', '开源'],
+            description: '开源端到端加密传输，零知识证明确保隐私。',
+            url: 'https://send.internxt.com',
+            encrypted: true,
+            anonymous: true,
+            icon: 'fa-lock'
+        }, {
+            id: 29,
+            name: 'LimeWire',
+            category: 'privacy',
+            categoryLabel: '隐私保护',
+            maxSize: '4GB',
+            retention: '有条件',
+            features: ['端到端加密', '浏览器端加密', '现代'],
+            description: '现代浏览器端到端加密传输，注重用户隐私。',
+            url: 'https://limewire.com',
+            encrypted: true,
+            anonymous: true,
+            icon: 'fa-bolt'
+        }, {
+            id: 30,
+            name: 'OnionShare',
+            category: 'privacy',
+            categoryLabel: '隐私保护',
+            maxSize: '不限',
+            retention: '按需',
+            features: ['洋葱网络', '开源', '完全匿名'],
+            description: '通过洋葱网络 (Tor) 匿名分享文件，开源且高度安全。',
+            url: 'https://onionshare.org',
+            encrypted: true,
+            anonymous: true,
+            icon: 'fa-tor'
+        }, {
+            id: 31,
+            name: 'Stashr',
+            category: 'privacy',
+            categoryLabel: '隐私保护',
+            maxSize: '5GB',
+            retention: '未明确',
+            features: ['专注隐私', '无广告', '注册可选'],
+            description: '专注于隐私保护，无广告干扰，注册为可选操作。',
+            url: 'https://stashr.com',
+            encrypted: false,
+            anonymous: true,
+            icon: 'fa-user-shield'
+        }, {
+            id: 32,
+            name: 'file.kiwi',
+            category: 'privacy',
+            categoryLabel: '隐私保护',
+            maxSize: '不限',
+            retention: '90 小时',
+            features: ['端到端加密', '断点续传', '限时分享'],
+            description: '端到端加密，支持断点续传，文件保留 90 小时。',
+            url: 'https://file.kiwi',
+            encrypted: true,
+            anonymous: true,
+            icon: 'fa-kiwi-bird'
+        }, {
+            id: 33,
+            name: 'MediaFire APP',
+            category: 'mobile',
+            categoryLabel: '移动端 APP',
+            maxSize: '10GB 免费空间',
+            retention: '长期',
+            features: ['移动端优化', '自动备份', '分享便捷'],
+            description: 'MediaFire 的移动应用，支持自动备份和便捷分享。',
+            url: 'https://www.mediafire.com/mobile',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-mobile-alt'
+        }, {
+            id: 34,
+            name: 'pCloud APP',
+            category: 'mobile',
+            categoryLabel: '移动端 APP',
+            maxSize: '10GB 免费空间',
+            retention: '长期',
+            features: ['移动端流畅', '自动上传', '加密可选'],
+            description: 'pCloud 移动应用，提供流畅的同步和自动上传功能。',
+            url: 'https://www.pcloud.com/apps',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-mobile-alt'
+        }, {
+            id: 35,
+            name: 'MEGA APP',
+            category: 'mobile',
+            categoryLabel: '移动端 APP',
+            maxSize: '20GB 免费空间',
+            retention: '长期',
+            features: ['端到端加密', '移动端优化', '自动备份'],
+            description: 'MEGA 移动应用，端到端加密，支持自动备份照片。',
+            url: 'https://mega.nz/apps',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-mobile-alt'
+        }, {
+            id: 36,
+            name: 'eShare.ai',
+            category: 'mobile',
+            categoryLabel: '移动端 APP',
+            maxSize: '未明确',
+            retention: '长期',
+            features: ['AI 增强', '移动端专属', '社交分享'],
+            description: '专注于移动端的云存储 APP，集成 AI 辅助功能。',
+            url: 'https://eshare.ai',
+            encrypted: false,
+            anonymous: false,
+            icon: 'fa-robot'
+        }, {
+            id: 37,
+            name: 'hashcloud',
+            category: 'mobile',
+            categoryLabel: '移动端 APP',
+            maxSize: '未明确',
+            retention: '长期',
+            features: ['移动端优先', '加密存储', '便捷分享'],
+            description: '移动端优先的云存储 APP，提供加密存储和分享功能。',
+            url: 'https://hashcloud.com',
+            encrypted: true,
+            anonymous: false,
+            icon: 'fa-cloud-upload-alt'
+        }];
+
+        // ======================================================================
+        //  2. 分类配置
+        // ======================================================================
+        const CATEGORIES = [
+            { key: 'all', label: '🏷️ 全部', icon: 'fa-th' },
+            { key: 'anonymous', label: '匿名上传', icon: 'fa-user-secret' },
+            { key: 'cloud', label: '云盘服务', icon: 'fa-cloud' },
+            { key: 'dev', label: '开发者工具', icon: 'fa-code' },
+            { key: 'privacy', label: '隐私保护', icon: 'fa-shield-alt' },
+            { key: 'mobile', label: '移动端 APP', icon: 'fa-mobile-alt' },
+        ];
+
+        // ======================================================================
+        //  3. 状态
+        // ======================================================================
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let filteredServices = [...SERVICES];
+
+        // ======================================================================
+        //  4. DOM 引用
+        // ======================================================================
+        const grid = document.getElementById('cardsGrid');
+        const filterTabs = document.getElementById('filterTabs');
+        const searchInput = document.getElementById('searchInput');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+        const totalCountEl = document.getElementById('totalCount');
+        const statCategories = document.getElementById('statCategories');
+        const statTotal = document.getElementById('statTotal');
+        const statEncrypted = document.getElementById('statEncrypted');
+        const statAnonymous = document.getElementById('statAnonymous');
+
+        // ======================================================================
+        //  5. 渲染函数
+        // ======================================================================
+
+        // 5.1 分类标签
+        function renderTabs() {
+            filterTabs.innerHTML = '';
+            CATEGORIES.forEach(cat => {
+                const count = cat.key === 'all' ?
+                    SERVICES.length :
+                    SERVICES.filter(s => s.category === cat.key).length;
+
+                const btn = document.createElement('button');
+                btn.className = `filter-tab ${currentCategory === cat.key ? 'active' : ''}`;
+                btn.dataset.key = cat.key;
+                btn.innerHTML = `
+                            <i class="fas ${cat.icon}"></i>
+                            ${cat.label}
+                            <span class="count-badge">${count}</span>
+                        `;
+                btn.addEventListener('click', () => {
+                    currentCategory = cat.key;
+                    renderTabs();
+                    filterAndRender();
+                });
+                filterTabs.appendChild(btn);
+            });
+        }
+
+        // 5.2 卡片
+        function renderCards(services) {
+            if (!services || services.length === 0) {
+                grid.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fas fa-search"></i>
+                                <h3>没有找到匹配的服务</h3>
+                                <p style="color:#8a9bb8; margin-top:6px;">试试调整筛选条件或搜索词</p>
+                            </div>
+                        `;
+                return;
+            }
+
+            grid.innerHTML = '';
+            services.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+
+                // 分类标签
+                const catLabel = CATEGORIES.find(c => c.key === service.category)?.label || service.category;
+
+                // 加密标识
+                const encryptBadge = service.encrypted ?
+                    `<span class="badge-encrypt"><i class="fas fa-lock"></i> 加密</span>` :
+                    '';
+
+                card.innerHTML = `
+                            <div class="card-top">
+                                <div class="card-name">
+                                    <i class="fas ${service.icon || 'fa-file-alt'}" style="color:#4a6cf7; font-size:16px;"></i>
+                                    ${service.name}
+                                    ${encryptBadge}
+                                </div>
+                                <span class="card-category">${catLabel}</span>
+                            </div>
+                            <div class="card-desc">${service.description}</div>
+                            <div class="card-features">
+                                ${service.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                            </div>
+                            <div class="card-meta">
+                                <span class="meta-item"><i class="fas fa-weight-hanging"></i> <span class="highlight">${service.maxSize}</span></span>
+                                <span class="meta-item"><i class="fas fa-clock"></i> ${service.retention}</span>
+                                ${service.anonymous ? '<span class="meta-item"><i class="fas fa-user-secret"></i> 匿名</span>' : ''}
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-detail" data-id="${service.id}"><i class="fas fa-info-circle"></i> 详情</button>
+                                ${service.url ? `<a href="${service.url}" target="_blank" rel="noopener" class="btn-visit"><i class="fas fa-external-link-alt"></i> 访问</a>` : ''}
+                            </div>
+                        `;
+
+                // 详情按钮事件
+                card.querySelector('.btn-detail').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openModal(service.id);
+                });
+
+                // 卡片点击打开详情
+                card.addEventListener('click', () => {
+                    openModal(service.id);
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        // 5.3 统计
+        function updateStats(services) {
+            const total = services.length;
+            const encrypted = services.filter(s => s.encrypted).length;
+            const anonymous = services.filter(s => s.anonymous).length;
+            const categories = new Set(services.map(s => s.category)).size;
+
+            totalCountEl.textContent = SERVICES.length;
+            statCategories.textContent = categories;
+            statTotal.textContent = total;
+            statEncrypted.textContent = encrypted;
+            statAnonymous.textContent = anonymous;
+        }
+
+        // 5.4 主筛选 + 渲染
+        function filterAndRender() {
+            let filtered = [...SERVICES];
+
+            // 分类筛选
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(s => s.category === currentCategory);
+            }
+
+            // 搜索筛选
+            if (searchQuery.trim() !== '') {
+                const q = searchQuery.trim().toLowerCase();
+                filtered = filtered.filter(s =>
+                    s.name.toLowerCase().includes(q) ||
+                    s.description.toLowerCase().includes(q) ||
+                    s.features.some(f => f.toLowerCase().includes(q)) ||
+                    s.categoryLabel.includes(q)
+                );
+            }
+
+            filteredServices = filtered;
+            renderCards(filtered);
+            updateStats(filtered);
+        }
+
+        // ======================================================================
+        //  6. 模态框
+        // ======================================================================
+        function openModal(id) {
+            const service = SERVICES.find(s => s.id === id);
+            if (!service) return;
+
+            const catLabel = CATEGORIES.find(c => c.key === service.category)?.label || service.category;
+            const encryptBadge = service.encrypted ?
+                `<span class="badge-encrypt"><i class="fas fa-lock"></i> 端到端加密</span>` :
+                '';
+
+            modalContent.innerHTML = `
+                        <div class="modal-title">
+                            <i class="fas ${service.icon || 'fa-file-alt'}" style="color:#4a6cf7;"></i>
+                            ${service.name}
+                            ${encryptBadge}
+                        </div>
+                        <div class="modal-category">${catLabel}</div>
+                        <div class="modal-desc">${service.description}</div>
+
+                        <div class="modal-detail-grid">
+                            <div class="detail-item">
+                                <span class="label"><i class="fas fa-weight-hanging"></i> 大小限制</span>
+                                <span class="value">${service.maxSize}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label"><i class="fas fa-clock"></i> 保留期限</span>
+                                <span class="value">${service.retention}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label"><i class="fas fa-user-secret"></i> 匿名上传</span>
+                                <span class="value">${service.anonymous ? '✅ 支持' : '❌ 需注册'}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label"><i class="fas fa-lock"></i> 加密支持</span>
+                                <span class="value">${service.encrypted ? '✅ 支持' : '❌ 不支持'}</span>
+                            </div>
+                        </div>
+
+                        <div style="font-size:13px; font-weight:600; color:#3f5a7c; margin-top:6px;">✨ 特点</div>
+                        <div class="modal-features">
+                            ${service.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+
+                        <div class="modal-actions">
+                            ${service.url ? `<a href="${service.url}" target="_blank" rel="noopener" class="btn-visit"><i class="fas fa-external-link-alt"></i> 访问 ${service.name}</a>` : ''}
+                            <button class="btn-close-modal" id="modalCloseInnerBtn">关闭</button>
+                        </div>
+                    `;
+
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            // 内层关闭按钮
+            const innerClose = document.getElementById('modalCloseInnerBtn');
+            if (innerClose) {
+                innerClose.addEventListener('click', closeModal);
+            }
+
+            // 点击外部关闭
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // 模态框关闭按钮
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        // ESC 键关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ======================================================================
+        //  7. 搜索输入
+        // ======================================================================
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            filterAndRender();
+        });
+
+        // ======================================================================
+        //  8. 启动
+        // ======================================================================
+        renderTabs();
+        filterAndRender();
+
+        // 小彩蛋：控制台提示
+        console.log('🌍 全球免费上传 · 服务目录已加载');
+        console.log(`📦 共 ${SERVICES.length} 个服务，${CATEGORIES.length - 1} 个分类`);
+        console.log('🔍 试试搜索或点击分类筛选吧！');
+    </script>
+</body>
+</html>
