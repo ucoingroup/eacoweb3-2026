@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外贸大全 | 外贸人一站式导航 eaco foreign trade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F52BA',
+                        secondary: '#165DFF',
+                        cardBg: '#f8fafc'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .nav-card {
+                @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-5 border border-gray-100;
+            }
+            .link-item {
+                @apply block py-1.5 px-2 rounded hover:bg-blue-50 text-gray-700 hover:text-secondary text-sm transition-colors;
+            }
+            .eaco-link {
+                @apply block py-1 px-2 rounded hover:bg-slate-700 text-slate-300 hover:text-white text-sm break-all transition-colors;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- 头部 -->
+    <header class="bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold">外贸大全</h1>
+            <p class="mt-2 text-blue-100 text-lg">外贸人一站式导航｜平台｜工具｜物流｜政策｜选品</p>
+            <!-- 搜索框 -->
+            <div class="mt-6 max-w-xl">
+                <div class="flex">
+                    <input type="text" placeholder="搜索外贸网站、工具..." class="flex-1 rounded-l-lg px-4 py-3 text-gray-800 outline-none">
+                    <button class="bg-secondary px-5 py-3 rounded-r-lg hover:bg-blue-700">
+                        <i class="fa fa-search"></i> 搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- B2B外贸平台 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-globe"></i> B2B外贸平台
+                </h2>
+                <a href="#" class="link-item">阿里巴巴国际站</a>
+                <a href="#" class="link-item">Made‑in‑China中国制造网</a>
+                <a href="#" class="link-item">Global Sources环球资源</a>
+                <a href="#" class="link-item">TradeKey</a>
+                <a href="#" class="link-item">EC21</a>
+                <a href="#" class="link-item">ECPlaza</a>
+            </div>
+
+            <!-- B2C跨境电商 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-shopping-cart"></i> B2C跨境平台
+                </h2>
+                <a href="#" class="link-item">SHEIN</a>
+                <a href="#" class="link-item">Temu</a>
+                <a href="#" class="link-item">Shopee虾皮</a>
+                <a href="#" class="link-item">Lazada来赞达</a>
+                <a href="#" class="link-item">AliExpress速卖通</a>
+                <a href="#" class="link-item">TikTok Shop跨境</a>
+            </div>
+
+            <!-- 物流货代 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-truck"></i> 物流 & 货代
+                </h2>
+                <a href="#" class="link-item">菜鸟国际</a>
+                <a href="#" class="link-item">燕文物流</a>
+                <a href="#" class="link-item">4PX递四方</a>
+                <a href="#" class="link-item">云途物流</a>
+                <a href="#" class="link-item">DHL</a>
+                <a href="#" class="link-item">FedEx</a>
+            </div>
+
+            <!-- 海关&报关 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-building-o"></i> 海关 & 政策查询
+                </h2>
+                <a href="#" class="link-item">中国海关总署</a>
+                <a href="#" class="link-item">单一窗口</a>
+                <a href="#" class="link-item">商务部公共服务平台</a>
+                <a href="#" class="link-item">出口退税查询</a>
+                <a href="#" class="link-item">关税查询工具</a>
+                <a href="#" class="link-item">RCEP相关资讯</a>
+            </div>
+
+            <!-- 翻译&工具 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-wrench"></i> 翻译 & 办公工具
+                </h2>
+                <a href="#" class="link-item">DeepL翻译</a>
+                <a href="#" class="link-item">谷歌翻译</a>
+                <a href="#" class="link-item">ChatGPT</a>
+                <a href="#" class="link-item">Grammarly语法校对</a>
+                <a href="#" class="link-item">UnitConverter单位换算</a>
+                <a href="#" class="link-item">汇率查询</a>
+            </div>
+
+            <!-- 选品&市场调研 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-bar-chart"></i> 选品 & 市场调研
+                </h2>
+                <a href="#" class="link-item">Google Trends谷歌趋势</a>
+                <a href="#" class="link-item">SimilarWeb</a>
+                <a href="#" class="link-item">Jungle Scout</a>
+                <a href="#" class="link-item">Oberlo</a>
+                <a href="#" class="link-item">Keyword Tool关键词挖掘</a>
+                <a href="#" class="link-item">海关数据查询</a>
+            </div>
+
+            <!-- 社媒营销 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-comment"></i> 海外社媒营销
+                </h2>
+                <a href="#" class="link-item">Facebook</a>
+                <a href="#" class="link-item">Instagram</a>
+                <a href="#" class="link-item">TikTok</a>
+                <a href="#" class="link-item">LinkedIn领英</a>
+                <a href="#" class="link-item">X(Twitter)</a>
+                <a href="#" class="link-item">Pinterest</a>
+            </div>
+
+            <!-- 收款支付 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-credit-card"></i> 跨境收款支付
+                </h2>
+                <a href="#" class="link-item">PayPal</a>
+                <a href="#" class="link-item">派安盈Payoneer</a>
+                <a href="#" class="link-item">万里汇WorldFirst</a>
+                <a href="#" class="link-item">连连国际</a>
+                <a href="#" class="link-item">PingPong</a>
+                <a href="#" class="link-item">西联汇款</a>
+            </div>
+
+            <!-- 学习资讯 -->
+            <div class="nav-card">
+                <h2 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                    <i class="fa fa-book"></i> 外贸资讯学习
+                </h2>
+                <a href="#" class="link-item">雨果网</a>
+                <a href="#" class="link-item">亿邦动力</a>
+                <a href="#" class="link-item">跨境电商鹰熊汇</a>
+                <a href="#" class="link-item">福步外贸论坛</a>
+                <a href="#" class="link-item">海关解读资讯</a>
+                <a href="#" class="link-item">外贸干货博客</a>
+            </div>
+
+        </div>
+    </main>
+
+<!-- ========== Web3外贸城市专区 开始 ========== -->
+<section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-primary flex items-center gap-2">
+                <i class="fa fa-map-marker"></i> Web3友好100城｜EACO外贸市场导航
+            </h2>
+            <p class="text-gray-600 mt-2">按业务适配分为A‑RWA金融枢纽 / B‑实物贸易口岸 / C‑新兴社群市场 / D‑离岸DAO属地；<br>⚠️提示：中国大陆境内不可直接使用虚拟货币做货物贸易货款结算；EACO用于RWA、渠道激励、汇率预言机、本地小额服务结算。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- A类 RWA金融枢纽 20城 -->
+            <div class="nav-card">
+                <h3 class="text-lg font-semibold text-emerald-700 mb-3">🟢 A类｜RWA合规金融枢纽（优先建主体、牌照、RWA发行）</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">新加坡</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">中国香港</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">迪拜</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">阿布扎比</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">楚格(瑞士)</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">里斯本</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">伦敦</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">东京</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">首尔</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">悉尼</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">墨尔本</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">迈阿密</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">纽约</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">法兰克福</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">阿姆斯特丹</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">巴黎</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">巴林</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">阿拉木图</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">吉隆坡</span>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-800 text-xs rounded">新加坡</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-500">适配：E50汇率预言机、外贸RWA、机构兑换、区域总部</div>
+            </div>
+
+            <!-- B类 实物贸易口岸 30城 -->
+            <div class="nav-card">
+                <h3 class="text-lg font-semibold text-blue-700 mb-3">🔵 B类｜实物外贸口岸（B2B商户、清关货流、本地激励结算）</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">曼谷</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">清迈</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">胡志明市</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">岘港</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">雅加达</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">泗水</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">马尼拉</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">宿务</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">仰光</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">万象</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">金边</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">吉隆坡</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">槟城</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">伊斯坦布尔</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">利马</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">圣保罗</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">布宜诺斯艾利斯</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">墨西哥城</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">巴拿马城</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">拉各斯</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">内罗毕</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">约翰内斯堡</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">第比利斯</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">埃里温</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">里加</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">塔林</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">华沙</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">新加坡</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">迪拜</span>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-800 text-xs rounded">第比利斯</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-500">适配：光伏/建材/汽配出口、渠道返佣、样品单、本地商户激励</div>
+            </div>
+
+            <!-- C类 新兴社群市场 30城 -->
+            <div class="nav-card">
+                <h3 class="text-lg font-semibold text-orange-700 mb-3">🟠 C类｜新兴社群市场（侨汇、小额订单、社区获客）</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">圣萨尔瓦多</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">加拉加斯</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">布宜诺斯艾利斯</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">阿布贾</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">阿克拉</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">蒙巴萨</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">河内</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">巴厘岛</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">普吉</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">达沃</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">曼德勒</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">磨丁</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">西港</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">安塔利亚</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">开罗</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">卡萨布兰卡</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">安曼</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">班加罗尔</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">孟买</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">卡拉奇</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">塔什干</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">比什凯克</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">坎昆</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">麦德林</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">圣地亚哥</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">库斯科</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">波尔图</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">巴塞罗那</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">波德戈里察</span>
+                    <span class="px-2 py-1 bg-orange-50 text-orange-800 text-xs rounded">基辅</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-500">适配：E50汇率工具、Telegram社群、小额侨汇、轻品类商品出海</div>
+            </div>
+
+            <!-- D类 离岸DAO属地 20城/地区 -->
+            <div class="nav-card">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">⚫ D类｜离岸DAO属地（仅注册主体，不适合实物货流）</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">开曼群岛</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">BVI</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">百慕大</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">塞舌尔</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">巴拿马</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">列支敦士登</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">马耳他</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">直布罗陀</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">维尔纽斯</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">安道尔</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">摩纳哥</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">巴哈马</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">伯利兹</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">库克群岛</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">毛里求斯</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">塞浦路斯</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">圣基茨</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">多米尼克</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">格林纳达</span>
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">乌拉圭</span>
+                </div>
+                <div class="mt-3 text-sm text-gray-500">适配：EACO外贸DAO、SPV、基金会、流动性池，无实体贸易落地</div>
+            </div>
+        </div>
+
+        <div class="mt-8 p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <h4 class="font-semibold mb-2">EACO外贸三层结算参考</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+                <li>1.主线货款：法币 / CNH /合规稳定币（报关清关税务）</li>
+                <li>2.分润层：EACO（渠道佣金、物流分润、样品定金）</li>
+                <li>3.激励层：EACO（商户入驻、展会、RWA积分、低碳激励）</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- ========== Web3外贸城市专区 结束 ========== -->
+
+    <!-- EACO 板块 放在主内容与页脚中间 -->
+    <section class="bg-slate-900 text-gray-200 py-10 mt-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-2">EACO (Earth's best Coin)</h2>
+            <p class="text-slate-400 mb-6">The only $eaco in the universe and the earth<br>EACO ($eaco) is an innovative currency, the only $eaco in the universe and the earth.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 合约地址 & 浏览器 -->
+                <div>
+                    <h3 class="font-semibold text-white mb-3">Contract Address & Explorer</h3>
+                    <div class="text-xs mb-2 break-all text-slate-300">CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</div>
+                    <a target="_blank" href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="eaco-link">orbmarkets.io</a>
+                    <a target="_blank" href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="eaco-link">solscan.io</a>
+                </div>
+
+                <!-- DEX交易 -->
+                <div>
+                    <h3 class="font-semibold text-white mb-3">DEX Trade</h3>
+                    <a target="_blank" href="https://app.meteora.ag/dlmm/6ZfCi3qzhgDN1ygHVYXvfsfrwz8ZhQ7hD5mJtjeuUDyE" class="eaco-link">Meteora‑1</a>
+                    <a target="_blank" href="https://app.meteora.ag/dlmm/GsDB4iKELP7KDVjn5ZcHsJhWRY8J3HqTxvE86zyDhV34" class="eaco-link">Meteora‑2</a>
+                    <a target="_blank" href="https://raydium.io/swap/?inputMint=sol&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="eaco-link">Raydium</a>
+                    <a target="_blank" href="https://www.orca.so/pools?tokens=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="eaco-link">Orca</a>
+                    <a target="_blank" href="https://pancakeswap.finance/swap?inputCurrency=SOL&chain=sol&outputCurrency=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH&chainOut=sol" class="eaco-link">PancakeSwap(Sol)</a>
+                    <a target="_blank" href="https://app.uniswap.org/explore/tokens/solana/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="eaco-link">Uniswap(Sol)</a>
+                </div>
+
+                <!-- 项目信息 & 数据平台 -->
+                <div>
+                    <h3 class="font-semibold text-white mb-3">Project Info & Data</h3>
+                    <a target="_blank" href="https://github.com/eacocc/eaco" class="eaco-link">Github eacocc/eaco</a>
+                    <a target="_blank" href="https://coinmarketcap.com/dexscan/solana/7cmAfsKJrvcbMLWoXDTX5uZ2C8udBjzsKEgaxeweKMMU/" class="eaco-link">CoinMarketCap DexScan</a>
+                    <a target="_blank" href="https://web3.okx.com/token/solana/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="eaco-link">OKX Web3</a>
+                    <div class="mt-2 text-slate-400 text-xs">Quantitative robots could earn the difference with 5000‑50,000 sol/usdc/USDT.</div>
+                </div>
+
+                <!-- 社区社交 -->
+                <div>
+                    <h3 class="font-semibold text-white mb-3">Community (As a Volunteer)</h3>
+                    <a target="_blank" href="https://discord.gg/bWCDME9Pkc" class="eaco-link">Discord</a>
+                    <a target="_blank" href="https://x.com/eacocc" class="eaco-link">X / Twitter</a>
+                    <a target="_blank" href="https://t.me/e_eacocc" class="eaco-link">Telegram</a>
+                </div>
+            </div>
+
+            <!-- 项目网页合集 单独一行 -->
+            <div class="mt-8">
+                <h3 class="font-semibold text-white mb-3">EACO Project Websites</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                    <a target="_blank" href="https://ucoingroup.github.io/eur-eaco/" class="eaco-link">eur‑eaco</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/earths-best-coin/" class="eaco-link">earths‑best‑coin</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/eaco50rate/" class="eaco-link">eaco50rate</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/100WaysToWealth/" class="eaco-link">100WaysToWealth</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/earth-100-friends/" class="eaco-link">earth‑100‑friends</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/eacoSWAP/" class="eaco-link">eacoSWAP</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/good-books/" class="eaco-link">good‑books</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/au-trade/" class="eaco-link">au‑trade</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/Mohist-Tech/" class="eaco-link">Mohist‑Tech</a>
+                    <a target="_blank" href="https://eaco-build-world.base44.app/" class="eaco-link">eaco‑build‑world</a>
+                    <a target="_blank" href="https://eaco-web3.base44.app" class="eaco-link">eaco‑web3</a>
+                    <a target="_blank" href="https://ucoingroup.github.io/Footsteps-of-Civilization/" class="eaco-link">Footsteps‑of‑Civilization</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-gray-300 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>外贸大全 © eaco2025 | 外贸从业者导航站，仅做网址聚合，不承担第三方站点责任</p>
+            <p class="mt-2 text-sm">可提交网址收录、反馈问题</p>
+        </div>
+    </footer>
+</body>
+</html>
