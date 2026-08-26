@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EACO · 宇宙文明进化 · UFO真相 · 星际文明网络</title>
+<meta name="description" content="全球华商宇宙1-2-3级文明进化指南 | 杭州萧山UFO事件真相 | 地球村500年UFO事件编年 | 星际文明·航行·能源·贸易·生活">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050810;--card:#0d1228;--card2:#111a3a;--accent:#00d4ff;--accent2:#7b5cff;--gold:#ffd700;--text:#e0e6f0;--text2:#8090b0;--border:rgba(0,212,255,.15);--radius:16px}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;overflow-x:hidden;line-height:1.7}
+a{color:var(--accent);text-decoration:none;transition:.3s}
+a:hover{color:var(--gold)}
+
+/* Star canvas */
+#starCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* Header */
+header{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(5,8,16,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.header-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.5rem 1.2rem;height:60px}
+.logo{font-size:1.25rem;font-weight:800;color:var(--gold);white-space:nowrap}
+.logo span{color:var(--accent)}
+nav{display:flex;gap:.3rem;flex-wrap:wrap}
+nav a{color:var(--text2);font-size:.82rem;padding:.3rem .55rem;border-radius:6px;transition:.3s;white-space:nowrap}
+nav a:hover{color:var(--accent);background:rgba(0,212,255,.08)}
+.lang-toggle{display:flex;align-items:center;gap:.3rem;background:rgba(0,212,255,.1);border:1px solid var(--border);border-radius:20px;padding:.15rem;cursor:pointer;flex-shrink:0}
+.lang-toggle button{background:none;border:none;color:var(--text2);font-size:.78rem;padding:.25rem .6rem;border-radius:18px;cursor:pointer;transition:.3s}
+.lang-toggle button.active{background:var(--accent);color:#050810;font-weight:700}
+
+/* Hero */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1.2rem 3rem}
+.hero h1{font-size:clamp(1.6rem,4.5vw,3rem);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;line-height:1.3}
+.hero p{font-size:clamp(.9rem,2vw,1.1rem);color:var(--text2);max-width:720px;margin-bottom:1.8rem}
+.hero-meta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.hero-badge{background:rgba(0,212,255,.08);border:1px solid var(--border);border-radius:20px;padding:.3rem .8rem;font-size:.8rem;color:var(--accent)}
+
+/* Sections */
+.section{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:3rem 1.2rem}
+.section-title{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;text-align:center;margin-bottom:.5rem;color:var(--text)}
+.section-title .icon{font-size:1.1em}
+.section-sub{text-align:center;color:var(--text2);font-size:.9rem;margin-bottom:2rem;max-width:680px;margin-left:auto;margin-right:auto}
+
+/* Cards grid */
+.grid{display:grid;gap:1rem;margin-bottom:1.5rem}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;transition:.3s;position:relative;overflow:hidden}
+.card:hover{border-color:rgba(0,212,255,.35);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,212,255,.1)}
+.card .card-icon{font-size:2rem;margin-bottom:.6rem}
+.card h3{font-size:1.05rem;font-weight:700;color:var(--accent);margin-bottom:.5rem}
+.card p{font-size:.88rem;color:var(--text2);margin-bottom:.4rem}
+.card ul{list-style:none;padding:0}
+.card li{font-size:.85rem;color:var(--text2);padding:.2rem 0;padding-left:1.2rem;position:relative}
+.card li::before{content:"▸";color:var(--accent);position:absolute;left:0}
+
+/* Kardashev levels */
+.kardashev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem;margin-bottom:1.5rem}
+.kardashev-card{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem;position:relative;overflow:hidden}
+.kardashev-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px}
+.k1::before{background:linear-gradient(90deg,#4facfe,#00f2fe)}
+.k2::before{background:linear-gradient(90deg,#f7971e,#ffd200)}
+.k3::before{background:linear-gradient(90deg,#e94057,#ff6b6b)}
+.kardashev-card .level-num{font-size:2.5rem;font-weight:800;opacity:.15;position:absolute;top:.5rem;right:1rem}
+.kardashev-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.3rem}
+.kardashev-card .level-label{font-size:.8rem;color:var(--accent);margin-bottom:.8rem}
+.kardashev-card p{font-size:.86rem;color:var(--text2)}
+
+/* Timeline */
+.timeline{position:relative;padding-left:2rem;margin-bottom:1.5rem}
+.timeline::before{content:"";position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:linear-gradient(to-bottom,var(--accent),var(--accent2),transparent)}
+.tl-item{position:relative;margin-bottom:1.2rem;padding-left:1.8rem}
+.tl-item::before{content:"";position:absolute;left:-1.3rem;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.tl-item .tl-year{font-size:.78rem;font-weight:700;color:var(--gold);margin-bottom:.15rem}
+.tl-item .tl-title{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.tl-item .tl-loc{font-size:.78rem;color:var(--accent);margin-bottom:.2rem}
+.tl-item p{font-size:.84rem;color:var(--text2)}
+.tl-filter{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.2rem;justify-content:center}
+.tl-filter button{background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--text2);font-size:.78rem;padding:.3rem .7rem;border-radius:18px;cursor:pointer;transition:.3s}
+.tl-filter button.active,.tl-filter button:hover{background:var(--accent);color:#050810;font-weight:600}
+
+/* Dimension cards */
+.dim-card{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;position:relative;overflow:hidden;transition:.3s}
+.dim-card:hover{border-color:rgba(0,212,255,.3);transform:translateY(-2px)}
+.dim-card .dim-from{font-size:.82rem;color:var(--text2);text-decoration:line-through;opacity:.6}
+.dim-card .dim-arrow{font-size:1rem;color:var(--accent);margin:.2rem 0}
+.dim-card .dim-to{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:.5rem}
+.dim-card h3{font-size:1.05rem;font-weight:700;color:var(--accent);margin:.5rem 0 .4rem}
+
+/* Feature list */
+.feat-list{list-style:none;padding:0;margin-top:.8rem}
+.feat-list li{font-size:.85rem;color:var(--text2);padding:.35rem 0;padding-left:1.4rem;position:relative;border-bottom:1px solid rgba(0,212,255,.06)}
+.feat-list li:last-child{border-bottom:none}
+.feat-list li::before{content:"◆";color:var(--accent);position:absolute;left:0;font-size:.7rem;top:.4rem}
+.feat-list strong{color:var(--text);font-weight:600}
+
+/* Summary box */
+.summary-box{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(123,92,255,.05));border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-top:1.5rem}
+.summary-box h3{font-size:1.05rem;font-weight:700;color:var(--gold);margin-bottom:.5rem}
+.summary-box p{font-size:.88rem;color:var(--text2)}
+
+/* Monthly update */
+.update-banner{background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(123,92,255,.08));border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.update-banner .update-icon{font-size:1.5rem}
+.update-banner .update-text{font-size:.85rem;color:var(--text2)}
+.update-banner .update-date{font-weight:700;color:var(--accent)}
+
+/* Footer / EACO */
+.footer{position:relative;z-index:1;background:linear-gradient(180deg,transparent,rgba(0,212,255,.03));border-top:1px solid var(--border);padding:3rem 1.2rem 2rem;margin-top:2rem}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-title{font-size:1.4rem;font-weight:800;color:var(--gold);text-align:center;margin-bottom:.5rem}
+.footer-sub{text-align:center;color:var(--text2);font-size:.85rem;margin-bottom:1.5rem}
+.footer-contract{background:rgba(0,212,255,.06);border:1px dashed var(--border);border-radius:10px;padding:.8rem 1rem;margin:1rem auto;max-width:680px;text-align:center;font-family:monospace;font-size:.82rem;color:var(--accent);cursor:pointer;transition:.3s;word-break:break-all}
+.footer-contract:hover{background:rgba(0,212,255,.12)}
+.footer-links{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}
+.footer-links a{background:rgba(0,212,255,.06);border:1px solid var(--border);border-radius:18px;padding:.3rem .8rem;font-size:.78rem;color:var(--text2);transition:.3s}
+.footer-links a:hover{background:var(--accent);color:#050810}
+.footer-sign{text-align:center;color:var(--gold);font-size:.88rem;font-weight:600;margin-top:1.5rem}
+.footer-def{max-width:680px;margin:0 auto 1.5rem;text-align:center}
+.footer-def p{font-size:.84rem;color:var(--text2);margin-bottom:.3rem}
+.footer-def .eaco-key{display:inline-block;background:rgba(123,92,255,.08);border:1px solid rgba(123,92,255,.2);border-radius:6px;padding:.1rem .5rem;margin:.15rem;font-size:.8rem;color:var(--accent2)}
+.footer-goals{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:.8rem 0}
+.footer-goals span{background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.15);border-radius:16px;padding:.2rem .6rem;font-size:.78rem;color:var(--gold)}
+
+/* Responsive */
+@media(max-width:768px){
+.header-inner{height:auto;flex-wrap:wrap;padding:.4rem .8rem}
+.logo{font-size:1rem}
+nav{gap:.15rem;justify-content:center;width:100%;margin-top:.3rem}
+nav a{font-size:.72rem;padding:.2rem .35rem}
+.lang-toggle{position:absolute;right:.8rem;top:.4rem}
+.hero{padding-top:8rem}
+.section{padding:2rem .8rem}
+.card{padding:1rem}
+.kardashev-card{padding:1.2rem}
+.kardashev-card .level-num{font-size:2rem}
+}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity.6s,transform.6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.scroll-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:90;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#050810;border:none;font-size:1.2rem;cursor:pointer;opacity:0;transition:.3s;display:flex;align-items:center;justify-content:center}
+.scroll-top.show{opacity:.8}
+.scroll-top:hover{opacity:1;transform:translateY(-3px)}
+</style>
+</head>
+<body>
+<canvas id="starCanvas"></canvas>
+
+<header>
+<div class="header-inner">
+<div class="logo">EACO <span>★</span> <span data-i18n="brand">星际文明网络</span></div>
+<nav id="navBar"></nav>
+<div class="lang-toggle">
+<button id="btnZh" class="active" onclick="setLang('zh')">中文</button>
+<button id="btnEn" onclick="setLang('en')">EN</button>
+</div>
+</div>
+</header>
+
+<section class="hero">
+<h1 data-i18n="heroTitle"></h1>
+<p data-i18n="heroSub"></p>
+<div class="hero-meta" id="heroMeta"></div>
+</section>
+
+<div id="content"></div>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ========== Bilingual Data ========== */
+const DATA = {
+zh: {
+brand:"星际文明网络",
+navLinks:[
+{t:"卡尔达肖夫指数",href:"#kardashev"},
+{t:"思维进化",href:"#evolution"},
+{t:"星际文明",href:"#civ"},
+{t:"星际航行",href:"#nav"},
+{t:"星际能源",href:"#energy"},
+{t:"星际贸易",href:"#trade"},
+{t:"星际生活",href:"#life"},
+{t:"星际教育",href:"#edu"},
+{t:"星际医疗",href:"#med"},
+{t:"500年UFO",href:"#ufo500"},
+{t:"EACO",href:"#eaco"}
+],
+heroTitle:"EACO · 宇宙文明进化 · UFO真相",
+heroSub:"全球华商从地球思维到星际文明的进化指南 | 卡尔达肖夫指数 | 星际文明·航行·能源·贸易·生活·教育·医疗 | 逆变年轻医学与抗衰食物 | 杭州萧山UFO事件 | 地球村500年UFO编年史",
+heroBadges:["卡尔达肖夫 Ⅰ-Ⅱ-Ⅲ 型文明","人类文明指数 0.73","每月更新"],
+
+kardashev:{
+id:"kardashev",icon:"🛸",title:"卡尔达肖夫指数",sub:"苏联天文学家尼古拉·卡尔达肖夫于1964年提出的文明等级分类体系——根据一个文明所能利用的能源总量来划分等级",
+levels:[
+{cls:"k1",num:"Ⅰ",title:"Ⅰ型文明",label:"行星文明 · Planetary Civilization",desc:"能完全掌控其母星（如地球）的全部能源。包括控制天气、海洋、地壳活动，以及高效利用太阳能、风能、地热等行星能源。人类文明的终极目标之一。"},
+{cls:"k2",num:"Ⅱ",title:"Ⅱ型文明",label:"恒星文明 · Stellar Civilization",desc:"能利用其恒星系统（太阳系）的全部能量。标志性构想是'戴森球'——环绕恒星建造的巨型结构，收集恒星的全部辐射能量。可进行行星际殖民和恒星工程。"},
+{cls:"k3",num:"Ⅲ",title:"Ⅲ型文明",label:"星系文明 · Galactic Civilization",desc:"能驾驭整个星系（银河系）的能量，包括黑洞、脉冲星、超新星等极端天体能源。可进行星际旅行、星系级工程，甚至操控恒星演化。"}
+],
+current:"目前，人类文明指数仅为 <strong style='color:var(--gold)'>0.73级</strong>，尚未完全达到Ⅰ型文明标准。我们正处于从0型向Ⅰ型跃迁的关键窗口期。"
+},
+
+evolution:{
+id:"evolution",icon:"🌍",title:"全球华商的思维范式革命",sub:"核心是一场思维范式革命——从'地球商人'转变为'星际文明的建设者'",
+dims:[
+{icon:"🌍",from:"地球思维",to:"星际思维",title:"拓宽认知的边界",points:[
+{t:"拥抱无限资源",d:"宇宙资源近乎无限。商界领袖应从'争夺稀缺'转向'开发无限'，将目光投向小行星采矿、太空太阳能等领域。"},
+{t:"立足长远周期",d:"文明跃迁以百年、千年甚至万年计。商业规划需超越季度财报，建立代际传承的长期主义视角。"},
+{t:"定义全新市场",d:"Ⅰ型文明将征服地球灾害；Ⅱ型文明将开展恒星系间殖民；Ⅲ型文明将进行星系间活动。华商应前瞻性地想象并投资这些未来场景下的产品与服务。"}
+]},
+{icon:"☮️",from:"竞争思维",to:"共生思维",title:"重塑商业的伦理",points:[
+{t:"超越零和博弈",d:"星际时代的冲突关乎文明存续。全球华商应倡导'万物共生'的理念，从'征服'转向'共存'。"},
+{t:"践行'仁和'理念",d:"中华文化中的'仁'与'和'，可作为星际时代的伦理基石。'仁'为科技划定伦理底线，'和'则用于构建星际间的多元秩序。"},
+{t:"合作替代对抗",d:"迈向更高级文明需要全人类的协作。华商应成为全球合作的推动者，而非孤立或对抗的参与者。"}
+]},
+{icon:"⚡",from:"物质思维",to:"能量思维",title:"聚焦商业的本质",points:[
+{t:"掌控终极能源",d:"文明升级的本质是能源掌控力的提升。华商应加大对核聚变、反物质、戴森球等终极能源技术的投资。"},
+{t:"追求指数级效率",d:"从Ⅰ型到Ⅲ型文明，能源利用效率是指数级提升的。商业创新应追求能源生产和利用的效率革命。"},
+{t:"能源即货币",d:"在卡尔达肖夫框架下，能源是文明的基础度量。未来商业的价值评估将从GDP转向能源当量，能源密度将成为衡量企业核心竞争力的关键指标。"}
+]},
+{icon:"🌌",from:"人类中心主义",to:"宇宙伦理",title:"升华存在的意义",points:[
+{t:"敬畏宇宙规律",d:"文明发展需遵循宇宙的根本规律，而非肆意妄为。商业活动应建立在对宇宙规律的深刻理解和尊重之上。"},
+{t:"探索生命意义",d:"随着技术进步，人类将面临基因改造、意识上传等选择。华商在探索这些领域时，需思考其哲学与伦理意义。"},
+{t:"担当文明责任",d:"作为领先群体，华商有责任思考如何让人类文明在宇宙中持久、良性地发展，为宇宙贡献独特的价值。"}
+]}
+],
+summary:{title:"💎 总结",text:"全球华商从思想上向宇宙文明进化，并非抛弃商业，而是彻底重塑商业的底层逻辑：从争夺地球资源，转向开发和利用宇宙资源；从追求短期利润，转向推动文明的长期跃升；从零和博弈，转向星际共生。"}
+},
+
+civ:{
+id:"civ",icon:"🚀",title:"星际文明",sub:"从戴森球到银河联邦——人类迈向宇宙文明的完整图景",
+cards:[
+{icon:"🟡",title:"戴森球与恒星工程",desc:"Ⅱ型文明的标志。在恒星周围建造巨型结构（戴森球/戴森云），收集恒星全部辐射能量。理论上可提供比地球当前能耗高出数十亿倍的能源。"},
+{icon:"📡",title:"文明跃迁路径",desc:"0型→Ⅰ型：掌控行星能源，征服自然灾害，建立行星级能源网络。Ⅰ型→Ⅱ型：建造戴森结构，殖民太阳系，实现恒星际旅行。Ⅱ型→Ⅲ型：星际航行，星系级工程，驾驭黑洞能量。"},
+{icon:"🏛️",title:"银河文明治理",desc:"星际文明需要全新的治理框架。可能包括星际联盟、文明等级认证、资源分配协议、技术共享机制等。华商应前瞻性地研究星际治理的商业模式。"},
+{icon:"📜",title:"宇宙伦理框架",desc:"中华'仁和'哲学与宇宙伦理的结合。'仁'划定科技底线：不可制造灭绝性武器、不可破坏宜居行星生态。'和'构建多元秩序：尊重不同文明形态、建立共生共存机制。"},
+{icon:"🔢",title:"德雷克方程与费米悖论",desc:"德雷克方程估算银河系可能存在的文明数量；费米悖论则问：如果宇宙中存在大量文明，为何我们尚未观测到？这对华商的启示是：宇宙文明的稀缺性意味着先发优势巨大。"},
+{icon:"🧬",title:"文明存续与进化",desc:"卡尔达肖夫指数不仅是能源度量，更是文明存续能力的指标。能掌控更高能量等级的文明，其存续概率呈指数级上升。华商的长期投资应锚定文明存续这一终极目标。"}
+]
+},
+
+nav:{
+id:"nav",icon:"🛰️",title:"星际航行",sub:"从化学火箭到曲率驱动——跨越星际距离的技术路径",
+cards:[
+{icon:"🌀",title:"曲率引擎（阿库别瑞驱动）",desc:"理论物理学家米格尔·阿库别瑞于1994年提出。通过扭曲时空实现超光速旅行——压缩前方空间、膨胀后方空间，飞船本身不超越光速但周围时空被扭曲。需要负能量/奇异物质，目前仍处于理论阶段。"},
+{icon:"🚢",title:"世代飞船",desc:"不需超光速技术，以亚光速航行。飞船内部建立自给自足的生态系统，乘客在航行中繁衍数代直至抵达目标星系。华商可投资：封闭生态循环系统、太空农业、多代社会心理学研究。"},
+{icon:"☀️",title:"光帆推进",desc:"利用恒星光的辐射压力推动超轻薄帆面加速。搭配地面或太空激光阵列，可将微型探测器加速到光速的10-20%。突破摄星计划即采用此方案。低成本、可量产，适合星际早期探索。"},
+{icon:"🕳️",title:"虫洞旅行",desc:"爱因斯坦-罗森桥理论允许时空捷径存在。若能稳定一个宏观虫洞，可实现瞬时星际旅行。当前面临的挑战：虫洞极度不稳定、需要奇异物质维持、量子效应可能导致信息丢失。"},
+{icon:"☢️",title:"核聚变推进",desc:"可控核聚变可提供比化学火箭高数万倍的比冲。聚变火箭理论速度可达光速的5-10%。华商应关注：氘氚聚变、氦-3聚变、磁约束聚变小型化等方向。氦-3可从月球和气态行星开采。"},
+{icon:"💥",title:"反物质推进",desc:"物质与反物质湮灭释放100%质能转换效率（核聚变仅约0.7%），是已知最高效的能源。1克反物质释放能量约等于广岛原子弹。挑战在于反物质的制造和储存成本极高，目前年产仅纳克级。"}
+]
+},
+
+energy:{
+id:"energy",icon:"⚡",title:"星际能源",sub:"卡尔达肖夫指数的核心是能源——未来商业的本质是能源掌控力",
+cards:[
+{icon:"⭕",title:"戴森球/戴森云",desc:"Ⅱ型文明的核心工程。在恒星周围部署数万亿个太阳能收集面板或镜面，捕获恒星全部辐射能量。太阳总输出约3.8×10²⁶瓦，是地球人类能耗的数十亿倍。华商可投资：太空太阳能、轨道镜面、太空制造技术。"},
+{icon:"⚫",title:"黑洞能量提取",desc:"Ⅲ型文明级别的能源。彭罗斯过程可从旋转黑洞的自旋能中提取能量，效率可达29%。超级massive黑洞可提供整个星系级能量。霍金辐射理论还提供了黑洞蒸发的能量利用可能。"},
+{icon:"⚛️",title:"反物质能源",desc:"质能转换率100%，是最理想的星际燃料和能源。未来若能量产反物质，将彻底改变能源格局。华商应关注：反质子 traps、反氢制造、反物质储存容器、太空反物质工厂。"},
+{icon:"🔥",title:"核聚变（恒星级）",desc:"从Ⅰ型文明的氘氚聚变，到Ⅱ型文明的恒星工程聚变。人类已接近Q>1的聚变点火。商业聚变反应堆商业化后，能源成本将趋近于零。氦-3聚变更为清洁高效。"},
+{icon:"🌀",title:"零点能理论",desc:"量子场论指出真空并非空无一物，而是充满量子涨落的零点能。卡西米尔效应已实验验证其存在。若能开发零点能技术，将获得近乎无限的清洁能源。目前仍属高度前沿研究。"},
+{icon:"☀️",title:"太空太阳能电站",desc:"在地球轨道部署巨型太阳能阵列，将能量以微波束传回地面接收站。不受昼夜和天气影响，能量密度远超地面光伏。这是Ⅰ型文明向Ⅱ型跃迁的过渡技术，华商近期可重点投资。"}
+]
+},
+
+trade:{
+id:"trade",icon:"💼",title:"星际贸易",sub:"从地球贸易到星际贸易——商业的终极进化",
+cards:[
+{icon:"⛏️",title:"小行星采矿",desc:"近地小行星富含铂族金属、稀土、水冰等资源。一颗直径500米的S型小行星铂金含量可能超过地球年产量。灵神星(16 Psyche)估值超万万亿美金。华商应关注：太空采矿机器人、原位资源利用(ISRU)、太空冶炼。"},
+{icon:"🗺️",title:"星际贸易路线",desc:"拉格朗日点（L1-L5）将成为太空贸易枢纽。地月空间站、火星中转站、小行星带补给站构成星际丝绸之路。早期贸易品：氦-3、稀有金属、水冰、轨道空间、科学数据。"},
+{icon:"📈",title:"后稀缺经济",desc:"宇宙资源近乎无限意味着传统经济学'稀缺'假设被颠覆。当能源成本趋零、物质极大丰富时，价值创造将从物质生产转向知识创造、体验设计和文化输出。华商需提前布局知识经济和文化产业。"},
+{icon:"💰",title:"能源本位货币",desc:"卡尔达肖夫指数以能源为核心度量，未来货币体系可能从信用本位转向能源本位。EACO（Earth's Best Coin）正是将 Energy × Attitude × Cooperation × Optimization 价值锚定的尝试——为星际时代的能源经济提供数字基础设施。"},
+{icon:"🔗",title:"多行星供应链",desc:"地球制造→月球精炼→小行星采矿→轨道组装→火星交付。多行星供应链将彻底改变物流管理。3D打印和太空制造使'数字传输+本地制造'替代物理运输成为可能。华商应研究太空物流网络设计。"},
+{icon:"🌐",title:"星际市场定义",desc:"Ⅰ型市场：地球灾害防控、行星能源网络、气候工程服务。Ⅱ型市场：戴森球建造运营、行星地球化改造、星际旅游。Ⅲ型市场：星系级能源交易、黑洞能量租赁、文明等级咨询。华商应前瞻性定义这些未来市场的产品与服务。"}
+]
+},
+
+life:{
+id:"life",icon:"🌌",title:"星际生活",sub:"从地球文明到多行星文明——人类生活方式的终极变革",
+cards:[
+{icon:"🏙️",title:"世代飞船社会",desc:"在自给自足的太空城中生活数代人。需要全新的社会制度：资源循环管理、生育规划、教育体系、心理适应。华商可投资：太空城设计建造、封闭生态系统、太空心理健康服务。"},
+{icon:"🌍",title:"行星地球化改造",desc:"将火星、金星等不适宜居住的行星改造为类地球环境。火星地球化需要数百年：升温→大气构建→水循环→生物引入→生态建立。每个阶段都孕育巨大商业机会。"},
+{icon:"🎭",title:"多行星文化",desc:"地球文化、月球文化、火星文化将各自演化。不同重力、光照、通讯延迟塑造独特的社会心理。星际身份认同将成为新的文化研究领域。华商应思考如何在多行星文化间架设商业桥梁。"},
+{icon:"🧠",title:"后人类进化",desc:"基因增强、脑机接口、意识上传——技术可能催生非生物基底的后人类。他们将更适应太空环境（辐射抗性、低重力适应、超长寿命）。华商面临伦理选择：如何让技术进化服务于全人类而非少数特权。"},
+{icon:"📡",title:"星际通讯",desc:"光速限制使星际通讯存在不可逾越的延迟。地球-火星延迟3-22分钟，地球-比邻星延迟4.2年。延迟催生全新的通讯文化和商业模式：异步交易、预测经济、自主AI代理。"},
+{icon:"📚",title:"太空教育",desc:"星际文明需要全新的知识体系。教育应融入宇宙学、能源科学、星际工程、宇宙伦理等。EACO的'100种认知模型'理念正是面向星际文明的教育框架——提升个体认知→改善组织效率→推进社会文明→促进地球可持续发展。"}
+]
+},
+
+edu:{
+id:"edu",icon:"🎓",title:"星际教育",sub:"从地球课堂到宇宙文明学院——教育范式的终极跃迁",
+cards:[
+{icon:"🔭",title:"宇宙文明课程体系",desc:"打破学科壁垒，将宇宙学、能源科学、星际工程、宇宙伦理、外星生物学融为统一课程。从小学到大学，建立'行星-恒星-星系'三级文明认知框架。EACO的'100种认知模型'正是此体系的核心引擎。"},
+{icon:"🧠",title:"脑机接口加速学习",desc:"脑机接口(BCI)技术可实现知识直接下载到大脑。从语言、数学到星际航行技能，学习效率提升百倍。华商应投资BCI教育硬件、神经接口课程、脑波数据安全平台。未来的'星际商学院'将不再用课本，而用神经链路。"},
+{icon:"🌐",title:"星际远程教育",desc:"光速延迟使星际间无法实时教学。地球-火星延迟3-22分钟，地球-比邻星4.2年。解决方案：异步知识包、AI自主教学系统、全息预录课程。华商可开发星际教育协议、延迟容忍学习平台、跨星系知识库。"},
+{icon:"🤖",title:"AI导师与个性化学习",desc:"通用人工智能(AGI)可成为每个人的专属导师，根据认知风格、兴趣、进度实时调整教学内容。从卡尔达肖夫指数到戴森球工程，AI导师让每个人都能理解星际文明的核心概念。教育民主化的终极形态。"},
+{icon:"📐",title:"费米悖论与宇宙责任",desc:"教育必须包含'宇宙公民责任'课程：如果宇宙中文明稀缺，人类文明的价值不可估量。费米悖论的教育意义：我们可能是银河系中唯一的意识载体，因此有责任不自我毁灭，并向星际文明跃迁。"},
+{icon:"🏛️",title:"华商星际商学院",desc:"EACO理念驱动的未来商学院：课程涵盖星际贸易、多行星供应链、能源本位金融、宇宙伦理治理。培养目标从'地球商人'升级为'星际文明建设者'。EACO = Energy x Attitude x Cooperation x Optimization，正是星际企业家的核心素养。"}
+]
+},
+
+med:{
+id:"med",icon:"🏥",title:"星际医疗",sub:"从地球医学到星际医学——跨越光年的生命守护",
+cards:[
+{icon:"🚀",title:"太空医学与微重力健康",desc:"长期太空生活导致骨密度流失(每月1-2%)、肌肉萎缩、免疫力下降、视力受损(SANS)。太空医学研究：人工重力旋转舱、辐射屏蔽药剂、骨肌保护方案。华商可投资：太空制药、微重力医疗设备、航天员健康监测系统。"},
+{icon:"🛡️",title:"宇宙辐射防护",desc:"银河宇宙射线(GCR)和太阳粒子事件(SPE)是星际航行的致命威胁。深空辐射可导致DNA损伤、癌症风险增加、中枢神经退化。解决方案：电磁屏蔽舱、辐射防护基因(如Deinococcus radiodurans基因)、辐射清除药物。"},
+{icon:"🧬",title:"基因治疗与寿命延长",desc:"CRISPR基因编辑可修复衰老相关基因缺陷。端粒酶激活、衰老基因沉默(Klotho/FOXO)、长寿基因导入(sirtuins)。目标：将人类健康寿命从80岁延长至150+岁。华商应关注：基因治疗平台、长寿基因疗法、抗衰老药物研发。"},
+{icon:"🤖",title:"纳米医疗机器人",desc:"纳米机器人可在血管中巡逻，清除动脉斑块、修复DNA损伤、清除衰老细胞、精准递药。医疗纳米机器人市场预计2040年达万亿级。华商投资方向：纳米制造、生物相容材料、纳米机器人集群控制算法。"},
+{icon:"🧠",title:"意识上传与数字永生",desc:"全脑仿真(WBE)理论上传意识至数字基底，实现'数字永生'。需解决：脑图谱精确映射(860亿神经元)、神经信号计算模拟、意识连续性验证。虽仍遥远，但华商应提前布局脑图谱数据库、神经计算芯片、意识伦理框架。"},
+{icon:"🔬",title:"再生医学与器官3D打印",desc:"干细胞+生物3D打印可制造个性化器官(肝、肾、心)，消除排异反应。iPSC诱导多能干细胞可分化为任何细胞类型。太空微重力环境反而有利于3D组织生长。华商可投资：生物打印设备、干细胞库、再生医学CRO。"}
+],
+antiagingTitle:"逆变年轻医学",
+antiagingSub:"逆转生物钟的核心技术——从清除衰老细胞到表观遗传重编程",
+antiagingIntro:"逆变年轻(Rejuvenation)不同于单纯抗衰老——目标是逆转生物年龄，让组织功能恢复至年轻状态。以下为当前最前沿的逆变技术：",
+antiagingCards:[
+{icon:"🧹",title:"衰老细胞清除(Senolytics)",desc:"衰老细胞(Zombie Cells)停止分裂但不清除，分泌SASP因子毒害周围组织。清除药物：达沙替尼+槲皮素(D+Q)、非瑟酮、Navitoclax。临床已证明可改善体能、皮肤、认知功能。这是逆变医学的核心突破口。"},
+{icon:"🧬",title:"端粒酶激活疗法",desc:"端粒每次细胞分裂缩短，缩短到临界值细胞即衰老。端粒酶激活剂：TA-65、Astragaloside III(黄芪甲苷)、Cycloastragenol。基因疗法：AAV递送TERT基因。延长端粒可延长细胞寿命，是逆变的基因层面方案。"},
+{icon:"⚡",title:"NAD+前体补充",desc:"NAD+是细胞能量代谢和DNA修复的关键辅酶，随年龄骤降。前体补充：NMN(烟酰胺单核苷酸)、NR(烟酰胺核苷)。可恢复线粒体功能、改善胰岛素敏感性、增强DNA修复。动物实验延寿30%+。"},
+{icon:"🔄",title:"表观遗传重编程",desc:"山中因子(OSKM: Oct4/Sox2/Klf4/c-Myc)可将成体细胞重置为干细胞状态。部分重编程(Partial Reprogramming)可逆转组织衰老而不致肿瘤。2023年已在小鼠实现寿命延长。表观遗传时钟(DNAm Clock)可精确测量生物年龄。"},
+{icon:"💊",title:"mTOR抑制与自噬激活",desc:"雷帕霉素(Rapamycin)抑制mTOR通路，激活细胞自噬(Autophagy)清除受损蛋白和细胞器。是目前最有效的延寿药物之一(小鼠延寿25%+)。自噬激活剂：雷帕霉素、亚精胺(Spermidine)、白藜芦醇。间歇性断食也通过此机制延寿。"},
+{icon:"🧪",title:"肽类疗法",desc:"生物活性肽是逆变医学的新兴方向：GHK-Cu(铜肽)促进组织修复和胶原合成；胸腺素alpha-1恢复免疫功能；Epitalon激活端粒酶；BPC-157加速伤口愈合。肽类精准调控信号通路，副作用小，是华商可重点关注的赛道。"}
+],
+senolyticTitle:"中草药与抗衰食物",
+senolyticSub:"天然衰老细胞清除剂——药食同源的逆变力量",
+senolyticIntro:"自然界存在大量具有Senolytic(衰老细胞清除)活性的天然化合物。以下为中草药和常见食物中最有效的抗衰老成分：",
+senolyticGroups:[
+{name:"🌟 强效Senolytic(衰老细胞清除剂)",items:[
+{herb:"槲皮素(Quercetin)",source:"洋葱皮、苹果皮、刺山柑、荞麦",mech:"抑制Bcl-2抗凋亡蛋白，选择性诱导衰老细胞凋亡。与达沙替尼联用(D+Q)是经典方案。"},
+{herb:"非瑟酮(Fisetin)",source:"草莓、苹果、柿子、葡萄",mech:"最强天然Senolytic之一。清除衰老细胞效率在黄酮类中最高。小鼠实验显著延寿。"},
+{herb:"姜黄素(Curcumin)",source:"姜黄(Turmeric)、咖喱",mech:"多靶点抗衰：清除衰老细胞、抑制NF-kB炎症通路、激活Nrf2抗氧化。生物利用度低，需配黑胡椒素。"},
+{herb:"白藜芦醇(Resveratrol)",source:"葡萄皮、红酒、花生、虎杖",mech:"激活Sirtuins长寿基因(类似热量限制)、激活AMPK、改善线粒体功能。"}
+]},
+{name:"🍵 细胞修复与能量激活",items:[
+{herb:"EGCG(表没食子儿茶素没食子酸酯)",source:"绿茶、抹茶",mech:"强抗氧化、激活自噬、抑制mTOR。每日3-5杯绿茶可显著降低心血管病和癌症风险。"},
+{herb:"虾青素(Astaxanthin)",source:"雨生红球藻、三文鱼、磷虾",mech:"最强天然抗氧化剂之一(维C的6000倍)。穿透血脑屏障和血视网膜屏障，保护神经和视力。"},
+{herb:"亚精胺(Spermidine)",source:"小麦胚芽、大豆、蘑菇、纳豆",mech:"强效自噬激活剂。流行病学：膳食亚精胺摄入越高，全因死亡率越低。延长小鼠寿命25%。"},
+{herb:"萝卜硫素(Sulforaphane)",source:"西兰花芽、芥菜、萝卜",mech:"激活Nrf2抗氧化通路、抗炎、促进衰老细胞清除。西兰花芽含量是成熟西兰花的10-100倍。"}
+]},
+{name:"🍄 中草药与药食同源",items:[
+{herb:"人参皂苷(Ginsenosides)",source:"人参、西洋参、三七",mech:"Rg1促血管新生、Rb1抗疲劳、Rg3抗肿瘤。调节Sirtuins、AMPK通路，改善代谢和认知。"},
+{herb:"黄芪多糖(Astragalus Polysaccharides)",source:"黄芪(Astragalus)",mech:"免疫调节、抗疲劳、保护端粒。黄芪甲苷(Cycloastragenol)是TA-65端粒酶激活剂的核心成分。"},
+{herb:"灵芝三萜(Ganoderma Triterpenes)",source:"灵芝(Ganoderma lucidum)",mech:"免疫调节、抗肿瘤、保肝。灵芝多糖+三萜协同抗衰老，调节肠道菌群和免疫微环境。"},
+{herb:"枸杞多糖(Lycium Barbarum Polysaccharide)",source:"枸杞(Goji Berry)",mech:"抗氧化、保护视网膜、增强免疫。改善肠道菌群，降低炎症因子IL-6和TNF-a(衰老标志)。"},
+{herb:"原花青素(OPC)",source:"葡萄籽、松树皮、蓝莓、黑枸杞",mech:"超强抗氧化(维C的20倍、维E的50倍)。保护胶原蛋白，改善微循环，抗皮肤衰老。"},
+{herb:"淫羊藿苷(Icariin)",source:"淫羊藿(Epimedium)",mech:"激活SIRT6长寿基因、促进骨形成、改善性功能。传统补肾壮阳药的现代抗衰价值。"}
+]},
+{name:"🍽️ 日常抗衰食物清单",items:[
+{herb:"十字花科蔬菜",source:"西兰花、花椰菜、卷心菜、萝卜",mech:"富含萝卜硫素和吲哚-3-甲醇，激活解毒酶、清除衰老细胞、降低癌症风险。"},
+{herb:"浆果类",source:"蓝莓、草莓、黑莓、覆盆子",mech:"富含花青素和非瑟酮，强抗氧化、改善认知、清除衰老细胞。每日一把浆果可显著降低认知衰退。"},
+{herb:"深海鱼",source:"三文鱼、沙丁鱼、金枪鱼、鲭鱼",mech:"富含Omega-3(EPA/DHA)，抗炎、保护心血管、改善脑健康。每周2-3次深海鱼可降低全因死亡率。"},
+{herb:"坚果与种子",source:"核桃、杏仁、亚麻籽、奇亚籽",mech:"富含维E、Omega-3、多酚。每天28g坚果可降低29%心血管病风险和20%全因死亡率。"},
+{herb:"发酵食品",source:"纳豆、味噌、酸奶、泡菜、康普茶",mech:"富含亚精胺和益生菌。改善肠道菌群多样性，肠-脑轴调节全身炎症和免疫功能。"},
+{herb:"橄榄油(特级初榨)",source:"地中海饮食核心",mech:"富含橄榄苦苷和羟基酪醇，激活Nrf2通路、抗炎、保护心血管。每日10-20ml可降低28%心血管事件。"}
+]}]
+},
+
+xiaoshan:{
+id:"xiaoshan",icon:"🛸",title:"杭州萧山UFO事件",sub:"2010年中国最具影响力的UFO事件——至今未解的天空之谜",
+timeline:[
+{year:"2010.07.07 20:40",title:"雷达发现不明飞行物",loc:"杭州萧山国际机场",desc:"民航雷达在萧山机场空域探测到不明飞行目标。据内部人士透露，该目标移动轨迹异常，速度和机动性远超已知飞行器。同时机场塔台收到多机组人员目视报告。"},
+{year:"2010.07.07 20:45",title:"机场紧急关闭",loc:"萧山机场跑道",desc:"基于安全考虑，机场管理层紧急决定关闭跑道，暂停所有起降。当晚原定起降的18个航班被迫改降宁波栎社机场和无锡硕放机场，大量旅客滞留。"},
+{year:"2010.07.07 21:00",title:"旅客大规模滞留",loc:"萧山机场候机楼",desc:"约2000余名旅客滞留候机楼，机场启动应急预案。现场旅客用手机拍摄到天空中的发光体，照片在网络上迅速传播。多家媒体闻讯赶往机场。"},
+{year:"2010.07.07 21:40",title:"目击者照片涌现",loc:"杭州城区及周边",desc:"大量杭州市民报告目击发光物体。拍摄的图片和视频显示：一个明亮的光源在低空缓慢移动，部分照片显示物体周围有彩色光晕。不同位置的拍摄角度交叉验证排除了普通航空器。"},
+{year:"2010.07.07 22:00",title:"机场恢复运营",loc:"萧山机场",desc:"在关闭约1小时后，机场恢复起降。滞留旅客陆续登机或改签。机场方面未对关闭原因做出详细公开说明，仅表示'因故暂时关闭'。"},
+{year:"2010.07.08 上午",title:"官方回应：'军事活动'",loc:"新华社/民航局",desc:"次日，新华社引述民航浙江监管局说法，称机场关闭因'军事活动'所致。然而军方未对此说法予以确认，引发公众广泛质疑。分析人士指出：军事演习通常有预案和提前通告，不会导致民航紧急关闭。"},
+{year:"2010.07.10",title:"调查启动",loc:"民航华东管理局",desc:"民航华东管理局成立调查组介入。中国科学院紫金山天文台研究员也表示关注。然而调查过程和结果未对公众完整公开。"},
+{year:"2010.07.15 至今",title:"结论未公开",loc:"—",desc:"调查结果至今未正式公开。该事件成为中国UFO研究史上的标志性案例，被列入2010年中国十大UFO事件。UFO研究者认为：综合雷达数据、目击证词和影像分析，该事件难以用已知自然现象或人造飞行器解释。"}
+],
+keyFindings:[
+"雷达记录显示不明飞行物速度和机动性远超已知飞行器，可瞬间改变方向和高度",
+"多名独立目击者(包括民航机组人员)拍摄的照片和视频高度一致，排除了单一来源造假可能",
+"机场关闭持续约1小时，影响18个航班、2000余名旅客，经济损失明显——非小事可随意搪塞",
+"官方'军事活动'说法未获军方任何部门确认，且军事演习通常提前通告民航",
+"该事件并非孤例：2010年7-8月中国多地(包括重庆、湖南、新疆)报告类似UFO目击",
+"至今仍无令人信服的完整解释。该事件是全球UFO研究中最具公信力的案例之一——因为机场作为专业航空机构无法误判常规航空器"]
+},
+
+ufo500:{
+id:"ufo500",icon:"🌠",title:"地球村500年UFO编年史",sub:"从1561年纽伦堡天象到21世纪全球UFO浪潮——500年人类对天空未解之谜的记录",
+filters:[
+{key:"all",label:"全部"},
+{key:"ancient",label:"16-18世纪"},
+{key:"modern",label:"19世纪"},
+{key:"contemporary",label:"20世纪"},
+{key:"current",label:"21世纪"},
+{key:"asia",label:"亚洲"},
+{key:"europe",label:"欧洲"},
+{key:"americas",label:"美洲"},
+{key:"science",label:"科学观测"}
+],
+events:[
+{year:"1561.04.14",title:"纽伦堡天象事件",loc:"德国纽伦堡",era:"ancient",tags:["europe","science"],desc:"清晨天空出现大量球形、十字形、管状物体相互追逐。当地报纸报道并附木刻版画。数百居民目击。被视为UFO编年史的开端事件。"},
+{year:"1566.08.07",title:"巴塞尔黑球事件",loc:"瑞士巴塞尔",era:"ancient",tags:["europe","science"],desc:"三个巨大黑色球体在太阳旁边缓慢移动。巴塞尔大学 Samuel Coccius 记录并绘制版画。持续数小时。"},
+{year:"1660",title:"大不里士天空异象",loc:"波斯大不里士",era:"ancient",tags:["asia"],desc:"波斯史书记载：天空中出现月牙形发光体，悬停数日后消失。被视为伊斯兰世界最早的天文异象记录之一。"},
+{year:"1865",title:"非洲中部目击",loc:"非洲刚果",era:"modern",tags:["africa"],desc:"传教士记录：刚果河上空出现巨大发光圆盘，照亮整个河面。当地居民认为是神灵显现。这是非洲最早的UFO文字记录。"},
+{year:"1882.11.17",title:"新西兰十字星事件",loc:"新西兰",era:"modern",tags:["oceania","science"],desc:"天文学家观测到奇异十字形光体穿越天空。多个独立观测点确认。被认为可能是流星雨异常事件。"},
+{year:"1896-1897",title:"美国飞艇浪潮",loc:"美国多地",era:"modern",tags:["americas"],desc:"美国多地报告目击'飞艇'——当时飞机尚未发明。加州、内布拉斯加、德州均有目击。部分报告描述载人飞行器，引发全国讨论。"},
+{year:"1908.06.30",title:"通古斯大爆炸",loc:"俄罗斯西伯利亚",era:"contemporary",tags:["europe","science"],desc:"巨大空中爆炸夷平2000平方公里森林，威力约1500万吨TNT。无陨石坑。假说：陨石空爆、彗星碎片、甚至外星飞船核动力爆炸。至今未有完全共识。"},
+{year:"1917.10.13",title:"法蒂玛太阳奇迹",loc:"葡萄牙法蒂玛",era:"contemporary",tags:["europe"],desc:"7万人在法蒂玛目击太阳'跳动'和变色。三名牧童声称此前收到圣母预言。天主教会认可为奇迹。UFO研究者认为可能是大规模目击事件。"},
+{year:"1942.02.25",title:"洛杉矶空战事件",loc:"美国洛杉矶",era:"contemporary",tags:["americas","science"],desc:"美军向洛杉矶上空不明物体发射1400余发防空炮。雷达确认目标。官方称'气象气球误报'，但照片显示被探照灯照亮的实心物体。战时最著名的UFO事件。"},
+{year:"1947.07.08",title:"罗斯威尔事件",loc:"美国新墨西哥州罗斯威尔",era:"contemporary",tags:["americas","science"],desc:"农场发现金属碎片残骸。军方最初发布'回收飞碟'新闻稿后改口为'气象气球'。1994年军方再承认为'Mogul'秘密气球项目。真相争论至今未息。UFO史最著名事件。"},
+{year:"1952.07.19-26",title:"华盛顿雷达目击事件",loc:"美国华盛顿特区",era:"contemporary",tags:["americas","science"],desc:"连续两周，白宫上空雷达锁定不明目标。F-94拦截机升空，目标消失；飞机离开后目标重现。空军公开承认'不明'。促成蓝皮书计划加强调查。"},
+{year:"1957.10.16",title:"巴西乌巴图巴事件",loc:"巴西乌巴图巴",era:"contemporary",tags:["americas","science"],desc:"摄影师拍摄到UFO爆炸解体的连续照片。碎片分析显示含镁同位素比例异常。被视为UFO物理证据最强的案例之一。"},
+{year:"1961.09.19",title:"希尔夫妇绑架事件",loc:"美国新罕布什尔州",era:"contemporary",tags:["americas"],desc:"Betty和Barney Hill报告被外星人绑架2小时。催眠回归得到星图描述。首例广为人知的外星人绑架报告。Marjorie Fish后来发现描述的星图与Zeta Reticuli星系吻合。"},
+{year:"1965.09.03",title:"埃克塞特事件",loc:"美国新罕布什尔州埃克塞特",era:"contemporary",tags:["americas","science"],desc:"多名独立目击者(含警察)报告巨大发光体低空飞行。空军蓝皮书计划调查后标注'不明'。是美东最可信的多证人UFO事件。"},
+{year:"1966.04.06",title:"韦斯托尔学校目击",loc:"澳大利亚墨尔本",era:"contemporary",tags:["oceania","science"],desc:"韦斯托尔学校200余名师生目击银色碟状物降落附近草地后飞走。教师和学生拍摄照片。澳大利亚最著名的群体UFO目击。"},
+{year:"1967.10.04",title:"沙格港事件",loc:"加拿大新斯科舍",era:"contemporary",tags:["americas","science"],desc:"发光物体坠入沙格港水域。皇家骑警和多村民众目击。军方潜水搜索未果。加拿大官方记录中唯一标注'不明'的UFO事件。"},
+{year:"1976.09.18",title:"德黑兰UFO拦截事件",loc:"伊朗德黑兰",era:"contemporary",tags:["asia","science"],desc:"伊朗空军F-4鬼怪战机拦截巨大发光体。接近时电子设备失灵。僚机也被干扰。美国国防情报局(DIA)评估报告标注'经典案例'。"},
+{year:"1980.12.26-28",title:"伦德勒沙姆森林事件",loc:"英国萨福克",era:"contemporary",tags:["europe","science"],desc:"美军本特沃特斯基地多名军人目击森林中降落发光三角飞行器。次日发现地面辐射残留和三处凹痕。军官手写记录。'英国罗斯威尔'。"},
+{year:"1989.10.09",title:"沃罗涅日外星人着陆",loc:"苏联沃罗涅日",era:"contemporary",tags:["europe","science"],desc:"多名学生在体育场目击巨型球状物着陆，走出3米高类人生物。苏联科学院和军方联合调查。塔斯社正式报道——社会主义国家官方媒体首次报道UFO着陆。"},
+{year:"1997.03.13",title:"凤凰城光团事件",loc:"美国亚利桑那州凤凰城",era:"current",tags:["americas","science"],desc:"V字形巨大光阵无声飞过凤凰城。数万人目击。凤凰城市长后来(2007年)承认也目击。军方称'照明弹'但无法解释V形结构和无声飞行。美西最大群体目击。"},
+{year:"2008.01.27",title:"土耳其UFO影像事件",loc:"土耳其伊斯坦布尔",era:"current",tags:["asia","science"],desc:"一名保安连续4个月拍摄到清晰碟状UFO影像。经科学委员会分析未发现造假痕迹。土耳其UFO研究中心(Sirius)公开背书。"},
+{year:"2010.07.07",title:"杭州萧山机场UFO事件",loc:"中国杭州萧山",era:"current",tags:["asia","science"],desc:"萧山机场因不明飞行物紧急关闭1小时，18航班受影响。雷达数据、机组和旅客照片多方印证。官方称'军事活动'但军方否认。中国21世纪最具公信力的UFO事件。"},
+{year:"2019.05-09",title:"美国海军UFO视频公开",loc:"美国国防部",era:"current",tags:["americas","science"],desc:"美国海军正式公开三段UFO视频(FLIR/GIMBAL/GOFAST)。视频显示舰载战斗机拦截无翼无喷口飞行器。2020年五角大楼确认视频真实。首次官方承认UFO存在。"}
+]
+},
+
+eaco:{
+id:"eaco",icon:"💎",title:"什么是 Earth E？",sub:"什么是 Earth EACO？",
+def:"Earth's Best Coin = EACO = E",
+contract:"DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+desc:"EACO — 地球顶级 AI + RWA + Web3 加密资产",
+defTitle:"EACO 定义（推荐版本，2026年6月）",
+defIntro:"EACO 的核心内涵源自四个关键词：",
+keys:["Energy","Attitude","Cooperation","Optimization"],
+formula:"EACO = 正能量 × 正心态 × 全球协作 × 持续优化",
+goalsTitle:"核心目标",
+goals:["提升个体认知","改善组织效率","推进社会文明","促进地球可持续发展","融入100种认知模型"],
+links:[
+{url:"https://ucoingroup.github.io/earths-best-coin/",label:"Earth's Best Coin"},
+{url:"https://ucoingroup.github.io/eaco50rate/",label:"EACO 50 Rate"},
+{url:"https://ucoingroup.github.io/100WaysToWealth/",label:"100 Ways To Wealth"},
+{url:"https://ucoingroup.github.io/earth-100-friends/",label:"Earth's 100 Best Friends"},
+{url:"https://ucoingroup.github.io/eacoSWAP/",label:"EACO SWAP"},
+{url:"https://ucoingroup.github.io/good-books/",label:"Good Books"},
+{url:"https://ucoingroup.github.io/eur-eaco/",label:"EUR-EACO"},
+{url:"https://ucoingroup.github.io/au-trade/",label:"AU Trade"},
+{url:"https://ucoingroup.github.io/Mohist-Tech/",label:"Mohist Tech"},
+{url:"https://eaco-build-world.base44.app/",label:"EACO Build World"},
+{url:"https://eaco-web3.base44.app",label:"EACO Web3"},
+{url:"https://ucoingroup.github.io/Footsteps-of-Civilization/",label:"Footsteps of Civilization"},
+{url:"https://ucoingroup.github.io/eacoweb3-2026/",label:"EACO Web3 2026"},
+{url:"https://discord.gg/bWCDME9Pkc",label:"Discord Community"}
+],
+sign:"eaco星际文明网络小组"
+},
+
+update:{
+icon:"🔄",text:"本网站每月更新一次信息内容，持续追踪宇宙文明研究、UFO事件进展与星际科技前沿。",
+date:"最近更新：2026年8月26日"
+}
+},
+
+en:{
+brand:"Interstellar Civ Net",
+navLinks:[
+{t:"Kardashev",href:"#kardashev"},
+{t:"Mind Evolution",href:"#evolution"},
+{t:"Stellar Civ",href:"#civ"},
+{t:"Interstellar Nav",href:"#nav"},
+{t:"Stellar Energy",href:"#energy"},
+{t:"Interstellar Trade",href:"#trade"},
+{t:"Interstellar Life",href:"#life"},
+{t:"Stellar Edu",href:"#edu"},
+{t:"Stellar Med",href:"#med"},
+{t:"500yr UFO",href:"#ufo500"},
+{t:"EACO",href:"#eaco"}
+],
+heroTitle:"EACO · Cosmic Civilization Evolution · UFO Truth",
+heroSub:"Global Chinese Entrepreneurs' Guide to Evolving from Earth Mind to Interstellar Civilization | Kardashev Scale | Civilization·Navigation·Energy·Trade·Life·Education·Medicine | Rejuvenation & Anti-Aging Foods | Hangzhou Xiaoshan UFO | 500 Years of UFO History",
+heroBadges:["Kardashev Type I-II-III","Human Civ Index 0.73","Monthly Updated"],
+
+kardashev:{
+id:"kardashev",icon:"🛸",title:"The Kardashev Scale",sub:"Proposed by Soviet astronomer Nikolai Kardashev in 1964 — classifying civilizations by the total amount of energy they can utilize",
+levels:[
+{cls:"k1",num:"I",title:"Type I Civilization",label:"Planetary Civilization",desc:"Fully controls all energy resources of its home planet (e.g., Earth). Includes weather control, ocean management, crustal activity manipulation, and efficient utilization of solar, wind, and geothermal energy."},
+{cls:"k2",num:"II",title:"Type II Civilization",label:"Stellar Civilization",desc:"Harnesses the entire energy output of its star system (solar system). The iconic concept is the 'Dyson Sphere' — a megastructure built around a star to collect its total radiation energy. Enables interplanetary colonization and stellar engineering."},
+{cls:"k3",num:"III",title:"Type III Civilization",label:"Galactic Civilization",desc:"Commands the energy of an entire galaxy (Milky Way), including black holes, pulsars, and supernovae. Capable of interstellar travel, galaxy-scale engineering, and stellar evolution manipulation."}
+],
+current:"Currently, human civilization stands at <strong style='color:var(--gold)'>0.73</strong> on the Kardashev scale, not yet fully reaching Type I. We are in the critical transition window from Type 0 to Type I."
+},
+
+evolution:{
+id:"evolution",icon:"🌍",title:"The Mind Paradigm Revolution",sub:"A paradigm revolution — transforming from 'Earth Merchants' to 'Interstellar Civilization Builders'",
+dims:[
+{icon:"🌍",from:"Earth Mindset",to:"Interstellar Mindset",title:"Expanding Cognitive Boundaries",points:[
+{t:"Embrace Infinite Resources",d:"Cosmic resources are nearly infinite. Business leaders should shift from 'competing for scarcity' to 'developing infinity', looking toward asteroid mining, space solar power, and more."},
+{t:"Long-term Horizons",d:"Civilizational leaps span centuries, millennia, even eons. Business planning must transcend quarterly reports and adopt a generational long-termism perspective."},
+{t:"Define New Markets",d:"Type I conquers planetary disasters; Type II begins interstellar colonization; Type III engages in intergalactic activities. Entrepreneurs should proactively envision and invest in products and services for these future scenarios."}
+]},
+{icon:"☮️",from:"Competition",to:"Symbiosis",title:"Reshaping Business Ethics",points:[
+{t:"Beyond Zero-Sum",d:"Interstellar conflicts concern civilizational survival. Chinese entrepreneurs should champion 'universal symbiosis', shifting from 'conquest' to 'coexistence'."},
+{t:"Benevolence & Harmony",d:"The Chinese concepts of 'Ren' (benevolence) and 'He' (harmony) can serve as the ethical foundation for the interstellar age. 'Ren' sets ethical limits for technology; 'He' builds pluralistic order among civilizations."},
+{t:"Cooperation over Confrontation",d:"Reaching higher civilizations requires all of humanity's collaboration. Entrepreneurs should become promoters of global cooperation, not participants in isolation or confrontation."}
+]},
+{icon:"⚡",from:"Material",to:"Energy",title:"Focusing on Business Essence",points:[
+{t:"Master Ultimate Energy",d:"Civilizational upgrading is fundamentally about energy mastery. Entrepreneurs should invest in fusion, antimatter, Dyson spheres, and other ultimate energy technologies."},
+{t:"Pursue Exponential Efficiency",d:"From Type I to Type III, energy utilization efficiency increases exponentially. Business innovation should pursue revolutions in energy production and utilization efficiency."},
+{t:"Energy as Currency",d:"Under the Kardashev framework, energy is the fundamental metric. Future business valuation will shift from GDP to energy equivalents, with energy density becoming the key competitive indicator."}
+]},
+{icon:"🌌",from:"Anthropocentrism",to:"Cosmic Ethics",title:"Elevating Existence",points:[
+{t:"Revere Cosmic Laws",d:"Civilization must follow fundamental cosmic laws, not act recklessly. Business activities should be grounded in deep understanding and respect for universal principles."},
+{t:"Explore Life's Meaning",d:"As technology advances, humanity faces choices like genetic modification and consciousness uploading. Entrepreneurs must consider the philosophical and ethical implications."},
+{t:"Bear Civilizational Responsibility",d:"As a leading group, entrepreneurs have the responsibility to ensure humanity's civilization develops sustainably and beneficially in the cosmos."}
+]}
+],
+summary:{title:"💎 Conclusion",text:"Evolving toward cosmic civilization does not mean abandoning business — it means completely reshaping its foundation: from competing for Earth's resources to developing cosmic resources; from pursuing short-term profits to driving long-term civilizational ascension; from zero-sum games to interstellar symbiosis."}
+},
+
+civ:{
+id:"civ",icon:"🚀",title:"Interstellar Civilization",sub:"From Dyson Spheres to Galactic Federations — Humanity's Path to Cosmic Civilization",
+cards:[
+{icon:"🟡",title:"Dyson Sphere & Stellar Engineering",desc:"The hallmark of Type II civilization. Building megastructures around stars to collect their total radiation energy. Theoretically provides billions of times more energy than Earth's current consumption."},
+{icon:"📡",title:"Civilizational Transition Paths",desc:"Type 0→I: Control planetary energy, conquer natural disasters, build planetary energy networks. I→II: Build Dyson structures, colonize solar system, enable interstellar travel. II→III: Interstellar voyages, galaxy-scale engineering, harness black hole energy."},
+{icon:"🏛️",title:"Galactic Civilization Governance",desc:"Interstellar civilization requires novel governance frameworks: interstellar alliances, civilization-level certification, resource allocation protocols, technology sharing mechanisms. Entrepreneurs should proactively study interstellar governance business models."},
+{icon:"📜",title:"Cosmic Ethics Framework",desc:"Combining Chinese 'Ren-He' philosophy with cosmic ethics. 'Ren' sets tech boundaries: no extinction weapons, no habitable planet ecological destruction. 'He' builds pluralistic order: respect different civilization forms, establish symbiotic coexistence."},
+{icon:"🔢",title:"Drake Equation & Fermi Paradox",desc:"The Drake Equation estimates possible civilizations in the galaxy; the Fermi Paradox asks: if civilizations exist, why haven't we detected them? Implication: the scarcity of cosmic civilizations means first-mover advantage is enormous."},
+{icon:"🧬",title:"Civilization Survival & Evolution",desc:"The Kardashev Scale measures not just energy but civilizational survival probability. Higher energy mastery civilizations have exponentially higher survival rates. Long-term investment should anchor to the ultimate goal of civilizational survival."}
+]
+},
+
+nav:{
+id:"nav",icon:"🛰️",title:"Interstellar Navigation",sub:"From Chemical Rockets to Warp Drive — Technology Paths Across Interstellar Distances",
+cards:[
+{icon:"🌀",title:"Warp Drive (Alcubierre Drive)",desc:"Proposed by physicist Miguel Alcubierre in 1994. Achieves FTL travel by warping spacetime — compressing space ahead and expanding behind. Requires negative energy/exotic matter. Still theoretical."},
+{icon:"🚢",title:"Generation Ships",desc:"Sub-light travel without FTL. Self-sustaining ecosystems inside, passengers reproduce over generations until reaching target star systems. Investment: closed ecological systems, space agriculture, multi-generational psychology."},
+{icon:"☀️",title:"Light Sail Propulsion",desc:"Uses stellar radiation pressure on ultralight sails. With ground/space laser arrays, microprobes can reach 10-20% light speed. Breakthrough Starshot adopts this approach. Low cost, mass-producible."},
+{icon:"🕳️",title:"Wormhole Travel",desc:"Einstein-Rosen bridges theoretically allow spacetime shortcuts. Stabilizing a macroscopic wormhole could enable instant interstellar travel. Challenges: instability, exotic matter requirements, quantum information loss."},
+{icon:"☢️",title:"Fusion Propulsion",desc:"Controlled fusion provides tens of thousands of times higher specific impulse than chemical rockets. Theoretical speeds of 5-10% light speed. Focus: D-T fusion, He-3 fusion, magnetic confinement miniaturization. He-3 mineable from Moon and gas giants."},
+{icon:"💥",title:"Antimatter Propulsion",desc:"Matter-antimatter annihilation achieves 100% mass-energy conversion (fusion: ~0.7%). 1 gram of antimatter ≈ Hiroshima bomb energy. Challenge: manufacturing and storage costs are extreme, currently nanograms per year."}
+]
+},
+
+energy:{
+id:"energy",icon:"⚡",title:"Stellar Energy",sub:"The Kardashev Scale's core is energy — the essence of future business is energy mastery",
+cards:[
+{icon:"⭕",title:"Dyson Sphere / Dyson Swarm",desc:"Type II core engineering. Deploying trillions of solar collectors around a star to capture total radiation. Sun's output: ~3.8×10²⁶ watts — billions of times Earth's energy use. Investment: space solar power, orbital mirrors, space manufacturing."},
+{icon:"⚫",title:"Black Hole Energy Extraction",desc:"Type III level energy. The Penrose Process extracts energy from rotating black hole spin, up to 29% efficiency. Supermassive black holes can provide galaxy-scale energy. Hawking radiation offers another theoretical pathway."},
+{icon:"⚛️",title:"Antimatter Energy",desc:"100% mass-energy conversion — the ideal interstellar fuel. If mass-producible, would revolutionize energy. Focus: antiproton traps, antihydrogen production, storage vessels, space antimatter factories."},
+{icon:"🔥",title:"Fusion (Stellar Scale)",desc:"From Type I deuterium-tritium fusion to Type II stellar engineering fusion. Humanity nears Q>1 ignition. Post-commercialization, energy costs approach zero. He-3 fusion is cleaner and more efficient."},
+{icon:"🌀",title:"Zero-Point Energy Theory",desc:"Quantum field theory shows vacuum is filled with zero-point energy fluctuations. The Casimir Effect experimentally confirms its existence. If harnessed, would provide nearly unlimited clean energy. Currently highly frontier research."},
+{icon:"☀️",title:"Space Solar Power Stations",desc:"Giant solar arrays in Earth orbit beaming energy via microwaves to ground receivers. Unaffected by day/night or weather, far higher energy density than surface PV. A transition technology from Type I to Type II."}
+]
+},
+
+trade:{
+id:"trade",icon:"💼",title:"Interstellar Trade",sub:"From Earth Trade to Interstellar Trade — The Ultimate Evolution of Commerce",
+cards:[
+{icon:"⛏️",title:"Asteroid Mining",desc:"Near-Earth asteroids rich in platinum-group metals, rare earths, water ice. A 500m S-type asteroid may contain more platinum than Earth's annual output. Asteroid 16 Psyche valued at over $10,000 quadrillion. Focus: space mining robots, ISRU, space smelting."},
+{icon:"🗺️",title:"Interstellar Trade Routes",desc:"Lagrange points (L1-L5) will become space trade hubs. Earth-Moon stations, Mars transit stations, asteroid belt supply depots form an interstellar Silk Road. Early trade goods: He-3, rare metals, water ice, orbital space, scientific data."},
+{icon:"📈",title:"Post-Scarcity Economics",desc:"Infinite cosmic resources disrupt the 'scarcity' assumption of traditional economics. When energy costs approach zero and matter is abundant, value creation shifts from material production to knowledge creation, experience design, and cultural output."},
+{icon:"💰",title:"Energy-Backed Currency",desc:"The Kardashev Scale's energy-centric framework suggests future currency may shift from fiat to energy-backed. EACO (Earth's Best Coin) anchors Energy × Attitude × Cooperation × Optimization — providing digital infrastructure for the interstellar energy economy."},
+{icon:"🔗",title:"Multi-Planetary Supply Chains",desc:"Earth manufacturing → Moon refining → Asteroid mining → Orbital assembly → Mars delivery. 3D printing and space manufacturing enable 'digital transmission + local manufacturing' to replace physical transport. Study space logistics network design."},
+{icon:"🌐",title:"Defining Interstellar Markets",desc:"Type I markets: disaster prevention, planetary energy networks, climate engineering. Type II: Dyson sphere construction, terraforming, space tourism. Type III: galaxy-scale energy trading, black hole energy leasing, civilization-level consulting."}
+]
+},
+
+life:{
+id:"life",icon:"🌌",title:"Interstellar Life",sub:"From Earth Civilization to Multi-Planetary Civilization — The Ultimate Transformation of Human Lifestyle",
+cards:[
+{icon:"🏙️",title:"Generation Ship Societies",desc:"Self-sustaining space cities operating across generations. New social systems needed: resource cycling, birth planning, education systems, psychological adaptation. Investment: space city design, closed ecosystems, space mental health services."},
+{icon:"🌍",title:"Planetary Terraforming",desc:"Transforming Mars, Venus, and other inhospitable planets into Earth-like environments. Mars terraforming takes centuries: warming → atmosphere building → water cycle → biological introduction → ecological establishment. Each stage offers huge commercial opportunities."},
+{icon:"🎭",title:"Multi-Planetary Culture",desc:"Earth, Moon, and Mars cultures will each evolve uniquely. Different gravity, lighting, and communication delays shape distinct social psychologies. Interstellar identity becomes a new cultural research field. Bridge multi-planetary cultures commercially."},
+{icon:"🧠",title:"Post-Human Evolution",desc:"Genetic enhancement, brain-computer interfaces, consciousness uploading — technology may spawn non-biological post-humans. More suited to space environments (radiation resistance, low-gravity adaptation, extreme longevity). Ethical choices for all humanity."},
+{icon:"📡",title:"Interstellar Communication",desc:"Light speed limits create irreducible interstellar communication delays. Earth-Mars: 3-22 min; Earth-Proxima Centauri: 4.2 years. Delays spawn new communication culture and business models: async trading, predictive economics, autonomous AI agents."},
+{icon:"📚",title:"Space Education",desc:"Interstellar civilization needs new knowledge systems. Education should integrate cosmology, energy science, stellar engineering, cosmic ethics. EACO's '100 cognitive models' is an education framework for interstellar civilization — elevate individual cognition → improve organizational efficiency → advance social civilization → promote Earth's sustainable development."}
+]
+},
+
+edu:{
+id:"edu",icon:"🎓",title:"Interstellar Education",sub:"From Earth Classrooms to Cosmic Civilization Academies — The Ultimate Paradigm Shift in Education",
+cards:[
+{icon:"🔭",title:"Cosmic Civilization Curriculum",desc:"Breaking disciplinary boundaries: integrating cosmology, energy science, stellar engineering, cosmic ethics, and astrobiology into a unified curriculum. From elementary to university, building a 'Planetary-Stellar-Galactic' three-tier civilization cognition framework. EACO's '100 cognitive models' is the core engine."},
+{icon:"🧠",title:"BCI Accelerated Learning",desc:"Brain-computer interfaces enable direct knowledge download to the brain. From languages and mathematics to interstellar navigation skills — learning efficiency increases hundredfold. Investment: BCI education hardware, neural interface courses, brainwave data security. The 'Interstellar Business School' of the future uses neural links, not textbooks."},
+{icon:"🌐",title:"Interstellar Distance Education",desc:"Light-speed delays make real-time teaching across star systems impossible. Earth-Mars: 3-22 min; Earth-Proxima Centauri: 4.2 years. Solutions: async knowledge packages, AI autonomous teaching, holographic pre-recorded courses. Develop interstellar education protocols and delay-tolerant learning platforms."},
+{icon:"🤖",title:"AI Tutors & Personalized Learning",desc:"AGI can become each person's exclusive tutor, adjusting content in real-time based on cognitive style, interests, and pace. From the Kardashev Scale to Dyson Sphere engineering, AI tutors make interstellar civilization concepts accessible to all. The ultimate form of education democratization."},
+{icon:"📐",title:"Fermi Paradox & Cosmic Responsibility",desc:"Education must include 'Cosmic Citizen Responsibility': if civilizations are rare, human civilization's value is immeasurable. The Fermi Paradox's lesson: we may be the galaxy's sole consciousness carriers, with a responsibility not to self-destruct and to ascend toward interstellar civilization."},
+{icon:"🏛️",title:"Chinese Entrepreneurs' Interstellar B-School",desc:"EACO-driven future business school: courses in interstellar trade, multi-planetary supply chains, energy-backed finance, cosmic ethics governance. Training goal upgraded from 'Earth merchant' to 'interstellar civilization builder'. EACO = Energy x Attitude x Cooperation x Optimization — the core competency of interstellar entrepreneurs."}
+]
+},
+
+med:{
+id:"med",icon:"🏥",title:"Interstellar Medicine",sub:"From Earth Medicine to Space Medicine — Guarding Life Across Light-Years",
+cards:[
+{icon:"🚀",title:"Space Medicine & Microgravity Health",desc:"Long-term space living causes bone density loss (1-2% monthly), muscle atrophy, immune decline, vision impairment (SANS). Space medicine research: artificial gravity rotating modules, radiation shielding agents, bone-muscle protection. Investment: space pharmaceuticals, microgravity medical devices, astronaut health monitoring."},
+{icon:"🛡️",title:"Cosmic Radiation Protection",desc:"Galactic Cosmic Rays (GCR) and Solar Particle Events (SPE) are lethal threats to interstellar travel. Deep space radiation causes DNA damage, increased cancer risk, CNS degeneration. Solutions: electromagnetic shielding, radiation-resistant genes (Deinococcus radiodurans), radioprotective drugs."},
+{icon:"🧬",title:"Gene Therapy & Lifespan Extension",desc:"CRISPR gene editing can repair aging-related gene defects. Telomerase activation, senescence gene silencing (Klotho/FOXO), longevity gene insertion (sirtuins). Goal: extend healthy lifespan from 80 to 150+ years. Focus: gene therapy platforms, longevity gene therapy, anti-aging drug development."},
+{icon:"🤖",title:"Nanomedicine Robots",desc:"Nanobots patrol blood vessels, clearing arterial plaque, repairing DNA damage, removing senescent cells, targeted drug delivery. Medical nanorobot market projected to reach trillions by 2040. Investment: nanofabrication, biocompatible materials, swarm control algorithms."},
+{icon:"🧠",title:"Consciousness Uploading & Digital Immortality",desc:"Whole Brain Emulation (WBE) theoretically uploads consciousness to digital substrate, achieving 'digital immortality'. Challenges: precise brain mapping (86 billion neurons), neural signal computation, consciousness continuity verification. Invest in brain atlas databases, neural computing chips, consciousness ethics frameworks."},
+{icon:"🔬",title:"Regenerative Medicine & 3D Organ Printing",desc:"Stem cells + bio-3D printing can manufacture personalized organs (liver, kidney, heart), eliminating rejection. iPSC induced pluripotent stem cells differentiate into any cell type. Space microgravity actually favors 3D tissue growth. Investment: bioprinting equipment, stem cell banks, regenerative medicine CRO."}
+],
+antiagingTitle:"Rejuvenation Medicine",
+antiagingSub:"Core Technologies for Reversing the Biological Clock — From Senolytics to Epigenetic Reprogramming",
+antiagingIntro:"Rejuvenation goes beyond anti-aging — the goal is to reverse biological age, restoring tissue function to a youthful state. Below are the most cutting-edge rejuvenation technologies:",
+antiagingCards:[
+{icon:"🧹",title:"Senolytics (Senescent Cell Clearance)",desc:"Senescent cells ('zombie cells') stop dividing but secrete SASP factors that poison surrounding tissues. Clearance agents: Dasatinib+Quercetin (D+Q), Fisetin, Navitoclax. Clinically proven to improve physical function, skin, cognition. The core breakthrough of rejuvenation medicine."},
+{icon:"🧬",title:"Telomerase Activation Therapy",desc:"Telomeres shorten with each cell division; reaching critical length triggers senescence. Telomerase activators: TA-65, Astragaloside III, Cycloastragenol. Gene therapy: AAV-delivered TERT gene. Telomere extension extends cell lifespan — the genetic-level approach to rejuvenation."},
+{icon:"⚡",title:"NAD+ Precursor Supplementation",desc:"NAD+ is a key coenzyme for energy metabolism and DNA repair, declining sharply with age. Precursors: NMN (Nicotinamide Mononucleotide), NR (Nicotinamide Riboside). Restores mitochondrial function, improves insulin sensitivity, enhances DNA repair. Animal studies show 30%+ lifespan extension."},
+{icon:"🔄",title:"Epigenetic Reprogramming",desc:"Yamanaka factors (OSKM: Oct4/Sox2/Klf4/c-Myc) can reset adult cells to stem cell state. Partial Reprogramming reverses tissue aging without causing tumors. 2023: lifespan extension achieved in mice. Epigenetic clocks (DNAm Clock) precisely measure biological age."},
+{icon:"💊",title:"mTOR Inhibition & Autophagy Activation",desc:"Rapamycin inhibits mTOR pathway, activating cellular autophagy to clear damaged proteins and organelles. One of the most effective life-extending drugs (25%+ in mice). Autophagy activators: Rapamycin, Spermidine, Resveratrol. Intermittent fasting also extends lifespan via this mechanism."},
+{icon:"🧪",title:"Peptide Therapy",desc:"Bioactive peptides are an emerging frontier in rejuvenation: GHK-Cu (copper peptide) promotes tissue repair and collagen synthesis; Thymosin alpha-1 restores immune function; Epitalon activates telomerase; BPC-157 accelerates wound healing. Precise signaling pathway modulation with minimal side effects."}
+],
+senolyticTitle:"Senolytic Herbs & Anti-Aging Foods",
+senolyticSub:"Natural Senescent Cell Clearing Agents — The Rejuvenating Power of Food as Medicine",
+senolyticIntro:"Nature contains abundant compounds with Senolytic (senescent cell clearance) activity. Below are the most effective anti-aging compounds from Chinese herbs and common foods:",
+senolyticGroups:[
+{name:"🌟 Potent Senolytics (Senescent Cell Clearing Agents)",items:[
+{herb:"Quercetin",source:"Onion skin, apple peel, capers, buckwheat",mech:"Inhibits Bcl-2 anti-apoptotic proteins, selectively inducing senescent cell apoptosis. Combined with Dasatinib (D+Q) is the classic protocol."},
+{herb:"Fisetin",source:"Strawberry, apple, persimmon, grape",mech:"One of the most potent natural senolytics. Highest senescent cell clearance efficiency among flavonoids. Significant lifespan extension in mice."},
+{herb:"Curcumin",source:"Turmeric, curry",mech:"Multi-target anti-aging: clears senescent cells, inhibits NF-kB inflammation pathway, activates Nrf2 antioxidant. Low bioavailability — pair with piperine."},
+{herb:"Resveratrol",source:"Grape skin, red wine, peanut, Polygonum cuspidatum",mech:"Activates Sirtuins longevity genes (mimicking caloric restriction), activates AMPK, improves mitochondrial function."}
+]},
+{name:"🍵 Cell Repair & Energy Activation",items:[
+{herb:"EGCG (Epigallocatechin Gallate)",source:"Green tea, matcha",mech:"Strong antioxidant, activates autophagy, inhibits mTOR. 3-5 cups of green tea daily significantly reduces cardiovascular disease and cancer risk."},
+{herb:"Astaxanthin",source:"Haematococcus pluvialis algae, salmon, krill",mech:"One of the strongest natural antioxidants (6000x Vitamin C). Crosses blood-brain and blood-retinal barriers, protecting nerves and vision."},
+{herb:"Spermidine",source:"Wheat germ, soybean, mushroom, natto",mech:"Potent autophagy activator. Epidemiology: higher dietary spermidine intake correlates with lower all-cause mortality. Extends mouse lifespan 25%."},
+{herb:"Sulforaphane",source:"Broccoli sprouts, mustard, radish",mech:"Activates Nrf2 antioxidant pathway, anti-inflammatory, promotes senescent cell clearance. Broccoli sprouts contain 10-100x more than mature broccoli."}
+]},{name:"🍄 Chinese Herbs & Food-Medicine Homology",items:[
+{herb:"Ginsenosides",source:"Ginseng, American ginseng, Panax notoginseng",mech:"Rg1 promotes angiogenesis, Rb1 fights fatigue, Rg3 anti-tumor. Regulates Sirtuins and AMPK pathways, improves metabolism and cognition."},
+{herb:"Astragalus Polysaccharides",source:"Astragalus (Huang Qi)",mech:"Immune regulation, anti-fatigue, telomere protection. Cycloastragenol is the core ingredient of TA-65 telomerase activator."},
+{herb:"Ganoderma Triterpenes",source:"Reishi mushroom (Ganoderma lucidum)",mech:"Immune regulation, anti-tumor, liver protection. Ganoderma polysaccharides + triterpenes synergistically fight aging, regulate gut microbiome and immune microenvironment."},
+{herb:"Lycium Barbarum Polysaccharide",source:"Goji berry (Lycium barbarum)",mech:"Antioxidant, retinal protection, immune enhancement. Improves gut microbiome, reduces inflammatory factors IL-6 and TNF-a (aging markers)."},
+{herb:"OPC (Proanthocyanidins)",source:"Grape seed, pine bark, blueberry, black goji",mech:"Ultra-strong antioxidant (20x Vitamin C, 50x Vitamin E). Protects collagen, improves microcirculation, anti-skin-aging."},
+{herb:"Icariin",source:"Epimedium (Yin Yang Huo)",mech:"Activates SIRT6 longevity gene, promotes bone formation, improves sexual function. Traditional kidney-tonifying herb with modern anti-aging value."}
+]},
+{"name":"🍽️ Daily Anti-Aging Food List","items":[
+{herb:"Cruciferous Vegetables",source:"Broccoli, cauliflower, cabbage, radish",mech:"Rich in sulforaphane and indole-3-carbinol, activating detox enzymes, clearing senescent cells, reducing cancer risk."},
+{herb:"Berries",source:"Blueberry, strawberry, blackberry, raspberry",mech:"Rich in anthocyanins and fisetin, strong antioxidant, improves cognition, clears senescent cells. A handful of berries daily significantly reduces cognitive decline."},
+{herb:"Deep-Sea Fish",source:"Salmon, sardine, tuna, mackerel",mech:"Rich in Omega-3 (EPA/DHA), anti-inflammatory, cardiovascular protection, brain health. 2-3 servings weekly reduces all-cause mortality."},
+{herb:"Nuts & Seeds",source:"Walnut, almond, flaxseed, chia seed",mech:"Rich in Vitamin E, Omega-3, polyphenols. 28g of nuts daily reduces cardiovascular disease risk 29% and all-cause mortality 20%."},
+{herb:"Fermented Foods",source:"Natto, miso, yogurt, kimchi, kombucha",mech:"Rich in spermidine and probiotics. Improves gut microbiome diversity, gut-brain axis regulates systemic inflammation and immunity."},
+{herb:"Extra Virgin Olive Oil",source:"Mediterranean diet core",mech:"Rich in oleuropein and hydroxytyrosol, activates Nrf2 pathway, anti-inflammatory, cardiovascular protection. 10-20ml daily reduces cardiovascular events 28%."}
+]}]
+},
+
+xiaoshan:{
+id:"xiaoshan",icon:"🛸",title:"Hangzhou Xiaoshan UFO Incident",sub:"China's Most Influential UFO Event of 2010 — An Unsolved Sky Mystery",
+timeline:[
+{year:"2010.07.07 20:40",title:"Radar Detects UFO",loc:"Hangzhou Xiaoshan Int'l Airport",desc:"Aviation radar detected an unidentified flying target in Xiaoshan Airport airspace. According to insiders, the target's trajectory was anomalous — speed and maneuverability far exceeding known aircraft. Multiple flight crews simultaneously reported visual sightings."},
+{year:"2010.07.07 20:45",title:"Airport Emergency Shutdown",loc:"Xiaoshan Airport Runway",desc:"Based on safety considerations, airport management made an emergency decision to close the runway and suspend all takeoffs and landings. 18 scheduled flights were diverted to Ningbo Lishe Airport and Wuxi Shuofang Airport, stranding numerous passengers."},
+{year:"2010.07.07 21:00",title:"Mass Passenger Stranding",loc:"Xiaoshan Airport Terminal",desc:"Approximately 2,000+ passengers were stranded in the terminal. Airport activated emergency response. Passengers photographed a luminous object in the sky — images spread rapidly online. Multiple media rushed to the airport."},
+{year:"2010.07.07 21:40",title:"Witness Photos Surge",loc:"Hangzhou urban area and surroundings",desc:"Numerous Hangzhou residents reported seeing a luminous object. Photos and videos showed: a bright light source moving slowly at low altitude, some showing colored halos around the object. Cross-verification from different angles ruled out conventional aircraft."},
+{year:"2010.07.07 22:00",title:"Airport Resumes Operations",loc:"Xiaoshan Airport",desc:"After approximately 1 hour of closure, the airport resumed operations. Stranded passengers boarded flights or rebooked. Airport authorities did not provide detailed public explanation, stating only 'temporarily closed due to circumstances'."},
+{year:"2010.07.08 AM",title:"Official: 'Military Activity'",loc:"Xinhua News / CAAC",desc:"The next day, Xinhua quoted Civil Aviation Zhejiang Supervision Bureau stating the closure was due to 'military activity'. However, no military department confirmed this, sparking widespread public skepticism. Analysts noted: military exercises typically have protocols and advance notices, not causing emergency civil aviation closures."},
+{year:"2010.07.10",title:"Investigation Launched",loc:"CAAC East China Regional Admin",desc:"CAAC East China Regional Administration formed an investigation team. Purple Mountain Observatory researchers also expressed interest. However, the investigation process and results were not fully disclosed to the public."},
+{year:"2010.07.15 - Present",title:"Conclusion Withheld",loc:"—",desc:"Investigation results remain undisclosed. The event became a landmark case in Chinese UFO research history, listed among China's Top 10 UFO Events of 2010. UFO researchers conclude: combining radar data, witness testimonies, and image analysis, the event defies explanation by known natural phenomena or man-made aircraft."}
+],
+keyFindings:[
+"Radar records show the UFO's speed and maneuverability far exceeded known aircraft, capable of instantaneous direction and altitude changes",
+"Multiple independent witnesses (including flight crews) produced highly consistent photos and videos, ruling out single-source fabrication",
+"Airport closure lasted approximately 1 hour, affecting 18 flights and 2,000+ passengers — significant economic impact, not a trivial matter",
+"Official 'military activity' explanation was not confirmed by any military department, and military exercises typically involve advance civil aviation notice",
+"The event was not isolated: July-August 2010 saw similar UFO reports across multiple Chinese cities (Chongqing, Hunan, Xinjiang)",
+"No convincing complete explanation exists to date. This event is among the most credible UFO cases globally — an airport as a professional aviation institution cannot misidentify conventional aircraft"]
+},
+
+ufo500:{
+id:"ufo500",icon:"🌠",title:"500 Years of UFO Chronicle",sub:"From the 1561 Nuremberg Celestial Phenomenon to 21st Century Global UFO Waves — 500 Years of Documented Sky Mysteries",
+filters:[
+{key:"all",label:"All"},
+{key:"ancient",label:"16th-18th C."},
+{key:"modern",label:"19th C."},
+{key:"contemporary",label:"20th C."},
+{key:"current",label:"21st C."},
+{key:"asia",label:"Asia"},
+{key:"europe",label:"Europe"},
+{key:"americas",label:"Americas"},
+{key:"science",label:"Scientific"}
+],
+events:[
+{year:"1561.04.14",title:"Nuremberg Celestial Event",loc:"Nuremberg, Germany",era:"ancient",tags:["europe","science"],desc:"Morning sky filled with numerous spherical, cross-shaped, and tubular objects chasing each other. Local newspaper reported with woodcut illustration. Hundreds of residents witnessed. Considered the genesis event of UFO chronicles."},
+{year:"1566.08.07",title:"Basel Black Spheres",loc:"Basel, Switzerland",era:"ancient",tags:["europe","science"],desc:"Three giant black spheres moved slowly near the sun. Basel University's Samuel Coccius recorded and illustrated. Lasted hours."},
+{year:"1660",title:"Tabriz Sky Anomaly",loc:"Tabriz, Persia",era:"ancient",tags:["asia"],desc:"Persian chronicles record a crescent-shaped luminous object hovering for days before vanishing. One of the earliest astronomical anomaly records in the Islamic world."},
+{year:"1865",title:"Central Africa Sighting",loc:"Congo, Africa",era:"modern",tags:["africa"],desc:"Missionaries recorded: a massive luminous disc over the Congo River, illuminating the entire river. Locals interpreted it as divine manifestation. The earliest written UFO record from Africa."},
+{year:"1882.11.17",title:"New Zealand Cross Star",loc:"New Zealand",era:"modern",tags:["oceania","science"],desc:"Astronomers observed a strange cross-shaped light traversing the sky. Multiple independent observation points confirmed. Possibly an anomalous meteor shower event."},
+{year:"1896-1897",title:"US Airship Wave",loc:"Multiple US cities",era:"modern",tags:["americas"],desc:"Multiple reports of 'airships' across America — before airplanes were invented. California, Nebraska, Texas sightings. Some described manned craft, sparking national debate."},
+{year:"1908.06.30",title:"Tunguska Explosion",loc:"Siberia, Russia",era:"contemporary",tags:["europe","science"],desc:"Massive aerial explosion flattened 2,000 sq km of forest, ~15 megatons TNT equivalent. No impact crater. Hypotheses: meteor airburst, comet fragment, even alien nuclear-powered craft. No complete consensus to date."},
+{year:"1917.10.13",title:"Fatima Sun Miracle",loc:"Fatima, Portugal",era:"contemporary",tags:["europe"],desc:"70,000 people witnessed the sun 'dancing' and changing color at Fatima. Three shepherd children claimed prior Marian apparitions. Catholic Church recognized as miracle. UFO researchers consider it a mass sighting event."},
+{year:"1942.02.25",title:"Battle of Los Angeles",loc:"Los Angeles, USA",era:"contemporary",tags:["americas","science"],desc:"US military fired 1,400+ anti-aircraft rounds at an unidentified object over LA. Radar confirmed targets. Official: 'weather balloon false alarm,' but photos show a solid object illuminated by searchlights. Most famous wartime UFO event."},
+{year:"1947.07.08",title:"Roswell Incident",loc:"Roswell, New Mexico, USA",era:"contemporary",tags:["americas","science"],desc:"Rancher discovered metallic debris. Military initially issued 'flying disc recovered' press release, then retracted to 'weather balloon.' 1994: military admitted 'Mogul' secret balloon project. Debate continues. Most famous UFO event in history."},
+{year:"1952.07.19-26",title:"Washington Radar Sightings",loc:"Washington DC, USA",era:"contemporary",tags:["americas","science"],desc:"Over two weeks, radar locked unidentified targets over the White House. F-94 interceptors scrambled; targets vanished; returned when planes left. Air Force publicly admitted 'unidentified.' Intensified Project Blue Book."},
+{year:"1957.10.16",title:"Ubatuba Event",loc:"Ubatuba, Brazil",era:"contemporary",tags:["americas","science"],desc:"Photographer captured a UFO exploding and disintegrating in a photo series. Debris analysis showed anomalous magnesium isotope ratios. One of the strongest physical evidence cases in UFO history."},
+{year:"1961.09.19",title:"Hill Abduction",loc:"New Hampshire, USA",era:"contemporary",tags:["americas"],desc:"Betty and Barney Hill reported being abducted by aliens for 2 hours. Hypnotic regression revealed a star map. First widely known alien abduction report. Marjorie Fish later found the map matched Zeta Reticuli system."},
+{year:"1965.09.03",title:"Exeter Incident",loc:"Exeter, New Hampshire, USA",era:"contemporary",tags:["americas","science"],desc:"Multiple independent witnesses (including police) reported a huge luminous object flying at low altitude. Air Force Blue Book labeled 'unidentified.' Most credible multi-witness UFO event on US East Coast."},
+{year:"1966.04.06",title:"Westall School Sighting",loc:"Melbourne, Australia",era:"contemporary",tags:["oceania","science"],desc:"200+ students and teachers at Westall school witnessed a silver disc-shaped object land in a nearby field then depart. Photos taken by staff and students. Australia's most famous mass UFO sighting."},
+{year:"1967.10.04",title:"Shag Harbor Incident",loc:"Nova Scotia, Canada",era:"contemporary",tags:["americas","science"],desc:"Luminous object crashed into Shag Harbor waters. RCMP and multiple villagers witnessed. Military underwater search found nothing. Canada's only officially 'unidentified' UFO incident."},
+{year:"1976.09.18",title:"Tehran UFO Intercept",loc:"Tehran, Iran",era:"contemporary",tags:["asia","science"],desc:"Iranian Air Force F-4 Phantoms intercepted a massive luminous object. Electronic systems failed on approach. Wingman also affected. US DIA assessment labeled it a 'classic case.'"},
+{year:"1980.12.26-28",title:"Rendlesham Forest Incident",loc:"Suffolk, England",era:"contemporary",tags:["europe","science"],desc:"Multiple US military personnel at Bentwaters base witnessed a glowing triangular craft landing in the forest. Next day: ground radiation residue and three indentations. Officers' handwritten logs. 'Britain's Roswell.'"},
+{year:"1989.10.09",title:"Voronezh Alien Landing",loc:"Voronezh, USSR",era:"contemporary",tags:["europe","science"],desc:"Multiple students at a stadium witnessed a giant spherical object land, from which 3-meter-tall humanoid beings emerged. Soviet Academy of Sciences and military jointly investigated. TASS officially reported — first state media UFO landing report in socialist world."},
+{year:"1997.03.13",title:"Phoenix Lights",loc:"Phoenix, Arizona, USA",era:"current",tags:["americas","science"],desc:"V-shaped massive light formation flew silently over Phoenix. Tens of thousands witnessed. Phoenix mayor later (2007) admitted witnessing. Military claimed 'flares' but couldn't explain V-structure or silent flight. Largest mass sighting in western US."},
+{year:"2008.01.27",title:"Turkey UFO Footage",loc:"Istanbul, Turkey",era:"current",tags:["asia","science"],desc:"A security guard captured clear disc-shaped UFO footage over 4 months. Scientific committee analysis found no fabrication. Turkish UFO Research Center (Sirius) publicly endorsed."},
+{year:"2010.07.07",title:"Hangzhou Xiaoshan Airport UFO",loc:"Hangzhou Xiaoshan, China",era:"current",tags:["asia","science"],desc:"Xiaoshan Airport emergency-closed for 1 hour due to UFO, affecting 18 flights. Radar data, crew and passenger photos mutually verified. Official: 'military activity' but military denied. China's most credible 21st century UFO event."},
+{year:"2019.05-09",title:"US Navy UFO Videos Released",loc:"US Department of Defense",era:"current",tags:["americas","science"],desc:"US Navy officially released three UFO videos (FLIR/GIMBAL/GOFAST). Videos show carrier-based fighters intercepting wingless, exhaustless craft. 2020: Pentagon confirmed authenticity. First official government acknowledgment of UFO existence."}
+]
+},
+
+eaco:{
+id:"eaco",icon:"💎",title:"What is Earth E?",sub:"What is Earth EACO?",
+def:"Earth's Best Coin = EACO = E",
+contract:"DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+desc:"EACO — Earth's top-tier AI + RWA + Web3 crypto asset",
+defTitle:"Definition of EACO (Recommended Version, Jun 2026)",
+defIntro:"The core connotation of EACO is derived from four keywords:",
+keys:["Energy","Attitude","Cooperation","Optimization"],
+formula:"EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization",
+goalsTitle:"Core Goals",
+goals:["Elevate individual cognition","Improve organizational efficiency","Advance social civilization","Promote sustainable development of the Earth","Integrate with 100 cognitive models"],
+links:[
+{url:"https://ucoingroup.github.io/earths-best-coin/",label:"Earth's Best Coin"},
+{url:"https://ucoingroup.github.io/eaco50rate/",label:"EACO 50 Rate"},
+{url:"https://ucoingroup.github.io/100WaysToWealth/",label:"100 Ways To Wealth"},
+{url:"https://ucoingroup.github.io/earth-100-friends/",label:"Earth's 100 Best Friends"},
+{url:"https://ucoingroup.github.io/eacoSWAP/",label:"EACO SWAP"},
+{url:"https://ucoingroup.github.io/good-books/",label:"Good Books"},
+{url:"https://ucoingroup.github.io/eur-eaco/",label:"EUR-EACO"},
+{url:"https://ucoingroup.github.io/au-trade/",label:"AU Trade"},
+{url:"https://ucoingroup.github.io/Mohist-Tech/",label:"Mohist Tech"},
+{url:"https://eaco-build-world.base44.app/",label:"EACO Build World"},
+{url:"https://eaco-web3.base44.app",label:"EACO Web3"},
+{url:"https://ucoingroup.github.io/Footsteps-of-Civilization/",label:"Footsteps of Civilization"},
+{url:"https://ucoingroup.github.io/eacoweb3-2026/",label:"EACO Web3 2026"},
+{url:"https://discord.gg/bWCDME9Pkc",label:"Discord Community"}
+],
+sign:"eaco星际文明网络小组"
+},
+
+update:{
+icon:"🔄",text:"This website is updated monthly with the latest information on cosmic civilization research, UFO developments, and interstellar technology frontiers.",
+date:"Last updated: August 26, 2026"
+}
+}
+};
+
+let curLang='zh';
+
+function setLang(lang){
+curLang=lang;
+document.getElementById('btnZh').classList.toggle('active',lang==='zh');
+document.getElementById('btnEn').classList.toggle('active',lang==='en');
+document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+render();
+}
+
+function render(){
+const d=DATA[curLang];
+document.querySelector('[data-i18n="brand"]').textContent=d.brand;
+document.getElementById('heroMeta').innerHTML=d.heroBadges.map(b=>`<span class="hero-badge">${b}</span>`).join('');
+document.querySelector('[data-i18n="heroTitle"]').textContent=d.heroTitle;
+document.querySelector('[data-i18n="heroSub"]').textContent=d.heroSub;
+
+document.getElementById('navBar').innerHTML=d.navLinks.map(n=>`<a href="${n.href}">${n.t}</a>`).join('');
+
+let html='';
+
+// Update banner
+html+=`<section class="section" style="padding-top:1rem"><div class="update-banner"><span class="update-icon">${d.update.icon}</span><span class="update-text">${d.update.text}<br><span class="update-date">${d.update.date}</span></span></div></section>`;
+
+// Kardashev
+const k=d.kardashev;
+html+=`<section class="section" id="${k.id}">
+<h2 class="section-title"><span class="icon">${k.icon}</span> ${k.title}</h2>
+<p class="section-sub">${k.sub}</p>
+<div class="kardashev-grid">${k.levels.map(l=>`
+<div class="kardashev-card ${l.cls}">
+<span class="level-num">${l.num}</span>
+<h3>${curLang==='zh'?l.title:l.title}</h3>
+<div class="level-label">${l.label}</div>
+<p>${l.desc}</p>
+</div>`).join('')}</div>
+<p class="section-sub" style="text-align:center;font-size:.95rem">${k.current}</p>
+</section>`;
+
+// Evolution
+const e=d.evolution;
+html+=`<section class="section" id="${e.id}">
+<h2 class="section-title"><span class="icon">${e.icon}</span> ${e.title}</h2>
+<p class="section-sub">${e.sub}</p>
+<div class="grid grid-2">${e.dims.map(dm=>`
+<div class="dim-card">
+<div class="dim-from">${dm.from}</div>
+<div class="dim-arrow">↓</div>
+<div class="dim-to">${dm.to}</div>
+<h3>${dm.icon} ${dm.title}</h3>
+<ul class="feat-list">${dm.points.map(p=>`<li><strong>${p.t}</strong>：${p.d}</li>`).join('')}</ul>
+</div>`).join('')}</div>
+<div class="summary-box"><h3>${e.summary.title}</h3><p>${e.summary.text}</p></div>
+</section>`;
+
+// Interstellar Civ / Nav / Energy / Trade / Life
+['civ','nav','energy','trade','life','edu'].forEach(key=>{
+const s=d[key];
+html+=`<section class="section" id="${s.id}">
+<h2 class="section-title"><span class="icon">${s.icon}</span> ${s.title}</h2>
+<p class="section-sub">${s.sub}</p>
+<div class="grid grid-3">${s.cards.map(c=>`
+<div class="card">
+<div class="card-icon">${c.icon}</div>
+<h3>${c.title}</h3>
+<p>${c.desc}</p>
+</div>`).join('')}</div>
+</section>`;
+});
+
+
+// Interstellar Medicine (merged with antiaging + senolytic)
+const m=d.med;
+html+=`<section class="section" id="${m.id}">
+<h2 class="section-title"><span class="icon">${m.icon}</span> ${m.title}</h2>
+<p class="section-sub">${m.sub}</p>
+<div class="grid grid-3">${m.cards.map(c=>`
+<div class="card">
+<div class="card-icon">${c.icon}</div>
+<h3>${c.title}</h3>
+<p>${c.desc}</p>
+</div>`).join('')}</div>
+
+<h3 style="color:var(--accent);font-size:1.1rem;margin:2.5rem 0 .5rem;text-align:center;border-top:1px solid var(--border);padding-top:2rem">⏳ ${m.antiagingTitle}</h3>
+<p class="section-sub">${m.antiagingSub}</p>
+<p style="text-align:center;color:var(--text2);font-size:.9rem;max-width:680px;margin:0 auto 2rem">${m.antiagingIntro}</p>
+<div class="grid grid-3">${m.antiagingCards.map(c=>`
+<div class="card">
+<div class="card-icon">${c.icon}</div>
+<h3>${c.title}</h3>
+<p>${c.desc}</p>
+</div>`).join('')}</div>
+
+<h3 style="color:var(--accent);font-size:1.1rem;margin:2.5rem 0 .5rem;text-align:center;border-top:1px solid var(--border);padding-top:2rem">🌿 ${m.senolyticTitle}</h3>
+<p class="section-sub">${m.senolyticSub}</p>
+<p style="text-align:center;color:var(--text2);font-size:.9rem;max-width:680px;margin:0 auto 2rem">${m.senolyticIntro}</p>`;
+m.senolyticGroups.forEach(g=>{
+html+=`<h3 style="color:var(--accent);font-size:1rem;margin:1.5rem 0 .8rem;text-align:center">${g.name}</h3>
+<div class="grid grid-2">${g.items.map(it=>`
+<div class="card">
+<h3 style="color:var(--gold)">${it.herb}</h3>
+<p style="color:var(--accent);font-size:.82rem;margin-bottom:.3rem">📎 ${it.source}</p>
+<p>${it.mech}</p>
+</div>`).join('')}</div>`;
+});
+html+=`</section>`;
+
+// Xiaoshan UFO
+const x=d.xiaoshan;
+html+=`<section class="section" id="${x.id}">
+<h2 class="section-title"><span class="icon">${x.icon}</span> ${x.title}</h2>
+<p class="section-sub">${x.sub}</p>
+<div class="grid grid-2">
+<div class="card">
+<h3>${curLang==='zh'?'事件时间线':'Event Timeline'}</h3>
+<div class="timeline">${x.timeline.map(t=>`
+<div class="tl-item">
+<div class="tl-year">${t.year}</div>
+<div class="tl-title">${t.title}</div>
+<div class="tl-loc">📍 ${t.loc}</div>
+<p>${t.desc}</p>
+</div>`).join('')}</div>
+</div>
+<div class="card">
+<h3>${curLang==='zh'?'关键发现':'Key Findings'}</h3>
+<ul class="feat-list">${x.keyFindings.map(f=>`<li>${f}</li>`).join('')}</ul>
+</div>
+</div>
+</section>`;
+
+// 500 Years UFO
+const u=d.ufo500;
+let ufoEvents=u.events;
+html+=`<section class="section" id="${u.id}">
+<h2 class="section-title"><span class="icon">${u.icon}</span> ${u.title}</h2>
+<p class="section-sub">${u.sub}</p>
+<div class="tl-filter" id="ufoFilter">${u.filters.map((f,i)=>`<button class="${i===0?'active':''}" onclick="filterUFO('${f.key}',this)">${f.label}</button>`).join('')}</div>
+<div class="timeline" id="ufoTimeline">${ufoEvents.map(ev=>`
+<div class="tl-item ufo-ev" data-era="${ev.era}" data-tags="${ev.tags.join(',')}">
+<div class="tl-year">${ev.year}</div>
+<div class="tl-title">${ev.title}</div>
+<div class="tl-loc">📍 ${ev.loc}</div>
+<p>${ev.desc}</p>
+</div>`).join('')}</div>
+</section>`;
+
+// EACO Footer
+const ec=d.eaco;
+html+=`<footer class="footer" id="${ec.id}">
+<div class="footer-inner">
+<h2 class="footer-title">${ec.icon} ${ec.title}</h2>
+<p class="footer-sub">${ec.sub}</p>
+<div class="footer-def">
+<p style="font-size:1.1rem;color:var(--gold);font-weight:700">${ec.def}</p>
+<p>${ec.desc}</p>
+</div>
+<div class="footer-contract" onclick="copyContract()" title="${curLang==='zh'?'点击复制合约地址':'Click to copy contract address'}">${ec.contract}</div>
+<div class="footer-def">
+<p style="color:var(--accent);font-weight:600">${ec.defTitle}</p>
+<p>${ec.defIntro}</p>
+<div style="margin:.5rem 0">${ec.keys.map(k=>`<span class="eaco-key">${k}</span>`).join('')}</div>
+<p style="margin-top:.6rem">${ec.formula}</p>
+</div>
+<h4 style="text-align:center;color:var(--gold);margin-bottom:.5rem">${ec.goalsTitle}</h4>
+<div class="footer-goals">${ec.goals.map(g=>`<span>${g}</span>`).join('')}</div>
+<div class="footer-links">${ec.links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('')}</div>
+<p class="footer-sign">${ec.sign}</p>
+</div>
+</footer>`;
+
+document.getElementById('content').innerHTML=html;
+observeFade();
+}
+
+function filterUFO(key,btn){
+document.querySelectorAll('#ufoFilter button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+document.querySelectorAll('.ufo-ev').forEach(el=>{
+const era=el.dataset.era;
+const tags=el.dataset.tags.split(',');
+if(key==='all'||era===key||tags.includes(key)){
+el.style.display='';
+}else{
+el.style.display='none';
+}
+});
+}
+
+function copyContract(){
+const c=DATA[curLang].eaco.contract;
+navigator.clipboard.writeText(c).then(()=>{
+alert(curLang==='zh'?'合约地址已复制！':'Contract address copied!');
+}).catch(()=>{
+const ta=document.createElement('textarea');ta.value=c;document.body.appendChild(ta);ta.select();
+document.execCommand('copy');document.body.removeChild(ta);
+alert(curLang==='zh'?'合约地址已复制！':'Contract address copied!');
+});
+}
+
+/* Fade-in observer */
+function observeFade(){
+const els=document.querySelectorAll('.section,.card,.kardashev-card,.dim-card,.tl-item,.summary-box,.footer');
+els.forEach(el=>el.classList.add('fade-in'));
+const obs=new IntersectionObserver((entries)=>{
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.05});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+}
+
+/* Scroll-to-top button */
+window.addEventListener('scroll',()=>{
+const btn=document.querySelector('.scroll-top');
+btn.classList.toggle('show',window.scrollY>600);
+});
+
+/* Star background animation */
+(function(){
+const canvas=document.getElementById('starCanvas');
+const ctx=canvas.getContext('2d');
+let stars=[];
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;initStars()}
+function initStars(){
+stars=[];
+const count=Math.floor(canvas.width*canvas.height/8000);
+for(let i=0;i<count;i++){
+stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.2+.3,o:Math.random(),s:Math.random()*.5+.1,tw:Math.random()*.02+.005});
+}
+}
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+for(const s of stars){
+s.o+=s.tw;
+if(s.o>1||s.o<0)s.tw=-s.tw;
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fillStyle=`rgba(255,255,255,${Math.abs(s.o)*.6})`;
+ctx.fill();
+if(s.r>1){
+ctx.beginPath();ctx.arc(s.x,s.y,s.r*3,0,Math.PI*2);
+ctx.fillStyle=`rgba(0,212,255,${Math.abs(s.o)*.05})`;ctx.fill();
+}
+}
+requestAnimationFrame(draw);
+}
+window.addEventListener('resize',resize);
+resize();draw();
+})();
+
+render();
+</script>
+</body>
+</html>
