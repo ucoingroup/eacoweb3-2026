@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EACO 乱世生存 - 地球村与星际文明启示录</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            classical: {
+              bg: '#f8f2e4',
+              text: '#3c2b1f',
+              accent: '#8b4513',
+              card: '#fff9ec',
+              border: '#c9b89c'
+            },
+            xuanqing: {
+              bg: '#0f1720',
+              text: '#c8e0e8',
+              accent: '#22a3b7',
+              card: '#172430',
+              border: '#2b4452'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #f8f2e4;
+      --text: #3c2b1f;
+      --accent: #8b4513;
+      --card: #fff9ec;
+      --border: #c9b89c;
+    }
+    [data-theme="classical"] {
+      --bg: #f8f2e4;
+      --text: #3c2b1f;
+      --accent: #8b4513;
+      --card: #fff9ec;
+      --border: #c9b89c;
+    }
+    [data-theme="xuanqing"] {
+      --bg: #0f1720;
+      --text: #c8e0e8;
+      --accent: #22a3b7;
+      --card: #172430;
+      --border: #2b4452;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: all 0.5s ease;
+    }
+    .eaco-card {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+    }
+    .accent-text {
+      color: var(--accent);
+    }
+    .border-theme {
+      border-color: var(--border);
+    }
+    .btn-theme {
+      background-color: var(--accent);
+      color: var(--bg);
+    }
+    .btn-theme:hover {
+      opacity: 0.85;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body data-theme="classical" class="min-h-screen">
+  <div class="max-w-6xl mx-auto px-4 py-6">
+    <!-- 头部导航 -->
+    <header class="eaco-card rounded-xl p-6 mb-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold accent-text">EACO 乱世生存专题</h1>
+          <p class="text-sm mt-1">地球村百姓生存 · 自保实操 · 星际文明启示录</p>
+        </div>
+        <div class="flex gap-3 items-center">
+          <span class="text-sm">风格切换：</span>
+          <button id="btn-classical" class="btn-theme px-4 py-2 rounded-lg text-sm">古典</button>
+          <button id="btn-xuanqing" class="btn-theme px-4 py-2 rounded-lg text-sm">玄青</button>
+          <select id="lang-select" class="eaco-card border-theme border px-3 py-2 rounded-lg text-sm">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- 目录导航 -->
+    <nav class="eaco-card rounded-xl p-5 mb-8">
+      <h2 class="text-xl font-bold accent-text mb-3 nav-zh">📖 专题目录</h2>
+      <h2 class="text-xl font-bold accent-text mb-3 nav-en hidden">📖 Table of Contents</h2>
+      <div class="grid md:grid-cols-2 gap-2 text-sm">
+        <a href="#part1" class="underline hover:no-underline nav-zh">一、乱世地球村老百姓真实生活</a>
+        <a href="#part1-en" class="underline hover:no-underline nav-en hidden">1. Real‑life of ordinary people in troubled times</a>
+
+        <a href="#part2" class="underline hover:no-underline nav-zh">二、乱世谋生行业分析</a>
+        <a href="#part2-en" class="underline hover:no-underline nav-en hidden">2. Survival & livelihood industries</a>
+
+        <a href="#part3" class="underline hover:no-underline nav-zh">三、动荡环境保护自己与家人安全实操</a>
+        <a href="#part3-en" class="underline hover:no-underline nav-en hidden">3. Practical safety for yourself & family</a>
+
+        <a href="#part4" class="underline hover:no-underline nav-zh">四、对 EACO 星际文明的启示</a>
+        <a href="#part4-en" class="underline hover:no-underline nav-en hidden">4. Revelations for EACO interstellar civilization</a>
+
+        <a href="#links" class="underline hover:no-underline nav-zh">五、EACO 网络资源汇总</a>
+        <a href="#links-en" class="underline hover:no-underline nav-en hidden">5. EACO network resources</a>
+      </div>
+    </nav>
+
+    <!-- 中文内容区块 -->
+    <div id="zh-content">
+      <section id="part1" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">一、乱世，地球村老百姓的真实生活是什么样子的？</h2>
+        <div class="space-y-4 text-base leading-relaxed">
+          <p>乱世，不只是炮火与宏大战争叙事，更多是旧秩序崩塌、货币信用失效、供应链断裂、安全失去保障。普通人最大命题从“追求美好生活”压缩为<strong>活下去、护家人、守住最低限度的尊严</strong>。</p>
+          <h3 class="font-bold accent-text mt-3">1.生存优先级彻底颠倒</h3>
+          <p>财富、房产、学历、社会身份快速贬值；食物、水源、药品、保暖、安全庇护地成为第一硬通货。纸币快速通胀作废，实物、手艺、体力、信任关系比存款更重要。很多人放弃远方梦想，一切行动围绕就近生存展开。一部分人固守故土苟且求生；一部分成为流民，拖家带口迁徙，居无定所，随时面临饥荒、疫病、劫掠风险。</p>
+
+          <h3 class="font-bold accent-text mt-3">2.社会规则失效，人性两极分化</h3>
+          <p>旧法律、商业契约失效。一部分人互相帮扶抱团求生；另一部分丛林法则抬头，掠夺、哄抬物资、欺骗泛滥。守规矩不一定有回报，不守规矩又会透支信用，普通人长期活在两难的夹缝之中。家庭压力被无限放大：老人孩子是最脆弱群体，很多家庭为保全部分人，被迫做出残酷取舍。</p>
+
+          <h3 class="font-bold accent-text mt-3">3.精神层面：麻木与微小希望并存</h3>
+          <p>宏大理想被磨灭，大部分人精神趋于麻木，只求今日平安；但民间依旧保留朴素善意，邻里互助、民间互助社群自发诞生。乱世最珍贵的不是财富，是人与人之间的信任，小社群会取代大社会成为生存依靠。</p>
+
+          <h3 class="font-bold accent-text mt-3">4.阶层快速洗牌</h3>
+          <p>豪门大族可能一夜失去一切；掌握刚需手艺、懂得物资流转、擅长社群协作的底层人，反而获得生存优势。血统、出身权重下降，<strong>生存能力、应变能力、共情协作能力</strong>成为生存核心筹码。</p>
+        </div>
+      </section>
+
+      <section id="part2" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">二、乱世普通人如何生活赚钱，哪些行业最适合普通百姓发展生存</h2>
+        <p class="mb-3">核心原则：<strong>贴近刚需、轻资产、靠手艺与服务、不做高风险投机，远离军火、违禁品等高致命灰色地带。</strong></p>
+
+        <h3 class="font-bold accent-text mt-3">第一梯队：绝对刚需，永远不会消失（最安全）</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>基础粮食食品供给</strong>：种植、简易食品加工、便民小食摊、物资分销。乱世里粮食的价值远超金银，薄利多销，做邻里社区供给，风险最低。</li>
+          <li><strong>维修与循环手艺</strong>：农具、水电、车辆、家具修补。物资匮乏时代，修远胜于买新，手艺人永远有饭吃；二手物资回收流转，置换交易，不需要大额本钱。</li>
+          <li><strong>基础医疗防护服务</strong>：消毒、护理、简易伤病照料、防护物资流通（不触碰非法行医、处方药）。疫病伴随乱世，基础健康服务永远有需求。</li>
+          <li><strong>短途物流搬运、脚夫、转运</strong>：大物流瘫痪，区域之间短途物资搬运，靠体力换取生存资源。</li>
+        </ul>
+
+        <h3 class="font-bold accent-text mt-4">第二梯队：社群服务类，靠信任吃饭</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>缝纫修补、衣物简单加工</strong>：衣物破损无力换新，缝补、旧衣改造，门槛低。</li>
+          <li><strong>庇护、中转、信息中介</strong>：给流民提供临时落脚，传递哪里有粮食、哪里相对安全的信息，做物物交换的中间人，赚取服务费，不靠囤积居奇发横财。</li>
+          <li><strong>殡葬、清洁防疫服务</strong>：乱世疫病风险高，环境消杀、简单善后，属于被人忽视但刚需的行业。</li>
+        </ul>
+
+        <h3 class="font-bold accent-text mt-4">第三梯队：精神与情绪价值行业（秩序崩塌后需求暴涨）</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>简易教育、手艺教学</strong>：乱世人人想学一门保命手艺，教人种地、维修、基础生存技能，用技能换取物资回报。</li>
+          <li><strong>疗愈、安抚类服务</strong>：说书、简单文艺、心理慰藉。巨大苦难之下，人需要精神出口，提供情绪慰藉，换取口粮。</li>
+        </ul>
+
+        <h3 class="font-bold accent-text mt-4">普通人尽量避开的坑</h3>
+        <p>黑市走私、囤积居奇哄抬物价、依附交战势力投机。这类行业短期暴利，但风险极高，局势一变就会付出生命代价。</p>
+        <p class="mt-2 italic">乱世生存铁律：大富靠命，小活靠手艺；不赌大机遇，守住小现金流；抱团远胜于单打独斗。</p>
+      </section>
+
+      <section id="part3" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">三、乱世动荡环境中，保护自己与家人的安全实操</h2>
+        <div class="space-y-4">
+          <h3 class="font-bold accent-text">思维认知：先把心态调整过来</h3>
+          <ul class="list-disc pl-6">
+            <li>放弃旧时代的价值观，人活着是第一目标，必要时财物可以全部舍弃。</li>
+            <li>不凑热闹、不站队、不逞能；远离冲突现场，不帮任何武装势力出力。</li>
+            <li>凡事留两套方案：固守、撤离。不要把全部希望押在一个地方。</li>
+            <li>藏拙守弱，不显财也不卖惨，低调沉默是最好的保护色。</li>
+          </ul>
+
+          <h3 class="font-bold accent-text mt-3">留守本土：守家避险实操（优先方案，能不走就不走）</h3>
+          <ul class="list-disc pl-6">
+            <li>居所避开主干道、兵营、据点、大型仓库；不要独居偏僻房屋；优先熟人邻里聚集区，房屋外观尽量普通简陋。</li>
+            <li>夜晚控制灯光烟火外泄，门窗简易加固。</li>
+            <li>搭建微型互助小圈子，筛选少数知根知底邻居家庭，约定预警、警戒互助。谨慎接纳外来留宿人员。</li>
+            <li>物资分多处隐蔽储存，不要集中一处；储备净水、粮食、盐、消毒包扎用品。</li>
+            <li>家庭内部保密，告诫孩子不要对外谈论家中储备。</li>
+          </ul>
+
+          <h3 class="font-bold accent-text mt-3">万不得已必须逃难迁徙</h3>
+          <ul class="list-disc pl-6">
+            <li>家人绝不分散，约定失散后的集合地点与家庭暗号。</li>
+            <li>路线避开主干道、交战区，走偏僻小路；优先投奔知根知底亲友，拒绝陌生人许诺的避难所，不要漫无目的流浪。</li>
+            <li>轻装出行，贵重物品拆分不同家庭成员携带。</li>
+            <li>路上少交谈，遇到武装人员优先顺从，保全性命优先。</li>
+          </ul>
+
+          <h3 class="font-bold accent-text mt-3">健康与疫病防护</h3>
+          <ul class="list-disc pl-6">
+            <li>水源优先消毒，不喝生水；变质食物坚决舍弃。</li>
+            <li>做好环境卫生，出现发热腹泻人员做好隔离。</li>
+            <li>节约物资，始终保留安全缓冲。</li>
+          </ul>
+
+          <h3 class="font-bold accent-text mt-3">人际交往与交易生存法则</h3>
+          <ul class="list-disc pl-6">
+            <li>物物交换选公开人多场合，不拿生存物资换奢侈品。</li>
+            <li>面对索取，学会委婉周旋拒绝，不硬刚，也不耗尽自家储备。</li>
+            <li>多方甄别消息，不要被谣言裹挟盲目行动。</li>
+          </ul>
+
+          <h3 class="font-bold accent-text mt-3">危险发生的应急处置</h3>
+          <ul class="list-disc pl-6">
+            <li>遭遇劫掠：生命＞财物，不做无谓抵抗，舍弃物资保全家人。</li>
+            <li>暴乱炮火来临立刻锁闭房屋躲藏，绝不外出围观。</li>
+            <li>居所彻底不安全时优先撤离老人小孩，不要抢救财物。</li>
+          </ul>
+
+          <h3 class="font-bold accent-text mt-3">家庭心理防线</h3>
+          <p>减少内部互相指责，维持简单稳定生活节奏，依托小社群互相慰藉，避免全家陷入绝望麻木。</p>
+        </div>
+      </section>
+
+      <section id="part4" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">四、对 EACO 星际文明的启示</h2>
+        <div class="space-y-3">
+          <p>地球乱世普通人的生存经验，可以映射到星际灾难、星际冲突、大系统瘫痪场景：</p>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li><strong>不能完全仰仗高阶大系统保护个体</strong>：星际联盟、星际AI、舰队力量不是永远可靠。普通星际家庭，需要具备独立生存、避险预案，不能把全部安全寄托公共体系。</li>
+            <li><strong>小规模可信共生社群，是文明的备份火种</strong>：当宏大星际网络崩溃，DAO小共同体、局部利他社群，是个体最可靠屏障。大系统负责繁荣，分布式小社群负责灾难下的存续。</li>
+            <li><strong>要保障普通个体拥有中立生存权</strong>：星际各大势力博弈，不能裹挟普通平民被迫选边站队。制度上要保护平民不因为派系立场遭到清算。</li>
+            <li><strong>虚拟财富不等于安全</strong>：星际时代再高的数字资产、星际资产，在战争灾难面前可以瞬间归零。文明底层必须保障每个个体基础生存资源兜底。</li>
+            <li><strong>文明设计不能假设人性全善</strong>：即便科技高度发达，掠夺、欺骗依旧会存在。既要倡导利他共生，也要建立制衡机制，个体层面也要保留避险意识，不能单纯依靠道德自觉。</li>
+            <li><strong>肉体生存与精神生存同等重要</strong>：星际浩劫之下，精神崩溃会直接瓦解族群。EACO文明自愈，既要物质循环保障，也要配套精神疗愈社群机制。</li>
+          </ol>
+          <p class="mt-3 italic">总结：乱世保命不靠强大武力，靠预判风险、主动规避、低调隐忍、可信抱团。这套底层逻辑，同样适用于星球文明，乃至星际文明。</p>
+        </div>
+      </section>
+
+      <section id="links" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">五、EACO 网络资源汇总｜地球eaco星际文明网络小组</h2>
+        <div class="space-y-2 break-all text-sm">
+          <div><a target="_blank" href="https://ucoingroup.github.io/earths-best-coin/" class="underline accent-text">https://ucoingroup.github.io/earths-best-coin/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eaco50rate/" class="underline accent-text">https://ucoingroup.github.io/eaco50rate/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/100WaysToWealth/" class="underline accent-text">https://ucoingroup.github.io/100WaysToWealth/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/earth-100-friends/" class="underline accent-text">https://ucoingroup.github.io/earth-100-friends/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eacoSWAP/" class="underline accent-text">https://ucoingroup.github.io/eacoSWAP/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/good-books/" class="underline accent-text">https://ucoingroup.github.io/good-books/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eur-eaco/" class="underline accent-text">https://ucoingroup.github.io/eur-eaco/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/au-trade/" class="underline accent-text">https://ucoingroup.github.io/au-trade/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/Mohist-Tech/" class="underline accent-text">https://ucoingroup.github.io/Mohist-Tech/</a></div>
+          <div><a target="_blank" href="https://eaco-build-world.base44.app/" class="underline accent-text">https://eaco-build-world.base44.app/</a></div>
+          <div><a target="_blank" href="https://eaco-web3.base44.app" class="underline accent-text">https://eaco-web3.base44.app</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/Footsteps-of-Civilization/" class="underline accent-text">https://ucoingroup.github.io/Footsteps-of-Civilization/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eacoweb3-2026/" class="underline accent-text">https://ucoingroup.github.io/eacoweb3-2026/</a></div>
+          <div><a target="_blank" href="https://discord.gg/bWCDME9Pkc" class="underline accent-text">https://discord.gg/bWCDME9Pkc</a></div>
+        </div>
+        <div class="mt-4 p-3 eaco-card border-theme rounded-lg">
+          <p class="font-bold accent-text">EACO CA:</p>
+          <p class="font-mono mt-1 break‑all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- 英文内容区块 -->
+    <div id="en-content" class="hidden">
+      <section id="part1-en" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">1. Real‑life of ordinary villagers of global‑village in troubled times</h2>
+        <div class="space-y-4 text-base leading-relaxed">
+          <p>Troubled times mean collapse of old order, failure of currency credit, broken supply‑chains and loss of public security. For ordinary people, the primary goal shifts from pursuing a good life to <strong>survive, protect family and preserve basic dignity</strong>.</p>
+          <h3 class="font-bold accent-text mt-3">1.1 Complete reversal of survival priorities</h3>
+          <p>Wealth, real estate, education and social status depreciate rapidly. Food, clean water, medicine, warmth and safe shelter become top hard‑currency. Physical goods, craftsmanship, physical labor and trust are far more valuable than bank deposits. Many people abandon long‑term dreams and focus on local survival. Some stay in hometown; others become refugees facing famine, disease and plunder.</p>
+          <h3 class="font-bold accent-text mt-3">1.2 Collapsed social rules & polarization of human nature</h3>
+          <p>Laws and commercial contracts fail. Some people unite for mutual aid; others turn to looting, price‑gouging and fraud. Ordinary people live in a difficult dilemma. Family pressure multiplies, elders and children are the most vulnerable groups.</p>
+          <h3 class="font-bold accent-text mt-3">1.3 Spirit: numbness alongside faint hope</h3>
+          <p>Grand ideals fade away. Folk mutual‑aid communities emerge spontaneously. Trust among human beings becomes the most precious asset; small communities replace large society as survival foundation.</p>
+          <h3 class="font-bold accent-text mt-3">1.4 Rapid reshuffling of social classes</h3>
+          <p>Wealthy clans may lose everything overnight. People with practical skills, goods circulation ability and community collaboration competence gain survival advantages. Survival competence, adaptability and empathy outweigh bloodline and origin.</p>
+        </div>
+      </section>
+
+      <section id="part2-en" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">2. Livelihood industries for ordinary people under turbulence</h2>
+        <p class="mb-3">Core principle: <strong>focus on rigid demand, light‑asset, skill‑based service; avoid high‑risk speculation, arms and contraband.</strong></p>
+        <h3 class="font-bold accent-text mt-3">Tier‑1: Absolute rigid‑demand industries (safest)</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Food supply</strong>: farming, simple food processing, community food distribution. Food outvalues gold in chaos.</li>
+          <li><strong>Repair & circular craftsmanship</strong>: repair tools, vehicles, furniture. Repair prevails over buying new goods; second‑hand goods circulation.</li>
+          <li><strong>Basic health service</strong>: disinfection, nursing, casualty care. Epidemics always accompany troubled times.</li>
+          <li><strong>Short‑distance transport & porter service</strong>: regional goods delivery by physical labor.</li>
+        </ul>
+        <h3 class="font-bold accent-text mt-4">Tier‑2: Community service based on trust</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Tailoring & mending</strong>: garment repair and remake.</li>
+          <li><strong>Temporary shelter & information broker</strong>: refugee transit, safe‑zone information, barter intermediary, no profiteering by hoarding.</li>
+          <li><strong>Sanitation & funeral service</strong>: disinfection, public hygiene and simple funeral handling.</li>
+        </ul>
+        <h3 class="font-bold accent-text mt-4">Tier‑3: Mental & emotional value industries</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Basic education & skill teaching</strong>: teach survival skills in exchange for supplies.</li>
+          <li><strong>Spiritual comfort service</strong>: storytelling, consolation for traumatized people.</li>
+        </ul>
+        <h3 class="font-bold accent-text mt-4">Pitfalls to avoid</h3>
+        <p>Black‑market smuggling, hoarding for price‑gouging, speculating for warring factions. Short‑term huge profit with fatal risk.</p>
+        <p class="mt-2 italic">Survival rule: Great fortune depends on fate; small living depends on skills. Do not gamble for huge opportunities; prioritize stable small cash flow. Collaboration beats individualism.</p>
+      </section>
+
+      <section id="part3-en" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">3. Practical safety guide: protect yourself and your family in turmoil</h2>
+        <div class="space-y-4">
+          <h3 class="font-bold accent-text">Mindset adjustment</h3>
+          <ul class="list-disc pl-6">
+            <li>Human life is the top priority; abandon property if necessary.</li>
+            <li>Stay neutral, do not take sides in conflicts, avoid battle‑sites.</li>
+            <li>Prepare two plans: stay‑at‑home or evacuate.</li>
+            <li>Keep low‑profile: neither show wealth nor complain publicly.</li>
+          </ul>
+          <h3 class="font-bold accent-text mt-3">Stay at home (preferred option)</h3>
+          <ul class="list-disc pl-6">
+            <li>Avoid main roads, military posts and large warehouses. Do not live in isolated houses. Choose familiar neighborhood.</li>
+            <li>Reduce light leakage at night; reinforce doors & windows simply.</li>
+            <li>Build small trusted mutual‑aid circle with reliable neighbors. Be cautious receiving strangers for overnight stay.</li>
+            <li>Store supplies in multiple hidden locations: clean‑water, grain, salt, disinfection & first‑aid goods.</li>
+            <li>Keep family reserve information confidential; warn children not to talk about supplies outside.</li>
+          </ul>
+          <h3 class="font-bold accent-text mt-3">Evacuation as last resort</h3>
+          <ul class="list-disc pl-6">
+            <li>Never split family members. Pre‑arrange assembly spot and secret signal in case of separation.</li>
+            <li>Take back‑roads, avoid main roads and war zones. Head for trusted relatives instead of wandering aimlessly.</li>
+            <li>Travel light, split valuables among different family members.</li>
+            <li>Be obedient when facing armed groups, prioritize survival.</li>
+          </ul>
+          <h3 class="font-bold accent-text mt-3">Health & epidemic prevention</h3>
+          <ul class="list-disc pl-6">
+            <li>Disinfect drinking water; discard spoiled food.</li>
+            <li>Maintain sanitation; isolate fever & diarrhea patients.</li>
+            <li>Always keep safety buffer of supplies.</li>
+          </ul>
+          <h3 class="font-bold accent-text mt-3">Social & trading rules</h3>
+          <ul class="list-disc pl-6">
+            <li>Do barter in public crowded places; never exchange survival goods for luxuries.</li>
+            <li>Learn tactful refusal when people ask for your supplies.</li>
+            <li>Verify information from multiple sources; do not panic because of rumors.</li>
+          </ul>
+          <h3 class="font-bold accent-text mt-3">Emergency handling for danger</h3>
+          <ul class="list-disc pl-6">
+            <li>When looting occurs: life > property, give up goods to save family members.</li>
+            <li>Lock house and hide during riots or shelling; never go out to watch.</li>
+            <li>Evacuate elders and children first when home becomes unsafe.</li>
+          </ul>
+          <h3 class="font-bold accent-text mt-3">Family mental defense</h3>
+          <p>Reduce internal blame, maintain simple stable daily rhythm, seek comfort from trusted small community, avoid total despair.</p>
+        </div>
+      </section>
+
+      <section id="part4-en" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">4. Revelations for EACO interstellar civilization</h2>
+        <div class="space-y-3">
+          <p>Earth‑side survival lessons can be mapped to interstellar disaster, star‑war and large‑system collapse scenarios:</p>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li><strong>Individuals cannot fully rely on grand top‑level systems</strong>: Interstellar alliance, AI and fleets are not always reliable. Ordinary interstellar households need independent survival contingency plans.</li>
+            <li><strong>Small trusted symbiotic communities are civilization backup seeds</strong>: When interstellar network collapses, DAO‑style local mutual‑aid communities become the most reliable shelter. Large systems create prosperity; distributed small communities guarantee survival under disaster.</li>
+            <li><strong>Guarantee neutral survival rights for ordinary individuals</strong>: Ordinary civilians should not be forced to pick sides among interstellar factions. Institutions should protect neutral civilians from faction‑related purge.</li>
+            <li><strong>Virtual wealth does not equal safety</strong>: Digital assets can vanish instantly in war. Civilization must guarantee basic survival resources for every individual.</li>
+            <li><strong>Civilization design cannot assume all human nature is good</strong>: Even with advanced technology, plunder and fraud persist. We should advocate altruistic symbiosis while building check‑and‑balance mechanisms.</li>
+            <li><strong>Mental survival equals physical survival</strong>: Interstellar catastrophe may break group spirit. EACO civilization self‑healing requires both material circulation and spiritual consolation community mechanism.</li>
+          </ol>
+          <p class="mt-3 italic">Conclusion: Survival in troubled times does not depend on powerful weapons, but risk anticipation, active avoidance, low‑profile forbearance and trusted collaboration. This underlying logic applies to planetary civilization as well as interstellar civilization.</p>
+        </div>
+      </section>
+
+      <section id="links-en" class="eaco-card rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold accent-text mb-4">5. EACO Network Resources｜Earth EACO Interstellar Civilization Network Group</h2>
+        <div class="space-y-2 break-all text-sm">
+          <div><a target="_blank" href="https://ucoingroup.github.io/earths-best-coin/" class="underline accent-text">https://ucoingroup.github.io/earths-best-coin/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eaco50rate/" class="underline accent-text">https://ucoingroup.github.io/eaco50rate/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/100WaysToWealth/" class="underline accent-text">https://ucoingroup.github.io/100WaysToWealth/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/earth-100-friends/" class="underline accent-text">https://ucoingroup.github.io/earth-100-friends/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eacoSWAP/" class="underline accent-text">https://ucoingroup.github.io/eacoSWAP/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/good-books/" class="underline accent-text">https://ucoingroup.github.io/good-books/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eur-eaco/" class="underline accent-text">https://ucoingroup.github.io/eur-eaco/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/au-trade/" class="underline accent-text">https://ucoingroup.github.io/au-trade/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/Mohist-Tech/" class="underline accent-text">https://ucoingroup.github.io/Mohist-Tech/</a></div>
+          <div><a target="_blank" href="https://eaco-build-world.base44.app/" class="underline accent-text">https://eaco-build-world.base44.app/</a></div>
+          <div><a target="_blank" href="https://eaco-web3.base44.app" class="underline accent-text">https://eaco-web3.base44.app</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/Footsteps-of-Civilization/" class="underline accent-text">https://ucoingroup.github.io/Footsteps-of-Civilization/</a></div>
+          <div><a target="_blank" href="https://ucoingroup.github.io/eacoweb3-2026/" class="underline accent-text">https://ucoingroup.github.io/eacoweb3-2026/</a></div>
+          <div><a target="_blank" href="https://discord.gg/bWCDME9Pkc" class="underline accent-text">https://discord.gg/bWCDME9Pkc</a></div>
+        </div>
+        <div class="mt-4 p-3 eaco-card border-theme rounded-lg">
+          <p class="font-bold accent-text">EACO CA:</p>
+          <p class="font-mono mt-1 break‑all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+        </div>
+      </section>
+    </div>
+
+    <footer class="eaco-card rounded-xl p-5 text-center text-sm mt-10">
+      <p>© Earth EACO Interstellar Civilization Network Group</p>
+      <p class="mt-1">EACO CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+    </footer>
+  </div>
+
+  <script>
+    // 主题切换
+    const btnClassical = document.getElementById('btn-classical');
+    const btnXuanqing = document.getElementById('btn-xuanqing');
+    const bodyEl = document.body;
+
+    btnClassical.addEventListener('click', ()=>{
+      bodyEl.setAttribute('data-theme','classical');
+    });
+    btnXuanqing.addEventListener('click', ()=>{
+      bodyEl.setAttribute('data-theme','xuanqing');
+    });
+
+    // 语言切换
+    const langSelect = document.getElementById('lang-select');
+    const zhContent = document.getElementById('zh-content');
+    const enContent = document.getElementById('en-content');
+
+    langSelect.addEventListener('change', function(){
+      if(this.value === 'zh'){
+        zhContent.classList.remove('hidden');
+        enContent.classList.add('hidden');
+      }else{
+        zhContent.classList.add('hidden');
+        enContent.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
