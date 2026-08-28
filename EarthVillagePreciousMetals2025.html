@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌍 EACO Earth · 虚拟地球贵金属交易参考 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== 全局重置 & 字体 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: #0a0e1a;
+            color: #e8edf5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #141b2b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f0b429;
+            border-radius: 12px;
+        }
+
+        /* ===== 粒子背景 ===== */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== 主容器 ===== */
+        .app-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 24px 60px;
+        }
+
+        /* ===== 顶部品牌栏 ===== */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0 18px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            margin-bottom: 16px;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #f7d875, #f0b429);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .brand i {
+            font-size: 32px;
+            -webkit-text-fill-color: initial;
+            color: #f0b429;
+        }
+        .brand-sub {
+            font-size: 13px;
+            font-weight: 400;
+            color: #8892b0;
+            -webkit-text-fill-color: initial;
+            letter-spacing: 2px;
+            margin-left: 6px;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px 12px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: #8892b0;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .lang-btn.active {
+            background: #f0b429;
+            color: #0a0e1a;
+            box-shadow: 0 0 20px rgba(240, 180, 41, 0.25);
+        }
+        .lang-btn:hover:not(.active) {
+            color: #e8edf5;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* ===== 导航锚点 ===== */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px 40px;
+            justify-content: center;
+            padding: 12px 0 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 24px;
+        }
+        .nav-links a {
+            color: #8892b0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: color 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .nav-links a:hover {
+            color: #f0b429;
+        }
+        .nav-links a i {
+            margin-right: 6px;
+        }
+
+        /* ===== 英雄区 ===== */
+        .hero {
+            text-align: center;
+            padding: 20px 0 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 32px;
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #f7d875, #e8a317);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 60px rgba(240, 180, 41, 0.15);
+        }
+        .hero p {
+            font-size: 18px;
+            color: #a8b2d1;
+            margin-top: 10px;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+        .hero .tagline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px 30px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #ccd6f6;
+        }
+        .hero .tagline span {
+            background: rgba(240, 180, 41, 0.08);
+            padding: 4px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(240, 180, 41, 0.15);
+            font-weight: 400;
+        }
+
+        /* ===== 卡片网格 ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin-top: 12px;
+        }
+        .card {
+            background: rgba(20, 27, 43, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 26px 24px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.25s ease, border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(240, 180, 41, 0.25);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+        }
+        .card-icon {
+            font-size: 38px;
+            color: #f0b429;
+            margin-bottom: 14px;
+            display: inline-block;
+        }
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .card-title .badge {
+            font-size: 12px;
+            background: rgba(240, 180, 41, 0.15);
+            color: #f0b429;
+            padding: 0 14px;
+            border-radius: 30px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .card-sub {
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
+        }
+        .card-body {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #ccd6f6;
+        }
+        .card-body .highlight {
+            color: #f7d875;
+            font-weight: 600;
+        }
+        .card-body .label {
+            color: #8892b0;
+            font-weight: 400;
+        }
+        .card-body .value {
+            color: #e8edf5;
+            font-weight: 500;
+        }
+        .divider-light {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin: 18px 0;
+        }
+        .ca-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            color: #a8b2d1;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 12px;
+        }
+        .ca-box i {
+            color: #f0b429;
+            margin-right: 8px;
+        }
+        .card-eaco {
+            border-color: rgba(240, 180, 41, 0.2);
+            background: rgba(240, 180, 41, 0.04);
+        }
+        .card-eaco .card-icon {
+            animation: pulse-glow 2.8s infinite;
+        }
+        @keyframes pulse-glow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 6px rgba(240, 180, 41, 0.2));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(240, 180, 41, 0.5));
+            }
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== 新增加的部分 ===== */
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 48px 0 12px;
+            color: #f7d875;
+            border-left: 4px solid #f0b429;
+            padding-left: 18px;
+        }
+        .section-desc {
+            color: #8892b0;
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding-left: 22px;
+        }
+
+        .table-wrap {
+            max-height: 500px;
+            overflow-y: auto;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .table-wrap thead {
+            position: sticky;
+            top: 0;
+            background: #141b2b;
+            z-index: 2;
+        }
+        .table-wrap th {
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #f0b429;
+            border-bottom: 2px solid rgba(240, 180, 41, 0.2);
+            white-space: nowrap;
+        }
+        .table-wrap td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #ccd6f6;
+        }
+        .table-wrap tbody tr:hover {
+            background: rgba(240, 180, 41, 0.05);
+        }
+        .table-wrap .rank-col {
+            width: 60px;
+            text-align: center;
+            color: #8892b0;
+        }
+        .table-wrap .price-col {
+            font-weight: 500;
+            color: #f7d875;
+        }
+        .table-wrap .uses-col {
+            color: #a8b2d1;
+            font-size: 13px;
+        }
+
+        /* ===== 蓝图卡片 ===== */
+        .blueprint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin: 24px 0 30px;
+        }
+        .blueprint-card {
+            background: rgba(20, 27, 43, 0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 20px;
+            padding: 24px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.2s;
+        }
+        .blueprint-card:hover {
+            border-color: rgba(240, 180, 41, 0.25);
+            transform: translateY(-4px);
+        }
+        .blueprint-card .icon {
+            font-size: 30px;
+            color: #f0b429;
+            margin-bottom: 12px;
+        }
+        .blueprint-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e8edf5;
+        }
+        .blueprint-card p {
+            font-size: 14px;
+            color: #8892b0;
+            line-height: 1.6;
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            margin-top: 56px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #5a6380;
+        }
+        .footer a {
+            color: #8892b0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover {
+            color: #f0b429;
+        }
+        .footer .socials {
+            display: flex;
+            gap: 18px;
+        }
+        .footer .socials i {
+            font-size: 18px;
+        }
+        .update-stamp {
+            text-align: right;
+            font-size: 13px;
+            color: #3d4663;
+            margin-top: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .app-wrapper {
+                padding: 12px 14px 40px;
+            }
+            .header {
+                flex-direction: column;
+                gap: 14px;
+                align-items: stretch;
+            }
+            .lang-switch {
+                align-self: flex-start;
+            }
+            .brand {
+                font-size: 22px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 20px 18px 22px;
+            }
+            .footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            .table-wrap {
+                max-height: 350px;
+            }
+            .table-wrap td,
+            .table-wrap th {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            .nav-links {
+                gap: 12px;
+                font-size: 13px;
+            }
+            .section-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 粒子背景 ===== -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ===== 主应用 ===== -->
+    <div class="app-wrapper">
+
+        <!-- ===== 头部 ===== -->
+        <header class="header">
+            <div class="brand">
+                <i class="fas fa-globe-americas"></i>
+                EACO Earth
+                <span class="brand-sub">· 虚拟地球</span>
+            </div>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中文</button>
+                <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+                <button class="lang-btn" data-lang="ja" onclick="switchLang('ja')">日本語</button>
+            </div>
+        </header>
+
+        <!-- ===== 导航锚点 ===== -->
+        <nav class="nav-links">
+            <a href="#cards-section"><i class="fas fa-cubes"></i> <span data-i18n="nav_assets">核心资产</span></a>
+            <a href="#earth-top"><i class="fas fa-globe-asia"></i> <span data-i18n="nav_earth">地球TOP100</span></a>
+            <a href="#space-top"><i class="fas fa-rocket"></i> <span data-i18n="nav_space">星际TOP100</span></a>
+            <a href="#eaco-blueprint"><i class="fas fa-link"></i> <span data-i18n="nav_blueprint">EACO蓝图</span></a>
+        </nav>
+
+        <!-- ===== 英雄区 ===== -->
+        <section class="hero">
+            <h1>🌍 EACO · 地球村</h1>
+            <p data-i18n="slogan">The only $eaco in the universe and the earth</p>
+            <div class="tagline">
+                <span><i class="fas fa-coins" style="color:#f0b429;margin-right:6px;"></i> <span data-i18n="tag1">EACO ($e)</span></span>
+                <span><i class="fas fa-gem" style="color:#6c8cff;margin-right:6px;"></i> <span data-i18n="tag2">钨金 · 9999</span></span>
+                <span><i class="fas fa-crown" style="color:#f7d875;margin-right:6px;"></i> <span data-i18n="tag3">黄金 · 白银</span></span>
+                <span><i class="fas fa-flag" style="color:#ef4444;margin-right:6px;"></i> <span data-i18n="tag4">England</span></span>
+            </div>
+        </section>
+
+        <!-- ===== 核心资产卡片 (原卡片) ===== -->
+        <section id="cards-section">
+            <div class="grid">
+                <!-- EACO -->
+                <div class="card card-eaco">
+                    <div class="card-icon"><i class="fas fa-coins"></i></div>
+                    <div class="card-title">
+                        <span data-i18n="eaco_title">EACO ($e)</span>
+                        <span class="badge">✦ Earth's best Coin</span>
+                    </div>
+                    <div class="card-sub" data-i18n="eaco_sub">The only $eaco in the universe and the earth</div>
+                    <div class="card-body">
+                        <p data-i18n="eaco_desc">EACO 是一种创新型数字货币，承载地球村的价值共识。独一无二的宇宙级通证。</p>
+                        <div class="ca-box">
+                            <i class="fas fa-link"></i> CA: <span style="color:#e8edf5;">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+                        </div>
+                        <hr class="divider-light" />
+                        <div class="info-row">
+                            <span class="label" data-i18n="eaco_supply">总供应量</span>
+                            <span class="value">21,000,000 $e</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="eaco_chain">链</span>
+                            <span class="value">Solana · SPL</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="eaco_uniq">唯一性</span>
+                            <span class="value" style="color:#f7d875;">✦ 宇宙唯一 · 地球专属</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 钨金 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cube" style="color:#8a9bb5;"></i></div>
+                    <div class="card-title">
+                        <span data-i18n="tungsten_title">钨金</span>
+                        <span class="badge">W · 9999</span>
+                    </div>
+                    <div class="card-sub" data-i18n="tungsten_sub">高纯度 · 工业与战略金属</div>
+                    <div class="card-body">
+                        <p><span class="highlight" data-i18n="tungsten_quality">质量 9999</span> — <span data-i18n="tungsten_market">上海交易市场参考价</span></p>
+                        <p style="font-size:20px;font-weight:700;color:#f7d875;margin:6px 0 10px;">¥ 2,000,000+ <span style="font-size:14px;font-weight:400;color:#8892b0;">/ 吨</span></p>
+                        <hr class="divider-light" />
+                        <div class="info-row">
+                            <span class="label" data-i18n="tungsten_stock">可售库存</span>
+                            <span class="value" style="color:#7ec8e3;">100+ 吨</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="tungsten_location">货源地</span>
+                            <span class="value"><i class="fas fa-map-pin" style="color:#f0b429;margin-right:6px;"></i> <span data-i18n="tungsten_place">广西 · 中国</span></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="tungsten_form">形态</span>
+                            <span class="value" data-i18n="tungsten_form_val">钨条 / 钨粉 / 合金</span>
+                        </div>
+                        <div style="margin-top:12px;background:rgba(240,180,41,0.05);border-radius:10px;padding:10px 14px;border-left:3px solid #f0b429;">
+                            <span style="font-size:13px;color:#8892b0;" data-i18n="tungsten_note">⚡ 现货直供 · 可验货 · 可出口</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 黄金 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-crown" style="color:#f7d875;"></i></div>
+                    <div class="card-title">
+                        <span data-i18n="gold_title">黄金</span>
+                        <span class="badge">Au · 999.9</span>
+                    </div>
+                    <div class="card-sub" data-i18n="gold_sub">全球硬通货 · 避险资产</div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="label" data-i18n="gold_spot">现货参考价</span>
+                            <span class="value">$ 1,945.60 <span style="font-size:13px;color:#6fcf97;">▲ +0.32%</span></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="gold_ounce">盎司 / 克</span>
+                            <span class="value">¥ 452.30 / g</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="gold_supply">全球储量</span>
+                            <span class="value">≈ 54,000 吨</span>
+                        </div>
+                        <hr class="divider-light" />
+                        <p style="font-size:14px;color:#8892b0;" data-i18n="gold_note">伦敦金 · 纽约金 · 上海金 多市场联动</p>
+                    </div>
+                </div>
+
+                <!-- 白银 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-circle" style="color:#c0c8e0;"></i></div>
+                    <div class="card-title">
+                        <span data-i18n="silver_title">白银</span>
+                        <span class="badge">Ag · 999</span>
+                    </div>
+                    <div class="card-sub" data-i18n="silver_sub">工业+投资双轮驱动</div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="label" data-i18n="silver_spot">现货参考价</span>
+                            <span class="value">$ 24.78 <span style="font-size:13px;color:#f28b82;">▼ -0.15%</span></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="silver_ounce">盎司 / 克</span>
+                            <span class="value">¥ 5.72 / g</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="silver_demand">年需求</span>
+                            <span class="value">≈ 32,000 吨</span>
+                        </div>
+                        <hr class="divider-light" />
+                        <p style="font-size:14px;color:#8892b0;" data-i18n="silver_note">光伏 · 电子 · 首饰 多用途支撑</p>
+                    </div>
+                </div>
+
+                <!-- England -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-flag" style="color:#ef4444;"></i></div>
+                    <div class="card-title">
+                        <span data-i18n="england_title">England · 英国</span>
+                        <span class="badge">LME · 伦敦</span>
+                    </div>
+                    <div class="card-sub" data-i18n="england_sub">全球金属交易中心</div>
+                    <div class="card-body">
+                        <p data-i18n="england_desc">伦敦金属交易所 (LME) 是全球最大的有色金属交易中心，涵盖铜、铝、锌、镍、铅、锡等。</p>
+                        <hr class="divider-light" />
+                        <div class="info-row">
+                            <span class="label" data-i18n="england_lme">LME 铜</span>
+                            <span class="value">$ 8,420.00 / t</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="england_al">铝</span>
+                            <span class="value">$ 2,210.00 / t</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label" data-i18n="england_zn">锌</span>
+                            <span class="value">$ 2,860.00 / t</span>
+                        </div>
+                        <div style="margin-top:14px;background:rgba(239,68,68,0.04);border-radius:10px;padding:10px 14px;border-left:3px solid #ef4444;">
+                            <span style="font-size:13px;color:#8892b0;" data-i18n="england_note">🏛️ 伦敦 · 全球金属定价锚</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- ===== 新内容：地球 TOP100 ===== -->
+        <section id="earth-top">
+            <h2 class="section-title" data-i18n="earth_top_title">🌍 地球村最贵的100种贵金属</h2>
+            <p class="section-desc" data-i18n="earth_top_desc">基于当前市场价值与稀缺性排序（模拟数据，仅供参考）</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="rank-col" data-i18n="th_rank">排名</th>
+                            <th data-i18n="th_name">名称</th>
+                            <th data-i18n="th_symbol">符号</th>
+                            <th data-i18n="th_price">价格 (USD/g)</th>
+                            <th class="uses-col" data-i18n="th_uses">主要用途</th>
+                        </tr>
+                    </thead>
+                    <tbody id="earthTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- ===== 新内容：星际 TOP100 ===== -->
+        <section id="space-top">
+            <h2 class="section-title" data-i18n="space_top_title">🚀 宇宙星际文明最贵的100种贵金属</h2>
+            <p class="section-desc" data-i18n="space_top_desc">基于星际科技价值与宇宙稀缺性（模拟数据，仅供参考）</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="rank-col" data-i18n="th_rank">排名</th>
+                            <th data-i18n="th_name">名称</th>
+                            <th data-i18n="th_symbol">符号</th>
+                            <th data-i18n="th_price">价格 (USD/g)</th>
+                            <th class="uses-col" data-i18n="th_uses">主要用途</th>
+                        </tr>
+                    </thead>
+                    <tbody id="spaceTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- ===== 新内容：EACO 发展蓝图 ===== -->
+        <section id="eaco-blueprint">
+            <h2 class="section-title" data-i18n="eaco_blueprint_title">✨ EACO发展蓝图：如何结合贵金属经济</h2>
+            <div class="blueprint-grid">
+                <div class="blueprint-card">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 data-i18n="eaco_point1_title">锚定地球贵金属指数</h3>
+                    <p data-i18n="eaco_point1_desc">EACO挂钩地球贵金属综合指数（黄金、白银、铂、钯、铑等），成为数字化价值存储工具，实现真实资产链上映射。</p>
+                </div>
+                <div class="blueprint-card">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <h3 data-i18n="eaco_point2_title">星际资源预期价值</h3>
+                    <p data-i18n="eaco_point2_desc">引入小行星采矿（如灵神星）、月球氦-3等未来资源预期，通过EACO实现跨时间价值互联与早期定价。</p>
+                </div>
+                <div class="blueprint-card">
+                    <div class="icon"><i class="fas fa-handshake"></i></div>
+                    <h3 data-i18n="eaco_point3_title">跨文明价值桥梁</h3>
+                    <p data-i18n="eaco_point3_desc">作为地球与星际文明的价值通证，承载不同文明对稀缺资源的共识，推动星际贸易与协作。</p>
+                </div>
+                <div class="blueprint-card">
+                    <div class="icon"><i class="fas fa-cube"></i></div>
+                    <h3 data-i18n="eaco_point4_title">实物资产数字化</h3>
+                    <p data-i18n="eaco_point4_desc">支持钨金、黄金等实物资产的链上确权与流转，打通真实与虚拟世界，赋能全球贵金属交易。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 综合信息条 ===== -->
+        <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;background:rgba(20,27,43,0.4);border-radius:20px;padding:20px 28px;border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px);">
+            <div>
+                <span style="color:#8892b0;font-size:14px;" data-i18n="eco_note">🌱 地球村 · 虚拟贵金属交易参考</span>
+            </div>
+            <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                <span style="color:#a8b2d1;font-size:14px;"><i class="fas fa-database" style="color:#f0b429;margin-right:6px;"></i> <span data-i18n="data_source">数据来源：模拟地球 · 实时参考</span></span>
+                <span style="color:#5a6380;font-size:13px;" id="update-time"><i class="far fa-clock"></i> <span data-i18n="update_label">更新</span> 2026-08-28 14:30 UTC</span>
+            </div>
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <footer class="footer">
+            <div>
+                <span style="color:#f0b429;">✦</span> EACO Earth · <span data-i18n="footer_tag">虚拟地球 · 贵金属参考</span>
+                <span style="margin-left:12px;color:#3d4663;">|</span>
+                <span style="color:#5a6380;" data-i18n="footer_right">© 2025 EACO 地球村</span>
+            </div>
+            <div class="socials">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </footer>
+
+        <div class="update-stamp">
+            <span data-i18n="footer_disclaimer">⚠️ 所有价格均为模拟参考，不构成投资建议</span>
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== 多语言词典 ===== -->
+    <script>
+        const i18n = {
+            zh: {
+                slogan: '宇宙与地球唯一的 $eaco',
+                tag1: 'EACO ($e)',
+                tag2: '钨金 · 9999',
+                tag3: '黄金 · 白银',
+                tag4: 'England',
+                eaco_title: 'EACO ($e)',
+                eaco_sub: '宇宙与地球唯一的 $eaco',
+                eaco_desc: 'EACO 是一种创新型数字货币，承载地球村的价值共识。独一无二的宇宙级通证。',
+                eaco_supply: '总供应量',
+                eaco_chain: '链',
+                eaco_uniq: '唯一性',
+                tungsten_title: '钨金',
+                tungsten_sub: '高纯度 · 工业与战略金属',
+                tungsten_quality: '质量 9999',
+                tungsten_market: '上海交易市场参考价',
+                tungsten_stock: '可售库存',
+                tungsten_location: '货源地',
+                tungsten_place: '广西 · 中国',
+                tungsten_form: '形态',
+                tungsten_form_val: '钨条 / 钨粉 / 合金',
+                tungsten_note: '⚡ 现货直供 · 可验货 · 可出口',
+                gold_title: '黄金',
+                gold_sub: '全球硬通货 · 避险资产',
+                gold_spot: '现货参考价',
+                gold_ounce: '盎司 / 克',
+                gold_supply: '全球储量',
+                gold_note: '伦敦金 · 纽约金 · 上海金 多市场联动',
+                silver_title: '白银',
+                silver_sub: '工业+投资双轮驱动',
+                silver_spot: '现货参考价',
+                silver_ounce: '盎司 / 克',
+                silver_demand: '年需求',
+                silver_note: '光伏 · 电子 · 首饰 多用途支撑',
+                england_title: 'England · 英国',
+                england_sub: '全球金属交易中心',
+                england_desc: '伦敦金属交易所 (LME) 是全球最大的有色金属交易中心，涵盖铜、铝、锌、镍、铅、锡等。',
+                england_lme: 'LME 铜',
+                england_al: '铝',
+                england_zn: '锌',
+                england_note: '🏛️ 伦敦 · 全球金属定价锚',
+                eco_note: '🌱 地球村 · 虚拟贵金属交易参考',
+                data_source: '数据来源：模拟地球 · 实时参考',
+                update_label: '更新',
+                footer_tag: '虚拟地球 · 贵金属参考',
+                footer_right: '© 2026 EACO 地球村',
+                footer_disclaimer: '⚠️ 所有价格均为模拟参考，不构成投资建议',
+                nav_assets: '核心资产',
+                nav_earth: '地球TOP100',
+                nav_space: '星际TOP100',
+                nav_blueprint: 'EACO蓝图',
+                earth_top_title: '🌍 地球村最贵的100种贵金属',
+                earth_top_desc: '基于当前市场价值与稀缺性排序（模拟数据，仅供参考）',
+                space_top_title: '🚀 宇宙星际文明最贵的100种贵金属',
+                space_top_desc: '基于星际科技价值与宇宙稀缺性（模拟数据，仅供参考）',
+                eaco_blueprint_title: '✨ EACO发展蓝图：如何结合贵金属经济',
+                eaco_point1_title: '锚定地球贵金属指数',
+                eaco_point1_desc: 'EACO挂钩地球贵金属综合指数（黄金、白银、铂、钯、铑等），成为数字化价值存储工具，实现真实资产链上映射。',
+                eaco_point2_title: '星际资源预期价值',
+                eaco_point2_desc: '引入小行星采矿（如灵神星）、月球氦-3等未来资源预期，通过EACO实现跨时间价值互联与早期定价。',
+                eaco_point3_title: '跨文明价值桥梁',
+                eaco_point3_desc: '作为地球与星际文明的价值通证，承载不同文明对稀缺资源的共识，推动星际贸易与协作。',
+                eaco_point4_title: '实物资产数字化',
+                eaco_point4_desc: '支持钨金、黄金等实物资产的链上确权与流转，打通真实与虚拟世界，赋能全球贵金属交易。',
+                th_rank: '排名',
+                th_name: '名称',
+                th_symbol: '符号',
+                th_price: '价格 (USD/g)',
+                th_uses: '主要用途'
+            },
+            en: {
+                slogan: 'The only $eaco in the universe and the earth',
+                tag1: 'EACO ($e)',
+                tag2: 'Tungsten · 9999',
+                tag3: 'Gold · Silver',
+                tag4: 'England',
+                eaco_title: 'EACO ($e)',
+                eaco_sub: 'The only $eaco in the universe and the earth',
+                eaco_desc: 'EACO is an innovative digital currency that carries the value consensus of the global village. A unique cosmic-level token.',
+                eaco_supply: 'Total Supply',
+                eaco_chain: 'Chain',
+                eaco_uniq: 'Uniqueness',
+                tungsten_title: 'Tungsten',
+                tungsten_sub: 'High Purity · Industrial & Strategic Metal',
+                tungsten_quality: 'Quality 9999',
+                tungsten_market: 'Shanghai Market Reference',
+                tungsten_stock: 'Available Stock',
+                tungsten_location: 'Origin',
+                tungsten_place: 'Guangxi · China',
+                tungsten_form: 'Form',
+                tungsten_form_val: 'Bar / Powder / Alloy',
+                tungsten_note: '⚡ Spot supply · Inspection available · Exportable',
+                gold_title: 'Gold',
+                gold_sub: 'Global hard currency · Safe-haven asset',
+                gold_spot: 'Spot Reference',
+                gold_ounce: 'Ounce / Gram',
+                gold_supply: 'Global Reserves',
+                gold_note: 'London · New York · Shanghai multi-market linkage',
+                silver_title: 'Silver',
+                silver_sub: 'Industrial + Investment dual drive',
+                silver_spot: 'Spot Reference',
+                silver_ounce: 'Ounce / Gram',
+                silver_demand: 'Annual Demand',
+                silver_note: 'PV · Electronics · Jewelry multi-use support',
+                england_title: 'England · UK',
+                england_sub: 'Global Metal Trading Hub',
+                england_desc: 'The London Metal Exchange (LME) is the world\'s largest non-ferrous metal trading center, covering copper, aluminum, zinc, nickel, lead, tin, etc.',
+                england_lme: 'LME Copper',
+                england_al: 'Aluminum',
+                england_zn: 'Zinc',
+                england_note: '🏛️ London · Global metal pricing anchor',
+                eco_note: '🌱 Global Village · Virtual Precious Metals Reference',
+                data_source: 'Data Source: Simulated Earth · Real-time Reference',
+                update_label: 'Updated',
+                footer_tag: 'Virtual Earth · Precious Metals Reference',
+                footer_right: '© 2026 EACO Earth Village',
+                footer_disclaimer: '⚠️ All prices are simulated for reference only, not investment advice',
+                nav_assets: 'Core Assets',
+                nav_earth: 'Earth TOP100',
+                nav_space: 'Space TOP100',
+                nav_blueprint: 'EACO Blueprint',
+                earth_top_title: '🌍 Earth\'s Top 100 Most Valuable Precious Metals',
+                earth_top_desc: 'Ranked by current market value and scarcity (simulated data, for reference only)',
+                space_top_title: '🚀 Top 100 Most Valuable Precious Metals in Interstellar Civilization',
+                space_top_desc: 'Ranked by interstellar technological value and cosmic scarcity (simulated data, for reference only)',
+                eaco_blueprint_title: '✨ EACO Development Blueprint: Integrating with the Precious Metals Economy',
+                eaco_point1_title: 'Anchoring Earth\'s Precious Metals Index',
+                eaco_point1_desc: 'EACO is pegged to a composite index of Earth\'s precious metals (Gold, Silver, Platinum, Palladium, Rhodium, etc.), becoming a digital store of value and enabling on-chain mapping of real assets.',
+                eaco_point2_title: 'Interstellar Resource Forward Value',
+                eaco_point2_desc: 'Incorporate future resource expectations such as asteroid mining (e.g., 16 Psyche) and lunar Helium-3, enabling cross-temporal value interconnection and early pricing through EACO.',
+                eaco_point3_title: 'Cross-Civilization Value Bridge',
+                eaco_point3_desc: 'As a value token connecting Earth and interstellar civilizations, it carries consensus on scarce resources across different civilizations, facilitating interstellar trade and collaboration.',
+                eaco_point4_title: 'Real Asset Digitization',
+                eaco_point4_desc: 'Support on-chain verification and circulation of physical assets like tungsten and gold, bridging the physical and virtual worlds, empowering global precious metals trading.',
+                th_rank: 'Rank',
+                th_name: 'Name',
+                th_symbol: 'Symbol',
+                th_price: 'Price (USD/g)',
+                th_uses: 'Main Uses'
+            },
+            ja: {
+                slogan: '宇宙と地球で唯一の $eaco',
+                tag1: 'EACO ($e)',
+                tag2: 'タングステン · 9999',
+                tag3: '金 · 銀',
+                tag4: 'イングランド',
+                eaco_title: 'EACO ($e)',
+                eaco_sub: '宇宙と地球で唯一の $eaco',
+                eaco_desc: 'EACOは、地球村の価値コンセンサスを担う革新的なデジタル通貨です。唯一無二の宇宙レベルのトークン。',
+                eaco_supply: '総供給量',
+                eaco_chain: 'チェーン',
+                eaco_uniq: 'ユニーク性',
+                tungsten_title: 'タングステン',
+                tungsten_sub: '高純度 · 工業用・戦略金属',
+                tungsten_quality: '品質 9999',
+                tungsten_market: '上海取引市場参考価格',
+                tungsten_stock: '在庫可能',
+                tungsten_location: '産地',
+                tungsten_place: '広西 · 中国',
+                tungsten_form: '形態',
+                tungsten_form_val: 'インゴット / 粉末 / 合金',
+                tungsten_note: '⚡ 現物直送 · 検品可 · 輸出可',
+                gold_title: '金',
+                gold_sub: 'グローバルなハードカレンシー · 安全資産',
+                gold_spot: '現物参考価格',
+                gold_ounce: 'オンス / グラム',
+                gold_supply: '世界埋蔵量',
+                gold_note: 'ロンドン · ニューヨーク · 上海 マルチマーケット連動',
+                silver_title: '銀',
+                silver_sub: '産業 + 投資 両輪駆動',
+                silver_spot: '現物参考価格',
+                silver_ounce: 'オンス / グラム',
+                silver_demand: '年間需要',
+                silver_note: '太陽光発電 · 電子 · 宝飾品 多用途サポート',
+                england_title: 'イングランド · 英国',
+                england_sub: 'グローバル金属取引ハブ',
+                england_desc: 'ロンドン金属取引所（LME）は世界最大の非鉄金属取引センターで、銅、アルミニウム、亜鉛、ニッケル、鉛、スズなどを扱っています。',
+                england_lme: 'LME 銅',
+                england_al: 'アルミニウム',
+                england_zn: '亜鉛',
+                england_note: '🏛️ ロンドン · グローバル金属価格のアンカー',
+                eco_note: '🌱 地球村 · バーチャル貴金属取引リファレンス',
+                data_source: 'データソース：シミュレーション地球 · リアルタイム参考',
+                update_label: '更新',
+                footer_tag: 'バーチャルアース · 貴金属リファレンス',
+                footer_right: '© 2026 EACO 地球村',
+                footer_disclaimer: '⚠️ すべての価格はシミュレーション参考であり、投資アドバイスではありません',
+                nav_assets: 'コア資産',
+                nav_earth: '地球TOP100',
+                nav_space: '宇宙TOP100',
+                nav_blueprint: 'EACO青写真',
+                earth_top_title: '🌍 地球村で最も価値のある100種の貴金属',
+                earth_top_desc: '現在の市場価値と希少性に基づく順位（シミュレーションデータ、参考用）',
+                space_top_title: '🚀 宇宙星間文明で最も価値のある100種の貴金属',
+                space_top_desc: '星間技術価値と宇宙の希少性に基づく（シミュレーションデータ、参考用）',
+                eaco_blueprint_title: '✨ EACO開発青写真：貴金属経済との統合',
+                eaco_point1_title: '地球貴金属指数へのペッグ',
+                eaco_point1_desc: 'EACOは地球の貴金属複合指数（金、銀、プラチナ、パラジウム、ロジウムなど）に連動し、デジタル価値保存手段となり、実物資産のオンチェーン化を実現します。',
+                eaco_point2_title: '星間リソースの将来価値',
+                eaco_point2_desc: '小惑星採掘（例：プシケ星）や月のヘリウム3などの将来リソース見込みを組み込み、EACOを通じて時間を超えた価値連携と初期価格設定を実現します。',
+                eaco_point3_title: '文明間価値ブリッジ',
+                eaco_point3_desc: '地球と星間文明をつなぐ価値トークンとして、異なる文明間の希少リソースに対するコンセンサスを担い、星間貿易と協力を促進します。',
+                eaco_point4_title: '実物資産のデジタル化',
+                eaco_point4_desc: 'タングステン、金などの実物資産のチェーン上の所有権確認と流通をサポートし、現実と仮想世界を結び、グローバルな貴金属取引を支援します。',
+                th_rank: 'ランク',
+                th_name: '名称',
+                th_symbol: '記号',
+                th_price: '価格 (USD/g)',
+                th_uses: '主な用途'
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function switchLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (i18n[lang] && i18n[lang][key] !== undefined) {
+                    el.textContent = i18n[lang][key];
+                }
+            });
+            // 表格表头重新翻译（动态）
+            document.querySelectorAll('th[data-i18n]').forEach(th => {
+                const key = th.dataset.i18n;
+                if (i18n[lang] && i18n[lang][key] !== undefined) {
+                    th.textContent = i18n[lang][key];
+                }
+            });
+        }
+
+        // ===== 生成地球贵金属数据 =====
+        function generateEarthMetals() {
+            const metals = [];
+            // 前20个真实/半真实数据
+            const real = [
+                { name: 'Californium-252', symbol: 'Cf-252', price: 27000000, uses: '核医学放疗、中子源、材料研究' },
+                { name: 'Francium', symbol: 'Fr', price: 1000000000, uses: '科学研究（极稀有）' },
+                { name: 'Osmium', symbol: 'Os', price: 15000, uses: '喷气发动机、航天器零件、钢笔尖、手术器械' },
+                { name: 'Rhodium', symbol: 'Rh', price: 15000, uses: '汽车催化转化器、科学仪器、航空航天、制药' },
+                { name: 'Iridium', symbol: 'Ir', price: 4800, uses: '电子设备、珠宝、航天器、耐腐蚀合金' },
+                { name: 'Palladium', symbol: 'Pd', price: 1100, uses: '汽车催化转化器、电子、氢能存储、可再生能源' },
+                { name: 'Platinum', symbol: 'Pt', price: 1050, uses: '汽车催化剂、珠宝、氢能、化工' },
+                { name: 'Gold', symbol: 'Au', price: 75, uses: '避险资产、央行储备、珠宝、电子' },
+                { name: 'Ruthenium', symbol: 'Ru', price: 500, uses: '电子、化工催化剂、硬质合金' },
+                { name: 'Rhenium', symbol: 'Re', price: 300, uses: '喷气发动机高温合金、催化剂' },
+                { name: 'Silver', symbol: 'Ag', price: 0.7, uses: '工业、投资、珠宝、电子' },
+                { name: 'Indium', symbol: 'In', price: 0.3, uses: 'ITO靶材、半导体、合金' },
+                { name: 'Gallium', symbol: 'Ga', price: 0.4, uses: '半导体、LED、太阳能电池' },
+                { name: 'Beryllium', symbol: 'Be', price: 0.5, uses: '航空航天、核工业、X射线窗' },
+                { name: 'Scandium', symbol: 'Sc', price: 20, uses: '航空航天合金、燃料电池' },
+                { name: 'Yttrium', symbol: 'Y', price: 30, uses: '激光、荧光粉、超导材料' },
+                { name: 'Lanthanum', symbol: 'La', price: 5, uses: '催化剂、光学玻璃、电池' },
+                { name: 'Cerium', symbol: 'Ce', price: 4, uses: '催化剂、抛光粉、陶瓷' },
+                { name: 'Praseodymium', symbol: 'Pr', price: 8, uses: '永磁材料、光学纤维' },
+                { name: 'Neodymium', symbol: 'Nd', price: 6, uses: '强力永磁、激光器' }
+            ];
+            // 添加前20
+            real.forEach((item, idx) => {
+                metals.push({
+                    rank: idx + 1,
+                    name: item.name,
+                    symbol: item.symbol,
+                    price: item.price,
+                    uses: item.uses
+                });
+            });
+            // 后80个模拟数据
+            const metalNames = ['Titanium', 'Vanadium', 'Chromium', 'Manganese', 'Iron', 'Cobalt', 'Nickel', 'Copper', 'Zinc', 'Zirconium',
+                'Niobium', 'Molybdenum', 'Technetium', 'Ruthenium', 'Rhodium', 'Palladium', 'Silver', 'Cadmium', 'Hafnium',
+                'Tantalum', 'Tungsten', 'Rhenium', 'Osmium', 'Iridium', 'Platinum', 'Gold', 'Mercury', 'Thallium', 'Lead',
+                'Bismuth', 'Polonium', 'Lanthanum', 'Cerium', 'Praseodymium', 'Neodymium', 'Promethium', 'Samarium', 'Europium',
+                'Gadolinium', 'Terbium', 'Dysprosium', 'Holmium', 'Erbium', 'Thulium', 'Ytterbium', 'Lutetium', 'Actinium',
+                'Thorium', 'Protactinium', 'Uranium', 'Neptunium', 'Plutonium', 'Americium', 'Curium', 'Berkelium',
+                'Californium', 'Einsteinium', 'Fermium', 'Mendelevium', 'Nobelium', 'Lawrencium', 'Rutherfordium',
+                'Dubnium', 'Seaborgium', 'Bohrium', 'Hassium', 'Meitnerium', 'Darmstadtium', 'Roentgenium', 'Copernicium',
+                'Nihonium', 'Flerovium', 'Moscovium', 'Livermorium', 'Tennessine', 'Oganesson'
+            ];
+            // 从第21个开始
+            for (let i = 20; i < 100; i++) {
+                const name = metalNames[i % metalNames.length] + (i > 79 ? '-iso' : '');
+                const symbol = (name.substring(0, 2)).toUpperCase();
+                const price = Math.max(0.01, 300 * Math.pow(0.9, i - 19)); // 递减
+                const uses = ['催化剂', '电子', '合金', '航空航天', '化工', '能源', '医疗', '半导体', '光学', '耐腐蚀'][i % 10];
+                metals.push({
+                    rank: i + 1,
+                    name: name,
+                    symbol: symbol,
+                    price: parseFloat(price.toFixed(4)),
+                    uses: uses + ' · 工业/科技用途'
+                });
+            }
+            return metals;
+        }
+
+        // ===== 生成星际贵金属数据 =====
+        function generateSpaceMetals() {
+            const space = [];
+            const realSpace = [
+                { name: 'Antimatter', symbol: 'Anti', price: 62500000000000, uses: '星际推进、能量存储、武器' },
+                { name: 'Helium-3', symbol: 'He-3', price: 3000000, uses: '核聚变燃料（月球蕴藏丰富）' },
+                { name: 'Californium-252', symbol: 'Cf-252', price: 27000000, uses: '星际核医学、中子源' },
+                { name: 'Red Diamond', symbol: 'R.D', price: 4700000, uses: '星际奢侈品、高级工业切割' },
+                { name: 'Francium', symbol: 'Fr', price: 1000000000, uses: '基础物理研究' },
+                { name: 'Tritium', symbol: 'T', price: 30000, uses: '核聚变实验、星际照明' },
+                { name: 'Dark Matter', symbol: 'DM', price: 9999999999, uses: '暗物质引擎、宇宙结构研究' },
+                { name: 'Exotic Matter', symbol: 'Exo', price: 8888888888, uses: '星际通信、量子纠缠' },
+                { name: 'Strangelet', symbol: 'Str', price: 7777777777, uses: '星际能源、武器' },
+                { name: 'Neutronium', symbol: 'Nt', price: 6666666666, uses: '中子星材料、超致密建筑' },
+                { name: 'Lunar Regolith', symbol: 'LReg', price: 200000000, uses: '星际基地建设、资源提取' },
+                { name: 'Platinum Asteroid Ore', symbol: 'PtAst', price: 5000000, uses: '星际工业、铂金提炼' },
+                { name: 'Gold Asteroid Ore', symbol: 'AuAst', price: 4000000, uses: '星际金融、工艺品' },
+                { name: 'Rare Earth Isotopes', symbol: 'REI', price: 1000000, uses: '星际电子、超导' },
+                { name: 'Quantum Crystal', symbol: 'QC', price: 8000000, uses: '量子计算、时空导航' },
+                { name: 'Gravitonium', symbol: 'Grav', price: 9000000, uses: '重力控制装置' },
+                { name: 'Chronoton', symbol: 'Chr', price: 7000000, uses: '时间操控实验' },
+                { name: 'Aetherium', symbol: 'Aet', price: 6000000, uses: '星际护盾、能量场' },
+                { name: 'Phlogiston', symbol: 'Phl', price: 5000000, uses: '星际化学推进剂' },
+                { name: 'Orichalcum', symbol: 'Ori', price: 4000000, uses: '星际建筑、传奇合金' }
+            ];
+            realSpace.forEach((item, idx) => {
+                space.push({
+                    rank: idx + 1,
+                    name: item.name,
+                    symbol: item.symbol,
+                    price: item.price,
+                    uses: item.uses
+                });
+            });
+            // 后80个模拟
+            const spaceNames = ['Quasarite', 'Pulsarite', 'Nebula Ore', 'Void Crystal', 'Star Diamond', 'Cosmic Iron',
+                'Galactic Bronze', 'Stellar Silver', 'Hyperium', 'Metalloid X', 'Zephyrium', 'Astral Gold',
+                'Celestial Platinum', 'Ethereal Rhodium', 'Spectral Iridium', 'Void Palladium', 'Nova Ruthenium',
+                'Supernova Osmium', 'Singularity Rhenium', 'Phantom Indium', 'Shadow Gallium', 'Prism Beryllium',
+                'Aurora Scandium', 'Nexus Yttrium', 'Chronos Lanthanum', 'Eon Cerium', 'Zen Praseodymium',
+                'Karma Neodymium', 'Samsara Samarium', 'Moksha Europium', 'Nirvana Gadolinium', 'Cosmos Terbium',
+                'Orbit Dysprosium', 'Flare Holmium', 'Ember Erbium', 'Spark Thulium', 'Glow Ytterbium', 'Radiant Lutetium',
+                'Fusion Actinium', 'Plasma Thorium', 'Photon Protactinium', 'Warp Uranium', 'Wormhole Neptunium',
+                'Tesseract Plutonium', 'Hypercube Americium', 'Stargate Curium', 'Vortex Berkelium', 'Nebula Californium',
+                'Pulsar Einsteinium', 'Quasar Fermium', 'Blackhole Mendelevium', 'Event Nobelium', 'Singularity Lawrencium',
+                'Dimension Rutherfordium', 'Paradox Dubnium', 'Anomaly Seaborgium', 'Flux Bohrium', 'Phase Hassium',
+                'Stasis Meitnerium', 'Apex Darmstadtium', 'Zenith Roentgenium', 'Apex Copernicium', 'Zen Nihonium',
+                'Kai Flerovium', 'Ryu Moscovium', 'Shin Livermorium', 'Ten Tennessine', 'Oga Oganesson'
+            ];
+            for (let i = 20; i < 100; i++) {
+                const name = spaceNames[i % spaceNames.length] + (i > 79 ? '-X' : '');
+                const symbol = (name.substring(0, 3)).toUpperCase();
+                const price = Math.max(100, 3000000 * Math.pow(0.85, i - 19));
+                const uses = ['星际引擎', '武器', '护盾', '通信', '能源', '建筑', '医疗', '科研', '导航', '材料'][i % 10];
+                space.push({
+                    rank: i + 1,
+                    name: name,
+                    symbol: symbol,
+                    price: parseFloat(price.toFixed(2)),
+                    uses: uses + ' · 星际科技用途'
+                });
+            }
+            return space;
+        }
+
+        // ===== 渲染表格 =====
+        function renderTable(data, tbodyId) {
+            const tbody = document.getElementById(tbodyId);
+            if (!tbody) return;
+            let html = '';
+            data.forEach(item => {
+                html += `<tr>
+                    <td class="rank-col">${item.rank}</td>
+                    <td>${item.name}</td>
+                    <td>${item.symbol}</td>
+                    <td class="price-col">${item.price.toLocaleString()}</td>
+                    <td class="uses-col">${item.uses}</td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // ===== 初始化 =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // 语言
+            switchLang('zh');
+
+            // 生成并渲染地球数据
+            const earthData = generateEarthMetals();
+            renderTable(earthData, 'earthTableBody');
+
+            // 生成并渲染星际数据
+            const spaceData = generateSpaceMetals();
+            renderTable(spaceData, 'spaceTableBody');
+
+            // 更新时间
+            const now = new Date();
+            const utc = now.toISOString().slice(0, 16).replace('T', ' ');
+            document.getElementById('update-time').innerHTML =
+                `<i class="far fa-clock"></i> ${i18n.zh.update_label} ${utc} UTC`;
+        });
+
+        // ===== 粒子背景 =====
+        (function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            const particles = [];
+            const NUM = 70;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.r = Math.random() * 2.2 + 0.6;
+                    this.dx = (Math.random() - 0.5) * 0.25;
+                    this.dy = (Math.random() - 0.5) * 0.25;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                }
+                update() {
+                    this.x += this.dx;
+                    this.y += this.dy;
+                    if (this.x < 0 || this.x > w) this.dx *= -1;
+                    if (this.y < 0 || this.y > h) this.dy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(240, 180, 41, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < NUM; i++) {
+                particles.push(new Particle());
+            }
+
+            function drawLines() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 140) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(240, 180, 41, ${0.06 * (1 - dist / 140)})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update();
+                    p.draw(); });
+                drawLines();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+    </script>
+</body>
+</html>
