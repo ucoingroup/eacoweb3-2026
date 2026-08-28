@@ -552,5 +552,8 @@ A：风波炼人心、认知升维度、流量赋价值、向善赢未来；所�
 
 ---
 
+《我的女友景甜》原文：
+
+https://github.com/HEJustinSun/my-girlfriend-jingtian-latex
 
 > 本栏目部分内容由AI生成，仅供参考。
