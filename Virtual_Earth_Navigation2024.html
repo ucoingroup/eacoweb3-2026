@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eaco - Virtual Earth Navigation | EACO 30 Core Factors</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        mono: ['"Orbitron"', 'monospace'],
+                    },
+                    colors: {
+                        army: { base: '#4b5320', light: '#6b7535', dark: '#2f3518', accent: '#8fbc8f' },
+                        xuanqing: { base: '#1a2332', light: '#2c3e50', dark: '#0d1219', accent: '#3498db' },
+                        beige: { base: '#f5f5dc', light: '#fff8dc', dark: '#e8e4c9', accent: '#8b4513' },
+                        env: { base: '#2ecc71', light: '#27ae60', dark: '#1e8449' },
+                        tech: { base: '#9b59b6', light: '#8e44ad', dark: '#6c3483' },
+                        resource: { base: '#f39c12', light: '#e67e22', dark: '#d35400' },
+                        social: { base: '#3498db', light: '#2980b9', dark: '#1f618d' },
+                        finance: { base: '#e74c3c', light: '#c0392b', dark: '#a93226' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --theme-bg: #4b5320;
+            --theme-bg-light: #6b7535;
+            --theme-bg-dark: #2f3518;
+            --theme-text: #ffffff;
+            --theme-accent: #8fbc8f;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            background-color: var(--theme-bg);
+            color: var(--theme-text);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        .theme-army { --theme-bg: #4b5320; --theme-bg-light: #6b7535; --theme-bg-dark: #2f3518; --theme-text: #e0e0e0; --theme-accent: #8fbc8f; --card-bg: rgba(47, 53, 24, 0.6); --card-border: rgba(143, 188, 143, 0.3); }
+        .theme-xuanqing { --theme-bg: #1a2332; --theme-bg-light: #2c3e50; --theme-bg-dark: #0d1219; --theme-text: #ecf0f1; --theme-accent: #3498db; --card-bg: rgba(13, 18, 25, 0.6); --card-border: rgba(52, 152, 219, 0.3); }
+        .theme-beige { --theme-bg: #f5f5dc; --theme-bg-light: #fff8dc; --theme-bg-dark: #e8e4c9; --theme-text: #3e2723; --theme-accent: #8b4513; --card-bg: rgba(255, 255, 255, 0.6); --card-border: rgba(139, 69, 19, 0.2); }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: var(--theme-accent);
+        }
+
+        /* 3D Earth Placeholder Animation */
+        .earth-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--theme-accent), var(--theme-bg-dark));
+            box-shadow: 0 0 50px var(--theme-accent);
+            animation: rotateEarth 20s linear infinite;
+            overflow: hidden;
+        }
+        
+        @keyframes rotateEarth {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .earth-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://picsum.photos/600/600?grayscale&blur=2') center/cover;
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--theme-bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--theme-accent); border-radius: 4px; }
+        
+        .nav-item-active {
+            border-bottom: 2px solid var(--theme-accent);
+            color: var(--theme-accent);
+        }
+
+        .factor-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .factor-card:hover .factor-trend-icon {
+            transform: scale(1.2);
+        }
+
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: var(--theme-bg-dark);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body class="theme-army min-h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass-card border-b border-opacity-20">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <i class="fa-solid fa-earth-americas text-3xl animate-pulse" style="color: var(--theme-accent)"></i>
+                <div>
+                    <h1 class="text-xl font-bold font-mono tracking-wider leading-none">AAP NAVIGATION</h1>
+                    <span class="text-xs opacity-70">Virtual Earth & EACO 30 Core Index</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <!-- Search -->
+                <div class="hidden md:flex items-center bg-[var(--theme-bg-dark)] rounded-full px-3 py-1 border border-[var(--card-border)]">
+                    <i class="fa-solid fa-search text-xs opacity-50"></i>
+                    <input type="text" id="global-search" placeholder="Search factors..." class="bg-transparent border-none outline-none text-sm ml-2 w-32 focus:w-48 transition-all" style="color: var(--theme-text)">
+                </div>
+
+                <!-- Language -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-language"></i>
+                        <span id="current-lang-display" class="text-sm font-bold">CN</span>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-32 bg-[var(--theme-bg-dark)] border border-[var(--card-border)] rounded-md shadow-xl hidden group-hover:block overflow-hidden">
+                        <a href="#" onclick="setLang('zh')" class="block px-4 py-2 text-sm hover:bg-[var(--theme-bg-light)]">中文</a>
+                        <a href="#" onclick="setLang('en')" class="block px-4 py-2 text-sm hover:bg-[var(--theme-bg-light)]">English</a>
+                        <a href="#" onclick="setLang('es')" class="block px-4 py-2 text-sm hover:bg-[var(--theme-bg-light)]">Español</a>
+                        <a href="#" onclick="setLang('fr')" class="block px-4 py-2 text-sm hover:bg-[var(--theme-bg-light)]">Français</a>
+                        <a href="#" onclick="setLang('de')" class="block px-4 py-2 text-sm hover:bg-[var(--theme-bg-light)]">Deutsch</a>
+                        <a href="#" onclick="setLang('ja')" class="block px-4 py-2 text-sm hover:bg-[var(--theme-bg-light)]">日本語</a>
+                    </div>
+                </div>
+
+                <!-- Theme Switcher -->
+                <div class="flex space-x-2 bg-[var(--theme-bg-dark)] p-1 rounded-full border border-[var(--card-border)]">
+                    <button onclick="setTheme('army')" class="w-5 h-5 rounded-full bg-[#4b5320] border border-white/30 hover:scale-110 transition" title="Army Green"></button>
+                    <button onclick="setTheme('xuanqing')" class="w-5 h-5 rounded-full bg-[#1a2332] border border-white/30 hover:scale-110 transition" title="Xuan Qing"></button>
+                    <button onclick="setTheme('beige')" class="w-5 h-5 rounded-full bg-[#f5f5dc] border border-black/20 hover:scale-110 transition" title="Beige"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8 space-y-12">
+
+        <!-- Hero Section: Virtual Earth & Core Nav -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-5 text-center lg:text-left order-2 lg:order-1">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 font-mono" data-i18n="hero_title">30 Core Earth Factors</h2>
+                <p class="text-lg opacity-80 mb-6" data-i18n="hero_subtitle">The economic base of Virtual Earth, driving EACO dynamic index valuation.</p>
+                
+                <!-- EACO Real-time Index -->
+                <div class="glass-card p-5 rounded-xl mb-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm font-bold">EACO Comprehensive Index</span>
+                        <span class="text-2xl font-mono font-bold text-[var(--theme-accent)]" id="eaco-index">1452.80</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-[var(--theme-accent)]" style="width: 82%"></div>
+                    </div>
+                    <p class="text-xs opacity-70 mt-2">Real-time weighted by 30 core factors</p>
+                </div>
+                
+                <!-- Quick Access Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="glass-card p-4 rounded-xl flex flex-col items-center justify-center group" onclick="openModal('ar-nav')">
+                        <i class="fa-solid fa-location-arrow text-2xl mb-2 group-hover:text-[var(--theme-accent)]"></i>
+                        <span class="text-sm font-bold" data-i18n="nav_ar">AR Navigation</span>
+                    </button>
+                    <button class="glass-card p-4 rounded-xl flex flex-col items-center justify-center group" onclick="openModal('vr-tour')">
+                        <i class="fa-solid fa-vr-cardboard text-2xl mb-2 group-hover:text-[var(--theme-accent)]"></i>
+                        <span class="text-sm font-bold" data-i18n="nav_vr">VR Global Tour</span>
+                    </button>
+                    <button class="glass-card p-4 rounded-xl flex flex-col items-center justify-center group" onclick="scrollToSection('eaco-assets')">
+                        <i class="fa-solid fa-chart-pie text-2xl mb-2 group-hover:text-[var(--theme-accent)]">
+                        <span class="text-sm font-bold" data-i18n="nav_assets">EACO Assets
+                    
+                    <button class="glass-card p-4 rounded-xl flex flex-col items-center justify-center group" onclick="scrollToSection('simulation-panel')">
+                        <i class="fa-solid fa-sliders text-2xl mb-2 group-hover:text-[var(--theme-accent)]"></i>
+                        <span class="text-sm font-bold" data-i18n="nav_sim">Stress Test</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-7 flex justify-center order-1 lg:order-2">
+                <div class="earth-container cursor-pointer" onclick="openModal('earth-map')">
+                    <div class="earth-overlay"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fa-solid fa-play text-4xl text-white opacity-80 hover:scale-110 transition"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Dimensions Filter -->
+        <section class="glass-card p-6 rounded-2xl">
+            <h3 class="text-xl font-bold mb-4">5 Core Dimensions</h3>
+            <div class="flex flex-wrap gap-3">
+                <button class="dimension-btn px-4 py-2 rounded-lg bg-[var(--theme-bg-light)] nav-item-active" data-dimension="all" onclick="filterFactors('all')">
+                    <i class="fa-solid fa-globe mr-2"></i>All Factors
+                </button>
+                <button class="dimension-btn px-4 py-2 rounded-lg hover:bg-[var(--theme-bg-light)] opacity-80" data-dimension="env" onclick="filterFactors('env')">
+                    <i class="fa-solid fa-leaf mr-2 text-env-base"></i>Environment
+                </button>
+                <button class="dimension-btn px-4 py-2 rounded-lg hover:bg-[var(--theme-bg-light)] opacity-80" data-dimension="tech" onclick="filterFactors('tech')">
+                    <i class="fa-solid fa-microchip mr-2 text-tech-base"></i>Technology
+                </button>
+                <button class="dimension-btn px-4 py-2 rounded-lg hover:bg-[var(--theme-bg-light)] opacity-80" data-dimension="resource" onclick="filterFactors('resource')">
+                    <i class="fa-solid fa-gem mr-2 text-resource-base"></i>Resources
+                </button>
+                <button class="dimension-btn px-4 py-2 rounded-lg hover:bg-[var(--theme-bg-light)] opacity-80" data-dimension="social" onclick="filterFactors('social')">
+                    <i class="fa-solid fa-users mr-2 text-social-base"></i>Social
+                </button>
+                <button class="dimension-btn px-4 py-2 rounded-lg hover:bg-[var(--theme-bg-light)] opacity-80" data-dimension="finance" onclick="filterFactors('finance')">
+                    <i class="fa-solid fa-coins mr-2 text-finance-base"></i>Finance
+                </button>
+            </div>
+        </section>
+
+        <!-- 30 Core Factors Grid -->
+        <section>
+            <h3 class="text-2xl font-bold pl-2 border-l-4 mb-6" style="border-color: var(--theme-accent)">30 Core Factors Index</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5" id="factors-grid">
+                <!-- Dynamic Content Injected via JS -->
+            </div>
+        </section>
+
+        <!-- Anti-fragility Simulation Panel -->
+        <section id="simulation-panel" class="glass-card p-8 rounded-2xl border-l-4" style="border-left-color: var(--theme-accent)">
+            <h3 class="text-2xl font-bold mb-6">Anti-fragility Simulation Panel</h3>
+            <p class="text-sm opacity-80 mb-6">Adjust the fluctuation amplitude of any factor, real-time preview the impact on EACO comprehensive index.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-5">
+                    <div>
+                        <label class="text-sm font-bold block mb-2">Climate Change Fluctuation</label>
+                        <input type="range" min="-50" max="50" value="0" class="w-full" id="sim-env" oninput="updateSimulation()">
+                        <div class="flex justify-between text-xs opacity-70 mt-1">
+                            <span>-50%</span>
+                            <span id="sim-env-val">0%</span>
+                            <span>+50%</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-sm font-bold block mb-2">AI Agent Development Speed</label>
+                        <input type="range" min="-50" max="50" value="0" class="w-full" id="sim-tech" oninput="updateSimulation()">
+                        <div class="flex justify-between text-xs opacity-70 mt-1">
+                            <span>-50%</span>
+                            <span id="sim-tech-val">0%</span>
+                            <span>+50%</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-sm font-bold block mb-2">Strategic Mineral Price</label>
+                        <input type="range" min="-50" max="50" value="0" class="w-full" id="sim-resource" oninput="updateSimulation()">
+                        <div class="flex justify-between text-xs opacity-70 mt-1">
+                            <span>-50%</span>
+                            <span id="sim-resource-val">0%</span>
+                            <span>+50%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <div class="text-center">
+                        <p class="text-sm opacity-70 mb-2">Simulated EACO Index</p>
+                        <p class="text-5xl font-mono font-bold text-[var(--theme-accent)]" id="sim-result">1452.80</p>
+                        <p class="text-xs mt-2" id="sim-status">System Stable</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card mt-12 py-6 text-center text-sm opacity-60">
+        <p>&copy; 2024 eaco Virtual Earth Project. All Rights Reserved.</p>
+        <p class="mt-1">Powered by EACO Blockchain & Digital Twin Technology</p>
+    </footer>
+
+    <!-- Modal Template (Hidden by default) -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeModal(event)">
+        <div class="glass-card w-full max-w-2xl p-6 rounded-2xl relative animate-fade-in-up" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-xl hover:text-[var(--theme-accent)]" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4">Details</h3>
+            <div id="modal-content" class="space-y-4 text-sm opacity-90">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Data Source: 30 Core Factors (Expanded with 2026 Trends) ---
+        const factorsData = [
+            // Original 20
+            { id: 1, dim: 'env', title: 'Climate Change', icon: 'fa-temperature-high', trend: '+2.4%', weight: 8.5, desc: 'Extreme weather, carbon credit trading.' },
+            { id: 2, dim: 'tech', title: 'Artificial Intelligence (AGI)', icon: 'fa-brain', trend: '+15.2%', weight: 9.8, desc: 'Productivity reshaping, energy consumption surge.' },
+            { id: 3, dim: 'social', title: 'Population Aging', icon: 'fa-user-clock', trend: '-1.1%', weight: 6.2, desc: 'Labor shortage, pension pressure, asset pricing logic shift.' },
+            { id: 4, dim: 'finance', title: 'Geopolitical Conflict', icon: 'fa-shield-halved', trend: '+5.7%', weight: 7.5, desc: 'Supply chain decoupling, strategic material volatility.' },
+            { id: 5, dim: 'resource', title: 'Renewable Energy Transition', icon: 'fa-solar-panel', trend: '+8.3%', weight: 8.0, desc: 'Silver, copper, rare earth demand explosion.' },
+            { id: 6, dim: 'env', title: 'Food Security', icon: 'fa-wheat-awn', trend: '-0.5%', weight: 7.0, desc: 'Soil degradation, water scarcity, land asset tokenization.' },
+            { id: 7, dim: 'env', title: 'Biodiversity Loss', icon: 'fa-paw', trend: '-3.2%', weight: 5.5, desc: 'Ecosystem collapse, natural asset digital pricing.' },
+            { id: 8, dim: 'resource', title: 'Space Resource Mining', icon: 'fa-meteor', trend: '+12.0%', weight: 4.0, desc: 'Asteroid platinum/gold influx, disrupting scarcity.' },
+            { id: 9, dim: 'tech', title: 'Digital Twin (Virtual Earth)', icon: 'fa-earth-asia', trend: '+9.5%', weight: 9.0, desc: 'Real-world mirror, EACO native token circulation.' },
+            { id: 10, dim: 'resource', title: 'Strategic Minerals', icon: 'fa-gem', trend: '+6.1%', weight: 8.8, desc: 'Lithium, Cobalt, Tungsten as new precious metals.' },
+            { id: 11, dim: 'finance', title: 'Global Debt Crisis', icon: 'fa-file-invoice-dollar', trend: '-2.8%', weight: 7.2, desc: 'Monetary system restructuring, gold/EACO safe haven.' },
+            { id: 12, dim: 'finance', title: 'CBDC & Web3 Finance', icon: 'fa-bitcoin-sign', trend: '+4.5%', weight: 6.8, desc: 'Cross-border payment revolution, value bridge.' },
+            { id: 13, dim: 'tech', title: 'Biotech & Gene Editing', icon: 'fa-dna', trend: '+7.2%', weight: 5.8, desc: 'Longevity economy, ethical inequality risks.' },
+            { id: 14, dim: 'tech', title: 'Semiconductor Autonomy', icon: 'fa-microchip', trend: '+3.9%', weight: 8.2, desc: 'Compute power as national strength, high-purity metal demand.' },
+            { id: 15, dim: 'social', title: 'Super Urbanization', icon: 'fa-city', trend: '+1.5%', weight: 6.5, desc: 'Megacity infrastructure pressure, resource optimization.' },
+            { id: 16, dim: 'social', title: 'Education & Skill Gap', icon: 'fa-graduation-cap', trend: '-0.8%', weight: 4.5, desc: 'AI-era skill mismatch, market irrationality.' },
+            { id: 17, dim: 'tech', title: 'Cybersecurity', icon: 'fa-lock', trend: '+5.0%', weight: 7.8, desc: 'Data sovereignty, blockchain asset protection.' },
+            { id: 18, dim: 'env', title: 'Ocean Pollution', icon: 'fa-water', trend: '-4.1%', weight: 5.0, desc: 'Blue bonds, marine asset digital确权.' },
+            { id: 19, dim: 'resource', title: 'New Energy Vehicles', icon: 'fa-car-battery', trend: '+10.5%', weight: 8.5, desc: 'Transport electrification, battery metal dominance.' },
+            { id: 20, dim: 'tech', title: 'Quantum Computing', icon: 'fa-atom', trend: '+18.0%', weight: 3.5, desc: 'Breaking compute limits, redefining material value.' },
+            
+            // New 10 Factors (2026 Trends)
+            { id: 21, dim: 'tech', title: 'AI Agents (Agentic AI)', icon: 'fa-robot', trend: '+22.5%', weight: 9.2, desc: 'Autonomous task execution, software industry restructuring.' },
+            { id: 22, dim: 'tech', title: 'Embodied AI (Robotics)', icon: 'fa-person-walking', trend: '+16.8%', weight: 7.5, desc: 'Humanoid robots in manufacturing and logistics.' },
+            { id: 23, dim: 'tech', title: 'Spatial Computing (XR)', icon: 'fa-vr-cardboard', trend: '+11.3%', weight: 6.0, desc: '3D interaction, virtual collaboration, immersive retail.' },
+            { id: 24, dim: 'tech', title: 'Edge AI (On-device)', icon: 'fa-mobile-screen', trend: '+9.8%', weight: 7.0, desc: 'Privacy-first local inference, reduced cloud dependency.' },
+            { id: 25, dim: 'finance', title: 'Token Economy (Word Elements)', icon: 'fa-coins', trend: '+14.2%', weight: 8.5, desc: 'AI compute tokens as global trade commodity.' },
+            { id: 26, dim: 'env', title: 'Sustainable Tech (Green)', icon: 'fa-recycle', trend: '+7.5%', weight: 6.5, desc: 'Carbon capture, liquid cooling for data centers.' },
+            { id: 27, dim: 'tech', title: 'Vertical LLMs', icon: 'fa-layer-group', trend: '+10.1%', weight: 7.8, desc: 'Industry-specific models for medical, legal, industrial use.' },
+            { id: 28, dim: 'resource', title: 'Energy Storage Tech', icon: 'fa-battery-full', trend: '+13.5%', weight: 8.0, desc: 'Solid-state batteries, grid-scale storage solutions.' },
+            { id: 29, dim: 'social', title: 'Digital Identity (DID)', icon: 'fa-id-card', trend: '+5.5%', weight: 5.5, desc: 'Self-sovereign identity in metaverse and web3.' },
+            { id: 30, dim: 'finance', title: 'AI Governance & Risk', icon: 'fa-scale-balanced', trend: '+3.2%', weight: 6.0, desc: 'Regulatory compliance, algorithmic auditing services.' }
+        ];
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFactors('all');
+            updateSimulation();
+        });
+
+        // --- Rendering Logic ---
+        function renderFactors(filterDim) {
+            const grid = document.getElementById('factors-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filterDim === 'all' 
+                ? factorsData 
+                : factorsData.filter(f => f.dim === filterDim);
+
+            filtered.forEach((f, index) => {
+                const isPositive = f.trend.includes('+');
+                const trendColor = isPositive ? 'text-green-400' : 'text-red-400';
+                const trendIcon = isPositive ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
+                
+                const card = document.createElement('div');
+                card.className = 'glass-card p-5 rounded-xl factor-card animate-fade-in-up';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.onclick = () => showFactorDetail(f);
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="p-2 rounded-lg bg-[var(--theme-bg-dark)]">
+                            <i class="fa-solid ${f.icon} text-xl text-[var(--theme-accent)]"></i>
+                        </div>
+                        <span class="text-xs font-mono ${trendColor} flex items-center">
+                            <i class="fa-solid ${trendIcon} mr-1 factor-trend-icon"></i> ${f.trend}
+                        </span>
+                    </div>
+                    <h4 class="font-bold text-lg mb-1 truncate">${f.title}</h4>
+                    <p class="text-xs opacity-70 h-10 overflow-hidden mb-3">${f.desc}</p>
+                    <div class="flex justify-between items-center text-xs opacity-60">
+                        <span>EACO Weight</span>
+                        <span class="font-mono">${f.weight}%</span>
+                    </div>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill bg-[var(--theme-accent)]" style="width: ${f.weight * 10}%"></div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Update active button state
+            document.querySelectorAll('.dimension-btn').forEach(btn => {
+                if(btn.dataset.dimension === filterDim) {
+                    btn.classList.add('nav-item-active', 'bg-[var(--theme-bg-light)]');
+                    btn.classList.remove('opacity-80');
+                } else {
+                    btn.classList.remove('nav-item-active', 'bg-[var(--theme-bg-light)]');
+                    btn.classList.add('opacity-80');
+                }
+            });
+        }
+
+        function filterFactors(dim) {
+            renderFactors(dim);
+        }
+
+        // --- Interaction Logic ---
+        function setTheme(themeName) {
+            document.body.className = `theme-${themeName} min-h-screen flex flex-col font-sans`;
+        }
+
+        function setLang(lang) {
+            document.getElementById('current-lang-display').innerText = lang.toUpperCase();
+            // In a real app, this would trigger i18n replacement
+            alert(`Language switched to ${lang.toUpperCase()} (Demo Mode)`);
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Simulation Logic ---
+        function updateSimulation() {
+            const envVal = parseInt(document.getElementById('sim-env').value);
+            const techVal = parseInt(document.getElementById('sim-tech').value);
+            const resVal = parseInt(document.getElementById('sim-resource').value);
+
+            document.getElementById('sim-env-val').innerText = (envVal > 0 ? '+' : '') + envVal + '%';
+            document.getElementById('sim-tech-val').innerText = (techVal > 0 ? '+' : '') + techVal + '%';
+            document.getElementById('sim-resource-val').innerText = (resVal > 0 ? '+' : '') + resVal + '%';
+
+            // Simple weighted simulation algorithm
+            const baseIndex = 1452.80;
+            const impact = (envVal * 0.3) + (techVal * 0.5) + (resVal * 0.2);
+            const newIndex = baseIndex * (1 + impact / 100);
+
+            const resultEl = document.getElementById('sim-result');
+            resultEl.innerText = newIndex.toFixed(2);
+            
+            const statusEl = document.getElementById('sim-status');
+            if(Math.abs(impact) < 10) {
+                statusEl.innerText = "System Stable";
+                statusEl.className = "text-xs mt-2 text-green-400";
+            } else if (Math.abs(impact) < 25) {
+                statusEl.innerText = "Market Volatility Detected";
+                statusEl.className = "text-xs mt-2 text-yellow-400";
+            } else {
+                statusEl.innerText = "Critical Rebalancing Required";
+                statusEl.className = "text-xs mt-2 text-red-400";
+            }
+        }
+
+        // --- Modal Logic ---
+        function openModal(type) {
+            const overlay = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const content = document.getElementById('modal-content');
+            
+            overlay.classList.remove('hidden');
+            
+            if(type === 'earth-map') {
+                title.innerText = "Virtual Earth Core";
+                content.innerHTML = `<p class="mb-2">Accessing global digital twin data stream...</p><div class="h-40 bg-[var(--theme-bg-dark)] rounded flex items-center justify-center"><i class="fa-solid fa-spinner fa-spin text-2xl"></i></div>`;
+            } else if (type === 'ar-nav') {
+                title.innerText = "AR Navigation Module";
+                content.innerHTML = `<p>Initializing camera permissions for augmented reality overlay...</p>`;
+            } else if (type === 'vr-tour') {
+                title.innerText = "VR Global Tour";
+                content.innerHTML = `<p>Connecting to WebGL rendering engine...</p>`;
+            }
+        }
+
+        function showFactorDetail(factor) {
+            const overlay = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const content = document.getElementById('modal-content');
+            
+            overlay.classList.remove('hidden');
+            title.innerText = factor.title;
+            content.innerHTML = `
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="bg-[var(--theme-bg-dark)] p-3 rounded">
+                        <span class="text-xs opacity-60">Trend</span>
+                        <p class="text-xl font-mono ${factor.trend.includes('+') ? 'text-green-400' : 'text-red-400'}">${factor.trend}</p>
+                    </div>
+                    <div class="bg-[var(--theme-bg-dark)] p-3 rounded">
+                        <span class="text-xs opacity-60">EACO Weight</span>
+                        <p class="text-xl font-mono text-[var(--theme-accent)]">${factor.weight}%</p>
+                    </div>
+                </div>
+                <p class="mb-4">${factor.desc}</p>
+                <h5 class="font-bold mb-2">EACO Association:</h5>
+                <p class="text-xs opacity-80 bg-[var(--theme-bg-light)] p-2 rounded">
+                    This factor directly influences the dynamic indexing of EACO tokens. 
+                    Real-time data from this sector is fed into the smart contract oracle network.
+                </p>
+            `;
+        }
+
+        function closeModal(e) {
+            if (!e || e.target.id === 'modal-overlay' || e.target.closest('button')) {
+                document.getElementById('modal-overlay').classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
