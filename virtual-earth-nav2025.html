@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>虚拟地球 | Virtual Earth Navigation</title>
+<style>
+/* ==================== Theme Variables ==================== */
+:root {
+  --bg: #050810;
+  --bg-card: #0a1228;
+  --bg-header: #080d1a;
+  --bg-hero: #030610;
+  --text: #e0e8f0;
+  --text-secondary: #6a8aaa;
+  --accent: #00d4ff;
+  --accent-hover: #00b8e6;
+  --accent-glow: rgba(0, 212, 255, 0.3);
+  --border: #1a2a4a;
+  --shadow: rgba(0, 100, 200, 0.15);
+  --star: #ffd700;
+  --search-bg: #0a1228;
+  --badge-bg: #0f1f3a;
+  --footer-bg: #050810;
+  --earth-ocean: #0a3d6b;
+  --earth-land: #1a6b3a;
+  --earth-glow: rgba(0, 180, 255, 0.4);
+  --orbital: rgba(0, 212, 255, 0.15);
+}
+
+[data-theme="forest"] {
+  --bg: #061a0e;
+  --bg-card: #0a2818;
+  --bg-header: #061a0e;
+  --bg-hero: #031208;
+  --text: #d0f0d8;
+  --text-secondary: #5a9a6a;
+  --accent: #4ade80;
+  --accent-hover: #3abc68;
+  --accent-glow: rgba(74, 222, 128, 0.3);
+  --border: #1a3a2a;
+  --shadow: rgba(40, 120, 60, 0.15);
+  --star: #fbbf24;
+  --search-bg: #0a2818;
+  --badge-bg: #0f2a1a;
+  --footer-bg: #061a0e;
+  --earth-ocean: #0a3d2b;
+  --earth-land: #1a6b2a;
+  --earth-glow: rgba(74, 222, 128, 0.4);
+  --orbital: rgba(74, 222, 128, 0.15);
+}
+
+[data-theme="sunset"] {
+  --bg: #1a0f0a;
+  --bg-card: #281a14;
+  --bg-header: #1a0f0a;
+  --bg-hero: #120806;
+  --text: #f0e0d0;
+  --text-secondary: #b08a6a;
+  --accent: #f59e0b;
+  --accent-hover: #d97f06;
+  --accent-glow: rgba(245, 158, 11, 0.3);
+  --border: #3a2818;
+  --shadow: rgba(120, 80, 30, 0.15);
+  --star: #fde047;
+  --search-bg: #281a14;
+  --badge-bg: #2a1f18;
+  --footer-bg: #1a0f0a;
+  --earth-ocean: #3d2a0a;
+  --earth-land: #6b4a1a;
+  --earth-glow: rgba(245, 158, 11, 0.4);
+  --orbital: rgba(245, 158, 11, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.4s ease, color 0.4s ease;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==================== Starfield Background ==================== */
+.starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: var(--bright, 0.8); }
+}
+
+/* ==================== Header ==================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.4s ease;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.logo-icon {
+  font-size: 28px;
+  display: inline-block;
+  animation: spin 20s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== Search ==================== */
+.search-box {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  height: 38px;
+  padding: 0 40px 0 16px;
+  border-radius: 19px;
+  border: 1px solid var(--border);
+  background: var(--search-bg);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s;
+}
+.search-box input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.search-box input::placeholder { color: var(--text-secondary); }
+.search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+/* ==================== Header Controls ==================== */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-switcher {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--search-bg);
+}
+.theme-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+.theme-btn[data-set="space"] { background: linear-gradient(135deg, #050810, #00d4ff); }
+.theme-btn[data-set="forest"] { background: linear-gradient(135deg, #061a0e, #4ade80); }
+.theme-btn[data-set="sunset"] { background: linear-gradient(135deg, #1a0f0a, #f59e0b); }
+.theme-btn.active {
+  border-color: var(--text);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.lang-btn, .fav-btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 17px;
+  border: 1px solid var(--border);
+  background: var(--search-bg);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+.lang-btn:hover, .fav-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+.fav-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+  background: var(--bg-hero);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-bg-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* 3D Earth */
+.earth-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.earth-orbit-ring {
+  position: absolute;
+  border: 1px solid var(--orbital);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotateX(75deg);
+}
+.earth-orbit-ring.r1 { width: 240px; height: 240px; }
+.earth-orbit-ring.r2 { width: 280px; height: 280px; border-style: dashed; opacity: 0.5; }
+
+.earth-orbit-dot {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  top: 50%; left: 50%;
+  transform-origin: 0 0;
+}
+.earth-orbit-dot.d1 { animation: orbit1 8s linear infinite; }
+.earth-orbit-dot.d2 { animation: orbit2 12s linear infinite; }
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+@keyframes orbit2 {
+  from { transform: rotate(120deg) translateX(140px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(140px) rotate(-480deg); }
+}
+
+.earth-sphere {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+    var(--earth-land) 0%,
+    var(--earth-ocean) 25%,
+    var(--earth-land) 40%,
+    var(--earth-ocean) 55%,
+    var(--earth-land) 70%,
+    var(--earth-ocean) 85%,
+    #000814 100%);
+  box-shadow:
+    inset -20px -20px 50px rgba(0,0,0,0.5),
+    inset 5px 5px 20px rgba(255,255,255,0.1),
+    0 0 60px var(--earth-glow),
+    0 0 100px var(--earth-glow);
+  animation: rotate-earth 20s linear infinite;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes rotate-earth {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+
+.earth-sphere::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%; height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 40px,
+    var(--earth-land) 40px,
+    var(--earth-land) 70px,
+    transparent 70px,
+    transparent 120px,
+    var(--earth-land) 120px,
+    var(--earth-land) 150px,
+    transparent 150px,
+    transparent 220px
+  );
+  opacity: 0.4;
+  animation: earth-scroll 20s linear infinite;
+}
+@keyframes earth-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.earth-sphere::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Hero Text */
+.hero-text {
+  max-width: 600px;
+  padding: 20px 24px;
+  z-index: 2;
+}
+.hero-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.hero-tag {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: var(--badge-bg);
+  color: var(--accent);
+  transition: all 0.2s;
+}
+.hero-tag:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ==================== Category Bar ==================== */
+.category-bar {
+  position: sticky;
+  top: 64px;
+  z-index: 90;
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.4s ease;
+}
+.category-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.category-inner::-webkit-scrollbar { display: none; }
+
+.cat-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.cat-tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.cat-tab.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.cat-tab .cat-icon { font-size: 15px; }
+.cat-tab .cat-count {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+/* ==================== Main Content ==================== */
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.section-title .st-icon { font-size: 24px; }
+.section-title .st-bar {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* Site Grid */
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.site-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.site-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--cat-color, var(--accent));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.site-card:hover {
+  border-color: var(--cat-color, var(--accent));
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+.site-card:hover::before { opacity: 1; }
+
+.site-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.site-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--cat-color, var(--accent));
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.site-icon img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.site-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.site-fav-star {
+  font-size: 14px;
+  color: var(--star);
+  cursor: pointer;
+  opacity: 0.3;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.site-fav-star:hover { opacity: 0.7; transform: scale(1.2); }
+.site-fav-star.active { opacity: 1; }
+
+.site-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ==================== Search Results ==================== */
+.search-results {
+  margin-bottom: 32px;
+}
+.search-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+.empty-state .empty-icon { font-size: 56px; margin-bottom: 16px; }
+.empty-state p { font-size: 15px; }
+
+/* ==================== Footer ==================== */
+.footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-slogan {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.footer-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--badge-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+.footer-link .link-icon { font-size: 15px; }
+
+.footer-ca {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  word-break: break-all;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+  .header-inner { height: auto; padding: 10px 12px; flex-wrap: wrap; }
+  .logo { font-size: 16px; }
+  .logo-icon { font-size: 22px; }
+  .search-box { order: 3; max-width: 100%; flex-basis: 100%; }
+  .header-controls { gap: 6px; }
+  .lang-btn, .fav-btn { padding: 0 10px; font-size: 12px; height: 30px; }
+  .theme-btn { width: 18px; height: 18px; }
+
+  .hero { flex-direction: column; padding: 20px 0; gap: 20px; min-height: auto; }
+  .earth-container { width: 150px; height: 150px; }
+  .earth-sphere { width: 120px; height: 120px; }
+  .earth-orbit-ring.r1 { width: 180px; height: 180px; }
+  .earth-orbit-ring.r2 { width: 210px; height: 210px; }
+  .hero-text { text-align: center; padding: 0 16px; }
+  .hero-title { font-size: 22px; }
+  .hero-subtitle { font-size: 13px; }
+  .hero-tags { justify-content: center; }
+
+  .category-inner { padding: 8px 12px; }
+  .main { padding: 16px 12px 40px; }
+  .site-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .site-card { padding: 12px 10px; gap: 6px; }
+  .site-icon { width: 30px; height: 30px; font-size: 15px; }
+  .site-name { font-size: 13px; }
+  .site-desc { font-size: 11px; }
+
+  .footer-links { gap: 6px 10px; }
+  .footer-link { padding: 5px 10px; font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .site-grid { grid-template-columns: 1fr 1fr; }
+  .hero-title { font-size: 18px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.category-section, .search-results { animation: fadeInUp 0.3s ease; }
+
+/* Loading */
+.loading-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Back to top */
+.back-top {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  z-index: 200;
+  box-shadow: 0 4px 16px var(--shadow);
+}
+.back-top.show { opacity: 1; pointer-events: auto; }
+.back-top:hover { transform: scale(1.1); box-shadow: 0 6px 20px var(--accent-glow); }
+</style>
+</head>
+<body data-theme="space">
+
+<!-- Starfield -->
+<div class="starfield" id="starfield"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo" onclick="resetView()">
+      <span class="logo-icon">🌐</span>
+      <span class="logo-text" data-i18n="logo">虚拟地球</span>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" data-i18n-ph="search_ph" placeholder="搜索网站 / Search sites..." oninput="handleSearch(this.value)">
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="header-controls">
+      <div class="theme-switcher">
+        <div class="theme-btn active" data-set="space" title="深空蓝 Deep Space" onclick="switchTheme('space')"></div>
+        <div class="theme-btn" data-set="forest" title="地球绿 Earth Green" onclick="switchTheme('forest')"></div>
+        <div class="theme-btn" data-set="sunset" title="暖阳金 Warm Sun" onclick="switchTheme('sunset')"></div>
+      </div>
+      <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+      <button class="fav-btn" id="favBtn" onclick="toggleFavView()">
+        <span>⭐</span><span data-i18n="favorites">收藏</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="earth-container">
+    <div class="earth-orbit-ring r2"></div>
+    <div class="earth-orbit-ring r1"></div>
+    <div class="earth-orbit-dot d1"></div>
+    <div class="earth-orbit-dot d2"></div>
+    <div class="earth-sphere"></div>
+  </div>
+  <div class="hero-text">
+    <div class="hero-title" data-i18n="hero_title">探索虚拟地球，连接全球文明</div>
+    <div class="hero-subtitle" data-i18n="hero_sub">优化能源与态度，共创可持续未来 | Optimize energy &amp; attitude, co-create a sustainable future</div>
+    <div class="hero-tags">
+      <span class="hero-tag" data-i18n="tag1">🌍 虚拟地球探索</span>
+      <span class="hero-tag" data-i18n="tag2">🏛 全球文明连接</span>
+      <span class="hero-tag" data-i18n="tag3">⚡ 能源与气候</span>
+      <span class="hero-tag" data-i18n="tag4">🌱 可持续未来</span>
+    </div>
+  </div>
+</section>
+
+<!-- Category Bar -->
+<div class="category-bar">
+  <div class="category-inner" id="categoryBar"></div>
+</div>
+
+<!-- Main Content -->
+<main class="main" id="mainContent"></main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-slogan" data-i18n="footer_slogan">The only $eaco in the universe and the earth</div>
+  <p data-i18n="footer_text">虚拟地球导航 — 连接全球文明，共创可持续未来 | Virtual Earth Navigation</p>
+  <div class="footer-links">
+    <a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">🌍</span>Earth's Best Coin
+    </a>
+    <a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">📊</span>Eaco 50 Rate
+    </a>
+    <a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">💰</span>100 Ways To Wealth
+    </a>
+    <a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">🤝</span>Earth 100 Friends
+    </a>
+    <a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">🔄</span>Eaco SWAP
+    </a>
+    <a href="https://ucoingroup.github.io/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">🏠</span>EACO Home
+    </a>
+    <a href="https://ucoingroup.github.io/good-books/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">📚</span>Good Books
+    </a>
+    <a href="https://ucoingroup.github.io/eur-eaco/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">💶</span>EUR Eaco
+    </a>
+    <a href="https://ucoingroup.github.io/au-trade/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">🪙</span>AU Trade
+    </a>
+    <a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">⚙️</span>Mohist Tech
+    </a>
+    <a href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener" class="footer-link">
+      <span class="link-icon">🏗️</span>Build World
+    </a>
+  </div>
+  <div class="footer-ca">
+    EACO CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH (Solana)
+  </div>
+  <p style="margin-top:12px;font-size:12px;">&copy; 2026 Virtual Earth Nav</p>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" onclick="scrollToTop()">↑</button>
+
+<script>
+/* ==================== i18n Strings ==================== */
+const I18N = {
+  logo: { zh: "虚拟地球", en: "Virtual Earth" },
+  search_ph: { zh: "搜索网站...", en: "Search sites..." },
+  favorites: { zh: "收藏", en: "Favorites" },
+  hero_title: { zh: "探索虚拟地球，连接全球文明", en: "Explore Virtual Earth, Connect Civilizations" },
+  hero_sub: { zh: "优化能源与态度，共创可持续未来 | Optimize energy & attitude, co-create a sustainable future", en: "Optimize energy & attitude, co-create a sustainable future | 优化能源与态度，共创可持续未来" },
+  tag1: { zh: "🌍 虚拟地球探索", en: "🌍 Earth Exploration" },
+  tag2: { zh: "🏛 全球文明连接", en: "🏛 Global Civilization" },
+  tag3: { zh: "⚡ 能源与气候", en: "⚡ Energy & Climate" },
+  tag4: { zh: "🌱 可持续未来", en: "🌱 Sustainable Future" },
+  footer_slogan: { zh: "宇宙与地球唯一的 $eaco", en: "The only $eaco in the universe and the earth" },
+  footer_text: { zh: "虚拟地球导航 — 连接全球文明，共创可持续未来 | Virtual Earth Navigation", en: "Virtual Earth Navigation — Connecting civilizations, co-creating a sustainable future | 虚拟地球导航" },
+  all_sites: { zh: "全部", en: "All" },
+  fav_empty: { zh: "还没有收藏任何网站", en: "No favorites yet" },
+  search_empty: { zh: "未找到相关网站", en: "No sites found" },
+  search_result: { zh: "找到", en: "Found" },
+  sites_count: { zh: "个网站", en: "sites" },
+};
+
+/* ==================== Navigation Data ==================== */
+const NAV_DATA = [
+  {
+    id: "explore",
+    icon: "🌍",
+    color: "#4fc3f7",
+    name: { zh: "虚拟地球探索", en: "Earth Exploration" },
+    sites: [
+      { name: { zh: "Google Earth", en: "Google Earth" }, url: "https://earth.google.com", desc: { zh: "3D 地球浏览器，探索全球任意地点", en: "3D globe browser, explore anywhere on Earth" } },
+      { name: { zh: "NASA Worldview", en: "NASA Worldview" }, url: "https://worldview.earthdata.nasa.gov", desc: { zh: "NASA 卫星实时地球影像", en: "NASA real-time satellite imagery" } },
+      { name: { zh: "Sentinel Hub", en: "Sentinel Hub" }, url: "https://www.sentinel-hub.com", desc: { zh: "欧洲航天局哨兵卫星地图", en: "ESA Sentinel satellite maps" } },
+      { name: { zh: "OpenStreetMap", en: "OpenStreetMap" }, url: "https://www.openstreetmap.org", desc: { zh: "全球开源地图协作项目", en: "Global open-source map project" } },
+      { name: { zh: "Mapbox", en: "Mapbox" }, url: "https://www.mapbox.com", desc: { zh: "开发者地图平台与API", en: "Developer map platform & API" } },
+      { name: { zh: "Cesium", en: "Cesium" }, url: "https://cesium.com", desc: { zh: "3D 地球可视化引擎", en: "3D geospatial visualization engine" } },
+      { name: { zh: "Earth Nullschool", en: "Earth Nullschool" }, url: "https://earth.nullschool.net", desc: { zh: "实时全球风场与气候可视化", en: "Real-time global wind & climate map" } },
+      { name: { zh: "Google Maps", en: "Google Maps" }, url: "https://maps.google.com", desc: { zh: "全球地图与导航服务", en: "Global maps & navigation" } },
+      { name: { zh: "百度地图", en: "Baidu Maps" }, url: "https://map.baidu.com", desc: { zh: "中国地图导航与全景", en: "China maps & street view" } },
+      { name: { zh: "Flightradar24", en: "Flightradar24" }, url: "https://www.flightradar24.com", desc: { zh: "全球实时航班追踪", en: "Real-time global flight tracker" } },
+      { name: { zh: "MarineTraffic", en: "MarineTraffic" }, url: "https://www.marinetraffic.com", desc: { zh: "全球实时船舶追踪", en: "Real-time global ship tracker" } },
+      { name: { zh: "Light Pollution Map", en: "Light Pollution Map" }, url: "https://www.lightpollutionmap.info", desc: { zh: "全球光污染地图", en: "Global light pollution map" } },
+    ]
+  },
+  {
+    id: "civilization",
+    icon: "🏛",
+    color: "#ffd54f",
+    name: { zh: "全球文明", en: "Global Civilization" },
+    sites: [
+      { name: { zh: "UNESCO 世界遗产", en: "UNESCO Heritage" }, url: "https://whc.unesco.org", desc: { zh: "联合国世界遗产名录", en: "UNESCO World Heritage List" } },
+      { name: { zh: "Google 艺术与文化", en: "Google Arts & Culture" }, url: "https://artsandculture.google.com", desc: { zh: "全球博物馆与艺术珍品在线", en: "Global museums & art online" } },
+      { name: { zh: "大英博物馆", en: "British Museum" }, url: "https://www.britishmuseum.org", desc: { zh: "世界文明文物殿堂", en: "World civilization artifacts" } },
+      { name: { zh: "卢浮宫", en: "Louvre" }, url: "https://www.louvre.fr", desc: { zh: "巴黎卢浮宫在线参观", en: "Louvre online tour" } },
+      { name: { zh: "故宫博物院", en: "Palace Museum" }, url: "https://www.dpm.org.cn", desc: { zh: "北京故宫文物数字馆", en: "Forbidden City digital museum" } },
+      { name: { zh: "大都会博物馆", en: "Met Museum" }, url: "https://www.metmuseum.org", desc: { zh: "纽约大都会艺术博物馆", en: "Metropolitan Museum of Art" } },
+      { name: { zh: "Europeana", en: "Europeana" }, url: "https://www.europeana.eu", desc: { zh: "欧洲文化遗产数字图书馆", en: "European cultural heritage library" } },
+      { name: { zh: "世界数字图书馆", en: "World Digital Library" }, url: "https://www.wdl.org", desc: { zh: "联合国教科文组织数字文献", en: "UNESCO digital documents" } },
+      { name: { zh: "维基百科", en: "Wikipedia" }, url: "https://www.wikipedia.org", desc: { zh: "全球最大自由知识百科", en: "World's largest free encyclopedia" } },
+      { name: { zh: "Smithsonian", en: "Smithsonian" }, url: "https://www.si.edu", desc: { zh: "史密森尼学会博物馆群", en: "Smithsonian museums & research" } },
+      { name: { zh: "Internet Archive", en: "Internet Archive" }, url: "https://archive.org", desc: { zh: "互联网数字档案馆", en: "Digital archive of the internet" } },
+      { name: { zh: "Google 翻译", en: "Google Translate" }, url: "https://translate.google.com", desc: { zh: "多语言即时翻译", en: "Multi-language instant translation" } },
+    ]
+  },
+  {
+    id: "energy",
+    icon: "⚡",
+    color: "#ffb74d",
+    name: { zh: "能源与气候", en: "Energy & Climate" },
+    sites: [
+      { name: { zh: "IEA 国际能源署", en: "IEA" }, url: "https://www.iea.org", desc: { zh: "全球能源数据与政策分析", en: "Global energy data & analysis" } },
+      { name: { zh: "NASA 气候", en: "NASA Climate" }, url: "https://climate.nasa.gov", desc: { zh: "NASA 气候变化 vital signs", en: "NASA climate vital signs" } },
+      { name: { zh: "Climate.gov", en: "Climate.gov" }, url: "https://www.climate.gov", desc: { zh: "美国气候科学门户", en: "US climate science portal" } },
+      { name: { zh: "Our World in Data", en: "Our World in Data" }, url: "https://ourworldindata.org/energy", desc: { zh: "全球能源数据可视化", en: "Global energy data visualized" } },
+      { name: { zh: "IRENA", en: "IRENA" }, url: "https://www.irena.org", desc: { zh: "国际可再生能源机构", en: "International Renewable Energy Agency" } },
+      { name: { zh: "Electricity Maps", en: "Electricity Maps" }, url: "https://www.electricitymaps.com", desc: { zh: "全球电力碳排放实时地图", en: "Real-time power carbon map" } },
+      { name: { zh: "Global Energy Monitor", en: "Global Energy Monitor" }, url: "https://globalenergymonitor.org", desc: { zh: "全球能源项目追踪", en: "Global energy project tracker" } },
+      { name: { zh: "Carbon Tracker", en: "Carbon Tracker" }, url: "https://carbontracker.org", desc: { zh: "碳预算与气候金融研究", en: "Carbon budget & climate finance" } },
+      { name: { zh: "NOAA 气候", en: "NOAA Climate" }, url: "https://www.ncei.noaa.gov", desc: { zh: "美国国家环境信息中心", en: "US National Environmental Data" } },
+      { name: { zh: "WMO", en: "WMO" }, url: "https://public.wmo.int", desc: { zh: "世界气象组织", en: "World Meteorological Organization" } },
+      { name: { zh: "BP 能源展望", en: "BP Energy Outlook" }, url: "https://www.bp.com/en/global/corporate/energy-economics/energy-outlook.html", desc: { zh: "BP 全球能源展望报告", en: "BP global energy outlook" } },
+      { name: { zh: "IEA PVPS", en: "IEA PVPS" }, url: "https://iea-pvps.org", desc: { zh: "国际光伏技术路线图", en: "Solar PV technology roadmap" } },
+    ]
+  },
+  {
+    id: "sustainable",
+    icon: "🌱",
+    color: "#81c784",
+    name: { zh: "可持续未来", en: "Sustainable Future" },
+    sites: [
+      { name: { zh: "UN SDGs", en: "UN SDGs" }, url: "https://sdgs.un.org", desc: { zh: "联合国可持续发展目标", en: "UN Sustainable Development Goals" } },
+      { name: { zh: "SDG Tracker", en: "SDG Tracker" }, url: "https://sdg-tracker.org", desc: { zh: "SDG 进展数据追踪", en: "SDG progress tracker" } },
+      { name: { zh: "UNEP", en: "UNEP" }, url: "https://www.unep.org", desc: { zh: "联合国环境规划署", en: "UN Environment Programme" } },
+      { name: { zh: "WWF", en: "WWF" }, url: "https://www.wwf.org", desc: { zh: "世界自然基金会", en: "World Wildlife Fund" } },
+      { name: { zh: "Greenpeace", en: "Greenpeace" }, url: "https://www.greenpeace.org", desc: { zh: "全球环保行动组织", en: "Global environmental action" } },
+      { name: { zh: "ESG Today", en: "ESG Today" }, url: "https://www.esgtoday.com", desc: { zh: "ESG 可持续新闻", en: "ESG sustainability news" } },
+      { name: { zh: "Ellen MacArthur Foundation", en: "Ellen MacArthur Foundation" }, url: "https://ellenmacarthurfoundation.org", desc: { zh: "循环经济研究基金会", en: "Circular economy foundation" } },
+      { name: { zh: "UN Global Compact", en: "UN Global Compact" }, url: "https://unglobalcompact.org", desc: { zh: "联合国全球契约组织", en: "UN corporate sustainability" } },
+      { name: { zh: "IPCC", en: "IPCC" }, url: "https://www.ipcc.ch", desc: { zh: "政府间气候变化委员会", en: "Intergovernmental Panel on Climate Change" } },
+      { name: { zh: "Climate Action", en: "Climate Action" }, url: "https://unfccc.int/climate-action", desc: { zh: "联合国气候行动公约", en: "UN climate action convention" } },
+      { name: { zh: "Global Goals", en: "Global Goals" }, url: "https://www.globalgoals.org", desc: { zh: "全球目标宣传平台", en: "Global Goals campaign" } },
+      { name: { zh: "Carbon Brief", en: "Carbon Brief" }, url: "https://www.carbonbrief.org", desc: { zh: "气候科学深度分析", en: "Climate science deep analysis" } },
+    ]
+  },
+  {
+    id: "ai",
+    icon: "🤖",
+    color: "#ba68c8",
+    name: { zh: "AI 与科技", en: "AI & Tech" },
+    sites: [
+      { name: { zh: "ChatGPT", en: "ChatGPT" }, url: "https://chat.openai.com", desc: { zh: "OpenAI 对话助手", en: "OpenAI conversational AI" } },
+      { name: { zh: "Claude", en: "Claude" }, url: "https://claude.ai", desc: { zh: "Anthropic AI 助手", en: "Anthropic AI assistant" } },
+      { name: { zh: "Gemini", en: "Gemini" }, url: "https://gemini.google.com", desc: { zh: "谷歌多模态 AI", en: "Google multimodal AI" } },
+      { name: { zh: "DeepSeek", en: "DeepSeek" }, url: "https://www.deepseek.com", desc: { zh: "深度求索 AI 模型", en: "DeepSeek AI model" } },
+      { name: { zh: "GitHub", en: "GitHub" }, url: "https://github.com", desc: { zh: "全球最大代码托管平台", en: "World's largest code host" } },
+      { name: { zh: "Hugging Face", en: "Hugging Face" }, url: "https://huggingface.co", desc: { zh: "AI 模型开源社区", en: "Open-source AI model hub" } },
+      { name: { zh: "Stack Overflow", en: "Stack Overflow" }, url: "https://stackoverflow.com", desc: { zh: "程序员问答社区", en: "Developer Q&A community" } },
+      { name: { zh: "Hacker News", en: "Hacker News" }, url: "https://news.ycombinator.com", desc: { zh: "科技新闻聚合", en: "Tech news aggregator" } },
+      { name: { zh: "Product Hunt", en: "Product Hunt" }, url: "https://www.producthunt.com", desc: { zh: "新产品发现平台", en: "New product discovery" } },
+      { name: { zh: "arXiv", en: "arXiv" }, url: "https://arxiv.org", desc: { zh: "学术论文预印本", en: "Academic preprint papers" } },
+      { name: { zh: "Midjourney", en: "Midjourney" }, url: "https://www.midjourney.com", desc: { zh: "AI 绘画工具", en: "AI art generator" } },
+      { name: { zh: "Perplexity", en: "Perplexity" }, url: "https://www.perplexity.ai", desc: { zh: "AI 搜索引擎", en: "AI-powered search engine" } },
+    ]
+  },
+  {
+    id: "web3",
+    icon: "🔗",
+    color: "#4db6ac",
+    name: { zh: "Web3 与区块链", en: "Web3 & Blockchain" },
+    sites: [
+      { name: { zh: "Ethereum", en: "Ethereum" }, url: "https://ethereum.org", desc: { zh: "以太坊智能合约平台", en: "Ethereum smart contract platform" } },
+      { name: { zh: "Solana", en: "Solana" }, url: "https://solana.com", desc: { zh: "高性能区块链网络", en: "High-performance blockchain" } },
+      { name: { zh: "CoinGecko", en: "CoinGecko" }, url: "https://www.coingecko.com", desc: { zh: "加密货币数据聚合", en: "Crypto data aggregator" } },
+      { name: { zh: "DexScreener", en: "DexScreener" }, url: "https://dexscreener.com", desc: { zh: "DEX 实时交易数据", en: "Real-time DEX data" } },
+      { name: { zh: "Uniswap", en: "Uniswap" }, url: "https://app.uniswap.org", desc: { zh: "去中心化交易协议", en: "Decentralized exchange protocol" } },
+      { name: { zh: "Jupiter", en: "Jupiter" }, url: "https://jup.ag", desc: { zh: "Solana DEX 聚合器", en: "Solana DEX aggregator" } },
+      { name: { zh: "Orb Markets", en: "Orb Markets" }, url: "https://orbmarkets.io", desc: { zh: "Solana 代币分析平台", en: "Solana token analytics" } },
+      { name: { zh: "MetaMask", en: "MetaMask" }, url: "https://metamask.io", desc: { zh: "以太坊钱包与浏览器", en: "Ethereum wallet & browser" } },
+      { name: { zh: "Etherscan", en: "Etherscan" }, url: "https://etherscan.io", desc: { zh: "以太坊区块浏览器", en: "Ethereum block explorer" } },
+      { name: { zh: "Solscan", en: "Solscan" }, url: "https://solscan.io", desc: { zh: "Solana 区块浏览器", en: "Solana block explorer" } },
+      { name: { zh: "EACO 官网", en: "EACO" }, url: "https://ucoingroup.github.io/earths-best-coin/", desc: { zh: "地球最佳代币 EACO", en: "Earth's Best Coin" } },
+      { name: { zh: "OpenSea", en: "OpenSea" }, url: "https://opensea.io", desc: { zh: "NFT 数字资产市场", en: "NFT marketplace" } },
+    ]
+  },
+  {
+    id: "data",
+    icon: "📊",
+    color: "#64b5f6",
+    name: { zh: "数据与观测", en: "Data & Observation" },
+    sites: [
+      { name: { zh: "Worldometer", en: "Worldometer" }, url: "https://www.worldometers.info", desc: { zh: "全球实时统计数据", en: "Real-time global statistics" } },
+      { name: { zh: "Google 公共数据", en: "Google Public Data" }, url: "https://www.google.com/publicdata/directory", desc: { zh: "全球公共数据集探索", en: "Global public datasets" } },
+      { name: { zh: "Gapminder", en: "Gapminder" }, url: "https://www.gapminder.org", desc: { zh: "世界数据可视化工具", en: "World data visualization" } },
+      { name: { zh: "Statista", en: "Statista" }, url: "https://www.statista.com", desc: { zh: "市场与行业数据统计", en: "Market & industry statistics" } },
+      { name: { zh: "UN Data", en: "UN Data" }, url: "https://data.un.org", desc: { zh: "联合国统计数据门户", en: "UN statistics portal" } },
+      { name: { zh: "World Bank Data", en: "World Bank Data" }, url: "https://data.worldbank.org", desc: { zh: "世界银行开放数据", en: "World Bank open data" } },
+      { name: { zh: "IMF Data", en: "IMF Data" }, url: "https://www.imf.org/en/Data", desc: { zh: "国际货币基金组织数据", en: "IMF data portal" } },
+      { name: { zh: "OECD Data", en: "OECD Data" }, url: "https://data.oecd.org", desc: { zh: "经合组织统计数据", en: "OECD statistics" } },
+      { name: { zh: "Our World in Data", en: "Our World in Data" }, url: "https://ourworldindata.org", desc: { zh: "全球问题数据可视化", en: "Global problems data visualized" } },
+      { name: { zh: "NASA Earth Data", en: "NASA Earth Data" }, url: "https://earthdata.nasa.gov", desc: { zh: "NASA 地球科学数据", en: "NASA Earth science data" } },
+      { name: { zh: "Google Trends", en: "Google Trends" }, url: "https://trends.google.com", desc: { zh: "全球搜索趋势分析", en: "Global search trends" } },
+      { name: { zh: "Kaggle", en: "Kaggle" }, url: "https://www.kaggle.com", desc: { zh: "数据科学与机器学习社区", en: "Data science & ML community" } },
+    ]
+  },
+  {
+    id: "education",
+    icon: "🎓",
+    color: "#4dd0e1",
+    name: { zh: "教育与知识", en: "Education & Knowledge" },
+    sites: [
+      { name: { zh: "Coursera", en: "Coursera" }, url: "https://www.coursera.org", desc: { zh: "全球名校在线课程", en: "Top university online courses" } },
+      { name: { zh: "edX", en: "edX" }, url: "https://www.edx.org", desc: { zh: "哈佛 MIT 在线教育", en: "Harvard & MIT online education" } },
+      { name: { zh: "Khan Academy", en: "Khan Academy" }, url: "https://www.khanacademy.org", desc: { zh: "免费在线学习平台", en: "Free online learning" } },
+      { name: { zh: "MIT OCW", en: "MIT OCW" }, url: "https://ocw.mit.edu", desc: { zh: "MIT 开放课程", en: "MIT OpenCourseWare" } },
+      { name: { zh: "TED", en: "TED" }, url: "https://www.ted.com", desc: { zh: "思想者演讲视频", en: "Ideas worth spreading" } },
+      { name: { zh: "YouTube", en: "YouTube" }, url: "https://www.youtube.com", desc: { zh: "全球视频学习平台", en: "Global video platform" } },
+      { name: { zh: "Wolfram Alpha", en: "Wolfram Alpha" }, url: "https://www.wolframalpha.com", desc: { zh: "计算知识引擎", en: "Computational knowledge engine" } },
+      { name: { zh: "Brilliant", en: "Brilliant" }, url: "https://brilliant.org", desc: { zh: "互动数学科学学习", en: "Interactive math & science" } },
+      { name: { zh: "Duolingo", en: "Duolingo" }, url: "https://www.duolingo.com", desc: { zh: "游戏化语言学习", en: "Gamified language learning" } },
+      { name: { zh: "BBC Learning", en: "BBC Learning" }, url: "https://www.bbc.co.uk/learning", desc: { zh: "BBC 英语学习资源", en: "BBC English learning" } },
+      { name: { zh: "National Geographic", en: "National Geographic" }, url: "https://www.nationalgeographic.com", desc: { zh: "国家地理探索频道", en: "Geographic exploration" } },
+      { name: { zh: "中国大学 MOOC", en: "CN MOOC" }, url: "https://www.icourse163.org", desc: { zh: "中国名校在线课程", en: "Chinese university MOOCs" } },
+    ]
+  },
+  {
+    id: "maps",
+    icon: "🗺",
+    color: "#aed581",
+    name: { zh: "地图与旅行", en: "Maps & Travel" },
+    sites: [
+      { name: { zh: "Google Maps", en: "Google Maps" }, url: "https://maps.google.com", desc: { zh: "全球地图导航服务", en: "Global map navigation" } },
+      { name: { zh: "百度地图", en: "Baidu Maps" }, url: "https://map.baidu.com", desc: { zh: "中国地图与导航", en: "China maps & navigation" } },
+      { name: { zh: "Apple Maps", en: "Apple Maps" }, url: "https://maps.apple.com", desc: { zh: "苹果地图服务", en: "Apple map service" } },
+      { name: { zh: "Waze", en: "Waze" }, url: "https://www.waze.com", desc: { zh: "社区实时交通导航", en: "Community traffic navigation" } },
+      { name: { zh: "TripAdvisor", en: "TripAdvisor" }, url: "https://www.tripadvisor.com", desc: { zh: "全球旅行点评平台", en: "Global travel reviews" } },
+      { name: { zh: "Lonely Planet", en: "Lonely Planet" }, url: "https://www.lonelyplanet.com", desc: { zh: "旅行指南与攻略", en: "Travel guides" } },
+      { name: { zh: "Booking.com", en: "Booking.com" }, url: "https://www.booking.com", desc: { zh: "全球酒店预订", en: "Global hotel booking" } },
+      { name: { zh: "Airbnb", en: "Airbnb" }, url: "https://www.airbnb.com", desc: { zh: "民宿短租平台", en: "Vacation rental platform" } },
+      { name: { zh: "Skyscanner", en: "Skyscanner" }, url: "https://www.skyscanner.com", desc: { zh: "全球机票比价", en: "Global flight comparison" } },
+      { name: { zh: "Google Flights", en: "Google Flights" }, url: "https://www.google.com/travel/flights", desc: { zh: "谷歌航班搜索", en: "Google flight search" } },
+      { name: { zh: "Rome2Rio", en: "Rome2Rio" }, url: "https://www.rome2rio.com", desc: { zh: "多式联程路线规划", en: "Multi-modal route planner" } },
+      { name: { zh: "携程旅行", en: "Ctrip" }, url: "https://www.ctrip.com", desc: { zh: "中国综合旅行平台", en: "China travel platform" } },
+    ]
+  },
+  {
+    id: "language",
+    icon: "💬",
+    color: "#f06292",
+    name: { zh: "语言与交流", en: "Language & Communication" },
+    sites: [
+      { name: { zh: "Google 翻译", en: "Google Translate" }, url: "https://translate.google.com", desc: { zh: "多语言即时翻译", en: "Multi-language translation" } },
+      { name: { zh: "DeepL", en: "DeepL" }, url: "https://www.deepl.com", desc: { zh: "高质量 AI 翻译", en: "High-quality AI translation" } },
+      { name: { zh: "Duolingo", en: "Duolingo" }, url: "https://www.duolingo.com", desc: { zh: "游戏化语言学习", en: "Gamified language learning" } },
+      { name: { zh: "Bing 翻译", en: "Bing Translator" }, url: "https://www.bing.com/translator", desc: { zh: "微软在线翻译", en: "Microsoft translator" } },
+      { name: { zh: "Forvo", en: "Forvo" }, url: "https://forvo.com", desc: { zh: "全球发音词典", en: "Global pronunciation dictionary" } },
+      { name: { zh: "WordReference", en: "WordReference" }, url: "https://www.wordreference.com", desc: { zh: "多语言词典社区", en: "Multilingual dictionary" } },
+      { name: { zh: "Linguee", en: "Linguee" }, url: "https://www.linguee.com", desc: { zh: "双语例句搜索引擎", en: "Bilingual sentence search" } },
+      { name: { zh: "Reverso", en: "Reverso" }, url: "https://context.reverso.net", desc: { zh: "上下文翻译工具", en: "Context translation tool" } },
+      { name: { zh: "Tandem", en: "Tandem" }, url: "https://www.tandem.net", desc: { zh: "语言交换社交", en: "Language exchange social" } },
+      { name: { zh: "HelloTalk", en: "HelloTalk" }, url: "https://www.hellotalk.com", desc: { zh: "全球语言交流社区", en: "Global language exchange" } },
+      { name: { zh: "italki", en: "italki" }, url: "https://www.italki.com", desc: { zh: "在线语言教师平台", en: "Online language teachers" } },
+      { name: { zh: "Google Input Tools", en: "Google Input" }, url: "https://www.google.com/inputtools", desc: { zh: "多语言输入工具", en: "Multi-language input tool" } },
+    ]
+  },
+  {
+    id: "intl",
+    icon: "🌐",
+    color: "#7986cb",
+    name: { zh: "国际组织", en: "International Orgs" },
+    sites: [
+      { name: { zh: "联合国", en: "United Nations" }, url: "https://www.un.org", desc: { zh: "联合国官方门户", en: "United Nations portal" } },
+      { name: { zh: "UNESCO", en: "UNESCO" }, url: "https://www.unesco.org", desc: { zh: "联合国教科文组织", en: "UN education & science org" } },
+      { name: { zh: "WHO", en: "WHO" }, url: "https://www.who.int", desc: { zh: "世界卫生组织", en: "World Health Organization" } },
+      { name: { zh: "World Bank", en: "World Bank" }, url: "https://www.worldbank.org", desc: { zh: "世界银行集团", en: "World Bank Group" } },
+      { name: { zh: "IMF", en: "IMF" }, url: "https://www.imf.org", desc: { zh: "国际货币基金组织", en: "Int'l Monetary Fund" } },
+      { name: { zh: "WTO", en: "WTO" }, url: "https://www.wto.org", desc: { zh: "世界贸易组织", en: "World Trade Organization" } },
+      { name: { zh: "UNDP", en: "UNDP" }, url: "https://www.undp.org", desc: { zh: "联合国开发计划署", en: "UN Development Programme" } },
+      { name: { zh: "UNICEF", en: "UNICEF" }, url: "https://www.unicef.org", desc: { zh: "联合国儿童基金会", en: "UN Children's Fund" } },
+      { name: { zh: "FAO", en: "FAO" }, url: "https://www.fao.org", desc: { zh: "联合国粮农组织", en: "Food & Agriculture Org" } },
+      { name: { zh: "ILO", en: "ILO" }, url: "https://www.ilo.org", desc: { zh: "国际劳工组织", en: "International Labour Org" } },
+      { name: { zh: "OECD", en: "OECD" }, url: "https://www.oecd.org", desc: { zh: "经合组织", en: "OECD" } },
+      { name: { zh: "UNHCR", en: "UNHCR" }, url: "https://www.unhcr.org", desc: { zh: "联合国难民署", en: "UN Refugee Agency" } },
+    ]
+  },
+  {
+    id: "space",
+    icon: "🛰",
+    color: "#ce93d8",
+    name: { zh: "航天与太空", en: "Space & Aerospace" },
+    sites: [
+      { name: { zh: "NASA", en: "NASA" }, url: "https://www.nasa.gov", desc: { zh: "美国国家航空航天局", en: "US space agency" } },
+      { name: { zh: "ESA", en: "ESA" }, url: "https://www.esa.int", desc: { zh: "欧洲航天局", en: "European Space Agency" } },
+      { name: { zh: "SpaceX", en: "SpaceX" }, url: "https://www.spacex.com", desc: { zh: "商业航天发射公司", en: "Commercial space launch" } },
+      { name: { zh: "JAXA", en: "JAXA" }, url: "https://global.jaxa.jp", desc: { zh: "日本宇宙航空研究机构", en: "Japan aerospace agency" } },
+      { name: { zh: "ISRO", en: "ISRO" }, url: "https://www.isro.gov.in", desc: { zh: "印度空间研究组织", en: "Indian space agency" } },
+      { name: { zh: "CNSA", en: "CNSA" }, url: "https://www.cnsa.gov.cn", desc: { zh: "中国国家航天局", en: "China space agency" } },
+      { name: { zh: "Hubble 望远镜", en: "Hubble" }, url: "https://hubblesite.org", desc: { zh: "哈勃太空望远镜影像", en: "Hubble telescope images" } },
+      { name: { zh: "James Webb", en: "James Webb" }, url: "https://webb.nasa.gov", desc: { zh: "韦伯太空望远镜", en: "James Webb telescope" } },
+      { name: { zh: "Google Sky", en: "Google Sky" }, url: "https://www.google.com/sky", desc: { zh: "星空在线探索", en: "Online sky exploration" } },
+      { name: { zh: "Stellarium", en: "Stellarium" }, url: "https://stellarium-web.org", desc: { zh: "在线虚拟天文馆", en: "Online virtual planetarium" } },
+      { name: { zh: "Heavens-Above", en: "Heavens-Above" }, url: "https://www.heavens-above.com", desc: { zh: "卫星与空间站追踪", en: "Satellite & ISS tracking" } },
+      { name: { zh: "Space.com", en: "Space.com" }, url: "https://www.space.com", desc: { zh: "太空新闻与探索", en: "Space news & exploration" } },
+    ]
+  },
+];
+
+/* ==================== State ==================== */
+let currentLang = localStorage.getItem('ve-lang') || 'zh';
+let currentTheme = localStorage.getItem('ve-theme') || 'space';
+let currentCategory = 'all';
+let favView = false;
+let favorites = JSON.parse(localStorage.getItem('ve-favs') || '[]');
+let searchText = '';
+
+/* ==================== Starfield ==================== */
+function initStarfield() {
+  const sf = document.getElementById('starfield');
+  const count = 80;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.setProperty('--dur', (Math.random() * 4 + 2) + 's');
+    s.style.setProperty('--delay', Math.random() * 5 + 's');
+    s.style.setProperty('--bright', (Math.random() * 0.6 + 0.3).toString());
+    sf.appendChild(s);
+  }
+}
+
+/* ==================== i18n ==================== */
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (I18N[key]) el.textContent = I18N[key][currentLang];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (I18N[key]) el.placeholder = I18N[key][currentLang];
+  });
+  document.getElementById('langBtn').textContent = currentLang === 'zh' ? 'EN' : '中';
+  document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  localStorage.setItem('ve-lang', currentLang);
+  applyI18n();
+  renderCategories();
+  renderContent();
+}
+
+/* ==================== Theme ==================== */
+function switchTheme(theme) {
+  currentTheme = theme;
+  document.body.setAttribute('data-theme', theme);
+  localStorage.setItem('ve-theme', theme);
+  document.querySelectorAll('.theme-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-set') === theme);
+  });
+}
+
+/* ==================== Categories ==================== */
+function renderCategories() {
+  const bar = document.getElementById('categoryBar');
+  bar.innerHTML = '';
+
+  // "All" tab
+  const allTab = document.createElement('div');
+  allTab.className = 'cat-tab' + (currentCategory === 'all' ? ' active' : '');
+  allTab.innerHTML = `<span class="cat-icon">🌐</span><span>${I18N.all_sites[currentLang]}</span>`;
+  allTab.onclick = () => { currentCategory = 'all'; favView = false; document.getElementById('favBtn').classList.remove('active'); renderCategories(); renderContent(); };
+  bar.appendChild(allTab);
+
+  NAV_DATA.forEach(cat => {
+    const tab = document.createElement('div');
+    tab.className = 'cat-tab' + (currentCategory === cat.id ? ' active' : '');
+    tab.style.setProperty('--cat-color', cat.color);
+    tab.innerHTML = `<span class="cat-icon">${cat.icon}</span><span>${cat.name[currentLang]}</span><span class="cat-count">${cat.sites.length}</span>`;
+    tab.onclick = () => { currentCategory = cat.id; favView = false; document.getElementById('favBtn').classList.remove('active'); renderCategories(); renderContent(); };
+    bar.appendChild(tab);
+  });
+}
+
+/* ==================== Content Rendering ==================== */
+function renderContent() {
+  const main = document.getElementById('mainContent');
+
+  // Search mode
+  if (searchText) {
+    const results = [];
+    NAV_DATA.forEach(cat => {
+      cat.sites.forEach(site => {
+        const name = site.name[currentLang].toLowerCase();
+        const desc = site.desc[currentLang].toLowerCase();
+        const catName = cat.name[currentLang].toLowerCase();
+        if (name.includes(searchText) || desc.includes(searchText) || catName.includes(searchText) || site.name.zh.toLowerCase().includes(searchText) || site.name.en.toLowerCase().includes(searchText)) {
+          results.push({ ...site, catColor: cat.color, catName: cat.name[currentLang], catIcon: cat.icon });
+        }
+      });
+    });
+
+    main.innerHTML = '';
+    const section = document.createElement('div');
+    section.className = 'search-results';
+    const info = document.createElement('div');
+    info.className = 'search-info';
+    info.innerHTML = `${I18N.search_result[currentLang]} <strong style="color:var(--accent)">${results.length}</strong> ${I18N.sites_count[currentLang]}`;
+    section.appendChild(info);
+
+    if (results.length === 0) {
+      section.innerHTML += `<div class="empty-state"><div class="empty-icon">🔍</div><p>${I18N.search_empty[currentLang]}</p></div>`;
+    } else {
+      const grid = document.createElement('div');
+      grid.className = 'site-grid';
+      results.forEach(site => grid.appendChild(createSiteCard(site, site.catColor)));
+      section.appendChild(grid);
+    }
+    main.appendChild(section);
+    return;
+  }
+
+  // Favorites mode
+  if (favView) {
+    main.innerHTML = '';
+    const section = document.createElement('div');
+    section.className = 'category-section';
+    section.innerHTML = `<div class="section-title"><span class="st-icon">⭐</span><span>${I18N.favorites[currentLang]}</span><span class="st-bar"></span></div>`;
+
+    if (favorites.length === 0) {
+      section.innerHTML += `<div class="empty-state"><div class="empty-icon">⭐</div><p>${I18N.fav_empty[currentLang]}</p></div>`;
+    } else {
+      const grid = document.createElement('div');
+      grid.className = 'site-grid';
+      favorites.forEach(fav => {
+        const card = createSiteCard(fav, fav.catColor || '#ffd700');
+        grid.appendChild(card);
+      });
+      section.appendChild(grid);
+    }
+    main.appendChild(section);
+    return;
+  }
+
+  // Normal mode
+  main.innerHTML = '';
+  const cats = currentCategory === 'all' ? NAV_DATA : NAV_DATA.filter(c => c.id === currentCategory);
+
+  cats.forEach(cat => {
+    const section = document.createElement('div');
+    section.className = 'category-section';
+    section.innerHTML = `<div class="section-title"><span class="st-icon">${cat.icon}</span><span>${cat.name[currentLang]}</span><span class="st-bar"></span></div>`;
+
+    const grid = document.createElement('div');
+    grid.className = 'site-grid';
+    cat.sites.forEach(site => {
+      const card = createSiteCard(site, cat.color);
+      grid.appendChild(card);
+    });
+    section.appendChild(grid);
+    main.appendChild(section);
+  });
+}
+
+function createSiteCard(site, catColor) {
+  const card = document.createElement('a');
+  card.className = 'site-card';
+  card.href = site.url;
+  card.target = '_blank';
+  card.rel = 'noopener';
+  card.style.setProperty('--cat-color', catColor);
+
+  const siteKey = site.url;
+  const isFav = favorites.some(f => f.url === siteKey);
+
+  // Favicon
+  let faviconHTML = '';
+  try {
+    const domain = new URL(site.url).hostname;
+    faviconHTML = `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.parentElement.textContent='${site.name[currentLang].charAt(0)}'">`;
+  } catch(e) {
+    faviconHTML = site.name[currentLang].charAt(0);
+  }
+
+  card.innerHTML = `
+    <div class="site-card-top">
+      <div class="site-icon">${faviconHTML}</div>
+      <div class="site-name">${site.name[currentLang]}</div>
+      <span class="site-fav-star ${isFav ? 'active' : ''}" onclick="event.preventDefault();event.stopPropagation();toggleFav('${siteKey}')">⭐</span>
+    </div>
+    <div class="site-desc">${site.desc[currentLang]}</div>
+  `;
+
+  return card;
+}
+
+/* ==================== Favorites ==================== */
+function toggleFav(url) {
+  // Find site data
+  let siteData = null;
+  let catColor = '#ffd700';
+  NAV_DATA.forEach(cat => {
+    const found = cat.sites.find(s => s.url === url);
+    if (found) { siteData = found; catColor = cat.color; }
+  });
+  if (!siteData) {
+    // Check if already in favorites
+    siteData = favorites.find(f => f.url === url);
+    if (!siteData) return;
+  }
+
+  const idx = favorites.findIndex(f => f.url === url);
+  if (idx >= 0) {
+    favorites.splice(idx, 1);
+  } else {
+    favorites.push({ ...siteData, catColor });
+  }
+  localStorage.setItem('ve-favs', JSON.stringify(favorites));
+  renderContent();
+}
+
+function toggleFavView() {
+  favView = !favView;
+  document.getElementById('favBtn').classList.toggle('active', favView);
+  if (favView) {
+    currentCategory = 'all';
+    searchText = '';
+    document.getElementById('searchInput').value = '';
+  }
+  renderCategories();
+  renderContent();
+}
+
+/* ==================== Search ==================== */
+function handleSearch(val) {
+  searchText = val.trim().toLowerCase();
+  if (searchText) {
+    favView = false;
+    document.getElementById('favBtn').classList.remove('active');
+  }
+  renderContent();
+}
+
+/* ==================== Misc ==================== */
+function resetView() {
+  currentCategory = 'all';
+  favView = false;
+  searchText = '';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('favBtn').classList.remove('active');
+  renderCategories();
+  renderContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backTop');
+  btn.classList.toggle('show', window.scrollY > 400);
+});
+
+/* ==================== Init ==================== */
+initStarfield();
+switchTheme(currentTheme);
+applyI18n();
+renderCategories();
+renderContent();
+</script>
+</body>
+</html>
