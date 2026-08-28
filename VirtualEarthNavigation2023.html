@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAP - Virtual Earth Navigation</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        mono: ['"Orbitron"', 'monospace'],
+                    },
+                    colors: {
+                        // 军绿色主题 (默认)
+                        army: {
+                            base: '#4b5320',
+                            light: '#6b7535',
+                            dark: '#2f3518',
+                            accent: '#8fbc8f'
+                        },
+                        // 玄青主题
+                        xuanqing: {
+                            base: '#1a2332',
+                            light: '#2c3e50',
+                            dark: '#0d1219',
+                            accent: '#3498db'
+                        },
+                        // 米黄主题
+                        beige: {
+                            base: '#f5f5dc',
+                            light: '#fff8dc',
+                            dark: '#e8e4c9',
+                            accent: '#8b4513'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 动态主题变量 */
+        :root {
+            --theme-bg: #4b5320;
+            --theme-bg-light: #6b7535;
+            --theme-bg-dark: #2f3518;
+            --theme-text: #ffffff;
+            --theme-accent: #8fbc8f;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            background-color: var(--theme-bg);
+            color: var(--theme-text);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .theme-army {
+            --theme-bg: #4b5320;
+            --theme-bg-light: #6b7535;
+            --theme-bg-dark: #2f3518;
+            --theme-text: #e0e0e0;
+            --theme-accent: #8fbc8f;
+            --card-bg: rgba(47, 53, 24, 0.6);
+            --card-border: rgba(143, 188, 143, 0.3);
+        }
+
+        .theme-xuanqing {
+            --theme-bg: #1a2332;
+            --theme-bg-light: #2c3e50;
+            --theme-bg-dark: #0d1219;
+            --theme-text: #ecf0f1;
+            --theme-accent: #3498db;
+            --card-bg: rgba(13, 18, 25, 0.6);
+            --card-border: rgba(52, 152, 219, 0.3);
+        }
+
+        .theme-beige {
+            --theme-bg: #f5f5dc;
+            --theme-bg-light: #fff8dc;
+            --theme-bg-dark: #e8e4c9;
+            --theme-text: #3e2723;
+            --theme-accent: #8b4513;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(139, 69, 19, 0.2);
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-color: var(--theme-accent);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--theme-accent);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--theme-bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--theme-accent);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="theme-army min-h-screen flex flex-col font-sans">
+
+    <!-- 头部导航 -->
+    <header class="sticky top-0 z-50 glass-card border-b border-opacity-20">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-earth-americas text-3xl" style="color: var(--theme-accent)"></i>
+                <h1 class="text-2xl font-bold font-mono tracking-wider">AAP NAVIGATION</h1>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <!-- 语言选择 -->
+                <div class="relative group">
+                    <button id="lang-btn" class="flex items-center space-x-2 hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-language"></i>
+                        <span id="current-lang">中文</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-40 bg-[var(--theme-bg-dark)] border border-[var(--card-border)] rounded-md shadow-lg hidden group-hover:block">
+                        <a href="#" onclick="changeLang('zh')" class="block px-4 py-2 hover:bg-[var(--theme-bg-light)]">中文</a>
+                        <a href="#" onclick="changeLang('en')" class="block px-4 py-2 hover:bg-[var(--theme-bg-light)]">English</a>
+                        <a href="#" onclick="changeLang('es')" class="block px-4 py-2 hover:bg-[var(--theme-bg-light)]">Español</a>
+                        <a href="#" onclick="changeLang('fr')" class="block px-4 py-2 hover:bg-[var(--theme-bg-light)]">Français</a>
+                        <a href="#" onclick="changeLang('de')" class="block px-4 py-2 hover:bg-[var(--theme-bg-light)]">Deutsch</a>
+                        <a href="#" onclick="changeLang('ja')" class="block px-4 py-2 hover:bg-[var(--theme-bg-light)]">日本語</a>
+                    </div>
+                </div>
+
+                <!-- 主题切换 -->
+                <div class="flex space-x-2 bg-[var(--theme-bg-dark)] p-1 rounded-full">
+                    <button onclick="setTheme('army')" class="w-6 h-6 rounded-full bg-[#4b5320] border border-white/20 hover:scale-110 transition" title="军绿"></button>
+                    <button onclick="setTheme('xuanqing')" class="w-6 h-6 rounded-full bg-[#1a2332] border border-white/20 hover:scale-110 transition" title="玄青"></button>
+                    <button onclick="setTheme('beige')" class="w-6 h-6 rounded-full bg-[#f5f5dc] border border-black/20 hover:scale-110 transition" title="米黄"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        
+        <!-- Hero Section -->
+        <section class="text-center mb-16 animate-fade-in-up">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 font-mono" data-i18n="hero_title">探索虚拟地球</h2>
+            <p class="text-xl opacity-80 max-w-2xl mx-auto" data-i18n="hero_subtitle">连接全球文明，优化能源与态度，共创可持续未来。</p>
+        </section>
+
+        <!-- EACO 核心介绍卡片 -->
+        <section class="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass-card p-8 rounded-2xl">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fa-solid fa-circle-question mr-3" style="color: var(--theme-accent)"></i>
+                    <span data-i18n="what_is_earth_e">What is Earth E?</span>
+                </h3>
+                <p class="leading-relaxed opacity-90" data-i18n="earth_e_desc">
+                    Earth E represents the evolving consciousness of our planet, a digital twin reflecting the collective energy and optimization of human civilization. It serves as the foundational layer for global coordination and sustainable development.
+                </p>
+            </div>
+            <div class="glass-card p-8 rounded-2xl">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fa-solid fa-network-wired mr-3" style="color: var(--theme-accent)"></i>
+                    <span data-i18n="what_is_eaco">What is Earth EACO?</span>
+                </h3>
+                <p class="leading-relaxed opacity-90" data-i18n="eaco_desc">
+                    EACO (Energy Attitude Cooperation Optimization) is Earth's top-tier AI + RWA + Web3 crypto asset. It is a global civilization upgrading model derived from four keywords: Positive Energy, Positive Mindset, Global Collaboration, and Continuous Optimization.
+                </p>
+            </div>
+        </section>
+
+        <!-- EACO 详细定义与合约 -->
+        <section class="mb-16 glass-card p-8 rounded-2xl border-l-4" style="border-left-color: var(--theme-accent)">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <h3 class="text-3xl font-bold font-mono">EACO Definition</h3>
+                <span class="text-sm opacity-70 mt-2 md:mt-0">Recommended Version, Jun 2026</span>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-4">
+                    <p class="text-lg" data-i18n="eaco_core">
+                        The core connotation of EACO is derived from four keywords: <strong>Energy, Attitude, Cooperation, Optimization</strong>.
+                    </p>
+                    <p class="opacity-80" data-i18n="eaco_formula">
+                        In essence, EACO serves as a global civilization upgrading model: <br>
+                        <span class="font-mono text-xl mt-2 block" style="color: var(--theme-accent)">EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization</span>
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 mt-4 opacity-90">
+                        <li data-i18n="goal_1">Elevate individual cognition</li>
+                        <li data-i18n="goal_2">Improve organizational efficiency</li>
+                        <li data-i18n="goal_3">Advance social civilization</li>
+                        <li data-i18n="goal_4">Promote sustainable development of the Earth</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--theme-bg-dark)] p-6 rounded-xl border border-[var(--card-border)]">
+                    <h4 class="font-bold mb-3 text-sm uppercase tracking-widest opacity-70">Contract Address</h4>
+                    <div class="flex items-center space-x-2 break-all">
+                        <code class="text-xs md:text-sm font-mono bg-black/20 p-2 rounded w-full select-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+                        <button onclick="copyContract()" class="p-2 hover:text-[var(--theme-accent)] transition" title="Copy">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4 flex space-x-3">
+                        <a href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="flex-1 text-center py-2 bg-[var(--theme-bg-light)] rounded hover:opacity-80 transition text-sm">Solscan</a>
+                        <a href="https://www.oklink.com/zh-hans/solana/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="flex-1 text-center py-2 bg-[var(--theme-bg-light)] rounded hover:opacity-80 transition text-sm">OKLink</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 资源链接网格 -->
+        <section>
+            <h3 class="text-2xl font-bold mb-6 pl-2 border-l-4" style="border-color: var(--theme-accent)" data-i18n="resources">EACO Ecosystem Resources</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Link Card Template -->
+                <a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Earth's Best Coin</h4>
+                        <p class="text-xs opacity-70">Official Token Info</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-chart-line">
+                    </div>
+                    <div>
+                        <h4 class="font-bold">EACO 50 Rate</h4>
+                        <p class="text-xs opacity-70">Performance Metrics</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-sack-dollar"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">100 Ways To Wealth</h4>
+                        <p class="text-xs opacity-70">Economic Models</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Earth 100 Friends</h4>
+                        <p class="text-xs opacity-70">Community Network</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-exchange-alt"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">EACO SWAP</h4>
+                        <p class="text-xs opacity-70">Decentralized Exchange</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/good-books/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Good Books</h4>
+                        <p class="text-xs opacity-70">Knowledge Base</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/eur-eaco/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-euro-sign"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">EUR-EACO</h4>
+                        <p class="text-xs opacity-70">Euro Pairing</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/au-trade/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-globe-asia"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">AU Trade</h4>
+                        <p class="text-xs opacity-70">Australia Trade Hub</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Mohist Tech</h4>
+                        <p class="text-xs opacity-70">Technology Stack</p>
+                    </div>
+                </a>
+
+                <a href="https://eaco-build-world.base44.app/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Build World</h4>
+                        <p class="text-xs opacity-70">Construction App</p>
+                    </div>
+                </a>
+
+                <a href="https://eaco-web3.base44.app" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-brands fa-webflow"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">EACO Web3</h4>
+                        <p class="text-xs opacity-70">Web3 Portal</p>
+                    </div>
+                </a>
+
+                <a href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-shoe-prints"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Footsteps of Civilization</h4>
+                        <p class="text-xs opacity-70">Historical Context</p>
+                    </div>
+                </a>
+                
+                 <a href="https://ucoingroup.github.io/eacoweb3-2026/" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[var(--theme-bg-dark)] flex items-center justify-center text-xl group-hover:text-[var(--theme-accent)] transition">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">EACO Web3 2026</h4>
+                        <p class="text-xs opacity-70">Latest Updates</p>
+                    </div>
+                </a>
+
+                <a href="https://discord.gg/bWCDME9Pkc" target="_blank" class="glass-card p-6 rounded-xl flex items-center space-x-4 group">
+                    <div class="w-12 h-12 rounded-full bg-[#5865F2] flex items-center justify-center text-xl text-white transition">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Discord Community</h4>
+                        <p class="text-xs opacity-70">Join the Conversation</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="glass-card mt-12 py-8 border-t border-[var(--card-border)]">
+        <div class="container mx-auto px-4 text-center">
+            <p class="font-mono text-lg mb-2">eaco星际文明网络小组</p>
+            <p class="text-sm opacity-60">&copy; 2026 Earth EACO Project. All rights reserved.</p>
+            <div class="mt-4 flex justify-center space-x-4 text-sm opacity-80">
+                <span>EACO = Earth's Best Coin</span>
+                <span>|</span>
+                <span>AI + RWA + Web3</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 多语言字典
+        const translations = {
+            zh: {
+                hero_title: "探索虚拟地球",
+                hero_subtitle: "连接全球文明，优化能源与态度，共创可持续未来。",
+                what_is_earth_e: "什么是 Earth E?",
+                earth_e_desc: "Earth E 代表我们星球不断进化的意识，是反映人类集体能量和优化的数字孪生体。它是全球协调和可持续发展的基础层。",
+                what_is_eaco: "什么是 Earth EACO?",
+                eaco_desc: "EACO (Energy Attitude Cooperation Optimization) 是地球顶级的 AI + RWA + Web3 加密资产。它是一种源自四个关键词的全球文明升级模式：正能量、积极心态、全球协作和持续优化。",
+                eaco_core: "EACO 的核心内涵源自四个关键词：能量、态度、协作、优化。",
+                eaco_formula: "本质上，EACO 作为一个全球文明升级模型：",
+                goal_1: "提升个人认知",
+                goal_2: "提高组织效率",
+                goal_3: "推进社会文明",
+                goal_4: "促进地球的可持续发展",
+                resources: "EACO 生态系统资源"
+            },
+            en: {
+                hero_title: "Explore Virtual Earth",
+                hero_subtitle: "Connecting global civilizations, optimizing energy and attitude for a sustainable future.",
+                what_is_earth_e: "What is Earth E?",
+                earth_e_desc: "Earth E represents the evolving consciousness of our planet, a digital twin reflecting the collective energy and optimization of human civilization.",
+                what_is_eaco: "What is Earth EACO?",
+                eaco_desc: "EACO (Energy Attitude Cooperation Optimization) is Earth's top-tier AI + RWA + Web3 crypto asset. It is a global civilization upgrading model.",
+                eaco_core: "The core connotation of EACO is derived from four keywords: Energy, Attitude, Cooperation, Optimization.",
+                eaco_formula: "In essence, EACO serves as a global civilization upgrading model:",
+                goal_1: "Elevate individual cognition",
+                goal_2: "Improve organizational efficiency",
+                goal_3: "Advance social civilization",
+                goal_4: "Promote sustainable development of the Earth",
+                resources: "EACO Ecosystem Resources"
+            },
+            es: {
+                hero_title: "Explora la Tierra Virtual",
+                hero_subtitle: "Conectando civilizaciones globales, optimizando energía y actitud para un futuro sostenible.",
+                what_is_earth_e: "¿Qué es Earth E?",
+                earth_e_desc: "Earth E representa la conciencia evolutiva de nuestro planeta, un gemelo digital que refleja la energía colectiva.",
+                what_is_eaco: "¿Qué es Earth EACO?",
+                eaco_desc: "EACO es el activo cripto AI + RWA + Web3 de primer nivel de la Tierra. Un modelo de actualización de la civilización global.",
+                eaco_core: "La connotación central de EACO se deriva de cuatro palabras clave: Energía, Actitud, Cooperación, Optimización.",
+                eaco_formula: "En esencia, EACO sirve como un modelo de actualización de la civilización global:",
+                goal_1: "Elevar la cognición individual",
+                goal_2: "Mejorar la eficiencia organizacional",
+                goal_3: "Avanzar la civilización social",
+                goal_4: "Promover el desarrollo sostenible de la Tierra",
+                resources: "Recursos del Ecosistema EACO"
+            },
+            fr: {
+                hero_title: "Explorer la Terre Virtuelle",
+                hero_subtitle: "Connecter les civilisations mondiales, optimiser l'énergie et l'attitude pour un avenir durable.",
+                what_is_earth_e: "Qu'est-ce que Earth E ?",
+                earth_e_desc: "Earth E représente la conscience évolutive de notre planète, un jumeau numérique reflétant l'énergie collective.",
+                what_is_eaco: "Qu'est-ce que Earth EACO ?",
+                eaco_desc: "EACO est l'actif crypto AI + RWA + Web3 de premier plan de la Terre. Un modèle de mise à niveau de la civilisation mondiale.",
+                eaco_core: "La connotation centrale d'EACO est dérivée de quatre mots-clés : Énergie, Attitude, Coopération, Optimisation.",
+                eaco_formula: "Essentiellement, EACO sert de modèle de mise à niveau de la civilisation mondiale :",
+                goal_1: "Élever la cognition individuelle",
+                goal_2: "Améliorer l'efficacité organisationnelle",
+                goal_3: "Faire avancer la civilisation sociale",
+                goal_4: "Promouvoir le développement durable de la Terre",
+                resources: "Ressources de l'écosystème EACO"
+            },
+            de: {
+                hero_title: "Entdecke die virtuelle Erde",
+                hero_subtitle: "Verbindung globaler Zivilisationen, Optimierung von Energie und Haltung für eine nachhaltige Zukunft.",
+                what_is_earth_e: "Was ist Earth E?",
+                earth_e_desc: "Earth E repräsentiert das sich entwickelnde Bewusstsein unseres Planeten, ein digitaler Zwilling der kollektiven Energie.",
+                what_is_eaco: "Was ist Earth EACO?",
+                eaco_desc: "EACO ist das erstklassige AI + RWA + Web3 Krypto-Asset der Erde. Ein globales Zivilisations-Upgrading-Modell.",
+                eaco_core: "Die Kernbedeutung von EACO leitet sich aus vier Schlüsselwörtern ab: Energie, Einstellung, Kooperation, Optimierung.",
+                eaco_formula: "Im Wesentlichen dient EACO als globales Zivilisations-Upgrading-Modell:",
+                goal_1: "Individuelle Kognition erhöhen",
+                goal_2: "Organisationseffizienz verbessern",
+                goal_3: "Soziale Zivilisation vorantreiben",
+                goal_4: "Nachhaltige Entwicklung der Erde fördern",
+                resources: "EACO Ökosystem Ressourcen"
+            },
+            ja: {
+                hero_title: "仮想地球を探検する",
+                hero_subtitle: "グローバルな文明をつなぎ、エネルギーと態度を最適化し、持続可能な未来を創造します。",
+                what_is_earth_e: "Earth Eとは？",
+                earth_e_desc: "Earth Eは、私たちの惑星の進化する意識を表し、人類の集合的なエネルギーと最適化を反映するデジタルツインです。",
+                what_is_eaco: "Earth EACOとは？",
+                eaco_desc: "EACOは、地球のトップティアのAI + RWA + Web3暗号資産です。4つのキーワードから派生したグローバル文明アップグレードモデルです。",
+                eaco_core: "EACOのコアな意味は、4つのキーワードから派生しています：エネルギー、態度、協力、最適化。",
+                eaco_formula: "本質的に、EACOはグローバルな文明アップグレードモデルとして機能します：",
+                goal_1: "個人の認知を高める",
+                goal_2: "組織の効率を改善する",
+                goal_3: "社会文明を進歩させる",
+                goal_4: "地球の持続可能な開発を促進する",
+                resources: "EACO エコシステムリソース"
+            }
+        };
+
+        // 切换主题
+        function setTheme(themeName) {
+            document.body.className = `theme-${themeName} min-h-screen flex flex-col font-sans`;
+            localStorage.setItem('eaco-theme', themeName);
+        }
+
+        // 切换语言
+        function changeLang(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            
+            const langNames = {
+                'zh': '中文',
+                'en': 'English',
+                'es': 'Español',
+                'fr': 'Français',
+                'de': 'Deutsch',
+                'ja': '日本語'
+            };
+            document.getElementById('current-lang').innerText = langNames[lang];
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+            localStorage.setItem('eaco-lang', lang);
+        }
+
+        // 复制合约地址
+        function copyContract() {
+            const address = "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH";
+            navigator.clipboard.writeText(address).then(() => {
+                alert("Contract Address Copied!");
+            });
+        }
+
+        // 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('eaco-theme') || 'army';
+            setTheme(savedTheme);
+            
+            const savedLang = localStorage.getItem('eaco-lang') || 'zh';
+            changeLang(savedLang);
+        });
+    </script>
+</body>
+</html>
