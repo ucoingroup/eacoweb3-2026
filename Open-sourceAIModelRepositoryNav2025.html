@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EACO 开源AI模型仓库导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            z-index: 100;
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            padding: 6px 12px;
+            border-radius: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .lang-switch button {
+            border: none;
+            background: transparent;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+
+        .lang-switch button.active {
+            background: #2563eb;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+        }
+
+        .lang-switch button:hover:not(.active) {
+            background: #e2e8f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 30px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .header .logo {
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .header .sub {
+            font-size: 16px;
+            color: #64748b;
+            margin-top: 6px;
+            font-weight: 400;
+        }
+
+        .header .sub .en {
+            display: none;
+        }
+
+        body.lang-en .header .sub .zh {
+            display: none;
+        }
+        body.lang-en .header .sub .en {
+            display: inline;
+        }
+
+        /* ---- 华语TOP10 栏目 ---- */
+        .top10-section {
+            margin: 32px 0 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 28px 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(226,232,240,0.6);
+        }
+
+        .top10-section .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .top10-section .section-title .badge-top {
+            font-size: 13px;
+            font-weight: 500;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 2px 14px;
+            border-radius: 20px;
+        }
+
+        .top10-section .section-sub {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+        .top10-section .section-sub .en { display: none; }
+        body.lang-en .top10-section .section-sub .zh { display: none; }
+        body.lang-en .top10-section .section-sub .en { display: inline; }
+
+        .top10-table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .top10-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 600px;
+        }
+
+        .top10-table th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .top10-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #0f172a;
+            vertical-align: middle;
+        }
+
+        .top10-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .top10-table .rank {
+            font-weight: 700;
+            color: #2563eb;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .top10-table .rank-group {
+            font-weight: 700;
+            color: #7c3aed;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .top10-table .model-name {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .top10-table .model-name .en {
+            display: none;
+        }
+        body.lang-en .top10-table .model-name .zh {
+            display: none;
+        }
+        body.lang-en .top10-table .model-name .en {
+            display: inline;
+        }
+
+        .top10-table .org {
+            color: #475569;
+            white-space: nowrap;
+        }
+
+        .top10-table .desc-cell {
+            color: #475569;
+            line-height: 1.5;
+        }
+        .top10-table .desc-cell .en { display: none; }
+        body.lang-en .top10-table .desc-cell .zh { display: none; }
+        body.lang-en .top10-table .desc-cell .en { display: inline; }
+
+        .top10-table .link-cell a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 13px;
+            word-break: break-all;
+        }
+        .top10-table .link-cell a:hover {
+            text-decoration: underline;
+        }
+
+        .top10-note {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+        .top10-note .en { display: none; }
+        body.lang-en .top10-note .zh { display: none; }
+        body.lang-en .top10-note .en { display: inline; }
+
+        /* ---- 搜索与导航卡片 ---- */
+        .search-box {
+            max-width: 560px;
+            margin: 24px auto 36px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 15px;
+            background: #fff;
+            transition: all 0.25s;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .search-box input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 4px 20px rgba(37,99,235,0.12);
+        }
+
+        .search-box .icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .stats {
+            text-align: center;
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 22px 24px 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(226,232,240,0.6);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            border-color: #bfdbfe;
+        }
+
+        .card .name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card .name .badge {
+            font-size: 11px;
+            font-weight: 500;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 1px 10px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        .card .desc {
+            font-size: 14px;
+            color: #475569;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .card .desc .en {
+            display: none;
+        }
+
+        body.lang-en .card .desc .zh {
+            display: none;
+        }
+        body.lang-en .card .desc .en {
+            display: inline;
+        }
+
+        .card .url {
+            font-size: 13px;
+            color: #2563eb;
+            margin-top: 10px;
+            word-break: break-all;
+            font-family: "SF Mono", "Fira Code", monospace;
+            opacity: 0.8;
+        }
+
+        .card .tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 2px 12px;
+            border-radius: 12px;
+            margin-top: 10px;
+            margin-right: 4px;
+        }
+
+        .no-result {
+            text-align: center;
+            padding: 40px 0;
+            color: #94a3b8;
+            font-size: 15px;
+            display: none;
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            margin-top: 50px;
+            padding: 32px 24px 28px;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .footer .inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer .eaco-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .eaco-title span {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer .eaco-desc {
+            font-size: 14px;
+            color: #475569;
+            max-width: 600px;
+            margin: 10px auto 14px;
+            line-height: 1.7;
+        }
+
+        .footer .eaco-desc .en {
+            display: none;
+        }
+
+        body.lang-en .footer .eaco-desc .zh {
+            display: none;
+        }
+        body.lang-en .footer .eaco-desc .en {
+            display: inline;
+        }
+
+        .footer .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 24px;
+            margin-top: 14px;
+        }
+
+        .footer .links a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .footer .links a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 18px;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 18px;
+        }
+
+        /* ---- EACO Coin Info (新增) ---- */
+        .eaco-coin-section {
+            margin-top: 28px;
+            padding: 24px 28px 20px;
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+            border-radius: 16px;
+            border: 1px solid #dbeafe;
+        }
+
+        .eaco-coin-section .coin-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .eaco-coin-section .coin-title .highlight {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .eaco-coin-section .coin-tagline {
+            font-size: 15px;
+            color: #475569;
+            margin: 4px 0 10px;
+        }
+        .eaco-coin-section .coin-tagline .en { display: none; }
+        body.lang-en .eaco-coin-section .coin-tagline .zh { display: none; }
+        body.lang-en .eaco-coin-section .coin-tagline .en { display: inline; }
+
+        .eaco-coin-section .ca-box {
+            background: #ffffff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 13px;
+            color: #0f172a;
+            word-break: break-all;
+            display: inline-block;
+            margin: 6px 0 12px;
+            max-width: 100%;
+        }
+
+        .eaco-coin-section .ca-box .ca-label {
+            color: #64748b;
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .eaco-coin-section .coin-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin: 12px 0 4px;
+        }
+
+        .eaco-coin-section .coin-links a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .eaco-coin-section .coin-links a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        .eaco-coin-section .coin-links .dot {
+            color: #cbd5e1;
+            user-select: none;
+        }
+
+        .eaco-coin-section .coin-links-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px 12px;
+            margin-top: 6px;
+        }
+
+        .eaco-coin-section .coin-links-group .group-label {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-right: 2px;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 20px 16px 20px; }
+            .header .logo { font-size: 28px; }
+            .grid { grid-template-columns: 1fr; }
+            .lang-switch { top: 12px; right: 12px; padding: 4px 8px; }
+            .lang-switch button { font-size: 12px; padding: 3px 10px; }
+            .footer .links { gap: 8px 16px; }
+            .top10-section { padding: 18px 16px 16px; }
+            .top10-table { font-size: 13px; min-width: 480px; }
+            .top10-table th,
+            .top10-table td { padding: 8px 10px; }
+            .top10-section .section-title { font-size: 20px; }
+            .eaco-coin-section { padding: 18px 16px 16px; }
+            .eaco-coin-section .coin-title { font-size: 17px; }
+            .eaco-coin-section .coin-links { gap: 4px 10px; }
+            .eaco-coin-section .coin-links a { font-size: 12px; }
+            .eaco-coin-section .ca-box { font-size: 11px; padding: 8px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Switch -->
+    <div class="lang-switch">
+        <button class="active" data-lang="zh" id="langZh">中文</button>
+        <button data-lang="en" id="langEn">English</button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">EACO 模型导航</div>
+            <div class="sub">
+                <span class="zh">🌐 开源AI模型仓库 · 一站直达</span>
+                <span class="en">🌐 Open Source AI Model Repositories · One-Stop</span>
+            </div>
+        </div>
+
+        <!-- ===== 华语TOP10 栏目 ===== -->
+        <div class="top10-section">
+            <div class="section-title">
+                🇨🇳 华语前10大AI开源大模型
+                <span class="badge-top">TOP 10</span>
+            </div>
+            <div class="section-sub">
+                <span class="zh">基于 Artificial Analysis 开源智能指数及 Hugging Face 社区热度（2026年7月）</span>
+                <span class="en">Based on Artificial Analysis Open-Source Intelligence Index &amp; Hugging Face community popularity (Jul 2026)</span>
+            </div>
+
+            <div class="top10-table-wrap">
+                <table class="top10-table">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>模型</th>
+                            <th>开发方</th>
+                            <th>简介</th>
+                            <th>官网 / 代码仓库</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="rank">1</td>
+                            <td class="model-name"><span class="zh">GLM-5.2</span><span class="en">GLM-5.2</span></td>
+                            <td class="org">智谱AI</td>
+                            <td class="desc-cell"><span class="zh">开源智能指数 51 分，断层领先全球第一</span><span class="en">51 pts, #1 on Open-Source Intelligence Index</span></td>
+                            <td class="link-cell"><a href="https://github.com/THUDM/GLM" target="_blank">THUDM/GLM</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank-group">2</td>
+                            <td class="model-name"><span class="zh">MiniMax-M3</span><span class="en">MiniMax-M3</span></td>
+                            <td class="org">MiniMax</td>
+                            <td class="desc-cell"><span class="zh">多模态黑马，智能指数 44 分</span><span class="en">Multimodal, 44 pts</span></td>
+                            <td class="link-cell"><a href="https://www.minimaxi.com" target="_blank">minimaxi.com</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank-group">2</td>
+                            <td class="model-name"><span class="zh">DeepSeek V4 Pro</span><span class="en">DeepSeek V4 Pro</span></td>
+                            <td class="org">深度求索</td>
+                            <td class="desc-cell"><span class="zh">1.6T 总参数，1M 上下文，MIT 许可</span><span class="en">1.6T params, 1M ctx, MIT</span></td>
+                            <td class="link-cell"><a href="https://github.com/deepseek-ai" target="_blank">deepseek-ai</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank-group">2</td>
+                            <td class="model-name"><span class="zh">Kimi K2.6</span><span class="en">Kimi K2.6</span></td>
+                            <td class="org">月之暗面</td>
+                            <td class="desc-cell"><span class="zh">万亿参数，智能指数 44 分</span><span class="en">Trillion-param, 44 pts</span></td>
+                            <td class="link-cell"><a href="https://www.moonshot.cn" target="_blank">moonshot.cn</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank">5</td>
+                            <td class="model-name"><span class="zh">MiMo-V2.5-Pro</span><span class="en">MiMo-V2.5-Pro</span></td>
+                            <td class="org">小米</td>
+                            <td class="desc-cell"><span class="zh">1.0T 总参数，支持 1M 超长上下文</span><span class="en">1.0T params, 1M ctx</span></td>
+                            <td class="link-cell"><a href="https://www.mi.com" target="_blank">mi.com</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank">6</td>
+                            <td class="model-name"><span class="zh">DeepSeek V4 Flash</span><span class="en">DeepSeek V4 Flash</span></td>
+                            <td class="org">深度求索</td>
+                            <td class="desc-cell"><span class="zh">13B 激活参数，智能指数 40 分，性价比极高</span><span class="en">13B active, 40 pts, high性价比</span></td>
+                            <td class="link-cell"><a href="https://github.com/deepseek-ai" target="_blank">deepseek-ai</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank">7</td>
+                            <td class="model-name"><span class="zh">Qwen3.5-397B-A17B</span><span class="en">Qwen3.5-397B-A17B</span></td>
+                            <td class="org">阿里通义</td>
+                            <td class="desc-cell"><span class="zh">总参数 3970 亿，Apache 2.0，全球下载破 10 亿</span><span class="en">397B total, Apache 2.0, 1B+ downloads</span></td>
+                            <td class="link-cell"><a href="https://github.com/QwenLM/Qwen" target="_blank">QwenLM/Qwen</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank">8</td>
+                            <td class="model-name"><span class="zh">Kimi K2.7-Code</span><span class="en">Kimi K2.7-Code</span></td>
+                            <td class="org">月之暗面</td>
+                            <td class="desc-cell"><span class="zh">专攻编码，带视觉编码器，可看图写代码</span><span class="en">Code-specialized, vision encoder</span></td>
+                            <td class="link-cell"><a href="https://www.moonshot.cn" target="_blank">moonshot.cn</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank">9</td>
+                            <td class="model-name"><span class="zh">Qwen3.6-35B-A3B</span><span class="en">Qwen3.6-35B-A3B</span></td>
+                            <td class="org">阿里通义</td>
+                            <td class="desc-cell"><span class="zh">3B 激活参数，本地部署首选，社区生态最大</span><span class="en">3B active, best for local deployment</span></td>
+                            <td class="link-cell"><a href="https://github.com/QwenLM/Qwen" target="_blank">QwenLM/Qwen</a></td>
+                        </tr>
+                        <tr>
+                            <td class="rank">10</td>
+                            <td class="model-name"><span class="zh">GLM-OCR</span><span class="en">GLM-OCR</span></td>
+                            <td class="org">智谱AI</td>
+                            <td class="desc-cell"><span class="zh">智谱下载量最高的模型，OCR 赛道热度极高</span><span class="en">Top-downloaded Zhipu model, hot in OCR</span></td>
+                            <td class="link-cell"><a href="https://github.com/THUDM/GLM" target="_blank">THUDM/GLM</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="top10-note">
+                <span class="zh">📌 排名综合 Artificial Analysis 开源智能指数（截至2026年7月）及 Hugging Face 社区热度。部分模型排名并列（同为44分）。</span>
+                <span class="en">📌 Rankings based on Artificial Analysis Open-Source Intelligence Index (as of Jul 2026) &amp; Hugging Face community popularity. Some models tied at 44 pts.</span>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-box">
+            <span class="icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="搜索模型仓库 / Search repositories..." />
+        </div>
+
+        <div class="stats" id="stats">共 <span id="count">0</span> 个仓库</div>
+
+        <!-- Cards Grid -->
+        <div class="grid" id="cardGrid"></div>
+        <div class="no-result" id="noResult">😕 没有找到匹配的仓库 / No repositories found</div>
+    </div>
+
+    <!-- Footer: EACO Info + Coin Info -->
+    <div class="footer">
+        <div class="inner">
+            <div class="eaco-title">⚡ <span>EACO</span> 开源AI模型仓库</div>
+            <div class="eaco-desc">
+                <span class="zh">
+                    EACO 致力于汇聚全球最优质的开源AI模型与工具，
+                    为开发者、研究者和AI爱好者提供高效、开放的模型发现与导航服务。
+                    我们相信开源的力量，推动AI技术普惠与创新。
+                </span>
+                <span class="en">
+                    EACO is dedicated to bringing together the finest open-source AI models and tools,
+                    providing developers, researchers, and AI enthusiasts with efficient and open model discovery
+                    and navigation services. We believe in the power of open source to drive AI democratization and innovation.
+                </span>
+            </div>
+            <div class="links">
+                <a href="https://ucoingroup.github.io/eacoweb3-2026/" target="_blank">🌍 EACO Web3 官网</a>
+                <a href="https://github.com/ucoingroup" target="_blank">🐙 GitHub</a>
+                <a href="https://ucoingroup.github.io/eacoweb3-2026/" target="_blank">📖 文档</a>
+            </div>
+
+            <!-- ===== EACO Coin 信息 ===== -->
+            <div class="eaco-coin-section">
+                <div class="coin-title">
+                    <span>🪙 <span class="highlight">Earth's Best Coin</span> = EACO = E</span>
+                </div>
+                <div class="coin-tagline">
+                    <span class="zh">🌍 EACO — Earth's Best AI + RWA + WEB3 Coin</span>
+                    <span class="en">🌍 EACO — Earth's Best AI + RWA + WEB3 Coin</span>
+                </div>
+
+                <div class="ca-box">
+                    <span class="ca-label">CA:</span>
+                    DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+                </div>
+
+                <div class="coin-links">
+                    <a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank">🌍 Earth's Best Coin</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/eaco50rate/" target="_blank">📊 EACO 50国预言机</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank">💰 100 Ways to Wealth</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank">🤝 Earth 100 Friends</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank">🔄 EACO SWAP</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/good-books/" target="_blank">📚 Good Books</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/eur-eaco/" target="_blank">🇪🇺 EUR-EACO</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/au-trade/" target="_blank">🇦🇺 AU-Trade</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank">🏛️ Mohist-Tech</a>
+                    <span class="dot">·</span>
+                    <a href="https://eaco-build-world.base44.app/" target="_blank">🏗️ EACO Build World</a>
+                    <span class="dot">·</span>
+                    <a href="https://eaco-web3.base44.app" target="_blank">🌐 EACO Web3</a>
+                    <span class="dot">·</span>
+                    <a href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank">🚶 Footsteps of Civilization</a>
+                    <span class="dot">·</span>
+                    <a href="https://discord.gg/bWCDME9Pkc" target="_blank">💬 Discord</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                © 2025 EACO · 开源 · 共建 · 共享 &nbsp;|&nbsp; Open · Collaborative · Shared
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ----- Data -----
+        const repositories = [
+            {
+                name: "Hugging Face Hub",
+                desc_zh: "全球最大AI模型托管平台，模型库最全，推理API开箱即用",
+                desc_en: "World's largest AI model hub, richest model library, ready-to-use inference API",
+                url: "https://huggingface.co",
+                tags: ["全球", "模型库", "API"]
+            },
+            {
+                name: "ModelScope 魔搭社区",
+                desc_zh: "阿里达摩院发起，国内最活跃AI模型社区，中文模型支持最好",
+                desc_en: "Initiated by Alibaba DAMO Academy, most active AI model community in China",
+                url: "https://modelscope.cn",
+                tags: ["国内", "中文模型", "阿里"]
+            },
+            {
+                name: "GitHub",
+                desc_zh: "全球最大代码托管平台，开源AI项目的绝对主阵地",
+                desc_en: "World's largest code hosting platform, the absolute home for open-source AI projects",
+                url: "https://github.com",
+                tags: ["代码托管", "开源", "协作"]
+            },
+            {
+                name: "Ollama",
+                desc_zh: "轻量级本地模型运行框架，一行命令跑大模型",
+                desc_en: "Lightweight local model runtime, run LLMs with one command",
+                url: "https://ollama.com",
+                tags: ["本地部署", "轻量", "跨平台"]
+            },
+            {
+                name: "Meta Llama",
+                desc_zh: "Meta官方Llama系列开源模型发布渠道",
+                desc_en: "Meta's official release channel for Llama series open-source models",
+                url: "https://github.com/meta-llama/llama",
+                tags: ["Meta", "Llama", "官方"]
+            },
+            {
+                name: "DeepSeek",
+                desc_zh: "深度求索官方开源模型，MIT许可，先进推理能力",
+                desc_en: "DeepSeek official open-source models, MIT license, advanced reasoning",
+                url: "https://github.com/deepseek-ai",
+                tags: ["DeepSeek", "推理", "MIT"]
+            },
+            {
+                name: "Qwen 通义千问",
+                desc_zh: "阿里云官方Qwen系列开源模型，支持201种语言",
+                desc_en: "Alibaba Cloud official Qwen series, supports 201 languages",
+                url: "https://github.com/QwenLM/Qwen",
+                tags: ["阿里", "多语言", "Apache 2.0"]
+            },
+            {
+                name: "OpenBMB",
+                desc_zh: "清华大学开源模型社区，ChatGLM等国产模型",
+                desc_en: "Tsinghua University open-source model community, ChatGLM and more",
+                url: "https://github.com/OpenBMB",
+                tags: ["清华", "ChatGLM", "国产"]
+            },
+            {
+                name: "Civitai",
+                desc_zh: "AI艺术模型社区，专注Stable Diffusion等生成式模型",
+                desc_en: "AI art model community, focused on Stable Diffusion & generative models",
+                url: "https://civitai.com",
+                tags: ["AI艺术", "Stable Diffusion", "社区"]
+            },
+            {
+                name: "AtomGit (GitCode)",
+                desc_zh: "CSDN生态代码托管平台，国内访问快，中文文档完善",
+                desc_en: "CSDN ecosystem code hosting, fast access in China, well-documented in Chinese",
+                url: "https://gitcode.com",
+                tags: ["国内", "CSDN", "代码托管"]
+            },
+            {
+                name: "Open Source AI Index",
+                desc_zh: "欧洲开源AI指数，评估模型开放性的权威排行榜",
+                desc_en: "European Open Source AI Index, authoritative leaderboard for model openness",
+                url: "https://osai-index.eu",
+                tags: ["排行榜", "开放性", "欧洲"]
+            },
+            {
+                name: "Awesome LLM",
+                desc_zh: "GitHub上最全的大语言模型资源汇总",
+                desc_en: "The most comprehensive LLM resource collection on GitHub",
+                url: "https://github.com/hannibal046/awesome-llm",
+                tags: ["资源汇总", "LLM", "Awesome"]
+            }
+        ];
+
+        // ----- Render -----
+        const grid = document.getElementById('cardGrid');
+        const searchInput = document.getElementById('searchInput');
+        const stats = document.getElementById('count');
+        const noResult = document.getElementById('noResult');
+
+        function render(filter = '') {
+            const q = filter.toLowerCase().trim();
+            const filtered = repositories.filter(r =>
+                r.name.toLowerCase().includes(q) ||
+                r.desc_zh.includes(q) ||
+                r.desc_en.toLowerCase().includes(q) ||
+                r.tags.some(t => t.toLowerCase().includes(q))
+            );
+
+            stats.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResult.style.display = 'block';
+                return;
+            }
+            noResult.style.display = 'none';
+
+            grid.innerHTML = filtered.map(r => `
+                <a href="${r.url}" target="_blank" class="card" data-name="${r.name}">
+                    <div class="name">
+                        ${r.name}
+                        <span class="badge">↗</span>
+                    </div>
+                    <div class="desc">
+                        <span class="zh">${r.desc_zh}</span>
+                        <span class="en">${r.desc_en}</span>
+                    </div>
+                    <div class="url">${r.url.replace(/^https?:\/\//, '')}</div>
+                    <div>
+                        ${r.tags.map(t => `<span class="tag">#${t}</span>`).join('')}
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // ----- Search -----
+        searchInput.addEventListener('input', () => render(searchInput.value));
+
+        // ----- Language Switch -----
+        const langZh = document.getElementById('langZh');
+        const langEn = document.getElementById('langEn');
+
+        function setLang(lang) {
+            document.body.classList.remove('lang-zh', 'lang-en');
+            document.body.classList.add('lang-' + lang);
+            langZh.classList.toggle('active', lang === 'zh');
+            langEn.classList.toggle('active', lang === 'en');
+            render(searchInput.value);
+        }
+
+        langZh.addEventListener('click', () => setLang('zh'));
+        langEn.addEventListener('click', () => setLang('en'));
+
+        // ----- Init -----
+        setLang('zh');
+        render('');
+    </script>
+
+</body>
+</html>
