@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Earth AI + EACO = Earth-E | Earth's Top-tier AI + RWA + Web3 Crypto Asset">
+<title>Earth-E | Earth AI × EACO</title>
+<style>
+:root{
+  --bg:#05050f; --bg2:#0a0a20; --bg3:#0f0f28;
+  --cyan:#00d4ff; --blue:#0080ff; --purple:#7b2fff;
+  --gold:#ffd700; --green:#00ff88; --orange:#ff8c00;
+  --text:#e0e0f0; --text2:#8888aa; --text3:#555570;
+  --card:rgba(15,15,40,0.6); --card-border:rgba(0,212,255,0.15);
+  --glow:rgba(0,212,255,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{
+  background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  overflow-x:hidden;line-height:1.6;min-height:100vh;
+}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1}
+nav{
+  position:fixed;top:0;left:0;width:100%;height:60px;
+  background:rgba(5,5,15,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--card-border);z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 20px;
+}
+nav .logo{font-size:1.2rem;font-weight:700;color:var(--cyan);text-decoration:none;letter-spacing:1px}
+nav .logo span{color:var(--gold)}
+nav ul{display:flex;list-style:none;gap:24px;align-items:center}
+nav ul li a{color:var(--text2);text-decoration:none;font-size:.85rem;transition:color .3s;white-space:nowrap}
+nav ul li a:hover{color:var(--cyan)}
+.lang-toggle{
+  background:rgba(0,212,255,0.1);border:1px solid var(--cyan);color:var(--cyan);
+  padding:4px 14px;border-radius:20px;cursor:pointer;font-size:.8rem;transition:all .3s;
+}
+.lang-toggle:hover{background:rgba(0,212,255,0.2)}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--cyan);border-radius:2px;transition:.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;width:100%;background:rgba(5,5,15,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);z-index:999;flex-direction:column;padding:10px 20px}
+.mobile-menu a{color:var(--text2);text-decoration:none;padding:10px 0;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+.mobile-menu a:hover{color:var(--cyan)}
+.mobile-menu.show{display:flex}
+section{padding:80px 20px;max-width:1200px;margin:0 auto}
+.hero{text-align:center;padding:120px 20px 60px;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero h1{font-size:3.5rem;font-weight:800;letter-spacing:2px;margin-bottom:16px;background:linear-gradient(135deg,var(--cyan),var(--gold),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1 .e{color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.hero .tagline{font-size:1.3rem;color:var(--text);margin-bottom:8px}
+.hero .subtitle{font-size:1rem;color:var(--text2);margin-bottom:30px;max-width:600px}
+.hero .formula{font-size:.95rem;color:var(--green);font-family:'Courier New',monospace;margin-bottom:30px;padding:10px 20px;border:1px solid rgba(0,255,136,0.2);border-radius:8px;background:rgba(0,255,136,0.05)}
+.hero .cta-group{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-block;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:.9rem;font-weight:600;transition:all .3s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#fff;box-shadow:0 0 20px var(--glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 30px var(--glow)}
+.btn-outline{background:transparent;border:1px solid var(--cyan);color:var(--cyan)}
+.btn-outline:hover{background:rgba(0,212,255,0.1)}
+.section-title{text-align:center;font-size:2rem;font-weight:700;margin-bottom:12px;color:var(--text)}
+.section-title .accent{color:var(--cyan)}
+.section-subtitle{text-align:center;color:var(--text2);font-size:1rem;margin-bottom:40px;max-width:700px;margin-left:auto;margin-right:auto}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{
+  background:var(--card);border:1px solid var(--card-border);border-radius:12px;
+  padding:24px;transition:all .3s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.card:hover{border-color:var(--cyan);transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,212,255,0.1)}
+.card .icon{font-size:2rem;margin-bottom:12px}
+.card h3{font-size:1.1rem;color:var(--cyan);margin-bottom:10px}
+.card p{font-size:.9rem;color:var(--text2);margin-bottom:8px}
+.card .stat{color:var(--gold);font-weight:600;font-size:.95rem}
+.card ul{list-style:none;padding-left:0;margin-top:8px}
+.card ul li{font-size:.85rem;color:var(--text2);padding:3px 0;padding-left:16px;position:relative}
+.card ul li::before{content:'▸';color:var(--cyan);position:absolute;left:0}
+.companies{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:30px}
+.company-tag{padding:6px 16px;border:1px solid var(--card-border);border-radius:20px;font-size:.8rem;color:var(--text2);background:var(--card)}
+.integration-card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:24px;transition:all .3s;position:relative;overflow:hidden}
+.integration-card:hover{border-color:var(--purple);box-shadow:0 8px 30px rgba(123,47,255,0.15)}
+.integration-card .mode-num{position:absolute;top:-5px;right:15px;font-size:3rem;color:rgba(123,47,255,0.15);font-weight:800}
+.integration-card h3{color:var(--purple);margin-bottom:10px;font-size:1.05rem}
+.integration-card p{font-size:.85rem;color:var(--text2)}
+.eaco-def{text-align:center;padding:60px 20px}
+.eaco-formula-box{
+  display:inline-block;padding:20px 30px;border:1px solid var(--gold);border-radius:12px;
+  background:rgba(255,215,0,0.05);margin:20px auto;text-align:center;
+}
+.eaco-formula-box .formula-text{font-size:1.1rem;color:var(--gold);font-family:'Courier New',monospace}
+.keyword-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:600px;margin:0 auto}
+.keyword-item{text-align:center;padding:20px;border:1px solid var(--card-border);border-radius:12px;background:var(--card)}
+.keyword-item .kw-letter{font-size:2.5rem;font-weight:800;color:var(--gold)}
+.keyword-item .kw-name{font-size:1rem;color:var(--cyan);margin-top:4px}
+.keyword-item .kw-desc{font-size:.8rem;color:var(--text2);margin-top:4px}
+.ca-box{
+  display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin:20px auto;padding:12px 20px;border:1px solid var(--card-border);border-radius:8px;
+  background:var(--card);max-width:700px;
+}
+.ca-box code{color:var(--green);font-size:.8rem;word-break:break-all;text-align:left}
+.copy-btn{background:rgba(0,255,136,0.1);border:1px solid var(--green);color:var(--green);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;transition:.3s;white-space:nowrap}
+.copy-btn:hover{background:rgba(0,255,136,0.2)}
+.goal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.goal-item{text-align:center;padding:24px 16px;border:1px solid var(--card-border);border-radius:12px;background:var(--card);transition:.3s}
+.goal-item:hover{border-color:var(--green);transform:translateY(-3px)}
+.goal-item .goal-icon{font-size:2rem;margin-bottom:8px}
+.goal-item h4{color:var(--green);font-size:.95rem;margin-bottom:4px}
+.goal-item p{font-size:.8rem;color:var(--text2)}
+.token-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.85rem}
+.token-table th{text-align:left;padding:10px;border-bottom:1px solid var(--card-border);color:var(--cyan)}
+.token-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text2)}
+.token-table td:first-child{color:var(--text)}
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.link-card{display:block;padding:16px;border:1px solid var(--card-border);border-radius:10px;background:var(--card);text-decoration:none;transition:.3s}
+.link-card:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.link-card .link-title{color:var(--cyan);font-size:.9rem;margin-bottom:4px}
+.link-card .link-url{color:var(--text3);font-size:.75rem;word-break:break-all}
+.dex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:20px}
+.dex-item{padding:14px;border:1px solid var(--card-border);border-radius:8px;background:var(--card);text-align:center}
+.dex-item a{color:var(--cyan);text-decoration:none;font-size:.85rem}
+.dex-item a:hover{text-decoration:underline}
+.dex-item .dex-label{color:var(--text2);font-size:.75rem;margin-top:4px}
+.tg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:20px}
+.tg-item{padding:10px;border:1px solid var(--card-border);border-radius:8px;background:var(--card);text-align:center}
+.tg-item a{color:var(--text);text-decoration:none;font-size:.8rem}
+.tg-item a:hover{color:var(--cyan)}
+.tg-item .lang{color:var(--text3);font-size:.7rem}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--card-border),transparent);margin:40px auto;max-width:800px}
+footer{text-align:center;padding:40px 20px;border-top:1px solid var(--card-border);color:var(--text3);font-size:.8rem}
+footer a{color:var(--text2);text-decoration:none;margin:0 8px}
+footer a:hover{color:var(--cyan)}
+#back-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:rgba(0,212,255,0.15);border:1px solid var(--cyan);color:var(--cyan);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .3s;z-index:999;font-size:1.2rem}
+#back-top.show{opacity:1}
+#back-top:hover{background:rgba(0,212,255,0.3)}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:rgba(0,255,136,0.15);border:1px solid var(--green);color:var(--green);padding:10px 24px;border-radius:8px;font-size:.85rem;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+@media(max-width:768px){
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero h1{font-size:2.2rem}
+  .hero .tagline{font-size:1rem}
+  .keyword-grid{grid-template-columns:1fr}
+  section{padding:60px 16px}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="wrap">
+<nav>
+  <a href="#hero" class="logo">Earth-<span>E</span></a>
+  <ul>
+    <li><a href="#earth-e" data-zh="Earth-E 概念" data-en="Earth-E Concept">Earth-E</a></li>
+    <li><a href="#earth-ai" data-zh="Earth AI 商业" data-en="Earth AI Business">Earth AI</a></li>
+    <li><a href="#eaco" data-zh="EACO 定义" data-en="EACO Definition">EACO</a></li>
+    <li><a href="#integration" data-zh="结合模式" data-en="Integration">Integration</a></li>
+    <li><a href="#tokenomics" data-zh="代币经济" data-en="Tokenomics">Tokenomics</a></li>
+    <li><a href="#community" data-zh="社区" data-en="Community">Community</a></li>
+    <li><button class="lang-toggle" onclick="toggleLang()" id="langBtn">EN</button></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#earth-e" data-zh="Earth-E 概念" data-en="Earth-E Concept">Earth-E</a>
+  <a href="#earth-ai" data-zh="Earth AI 商业" data-en="Earth AI Business">Earth AI</a>
+  <a href="#eaco" data-zh="EACO 定义" data-en="EACO Definition">EACO</a>
+  <a href="#integration" data-zh="结合模式" data-en="Integration">Integration</a>
+  <a href="#tokenomics" data-zh="代币经济" data-en="Tokenomics">Tokenomics</a>
+  <a href="#community" data-zh="社区" data-en="Community">Community</a>
+  <button class="lang-toggle" onclick="toggleLang()" id="langBtnMobile" style="margin-top:10px">EN</button>
+</div>
+
+<section class="hero" id="hero">
+  <h1>Earth-<span class="e">E</span></h1>
+  <p class="tagline" data-zh="Earth AI + EACO = Earth-E" data-en="Earth AI + EACO = Earth-E">Earth AI + EACO = Earth-E</p>
+  <p class="subtitle" data-zh="Earth's Top-tier AI + RWA + Web3 加密资产 | 地球顶级智能经济基础设施" data-en="Earth's Top-tier AI + RWA + Web3 Crypto Asset | Earth's Premier Intelligent Economy Infrastructure">Earth's Top-tier AI + RWA + Web3 加密资产 | 地球顶级智能经济基础设施</p>
+  <div class="formula" data-zh="EACO = 正向能量 × 正向心态 × 全球协作 × 持续优化" data-en="EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization">EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization</div>
+  <div class="cta-group">
+    <a href="#earth-ai" class="btn btn-primary" data-zh="探索 Earth AI" data-en="Explore Earth AI">探索 Earth AI</a>
+    <a href="#eaco" class="btn btn-outline" data-zh="了解 EACO" data-en="Learn EACO">了解 EACO</a>
+  </div>
+</section>
+
+<section id="earth-e">
+  <h2 class="section-title"><span class="accent">Earth-E</span> <span data-zh="概念" data-en="Concept">概念</span></h2>
+  <p class="section-subtitle" data-zh="Earth-E 是 Earth AI（地球人工智能层）与 EACO Token（价值通证层）的一体化代号，E 取自 EACO (Earth's Best Coin)" data-en="Earth-E is the integrated designation of Earth AI (Geospatial AI Intelligence Layer) and EACO Token (Value Settlement Layer), where E derives from EACO (Earth's Best Coin)">Earth-E 是 Earth AI（地球人工智能层）与 EACO Token（价值通证层）的一体化代号，E 取自 EACO (Earth's Best Coin)</p>
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(400px,1fr))">
+    <div class="card">
+      <div class="icon">🌍🤖</div>
+      <h3 data-zh="Earth AI — 地球人工智能层" data-en="Earth AI — Intelligence Layer">Earth AI — 地球人工智能层</h3>
+      <p data-zh="谷歌推出的一系列地理空间人工智能模型和推理代理，将地球变成「可计算对象」。通过对卫星影像、人口、环境等多源数据的融合推理，为商业世界提供可行动的洞察。" data-en="A suite of geospatial AI models and reasoning agents by Google that turn Earth into a computable object. By fusing satellite imagery, population, and environmental data, it delivers actionable insights for the business world.">谷歌推出的一系列地理空间人工智能模型和推理代理，将地球变成「可计算对象」。通过对卫星影像、人口、环境等多源数据的融合推理，为商业世界提供可行动的洞察。</p>
+      <p data-zh="负责：算力、认知、决策、内容生成、业务自动化" data-en="Responsible for: computing, cognition, decision-making, content generation, business automation">负责：算力、认知、决策、内容生成、业务自动化</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚡🔗</div>
+      <h3 data-zh="EACO Token — 价值通证层" data-en="EACO Token — Value Layer">EACO Token — 价值通证层</h3>
+      <p data-zh="Solana 链上的 Web3 资产，不只是一种代币，更是一套全球文明升级模型。由 Energy-Attitude-Cooperation-Optimization 四个词根定义，把正向能量、正向心态、全球协作、持续优化变成可运行、可激励、可交易的链上经济系统。" data-en="A Web3 asset on the Solana blockchain — not just a token, but a global civilization upgrading model. Defined by four roots: Energy-Attitude-Cooperation-Optimization, it turns positive energy, positive mindset, global collaboration, and continuous optimization into a runnable, incentivizable, tradable on-chain economic system.">Solana 链上的 Web3 资产，不只是一种代币，更是一套全球文明升级模型。由 Energy-Attitude-Cooperation-Optimization 四个词根定义，把正向能量、正向心态、全球协作、持续优化变成可运行、可激励、可交易的链上经济系统。</p>
+      <p data-zh="负责：价值计量、激励、结算、RWA 实物资产上链、DAO 治理" data-en="Responsible for: value measurement, incentives, settlement, RWA asset tokenization, DAO governance">负责：价值计量、激励、结算、RWA 实物资产上链、DAO 治理</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <p style="text-align:center;color:var(--gold);font-size:1.1rem;font-family:'Courier New',monospace">
+    <span data-zh="核心逻辑：Earth-AI（能力输出）⇋ EACO（价值流转与治理）" data-en="Core Logic: Earth-AI (Capability Output) ⇋ EACO (Value Flow & Governance)">核心逻辑：Earth-AI（能力输出）⇋ EACO（价值流转与治理）</span>
+  </p>
+</section>
+
+<section id="earth-ai">
+  <h2 class="section-title"><span class="accent">Earth AI</span> <span data-zh="商业应用场景" data-en="Commercial Applications">商业应用场景</span></h2>
+  <p class="section-subtitle" data-zh="Earth AI 将地球变成可计算对象，通过对卫星影像、人口、环境等多源数据的融合推理，为商业世界提供可行动的洞察。以下为已落地的商业应用场景。" data-en="Earth AI turns the planet into a computable object, fusing satellite imagery, population, and environmental data to deliver actionable insights for business. Below are deployed commercial applications.">Earth AI 将地球变成可计算对象，通过对卫星影像、人口、环境等多源数据的融合推理，为商业世界提供可行动的洞察。以下为已落地的商业应用场景。</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">⛏️</div>
+      <h3 data-zh="1. 矿产勘探" data-en="1. Mineral Exploration">1. 矿产勘探</h3>
+      <p data-zh="利用 AI 模型分析数十年历史采矿数据和卫星遥感信息，在传统勘探手段忽略的区域发现关键矿产资源。" data-en="AI models analyze decades of historical mining data and satellite remote sensing to discover critical mineral resources in areas overlooked by traditional exploration.">利用 AI 模型分析数十年历史采矿数据和卫星遥感信息，在传统勘探手段忽略的区域发现关键矿产资源。</p>
+      <p class="stat" data-zh="项目发现率：75%（行业平均不足 1%）" data-en="Discovery rate: 75% (industry average < 1%)">项目发现率：75%（行业平均不足 1%）</p>
+      <p data-zh="商业模式：预测软件 + 自主钻探技术 → 验证矿点 → 转让项目权益给矿业公司" data-en="Business model: prediction software + proprietary drilling → validate prospects → transfer proven project interests to mining companies">商业模式：预测软件 + 自主钻探技术 → 验证矿点 → 转让项目权益给矿业公司</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌊🔥</div>
+      <h3 data-zh="2. 灾害预警与应急响应" data-en="2. Disaster Warning & Emergency Response">2. 灾害预警与应急响应</h3>
+      <p data-zh="实现对洪水、山火、气旋等自然灾害的预测和预警。" data-en="Predicts and warns against natural disasters including floods, wildfires, and cyclones.">实现对洪水、山火、气旋等自然灾害的预测和预警。</p>
+      <ul>
+        <li data-zh="GiveDirectly：洪水预测数据精准定位最需援助群体，快速发放现金援助" data-en="GiveDirectly: flood prediction data pinpoints most vulnerable groups for rapid cash aid">GiveDirectly：洪水预测数据精准定位最需援助群体，快速发放现金援助</li>
+        <li data-zh="加州山火：谷歌向洛杉矶地区 1500 万人推送危机警报" data-en="California wildfires: Google pushed crisis alerts to 15M people in Los Angeles area">加州山火：谷歌向洛杉矶地区 1500 万人推送危机警报</li>
+        <li data-zh="WHO 非洲区：利用 Earth AI 预测霍乱暴发风险区" data-en="WHO Africa: uses Earth AI to predict cholera outbreak risk zones">WHO 非洲区：利用 Earth AI 预测霍乱暴发风险区</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">📊🎯</div>
+      <h3 data-zh="3. 市场营销与消费者洞察" data-en="3. Marketing & Consumer Insights">3. 市场营销与消费者洞察</h3>
+      <p data-zh="全球最大广告集团之一 WPP 已将 Earth AI 模型和数据集整合到营销平台 WPP Open 中。" data-en="WPP, one of the world's largest advertising groups, has integrated Earth AI models and datasets into its WPP Open marketing platform.">全球最大广告集团之一 WPP 已将 Earth AI 模型和数据集整合到营销平台 WPP Open 中。</p>
+      <ul>
+        <li data-zh="超本地化需求预测：基于物理世界的脉搏预测消费者需求" data-en="Hyper-local demand forecasting: predict consumer demand based on real-world pulse">超本地化需求预测：基于物理世界的脉搏预测消费者需求</li>
+        <li data-zh="精准媒体规划：在投放前用真实人口数据预验证营销活动效果" data-en="Precision media planning: pre-validate campaign effectiveness with real population data">精准媒体规划：在投放前用真实人口数据预验证营销活动效果</li>
+        <li data-zh="将消费者数字行为与物理世界实时变化连接" data-en="Connect consumer digital behavior with real-time physical-world changes">将消费者数字行为与物理世界实时变化连接</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">☀️🔌</div>
+      <h3 data-zh="4. 能源与基础设施" data-en="4. Energy & Infrastructure">4. 能源与基础设施</h3>
+      <ul>
+        <li data-zh="公用事业：建筑级太阳能潜力数据，识别未开发市场机会" data-en="Utilities: building-level solar potential data to identify untapped market opportunities">公用事业：建筑级太阳能潜力数据，识别未开发市场机会</li>
+        <li data-zh="通信行业：优化无线网络规划，最小化信号阻挡" data-en="Telecom: optimize wireless network planning, minimize signal blocking">通信行业：优化无线网络规划，最小化信号阻挡</li>
+        <li data-zh="空中客车：检测植被侵占输电线路，帮助客户预防停电" data-en="Airbus: detect vegetation encroaching on power lines, help prevent outages">空中客车：检测植被侵占输电线路，帮助客户预防停电</li>
+      </ul>
+      <p class="stat" data-zh="加速可再生能源普及" data-en="Accelerating renewable energy adoption">加速可再生能源普及</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏗️🗺️</div>
+      <h3 data-zh="5. 供应链与城市规划" data-en="5. Supply Chain & Urban Planning">5. 供应链与城市规划</h3>
+      <ul>
+        <li data-zh="企业：选址分析、风险评估和供应链规划" data-en="Enterprise: site selection analysis, risk assessment, supply chain planning">企业：选址分析、风险评估和供应链规划</li>
+        <li data-zh="城市管理：监测住宅区建设工地，合理分配道路和电线维护资源" data-en="City management: monitor residential construction sites, allocate road and utility maintenance">城市管理：监测住宅区建设工地，合理分配道路和电线维护资源</li>
+        <li data-zh="联合国全球脉动项目：评估自然灾害后的损失" data-en="UN Global Pulse: assess post-disaster damage">联合国全球脉动项目：评估自然灾害后的损失</li>
+      </ul>
+    </div>
+    <div class="card" style="grid-column:1/-1;background:rgba(255,215,0,0.03);border-color:rgba(255,215,0,0.15)">
+      <h3 style="color:var(--gold);text-align:center" data-zh="已采用 Earth AI 的企业" data-en="Companies That Adopted Earth AI">已采用 Earth AI 的企业</h3>
+      <div class="companies">
+        <span class="company-tag">Public Storage</span>
+        <span class="company-tag">CARTO</span>
+        <span class="company-tag">Visiona Space Technology</span>
+        <span class="company-tag" data-zh="巴西航空工业公司旗下" data-en=" subsidiary of Embraer">巴西航空工业公司旗下</span>
+        <span class="company-tag">Planet</span>
+        <span class="company-tag">Airbus</span>
+        <span class="company-tag">WPP</span>
+        <span class="company-tag">GiveDirectly</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="earth-ai-expanded" style="background:rgba(10,10,32,0.3)">
+  <h2 class="section-title"><span class="accent">Earth AI</span> <span data-zh="扩展商业场景" data-en="Expanded Sectors">扩展商业场景</span></h2>
+  <p class="section-subtitle" data-zh="Earth AI 在 B 端企业、Web3 加密、IP 教育、新能源及个人发展领域的深度应用" data-en="Earth AI's deep applications across B2B, Web3, IP & Education, New Energy, and Personal Development">Earth AI 在 B 端企业、Web3 加密、IP 教育、新能源及个人发展领域的深度应用</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">🏢🌐</div>
+      <h3 data-zh="B 端企业与跨境商业" data-en="B2B Enterprise & Cross-border">B 端企业与跨境商业</h3>
+      <ul>
+        <li data-zh="跨境多语种商业内容自动化：营销文案、BP、路演稿、多语言官网" data-en="Cross-border multilingual content automation: marketing copy, BP, roadshow decks, multilingual websites">跨境多语种商业内容自动化：营销文案、BP、路演稿、多语言官网</li>
+        <li data-zh="全球市场调研与合规研判：Web3 监管、RWA 政策分析" data-en="Global market research & compliance: Web3 regulation, RWA policy analysis">全球市场调研与合规研判：Web3 监管、RWA 政策分析</li>
+        <li data-zh="供应链与外贸智能助手：海外客户挖掘、询盘处理、报价生成" data-en="Supply chain & trade assistant: overseas lead discovery, inquiry processing, quote generation">供应链与外贸智能助手：海外客户挖掘、询盘处理、报价生成</li>
+        <li data-zh="RWA 实体资产数字化建模：光伏电站、厂房、大宗商品" data-en="RWA asset digital modeling: solar plants, factories, commodities">RWA 实体资产数字化建模：光伏电站、厂房、大宗商品</li>
+        <li data-zh="组织治理与 DAO 运营工具：提案起草、投票文案、贡献评估" data-en="Governance & DAO tools: proposal drafting, voting copy, contribution assessment">组织治理与 DAO 运营工具：提案起草、投票文案、贡献评估</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">⛓️💰</div>
+      <h3 data-zh="Web3 与 Crypto 业务" data-en="Web3 & Crypto Operations">Web3 与 Crypto 业务</h3>
+      <ul>
+        <li data-zh="链上数据分析：流动池监控、持币地址画像、社区情绪分析" data-en="On-chain analytics: liquidity pool monitoring, holder profiling, sentiment analysis">链上数据分析：流动池监控、持币地址画像、社区情绪分析</li>
+        <li data-zh="多语言社区运营自动化：Telegram/Discord 机器人、FAQ、科普推文" data-en="Multilingual community automation: TG/Discord bots, FAQs, educational posts">多语言社区运营自动化：Telegram/Discord 机器人、FAQ、科普推文</li>
+        <li data-zh="合约与应用辅助开发：MRD 文档、前端 HTML、Node.js 后端、Docker 部署" data-en="Contract & app development: MRD docs, frontend HTML, Node.js backend, Docker deploy">合约与应用辅助开发：MRD 文档、前端 HTML、Node.js 后端、Docker 部署</li>
+        <li data-zh="预测市场、汇率预言机逻辑构建" data-en="Prediction market & exchange rate oracle logic">预测市场、汇率预言机逻辑构建</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">📚🎬</div>
+      <h3 data-zh="IP、教育与内容产业" data-en="IP, Education & Content">IP、教育与内容产业</h3>
+      <ul>
+        <li data-zh="超级 IP 批量生产：科幻小说大纲、金句、世界观设定、主题曲脚本" data-en="Mass IP production: sci-fi outlines, maxims, worldbuilding, theme songs">超级 IP 批量生产：科幻小说大纲、金句、世界观设定、主题曲脚本</li>
+        <li data-zh="地球村商学院课程体系：课程目录、18 个月自学计划、打卡体系" data-en="Global Village Business School: curriculum, 18-month self-study plan, check-in system">地球村商学院课程体系：课程目录、18 个月自学计划、打卡体系</li>
+        <li data-zh="认知模型知识库：整理 100 套认知模型，可检索 AI 知识库" data-en="Cognitive model knowledge base: 100 cognitive models, searchable AI knowledge base">认知模型知识库：整理 100 套认知模型，可检索 AI 知识库</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">☀️🔋</div>
+      <h3 data-zh="实体新能源产业" data-en="New Energy Industry">实体新能源产业</h3>
+      <ul>
+        <li data-zh="光伏项目智能测算：屋顶面积 → 组件数量、发电量、投资回报" data-en="Solar project calculation: roof area → panel count, generation, ROI">光伏项目智能测算：屋顶面积 → 组件数量、发电量、投资回报</li>
+        <li data-zh="EMC 模式方案、甲方问询函自动生成" data-en="EMC model plans, automated client inquiry letters">EMC 模式方案、甲方问询函自动生成</li>
+        <li data-zh="项目风险识别：并网消纳风险、消费欺诈识别" data-en="Project risk: grid curtailment risk, fraud detection">项目风险识别：并网消纳风险、消费欺诈识别</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">🧠💎</div>
+      <h3 data-zh="个人发展与财富显化" data-en="Personal Development & Wealth">个人发展与财富显化</h3>
+      <ul>
+        <li data-zh="认知提升、财富显化文案生成：短句、语录、冥想引导" data-en="Cognitive & wealth manifestation: maxims, quotes, meditation guides">认知提升、财富显化文案生成：短句、语录、冥想引导</li>
+        <li data-zh="文明自愈纪元类正能量内容" data-en="Civilization Self-Healing Era positive content">文明自愈纪元类正能量内容</li>
+        <li data-zh="商业方案快速迭代：一页纸 BP、极简路演版本、融资方案" data-en="Rapid business plan iteration: one-page BP, minimal roadshow, funding plans">商业方案快速迭代：一页纸 BP、极简路演版本、融资方案</li>
+        <li data-zh="国别落地分工表" data-en="Country-by-country execution roadmap">国别落地分工表</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="eaco" class="eaco-def">
+  <h2 class="section-title"><span style="color:var(--gold)">EACO</span> <span data-zh="定义" data-en="Definition">定义</span></h2>
+  <p class="section-subtitle" data-zh="EACO — Earth's top-tier AI + RWA + Web3 crypto asset" data-en="EACO — Earth's top-tier AI + RWA + Web3 crypto asset">EACO — Earth's top-tier AI + RWA + Web3 crypto asset</p>
+  <div style="margin:20px 0">
+    <p style="font-size:1.5rem;color:var(--gold);text-align:center;font-weight:700">
+      <span data-zh="Earth's Best Coin = EACO = E" data-en="Earth's Best Coin = EACO = E">Earth's Best Coin = EACO = E</span>
+    </p>
+  </div>
+  <div class="ca-box">
+    <span style="color:var(--text2);font-size:.85rem" data-zh="合约地址 (CA)：" data-en="Contract Address (CA):">合约地址 (CA)：</span>
+    <code>DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+    <button class="copy-btn" onclick="copyCA()" data-zh="复制" data-en="Copy">复制</button>
+  </div>
+  <p style="text-align:center;color:var(--text2);margin:16px 0;font-size:.85rem">
+    <span data-zh="Solana 链 | 总供应量：1,350,000,000 EACO | SPL Token" data-en="Solana Blockchain | Total Supply: 1,350,000,000 EACO | SPL Token">Solana 链 | 总供应量：1,350,000,000 EACO | SPL Token</span>
+  </p>
+  <div class="divider"></div>
+  <h3 style="text-align:center;color:var(--cyan);margin-bottom:20px" data-zh="四大核心词根" data-en="Four Core Roots">四大核心词根</h3>
+  <div class="keyword-grid">
+    <div class="keyword-item">
+      <div class="kw-letter">E</div>
+      <div class="kw-name">Energy</div>
+      <div class="kw-desc" data-zh="能量" data-en="能量">能量</div>
+    </div>
+    <div class="keyword-item">
+      <div class="kw-letter">A</div>
+      <div class="kw-name">Attitude</div>
+      <div class="kw-desc" data-zh="心态" data-en="心态">心态</div>
+    </div>
+    <div class="keyword-item">
+      <div class="kw-letter">C</div>
+      <div class="kw-name">Cooperation</div>
+      <div class="kw-desc" data-zh="协作" data-en="协作">协作</div>
+    </div>
+    <div class="keyword-item">
+      <div class="kw-letter">O</div>
+      <div class="kw-name">Optimization</div>
+      <div class="kw-desc" data-zh="优化" data-en="优化">优化</div>
+    </div>
+  </div>
+  <div class="eaco-formula-box">
+    <div class="formula-text">EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization</div>
+    <p style="color:var(--text2);font-size:.8rem;margin-top:8px" data-zh="EACO = 正向能量 × 正向心态 × 全球协作 × 持续优化" data-en="">EACO = 正向能量 × 正向心态 × 全球协作 × 持续优化</p>
+    <p style="color:var(--text2);font-size:.85rem;margin-top:8px" data-zh="本质上，EACO 是一套全球文明升级模型" data-en="In essence, EACO serves as a global civilization upgrading model">本质上，EACO 是一套全球文明升级模型</p>
+  </div>
+</section>
+
+<section id="eaco-goals" style="background:rgba(10,10,32,0.3)">
+  <h2 class="section-title"><span style="color:var(--green)">EACO</span> <span data-zh="核心目标" data-en="Core Goals">核心目标</span></h2>
+  <div class="goal-grid">
+    <div class="goal-item">
+      <div class="goal-icon">🧠</div>
+      <h4 data-zh="提升个体认知" data-en="Elevate Individual Cognition">提升个体认知</h4>
+      <p data-zh="通过 AI 认知模型整合，帮助个体突破认知边界" data-en="Integrate AI cognitive models to help individuals break cognitive boundaries">通过 AI 认知模型整合，帮助个体突破认知边界</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-icon">⚙️</div>
+      <h4 data-zh="提高组织效率" data-en="Improve Organizational Efficiency">提高组织效率</h4>
+      <p data-zh="AI 驱动的自动化与优化工具赋能组织运营" data-en="AI-driven automation and optimization tools empower organizational operations">AI 驱动的自动化与优化工具赋能组织运营</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-icon">🏛️</div>
+      <h4 data-zh="推进社会文明" data-en="Advance Social Civilization">推进社会文明</h4>
+      <p data-zh="正向能量与全球协作推动文明演进" data-en="Positive energy and global collaboration drive civilizational progress">正向能量与全球协作推动文明演进</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-icon">🌍</div>
+      <h4 data-zh="促进地球可持续发展" data-en="Promote Sustainable Earth Development">促进地球可持续发展</h4>
+      <p data-zh="RWA 绿色能源、环保叙事与可持续经济模型" data-en="RWA green energy, environmental narrative, sustainable economic models">RWA 绿色能源、环保叙事与可持续经济模型</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-icon">🔗</div>
+      <h4 data-zh="整合 100 套认知模型" data-en="Integrate 100 Cognitive Models">整合 100 套认知模型</h4>
+      <p data-zh="构建可检索的 AI 认知知识库，对接多元智慧体系" data-en="Build a searchable AI cognitive knowledge base, connecting diverse wisdom systems">构建可检索的 AI 认知知识库，对接多元智慧体系</p>
+    </div>
+  </div>
+</section>
+
+<section id="integration">
+  <h2 class="section-title"><span class="accent">Earth AI × EACO</span> <span data-zh="结合发展模式" data-en="Integration Models">结合发展模式</span></h2>
+  <p class="section-subtitle" data-zh="核心逻辑：Earth-AI 产出能力与服务；EACO 承担价值计量、激励、支付、RWA 确权、DAO 治理" data-en="Core logic: Earth-AI produces capabilities and services; EACO handles value measurement, incentives, settlement, RWA tokenization, and DAO governance">核心逻辑：Earth-AI 产出能力与服务；EACO 承担价值计量、激励、支付、RWA 确权、DAO 治理</p>
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr))">
+    <div class="integration-card">
+      <div class="mode-num">1</div>
+      <h3 data-zh="AI 服务以 EACO 结算激励" data-en="AI Services Settled in EACO">AI 服务以 EACO 结算激励</h3>
+      <ul>
+        <li data-zh="Earth-AI 提供 B 端报告、市场调研、课程、IP 内容、链上分析服务；用户支付 EACO 获取 AI 输出" data-en="Earth-AI provides B2B reports, market research, courses, IP content, on-chain analytics; users pay EACO for AI outputs">Earth-AI 提供 B 端报告、市场调研、课程、IP 内容、链上分析服务；用户支付 EACO 获取 AI 输出</li>
+        <li data-zh="AI 工具机器人完成任务后，贡献者、开发者、社区大使获得 EACO 奖励" data-en="After AI tool bots complete tasks, contributors, developers, community ambassadors earn EACO rewards">AI 工具机器人完成任务后，贡献者、开发者、社区大使获得 EACO 奖励</li>
+        <li data-zh="将 Energy-Attitude-Cooperation-Optimization 植入 AI 提示底层" data-en="Embed Energy-Attitude-Cooperation-Optimization into AI prompt foundation">将 Energy-Attitude-Cooperation-Optimization 植入 AI 提示底层</li>
+      </ul>
+    </div>
+    <div class="integration-card">
+      <div class="mode-num">2</div>
+      <h3 data-zh="RWA 现实资产 + Earth AI + EACO" data-en="RWA + Earth AI + EACO">RWA 现实资产 + Earth AI + EACO</h3>
+      <ul>
+        <li data-zh="光伏电站、钨金大宗商品、外贸实体资产：Earth-AI 做资产收益测算、风控建模" data-en="Solar plants, tungsten commodities, trade assets: Earth-AI does yield calculation, risk modeling">光伏电站、钨金大宗商品、外贸实体资产：Earth-AI 做资产收益测算、风控建模</li>
+        <li data-zh="资产权益映射上链，用 EACO 作为价值流转媒介" data-en="Asset rights tokenized on-chain, EACO as value transfer medium">资产权益映射上链，用 EACO 作为价值流转媒介</li>
+        <li data-zh="现实资产收益回流 EACO 生态池，用于 AI 模型迭代、社区激励" data-en="Real asset revenue flows back to EACO ecosystem pool for AI iteration, community incentives">现实资产收益回流 EACO 生态池，用于 AI 模型迭代、社区激励</li>
+      </ul>
+    </div>
+    <div class="integration-card">
+      <div class="mode-num">3</div>
+      <h3 data-zh="EACO-DAO 由 Earth AI 辅助治理" data-en="EACO-DAO Governed by Earth AI">EACO-DAO 由 Earth AI 辅助治理</h3>
+      <ul>
+        <li data-zh="Earth-AI 读取社区讨论、提案，自动做提案摘要、风险评估、贡献度打分" data-en="Earth-AI reads discussions, proposals; auto-generates summaries, risk assessments, contribution scores">Earth-AI 读取社区讨论、提案，自动做提案摘要、风险评估、贡献度打分</li>
+        <li data-zh="DAO 成员贡献由 AI 量化评估，自动分发 EACO 奖励" data-en="DAO member contributions quantified by AI, auto-distribute EACO rewards">DAO 成员贡献由 AI 量化评估，自动分发 EACO 奖励</li>
+        <li data-zh="实现目标：提升个体认知 / 提高组织效率 / 推进社会文明" data-en="Goal: Elevate cognition / Improve efficiency / Advance civilization">实现目标：提升个体认知 / 提高组织效率 / 推进社会文明</li>
+      </ul>
+    </div>
+    <div class="integration-card">
+      <div class="mode-num">4</div>
+      <h3 data-zh="多语种全球 AI 社区（MOOC）" data-en="Multilingual Global AI Community (MOOC)">多语种全球 AI 社区（MOOC）</h3>
+      <ul>
+        <li data-zh="Earth-AI 驱动多语言 MOOC 公开课系统：课程自动翻译、答疑、打卡" data-en="Earth-AI drives multilingual MOOC: auto-translation, Q&A, check-ins">Earth-AI 驱动多语言 MOOC 公开课系统：课程自动翻译、答疑、打卡</li>
+        <li data-zh="北美、中东、东南亚 EACO 语言小组，AI 自动生成当地语言宣传物料" data-en="North America, Middle East, SE Asia EACO language groups, AI auto-generates localized materials">北美、中东、东南亚 EACO 语言小组，AI 自动生成当地语言宣传物料</li>
+        <li data-zh="接入 100 套认知模型知识库，AI 对外输出 EACO 文明升级叙事" data-en="Connect 100 cognitive models knowledge base, AI outputs EACO civilizational narrative">接入 100 套认知模型知识库，AI 对外输出 EACO 文明升级叙事</li>
+      </ul>
+    </div>
+    <div class="integration-card">
+      <div class="mode-num">5</div>
+      <h3 data-zh="预言机 & Web3 基础设施" data-en="Oracle & Web3 Infrastructure">预言机 & Web3 基础设施</h3>
+      <ul>
+        <li data-zh="Earth-AI 作为数据源层，输出全球国别数据、多法币汇率、市场情绪" data-en="Earth-AI as data layer: outputs country data, multi-fiat exchange rates, market sentiment">Earth-AI 作为数据源层，输出全球国别数据、多法币汇率、市场情绪</li>
+        <li data-zh="供给 EACO Solana 汇率预言机" data-en="Feeds EACO Solana exchange rate oracle">供给 EACO Solana 汇率预言机</li>
+        <li data-zh="数据调用消耗 EACO → 流入 DAO 国库 → 用于 AI 迭代，形成生态闭环" data-en="Data calls consume EACO → flow to DAO treasury → fund AI iteration, forming ecosystem loop">数据调用消耗 EACO → 流入 DAO 国库 → 用于 AI 迭代，形成生态闭环</li>
+      </ul>
+    </div>
+    <div class="integration-card">
+      <div class="mode-num">6</div>
+      <h3 data-zh="IP 内容生态闭环" data-en="IP Content Ecosystem Loop">IP 内容生态闭环</h3>
+      <ul>
+        <li data-zh="Earth-AI 批量产出《EACO：文明自愈纪元》等科幻 IP、金句、短视频文案" data-en="Earth-AI mass-produces sci-fi IP like Civilization Self-Healing Era, maxims, short video scripts">Earth-AI 批量产出《EACO：文明自愈纪元》等科幻 IP、金句、短视频文案</li>
+        <li data-zh="IP 版权、衍生权益 RWA 化，权益通证和 EACO 联动" data-en="IP rights and derivatives RWA-tokenized, linked with EACO">IP 版权、衍生权益 RWA 化，权益通证和 EACO 联动</li>
+        <li data-zh="IP 变现收益反哺 EACO 生态" data-en="IP monetization revenue feeds back to EACO ecosystem">IP 变现收益反哺 EACO 生态</li>
+      </ul>
+    </div>
+    <div class="integration-card">
+      <div class="mode-num">7</div>
+      <h3 data-zh="外贸导航平台（Web3 外贸基建）" data-en="Trade Navigation Platform (Web3 Trade Infrastructure)">外贸导航平台（Web3 外贸基建）</h3>
+      <ul>
+        <li data-zh="Earth-AI 做全球 Web3 城市、投资方、外贸企业智能匹配" data-en="Earth-AI matches global Web3 cities, investors, trade enterprises">Earth-AI 做全球 Web3 城市、投资方、外贸企业智能匹配</li>
+        <li data-zh="外贸导航站后台由 AI 驱动" data-en="Trade navigation platform backend powered by AI">外贸导航站后台由 AI 驱动</li>
+        <li data-zh="企业入驻、高级查询服务使用 EACO 支付；城市大使完成推广获 EACO 激励" data-en="Enterprise onboarding, advanced queries paid in EACO; city ambassadors earn EACO for promotion">企业入驻、高级查询服务使用 EACO 支付；城市大使完成推广获 EACO 激励</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="tokenomics" style="background:rgba(10,10,32,0.3)">
+  <h2 class="section-title"><span class="accent" data-zh="代币经济学" data-en="Tokenomics">代币经济学</span></h2>
+  <p class="section-subtitle" data-zh="EACO 通过 AI × Web3 × RWA × 全球流动网络构建下一代地球智能经济基础设施" data-en="EACO builds next-generation Earth Intelligence Economy infrastructure through AI × Web3 × RWA × Global Liquidity Network">EACO 通过 AI × Web3 × RWA × 全球流动网络构建下一代地球智能经济基础设施</p>
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
+    <div class="card">
+      <h3 style="color:var(--gold)" data-zh="基础信息" data-en="Basic Info">基础信息</h3>
+      <table class="token-table">
+        <tr><td data-zh="代币" data-en="Token">代币</td><td>EACO ($E)</td></tr>
+        <tr><td data-zh="区块链" data-en="Blockchain">区块链</td><td>Solana (SPL)</td></tr>
+        <tr><td data-zh="总供应量" data-en="Total Supply">总供应量</td><td>1,350,000,000</td></tr>
+        <tr><td data-zh="合约地址" data-en="Contract Address">合约地址</td><td style="font-size:.7rem;word-break:break-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</td></tr>
+        <tr><td data-zh="定位" data-en="Positioning">定位</td><td>Earth Intelligence Economy Network</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--cyan)" data-zh="投资限制" data-en="Investment Limits">投资限制</h3>
+      <table class="token-table">
+        <tr><th data-zh="轮次" data-en="Round">轮次</th><th data-zh="最大比例" data-en="Max">最大比例</th><th data-zh="数量" data-en="Amount">数量</th></tr>
+        <tr><td>Angel</td><td>10%</td><td>135M</td></tr>
+        <tr><td>A Round</td><td>10%</td><td>135M</td></tr>
+        <tr><td>B Round</td><td>10%</td><td>135M</td></tr>
+        <tr><td data-zh="投资总限制" data-en="Total Cap" style="color:var(--gold);font-weight:700">投资总限制</td><td style="color:var(--gold);font-weight:700">≤30%</td><td style="color:var(--gold);font-weight:700">≤405M</td></tr>
+      </table>
+      <p style="font-size:.8rem;color:var(--text2);margin-top:8px" data-zh="4-5 年长期释放，避免短期压力和市场冲击" data-en="4-5 year vesting to avoid short-term pressure and market impact">4-5 年长期释放，避免短期压力和市场冲击</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green)" data-zh="金库分配" data-en="Treasury Allocation">金库分配</h3>
+      <table class="token-table">
+        <tr><th data-zh="方向" data-en="Direction">方向</th><th data-zh="比例" data-en="Ratio">比例</th></tr>
+        <tr><td data-zh="AI 研发" data-en="AI R&D">AI 研发</td><td>25%</td></tr>
+        <tr><td>RWA</td><td>20%</td></tr>
+        <tr><td data-zh="节点" data-en="Nodes">节点</td><td>20%</td></tr>
+        <tr><td data-zh="流动性" data-en="Liquidity">流动性</td><td>15%</td></tr>
+        <tr><td data-zh="投资" data-en="Investment">投资</td><td>10%</td></tr>
+        <tr><td data-zh="储备" data-en="Reserve">储备</td><td>10%</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--purple)" data-zh="十大行业分配" data-en="10 Industry Allocation">十大行业分配</h3>
+      <table class="token-table">
+        <tr><th data-zh="行业" data-en="Industry">行业</th><th data-zh="分配" data-en="Allocation">分配</th></tr>
+        <tr><td data-zh="AI 人工智能" data-en="AI">AI 人工智能</td><td>13,500万</td></tr>
+        <tr><td>Web3/区块链</td><td>13,500万</td></tr>
+        <tr><td>RWA</td><td>13,500万</td></tr>
+        <tr><td>DeFi</td><td>1,350万</td></tr>
+        <tr><td>GameFi</td><td>1,350万</td></tr>
+        <tr><td>SocialFi</td><td>1,350万</td></tr>
+        <tr><td data-zh="绿色能源/碳交易" data-en="Green Energy/Carbon">绿色能源/碳交易</td><td>1,350万</td></tr>
+        <tr><td data-zh="供应链金融" data-en="Supply Chain Finance">供应链金融</td><td>1,350万</td></tr>
+        <tr><td data-zh="教育科技" data-en="EdTech">教育科技</td><td>1,350万</td></tr>
+        <tr><td data-zh="医疗健康" data-en="Healthcare">医疗健康</td><td>1,350万</td></tr>
+        <tr><td data-zh="物联网" data-en="IoT">物联网</td><td>1,350万</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--orange)" data-zh="锁仓与通缩机制" data-en="Lock-up & Deflation">锁仓与通缩机制</h3>
+      <ul>
+        <li data-zh="项目方团队 50% 筹码全额上链做各种RWA应用" data-en="50% of team tokens fully on-chain for various RWA applications">项目方团队 50% 筹码全额上链做各种RWA应用</li>
+        <li data-zh="源头杜绝项目方砸盘，无上方套牢抛压" data-en="Prevents developer dumping, no overhead sell pressure">源头杜绝项目方砸盘，无上方套牢抛压</li>
+        <li data-zh="持有网友链上自愿销毁，销毁哈希永久公示" data-en="Community voluntary on-chain burns with public hash records">持有网友链上自愿销毁，销毁哈希永久公示</li>
+        <li data-zh="合约无无限增发权限，总量恒定，长期通缩" data-en="No unlimited mint authority, fixed supply, long-term deflationary">合约无无限增发权限，总量恒定，长期通缩</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--cyan)" data-zh="融资路线图" data-en="Fundraising Roadmap">融资路线图</h3>
+      <table class="token-table">
+        <tr><th data-zh="阶段" data-en="Phase">阶段</th><th data-zh="时间" data-en="Timeline">时间</th><th data-zh="目标" data-en="Target">目标</th></tr>
+        <tr><td>Seed/Angel</td><td>2026</td><td>$17M</td></tr>
+        <tr><td>A Round</td><td>2027</td><td>$80M</td></tr>
+        <tr><td>B Round</td><td>2028</td><td data-zh="战略规模" data-en="Strategic">战略规模</td></tr>
+        <tr><td data-zh="战略合作" data-en="Strategic Partnership">战略合作</td><td>2029-2030</td><td data-zh="全球生态扩张" data-en="Global Expansion">全球生态扩张</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="community">
+  <h2 class="section-title"><span class="accent" data-zh="社区与链接" data-en="Community & Links">社区与链接</span></h2>
+  <p class="section-subtitle" data-zh="EACO — Earth's Best Coin | 全球村民专属 MEME 币 | Solana 链原生代币" data-en="EACO — Earth's Best Coin | The MEME coin for global villagers | Solana native token">EACO — Earth's Best Coin | 全球村民专属 MEME 币 | Solana 链原生代币</p>
+  
+  <h3 style="color:var(--cyan);margin:20px 0 10px" data-zh="官方渠道" data-en="Official Channels">官方渠道</h3>
+  <div class="links-grid">
+    <a href="https://x.com/eacocc" target="_blank" class="link-card">
+      <div class="link-title">X (Twitter) — @eacocc</div>
+      <div class="link-url">https://x.com/eacocc</div>
+    </a>
+    <a href="https://linktr.ee/eacocc" target="_blank" class="link-card">
+      <div class="link-title">Linktree</div>
+      <div class="link-url">https://linktr.ee/eacocc</div>
+    </a>
+    <a href="https://www.oklink.com/zh-hans/solana/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+      <div class="link-title">OKlink <span data-zh="区块浏览器" data-en="Explorer">区块浏览器</span></div>
+      <div class="link-url">oklink.com/solana/token/EACO</div>
+    </a>
+    <a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" class="link-card">
+      <div class="link-title">Orb Markets</div>
+      <div class="link-url">orbmarkets.io/token/EACO</div>
+    </a>
+  </div>
+
+  <h3 style="color:var(--green);margin:30px 0 10px" data-zh="DEX 流动性入口" data-en="DEX Liquidity Entry">DEX 流动性入口</h3>
+  <div class="dex-grid">
+    <div class="dex-item">
+      <a href="https://raydium.io/swap/?inputMint=sol&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank">Raydium (E-SOL)</a>
+      <div class="dex-label" data-zh="原生池" data-en="Native Pool">原生池</div>
+    </div>
+    <div class="dex-item">
+      <a href="https://app.meteora.ag/dlmm/6ZfCi3qzhgDN1ygHVYXvfsfrwz8ZhQ7hD5mJtjeuUDyE" target="_blank">Meteora (E-USDT)</a>
+      <div class="dex-label" data-zh="稳定币池" data-en="Stablecoin Pool">稳定币池</div>
+    </div>
+    <div class="dex-item">
+      <a href="https://www.orca.so/pools/6GDJvBhq9NY4Tcry8rsCVU4RTd8tzjUQCANvHngjK7jw" target="_blank">Orca</a>
+      <div class="dex-label" data-zh="兜底深度池" data-en="Reserve Pool">兜底深度池</div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--purple);margin:30px 0 10px" data-zh="全球 Telegram 社群（7 大语种）" data-en="Global Telegram Groups (7 Languages)">全球 Telegram 社群（7 大语种）</h3>
+  <div class="tg-grid">
+    <div class="tg-item"><a href="https://t.me/e_eacocc" target="_blank">@e_eacocc</a><div class="lang">English</div></div>
+    <div class="tg-item"><a href="https://t.me/aieaco" target="_blank">@aieaco</a><div class="lang" data-zh="华语" data-en="Chinese">华语</div></div>
+    <div class="tg-item"><a href="https://t.me/earhcoingroup" target="_blank">@earhcoingroup</a><div class="lang">العربية</div></div>
+    <div class="tg-item"><a href="https://t.me/eacoespanish" target="_blank">@eacoespanish</a><div class="lang">Español</div></div>
+    <div class="tg-item"><a href="https://t.me/efrencheaco" target="_blank">@efrencheaco</a><div class="lang">Français</div></div>
+    <div class="tg-item"><a href="https://t.me/erussianeaco" target="_blank">@erussianeaco</a><div class="lang">Русский</div></div>
+    <div class="tg-item"><a href="https://t.me/ejapaneaco" target="_blank">@ejapaneaco</a><div class="lang">日本語・한국어</div></div>
+  </div>
+
+  <h3 style="color:var(--gold);margin:30px 0 10px" data-zh="生态项目链接" data-en="Ecosystem Project Links">生态项目链接</h3>
+  <div class="links-grid">
+    <a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" class="link-card">
+      <div class="link-title" data-zh="EACO 官网" data-en="EACO Official Website">EACO 官网</div>
+      <div class="link-url">ucoingroup.github.io/earths-best-coin</div>
+    </a>
+    <a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" class="link-card">
+      <div class="link-title" data-zh="EACO 50 率" data-en="EACO 50 Rate">EACO 50 率</div>
+      <div class="link-url">ucoingroup.github.io/eaco50rate</div>
+    </a>
+    <a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" class="link-card">
+      <div class="link-title" data-zh="致富 100 法" data-en="100 Ways to Wealth">致富 100 法</div>
+      <div class="link-url">ucoingroup.github.io/100WaysToWealth</div>
+    </a>
+    <a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" class="link-card">
+      <div class="link-title" data-zh="地球 100 友" data-en="Earth 100 Friends">地球 100 友</div>
+      <div class="link-url">ucoingroup.github.io/earth-100-friends</div>
+    </a>
+    <a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" class="link-card">
+      <div class="link-title">EACO SWAP</div>
+      <div class="link-url">ucoingroup.github.io/eacoSWAP</div>
+    </a>
+    <a href="https://ucoingroup.github.io/good-books/" target="_blank" class="link-card">
+      <div class="link-title" data-zh="好书推荐" data-en="Good Books">好书推荐</div>
+      <div class="link-url">ucoingroup.github.io/good-books</div>
+    </a>
+    <a href="https://ucoingroup.github.io/eur-eaco/" target="_blank" class="link-card">
+      <div class="link-title">EUR-EACO</div>
+      <div class="link-url">ucoingroup.github.io/eur-eaco</div>
+    </a>
+    <a href="https://ucoingroup.github.io/au-trade/" target="_blank" class="link-card">
+      <div class="link-title">AU Trade</div>
+      <div class="link-url">ucoingroup.github.io/au-trade</div>
+    </a>
+    <a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" class="link-card">
+      <div class="link-title" data-zh="墨子科技" data-en="Mohist Tech">墨子科技</div>
+      <div class="link-url">ucoingroup.github.io/Mohist-Tech</div>
+    </a>
+    <a href="https://eaco-build-world.base44.app/" target="_blank" class="link-card">
+      <div class="link-title" data-zh="EACO 建设世界" data-en="EACO Build World">EACO 建设世界</div>
+      <div class="link-url">eaco-build-world.base44.app</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="ca-box" style="max-width:600px">
+    <span style="color:var(--text2);font-size:.8rem">CA:</span>
+    <code style="font-size:.7rem">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+    <button class="copy-btn" onclick="copyCA()" data-zh="复制" data-en="Copy" style="font-size:.7rem;padding:4px 10px">复制</button>
+  </div>
+  <div style="margin-top:20px">
+    <p data-zh="Earth-E = Earth AI + EACO | Earth's Top-tier AI + RWA + Web3 加密资产" data-en="Earth-E = Earth AI + EACO | Earth's Top-tier AI + RWA + Web3 Crypto Asset">Earth-E = Earth AI + EACO | Earth's Top-tier AI + RWA + Web3 加密资产</p>
+    <p style="margin-top:8px;color:var(--text3)" data-zh="EACO = Energy × Attitude × Cooperation × Optimization" data-en="EACO = Energy × Attitude × Cooperation × Optimization">EACO = Energy × Attitude × Cooperation × Optimization</p>
+    <p style="margin-top:12px" data-zh="© 2026 Earth-E. 仅供信息参考，不构成投资建议。" data-en="© 2026 Earth-E. For informational purposes only, not financial advice.">© 2026 Earth-E. 仅供信息参考，不构成投资建议。</p>
+  </div>
+</footer>
+</div>
+
+<div id="back-top" onclick="scrollTop()">↑</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// === Starfield Canvas Animation ===
+var canvas=document.getElementById('starfield');
+var ctx=canvas.getContext('2d');
+var stars=[],meteors=[],nebulae=[];
+var W,H;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();
+window.addEventListener('resize',resize);
+
+function initStars(){
+  stars=[];
+  var count=Math.floor(W*H/8000);
+  for(var i=0;i<count;i++){
+    stars.push({
+      x:Math.random()*W, y:Math.random()*H,
+      r:Math.random()*1.5+0.3,
+      a:Math.random()*0.8+0.2,
+      tw:Math.random()*0.02+0.005,
+      td:Math.random()*Math.PI*2,
+      vy:Math.random()*0.15+0.02
+    });
+  }
+  nebulae=[];
+  for(var i=0;i<3;i++){
+    nebulae.push({
+      x:Math.random()*W, y:Math.random()*H,
+      r:Math.random()*200+100,
+      hue:i===0?'0,212,255':i===1?'123,47,255':'255,215,0',
+      a:0.03+Math.random()*0.02
+    });
+  }
+}
+initStars();
+window.addEventListener('resize',initStars);
+
+function spawnMeteor(){
+  if(Math.random()<0.012 && meteors.length<3){
+    var side=Math.random()<0.5;
+    meteors.push({
+      x:Math.random()*W, y:side?-20:Math.random()*H*0.3,
+      vx:Math.random()*4+2, vy:Math.random()*3+1,
+      len:Math.random()*60+40, life:1
+    });
+  }
+}
+
+function draw(){
+  ctx.fillStyle='rgba(5,5,15,0.15)';
+  ctx.fillRect(0,0,W,H);
+
+  // nebulae
+  for(var i=0;i<nebulae.length;i++){
+    var n=nebulae[i];
+    var g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,Math.max(1,n.r));
+    g.addColorStop(0,'rgba('+n.hue+','+n.a+')');
+    g.addColorStop(1,'rgba('+n.hue+',0)');
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,Math.max(1,n.r),0,Math.PI*2);
+    ctx.fill();
+  }
+
+  // stars
+  for(var i=0;i<stars.length;i++){
+    var s=stars[i];
+    s.td+=s.tw;
+    var alpha=s.a+Math.sin(s.td)*0.3;
+    if(alpha<0)alpha=0;
+    ctx.fillStyle='rgba(200,220,255,'+alpha+')';
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,Math.max(0.1,s.r),0,Math.PI*2);
+    ctx.fill();
+    s.y+=s.vy;
+    if(s.y>H){s.y=0;s.x=Math.random()*W;}
+  }
+
+  // meteors
+  spawnMeteor();
+  for(var i=meteors.length-1;i>=0;i--){
+    var m=meteors[i];
+    var gx=m.x-m.vx*5, gy=m.y-m.vy*5;
+    var g=ctx.createLinearGradient(m.x,m.y,gx,gy);
+    g.addColorStop(0,'rgba(0,212,255,'+m.life+')');
+    g.addColorStop(1,'rgba(0,212,255,0)');
+    ctx.strokeStyle=g;
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(m.x,m.y);
+    ctx.lineTo(gx,gy);
+    ctx.stroke();
+    m.x+=m.vx; m.y+=m.vy; m.life-=0.01;
+    if(m.life<=0||m.x>W+50||m.y>H+50)meteors.splice(i,1);
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+// === Language Toggle ===
+var currentLang='zh';
+function toggleLang(){
+  currentLang = currentLang==='zh'?'en':'zh';
+  var btns=document.querySelectorAll('#langBtn, #langBtnMobile');
+  for(var i=0;i<btns.length;i++){
+    btns[i].textContent = currentLang==='zh'?'EN':'中文';
+  }
+  var els=document.querySelectorAll('[data-zh]');
+  for(var i=0;i<els.length;i++){
+    var el=els[i];
+    if(currentLang==='en' && el.getAttribute('data-en') && el.getAttribute('data-en')!==''){
+      if(el.tagName==='BUTTON'||el.tagName==='INPUT'){
+        el.textContent=el.getAttribute('data-en');
+      } else {
+        el.textContent=el.getAttribute('data-en');
+      }
+    } else {
+      if(el.tagName==='BUTTON'||el.tagName==='INPUT'){
+        el.textContent=el.getAttribute('data-zh');
+      } else {
+        el.textContent=el.getAttribute('data-zh');
+      }
+    }
+  }
+  document.documentElement.lang = currentLang==='zh'?'zh-CN':'en';
+}
+
+// === Mobile Menu ===
+function toggleMenu(){
+  var ham=document.getElementById('hamburger');
+  var menu=document.getElementById('mobileMenu');
+  ham.classList.toggle('active');
+  menu.classList.toggle('show');
+}
+// Close menu on link click
+var mobileLinks=document.querySelectorAll('#mobileMenu a');
+for(var i=0;i<mobileLinks.length;i++){
+  mobileLinks[i].addEventListener('click',function(){
+    document.getElementById('hamburger').classList.remove('active');
+    document.getElementById('mobileMenu').classList.remove('show');
+  });
+}
+
+// === Copy CA ===
+function copyCA(){
+  var ca='DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ca).then(function(){
+      showToast(currentLang==='zh'?'合约地址已复制':'Contract Address Copied');
+    }).catch(function(){
+      fallbackCopy(ca);
+    });
+  } else {
+    fallbackCopy(ca);
+  }
+}
+function fallbackCopy(text){
+  var ta=document.createElement('textarea');
+  ta.value=text;
+  ta.style.position='fixed';
+  ta.style.opacity='0';
+  document.body.appendChild(ta);
+  ta.select();
+  try{document.execCommand('copy');showToast(currentLang==='zh'?'合约地址已复制':'Contract Address Copied');}
+  catch(e){showToast(currentLang==='zh'?'复制失败':'Copy Failed');}
+  document.body.removeChild(ta);
+}
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},2000);
+}
+
+// === Back to Top ===
+var backBtn=document.getElementById('back-top');
+window.addEventListener('scroll',function(){
+  if(window.pageYOffset>300){backBtn.classList.add('show');}
+  else{backBtn.classList.remove('show');}
+});
+function scrollTop(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// === Init: set default language to zh ===
+toggleLang(); // switch to en first
+toggleLang(); // switch back to zh, ensures data attributes are applied
+</script>
+</body>
+</html>
