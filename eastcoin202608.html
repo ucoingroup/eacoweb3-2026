@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>EACO · Earth's Best Coin | east coin = eaco 202608</title>
+
+    <!-- Font Awesome 6 (免费图标库) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ===== 全局重置 & CSS 变量 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 默认主题：宇宙星际蓝 */
+            --bg-primary: #0b0e1a;
+            --bg-secondary: #141b33;
+            --bg-card: rgba(20, 30, 60, 0.75);
+            --bg-card-hover: rgba(30, 50, 90, 0.85);
+            --text-primary: #e8f0fe;
+            --text-secondary: #a0c4ff;
+            --text-muted: #6a8fc0;
+            --border-glow: rgba(64, 164, 255, 0.3);
+            --shadow-glow: 0 0 30px rgba(64, 164, 255, 0.15);
+            --accent: #40a4ff;
+            --accent-glow: #40a4ff66;
+            --gradient-bg: linear-gradient(145deg, #0b0e1a 0%, #0f1a3a 100%);
+            --star-color: #ffffff;
+            --nav-bg: rgba(11, 14, 26, 0.85);
+            --footer-bg: rgba(8, 10, 20, 0.9);
+            --badge-bg: #40a4ff22;
+            --badge-border: #40a4ff44;
+            --link-color: #6ab0ff;
+            --link-hover: #8ac4ff;
+            --card-border: rgba(64, 164, 255, 0.2);
+            --divider: rgba(64, 164, 255, 0.15);
+            --btn-primary: #40a4ff;
+            --btn-primary-hover: #5fb4ff;
+        }
+
+        /* 军绿色主题 */
+        [data-theme="military"] {
+            --bg-primary: #1a1f0e;
+            --bg-secondary: #2a351a;
+            --bg-card: rgba(35, 45, 20, 0.80);
+            --bg-card-hover: rgba(50, 65, 30, 0.90);
+            --text-primary: #e8eed8;
+            --text-secondary: #b8c99a;
+            --text-muted: #7a8f5a;
+            --border-glow: rgba(148, 180, 80, 0.30);
+            --shadow-glow: 0 0 30px rgba(148, 180, 80, 0.12);
+            --accent: #8cb84a;
+            --accent-glow: #8cb84a66;
+            --gradient-bg: linear-gradient(145deg, #1a1f0e 0%, #2a351a 100%);
+            --star-color: #d4d9b8;
+            --nav-bg: rgba(26, 31, 14, 0.88);
+            --footer-bg: rgba(18, 22, 10, 0.92);
+            --badge-bg: #8cb84a22;
+            --badge-border: #8cb84a44;
+            --link-color: #a8d06a;
+            --link-hover: #c0e08a;
+            --card-border: rgba(148, 180, 80, 0.20);
+            --divider: rgba(148, 180, 80, 0.15);
+            --btn-primary: #8cb84a;
+            --btn-primary-hover: #a0cc5a;
+        }
+
+        /* 米黄色主题 */
+        [data-theme="cream"] {
+            --bg-primary: #f5efe6;
+            --bg-secondary: #ede3d5;
+            --bg-card: rgba(255, 248, 235, 0.88);
+            --bg-card-hover: rgba(255, 245, 225, 0.95);
+            --text-primary: #3d352a;
+            --text-secondary: #6a5d4a;
+            --text-muted: #9a8a75;
+            --border-glow: rgba(200, 170, 130, 0.30);
+            --shadow-glow: 0 0 30px rgba(200, 170, 130, 0.12);
+            --accent: #c4a07a;
+            --accent-glow: #c4a07a66;
+            --gradient-bg: linear-gradient(145deg, #f5efe6 0%, #ede3d5 100%);
+            --star-color: #b8a58a;
+            --nav-bg: rgba(245, 239, 230, 0.90);
+            --footer-bg: rgba(235, 225, 212, 0.92);
+            --badge-bg: #c4a07a22;
+            --badge-border: #c4a07a44;
+            --link-color: #a8856a;
+            --link-hover: #c49a7a;
+            --card-border: rgba(200, 170, 130, 0.25);
+            --divider: rgba(200, 170, 130, 0.20);
+            --btn-primary: #c4a07a;
+            --btn-primary-hover: #d4b08a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background 0.5s ease, color 0.4s ease;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== 星空背景（仅蓝色主题） ===== */
+        body.starry::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(2px 2px at 10% 20%, var(--star-color) 50%, transparent),
+                radial-gradient(2px 2px at 30% 60%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 50% 10%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 70% 80%, var(--star-color) 50%, transparent),
+                radial-gradient(2px 2px at 90% 30%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 15% 85%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 60% 45%, var(--star-color) 50%, transparent),
+                radial-gradient(2px 2px at 85% 70%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 40% 95%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 5% 40%, var(--star-color) 50%, transparent),
+                radial-gradient(2px 2px at 75% 15%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 25% 50%, var(--star-color) 50%, transparent),
+                radial-gradient(1px 1px at 55% 75%, var(--star-color) 50%, transparent),
+                radial-gradient(2px 2px at 95% 55%, var(--star-color) 50%, transparent);
+            background-size: 100% 100%;
+            opacity: 0.5;
+            animation: twinkle 4s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0.7;
+            }
+        }
+
+        /* ===== 滚动条 ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 8px;
+        }
+
+        /* ===== 通用容器 ===== */
+        .app-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 20px 30px;
+        }
+
+        /* ===== 导航栏 ===== */
+        .navbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-glow);
+            margin-bottom: 28px;
+            gap: 12px;
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .brand i {
+            color: var(--accent);
+            font-size: 28px;
+        }
+        .brand span {
+            background: var(--accent-glow);
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            border: 1px solid var(--badge-border);
+        }
+
+        .nav-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-controls select,
+        .nav-controls button {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s;
+            outline: none;
+            backdrop-filter: blur(4px);
+            font-family: inherit;
+        }
+        .nav-controls select:hover,
+        .nav-controls button:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+        .nav-controls select {
+            min-width: 110px;
+            appearance: auto;
+        }
+        .nav-controls .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+        .nav-controls .theme-btn i {
+            font-size: 16px;
+        }
+
+        /* ===== 卡片通用 ===== */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 28px 30px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-glow);
+            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+            margin-bottom: 28px;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .card-header i {
+            color: var(--accent);
+            font-size: 26px;
+        }
+
+        /* ===== 国家排名 ===== */
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .country-item {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 16px 18px;
+            transition: all 0.3s;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        .country-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 30px var(--accent-glow);
+            background: var(--bg-card-hover);
+        }
+        .country-item .rank {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--badge-bg);
+            padding: 2px 10px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 6px;
+            border: 1px solid var(--badge-border);
+        }
+        .country-item .name {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .country-item .name .flag {
+            font-size: 22px;
+        }
+        .country-item .desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            opacity: 0.85;
+        }
+        .country-item .tier-badge {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--accent-glow);
+            padding: 2px 12px;
+            border-radius: 30px;
+            color: var(--text-primary);
+            border: 1px solid var(--badge-border);
+        }
+        .tier-1 {
+            border-left: 4px solid #f7c948;
+        }
+        .tier-2 {
+            border-left: 4px solid #7ec8e3;
+        }
+
+        /* ===== 核心定义 ===== */
+        .def-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 16px 0 6px;
+        }
+        .def-block .def-item {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 20px 22px;
+            border: 1px solid var(--card-border);
+            transition: 0.3s;
+        }
+        .def-block .def-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .def-block .def-item h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            margin-bottom: 6px;
+            color: var(--accent);
+        }
+        .def-block .def-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .keyword-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 16px 0 8px;
+        }
+        .keyword-grid .kw {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 12px 16px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-primary);
+            transition: 0.3s;
+        }
+        .keyword-grid .kw:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+        .keyword-grid .kw small {
+            display: block;
+            font-weight: 400;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .goals-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 24px;
+            margin: 12px 0 4px;
+            padding-left: 4px;
+        }
+        .goals-list li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 4px 0;
+        }
+        .goals-list li i {
+            color: var(--accent);
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ===== 链接区 ===== */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .links-grid a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--card-border);
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.25s;
+            word-break: break-all;
+        }
+        .links-grid a:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            color: var(--link-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .links-grid a i {
+            font-size: 18px;
+            min-width: 20px;
+            color: var(--accent);
+        }
+
+        /* ===== 合约地址 ===== */
+        .contract-box {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 16px 22px;
+            border: 1px solid var(--card-border);
+            margin-top: 10px;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        .contract-box .label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .contract-box .addr {
+            color: var(--accent);
+            font-family: 'Monaco', 'Menlo', monospace;
+            letter-spacing: 0.3px;
+            background: var(--badge-bg);
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 1px solid var(--badge-border);
+            font-size: 13px;
+        }
+        .contract-box .copy-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.25s;
+            font-weight: 500;
+        }
+        .contract-box .copy-btn:hover {
+            background: var(--btn-primary-hover);
+            transform: scale(1.02);
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            margin-top: 20px;
+            padding: 24px 20px 16px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--divider);
+            background: var(--footer-bg);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+        .footer .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .footer .social-icons a {
+            color: var(--text-muted);
+            font-size: 20px;
+            transition: 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: var(--accent);
+            transform: scale(1.15);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 16px 18px;
+            }
+            .brand {
+                justify-content: center;
+                font-size: 20px;
+            }
+            .nav-controls {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .def-block {
+                grid-template-columns: 1fr;
+            }
+            .goals-list {
+                grid-template-columns: 1fr;
+            }
+            .country-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .card {
+                padding: 20px 16px;
+            }
+            .contract-box {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .contract-box .copy-btn {
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-wrapper {
+                padding: 10px 12px 20px;
+            }
+            .brand {
+                font-size: 17px;
+            }
+            .nav-controls select,
+            .nav-controls button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .country-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+            .keyword-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .card-header {
+                font-size: 17px;
+            }
+        }
+
+        /* ===== 工具类 ===== */
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .mt-16 {
+            margin-top: 16px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-12 {
+            gap: 12px;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 小标签 */
+        .tag {
+            display: inline-block;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            border-radius: 30px;
+            padding: 2px 14px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .accent-text {
+            color: var(--accent);
+        }
+        .divider-line {
+            height: 1px;
+            background: var(--divider);
+            margin: 20px 0 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper" id="app">
+
+        <!-- ===== 导航 ===== -->
+        <nav class="navbar">
+            <a href="#" class="brand" onclick="return false;">
+                <i class="fas fa-globe-americas"></i>
+                EACO
+                <span>Earth's Best Coin</span>
+            </a>
+            <div class="nav-controls">
+                <!-- 语言切换 -->
+                <select id="langSelect" aria-label="语言切换">
+                    <option value="zh">中文</option>
+                    <option value="en">English</option>
+                    <option value="ar">العربية</option>
+                    <option value="de">Deutsch</option>
+                    <option value="pt">Português</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="fr">Français</option>
+                </select>
+
+                <!-- 主题切换 -->
+                <button class="theme-btn" id="themeToggle" title="切换主题">
+                    <i class="fas fa-palette"></i>
+                    <span id="themeLabel">宇宙蓝</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- ===== 1. 国家排名 ===== -->
+        <section class="card fade-in" id="countrySection">
+            <div class="card-header">
+                <i class="fas fa-flag"></i>
+                <span data-key="countryTitle">🌍 周边20国 · WEB3最友善国家</span>
+                <span class="tag" data-key="countryTag">Top 10</span>
+            </div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;font-size:15px;" data-key="countrySub">
+                基于监管清晰度、政策支持、创新生态、交易活跃度等维度评选
+            </p>
+            <div class="country-grid" id="countryGrid">
+                <!-- 由 JS 渲染 -->
+            </div>
+        </section>
+
+        <!-- ===== 2. EACO 核心信息 ===== -->
+        <section class="card fade-in">
+            <div class="card-header">
+                <i class="fas fa-rocket"></i>
+                <span data-key="eacoTitle">⚡ EACO — Earth's Best Coin</span>
+            </div>
+
+            <div style="font-size:15px;color:var(--text-secondary);margin-bottom:12px;">
+                <span data-key="eacoTagline">Earth's top-tier AI + RWA + Web3 crypto asset</span>
+            </div>
+
+            <div class="def-block">
+                <div class="def-item">
+                    <h4><i class="fas fa-bolt"></i> <span data-key="defTitle1">核心内涵</span></h4>
+                    <p data-key="defDesc1">
+                        EACO 源自四大关键词：<br />
+                        <strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>
+                    </p>
+                </div>
+                <div class="def-item">
+                    <h4><i class="fas fa-brain"></i> <span data-key="defTitle2">本质定义</span></h4>
+                    <p data-key="defDesc2">
+                        EACO = 正能量 × 正念 × 全球协作 × 持续优化<br />
+                        <span style="font-size:13px;color:var(--text-muted);" data-key="defSub">全球文明升级模型</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 关键词 -->
+            <div class="keyword-grid">
+                <div class="kw">Energy <small data-key="kw1">能量</small></div>
+                <div class="kw">Attitude <small data-key="kw2">态度</small></div>
+                <div class="kw">Cooperation <small data-key="kw3">协作</small></div>
+                <div class="kw">Optimization <small data-key="kw4">优化</small></div>
+            </div>
+
+            <!-- 核心目标 -->
+            <div style="margin-top:8px;">
+                <h4 style="font-size:16px;color:var(--text-primary);display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                    <i class="fas fa-bullseye" style="color:var(--accent);"></i>
+                    <span data-key="goalsTitle">核心目标</span>
+                </h4>
+                <ul class="goals-list">
+                    <li><i class="fas fa-chevron-right"></i> <span data-key="goal1">提升个体认知</span></li>
+                    <li><i class="fas fa-chevron-right"></i> <span data-key="goal2">改善组织效能</span></li>
+                    <li><i class="fas fa-chevron-right"></i> <span data-key="goal3">推进社会文明</span></li>
+                    <li><i class="fas fa-chevron-right"></i> <span data-key="goal4">促进地球可持续发展</span></li>
+                    <li style="grid-column:1/-1;"><i class="fas fa-chevron-right"></i> <span data-key="goal5">融合 100 种认知模型</span></li>
+                </ul>
+            </div>
+
+            <div class="divider-line"></div>
+
+            <!-- 合约地址 -->
+            <div class="contract-box">
+                <span class="label"><i class="fas fa-link"></i> <span data-key="contractLabel">合约地址</span></span>
+                <span class="addr" id="contractAddr">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+                <button class="copy-btn" id="copyContract"><i class="fas fa-copy"></i> <span data-key="copyBtn">复制</span></button>
+            </div>
+        </section>
+
+        <!-- ===== 3. 链接资源 ===== -->
+        <section class="card fade-in">
+            <div class="card-header">
+                <i class="fas fa-link"></i>
+                <span data-key="linksTitle">🔗 EACO 生态链接</span>
+            </div>
+            <div class="links-grid" id="linksGrid">
+                <!-- 由 JS 渲染 -->
+            </div>
+
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--divider);">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;font-size:14px;color:var(--text-secondary);">
+                    <span><i class="fas fa-database" style="color:var(--accent);"></i> <span data-key="poolLabel">EACO DAO Pool</span></span>
+                    <a href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc"
+                    target="_blank" rel="noopener"
+                    style="color:var(--link-color);word-break:break-all;">
+                    meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc
+                    <i class="fas fa-external-link-alt" style="font-size:12px;margin-left:4px;"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 4. 底部 ===== -->
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener" title="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="https://github.com/ucoingroup" target="_blank" rel="noopener" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" title="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://t.me" target="_blank" rel="noopener" title="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+        </div>
+        <p style="margin-bottom:4px;">
+            <span data-key="footerBrand">EACO · Earth's Best Coin</span>
+            &nbsp;·&nbsp; <span data-key="footerRights">© 2026 地球文明升级计划 east coin = eaco 202608</span>
+        </p>
+        <p style="font-size:12px;opacity:0.7;">
+            <span data-key="footerSlogan">正能量 · 正念 · 全球协作 · 持续优化</span>
+        </p>
+    </footer>
+</div>
+
+<!-- ============================================================ -->
+<script>
+    (function() {
+        'use strict';
+
+        // =============================================================
+        //  1. 数据：国家排名（10个）
+        // =============================================================
+        const COUNTRIES = [{
+            id: 'sg',
+            name: 'Singapore',
+            nameCN: '新加坡',
+            flag: '🇸🇬',
+            tier: 1,
+            descEN: 'Asia\'s financial hub, clear regulations, pro-crypto',
+            descCN: '亚洲金融中心，监管清晰，积极拥抱加密资产',
+            descAR: 'المركز المالي الآسيوي، لوائح واضحة، مؤيد للعملات المشفرة',
+            descDE: 'Asiens Finanzzentrum, klare Regulierung, kryptofreundlich',
+            descPT: 'Centro financeiro da Ásia, regulamentação clara, pró-cripto',
+            descJA: 'アジアの金融ハブ、明確な規制、暗号資産に積極的',
+            descKO: '아시아 금융 허브, 명확한 규제, 암호화폐 친화적',
+            descFR: 'Centre financier asiatique, réglementation claire, pro-crypto'
+        }, {
+            id: 'ae',
+            name: 'UAE',
+            nameCN: '阿联酋',
+            flag: '🇦🇪',
+            tier: 1,
+            descEN: 'Dubai & Abu Dhabi leading Web3 innovation with clear frameworks',
+            descCN: '迪拜和阿布扎比引领Web3创新，监管框架清晰',
+            descAR: 'دبي وأبوظبي تقودان ابتكار Web3 بأطر واضحة',
+            descDE: 'Dubai und Abu Dhabi führen Web3-Innovation mit klaren Rahmenwerken',
+            descPT: 'Dubai e Abu Dhabi lideram a inovação Web3 com estruturas claras',
+            descJA: 'ドバイとアブダビが明確な枠組みでWeb3イノベーションを主導',
+            descKO: '두바이와 아부다비가 명확한 프레임워크로 Web3 혁신을 선도',
+            descFR: 'Dubaï et Abou Dhabi mènent l\'innovation Web3 avec des cadres clairs'
+        }, {
+            id: 'ch',
+            name: 'Switzerland',
+            nameCN: '瑞士',
+            flag: '🇨🇭',
+            tier: 1,
+            descEN: 'Crypto Valley in Zug, friendly regulations and banking',
+            descCN: '楚格“加密谷”，友好监管与银行体系',
+            descAR: 'وادي العملات المشفرة في تسوغ، لوائح ودية ونظام مصرفي',
+            descDE: 'Crypto Valley in Zug, freundliche Regulierung und Bankwesen',
+            descPT: 'Vale da Cripto em Zug, regulamentação amigável e bancária',
+            descJA: 'ツークの「クリプトバレー」、友好的な規制と銀行',
+            descKO: '추크의 암호화폐 밸리, 우호적 규제와 은행',
+            descFR: 'Crypto Valley à Zoug, réglementation et banques favorables'
+        }, {
+            id: 'pt',
+            name: 'Portugal',
+            nameCN: '葡萄牙',
+            flag: '🇵🇹',
+            tier: 1,
+            descEN: 'Tax-free crypto gains, vibrant Web3 community',
+            descCN: '加密资产收益免税，活跃的Web3社区',
+            descAR: 'مكاسب العملات المشفرة معفاة من الضرائب، مجتمع Web3 نابض بالحياة',
+            descDE: 'Steuerfreie Kryptogewinne, lebendige Web3-Community',
+            descPT: 'Ganhos de cripto isentos de impostos, comunidade Web3 vibrante',
+            descJA: '暗号資産の利益非課税、活気あるWeb3コミュニティ',
+            descKO: '암호화폐 수익 면세, 활기찬 Web3 커뮤니티',
+            descFR: 'Gains en crypto exonérés d\'impôts, communauté Web3 dynamique'
+        }, {
+            id: 'mt',
+            name: 'Malta',
+            nameCN: '马耳他',
+            flag: '🇲🇹',
+            tier: 1,
+            descEN: 'Blockchain Island with comprehensive DLT legislation',
+            descCN: '“区块链岛”，全面的DLT立法',
+            descAR: 'جزيرة البلوكشين مع تشريع شامل لـ DLT',
+            descDE: 'Blockchain-Insel mit umfassender DLT-Gesetzgebung',
+            descPT: 'Ilha Blockchain com legislação DLT abrangente',
+            descJA: '包括的なDLT法制を備えた「ブロックチェーン島」',
+            descKO: '포괄적인 DLT 입법을 갖춘 블록체인 섬',
+            descFR: 'Île de la Blockchain avec une législation DLT complète'
+        }, {
+            id: 'hk',
+            name: 'Hong Kong',
+            nameCN: '香港',
+            flag: '🇭🇰',
+            tier: 2,
+            descEN: 'Pro-crypto trading, bridging East and West',
+            descCN: '支持加密交易，连接东西方',
+            descAR: 'تداول مؤيد للعملات المشفرة، جسر بين الشرق والغرب',
+            descDE: 'Kryptofreundlicher Handel, Brücke zwischen Ost und West',
+            descPT: 'Negociação pró-cripto, ponte entre Oriente e Ocidente',
+            descJA: '暗号資産取引に積極的、東西の架け橋',
+            descKO: '암호화폐 거래 친화적, 동서양의 가교',
+            descFR: 'Négociation pro-crypto, pont entre l\'Est et l\'Ouest'
+        }, {
+            id: 'ee',
+            name: 'Estonia',
+            nameCN: '爱沙尼亚',
+            flag: '🇪🇪',
+            tier: 2,
+            descEN: 'E-residency, digital-first nation with blockchain roots',
+            descCN: '电子居民计划，数字优先的区块链国家',
+            descAR: 'الإقامة الإلكترونية، دولة رقمية أولى ذات جذور بلوكشين',
+            descDE: 'E-Residency, digitaler Vorreiter mit Blockchain-Wurzeln',
+            descPT: 'E-residência, nação digital com raízes em blockchain',
+            descJA: '電子居住者プログラム、ブロックチェーンにルーツを持つデジタルファースト国家',
+            descKO: '전자 거주제, 블록체인 뿌리를 가진 디지털 퍼스트 국가',
+            descFR: 'E-résidence, nation numérique avec des racines blockchain'
+        }, {
+            id: 'us',
+            name: 'USA',
+            nameCN: '美国',
+            flag: '🇺🇸',
+            tier: 2,
+            descEN: 'Wyoming, Texas etc. — crypto-friendly states with clear laws',
+            descCN: '怀俄明、德克萨斯等州 — 加密友好，法律明确',
+            descAR: 'وايومنغ وتكساس وغيرها — ولايات صديقة للعملات المشفرة بقوانين واضحة',
+            descDE: 'Wyoming, Texas u.a. — kryptofreundliche Bundesstaaten mit klaren Gesetzen',
+            descPT: 'Wyoming, Texas etc. — estados pró-cripto com leis claras',
+            descJA: 'ワイオミング、テキサスなど — 暗号資産に友好的な州、明確な法律',
+            descKO: '와이오밍, 텍사스 등 — 암호화폐 친화적 주, 명확한 법률',
+            descFR: 'Wyoming, Texas etc. — États pro-crypto avec des lois claires'
+        }, {
+            id: 'jp',
+            name: 'Japan',
+            nameCN: '日本',
+            flag: '🇯🇵',
+            tier: 2,
+            descEN: 'Legalized crypto, clear exchange regulations',
+            descCN: '加密货币合法化，交易所监管明确',
+            descAR: 'العملات المشفرة قانونية، لوائح تبادل واضحة',
+            descDE: 'Krypto legalisiert, klare Börsenregulierung',
+            descPT: 'Cripto legalizado, regulamentação clara de exchanges',
+            descJA: '暗号資産を合法化、取引所規制が明確',
+            descKO: '암호화폐 합법화, 거래소 규제 명확',
+            descFR: 'Crypto légalisée, réglementation claire des échanges'
+        }, {
+            id: 'kr',
+            name: 'Korea',
+            nameCN: '韩国',
+            flag: '🇰🇷',
+            tier: 2,
+            descEN: 'Active trading, strong community, clear guidelines',
+            descCN: '交易活跃，社区强大，监管指南明确',
+            descAR: 'تداول نشط، مجتمع قوي، مبادئ توجيهية واضحة',
+            descDE: 'Aktiver Handel, starke Community, klare Richtlinien',
+            descPT: 'Negociação ativa, comunidade forte, diretrizes claras',
+            descJA: '活発な取引、強力なコミュニティ、明確なガイドライン',
+            descKO: '활발한 거래, 강력한 커뮤니티, 명확한 가이드라인',
+            descFR: 'Négociation active, communauté forte, directives claires'
+        }];
+
+        // =============================================================
+        //  2. 链接数据
+        // =============================================================
+        const LINKS = [
+            { url: 'https://ucoingroup.github.io/earths-best-coin/', icon: 'fa-globe', label: 'Earth\'s Best Coin' },
+            { url: 'https://ucoingroup.github.io/eaco50rate/', icon: 'fa-chart-line', label: 'EACO 50 Rate' },
+            { url: 'https://ucoingroup.github.io/100WaysToWealth/', icon: 'fa-coins', label: '100 Ways to Wealth' },
+            { url: 'https://ucoingroup.github.io/earth-100-friends/', icon: 'fa-users', label: 'Earth 100 Friends' },
+            { url: 'https://ucoingroup.github.io/eacoSWAP/', icon: 'fa-exchange-alt', label: 'EACO SWAP' },
+            { url: 'https://ucoingroup.github.io/good-books/', icon: 'fa-book', label: 'Good Books' },
+            { url: 'https://ucoingroup.github.io/eur-eaco/', icon: 'fa-euro-sign', label: 'EUR-EACO' },
+            { url: 'https://ucoingroup.github.io/au-trade/', icon: 'fa-gem', label: 'AU Trade' },
+            { url: 'https://ucoingroup.github.io/Mohist-Tech/', icon: 'fa-microchip', label: 'Mohist Tech' },
+            { url: 'https://eaco-build-world.base44.app/', icon: 'fa-cubes', label: 'EACO Build World' },
+            { url: 'https://eaco-web3.base44.app', icon: 'fa-cube', label: 'EACO Web3' },
+            { url: 'https://ucoingroup.github.io/Footsteps-of-Civilization/', icon: 'fa-footprint', label: 'Footsteps of Civilization' },
+            { url: 'https://discord.gg/bWCDME9Pkc', icon: 'fa-discord', label: 'Discord Community' }
+        ];
+
+        // =============================================================
+        //  3. 多语言文本
+        // =============================================================
+        const LANG = {
+            zh: {
+                countryTitle: '🌍 周边20国 · WEB3最友善国家',
+                countryTag: 'Top 10',
+                countrySub: '基于监管清晰度、政策支持、创新生态、交易活跃度等维度评选',
+                eacoTitle: '⚡ EACO — Earth\'s Best Coin',
+                eacoTagline: 'Earth\'s top-tier AI + RWA + Web3 crypto asset',
+                defTitle1: '核心内涵',
+                defDesc1: 'EACO 源自四大关键词：<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: '本质定义',
+                defDesc2: 'EACO = 正能量 × 正念 × 全球协作 × 持续优化<br /><span style="font-size:13px;color:var(--text-muted);">全球文明升级模型</span>',
+                kw1: '能量',
+                kw2: '态度',
+                kw3: '协作',
+                kw4: '优化',
+                goalsTitle: '核心目标',
+                goal1: '提升个体认知',
+                goal2: '改善组织效能',
+                goal3: '推进社会文明',
+                goal4: '促进地球可持续发展',
+                goal5: '融合 100 种认知模型',
+                contractLabel: '合约地址',
+                copyBtn: '复制',
+                linksTitle: '🔗 EACO 生态链接',
+                poolLabel: 'EACO DAO Pool',
+                footerBrand: 'EACO · Earth\'s Best Coin',
+                footerRights: '© 2026 地球文明升级计划',
+                footerSlogan: '正能量 · 正念 · 全球协作 · 持续优化',
+                tier1: '第一梯队',
+                tier2: '第二梯队',
+                copySuccess: '已复制！',
+                themeLabel: '宇宙蓝'
+            },
+            en: {
+                countryTitle: '🌍 Top Web3-Friendly Countries (out of 20)',
+                countryTag: 'Top 10',
+                countrySub: 'Based on regulatory clarity, policy support, innovation ecosystem, trading activity',
+                eacoTitle: '⚡ EACO — Earth\'s Best Coin',
+                eacoTagline: 'Earth\'s top-tier AI + RWA + Web3 crypto asset',
+                defTitle1: 'Core Connotation',
+                defDesc1: 'EACO derives from four keywords:<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: 'Essence Definition',
+                defDesc2: 'EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization<br /><span style="font-size:13px;color:var(--text-muted);">Global Civilization Upgrade Model</span>',
+                kw1: 'Energy',
+                kw2: 'Attitude',
+                kw3: 'Cooperation',
+                kw4: 'Optimization',
+                goalsTitle: 'Core Goals',
+                goal1: 'Elevate individual cognition',
+                goal2: 'Improve organizational efficiency',
+                goal3: 'Advance social civilization',
+                goal4: 'Promote sustainable Earth development',
+                goal5: 'Integrate with 100 cognitive models',
+                contractLabel: 'Contract Address',
+                copyBtn: 'Copy',
+                linksTitle: '🔗 EACO Ecosystem Links',
+                poolLabel: 'EACO DAO Pool',
+                footerBrand: 'EACO · Earth\'s Best Coin',
+                footerRights: '© 2026 Earth Civilization Upgrade',
+                footerSlogan: 'Positive Energy · Positive Mindset · Global Collaboration · Continuous Optimization',
+                tier1: 'Tier 1',
+                tier2: 'Tier 2',
+                copySuccess: 'Copied!',
+                themeLabel: 'Cosmic Blue'
+            },
+            ar: {
+                countryTitle: '🌍 أفضل الدول الصديقة للويب3 (من بين 20)',
+                countryTag: 'أفضل 10',
+                countrySub: 'بناءً على الوضوح التنظيمي، دعم السياسات، النظام البيئي للابتكار، نشاط التداول',
+                eacoTitle: '⚡ EACO — أفضل عملة على الأرض',
+                eacoTagline: 'أصول تشفير من الدرجة الأولى AI + RWA + Web3',
+                defTitle1: 'المضمون الأساسي',
+                defDesc1: 'EACO مستمدة من أربع كلمات رئيسية:<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: 'التعريف الجوهري',
+                defDesc2: 'EACO = الطاقة الإيجابية × العقلية الإيجابية × التعاون العالمي × التحسين المستمر<br /><span style="font-size:13px;color:var(--text-muted);">نموذج ترقية الحضارة العالمية</span>',
+                kw1: 'طاقة',
+                kw2: 'موقف',
+                kw3: 'تعاون',
+                kw4: 'تحسين',
+                goalsTitle: 'الأهداف الأساسية',
+                goal1: 'رفع الإدراك الفردي',
+                goal2: 'تحسين الكفاءة التنظيمية',
+                goal3: 'تقدم الحضارة الاجتماعية',
+                goal4: 'تعزيز التنمية المستدامة للأرض',
+                goal5: 'دمج مع 100 نموذج معرفي',
+                contractLabel: 'عنوان العقد',
+                copyBtn: 'نسخ',
+                linksTitle: '🔗 روابط النظام البيئي EACO',
+                poolLabel: 'EACO DAO Pool',
+                footerBrand: 'EACO · أفضل عملة على الأرض',
+                footerRights: '© 2026 خطة ترقية الحضارة الأرضية',
+                footerSlogan: 'الطاقة الإيجابية · العقلية الإيجابية · التعاون العالمي · التحسين المستمر',
+                tier1: 'الطبقة الأولى',
+                tier2: 'الطبقة الثانية',
+                copySuccess: 'تم النسخ!',
+                themeLabel: 'أزرق كوني'
+            },
+            de: {
+                countryTitle: '🌍 Top Web3-freundliche Länder (von 20)',
+                countryTag: 'Top 10',
+                countrySub: 'Basierend auf regulatorischer Klarheit, Politikunterstützung, Innovationsökosystem, Handelsaktivität',
+                eacoTitle: '⚡ EACO — Earth\'s Best Coin',
+                eacoTagline: 'AI + RWA + Web3 Crypto-Asset der Spitzenklasse',
+                defTitle1: 'Kernbedeutung',
+                defDesc1: 'EACO leitet sich von vier Schlagwörtern ab:<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: 'Wesensdefinition',
+                defDesc2: 'EACO = Positive Energie × Positive Einstellung × Globale Zusammenarbeit × Kontinuierliche Optimierung<br /><span style="font-size:13px;color:var(--text-muted);">Globales Zivilisations-Upgrade-Modell</span>',
+                kw1: 'Energie',
+                kw2: 'Einstellung',
+                kw3: 'Zusammenarbeit',
+                kw4: 'Optimierung',
+                goalsTitle: 'Kernziele',
+                goal1: 'Individuelle Kognition heben',
+                goal2: 'Organisationseffizienz verbessern',
+                goal3: 'Soziale Zivilisation voranbringen',
+                goal4: 'Nachhaltige Entwicklung der Erde fördern',
+                goal5: 'Integration mit 100 kognitiven Modellen',
+                contractLabel: 'Vertragsadresse',
+                copyBtn: 'Kopieren',
+                linksTitle: '🔗 EACO Ökosystem-Links',
+                poolLabel: 'EACO DAO Pool',
+                footerBrand: 'EACO · Earth\'s Best Coin',
+                footerRights: '© 2026 Earth Civilization Upgrade',
+                footerSlogan: 'Positive Energie · Positive Einstellung · Globale Zusammenarbeit · Kontinuierliche Optimierung',
+                tier1: 'Stufe 1',
+                tier2: 'Stufe 2',
+                copySuccess: 'Kopiert!',
+                themeLabel: 'Kosmisch Blau'
+            },
+            pt: {
+                countryTitle: '🌍 Países mais amigáveis ao Web3 (entre 20)',
+                countryTag: 'Top 10',
+                countrySub: 'Com base na clareza regulatória, apoio político, ecossistema de inovação, atividade de negociação',
+                eacoTitle: '⚡ EACO — Earth\'s Best Coin',
+                eacoTagline: 'Ativo cripto AI + RWA + Web3 de primeira linha',
+                defTitle1: 'Conotação Central',
+                defDesc1: 'EACO deriva de quatro palavras-chave:<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: 'Definição Essencial',
+                defDesc2: 'EACO = Energia Positiva × Mentalidade Positiva × Colaboração Global × Otimização Contínua<br /><span style="font-size:13px;color:var(--text-muted);">Modelo de Upgrade da Civilização Global</span>',
+                kw1: 'Energia',
+                kw2: 'Atitude',
+                kw3: 'Cooperação',
+                kw4: 'Otimização',
+                goalsTitle: 'Objetivos Principais',
+                goal1: 'Elevar a cognição individual',
+                goal2: 'Melhorar a eficiência organizacional',
+                goal3: 'Avançar a civilização social',
+                goal4: 'Promover o desenvolvimento sustentável da Terra',
+                goal5: 'Integrar com 100 modelos cognitivos',
+                contractLabel: 'Endereço do Contrato',
+                copyBtn: 'Copiar',
+                linksTitle: '🔗 Links do Ecossistema EACO',
+                poolLabel: 'EACO DAO Pool',
+                footerBrand: 'EACO · Earth\'s Best Coin',
+                footerRights: '© 2026 Plano de Upgrade da Civilização Terrestre',
+                footerSlogan: 'Energia Positiva · Mentalidade Positiva · Colaboração Global · Otimização Contínua',
+                tier1: 'Nível 1',
+                tier2: 'Nível 2',
+                copySuccess: 'Copiado!',
+                themeLabel: 'Azul Cósmico'
+            },
+            ja: {
+                countryTitle: '🌍 Web3に最も友好的な国々（20か国中）',
+                countryTag: 'トップ10',
+                countrySub: '規制の明確さ、政策支援、イノベーションエコシステム、取引活性に基づく',
+                eacoTitle: '⚡ EACO — Earth\'s Best Coin',
+                eacoTagline: 'Earth\'s top-tier AI + RWA + Web3 crypto asset',
+                defTitle1: '核となる意味',
+                defDesc1: 'EACOは4つのキーワードに由来：<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: '本質的定義',
+                defDesc2: 'EACO = ポジティブエネルギー × ポジティブマインドセット × グローバルコラボレーション × 継続的最適化<br /><span style="font-size:13px;color:var(--text-muted);">グローバル文明アップグレードモデル</span>',
+                kw1: 'エネルギー',
+                kw2: '態度',
+                kw3: '協力',
+                kw4: '最適化',
+                goalsTitle: 'コア目標',
+                goal1: '個人の認知を向上',
+                goal2: '組織効率を改善',
+                goal3: '社会文明を進展',
+                goal4: '地球の持続可能な発展を促進',
+                goal5: '100の認知モデルと統合',
+                contractLabel: 'コントラクトアドレス',
+                copyBtn: 'コピー',
+                linksTitle: '🔗 EACO エコシステムリンク',
+                poolLabel: 'EACO DAO プール',
+                footerBrand: 'EACO · Earth\'s Best Coin',
+                footerRights: '© 2026 地球文明アップグレード計画',
+                footerSlogan: 'ポジティブエネルギー · ポジティブマインドセット · グローバルコラボレーション · 継続的最適化',
+                tier1: 'ティア1',
+                tier2: 'ティア2',
+                copySuccess: 'コピーしました！',
+                themeLabel: 'コズミックブルー'
+            },
+            ko: {
+                countryTitle: '🌍 Web3 친화적 국가 Top 10 (20개국 중)',
+                countryTag: 'Top 10',
+                countrySub: '규제 명확성, 정책 지원, 혁신 생태계, 거래 활성도 기준',
+                eacoTitle: '⚡ EACO — Earth\'s Best Coin',
+                eacoTagline: 'Earth\'s top-tier AI + RWA + Web3 crypto asset',
+                defTitle1: '핵심 의미',
+                defDesc1: 'EACO는 4가지 키워드에서 파생:<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: '본질적 정의',
+                defDesc2: 'EACO = 긍정 에너지 × 긍정 마인드셋 × 글로벌 협력 × 지속적 최적화<br /><span style="font-size:13px;color:var(--text-muted);">글로벌 문명 업그레이드 모델</span>',
+                kw1: '에너지',
+                kw2: '태도',
+                kw3: '협력',
+                kw4: '최적화',
+                goalsTitle: '핵심 목표',
+                goal1: '개인 인지 향상',
+                goal2: '조직 효율성 개선',
+                goal3: '사회 문명 발전',
+                goal4: '지구 지속 가능한 발전 촉진',
+                goal5: '100가지 인지 모델과 통합',
+                contractLabel: '컨트랙트 주소',
+                copyBtn: '복사',
+                linksTitle: '🔗 EACO 생태계 링크',
+                poolLabel: 'EACO DAO 풀',
+                footerBrand: 'EACO · Earth\'s Best Coin',
+                footerRights: '© 2026 지구 문명 업그레이드 계획',
+                footerSlogan: '긍정 에너지 · 긍정 마인드셋 · 글로벌 협력 · 지속적 최적화',
+                tier1: '티어 1',
+                tier2: '티어 2',
+                copySuccess: '복사 완료!',
+                themeLabel: '코스믹 블루'
+            },
+            fr: {
+                countryTitle: '🌍 Pays les plus favorables au Web3 (sur 20)',
+                countryTag: 'Top 10',
+                countrySub: 'Basé sur la clarté réglementaire, le soutien politique, l\'écosystème d\'innovation, l\'activité de trading',
+                eacoTitle: '⚡ EACO — Earth\'s Best Coin',
+                eacoTagline: 'Actif crypto AI + RWA + Web3 de premier plan',
+                defTitle1: 'Connotation centrale',
+                defDesc1: 'EACO dérive de quatre mots-clés :<br /><strong>Energy</strong> · <strong>Attitude</strong> · <strong>Cooperation</strong> · <strong>Optimization</strong>',
+                defTitle2: 'Définition essentielle',
+                defDesc2: 'EACO = Énergie positive × Mentalité positive × Collaboration mondiale × Optimisation continue<br /><span style="font-size:13px;color:var(--text-muted);">Modèle d\'upgrade de la civilisation mondiale</span>',
+                kw1: 'Énergie',
+                kw2: 'Attitude',
+                kw3: 'Coopération',
+                kw4: 'Optimisation',
+                goalsTitle: 'Objectifs principaux',
+                goal1: 'Élever la cognition individuelle',
+                goal2: 'Améliorer l\'efficacité organisationnelle',
+                goal3: 'Faire progresser la civilisation sociale',
+                goal4: 'Promouvoir le développement durable de la Terre',
+                goal5: 'Intégrer 100 modèles cognitifs',
+                contractLabel: 'Adresse du contrat',
+                copyBtn: 'Copier',
+                linksTitle: '🔗 Liens de l\'écosystème EACO',
+                poolLabel: 'EACO DAO Pool',
+                footerBrand: 'EACO · Earth\'s Best Coin',
+                footerRights: '© 2026 Plan d\'upgrade de la civilisation terrestre',
+                footerSlogan: 'Énergie positive · Mentalité positive · Collaboration mondiale · Optimisation continue',
+                tier1: 'Niveau 1',
+                tier2: 'Niveau 2',
+                copySuccess: 'Copié !',
+                themeLabel: 'Bleu Cosmique'
+            }
+        };
+
+        // =============================================================
+        //  4. 主题切换
+        // =============================================================
+        const THEMES = [
+            { id: 'cosmic', label: '宇宙蓝', labelEn: 'Cosmic Blue', labelAr: 'أزرق كوني', labelDe: 'Kosmisch Blau',
+                labelPt: 'Azul Cósmico', labelJa: 'コズミックブルー', labelKo: '코스믹 블루', labelFr: 'Bleu Cosmique' },
+            { id: 'military', label: '军绿色', labelEn: 'Military Green', labelAr: 'أخضر عسكري', labelDe: 'Militärgrün',
+                labelPt: 'Verde Militar', labelJa: 'ミリタリーグリーン', labelKo: '밀리터리 그린', labelFr: 'Vert Militaire' },
+            { id: 'cream', label: '米黄色', labelEn: 'Cream', labelAr: 'كريمي', labelDe: 'Cremefarben', labelPt: 'Creme',
+                labelJa: 'クリーム', labelKo: '크림', labelFr: 'Crème' }
+        ];
+        let currentTheme = 0;
+
+        function applyTheme(index) {
+            const theme = THEMES[index];
+            document.documentElement.setAttribute('data-theme', theme.id);
+            // 星空特效仅蓝色主题
+            const body = document.body;
+            if (theme.id === 'cosmic') {
+                body.classList.add('starry');
+            } else {
+                body.classList.remove('starry');
+            }
+            // 更新按钮文字
+            const label = document.getElementById('themeLabel');
+            const lang = document.getElementById('langSelect').value;
+            const map = {
+                'zh': theme.label,
+                'en': theme.labelEn,
+                'ar': theme.labelAr,
+                'de': theme.labelDe,
+                'pt': theme.labelPt,
+                'ja': theme.labelJa,
+                'ko': theme.labelKo,
+                'fr': theme.labelFr
+            };
+            label.textContent = map[lang] || theme.label;
+            currentTheme = index;
+            // 保存
+            try { localStorage.setItem('eaco-theme', index); } catch (e) { /* ignore */ }
+        }
+
+        function cycleTheme() {
+            const next = (currentTheme + 1) % THEMES.length;
+            applyTheme(next);
+        }
+
+        // =============================================================
+        //  5. 语言切换
+        // =============================================================
+        function setLanguage(lang) {
+            const data = LANG[lang];
+            if (!data) return;
+            // 更新所有 data-key 元素
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (data[key] !== undefined) {
+                    el.innerHTML = data[key];
+                }
+            });
+            // 更新国家列表
+            renderCountries(lang);
+            // 更新链接标签（链接本身不变，但 label 需要翻译？链接 label 是固定的，不过我们保留）
+            // 更新主题按钮文字
+            const theme = THEMES[currentTheme];
+            const labelMap = {
+                'zh': theme.label,
+                'en': theme.labelEn,
+                'ar': theme.labelAr,
+                'de': theme.labelDe,
+                'pt': theme.labelPt,
+                'ja': theme.labelJa,
+                'ko': theme.labelKo,
+                'fr': theme.labelFr
+            };
+            document.getElementById('themeLabel').textContent = labelMap[lang] || theme.label;
+            // 保存
+            try { localStorage.setItem('eaco-lang', lang); } catch (e) { /* ignore */ }
+        }
+
+        // =============================================================
+        //  6. 渲染国家
+        // =============================================================
+        function renderCountries(lang) {
+            const grid = document.getElementById('countryGrid');
+            const tierMap = {
+                'zh': { 1: '第一梯队', 2: '第二梯队' },
+                'en': { 1: 'Tier 1', 2: 'Tier 2' },
+                'ar': { 1: 'الطبقة الأولى', 2: 'الطبقة الثانية' },
+                'de': { 1: 'Stufe 1', 2: 'Stufe 2' },
+                'pt': { 1: 'Nível 1', 2: 'Nível 2' },
+                'ja': { 1: 'ティア1', 2: 'ティア2' },
+                'ko': { 1: '티어 1', 2: '티어 2' },
+                'fr': { 1: 'Niveau 1', 2: 'Niveau 2' }
+            };
+            const tiers = tierMap[lang] || tierMap['en'];
+
+            const descKey = {
+                'zh': 'descCN',
+                'en': 'descEN',
+                'ar': 'descAR',
+                'de': 'descDE',
+                'pt': 'descPT',
+                'ja': 'descJA',
+                'ko': 'descKO',
+                'fr': 'descFR'
+            };
+            const nameKey = {
+                'zh': 'nameCN',
+                'en': 'name',
+                'ar': 'name',
+                'de': 'name',
+                'pt': 'name',
+                'ja': 'name',
+                'ko': 'name',
+                'fr': 'name'
+            };
+            const dk = descKey[lang] || 'descEN';
+            const nk = nameKey[lang] || 'name';
+
+            grid.innerHTML = COUNTRIES.map((c, idx) => {
+                const tierLabel = c.tier === 1 ? tiers[1] : tiers[2];
+                const tierClass = c.tier === 1 ? 'tier-1' : 'tier-2';
+                const name = c[nk] || c.name;
+                const desc = c[dk] || c.descEN;
+                return `
+                    <div class="country-item ${tierClass}">
+                        <span class="rank">#${idx + 1}</span>
+                        <span class="tier-badge">${tierLabel}</span>
+                        <div class="name">
+                            <span class="flag">${c.flag}</span>
+                            ${name}
+                        </div>
+                        <div class="desc">${desc}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // =============================================================
+        //  7. 渲染链接
+        // =============================================================
+        function renderLinks() {
+            const grid = document.getElementById('linksGrid');
+            grid.innerHTML = LINKS.map(link => `
+                <a href="${link.url}" target="_blank" rel="noopener noreferrer">
+                    <i class="fas ${link.icon}"></i>
+                    ${link.label}
+                    <i class="fas fa-external-link-alt" style="font-size:11px;margin-left:auto;opacity:0.5;"></i>
+                </a>
+            `).join('');
+        }
+
+        // =============================================================
+        //  8. 复制合约
+        // =============================================================
+        function setupCopy() {
+            const btn = document.getElementById('copyContract');
+            const addr = document.getElementById('contractAddr');
+            btn.addEventListener('click', function() {
+                const text = addr.textContent.trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    const orig = btn.innerHTML;
+                    const lang = document.getElementById('langSelect').value;
+                    const msg = LANG[lang]?.copySuccess || 'Copied!';
+                    btn.innerHTML = `<i class="fas fa-check"></i> ${msg}`;
+                    setTimeout(() => { btn.innerHTML = orig; }, 1800);
+                }).catch(() => {
+                    // fallback
+                    const range = document.createRange();
+                    range.selectNode(addr);
+                    window.getSelection().removeAllRanges();
+                    window.getSelection().addRange(range);
+                    document.execCommand('copy');
+                    const lang = document.getElementById('langSelect').value;
+                    const msg = LANG[lang]?.copySuccess || 'Copied!';
+                    const orig = btn.innerHTML;
+                    btn.innerHTML = `<i class="fas fa-check"></i> ${msg}`;
+                    setTimeout(() => { btn.innerHTML = orig; }, 1800);
+                });
+            });
+        }
+
+        // =============================================================
+        //  9. 初始化
+        // =============================================================
+        function init() {
+            // 恢复主题
+            try {
+                const savedTheme = localStorage.getItem('eaco-theme');
+                if (savedTheme !== null) {
+                    const idx = parseInt(savedTheme, 10);
+                    if (idx >= 0 && idx < THEMES.length) {
+                        currentTheme = idx;
+                    }
+                }
+            } catch (e) { /* ignore */ }
+            applyTheme(currentTheme);
+
+            // 恢复语言
+            let lang = 'zh';
+            try {
+                const savedLang = localStorage.getItem('eaco-lang');
+                if (savedLang && LANG[savedLang]) {
+                    lang = savedLang;
+                }
+            } catch (e) { /* ignore */ }
+            document.getElementById('langSelect').value = lang;
+
+            // 渲染
+            renderCountries(lang);
+            renderLinks();
+            setLanguage(lang);
+            setupCopy();
+
+            // 事件绑定
+            document.getElementById('langSelect').addEventListener('change', function() {
+                setLanguage(this.value);
+                // 更新主题按钮文字
+                const theme = THEMES[currentTheme];
+                const labelMap = {
+                    'zh': theme.label,
+                    'en': theme.labelEn,
+                    'ar': theme.labelAr,
+                    'de': theme.labelDe,
+                    'pt': theme.labelPt,
+                    'ja': theme.labelJa,
+                    'ko': theme.labelKo,
+                    'fr': theme.labelFr
+                };
+                document.getElementById('themeLabel').textContent = labelMap[this.value] || theme.label;
+            });
+
+            document.getElementById('themeToggle').addEventListener('click', cycleTheme);
+
+            // 窗口 resize 无额外操作
+        }
+
+        // 页面加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+    })();
+</script>
+
+</body>
+</html>
