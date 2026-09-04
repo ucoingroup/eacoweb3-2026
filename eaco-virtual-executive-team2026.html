@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Virtual Executive Team</title>
+<style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg-deep:#050810;--bg-card:#0c1220;--bg-card-hover:#111a2e;
+  --gold:#f0c040;--gold-glow:rgba(240,192,64,.15);
+  --cyan:#00d4ff;--cyan-glow:rgba(0,212,255,.12);
+  --purple:#8b5cf6;--green:#00d68f;--orange:#ff8a3d;--pink:#ff5b8a;
+  --text:#e8eef6;--text-dim:#8896a8;--text-bright:#fff;
+  --border:rgba(255,255,255,.08);--border-bright:rgba(255,255,255,.18);
+  --radius:16px;--max-w:1200px;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg-deep);color:var(--text);line-height:1.6;
+  overflow-x:hidden;min-height:100vh;
+}
+
+/* ===== Starry Background ===== */
+.starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;overflow:hidden;}
+.star{position:absolute;background:#fff;border-radius:50%;opacity:0;}
+.star.small{width:1px;height:1px;animation:twinkle 3s ease-in-out infinite;}
+.star.medium{width:2px;height:2px;animation:twinkle 4s ease-in-out infinite .5s;}
+.star.large{width:3px;height:3px;animation:twinkle 5s ease-in-out infinite 1s;}
+@keyframes twinkle{0%,100%{opacity:.2;}50%{opacity:.9;}}
+.nebula{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
+  background:
+    radial-gradient(ellipse 600px 400px at 15% 20%,rgba(0,212,255,.06),transparent),
+    radial-gradient(ellipse 500px 300px at 85% 70%,rgba(139,92,246,.05),transparent),
+    radial-gradient(ellipse 400px 300px at 50% 90%,rgba(240,192,64,.04),transparent);
+}
+
+/* ===== Header ===== */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(5,8,16,.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;letter-spacing:1px;}
+.logo .eaco-badge{
+  display:inline-block;width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--orange));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:900;color:var(--bg-deep);
+  box-shadow:0 0 20px var(--gold-glow);
+}
+.logo span{color:var(--gold);}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-links{display:flex;gap:20px;}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:14px;transition:color .2s;}
+.nav-links a:hover{color:var(--cyan);}
+.lang-toggle{
+  display:flex;align-items:center;gap:0;
+  border:1px solid var(--border-bright);border-radius:24px;overflow:hidden;
+  background:rgba(255,255,255,.03);
+}
+.lang-btn{
+  padding:6px 16px;border:none;background:transparent;
+  color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;
+  transition:all .2s;
+}
+.lang-btn.active{background:var(--cyan);color:var(--bg-deep);}
+.lang-btn:not(.active):hover{color:var(--text-bright);}
+
+/* ===== Main Container ===== */
+main{max-width:var(--max-w);margin:0 auto;padding:0 24px;}
+
+/* ===== Hero ===== */
+.hero{
+  text-align:center;padding:80px 0 60px;position:relative;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;border-radius:24px;
+  background:var(--cyan-glow);border:1px solid rgba(0,212,255,.3);
+  color:var(--cyan);font-size:13px;font-weight:600;
+  margin-bottom:24px;
+}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);
+  animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.hero h1{
+  font-size:clamp(32px,5vw,56px);font-weight:900;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--cyan) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:16px;line-height:1.2;
+}
+.hero .subtitle{font-size:clamp(16px,2.5vw,22px);color:var(--text-dim);max-width:700px;margin:0 auto 32px;}
+.hero-Formula{
+  display:inline-block;padding:12px 28px;border-radius:var(--radius);
+  background:var(--bg-card);border:1px solid var(--border-bright);
+  font-size:16px;font-weight:600;color:var(--gold);
+  box-shadow:0 4px 30px rgba(0,0,0,.3);
+}
+.hero-Formula em{color:var(--cyan);font-style:normal;}
+.hero-CA{
+  margin-top:20px;font-size:13px;color:var(--text-dim);cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.03);
+  border:1px solid var(--border);transition:all .2s;
+}
+.hero-CA:hover{border-color:var(--gold);color:var(--gold);}
+.hero-CA .copy-icon{font-size:14px;}
+
+/* ===== Section ===== */
+.section{padding:48px 0;}
+.section-title{
+  font-size:clamp(24px,3.5vw,36px);font-weight:800;
+  text-align:center;margin-bottom:12px;color:var(--text-bright);
+}
+.section-sub{text-align:center;color:var(--text-dim);font-size:16px;margin-bottom:40px;}
+
+/* ===== Orchestrator ===== */
+.orchestrator{
+  background:linear-gradient(135deg,var(--bg-card) 0%,rgba(0,212,255,.05) 100%);
+  border:1px solid rgba(0,212,255,.2);border-radius:var(--radius);
+  padding:40px;margin-bottom:20px;position:relative;overflow:hidden;
+}
+.orchestrator::before{
+  content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;
+  background:radial-gradient(circle,var(--cyan-glow),transparent 70%);
+  border-radius:50%;
+}
+.orchestrator-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+.orchestrator-visual{
+  display:flex;align-items:center;justify-content:center;
+  position:relative;min-height:280px;
+}
+.core-node{
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,.2),transparent 70%);
+  border:2px solid var(--cyan);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+  box-shadow:0 0 40px rgba(0,212,255,.3);
+  animation:breathe 4s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{box-shadow:0 0 40px rgba(0,212,255,.3);}50%{box-shadow:0 0 60px rgba(0,212,255,.5);}}
+.core-node .core-icon{font-size:36px;}
+.core-node .core-label{font-size:12px;font-weight:700;color:var(--cyan);margin-top:4px;}
+.satellite{position:absolute;width:48px;height:48px;border-radius:50%;
+  background:var(--bg-card);border:1.5px solid var(--border-bright);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  transition:all .3s;cursor:default;
+}
+.satellite:hover{transform:scale(1.15);border-color:var(--cyan);}
+.satellite.s1{top:0;left:50%;transform:translateX(-50%);}
+.satellite.s2{top:25%;right:5%;}
+.satellite.s3{bottom:25%;right:5%;}
+.satellite.s4{bottom:0;left:50%;transform:translateX(-50%);}
+.satellite.s5{bottom:25%;left:5%;}
+.satellite.s6{top:25%;left:5%;}
+.orbit-ring{
+  position:absolute;width:240px;height:240px;border-radius:50%;
+  border:1px dashed rgba(0,212,255,.15);
+}
+.orbit-ring.outer{width:300px;height:300px;border-color:rgba(255,255,255,.05);}
+.orchestrator-text h3{font-size:24px;font-weight:800;color:var(--cyan);margin-bottom:12px;}
+.orchestrator-text p{color:var(--text-dim);font-size:15px;margin-bottom:16px;line-height:1.7;}
+.orchestrator-text .feature-list{list-style:none;padding:0;}
+.orchestrator-text .feature-list li{
+  padding:6px 0;font-size:14px;color:var(--text);
+  display:flex;align-items:flex-start;gap:8px;
+}
+.orchestrator-text .feature-list li::before{
+  content:'';display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);margin-top:8px;flex-shrink:0;
+}
+
+/* ===== Agent Grid ===== */
+.agent-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:20px;
+}
+.agent-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;transition:all .3s;position:relative;overflow:hidden;
+  cursor:default;
+}
+.agent-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--accent,var(--cyan));opacity:.7;
+}
+.agent-card:hover{
+  background:var(--bg-card-hover);border-color:var(--accent,var(--cyan));
+  transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+.agent-card .agent-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.agent-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+  background:rgba(255,255,255,.05);border:1px solid var(--border-bright);
+}
+.agent-card .role-tag{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:3px 10px;border-radius:12px;text-transform:uppercase;
+  background:var(--accent-bg,rgba(0,212,255,.1));color:var(--accent,var(--cyan));
+}
+.agent-card h3{font-size:20px;font-weight:700;color:var(--text-bright);margin-bottom:2px;}
+.agent-card .agent-title{font-size:13px;color:var(--text-dim);}
+.agent-card .resp-title{font-size:12px;font-weight:700;color:var(--accent,var(--cyan));
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;margin-top:16px;}
+.agent-card .resp-list{list-style:none;padding:0;margin-bottom:16px;}
+.agent-card .resp-list li{
+  font-size:13px;color:var(--text-dim);padding:3px 0;
+  display:flex;align-items:flex-start;gap:6px;
+}
+.agent-card .resp-list li::before{content:'\203A';color:var(--accent,var(--cyan));font-weight:bold;flex-shrink:0;}
+.agent-card .eaco-title{
+  font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:8px;padding-top:12px;
+  border-top:1px solid var(--border);
+}
+.agent-card .eaco-list{list-style:none;padding:0;}
+.agent-card .eaco-list li{
+  font-size:13px;color:var(--text);padding:3px 0;
+  display:flex;align-items:flex-start;gap:6px;
+}
+.agent-card .eaco-list li::before{content:'\25C6';color:var(--gold);font-size:10px;flex-shrink:0;margin-top:3px;}
+
+/* Accent colors per agent */
+.agent-card[data-accent="gold"]{--accent:var(--gold);--accent-bg:rgba(240,192,64,.1);}
+.agent-card[data-accent="cyan"]{--accent:var(--cyan);--accent-bg:rgba(0,212,255,.1);}
+.agent-card[data-accent="purple"]{--accent:var(--purple);--accent-bg:rgba(139,92,246,.1);}
+.agent-card[data-accent="green"]{--accent:var(--green);--accent-bg:rgba(0,214,143,.1);}
+.agent-card[data-accent="orange"]{--accent:var(--orange);--accent-bg:rgba(255,138,61,.1);}
+.agent-card[data-accent="pink"]{--accent:var(--pink);--accent-bg:rgba(255,91,138,.1);}
+
+/* ===== EACO Capabilities Section ===== */
+.capabilities{
+  background:var(--bg-card);border-radius:var(--radius);
+  border:1px solid var(--border);padding:40px;
+}
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.cap-item{
+  background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;
+  padding:20px;transition:all .2s;
+}
+.cap-item:hover{border-color:var(--border-bright);background:rgba(255,255,255,.04);}
+.cap-item .cap-icon{font-size:24px;margin-bottom:10px;}
+.cap-item h4{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:6px;}
+.cap-item p{font-size:13px;color:var(--text-dim);line-height:1.6;}
+
+/* ===== Workflow Demo ===== */
+.workflow{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:40px;margin-top:20px;
+}
+.workflow-demo{display:flex;flex-direction:column;gap:16px;}
+.wf-step{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:16px;border-radius:12px;background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+}
+.wf-num{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:var(--bg-deep);
+  background:var(--cyan);
+}
+.wf-step:nth-child(2) .wf-num{background:var(--gold);}
+.wf-step:nth-child(3) .wf-num{background:var(--purple);}
+.wf-step:nth-child(4) .wf-num{background:var(--green);}
+.wf-step:nth-child(5) .wf-num{background:var(--orange);}
+.wf-content h4{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:4px;}
+.wf-content p{font-size:13px;color:var(--text-dim);}
+.wf-content .wf-agents{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.wf-content .wf-agents span{
+  font-size:11px;padding:2px 8px;border-radius:10px;
+  background:rgba(0,212,255,.08);color:var(--cyan);border:1px solid rgba(0,212,255,.15);
+}
+
+/* ===== Footer ===== */
+footer{
+  margin-top:60px;border-top:1px solid var(--border);
+  background:rgba(5,8,16,.6);padding:40px 24px;
+}
+.footer-inner{max-width:var(--max-w);margin:0 auto;}
+.footer-links{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;
+  margin-bottom:24px;
+}
+.footer-links a{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:10px;
+  background:rgba(255,255,255,.02);border:1px solid var(--border);
+  color:var(--text-dim);text-decoration:none;font-size:13px;transition:all .2s;
+}
+.footer-links a:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(0,212,255,.05);}
+.footer-links a .link-icon{font-size:16px;flex-shrink:0;}
+.footer-bottom{text-align:center;color:var(--text-dim);font-size:12px;padding-top:20px;border-top:1px solid var(--border);}
+.footer-bottom .ca-text{font-family:monospace;font-size:12px;color:var(--gold);margin-top:8px;display:block;}
+
+/* ===== Toast ===== */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:var(--green);color:var(--bg-deep);
+  padding:10px 24px;border-radius:24px;font-size:14px;font-weight:600;
+  z-index:200;opacity:0;transition:opacity .3s,transform .3s;
+  pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-8px);}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  header{padding:0 16px;height:56px;}
+  .nav-links{display:none;}
+  .logo{font-size:15px;}
+  .logo .eaco-badge{width:30px;height:30px;font-size:13px;}
+  main{padding:0 16px;}
+  .hero{padding:48px 0 36px;}
+  .orchestrator-inner{grid-template-columns:1fr;}
+  .orchestrator-visual{min-height:220px;}
+  .orbit-ring{width:180px;height:180px;}
+  .orbit-ring.outer{width:220px;height:220px;}
+  .core-node{width:90px;height:90px;}
+  .core-node .core-icon{font-size:28px;}
+  .satellite{width:40px;height:40px;font-size:14px;}
+  .agent-grid{grid-template-columns:1fr;}
+  .section{padding:32px 0;}
+  .orchestrator,.capabilities,.workflow{padding:24px 16px;}
+  .footer-links{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- Starry Background -->
+<div class="starfield" id="starfield"></div>
+<div class="nebula"></div>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <div class="eaco-badge">E</div>
+    <span>EACO</span> Virtual Executive Team
+  </div>
+  <div class="nav-right">
+    <nav class="nav-links">
+      <a href="#orchestrator" data-i18n="nav_orchestrator">Orchestrator</a>
+      <a href="#agents" data-i18n="nav_agents">Agents</a>
+      <a href="#capabilities" data-i18n="nav_capabilities">Capabilities</a>
+      <a href="#workflow" data-i18n="nav_workflow">Workflow</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</header>
+
+<!-- Main -->
+<main>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    <span data-i18n="hero_badge">Powered by OpenExecutive Architecture</span>
+  </div>
+  <h1 data-i18n="hero_title">EACO Virtual Executive Team</h1>
+  <p class="subtitle" data-i18n="hero_subtitle">8 AI Executive Agents orchestrated by one intelligent coordinator, driving EACO's mission to build Earth's best civilization upgrade model.</p>
+  <div class="hero-Formula">
+    EACO = <em>Energy</em> x <em>Attitude</em> x <em>Cooperation</em> x <em>Optimization</em>
+  </div>
+  <div class="hero-CA" onclick="copyCA()" title="Click to copy">
+    <span>CA:</span>
+    <span class="ca-short">DqfoyZH9...HnDHRH</span>
+    <span class="copy-icon">&#9745;</span>
+  </div>
+</section>
+
+<!-- Orchestrator -->
+<section class="section" id="orchestrator">
+  <h2 class="section-title" data-i18n="orch_title">Executive Orchestrator</h2>
+  <p class="section-sub" data-i18n="orch_sub">The central brain that routes, coordinates, and synthesizes.</p>
+  <div class="orchestrator">
+    <div class="orchestrator-inner">
+      <div class="orchestrator-visual">
+        <div class="orbit-ring outer"></div>
+        <div class="orbit-ring"></div>
+        <div class="core-node">
+          <div class="core-icon">&#9881;</div>
+          <div class="core-label">ORCHESTRATOR</div>
+        </div>
+        <div class="satellite s1" title="CSO">&#9876;</div>
+        <div class="satellite s2" title="CFO">&#128176;</div>
+        <div class="satellite s3" title="COO">&#9881;</div>
+        <div class="satellite s4" title="CMO">&#128227;</div>
+        <div class="satellite s5" title="CPO">&#128230;</div>
+        <div class="satellite s6" title="CHRO">&#128101;</div>
+      </div>
+      <div class="orchestrator-text">
+        <h3 data-i18n="orch_h3">How It Works</h3>
+        <p data-i18n="orch_p1">Users never interact with the 8 agents directly. Every question goes to the Executive Orchestrator -- the system's central brain. It analyzes the query, determines which executives need to participate, and routes work in parallel.</p>
+        <p data-i18n="orch_p2">When a question spans multiple domains, the Orchestrator dispatches to several agents simultaneously, then synthesizes their outputs into one unified, coherent answer. From the user's perspective, you're always talking to one CEO.</p>
+        <ul class="feature-list">
+          <li data-i18n="orch_f1">Enterprise knowledge base (RAG) with document chunking and retrieval</li>
+          <li data-i18n="orch_f2">Scenario memory -- extracts and stores key decisions across sessions</li>
+          <li data-i18n="orch_f3">Proactive task scheduler for follow-up actions and deadlines</li>
+          <li data-i18n="orch_f4">Prompt caching for orchestrator persona, company profile, and knowledge index</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Agents Grid -->
+<section class="section" id="agents">
+  <h2 class="section-title" data-i18n="agents_title">8 Executive AI Agents</h2>
+  <p class="section-sub" data-i18n="agents_sub">Each agent is a domain specialist, working in concert to cover every dimension of EACO's ecosystem.</p>
+  <div class="agent-grid" id="agentGrid"></div>
+</section>
+
+<!-- EACO Capabilities -->
+<section class="section" id="capabilities">
+  <h2 class="section-title" data-i18n="cap_title">What This Team Can Do for EACO</h2>
+  <p class="section-sub" data-i18n="cap_sub">Concrete scenarios where the virtual executive team drives EACO's Web3 + AI + RWA mission forward.</p>
+  <div class="capabilities">
+    <div class="cap-grid" id="capGrid"></div>
+  </div>
+</section>
+
+<!-- Workflow Demo -->
+<section class="section" id="workflow">
+  <h2 class="section-title" data-i18n="wf_title">Workflow Example</h2>
+  <p class="section-sub" data-i18n="wf_sub">See how a real EACO question flows through the orchestrator to multiple agents.</p>
+  <div class="workflow">
+    <div class="workflow-demo" id="workflowDemo"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links" id="footerLinks"></div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copy">EACO - Earth's Best Coin | AI + RWA + Web3</span>
+      <br>
+      <span class="ca-text" id="caFull">CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== i18n Data ===== */
+var I18N = {
+  en: {
+    nav_orchestrator:"Orchestrator",nav_agents:"Agents",nav_capabilities:"Capabilities",nav_workflow:"Workflow",
+    hero_badge:"Powered by OpenExecutive Architecture",
+    hero_title:"EACO Virtual Executive Team",
+    hero_subtitle:"8 AI Executive Agents orchestrated by one intelligent coordinator, driving EACO's mission to build Earth's best civilization upgrade model.",
+    orch_title:"Executive Orchestrator",
+    orch_sub:"The central brain that routes, coordinates, and synthesizes.",
+    orch_h3:"How It Works",
+    orch_p1:"Users never interact with the 8 agents directly. Every question goes to the Executive Orchestrator -- the system's central brain. It analyzes the query, determines which executives need to participate, and routes work in parallel.",
+    orch_p2:"When a question spans multiple domains, the Orchestrator dispatches to several agents simultaneously, then synthesizes their outputs into one unified, coherent answer. From the user's perspective, you're always talking to one CEO.",
+    orch_f1:"Enterprise knowledge base (RAG) with document chunking and retrieval",
+    orch_f2:"Scenario memory -- extracts and stores key decisions across sessions",
+    orch_f3:"Proactive task scheduler for follow-up actions and deadlines",
+    orch_f4:"Prompt caching for orchestrator persona, company profile, and knowledge index",
+    agents_title:"8 Executive AI Agents",
+    agents_sub:"Each agent is a domain specialist, working in concert to cover every dimension of EACO's ecosystem.",
+    cap_title:"What This Team Can Do for EACO",
+    cap_sub:"Concrete scenarios where the virtual executive team drives EACO's Web3 + AI + RWA mission forward.",
+    wf_title:"Workflow Example",
+    wf_sub:"See how a real EACO question flows through the orchestrator to multiple agents.",
+    footer_copy:"EACO - Earth's Best Coin | AI + RWA + Web3",
+    copied:"Contract address copied!",
+    resp_label:"Core Responsibilities",
+    eaco_label:"EACO Applications"
+  },
+  zh: {
+    nav_orchestrator:"调度中枢",nav_agents:"高管团队",nav_capabilities:"赋能场景",nav_workflow:"工作流",
+    hero_badge:"基于 OpenExecutive 架构驱动",
+    hero_title:"EACO 虚拟高管团队",
+    hero_subtitle:"8 个 AI 高管 Agent 由一个智能协调中枢统一调度，推动 EACO 构建地球最佳文明升级模型。",
+    orch_title:"执行协调中枢",
+    orch_sub:"负责路由、协调与综合决策的中央大脑。",
+    orch_h3:"工作原理",
+    orch_p1:"用户不会直接与 8 个 Agent 对话。所有问题首先交给执行协调中枢——系统的大脑中枢。它分析问题、判断需要哪些高管参与，并并行分发任务。",
+    orch_p2:"当问题涉及多个领域时，协调中枢同时调度多个 Agent，然后将各角色的输出综合成统一连贯的回答。从用户视角看，你面对的始终只有一个 CEO。",
+    orch_f1:"企业知识库（RAG），支持文档分块存储与检索",
+    orch_f2:"情景记忆——跨会话提取并保存关键决策",
+    orch_f3:"主动任务调度器，发现到期任务并提醒后续行动",
+    orch_f4:"提示词缓存——协调中枢人设、公司概况、知识索引分别缓存",
+    agents_title:"8 位高管 AI Agent",
+    agents_sub:"每位高管都是领域专家，协同覆盖 EACO 生态的每一个维度。",
+    cap_title:"虚拟高管团队可以为 EACO 做什么",
+    cap_sub:"虚拟高管团队推动 EACO 的 Web3 + AI + RWA 使命落地的具体场景。",
+    wf_title:"工作流示例",
+    wf_sub:"看看一个真实的 EACO 问题如何通过协调中枢流转到多个高管。",
+    footer_copy:"EACO - 地球最好的币 | AI + RWA + Web3",
+    copied:"合约地址已复制！",
+    resp_label:"核心职责",
+    eaco_label:"EACO 赋能场景"
+  }
+};
+
+/* ===== Agent Data ===== */
+var AGENTS = [
+  {
+    id:"cso",icon:"\u2694",accent:"gold",tag:"CSO",
+    name_en:"Chief Strategy Officer",name_zh:"首席战略官",
+    title_en:"Strategy & Competitive Intelligence",title_zh:"战略与竞争情报",
+    resp_en:["Competitive analysis and market positioning","Mergers, acquisitions, and strategic partnerships","OKR design and strategic roadmap","Market entry and expansion strategy"],
+    resp_zh:["竞争分析与市场定位","并购与战略合作","OKR 设计与战略路线图","市场进入与扩张策略"],
+    eaco_en:["Analyze EACO's position vs other AI+RWA tokens on Solana; identify differentiation in the Energy x Attitude x Cooperation x Optimization framework","Strategic partnerships with global Chinese business communities across 10 most crypto-friendly countries","Map expansion path: Reality Earth -> Virtual Earth -> Simulation Earth -> Moon -> Mars -> Interstellar Civilization","Set quarterly OKRs for EACO ecosystem growth: TVL targets, community size, sub-project milestones"],
+    eaco_zh:["分析 EACO 在 Solana 生态中相对于其他 AI+RWA 代币的定位，在 Energy x Attitude x Cooperation x Optimization 框架下找到差异化优势","与全球对 Web3 及华商最友善的 10 个海外国家和城市建立战略合作","规划扩张路线：现实地球 -> 虚拟地球 -> 模拟地球 -> 月球 -> 火星 -> 星际文明","制定 EACO 生态季度 OKR：TVL 目标、社区规模、子项目里程碑"]
+  },
+  {
+    id:"cfo",icon:"\uD83D\uDCB0",accent:"cyan",tag:"CFO",
+    name_en:"Chief Financial Officer",name_zh:"首席财务官",
+    title_en:"Finance, Treasury & Token Economics",title_zh:"财务、金库与代币经济",
+    resp_en:["Financial modeling and forecasting","Fundraising and capital strategy","Unit economics and cash flow management","Treasury and budget allocation"],
+    resp_zh:["财务建模与预测","融资与资本策略","单位经济模型与现金流管理","金库管理与预算分配"],
+    eaco_en:["Design token economics: supply dynamics, 100% permanent lock verification, farm APR (currently 59.56%) sustainability modeling","Manage Meteora liquidity pool strategy (DAMM v2) and negotiate with potential LP providers","Build RWA asset valuation models for EACO's real-world asset backing","Financial planning for EACO DAO Pool tiers: 2000/5000/8000 USDT with 2 permille/5 permille/8 permille quarterly rewards","Unit economics for each EACO sub-project: eaco50rate, eacoSWAP, au-trade, etc."],
+    eaco_zh:["设计代币经济模型：供应量动态、100% 永久锁仓验证、农场 APR（当前 59.56%）可持续性建模","管理 Meteora 流动池策略（DAMM v2），与潜在 LP 提供者私下洽谈","为 EACO 的现实世界资产支撑建立 RWA 资产估值模型","EACO DAO Pool 三档财务规划：2000/5000/8000 USDT，季度奖励 2\u2030/5\u2030/8\u2030","每个 EACO 子项目的单位经济模型：eaco50rate、eacoSWAP、au-trade 等"]
+  },
+  {
+    id:"chro",icon:"\uD83D\uDC65",accent:"purple",tag:"CHRO",
+    name_en:"Chief HR Officer",name_zh:"首席人力资源官",
+    title_en:"People, Culture & DAO Governance",title_zh:"人才、文化与 DAO 治理",
+    resp_en:["Recruiting and talent acquisition","Compensation and incentive design","Performance management and evaluation","Organizational culture and team building"],
+    resp_zh:["招聘与人才获取","薪酬与激励设计","绩效管理与评估","组织文化与团队建设"],
+    eaco_en:["Design contributor incentive programs for EACO's open-source ecosystem (GitHub-based community of 10+ projects)","Propagate EACO culture through the four pillars: Energy (positive action), Attitude (growth mindset), Cooperation (global collaboration), Optimization (continuous improvement)","Structure DAO governance roles: proposal reviewers, liquidity committee, community moderators (max 9-person limit)","Build the 'Earth's 100 Best Friends' contributor program with tiered recognition and on-chain identity (DID)","Design fair compensation models for quant trading bot operators and community managers"],
+    eaco_zh:["为 EACO 开源生态设计贡献者激励计划（基于 GitHub 的 10+ 项目社区）","通过四柱理念传播 EACO 文化：Energy（正能量行动）、Attitude（成长心态）、Cooperation（全球协作）、Optimization（持续优化）","构建 DAO 治理角色：提案审核人、流动池委员会、社区管理员（最多 9 人限额）","建立\"地球最好的 100 个朋友\"贡献者计划，分层认可与链上身份（DID）","为量化交易机器人运营者和社区管理员设计公平的薪酬模型"]
+  },
+  {
+    id:"gc",icon:"\u2696",accent:"orange",tag:"GC",
+    name_en:"General Counsel",name_zh:"总法律顾问",
+    title_en:"Legal, Compliance & IP",title_zh:"法律、合规与知识产权",
+    resp_en:["Contract drafting and review","Intellectual property protection","Labor law and employment compliance","Regulatory and securities compliance"],
+    resp_zh:["合同起草与审查","知识产权保护","劳动法与雇佣合规","监管与证券合规"],
+    eaco_en:["Smart contract legal review: audit EACO token contract on Solana (CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH) for regulatory risks","Cross-jurisdictional compliance: navigate crypto regulations across 10+ friendly countries and cities","IP protection for EACO knowledge products: Earth Encyclopedia, good-books, 100WaysToWealth, Mohist-Tech","Draft DAO governance legal framework: proposal rules, voting rights, dispute resolution, member exit","Ensure compliance for EACO's RWA (Real World Assets) tokenization across jurisdictions"],
+    eaco_zh:["智能合约法律审查：审计 Solana 上的 EACO 代币合约（CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH）的监管风险","跨司法管辖区合规：在 10+ 个友好国家和城市间导航加密法规","EACO 知识产品知识产权保护：地球百科全书、good-books、100WaysToWealth、墨家科技","起草 DAO 治理法律框架：提案规则、投票权、争议解决、成员退出","确保 EACO 的 RWA（现实世界资产）代币化在多个司法管辖区合规"]
+  },
+  {
+    id:"coo",icon:"\u2699",accent:"green",tag:"COO",
+    name_en:"Chief Operating Officer",name_zh:"首席运营官",
+    title_en:"Operations & Ecosystem Scaling",title_zh:"运营与生态扩展",
+    resp_en:["Process optimization and standardization","Vendor and partner management","Business operations and scaling","Supply chain and resource allocation"],
+    resp_zh:["流程优化与标准化","供应商与合作伙伴管理","业务运营与规模化","供应链与资源配置"],
+    eaco_en:["Operate EACO ecosystem of 10+ sub-projects: eacoSWAP, eaco50rate, au-trade, Mohist-Tech, eaco-faucet, Earth Encyclopedia","Standardize GitHub Pages deployment pipeline for all EACO projects (single-file HTML, no backend, instant publish)","Manage resource allocation across Virtual Earth (digital twin) and Simulation Earth (AI civilization simulation) modules","Scale operations for the monthly update mechanism: monthly content refresh, archiving, multi-language sync (6+ languages)","Coordinate with external partners: Meteora, Discord community, Telegram channels, X social media"],
+    eaco_zh:["运营 EACO 10+ 子项目生态：eacoSWAP、eaco50rate、au-trade、墨家科技、eaco-faucet、地球百科全书","标准化 GitHub Pages 部署流水线：所有 EACO 项目统一单文件 HTML、无后端、即时发布","管理虚拟地球（数字孪生）和模拟地球（AI 文明模拟）模块间的资源配置","扩展月度更新机制运营：月度内容刷新、归档、多语言同步（6+ 语言）","协调外部合作伙伴：Meteora、Discord 社区、Telegram 频道、X 社交媒体"]
+  },
+  {
+    id:"cmo",icon:"\uD83D\uDD0A",accent:"pink",tag:"CMO",
+    name_en:"Chief Marketing Officer",name_zh:"首席营销官",
+    title_en:"GTM, Brand & Communications",title_zh:"市场、品牌与传播",
+    resp_en:["Go-to-market strategy and execution","Brand building and positioning","Content marketing and PR","Community growth and engagement"],
+    resp_zh:["市场进入策略与执行","品牌建设与定位","内容营销与公关","社区增长与参与"],
+    eaco_en:["Position EACO as 'Earth's Best Coin' -- the top-tier AI + RWA + Web3 crypto asset; build narrative around global civilization upgrade","Content marketing engine: 100 Ways to Wealth, good-books, Footsteps of Civilization -- each as a brand touchpoint","Community building: Discord (bWCDME9Pkc), Telegram (@e_eacocc), X (@eacocc) -- design engagement funnels and growth loops","PR strategy for exchange listings, liquidity pool milestones, and farm APR announcements","Bridge EACO with Eastern wisdom: integrate Jingang Jing (Diamond Srum), I Ching, and Buddhist sutras into brand storytelling"],
+    eaco_zh:["将 EACO 定位为\"地球最好的币\"——顶级 AI + RWA + Web3 加密资产；围绕全球文明升级构建叙事","内容营销引擎：100 Ways to Wealth、good-books、文明的脚步——每个都是品牌触点","社区建设：Discord（bWCDME9Pkc）、Telegram（@e_eacocc）、X（@eacocc）——设计参与漏斗和增长飞轮","交易所上线、流动池里程碑、农场 APR 公告的公关策略","将 EACO 与东方智慧连接：金刚经、易经、宝箧印陀罗尼经融入品牌叙事"]
+  },
+  {
+    id:"cpo",icon:"\uD83C\uDFAF",accent:"cyan",tag:"CPO",
+    name_en:"Chief Product Officer",name_zh:"首席产品官",
+    title_en:"Product Roadmap & Strategy",title_zh:"产品路线图与策略",
+    resp_en:["Product roadmap and prioritization","Product strategy and vision","Feature planning and release management","User experience and product innovation"],
+    resp_zh:["产品路线图与优先级","产品策略与愿景","功能规划与版本管理","用户体验与产品创新"],
+    eaco_en:["Define product ecosystem roadmap: eaco-faucet (entry point), eacoSWAP (trading), Earth Encyclopedia (knowledge), Mohist-Tech (infrastructure), eastcoin (identity)","Prioritize features for Virtual Earth: digital twin, DID identity, on-chain assets/RWA/NFT, DAO collaboration, AI education knowledge base","Design Simulation Earth product: civilization path simulation, climate/eco modeling, energy/resource allocation, Moon base/Mars colony/interstellar sandbox","Integrate 100 cognitive models into EACO products as decision-support tools","Plan interoperability between EACO sub-projects: shared identity, cross-platform asset portability"],
+    eaco_zh:["定义产品生态路线图：eaco-faucet（入口）、eacoSWAP（交易）、地球百科全书（知识）、墨家科技（基础设施）、eastcoin（身份）","虚拟地球功能优先级：数字孪生、DID 身份、链上资产/RWA/NFT、DAO 协作、AI 教育知识库","模拟地球产品设计：文明路径模拟、气候/生态建模、能源/资源分配、月球基地/火星殖民/星际沙盘","将 100 个认知模型集成到 EACO 产品中作为决策支持工具","规划 EACO 子项目间的互操作性：共享身份、跨平台资产可移植性"]
+  },
+  {
+    id:"bcd",icon:"\uD83D\uDCCA",accent:"purple",tag:"BCD",
+    name_en:"Board Communications Director",name_zh:"董事会沟通负责人",
+    title_en:"Board, Investors & Governance",title_zh:"董事会、投资者与治理",
+    resp_en:["Board materials and reporting","Investor relations and communications","Corporate governance and transparency","Stakeholder management"],
+    resp_zh:["董事会材料与报告","投资者关系与沟通","公司治理与透明度","利益相关者管理"],
+    eaco_en:["Prepare investor materials for EACO DAO Pool members: quarterly performance, TVL growth, farm APR sustainability analysis","Maintain transparent governance reports for the EACO community: treasury status, liquidity pool health, lock-up verification","Build investor relations framework: 2-3 year partnership structure, quarterly reward distributions (2\u2030/5\u2030/8\u2030 tiers)","Stakeholder communications for key events: new exchange listings, partnership announcements, milestone celebrations","Annual EACO ecosystem report: 10+ sub-projects status, community metrics, civilization upgrade progress"],
+    eaco_zh:["为 EACO DAO Pool 成员准备投资者材料：季度业绩、TVL 增长、农场 APR 可持续性分析","维护面向 EACO 社区的透明治理报告：金库状态、流动池健康度、锁仓验证","建立投资者关系框架：2-3 年合作期结构，季度奖励分配（2\u2030/5\u2030/8\u2030 三档）","关键事件的利益相关者沟通：新交易所上线、合作公告、里程碑庆祝","年度 EACO 生态报告：10+ 子项目状态、社区指标、文明升级进度"]
+  }
+];
+
+/* ===== EACO Capabilities Data ===== */
+var CAPABILITIES = [
+  {icon:"\uD83C\uDFAF",t_en:"Strategic Market Expansion",t_zh:"战略市场扩张",d_en:"CSO analyzes Web3 competitive landscape, identifies the 10 most crypto-friendly countries for EACO, and designs entry strategies for each market.",d_zh:"CSO 分析 Web3 竞争格局，识别对 EACO 最友好的 10 个国家，并为每个市场设计进入策略。"},
+  {icon:"\uD83D\uDCB0",t_en:"Tokenomics & Liquidity Strategy",t_zh:"代币经济与流动性策略",d_en:"CFO models sustainable farm APR, manages Meteora DAMM v2 pool, and negotiates with liquidity providers -- all while maintaining 100% permanent lock integrity.",d_zh:"CFO 建模可持续的农场 APR，管理 Meteora DAMM v2 池，与流动性提供者洽谈——同时保持 100% 永久锁仓完整性。"},
+  {icon:"\uD83D\uDC65",t_en:"DAO Community Building",t_zh:"DAO 社区建设",d_en:"CHRO structures the max 9-person DAO governance, designs contributor tiers for Earth's 100 Best Friends, and propagates EACO culture globally.",d_zh:"CHRO 构建最多 9 人限额的 DAO 治理，为\"地球最好的 100 个朋友\"设计贡献者层级，并全球传播 EACO 文化。"},
+  {icon:"\u2696",t_en:"Cross-Border Legal Compliance",t_zh:"跨境法律合规",d_en:"General Counsel ensures smart contract compliance, navigates regulations across friendly jurisdictions, and protects IP for EACO's knowledge products.",d_zh:"总法律顾问确保智能合约合规，在友好司法管辖区间导航法规，并保护 EACO 知识产品的知识产权。"},
+  {icon:"\u2699",t_en:"Ecosystem Operations at Scale",t_zh:"规模化生态运营",d_en:"COO standardizes deployment for 10+ sub-projects, manages monthly multi-language content updates, and coordinates Virtual Earth and Simulation Earth modules.",d_zh:"COO 标准化 10+ 子项目的部署，管理月度多语言内容更新，协调虚拟地球和模拟地球模块。"},
+  {icon:"\uD83D\uDD0A",t_en:"Brand as Civilization Narrative",t_zh:"品牌即文明叙事",d_en:"CMO positions EACO as Earth's Best Coin, integrates Eastern wisdom (Diamond Sutra, I Ching) into brand storytelling, and builds growth loops across Discord, Telegram, and X.",d_zh:"CMO 将 EACO 定位为地球最好的币，将东方智慧（金刚经、易经）融入品牌叙事，并在 Discord、Telegram 和 X 上构建增长飞轮。"},
+  {icon:"\uD83C\uDFAF",t_en:"Product Ecosystem Roadmap",t_zh:"产品生态路线图",d_en:"CPO designs the roadmap from eaco-faucet to interstellar sandbox, prioritizes 100 cognitive model integrations, and plans cross-project interoperability.",d_zh:"CPO 设计从 eaco-faucet 到星际沙盘的路线图，优先安排 100 个认知模型集成，并规划跨项目互操作性。"},
+  {icon:"\uD83D\uDCCA",t_en:"Investor Relations & Transparency",t_zh:"投资者关系与透明度",d_en:"Board Comms Director prepares quarterly DAO Pool reports, maintains transparent treasury disclosures, and manages 2-3 year investor partnership communications.",d_zh:"董事会沟通负责人准备季度 DAO Pool 报告，维护透明的金库披露，并管理 2-3 年投资者合作关系沟通。"},
+  {icon:"\uD83E\uDD16",t_en:"Orchestrated Multi-Domain Decisions",t_zh:"多领域协同决策",d_en:"When EACO faces a complex challenge -- e.g., 'cash flow is tight but we want to enter a new market' -- the Orchestrator simultaneously engages CFO, CSO, and COO, synthesizing one unified recommendation.",d_zh:"当 EACO 面临复杂挑战——例如\"现金流紧张但想进入新市场\"——协调中枢同时调度 CFO、CSO 和 COO，综合出统一建议。"},
+  {icon:"\uD83C\uDF0D",t_en:"Virtual Earth Digital Twin",t_zh:"虚拟地球数字孪生",d_en:"The team collectively designs Virtual Earth: digital twin mapping, DID identity, on-chain RWA/NFT assets, DAO global collaboration, and AI education knowledge base.",d_zh:"团队共同设计虚拟地球：数字孪生映射、DID 身份、链上 RWA/NFT 资产、DAO 全球协作、AI 教育知识库。"},
+  {icon:"\uD83D\uDE80",t_en:"Simulation Earth & Interstellar Roadmap",t_zh:"模拟地球与星际路线",d_en:"CPO and CSO co-design Simulation Earth: civilization path modeling, climate/eco simulation, Moon base, Mars colony, and interstellar civilization sandbox -- with EACO as the unifying collaboration layer.",d_zh:"CPO 和 CSO 共同设计模拟地球：文明路径建模、气候/生态模拟、月球基地、火星殖民和星际文明沙盘——以 EACO 作为统一协作层。"},
+  {icon:"\uD83D\uDCDA",t_en:"Eastern Wisdom Integration",t_zh:"东方智慧融合",d_en:"CMO and CPO integrate Diamond Sutra, I Ching, and Buddhist sutras into EACO's product experience and brand narrative, bridging Web3 technology with 5000 years of civilization wisdom.",d_zh:"CMO 和 CPO 将金刚经、易经和佛经融入 EACO 的产品体验和品牌叙事，将 Web3 技术与 5000 年文明智慧连接。"}
+];
+
+/* ===== Workflow Demo Data ===== */
+var WORKFLOW = [
+  {n:1,t_en:"User Question",t_zh:"用户提问",p_en:'"EACO cash flow is tight, but we want to expand into the Southeast Asian market. What should we do?"',p_zh:'"EACO 现金流紧张，但我们想进入东南亚市场。应该怎么办？"',agents:[]},
+  {n:2,t_en:"Orchestrator Analysis",t_zh:"协调中枢分析",p_en:"The Orchestrator identifies this as a multi-domain question requiring CFO (cash flow), CSO (market opportunity), and COO (execution cost) perspectives.",p_zh:"协调中枢识别出这是一个多领域问题，需要 CFO（现金流）、CSO（市场机会）和 COO（执行成本）的视角。",agents:[]},
+  {n:3,t_en:"Parallel Agent Dispatch",t_zh:"并行调度高管",p_en:"Three agents work simultaneously: CFO models cash flow scenarios, CSO analyzes the Southeast Asian Web3 landscape and identifies friendly cities, COO estimates operational setup costs.",p_zh:"三个 Agent 同时工作：CFO 建模现金流场景，CSO 分析东南亚 Web3 格局并识别友好城市，COO 估算运营部署成本。",agents:["CFO","CSO","COO"]},
+  {n:4,t_en:"Synthesis & Recommendation",t_zh:"综合与建议",p_en:"The Orchestrator merges all three analyses into one unified recommendation: phased market entry with treasury-backed liquidity allocation, targeting Singapore and Bangkok first, leveraging EACO's au-trade platform as the beachhead.",p_zh:"协调中枢将三份分析合并为统一建议：分阶段市场进入，以金库支撑的流动性分配，首选新加坡和曼谷，利用 EACO 的 au-trade 平台作为桥头堡。",agents:[]},
+  {n:5,t_en:"Memory & Follow-up",t_zh:"记忆与跟进",p_en:"Key decisions are saved to scenario memory. The scheduler creates follow-up tasks: 'Revisit Southeast Asian expansion progress in 90 days' and 'Monitor cash flow monthly.'",p_zh:"关键决策保存到情景记忆。调度器创建后续任务：'90 天后回顾东南亚扩张进展'和'每月监控现金流'。",agents:[]}
+];
+
+/* ===== Footer Links ===== */
+var LINKS = [
+  {icon:"\uD83C\uDF0D",url:"https://ucoingroup.github.io/earths-best-coin/",t_en:"Earth's Best Coin",t_zh:"地球最好的币"},
+  {icon:"\uD83D\uDD25",url:"https://ucoingroup.github.io/eaco50rate/",t_en:"EACO 50 Rate",t_zh:"EACO 50 汇率"},
+  {icon:"\uD83D\uDCB8",url:"https://ucoingroup.github.io/100WaysToWealth/",t_en:"100 Ways to Wealth",t_zh:"100 种致富方法"},
+  {icon:"\uD83E\uDD1D",url:"https://ucoingroup.github.io/earth-100-friends/",t_en:"Earth's 100 Friends",t_zh:"地球 100 个朋友"},
+  {icon:"\uD83D\uDD04",url:"https://ucoingroup.github.io/eacoSWAP/",t_en:"EACO SWAP",t_zh:"EACO 交换"},
+  {icon:"\uD83D\uDCDA",url:"https://ucoingroup.github.io/good-books/",t_en:"Good Books",t_zh:"好书推荐"},
+  {icon:"\uD83D\uDCB5",url:"https://ucoingroup.github.io/eur-eaco/",t_en:"EUR-EACO",t_zh:"欧元-EACO"},
+  {icon:"\uD83C\uDFED",url:"https://ucoingroup.github.io/au-trade/",t_en:"AU Trade",t_zh:"澳亚贸易"},
+  {icon:"\u2692",url:"https://ucoingroup.github.io/Mohist-Tech/",t_en:"Mohist Tech",t_zh:"墨家科技"},
+  {icon:"\uD83C\uDFD3",url:"https://eaco-build-world.base44.app/",t_en:"EACO Build World",t_zh:"EACO 构建世界"},
+  {icon:"\uD83C\uDF10",url:"https://ucoingroup.github.io/eaco-web3/",t_en:"EACO Web3",t_zh:"EACO Web3"},
+  {icon:"\uD83D\uDC63",url:"https://ucoingroup.github.io/Footsteps-of-Civilization/",t_en:"Footsteps of Civilization",t_zh:"文明的脚步"},
+  {icon:"\uD83D\uDCE8",url:"https://eastcoin.base44.app/",t_en:"East Coin",t_zh:"东方币"},
+  {icon:"\uD83D\uDCAC",url:"https://discord.gg/bWCDME9Pkc",t_en:"Discord Community",t_zh:"Discord 社区"}
+];
+
+/* ===== State ===== */
+var curLang = "en";
+
+/* ===== Render Functions ===== */
+function t(key){
+  var v = I18N[curLang][key];
+  return v || key;
+}
+
+function renderAgents(){
+  var html = "";
+  for(var i=0;i<AGENTS.length;i++){
+    var a = AGENTS[i];
+    var name = curLang==="en"?a.name_en:a.name_zh;
+    var title = curLang==="en"?a.title_en:a.title_zh;
+    var resp = curLang==="en"?a.resp_en:a.resp_zh;
+    var eaco = curLang==="en"?a.eaco_en:a.eaco_zh;
+
+    html += '<div class="agent-card" data-accent="'+a.accent+'">';
+    html += '<div class="agent-head">';
+    html += '<div class="agent-icon">'+a.icon+'</div>';
+    html += '<div>';
+    html += '<span class="role-tag">'+a.tag+'</span>';
+    html += '<h3>'+name+'</h3>';
+    html += '<div class="agent-title">'+title+'</div>';
+    html += '</div></div>';
+    html += '<div class="resp-title">'+t("resp_label")+'</div>';
+    html += '<ul class="resp-list">';
+    for(var j=0;j<resp.length;j++){
+      html += '<li>'+resp[j]+'</li>';
+    }
+    html += '</ul>';
+    html += '<div class="eaco-title">'+t("eaco_label")+'</div>';
+    html += '<ul class="eaco-list">';
+    for(var k=0;k<eaco.length;k++){
+      html += '<li>'+eaco[k]+'</li>';
+    }
+    html += '</ul>';
+    html += '</div>';
+  }
+  document.getElementById("agentGrid").innerHTML = html;
+}
+
+function renderCapabilities(){
+  var html = "";
+  for(var i=0;i<CAPABILITIES.length;i++){
+    var c = CAPABILITIES[i];
+    var tt = curLang==="en"?c.t_en:c.t_zh;
+    var dd = curLang==="en"?c.d_en:c.d_zh;
+    html += '<div class="cap-item">';
+    html += '<div class="cap-icon">'+c.icon+'</div>';
+    html += '<h4>'+tt+'</h4>';
+    html += '<p>'+dd+'</p>';
+    html += '</div>';
+  }
+  document.getElementById("capGrid").innerHTML = html;
+}
+
+function renderWorkflow(){
+  var html = "";
+  for(var i=0;i<WORKFLOW.length;i++){
+    var w = WORKFLOW[i];
+    var tt = curLang==="en"?w.t_en:w.t_zh;
+    var pp = curLang==="en"?w.p_en:w.p_zh;
+    html += '<div class="wf-step">';
+    html += '<div class="wf-num">'+w.n+'</div>';
+    html += '<div class="wf-content">';
+    html += '<h4>'+tt+'</h4>';
+    html += '<p>'+pp+'</p>';
+    if(w.agents && w.agents.length>0){
+      html += '<div class="wf-agents">';
+      for(var j=0;j<w.agents.length;j++){
+        html += '<span>'+w.agents[j]+'</span>';
+      }
+      html += '</div>';
+    }
+    html += '</div></div>';
+  }
+  document.getElementById("workflowDemo").innerHTML = html;
+}
+
+function renderFooter(){
+  var html = "";
+  for(var i=0;i<LINKS.length;i++){
+    var l = LINKS[i];
+    var tt = curLang==="en"?l.t_en:l.t_zh;
+    html += '<a href="'+l.url+'" target="_blank" rel="noopener">';
+    html += '<span class="link-icon">'+l.icon+'</span>';
+    html += '<span>'+tt+'</span>';
+    html += '</a>';
+  }
+  document.getElementById("footerLinks").innerHTML = html;
+}
+
+function applyI18n(){
+  var elements = document.querySelectorAll("[data-i18n]");
+  for(var i=0;i<elements.length;i++){
+    var key = elements[i].getAttribute("data-i18n");
+    elements[i].textContent = t(key);
+  }
+}
+
+function renderAll(){
+  applyI18n();
+  renderAgents();
+  renderCapabilities();
+  renderWorkflow();
+  renderFooter();
+  document.documentElement.lang = curLang;
+}
+
+/* ===== Language Switch ===== */
+function setLang(lang){
+  if(lang === curLang) return;
+  curLang = lang;
+  var btns = document.querySelectorAll(".lang-btn");
+  for(var i=0;i<btns.length;i++){
+    btns[i].classList.toggle("active", btns[i].textContent.trim() === (lang==="en"?"EN":"\u4E2D\u6587"));
+  }
+  renderAll();
+}
+
+/* ===== Copy CA ===== */
+function copyCA(){
+  var ca = "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH";
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ca).then(function(){
+      showToast(t("copied"));
+    }).catch(function(){
+      fallbackCopy(ca);
+    });
+  } else {
+    fallbackCopy(ca);
+  }
+}
+
+function fallbackCopy(text){
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try{
+    document.execCommand("copy");
+    showToast(t("copied"));
+  }catch(e){}
+  document.body.removeChild(ta);
+}
+
+function showToast(msg){
+  var toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(function(){ toast.classList.remove("show"); }, 2500);
+}
+
+/* ===== Starfield ===== */
+function initStars(){
+  var sf = document.getElementById("starfield");
+  var count = 150;
+  for(var i=0;i<count;i++){
+    var s = document.createElement("div");
+    s.className = "star";
+    var r = Math.random();
+    if(r < 0.6) s.classList.add("small");
+    else if(r < 0.9) s.classList.add("medium");
+    else s.classList.add("large");
+    s.style.left = Math.random()*100 + "%";
+    s.style.top = Math.random()*100 + "%";
+    s.style.animationDelay = Math.random()*5 + "s";
+    sf.appendChild(s);
+  }
+}
+
+/* ===== Init ===== */
+initStars();
+renderAll();
+</script>
+</body>
+</html>
