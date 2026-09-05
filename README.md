@@ -15,7 +15,7 @@ eaco web3-2026
 
 EACO（Earth's best Coin）是一个宏大的Web3教育生态项目，致力于：
 
-1. **多币种融资** - 融合SOL、USDT、USDC、wBNB、TRX、 wETH、eCNH等，目标$50-75M
+1. **多币种融资** - 融合SOL、USDT、USDC、wBNB、TRX、 wETH、wBTC、eCNH等，目标$50-75M
 2. **百年教育体系** - 创建覆盖100门学科的全球教育平台
 3. **双轨平台运营** - 华语版(.cn)和国际版(.org)
 4. **文明进化远景** - 1000年的地球村→星际→多宇宙文明演进
