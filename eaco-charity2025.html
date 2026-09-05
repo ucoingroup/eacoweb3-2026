@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EACO · 地球村 · 六语支持</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, sans-serif;
+            background: #f0f4f8;
+            color: #1a202c;
+            padding: 24px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            padding: 40px 48px;
+        }
+        @media (max-width:720px) { .container { padding:24px 16px; } body { padding:12px; } }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e9edf2;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg,#9945ff,#14f195);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo .sub { font-size:14px; color:#5a6a7a; -webkit-text-fill-color:#5a6a7a; background:none; }
+        .lang-switch {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            background: #eef2f6;
+            padding: 4px;
+            border-radius: 40px;
+        }
+        .lang-switch button {
+            border: none;
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #5a6a7a;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .lang-switch button.active {
+            background: #fff;
+            color: #1a202c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .lang-switch button:hover:not(.active) { color:#2d3748; }
+        .badge {
+            background: #eef2f6;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        .badge span { color:#9945ff; font-weight:600; }
+
+        .section { margin-bottom:44px; }
+        .section-title {
+            font-size:22px;
+            font-weight:700;
+            margin-bottom:16px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            border-left:5px solid #9945ff;
+            padding-left:16px;
+        }
+        .section-title .emoji { font-size:24px; }
+        .card-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:18px;
+        }
+        .card {
+            background:#f7fafc;
+            border-radius:18px;
+            padding:20px 22px;
+            border:1px solid #e2e8f0;
+            transition:0.15s;
+        }
+        .card:hover { border-color:#cbd5e0; background:#f9fcff; }
+        .card h4 { font-size:16px; font-weight:600; margin-bottom:6px; color:#2d3748; }
+        .card p, .card li { font-size:14px; color:#4a5568; }
+        .card ul { padding-left:18px; margin-top:6px; }
+        .card ul li { margin-bottom:3px; }
+        .highlight {
+            background:#ebf8ff;
+            border-left:4px solid #3182ce;
+            padding:14px 20px;
+            border-radius:12px;
+            margin:12px 0;
+        }
+        .highlight strong { color:#2b6cb0; }
+        .tag {
+            display:inline-block;
+            background:#e9d8fd;
+            color:#6b46c1;
+            font-size:12px;
+            font-weight:600;
+            padding:2px 12px;
+            border-radius:30px;
+            margin-right:4px;
+        }
+        .tag.green { background:#c6f6d5; color:#276749; }
+        .tag.orange { background:#feebc8; color:#9c6b2b; }
+        .table-wrap {
+            overflow-x:auto;
+            margin:12px 0 6px;
+            border-radius:14px;
+            border:1px solid #e2e8f0;
+        }
+        table {
+            width:100%;
+            border-collapse:collapse;
+            font-size:14px;
+            min-width:500px;
+        }
+        th {
+            background:#edf2f7;
+            text-align:left;
+            padding:12px 14px;
+            font-weight:600;
+            color:#2d3748;
+            border-bottom:2px solid #d2d9e3;
+        }
+        td {
+            padding:10px 14px;
+            border-bottom:1px solid #e9edf2;
+            vertical-align:top;
+        }
+        tr:last-child td { border-bottom:0; }
+        .rate { font-weight:600; color:#2d3748; }
+        .footnote {
+            font-size:13px;
+            color:#718096;
+            margin-top:8px;
+            border-top:1px solid #e2e8f0;
+            padding-top:14px;
+        }
+        .ref {
+            font-size:13px;
+            color:#4a5568;
+            background:#f1f4f9;
+            padding:10px 16px;
+            border-radius:10px;
+            margin-top:10px;
+        }
+        .ref a { color:#2b6cb0; text-decoration:none; word-break:break-all; }
+        .ref a:hover { text-decoration:underline; }
+        .flex-between {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:space-between;
+            align-items:center;
+            gap:12px;
+        }
+        .text-muted { color:#718096; font-size:14px; }
+        .footer {
+            border-top:1px solid #e2e8f0;
+            padding-top:24px;
+            margin-top:16px;
+            font-size:14px;
+            color:#5a6a7a;
+            text-align:center;
+        }
+        .footer a { color:#2b6cb0; text-decoration:none; }
+        /* 动态内容容器 */
+        [data-i18n] {
+            /* 所有带 data-i18n 的元素由 JS 填充文本 */;
+        }
+        .hidden { display:none; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <!-- ========== HEADER ========== -->
+    <div class="header">
+        <div class="logo">
+            <h1 data-i18n="site_title">🌍 EACO · 地球最佳币</h1>
+            <div class="sub" data-i18n="site_sub">Earth's Best Coin | 唯一 $eaco in the universe</div>
+        </div>
+        <div class="flex-between" style="gap:12px;">
+            <div class="badge">
+                ⚡ Solana · <span>CA</span> DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+            </div>
+            <div class="lang-switch" id="langSwitch">
+                <button data-lang="zh" class="active">华语</button>
+                <button data-lang="en">English</button>
+                <button data-lang="es">Español</button>
+                <button data-lang="fr">Français</button>
+                <button data-lang="ru">Русский</button>
+                <button data-lang="ar">العربية</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 1. 项目概况 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">🚀</span> <span data-i18n="sec1_title">项目概况 · EACO Web3 教育生态</span></div>
+        <div class="card-grid">
+            <div class="card">
+                <h4 data-i18n="card1_title">🎯 使命</h4>
+                <p data-i18n="card1_p1">“计算劳动价值，量化地球资源”<br />地球村民自己的 MEMEcoin</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" data-i18n="card1_p2">EACO（Earth's best Coin）是一个宏大的 Web3 教育生态项目</p>
+            </div>
+            <div class="card">
+                <h4 data-i18n="card2_title">📚 百年教育体系</h4>
+                <ul>
+                    <li data-i18n="card2_li1">100 门核心学科</li>
+                    <li data-i18n="card2_li2">小学 → 博士 全阶段</li>
+                    <li data-i18n="card2_li3">15 个主要专业领域</li>
+                    <li data-i18n="card2_li4">5 年目标：1500 万+ 学生</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4 data-i18n="card3_title">🌐 双轨平台</h4>
+                <p data-i18n="card3_p1"><strong>华语版</strong> (.cn) · 亚洲优先<br /><strong>国际版</strong> (.org) · 全球覆盖</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" data-i18n="card3_p2">功能：课程 · VR/AR · AI导师 · 社区DAO · NFT学位认证</p>
+            </div>
+            <div class="card">
+                <h4 data-i18n="card4_title">⛓️ 技术栈</h4>
+                <p data-i18n="card4_p1">Solana / 多链 · React/Next.js · Python AI</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" data-i18n="card4_p2">文明进化远景：1000 年地球村 → 星际 → 多宇宙文明</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 2. 三件小公益 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">❤️</span> <span data-i18n="sec2_title">每年三件 Web3 网友互助小公益</span></div>
+        <div class="highlight">
+            <strong data-i18n="sec2_core_label">核心理念：</strong>
+            <span data-i18n="sec2_core_text">让每一次交易都带有温度，让每一个持币者都是公益的参与者。</span>
+        </div>
+        <div class="card-grid">
+            <div class="card" style="border-left:4px solid #48bb78;">
+                <h4 data-i18n="charity1_title">🌊 自然灾害紧急援助</h4>
+                <p data-i18n="charity1_desc">为受灾社区捐赠稳定币（USDC），通过当地 NGO 兑换为物资。</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" data-i18n="charity1_ref">参考：Polygon 为尼泊尔洪水救援筹集 <strong>$168K</strong></p>
+            </div>
+            <div class="card" style="border-left:4px solid #4299e1;">
+                <h4 data-i18n="charity2_title">📚 偏远地区数字教育</h4>
+                <p data-i18n="charity2_desc">捐赠平板电脑 + SOL 钱包，教授 Web3 基础使用。</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" data-i18n="charity2_ref">参考：Pencil Finance 完成 <strong>$100 万</strong> 链上学生贷款，覆盖东南亚 6600 名学生</p>
+            </div>
+            <div class="card" style="border-left:4px solid #ed8936;">
+                <h4 data-i18n="charity3_title">🌱 社区植树 / 环保行动</h4>
+                <p data-i18n="charity3_desc">与环保组织合作，每笔捐赠对应一棵树的种植与追踪。</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" data-i18n="charity3_ref">参考：EcoThailand 将红树林修复 token 化，验证链上影响</p>
+            </div>
+        </div>
+        <div class="ref" style="margin-top:14px;">
+            <strong data-i18n="sec2_mech_label">🔧 实施机制：</strong>
+            <ul style="margin-top:6px;padding-left:20px;">
+                <li data-i18n="sec2_mech_li1"><strong>交易税自动捐赠</strong>：在 EACO/SOL 或 EACO/USDC 交易对中设置 1%-3% 手续费，自动流入公益多签钱包</li>
+                <li data-i18n="sec2_mech_li2"><strong>社区投票治理</strong>：成立 EACO 公益 DAO，持币者投票决定资金用途</li>
+                <li data-i18n="sec2_mech_li3"><strong>链上透明存证</strong>：所有收支记录在 Solana 链上，任何人可查（参考西班牙红十字会 <strong>RedChain</strong> 系统）</li>
+                <li data-i18n="sec2_mech_li4"><strong>NFT 纪念徽章</strong>：为每次公益行动铸造 NFT，分发给捐赠者和参与者</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== 3. 全球法币兑换路径 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">💱</span> <span data-i18n="sec3_title">全球 Top 10 法币 → EACO 兑换路径</span></div>
+        <p class="text-muted" style="margin-bottom:12px;">
+            <span data-i18n="sec3_based">基于 </span>
+            <a href="https://ucoingroup.github.io/eacoweb3-2026/eaco-exchange-analysis2025.html" target="_blank">EACO + SOL Global Exchange Analysis</a>
+            <span data-i18n="sec3_compiled"> 整理</span>
+        </p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-i18n="th_fiat">法币</th>
+                        <th data-i18n="th_rate">汇率参考</th>
+                        <th data-i18n="th_reg">监管友好度</th>
+                        <th data-i18n="th_path">兑换路径</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🇺🇸 USD</strong></td>
+                        <td class="rate">1 USD ≈ 0.0119 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="usd_reg">亲加密政策；BTC/ETH ETF 已批</span></td>
+                        <td data-i18n="usd_path">USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇪🇺 EUR</strong></td>
+                        <td class="rate">1 EUR ≈ 0.0137 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="eur_reg">MiCA 法规 2024.12 生效</span></td>
+                        <td data-i18n="eur_path">EUR → SOL (MYKOBO/Bitvavo) → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇯🇵 JPY</strong></td>
+                        <td class="rate">1 JPY ≈ 0.0000745 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="jpy_reg">2017 年起监管；JVCEA 自律框架</span></td>
+                        <td data-i18n="jpy_path">JPY → SOL (Coincheck/bitFlyer) → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇬🇧 GBP</strong></td>
+                        <td class="rate">1 GBP ≈ 0.0161 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="gbp_reg">FCA 解禁零售加密 ETN</span></td>
+                        <td data-i18n="gbp_path">GBP → SOL (CoinList/Bitstamp) → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇨🇳 CNH</strong></td>
+                        <td class="rate">1 CNH ≈ 0.00165 SOL</td>
+                        <td><span class="tag orange">中</span> <span data-i18n="cnh_reg">内地受限；香港稳定币条例 2025.8 生效</span></td>
+                        <td data-i18n="cnh_path">CNH → HKD → USDT (OTC) → SOL → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇦🇺 AUD</strong></td>
+                        <td class="rate">1 AUD ≈ 0.0083 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="aud_reg">AUSTRAC 注册；清晰牌照制度</span></td>
+                        <td data-i18n="aud_path">AUD → SOL (CoinSpot/BTC Markets) → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇨🇦 CAD</strong></td>
+                        <td class="rate">1 CAD ≈ 0.0084 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="cad_reg">全球首个 BTC ETF（Purpose）</span></td>
+                        <td data-i18n="cad_path">CAD → SOL (Wealthsimple/Netcoins) → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇨🇭 CHF</strong></td>
+                        <td class="rate">1 CHF ≈ 0.0147 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="chf_reg">FINMA 牌照；加密谷 Zug；DLT 法案</span></td>
+                        <td data-i18n="chf_path">CHF → SOL (Sygnum/SEBA Bank) → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇸🇬 SGD</strong></td>
+                        <td class="rate">1 SGD ≈ 0.0090 SOL</td>
+                        <td><span class="tag">高</span> <span data-i18n="sgd_reg">MAS 支付服务法；全球最 Web3 友好辖区</span></td>
+                        <td data-i18n="sgd_path">SGD → SOL (Independent Reserve/Gemini SG) → EACO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇰🇷 KRW</strong></td>
+                        <td class="rate">—</td>
+                        <td><span class="tag">高</span> <span data-i18n="krw_reg">活跃交易市场；正制定数字资产基本法</span></td>
+                        <td data-i18n="krw_path">KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footnote">
+            ⚡ <span data-i18n="sec3_note">以上法币均可通过 <strong>中心化交易所买入 SOL</strong>，再通过 Solana DEX（Jupiter / Orca）兑换 EACO。</span>
+        </div>
+    </div>
+
+    <!-- ========== 4. 海外融资 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">🏦</span> <span data-i18n="sec4_title">海外融资 · SEC 加密资产条例（2026.8.18）</span></div>
+        <div class="highlight">
+            <strong data-i18n="sec4_event_label">📅 事件：</strong><span data-i18n="sec4_event_text">2026 年 8 月 18 日，美国 SEC 正式发布《加密资产条例》（Regulation Crypto Assets）提案。</span><br />
+            <strong data-i18n="sec4_goal_label">🎯 目标：</strong><span data-i18n="sec4_goal_text">“为加密资产创业者与市场参与者提供在联邦证券法下清晰的资本募集路径”。</span>
+        </div>
+        <div class="card-grid">
+            <div class="card" style="border-left:4px solid #48bb78;">
+                <h4 data-i18n="tier1_title">🧾 Tier 1 · 小型豁免</h4>
+                <p data-i18n="tier1_desc"><strong>额度：</strong> 4 年内最高 <strong>500 万美元</strong></p>
+                <p style="font-size:13px;color:#4a5568;" data-i18n="tier1_note">无需传统证券注册；需“基于原则的叙述性披露”</p>
+            </div>
+            <div class="card" style="border-left:4px solid #4299e1;">
+                <h4 data-i18n="tier2_title">📊 Tier 2 · 大型豁免</h4>
+                <p data-i18n="tier2_desc"><strong>额度：</strong> 任意 12 个月内最高 <strong>7500 万美元</strong></p>
+                <p style="font-size:13px;color:#4a5568;" data-i18n="tier2_note">需提供财务报表 + 持续报告义务</p>
+            </div>
+            <div class="card" style="border-left:4px solid #9f7aea;">
+                <h4 data-i18n="tier3_title">🔒 条件式安全港</h4>
+                <p data-i18n="tier3_desc">当发行方完成“核心管理行为”后，代币可脱离“投资合同”定性、退出证券法管辖</p>
+            </div>
+            <div class="card" style="border-left:4px solid #ed8936;">
+                <h4 data-i18n="tier4_title">🇺🇸 州法优先</h4>
+                <p data-i18n="tier4_desc">豁免覆盖的发行及二级市场交易，可豁免各州证券注册要求</p>
+            </div>
+        </div>
+        <div class="ref">
+            <strong data-i18n="sec4_finance_label">💡 EACO 融资路径：</strong>
+            <span data-i18n="sec4_finance_text">融合 <strong>SOL、USDT、USDC、wBNB、TRX、wETH、eCNH</strong> 等多币种，目标 <strong>$50-75M</strong>。</span><br />
+            <span style="font-size:13px;color:#5a6a7a;" data-i18n="sec4_finance_detail">种子轮 A：$5-10M（USDC/USDT）｜种子轮 B：$25-40M（USDC/USDT/SOL）｜种子轮 C：$20-35M（5 币种均衡）</span>
+        </div>
+    </div>
+
+    <!-- ========== 5. 流动性数据 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">📊</span> <span data-i18n="sec5_title">当前流动性 · Meteora 池</span></div>
+        <div class="card-grid">
+            <div class="card">
+                <h4 data-i18n="mcap_label">💰 市值</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">~$39.8K</p>
+                <p class="text-muted" data-i18n="mcap_date">截至 2026 年 8 月</p>
+            </div>
+            <div class="card">
+                <h4 data-i18n="liq_label">💧 总流动性</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">~$758.6</p>
+                <p class="text-muted" data-i18n="liq_note">Solana 主流 DEX 合计</p>
+            </div>
+            <div class="card">
+                <h4 data-i18n="vol_label">📈 24h 交易量</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">$2.72</p>
+                <p class="text-muted" data-i18n="vol_change">较前日 -46.89%</p>
+            </div>
+            <div class="card">
+                <h4 data-i18n="holders_label">👥 持币地址</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">963</p>
+                <p class="text-muted" data-i18n="holders_top">前 20 大持仓占比 24.64%</p>
+            </div>
+        </div>
+        <div class="highlight" style="border-left-color:#e53e3e;background:#fff5f5;">
+            <strong data-i18n="risk_label">⚠️ 风险提示（Solflare 标记）：</strong>
+            <ul style="margin-top:6px;padding-left:20px;">
+                <li data-i18n="risk_li1"><strong>Mutable</strong> — 代币元数据可修改</li>
+                <li data-i18n="risk_li2"><strong>LP tokens 大量解锁</strong> — 流动性可随时移除</li>
+                <li data-i18n="risk_li3"><strong>低流动性</strong> — 当前流动性极低</li>
+                <li data-i18n="risk_li4"><strong>未验证代币</strong> — 多个代币可使用相同名称和符号</li>
+            </ul>
+            <p style="margin-top:6px;font-size:13px;color:#5a6a7a;">
+                📌 Meteora 池地址：
+                <a href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" style="word-break:break-all;">H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== 6. 总结 ========== -->
+    <div class="section" style="margin-bottom:12px;">
+        <div class="section-title"><span class="emoji">✨</span> <span data-i18n="sec6_title">总结 · 地球村共识</span></div>
+        <div style="background:linear-gradient(135deg,#faf5ff,#f0f4ff);border-radius:18px;padding:20px 28px;border:1px solid #e2e8f0;">
+            <p style="font-size:15px;color:#2d3748;" data-i18n="sec6_summary">
+                <strong>EACO</strong> 以“地球村民自己的 MEMEcoin”为定位，正在构建一个覆盖 <strong>100 门学科、1500 万+ 学生</strong>的 Web3 教育生态。
+                通过 <strong>每年三件链上公益</strong>、<strong>全球 10 种主流法币的清晰兑换路径</strong>，以及 <strong>SEC 新规下的合规融资通道</strong>（$5M–$75M），
+                EACO 正逐步成为连接“地球村”共识与 Web3 现实落地的重要桥梁。
+            </p>
+            <p style="margin-top:10px;font-size:14px;color:#4a5568;">
+                🔗 <span data-i18n="address_label">合约地址</span>：
+                <code style="background:#edf2f7;padding:2px 10px;border-radius:6px;font-size:13px;">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div class="footer">
+        <p>
+            📄 <span data-i18n="footer_sources">数据来源</span>：
+            <a href="https://ucoingroup.github.io/eacoweb3-2026/eaco-exchange-analysis2025.html" target="_blank">EACO Exchange Analysis</a> ·
+            <a href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank">GitHub · eacoweb3-2026</a> ·
+            <a href="https://www.solflare.com/prices/eaco/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH/" target="_blank">Solflare</a>
+        </p>
+        <p style="margin-top:4px;font-size:13px;color:#8a9aa8;">
+            🌍 EACO — Earth's Best Coin · The only $eaco in the universe and the earth
+        </p>
+        <p style="margin-top:6px;font-size:12px;color:#a0aec0;" data-i18n="footer_disclaimer">
+            本页面仅供信息参考，不构成任何投资建议。Web3 有风险，请自行研究（DYOR）。
+        </p>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ===== 多语言翻译数据 =====
+        const i18n = {
+            // 当前支持的语言列表
+            languages: ['zh', 'en', 'es', 'fr', 'ru', 'ar'],
+            // 语言显示名称
+            langNames: {
+                zh: '华语',
+                en: 'English',
+                es: 'Español',
+                fr: 'Français',
+                ru: 'Русский',
+                ar: 'العربية'
+            },
+            // 翻译字典
+            translations: {
+                zh: {
+                    site_title: '🌍 EACO · 地球最佳币',
+                    site_sub: 'Earth\'s Best Coin | 唯一 $eaco in the universe',
+                    sec1_title: '项目概况 · EACO Web3 教育生态',
+                    card1_title: '🎯 使命',
+                    card1_p1: '“计算劳动价值，量化地球资源”<br />地球村民自己的 MEMEcoin',
+                    card1_p2: 'EACO（Earth\'s best Coin）是一个宏大的 Web3 教育生态项目',
+                    card2_title: '📚 百年教育体系',
+                    card2_li1: '100 门核心学科',
+                    card2_li2: '小学 → 博士 全阶段',
+                    card2_li3: '15 个主要专业领域',
+                    card2_li4: '5 年目标：1500 万+ 学生',
+                    card3_title: '🌐 双轨平台',
+                    card3_p1: '<strong>华语版</strong> (.cn) · 亚洲优先<br /><strong>国际版</strong> (.org) · 全球覆盖',
+                    card3_p2: '功能：课程 · VR/AR · AI导师 · 社区DAO · NFT学位认证',
+                    card4_title: '⛓️ 技术栈',
+                    card4_p1: 'Solana / 多链 · React/Next.js · Python AI',
+                    card4_p2: '文明进化远景：1000 年地球村 → 星际 → 多宇宙文明',
+                    sec2_title: '每年三件 Web3 网友互助小公益',
+                    sec2_core_label: '核心理念：',
+                    sec2_core_text: '让每一次交易都带有温度，让每一个持币者都是公益的参与者。',
+                    charity1_title: '🌊 自然灾害紧急援助',
+                    charity1_desc: '为受灾社区捐赠稳定币（USDC），通过当地 NGO 兑换为物资。',
+                    charity1_ref: '参考：Polygon 为尼泊尔洪水救援筹集 <strong>$168K</strong>',
+                    charity2_title: '📚 偏远地区数字教育',
+                    charity2_desc: '捐赠平板电脑 + SOL 钱包，教授 Web3 基础使用。',
+                    charity2_ref: '参考：Pencil Finance 完成 <strong>$100 万</strong> 链上学生贷款，覆盖东南亚 6600 名学生',
+                    charity3_title: '🌱 社区植树 / 环保行动',
+                    charity3_desc: '与环保组织合作，每笔捐赠对应一棵树的种植与追踪。',
+                    charity3_ref: '参考：EcoThailand 将红树林修复 token 化，验证链上影响',
+                    sec2_mech_label: '🔧 实施机制：',
+                    sec2_mech_li1: '<strong>交易税自动捐赠</strong>：在 EACO/SOL 或 EACO/USDC 交易对中设置 1%-3% 手续费，自动流入公益多签钱包',
+                    sec2_mech_li2: '<strong>社区投票治理</strong>：成立 EACO 公益 DAO，持币者投票决定资金用途',
+                    sec2_mech_li3: '<strong>链上透明存证</strong>：所有收支记录在 Solana 链上，任何人可查（参考西班牙红十字会 <strong>RedChain</strong> 系统）',
+                    sec2_mech_li4: '<strong>NFT 纪念徽章</strong>：为每次公益行动铸造 NFT，分发给捐赠者和参与者',
+                    sec3_title: '全球 Top 10 法币 → EACO 兑换路径',
+                    sec3_based: '基于 ',
+                    sec3_compiled: ' 整理',
+                    th_fiat: '法币',
+                    th_rate: '汇率参考',
+                    th_reg: '监管友好度',
+                    th_path: '兑换路径',
+                    usd_reg: '亲加密政策；BTC/ETH ETF 已批',
+                    usd_path: 'USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)',
+                    eur_reg: 'MiCA 法规 2024.12 生效',
+                    eur_path: 'EUR → SOL (MYKOBO/Bitvavo) → EACO',
+                    jpy_reg: '2017 年起监管；JVCEA 自律框架',
+                    jpy_path: 'JPY → SOL (Coincheck/bitFlyer) → EACO',
+                    gbp_reg: 'FCA 解禁零售加密 ETN',
+                    gbp_path: 'GBP → SOL (CoinList/Bitstamp) → EACO',
+                    cnh_reg: '内地受限；香港稳定币条例 2025.8 生效',
+                    cnh_path: 'CNH → HKD → USDT (OTC) → SOL → EACO',
+                    aud_reg: 'AUSTRAC 注册；清晰牌照制度',
+                    aud_path: 'AUD → SOL (CoinSpot/BTC Markets) → EACO',
+                    cad_reg: '全球首个 BTC ETF（Purpose）',
+                    cad_path: 'CAD → SOL (Wealthsimple/Netcoins) → EACO',
+                    chf_reg: 'FINMA 牌照；加密谷 Zug；DLT 法案',
+                    chf_path: 'CHF → SOL (Sygnum/SEBA Bank) → EACO',
+                    sgd_reg: 'MAS 支付服务法；全球最 Web3 友好辖区',
+                    sgd_path: 'SGD → SOL (Independent Reserve/Gemini SG) → EACO',
+                    krw_reg: '活跃交易市场；正制定数字资产基本法',
+                    krw_path: 'KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)',
+                    sec3_note: '以上法币均可通过 <strong>中心化交易所买入 SOL</strong>，再通过 Solana DEX（Jupiter / Orca）兑换 EACO。',
+                    sec4_title: '海外融资 · SEC 加密资产条例（2026.8.18）',
+                    sec4_event_label: '📅 事件：',
+                    sec4_event_text: '2026 年 8 月 18 日，美国 SEC 正式发布《加密资产条例》（Regulation Crypto Assets）提案。',
+                    sec4_goal_label: '🎯 目标：',
+                    sec4_goal_text: '“为加密资产创业者与市场参与者提供在联邦证券法下清晰的资本募集路径”。',
+                    tier1_title: '🧾 Tier 1 · 小型豁免',
+                    tier1_desc: '<strong>额度：</strong> 4 年内最高 <strong>500 万美元</strong>',
+                    tier1_note: '无需传统证券注册；需“基于原则的叙述性披露”',
+                    tier2_title: '📊 Tier 2 · 大型豁免',
+                    tier2_desc: '<strong>额度：</strong> 任意 12 个月内最高 <strong>7500 万美元</strong>',
+                    tier2_note: '需提供财务报表 + 持续报告义务',
+                    tier3_title: '🔒 条件式安全港',
+                    tier3_desc: '当发行方完成“核心管理行为”后，代币可脱离“投资合同”定性、退出证券法管辖',
+                    tier4_title: '🇺🇸 州法优先',
+                    tier4_desc: '豁免覆盖的发行及二级市场交易，可豁免各州证券注册要求',
+                    sec4_finance_label: '💡 EACO 融资路径：',
+                    sec4_finance_text: '融合 <strong>SOL、USDT、USDC、wBNB、TRX、wETH、eCNH</strong> 等多币种，目标 <strong>$50-75M</strong>。',
+                    sec4_finance_detail: '种子轮 A：$5-10M（USDC/USDT）｜种子轮 B：$25-40M（USDC/USDT/SOL）｜种子轮 C：$20-35M（5 币种均衡）',
+                    sec5_title: '当前流动性 · Meteora 池',
+                    mcap_label: '💰 市值',
+                    mcap_date: '截至 2026 年 8 月',
+                    liq_label: '💧 总流动性',
+                    liq_note: 'Solana 主流 DEX 合计',
+                    vol_label: '📈 24h 交易量',
+                    vol_change: '较前日 -46.89%',
+                    holders_label: '👥 持币地址',
+                    holders_top: '前 20 大持仓占比 24.64%',
+                    risk_label: '⚠️ 风险提示（Solflare 标记）：',
+                    risk_li1: '<strong>Mutable</strong> — 代币元数据可修改',
+                    risk_li2: '<strong>LP tokens 大量解锁</strong> — 流动性可随时移除',
+                    risk_li3: '<strong>低流动性</strong> — 当前流动性极低',
+                    risk_li4: '<strong>未验证代币</strong> — 多个代币可使用相同名称和符号',
+                    sec6_title: '总结 · 地球村共识',
+                    sec6_summary: '<strong>EACO</strong> 以“地球村民自己的 MEMEcoin”为定位，正在构建一个覆盖 <strong>100 门学科、1500 万+ 学生</strong>的 Web3 教育生态。通过 <strong>每年三件链上公益</strong>、<strong>全球 10 种主流法币的清晰兑换路径</strong>，以及 <strong>SEC 新规下的合规融资通道</strong>（$5M–$75M），EACO 正逐步成为连接“地球村”共识与 Web3 现实落地的重要桥梁。',
+                    address_label: '合约地址',
+                    footer_sources: '数据来源',
+                    footer_disclaimer: '本页面仅供信息参考，不构成任何投资建议。Web3 有风险，请自行研究（DYOR）。'
+                },
+                en: {
+                    site_title: '🌍 EACO · Earth\'s Best Coin',
+                    site_sub: 'Earth\'s Best Coin | The only $eaco in the universe',
+                    sec1_title: 'Overview · EACO Web3 Education Ecosystem',
+                    card1_title: '🎯 Mission',
+                    card1_p1: '"Calculate labor value, quantify Earth\'s resources"<br />Earth villagers\' own MEMEcoin',
+                    card1_p2: 'EACO (Earth\'s Best Coin) is a grand Web3 education ecosystem project',
+                    card2_title: '📚 100-Year Education System',
+                    card2_li1: '100 core disciplines',
+                    card2_li2: 'Primary → PhD full spectrum',
+                    card2_li3: '15 major specialized fields',
+                    card2_li4: '5-year goal: 15M+ students',
+                    card3_title: '🌐 Dual-Track Platforms',
+                    card3_p1: '<strong>Chinese version</strong> (.cn) · Asia-first<br /><strong>International version</strong> (.org) · Global coverage',
+                    card3_p2: 'Features: Courses · VR/AR · AI tutors · Community DAO · NFT degree certification',
+                    card4_title: '⛓️ Tech Stack',
+                    card4_p1: 'Solana / Multi-chain · React/Next.js · Python AI',
+                    card4_p2: 'Civilization evolution vision: 1000-year Global Village → Interstellar → Multiverse civilization',
+                    sec2_title: '3 Web3 Mutual Aid Micro-Charities Per Year',
+                    sec2_core_label: 'Core concept:',
+                    sec2_core_text: 'Every transaction carries warmth, every token holder is a participant in public welfare.',
+                    charity1_title: '🌊 Natural Disaster Emergency Relief',
+                    charity1_desc: 'Donate stablecoins (USDC) to disaster-hit communities, converted to supplies via local NGOs.',
+                    charity1_ref: 'Reference: Polygon raised <strong>$168K</strong> for Nepal flood relief',
+                    charity2_title: '📚 Digital Education for Remote Areas',
+                    charity2_desc: 'Donate tablets + SOL wallets, teach Web3 basics.',
+                    charity2_ref: 'Reference: Pencil Finance completed <strong>$1M</strong> on-chain student loans, covering 6,600 students in SE Asia',
+                    charity3_title: '🌱 Community Tree Planting / Environmental Action',
+                    charity3_desc: 'Partner with environmental orgs, each donation corresponds to a tree planted & tracked.',
+                    charity3_ref: 'Reference: EcoThailand tokenized mangrove restoration, verified on-chain impact',
+                    sec2_mech_label: '🔧 Implementation Mechanism:',
+                    sec2_mech_li1: '<strong>Auto-donation via transaction tax</strong>: Set 1%-3% fee on EACO/SOL or EACO/USDC pairs, auto-flow to charity multisig wallet',
+                    sec2_mech_li2: '<strong>Community voting governance</strong>: Establish EACO Charity DAO, token holders vote on fund allocation',
+                    sec2_mech_li3: '<strong>On-chain transparent records</strong>: All transactions recorded on Solana, publicly verifiable (ref: Spanish Red Cross <strong>RedChain</strong> system)',
+                    sec2_mech_li4: '<strong>NFT Commemorative Badges</strong>: Mint NFTs for each charity action, distributed to donors and participants',
+                    sec3_title: 'Top 10 Global Fiat → EACO Exchange Paths',
+                    sec3_based: 'Based on ',
+                    sec3_compiled: ' compiled',
+                    th_fiat: 'Fiat',
+                    th_rate: 'Ref. Rate',
+                    th_reg: 'Regulatory Friendliness',
+                    th_path: 'Exchange Path',
+                    usd_reg: 'Pro-crypto; BTC/ETH ETFs approved',
+                    usd_path: 'USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)',
+                    eur_reg: 'MiCA effective Dec 2024',
+                    eur_path: 'EUR → SOL (MYKOBO/Bitvavo) → EACO',
+                    jpy_reg: 'Regulated since 2017; JVCEA self-regulatory',
+                    jpy_path: 'JPY → SOL (Coincheck/bitFlyer) → EACO',
+                    gbp_reg: 'FCA lifted retail crypto ETN ban',
+                    gbp_path: 'GBP → SOL (CoinList/Bitstamp) → EACO',
+                    cnh_reg: 'Mainland restricted; HK Stablecoin Ordinance Aug 2025',
+                    cnh_path: 'CNH → HKD → USDT (OTC) → SOL → EACO',
+                    aud_reg: 'AUSTRAC registered; clear licensing',
+                    aud_path: 'AUD → SOL (CoinSpot/BTC Markets) → EACO',
+                    cad_reg: 'World\'s first BTC ETF (Purpose)',
+                    cad_path: 'CAD → SOL (Wealthsimple/Netcoins) → EACO',
+                    chf_reg: 'FINMA licensed; Crypto Valley Zug; DLT Act',
+                    chf_path: 'CHF → SOL (Sygnum/SEBA Bank) → EACO',
+                    sgd_reg: 'MAS Payment Services Act; world\'s most Web3-friendly',
+                    sgd_path: 'SGD → SOL (Independent Reserve/Gemini SG) → EACO',
+                    krw_reg: 'Active trading; drafting Digital Asset Basic Act',
+                    krw_path: 'KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)',
+                    sec3_note: 'All above fiats can <strong>buy SOL via CEX</strong>, then swap to EACO via Solana DEX (Jupiter / Orca).',
+                    sec4_title: 'Overseas Financing · SEC Reg Crypto (2026.8.18)',
+                    sec4_event_label: '📅 Event:',
+                    sec4_event_text: 'On August 18, 2026, the U.S. SEC proposed "Regulation Crypto Assets".',
+                    sec4_goal_label: '🎯 Goal:',
+                    sec4_goal_text: '"Provide crypto asset entrepreneurs and market participants with clear pathways to raise capital under federal securities laws".',
+                    tier1_title: '🧾 Tier 1 · Small Exemption',
+                    tier1_desc: '<strong>Cap:</strong> Up to <strong>$5M</strong> over 4 years',
+                    tier1_note: 'No traditional securities registration; requires "principles-based narrative disclosures"',
+                    tier2_title: '📊 Tier 2 · Large Exemption',
+                    tier2_desc: '<strong>Cap:</strong> Up to <strong>$75M</strong> in any 12-month period',
+                    tier2_note: 'Requires financial statements + ongoing reporting',
+                    tier3_title: '🔒 Conditional Safe Harbor',
+                    tier3_desc: 'Token can shed "investment contract" status once issuer completes "essential managerial efforts"',
+                    tier4_title: '🇺🇸 State Preemption',
+                    tier4_desc: 'Preempts state registration requirements for covered offerings and secondary trades',
+                    sec4_finance_label: '💡 EACO Financing Path:',
+                    sec4_finance_text: 'Multi-currency <strong>SOL, USDT, USDC, wBNB, TRX, wETH, eCNH</strong>, target <strong>$50-75M</strong>.',
+                    sec4_finance_detail: 'Seed A: $5-10M (USDC/USDT)｜Seed B: $25-40M (USDC/USDT/SOL)｜Seed C: $20-35M (5-currency balanced)',
+                    sec5_title: 'Current Liquidity · Meteora Pool',
+                    mcap_label: '💰 Market Cap',
+                    mcap_date: 'As of Aug 2026',
+                    liq_label: '💧 Total Liquidity',
+                    liq_note: 'Solana major DEX combined',
+                    vol_label: '📈 24h Volume',
+                    vol_change: '-46.89% vs previous day',
+                    holders_label: '👥 Holders',
+                    holders_top: 'Top 20 holdings 24.64%',
+                    risk_label: '⚠️ Risk Warning (Solflare flagged):',
+                    risk_li1: '<strong>Mutable</strong> — Token metadata can be modified',
+                    risk_li2: '<strong>LP tokens unlocked</strong> — Liquidity can be removed at any time',
+                    risk_li3: '<strong>Low liquidity</strong> — Current liquidity is extremely low',
+                    risk_li4: '<strong>Unverified token</strong> — Multiple tokens may use same name & symbol',
+                    sec6_title: 'Summary · Global Village Consensus',
+                    sec6_summary: '<strong>EACO</strong>, positioned as "Earth villagers\' own MEMEcoin," is building a Web3 education ecosystem covering <strong>100 disciplines, 15M+ students</strong>. Through <strong>3 on-chain charities per year</strong>, <strong>clear exchange paths for 10 major fiat currencies</strong>, and <strong>compliant financing channels under new SEC rules</strong> ($5M–$75M), EACO is becoming a vital bridge connecting the "Global Village" consensus with Web3 real-world adoption.',
+                    address_label: 'Contract Address',
+                    footer_sources: 'Sources',
+                    footer_disclaimer: 'This page is for informational purposes only and does not constitute investment advice. Web3 involves risks; please DYOR.'
+                },
+                // === 西班牙语（机器翻译，可优化） ===
+                es: {
+                    site_title: '🌍 EACO · La Mejor Moneda de la Tierra',
+                    site_sub: 'Earth\'s Best Coin | El único $eaco en el universo',
+                    sec1_title: 'Resumen · Ecosistema Educativo Web3 de EACO',
+                    card1_title: '🎯 Misión',
+                    card1_p1: '"Calcular el valor del trabajo, cuantificar los recursos de la Tierra"<br />MEMEcoin propio de los aldeanos globales',
+                    card1_p2: 'EACO (Earth\'s Best Coin) es un gran proyecto de ecosistema educativo Web3',
+                    card2_title: '📚 Sistema Educativo de 100 Años',
+                    card2_li1: '100 disciplinas básicas',
+                    card2_li2: 'Primaria → Doctorado completo',
+                    card2_li3: '15 áreas especializadas principales',
+                    card2_li4: 'Objetivo a 5 años: 15M+ estudiantes',
+                    card3_title: '🌐 Plataformas de Doble Vía',
+                    card3_p1: '<strong>Versión china</strong> (.cn) · Asia primero<br /><strong>Versión internacional</strong> (.org) · Cobertura global',
+                    card3_p2: 'Características: Cursos · VR/AR · Tutores IA · DAO comunitaria · Certificación de títulos NFT',
+                    card4_title: '⛓️ Pila Tecnológica',
+                    card4_p1: 'Solana / Multi-chain · React/Next.js · Python AI',
+                    card4_p2: 'Visión de evolución civilizatoria: Aldea Global 1000 años → Interestelar → Civilización multiverso',
+                    sec2_title: '3 Micro-Beneficencias de Ayuda Mutua Web3 por Año',
+                    sec2_core_label: 'Concepto central:',
+                    sec2_core_text: 'Cada transacción lleva calidez, cada tenedor de tokens es un participante en el bienestar público.',
+                    charity1_title: '🌊 Ayuda de Emergencia por Desastres Naturales',
+                    charity1_desc: 'Donar stablecoins (USDC) a comunidades afectadas, convertidas en suministros a través de ONG locales.',
+                    charity1_ref: 'Referencia: Polygon recaudó <strong>$168K</strong> para ayuda por inundaciones en Nepal',
+                    charity2_title: '📚 Educación Digital en Zonas Remotas',
+                    charity2_desc: 'Donar tabletas + carteras SOL, enseñar uso básico de Web3.',
+                    charity2_ref: 'Referencia: Pencil Finance completó <strong>$1M</strong> en préstamos estudiantiles on-chain, cubriendo 6,600 estudiantes en el Sudeste Asiático',
+                    charity3_title: '🌱 Plantación de Árboles Comunitarios / Acción Ambiental',
+                    charity3_desc: 'Asociarse con organizaciones ambientales, cada donación corresponde a un árbol plantado y rastreado.',
+                    charity3_ref: 'Referencia: EcoThailand tokenizó la restauración de manglares, verificando el impacto en cadena',
+                    sec2_mech_label: '🔧 Mecanismo de Implementación:',
+                    sec2_mech_li1: '<strong>Donación automática mediante impuesto de transacción</strong>: Establecer una comisión del 1%-3% en pares EACO/SOL o EACO/USDC, flujo automático a billetera multisig benéfica',
+                    sec2_mech_li2: '<strong>Gobernanza por votación comunitaria</strong>: Crear DAO benéfica EACO, los tenedores votan la asignación de fondos',
+                    sec2_mech_li3: '<strong>Registros transparentes en cadena</strong>: Todos los ingresos y gastos registrados en Solana, verificables públicamente (ref: sistema <strong>RedChain</strong> de la Cruz Roja española)',
+                    sec2_mech_li4: '<strong>Insignias conmemorativas NFT</strong>: Acuñar NFTs para cada acción benéfica, distribuidos a donantes y participantes',
+                    sec3_title: 'Top 10 Monedas Fiat Globales → Rutas de Intercambio a EACO',
+                    sec3_based: 'Basado en ',
+                    sec3_compiled: ' compilado',
+                    th_fiat: 'Fiat',
+                    th_rate: 'Tasa Ref.',
+                    th_reg: 'Amigabilidad Regulatoria',
+                    th_path: 'Ruta de Intercambio',
+                    usd_reg: 'Pro-cripto; ETFs BTC/ETH aprobados',
+                    usd_path: 'USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)',
+                    eur_reg: 'MiCA efectiva Dic 2024',
+                    eur_path: 'EUR → SOL (MYKOBO/Bitvavo) → EACO',
+                    jpy_reg: 'Regulado desde 2017; marco de autorregulación JVCEA',
+                    jpy_path: 'JPY → SOL (Coincheck/bitFlyer) → EACO',
+                    gbp_reg: 'FCA levantó la prohibición de ETN cripto minoristas',
+                    gbp_path: 'GBP → SOL (CoinList/Bitstamp) → EACO',
+                    cnh_reg: 'Restringido en China continental; Ordenanza de Stablecoins de HK vigente Ago 2025',
+                    cnh_path: 'CNH → HKD → USDT (OTC) → SOL → EACO',
+                    aud_reg: 'Registrado en AUSTRAC; licencias claras',
+                    aud_path: 'AUD → SOL (CoinSpot/BTC Markets) → EACO',
+                    cad_reg: 'Primer ETF BTC del mundo (Purpose)',
+                    cad_path: 'CAD → SOL (Wealthsimple/Netcoins) → EACO',
+                    chf_reg: 'Licencia FINMA; Crypto Valley Zug; Ley DLT',
+                    chf_path: 'CHF → SOL (Sygnum/SEBA Bank) → EACO',
+                    sgd_reg: 'Ley de Servicios de Pago MAS; jurisdicción más amigable con Web3',
+                    sgd_path: 'SGD → SOL (Independent Reserve/Gemini SG) → EACO',
+                    krw_reg: 'Mercado activo; redacción de Ley Básica de Activos Digitales',
+                    krw_path: 'KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)',
+                    sec3_note: 'Todas las monedas fiat anteriores pueden <strong>comprar SOL mediante CEX</strong>, luego intercambiar a EACO a través de DEX de Solana (Jupiter/Orca).',
+                    sec4_title: 'Financiamiento Internacional · Regulación Crypto de la SEC (18.8.2026)',
+                    sec4_event_label: '📅 Evento:',
+                    sec4_event_text: 'El 18 de agosto de 2026, la SEC de EE. UU. propuso el "Reglamento de Criptoactivos".',
+                    sec4_goal_label: '🎯 Objetivo:',
+                    sec4_goal_text: '"Proporcionar a los emprendedores de criptoactivos y participantes del mercado vías claras para recaudar capital bajo las leyes federales de valores".',
+                    tier1_title: '🧾 Nivel 1 · Exención Pequeña',
+                    tier1_desc: '<strong>Límite:</strong> Hasta <strong>$5M</strong> en 4 años',
+                    tier1_note: 'Sin registro de valores tradicional; requiere "divulgaciones narrativas basadas en principios"',
+                    tier2_title: '📊 Nivel 2 · Exención Grande',
+                    tier2_desc: '<strong>Límite:</strong> Hasta <strong>$75M</strong> en cualquier período de 12 meses',
+                    tier2_note: 'Requiere estados financieros + informes continuos',
+                    tier3_title: '🔒 Puerto Seguro Condicional',
+                    tier3_desc: 'El token puede desprenderse de la calificación de "contrato de inversión" una vez que el emisor complete los "esfuerzos gerenciales esenciales"',
+                    tier4_title: '🇺🇸 Primacía Estatal',
+                    tier4_desc: 'Exime de los requisitos de registro de valores estatales para ofertas y transacciones secundarias cubiertas',
+                    sec4_finance_label: '💡 Ruta de Financiamiento de EACO:',
+                    sec4_finance_text: 'Multimoneda <strong>SOL, USDT, USDC, wBNB, TRX, wETH, eCNH</strong>, objetivo <strong>$50-75M</strong>.',
+                    sec4_finance_detail: 'Semilla A: $5-10M (USDC/USDT)｜Semilla B: $25-40M (USDC/USDT/SOL)｜Semilla C: $20-35M (balance de 5 monedas)',
+                    sec5_title: 'Liquidez Actual · Pool Meteora',
+                    mcap_label: '💰 Capitalización de Mercado',
+                    mcap_date: 'Hasta agosto 2026',
+                    liq_label: '💧 Liquidez Total',
+                    liq_note: 'DEX principales de Solana combinados',
+                    vol_label: '📈 Volumen 24h',
+                    vol_change: '-46.89% vs día anterior',
+                    holders_label: '👥 Tenedores',
+                    holders_top: 'Top 20 poseen 24.64%',
+                    risk_label: '⚠️ Advertencia de Riesgo (marcado por Solflare):',
+                    risk_li1: '<strong>Mutable</strong> — Los metadatos del token pueden modificarse',
+                    risk_li2: '<strong>Tokens LP desbloqueados</strong> — La liquidez puede retirarse en cualquier momento',
+                    risk_li3: '<strong>Baja liquidez</strong> — La liquidez actual es extremadamente baja',
+                    risk_li4: '<strong>Token no verificado</strong> — Múltiples tokens pueden usar el mismo nombre y símbolo',
+                    sec6_title: 'Resumen · Consenso de Aldea Global',
+                    sec6_summary: '<strong>EACO</strong>, posicionado como "MEMEcoin propio de los aldeanos globales", está construyendo un ecosistema educativo Web3 que cubre <strong>100 disciplinas, 15M+ estudiantes</strong>. A través de <strong>3 obras benéficas en cadena por año</strong>, <strong>rutas de intercambio claras para 10 monedas fiat principales</strong> y <strong>canales de financiación compatibles bajo las nuevas reglas de la SEC</strong> ($5M–$75M), EACO se está convirtiendo en un puente vital que conecta el consenso de la "Aldea Global" con la adopción real de Web3.',
+                    address_label: 'Dirección del Contrato',
+                    footer_sources: 'Fuentes',
+                    footer_disclaimer: 'Esta página es solo para fines informativos y no constituye asesoramiento de inversión. Web3 implica riesgos; por favor, DYOR.'
+                },
+                // === 法语（机器翻译） ===
+                fr: {
+                    site_title: '🌍 EACO · La Meilleure Monnaie de la Terre',
+                    site_sub: 'Earth\'s Best Coin | Le seul $eaco dans l\'univers',
+                    sec1_title: 'Aperçu · Écosystème Éducatif Web3 d\'EACO',
+                    card1_title: '🎯 Mission',
+                    card1_p1: '"Calculer la valeur du travail, quantifier les ressources de la Terre"<br />MEMEcoin propre aux villageois du monde',
+                    card1_p2: 'EACO (Earth\'s Best Coin) est un vaste projet d\'écosystème éducatif Web3',
+                    card2_title: '📚 Système Éducatif de 100 Ans',
+                    card2_li1: '100 disciplines fondamentales',
+                    card2_li2: 'Primaire → Doctorat complet',
+                    card2_li3: '15 domaines spécialisés majeurs',
+                    card2_li4: 'Objectif 5 ans : 15M+ d\'étudiants',
+                    card3_title: '🌐 Plateformes Double Voie',
+                    card3_p1: '<strong>Version chinoise</strong> (.cn) · Asie d\'abord<br /><strong>Version internationale</strong> (.org) · Couverture mondiale',
+                    card3_p2: 'Fonctionnalités : Cours · VR/AR · Tuteurs IA · DAO communautaire · Certification de diplômes NFT',
+                    card4_title: '⛓️ Stack Technologique',
+                    card4_p1: 'Solana / Multi-chaînes · React/Next.js · Python IA',
+                    card4_p2: 'Vision d\'évolution civilisationnelle : Village global 1000 ans → Interstellaire → Civilisation multi-univers',
+                    sec2_title: '3 Micro-Œuvres de Bienfaisance Mutualistes Web3 par An',
+                    sec2_core_label: 'Concept clé :',
+                    sec2_core_text: 'Chaque transaction porte de la chaleur, chaque détenteur de tokens est un participant à la solidarité.',
+                    charity1_title: '🌊 Aide d\'Urgence aux Catastrophes Naturelles',
+                    charity1_desc: 'Donner des stablecoins (USDC) aux communautés sinistrées, convertis en fournitures via des ONG locales.',
+                    charity1_ref: 'Référence : Polygon a collecté <strong>$168K</strong> pour les inondations au Népal',
+                    charity2_title: '📚 Éducation Numérique dans les Zones Reculées',
+                    charity2_desc: 'Donner des tablettes + portefeuilles SOL, enseigner les bases de Web3.',
+                    charity2_ref: 'Référence : Pencil Finance a réalisé <strong>$1M</strong> de prêts étudiants on-chain, couvrant 6 600 étudiants en Asie du Sud-Est',
+                    charity3_title: '🌱 Plantation d\'Arbres Communautaire / Action Environnementale',
+                    charity3_desc: 'Partenariat avec des organisations environnementales, chaque don correspond à un arbre planté et suivi.',
+                    charity3_ref: 'Référence : EcoThailand a tokenisé la restauration des mangroves, vérifiant l\'impact sur la chaîne',
+                    sec2_mech_label: '🔧 Mécanisme de Mise en Œuvre :',
+                    sec2_mech_li1: '<strong>Don automatique via taxe de transaction</strong> : Fixer des frais de 1%-3% sur les paires EACO/SOL ou EACO/USDC, flux automatique vers le portefeuille multisig caritatif',
+                    sec2_mech_li2: '<strong>Gouvernance par vote communautaire</strong> : Créer une DAO caritative EACO, les détenteurs votent l\'allocation des fonds',
+                    sec2_mech_li3: '<strong>Registres transparents on-chain</strong> : Toutes les transactions enregistrées sur Solana, vérifiables publiquement (réf : système <strong>RedChain</strong> de la Croix-Rouge espagnole)',
+                    sec2_mech_li4: '<strong>Badges commémoratifs NFT</strong> : Frapper des NFTs pour chaque action caritative, distribués aux donateurs et participants',
+                    sec3_title: 'Top 10 Monnaies Fiat Mondiales → Chemins d\'Échange vers EACO',
+                    sec3_based: 'Basé sur ',
+                    sec3_compiled: ' compilé',
+                    th_fiat: 'Fiat',
+                    th_rate: 'Taux Ref.',
+                    th_reg: 'Convivialité Réglementaire',
+                    th_path: 'Chemin d\'Échange',
+                    usd_reg: 'Pro-crypto; ETFs BTC/ETH approuvés',
+                    usd_path: 'USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)',
+                    eur_reg: 'MiCA effective déc. 2024',
+                    eur_path: 'EUR → SOL (MYKOBO/Bitvavo) → EACO',
+                    jpy_reg: 'Réglementé depuis 2017; cadre d\'autorégulation JVCEA',
+                    jpy_path: 'JPY → SOL (Coincheck/bitFlyer) → EACO',
+                    gbp_reg: 'La FCA a levé l\'interdiction des ETN cryptos pour les particuliers',
+                    gbp_path: 'GBP → SOL (CoinList/Bitstamp) → EACO',
+                    cnh_reg: 'Restreint en Chine continentale; Ordonnance sur les Stablecoins de HK en vigueur août 2025',
+                    cnh_path: 'CNH → HKD → USDT (OTC) → SOL → EACO',
+                    aud_reg: 'Enregistré AUSTRAC; licences claires',
+                    aud_path: 'AUD → SOL (CoinSpot/BTC Markets) → EACO',
+                    cad_reg: 'Premier ETF BTC au monde (Purpose)',
+                    cad_path: 'CAD → SOL (Wealthsimple/Netcoins) → EACO',
+                    chf_reg: 'Agrément FINMA; Crypto Valley Zug; Loi DLT',
+                    chf_path: 'CHF → SOL (Sygnum/SEBA Bank) → EACO',
+                    sgd_reg: 'Loi sur les Services de Paiement MAS; juridiction la plus amicale Web3',
+                    sgd_path: 'SGD → SOL (Independent Reserve/Gemini SG) → EACO',
+                    krw_reg: 'Marché actif; élaboration de la Loi de Base sur les Actifs Numériques',
+                    krw_path: 'KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)',
+                    sec3_note: 'Toutes les monnaies fiat ci-dessus peuvent <strong>acheter SOL via CEX</strong>, puis échanger contre EACO via DEX Solana (Jupiter/Orca).',
+                    sec4_title: 'Financement International · Règlement Crypto de la SEC (18.08.2026)',
+                    sec4_event_label: '📅 Événement :',
+                    sec4_event_text: 'Le 18 août 2026, la SEC américaine a proposé le "Règlement sur les Cryptoactifs".',
+                    sec4_goal_label: '🎯 Objectif :',
+                    sec4_goal_text: '"Fournir aux entrepreneurs en cryptoactifs et aux participants du marché des voies claires pour lever des capitaux en vertu des lois fédérales sur les valeurs mobilières".',
+                    tier1_title: '🧾 Niveau 1 · Petite Exemption',
+                    tier1_desc: '<strong>Plafond :</strong> Jusqu\'à <strong>$5M</strong> sur 4 ans',
+                    tier1_note: 'Pas d\'enregistrement de titres traditionnel ; nécessite des "divulgations narratives fondées sur des principes"',
+                    tier2_title: '📊 Niveau 2 · Grande Exemption',
+                    tier2_desc: '<strong>Plafond :</strong> Jusqu\'à <strong>$75M</strong> sur une période de 12 mois',
+                    tier2_note: 'Nécessite des états financiers + rapports continus',
+                    tier3_title: '🔒 Port Sûr Conditionnel',
+                    tier3_desc: 'Le token peut se défaire de la qualification de "contrat d\'investissement" une fois que l\'émetteur a accompli les "efforts de gestion essentiels"',
+                    tier4_title: '🇺🇸 Préemption d\'État',
+                    tier4_desc: 'Exonère des exigences d\'enregistrement des valeurs mobilières des États pour les offres et transactions secondaires couvertes',
+                    sec4_finance_label: '💡 Voie de Financement EACO :',
+                    sec4_finance_text: 'Multi-devises <strong>SOL, USDT, USDC, wBNB, TRX, wETH, eCNH</strong>, objectif <strong>$50-75M</strong>.',
+                    sec4_finance_detail: 'Seed A : $5-10M (USDC/USDT)｜Seed B : $25-40M (USDC/USDT/SOL)｜Seed C : $20-35M (équilibre de 5 devises)',
+                    sec5_title: 'Liquidité Actuelle · Pool Meteora',
+                    mcap_label: '💰 Capitalisation Boursière',
+                    mcap_date: 'En août 2026',
+                    liq_label: '💧 Liquidité Totale',
+                    liq_note: 'DEX majeurs de Solana combinés',
+                    vol_label: '📈 Volume 24h',
+                    vol_change: '-46.89% vs jour précédent',
+                    holders_label: '👥 Détenteurs',
+                    holders_top: 'Top 20 détiennent 24.64%',
+                    risk_label: '⚠️ Avertissement de Risque (signalé par Solflare) :',
+                    risk_li1: '<strong>Mutable</strong> — Les métadonnées du token peuvent être modifiées',
+                    risk_li2: '<strong>Tokens LP débloqués</strong> — La liquidité peut être retirée à tout moment',
+                    risk_li3: '<strong>Faible liquidité</strong> — La liquidité actuelle est extrêmement faible',
+                    risk_li4: '<strong>Token non vérifié</strong> — Plusieurs tokens peuvent utiliser le même nom et symbole',
+                    sec6_title: 'Résumé · Consensus du Village Global',
+                    sec6_summary: '<strong>EACO</strong>, positionné comme "MEMEcoin propre aux villageois du monde", construit un écosystème éducatif Web3 couvrant <strong>100 disciplines, 15M+ étudiants</strong>. Grâce à <strong>3 œuvres caritatives on-chain par an</strong>, <strong>des voies d\'échange claires pour 10 monnaies fiat majeures</strong> et <strong>des canaux de financement conformes aux nouvelles règles de la SEC</strong> ($5M–$75M), EACO devient un pont vital reliant le consensus du "Village Global" à l\'adoption réelle de Web3.',
+                    address_label: 'Adresse du Contrat',
+                    footer_sources: 'Sources',
+                    footer_disclaimer: 'Cette page est à titre informatif uniquement et ne constitue pas un conseil en investissement. Web3 comporte des risques ; veuillez DYOR.'
+                },
+                // === 俄语（机器翻译） ===
+                ru: {
+                    site_title: '🌍 EACO · Лучшая монета Земли',
+                    site_sub: 'Earth\'s Best Coin | Единственный $eaco во вселенной',
+                    sec1_title: 'Обзор · Образовательная экосистема Web3 EACO',
+                    card1_title: '🎯 Миссия',
+                    card1_p1: '"Рассчитывать ценность труда, количественно оценивать ресурсы Земли"<br />MEMEcoin для жителей глобальной деревни',
+                    card1_p2: 'EACO (Earth\'s Best Coin) — масштабный проект образовательной экосистемы Web3',
+                    card2_title: '📚 100-летняя система образования',
+                    card2_li1: '100 базовых дисциплин',
+                    card2_li2: 'Начальная школа → Докторантура полный спектр',
+                    card2_li3: '15 основных специализированных областей',
+                    card2_li4: 'Цель за 5 лет: 15 млн+ студентов',
+                    card3_title: '🌐 Двухплатформенность',
+                    card3_p1: '<strong>Китайская версия</strong> (.cn) · Приоритет Азии<br /><strong>Международная версия</strong> (.org) · Глобальное покрытие',
+                    card3_p2: 'Функции: Курсы · VR/AR · ИИ-наставники · Сообщество DAO · NFT-сертификация степеней',
+                    card4_title: '⛓️ Технологический стек',
+                    card4_p1: 'Solana / Мультичейн · React/Next.js · Python AI',
+                    card4_p2: 'Видение эволюции цивилизации: 1000-летняя глобальная деревня → Межзвёздная → Мультивселенная цивилизация',
+                    sec2_title: '3 микро-благотворительных взаимопомощи Web3 в год',
+                    sec2_core_label: 'Основная концепция:',
+                    sec2_core_text: 'Каждая транзакция несет тепло, каждый держатель токенов — участник общественного блага.',
+                    charity1_title: '🌊 Экстренная помощь при стихийных бедствиях',
+                    charity1_desc: 'Пожертвование стейблкоинов (USDC) пострадавшим сообществам, конвертация в товары через местные НПО.',
+                    charity1_ref: 'Ссылка: Polygon собрал <strong>$168K</strong> для помощи при наводнениях в Непале',
+                    charity2_title: '📚 Цифровое образование в отдаленных районах',
+                    charity2_desc: 'Пожертвование планшетов + кошельков SOL, обучение основам Web3.',
+                    charity2_ref: 'Ссылка: Pencil Finance выдал <strong>$1M</strong> студенческих займов на блокчейне, охватив 6600 студентов в Юго-Восточной Азии',
+                    charity3_title: '🌱 Общественная посадка деревьев / Экологические действия',
+                    charity3_desc: 'Сотрудничество с экологическими организациями, каждое пожертвование соответствует одному посаженному и отслеживаемому дереву.',
+                    charity3_ref: 'Ссылка: EcoThailand токенизировала восстановление мангровых лесов, подтверждая влияние на блокчейне',
+                    sec2_mech_label: '🔧 Механизм реализации:',
+                    sec2_mech_li1: '<strong>Автоматическое пожертвование через налог на транзакции</strong>: Установить комиссию 1%-3% на пары EACO/SOL или EACO/USDC, автоматическое направление в благотворительный мультисиг-кошелек',
+                    sec2_mech_li2: '<strong>Управление через голосование сообщества</strong>: Создать благотворительный DAO EACO, держатели голосуют за распределение средств',
+                    sec2_mech_li3: '<strong>Прозрачные записи в блокчейне</strong>: Все доходы и расходы записываются в Solana, общедоступны (ссылка: система <strong>RedChain</strong> испанского Красного Креста)',
+                    sec2_mech_li4: '<strong>NFT-памятные значки</strong>: Чеканка NFT для каждого благотворительного действия, распространение среди доноров и участников',
+                    sec3_title: 'Топ-10 мировых фиатных валют → Пути обмена на EACO',
+                    sec3_based: 'На основе ',
+                    sec3_compiled: ' составлено',
+                    th_fiat: 'Фиат',
+                    th_rate: 'Курс (справ.)',
+                    th_reg: 'Регуляторная дружественность',
+                    th_path: 'Путь обмена',
+                    usd_reg: 'Прокрипто; ETF BTC/ETH одобрены',
+                    usd_path: 'USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)',
+                    eur_reg: 'MiCA действует с дек. 2024',
+                    eur_path: 'EUR → SOL (MYKOBO/Bitvavo) → EACO',
+                    jpy_reg: 'Регулируется с 2017; саморегулирование JVCEA',
+                    jpy_path: 'JPY → SOL (Coincheck/bitFlyer) → EACO',
+                    gbp_reg: 'FCA сняла запрет на розничные крипто-ETN',
+                    gbp_path: 'GBP → SOL (CoinList/Bitstamp) → EACO',
+                    cnh_reg: 'Ограничено в материковом Китае; Закон о стейблкоинах Гонконга с авг. 2025',
+                    cnh_path: 'CNH → HKD → USDT (OTC) → SOL → EACO',
+                    aud_reg: 'Зарегистрировано в AUSTRAC; четкое лицензирование',
+                    aud_path: 'AUD → SOL (CoinSpot/BTC Markets) → EACO',
+                    cad_reg: 'Первый в мире ETF BTC (Purpose)',
+                    cad_path: 'CAD → SOL (Wealthsimple/Netcoins) → EACO',
+                    chf_reg: 'Лицензия FINMA; Crypto Valley Zug; Закон о DLT',
+                    chf_path: 'CHF → SOL (Sygnum/SEBA Bank) → EACO',
+                    sgd_reg: 'Закон о платежных услугах MAS; самая дружественная к Web3 юрисдикция',
+                    sgd_path: 'SGD → SOL (Independent Reserve/Gemini SG) → EACO',
+                    krw_reg: 'Активный рынок; разработка Основного закона о цифровых активах',
+                    krw_path: 'KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)',
+                    sec3_note: 'Все перечисленные фиатные валюты могут <strong>купить SOL через CEX</strong>, затем обменять на EACO через Solana DEX (Jupiter/Orca).',
+                    sec4_title: 'Международное финансирование · Регулирование криптоактивов SEC (18.08.2026)',
+                    sec4_event_label: '📅 Событие:',
+                    sec4_event_text: '18 августа 2026 года SEC США предложила «Регламент по криптоактивам».',
+                    sec4_goal_label: '🎯 Цель:',
+                    sec4_goal_text: '"Предоставить предпринимателям в сфере криптоактивов и участникам рынка четкие пути для привлечения капитала в соответствии с федеральными законами о ценных бумагах".',
+                    tier1_title: '🧾 Уровень 1 · Малое освобождение',
+                    tier1_desc: '<strong>Лимит:</strong> До <strong>$5M</strong> за 4 года',
+                    tier1_note: 'Без традиционной регистрации ценных бумаг; требуется "принципиальное повествовательное раскрытие"',
+                    tier2_title: '📊 Уровень 2 · Крупное освобождение',
+                    tier2_desc: '<strong>Лимит:</strong> До <strong>$75M</strong> за 12-месячный период',
+                    tier2_note: 'Требуется финансовая отчетность + постоянная отчетность',
+                    tier3_title: '🔒 Условная безопасная гавань',
+                    tier3_desc: 'Токен может выйти из категории "инвестиционного контракта" после того, как эмитент выполнит "основные управленческие усилия"',
+                    tier4_title: '🇺🇸 Приоритет штата',
+                    tier4_desc: 'Освобождает от требований регистрации ценных бумаг штатов для охваченных предложений и вторичных сделок',
+                    sec4_finance_label: '💡 Путь финансирования EACO:',
+                    sec4_finance_text: 'Мультивалютный <strong>SOL, USDT, USDC, wBNB, TRX, wETH, eCNH</strong>, цель <strong>$50-75M</strong>.',
+                    sec4_finance_detail: 'Seed A: $5-10M (USDC/USDT)｜Seed B: $25-40M (USDC/USDT/SOL)｜Seed C: $20-35M (баланс 5 валют)',
+                    sec5_title: 'Текущая ликвидность · Пул Meteora',
+                    mcap_label: '💰 Рыночная капитализация',
+                    mcap_date: 'По состоянию на август 2026',
+                    liq_label: '💧 Общая ликвидность',
+                    liq_note: 'Крупные DEX Solana вместе',
+                    vol_label: '📈 Объем за 24ч',
+                    vol_change: '-46.89% по сравнению с предыдущим днем',
+                    holders_label: '👥 Держатели',
+                    holders_top: 'Топ-20 держат 24.64%',
+                    risk_label: '⚠️ Предупреждение о риске (отмечено Solflare):',
+                    risk_li1: '<strong>Mutable</strong> — Метаданные токена могут быть изменены',
+                    risk_li2: '<strong>Токены LP разблокированы</strong> — Ликвидность может быть изъята в любое время',
+                    risk_li3: '<strong>Низкая ликвидность</strong> — Текущая ликвидность крайне низкая',
+                    risk_li4: '<strong>Непроверенный токен</strong> — Несколько токенов могут использовать одно и то же имя и символ',
+                    sec6_title: 'Резюме · Консенсус глобальной деревни',
+                    sec6_summary: '<strong>EACO</strong>, позиционируемый как "MEMEcoin жителей глобальной деревни", строит образовательную экосистему Web3, охватывающую <strong>100 дисциплин, 15 млн+ студентов</strong>. Благодаря <strong>3 благотворительным акциям в год</strong>, <strong>четким путям обмена для 10 основных фиатных валют</strong> и <strong>соответствующим каналам финансирования по новым правилам SEC</strong> ($5M–$75M), EACO становится важнейшим мостом, соединяющим консенсус "глобальной деревни" с реальным внедрением Web3.',
+                    address_label: 'Адрес контракта',
+                    footer_sources: 'Источники',
+                    footer_disclaimer: 'Эта страница носит исключительно информационный характер и не является инвестиционной рекомендацией. Web3 сопряжен с рисками; пожалуйста, DYOR.'
+                },
+                // === 阿拉伯语（机器翻译） ===
+                ar: {
+                    site_title: '🌍 EACO · أفضل عملة على الأرض',
+                    site_sub: 'Earth\'s Best Coin | العملة الوحيدة $eaco في الكون',
+                    sec1_title: 'نظرة عامة · نظام EACO التعليمي Web3',
+                    card1_title: '🎯 المهمة',
+                    card1_p1: '"حساب قيمة العمل، قياس موارد الأرض"<br />عملة الميم الخاصة بسكان القرية العالمية',
+                    card1_p2: 'EACO (Earth\'s Best Coin) هو مشروع نظام بيئي تعليمي Web3 طموح',
+                    card2_title: '📚 نظام تعليمي يمتد 100 عام',
+                    card2_li1: '100 تخصص أساسي',
+                    card2_li2: 'من الابتدائية إلى الدكتوراه (جميع المراحل)',
+                    card2_li3: '15 مجالاً تخصصياً رئيسياً',
+                    card2_li4: 'هدف 5 سنوات: 15 مليون+ طالب',
+                    card3_title: '🌐 منصات مزدوجة',
+                    card3_p1: '<strong>النسخة الصينية</strong> (.cn) · الأولوية لآسيا<br /><strong>النسخة الدولية</strong> (.org) · تغطية عالمية',
+                    card3_p2: 'الميزات: دورات · واقع افتراضي/معزز · مدرسون بالذكاء الاصطناعي · مجتمع DAO · شهادات NFT',
+                    card4_title: '⛓️ مجموعة التقنيات',
+                    card4_p1: 'Solana / متعدد السلاسل · React/Next.js · Python AI',
+                    card4_p2: 'رؤية تطور الحضارة: قرية عالمية 1000 عام → بين النجوم → حضارة متعددة الأكوان',
+                    sec2_title: '3 أعمال خيرية صغيرة للتعاون المتبادل Web3 سنوياً',
+                    sec2_core_label: 'المفهوم الأساسي:',
+                    sec2_core_text: 'كل معاملة تحمل دفئاً، وكل حامل للرمز هو مشارك في الخير العام.',
+                    charity1_title: '🌊 الإغاثة الطارئة للكوارث الطبيعية',
+                    charity1_desc: 'التبرع بالعملات المستقرة (USDC) للمجتمعات المتضررة، وتحويلها إلى إمدادات عبر المنظمات غير الحكومية المحلية.',
+                    charity1_ref: 'مرجع: جمع Polygon <strong>$168K</strong> لإغاثة الفيضانات في نيبال',
+                    charity2_title: '📚 التعليم الرقمي في المناطق النائية',
+                    charity2_desc: 'التبرع بأجهزة لوحية + محافظ SOL، وتعليم أساسيات Web3.',
+                    charity2_ref: 'مرجع: أنجزت Pencil Finance <strong>$1M</strong> من القروض الطلابية على السلسلة، تغطي 6600 طالب في جنوب شرق آسيا',
+                    charity3_title: '🌱 زراعة الأشجار المجتمعية / العمل البيئي',
+                    charity3_desc: 'الشراكة مع المنظمات البيئية، كل تبرع يقابل زراعة شجرة وتتبعها.',
+                    charity3_ref: 'مرجع: قامت EcoThailand برمجة ترميم أشجار المانغروف، والتحقق من التأثير على السلسلة',
+                    sec2_mech_label: '🔧 آلية التنفيذ:',
+                    sec2_mech_li1: '<strong>التبرع التلقائي عبر ضريبة المعاملات</strong>: تعيين رسوم 1%-3% على أزواج EACO/SOL أو EACO/USDC، تتدفق تلقائياً إلى محفظة التوقيعات المتعددة الخيرية',
+                    sec2_mech_li2: '<strong>الحوكمة عبر التصويت المجتمعي</strong>: إنشاء DAO خيري لـ EACO، يصوت حاملو الرموز على تخصيص الأموال',
+                    sec2_mech_li3: '<strong>سجلات شفافة على السلسلة</strong>: تسجيل جميع الإيرادات والمصروفات على Solana، قابلة للتحقق للجميع (المرجع: نظام <strong>RedChain</strong> للصليب الأحمر الإسباني)',
+                    sec2_mech_li4: '<strong>شارات تذكارية NFT</strong>: سك NFTs لكل عمل خيري، وتوزيعها على المتبرعين والمشاركين',
+                    sec3_title: 'أفضل 10 عملات ورقية عالمية → مسارات التبادل إلى EACO',
+                    sec3_based: 'بناءً على ',
+                    sec3_compiled: ' تم تجميعها',
+                    th_fiat: 'العملة الورقية',
+                    th_rate: 'سعر الصرف المرجعي',
+                    th_reg: 'الود التنظيمي',
+                    th_path: 'مسار التبادل',
+                    usd_reg: 'داعم للعملات المشفرة؛ تمت الموافقة على صناديق BTC/ETH',
+                    usd_path: 'USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)',
+                    eur_reg: 'قانون MiCA ساري من ديسمبر 2024',
+                    eur_path: 'EUR → SOL (MYKOBO/Bitvavo) → EACO',
+                    jpy_reg: 'خاضع للتنظيم منذ 2017؛ إطار التنظيم الذاتي JVCEA',
+                    jpy_path: 'JPY → SOL (Coincheck/bitFlyer) → EACO',
+                    gbp_reg: 'رفعت FCA حظر ETN المشفرة للتجزئة',
+                    gbp_path: 'GBP → SOL (CoinList/Bitstamp) → EACO',
+                    cnh_reg: 'مقيد في الصين القارية؛ قانون العملات المستقرة في هونغ كونغ ساري من أغسطس 2025',
+                    cnh_path: 'CNH → HKD → USDT (OTC) → SOL → EACO',
+                    aud_reg: 'مسجل في AUSTRAC؛ ترخيص واضح',
+                    aud_path: 'AUD → SOL (CoinSpot/BTC Markets) → EACO',
+                    cad_reg: 'أول صندوق BTC متداول في العالم (Purpose)',
+                    cad_path: 'CAD → SOL (Wealthsimple/Netcoins) → EACO',
+                    chf_reg: 'مرخص من FINMA؛ وادي التشفير Zug؛ قانون DLT',
+                    chf_path: 'CHF → SOL (Sygnum/SEBA Bank) → EACO',
+                    sgd_reg: 'قانون خدمات الدفع MAS؛ المنطقة القضائية الأكثر وداً لـ Web3',
+                    sgd_path: 'SGD → SOL (Independent Reserve/Gemini SG) → EACO',
+                    krw_reg: 'سوق نشط؛ صياغة قانون الأصول الرقمية الأساسي',
+                    krw_path: 'KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)',
+                    sec3_note: 'يمكن لجميع العملات الورقية المذكورة أعلاه <strong>شراء SOL عبر CEX</strong>، ثم استبدالها بـ EACO عبر DEX Solana (Jupiter/Orca).',
+                    sec4_title: 'التمويل الخارجي · لائحة الأصول المشفرة الصادرة عن SEC (18.8.2026)',
+                    sec4_event_label: '📅 الحدث:',
+                    sec4_event_text: 'في 18 أغسطس 2026، اقترحت هيئة الأوراق المالية والبورصات الأمريكية "لائحة الأصول المشفرة".',
+                    sec4_goal_label: '🎯 الهدف:',
+                    sec4_goal_text: '"توفير مسارات واضحة لرواد الأعمال في الأصول المشفرة والمشاركين في السوق لجمع رؤوس الأموال بموجب قوانين الأوراق المالية الفيدرالية".',
+                    tier1_title: '🧾 المستوى 1 · إعفاء صغير',
+                    tier1_desc: '<strong>الحد الأقصى:</strong> حتى <strong>$5M</strong> على مدى 4 سنوات',
+                    tier1_note: 'بدون تسجيل أوراق مالية تقليدي؛ يتطلب "إفصاحات سردية قائمة على المبادئ"',
+                    tier2_title: '📊 المستوى 2 · إعفاء كبير',
+                    tier2_desc: '<strong>الحد الأقصى:</strong> حتى <strong>$75M</strong> في أي فترة 12 شهراً',
+                    tier2_note: 'يتطلب بيانات مالية + تقارير مستمرة',
+                    tier3_title: '🔒 الملاذ الآمن المشروط',
+                    tier3_desc: 'يمكن للرمز التخلص من تصنيف "عقد استثمار" بمجرد أن يكمل المصدر "الجهود الإدارية الأساسية"',
+                    tier4_title: '🇺🇸 حق الأولوية للولاية',
+                    tier4_desc: 'يعفي من متطلبات تسجيل الأوراق المالية للولايات للعروض والمعاملات الثانوية المشمولة',
+                    sec4_finance_label: '💡 مسار تمويل EACO:',
+                    sec4_finance_text: 'متعدد العملات <strong>SOL، USDT، USDC، wBNB، TRX، wETH، eCNH</strong>، الهدف <strong>$50-75M</strong>.',
+                    sec4_finance_detail: 'البذرة A: $5-10M (USDC/USDT)｜البذرة B: $25-40M (USDC/USDT/SOL)｜البذرة C: $20-35M (توازن 5 عملات)',
+                    sec5_title: 'السيولة الحالية · مجمع Meteora',
+                    mcap_label: '💰 القيمة السوقية',
+                    mcap_date: 'حتى أغسطس 2026',
+                    liq_label: '💧 إجمالي السيولة',
+                    liq_note: 'مجموع DEX الرئيسية في Solana',
+                    vol_label: '📈 حجم التداول خلال 24 ساعة',
+                    vol_change: '-46.89% مقارنة باليوم السابق',
+                    holders_label: '👥 حاملي الرمز',
+                    holders_top: 'أكبر 20 حائزاً يملكون 24.64%',
+                    risk_label: '⚠️ تحذير المخاطر (تم وضع علامة بواسطة Solflare):',
+                    risk_li1: '<strong>قابل للتغيير</strong> — يمكن تعديل بيانات الرمز الوصفية',
+                    risk_li2: '<strong>رموز LP غير مقفلة</strong> — يمكن سحب السيولة في أي وقت',
+                    risk_li3: '<strong>سيولة منخفضة</strong> — السيولة الحالية منخفضة للغاية',
+                    risk_li4: '<strong>رمز غير موثّق</strong> — قد تستخدم عدة رموز نفس الاسم والرمز',
+                    sec6_title: 'ملخص · إجماع القرية العالمية',
+                    sec6_summary: '<strong>EACO</strong>، الموصوف بأنه "عملة الميم الخاصة بسكان القرية العالمية"، يبني نظاماً تعليمياً Web3 يغطي <strong>100 تخصص، 15 مليون+ طالب</strong>. من خلال <strong>3 أعمال خيرية على السلسلة سنوياً</strong>، <strong>مسارات تبادل واضحة لـ 10 عملات ورقية رئيسية</strong>، و <strong>قنوات تمويل متوافقة مع قواعد SEC الجديدة</strong> ($5M–$75M)، أصبح EACO جسراً حيوياً يربط إجماع "القرية العالمية" بتبني Web3 في الواقع.',
+                    address_label: 'عنوان العقد',
+                    footer_sources: 'المصادر',
+                    footer_disclaimer: 'هذه الصفحة لأغراض إعلامية فقط ولا تشكل نصيحة استثمارية. تنطوي Web3 على مخاطر؛ يرجى إجراء البحث الخاص بك (DYOR).'
+                }
+            }
+        };
+
+        // ===== 初始化 =====
+        let currentLang = localStorage.getItem('eaco-lang') || 'zh';
+        // 若浏览器语言为英文则默认英文，但优先 localStorage
+        if (!localStorage.getItem('eaco-lang')) {
+            const browserLang = navigator.language || navigator.languages?.[0] || 'zh';
+            if (browserLang.startsWith('en')) currentLang = 'en';
+        }
+
+        function render(lang) {
+            const dict = i18n.translations[lang];
+            if (!dict) return;
+            // 查找所有带 data-i18n 的元素
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) {
+                    el.innerHTML = dict[key];
+                }
+            });
+            // 更新按钮激活状态
+            document.querySelectorAll('#langSwitch button').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            // 保存语言
+            localStorage.setItem('eaco-lang', lang);
+            currentLang = lang;
+        }
+
+        // 绑定按钮事件
+        document.querySelectorAll('#langSwitch button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                render(lang);
+            });
+        });
+
+        // 初始渲染
+        render(currentLang);
+    })();
+</script>
+</body>
+</html>
