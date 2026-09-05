@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EACO Web3 综合信息 · 地球村公益 · 全球兑换分析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
+            background: #f0f4f8;
+            color: #1a202c;
+            padding: 24px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            padding: 40px 48px;
+        }
+        @media (max-width: 720px) {
+            .container { padding: 24px 16px; }
+            body { padding: 12px; }
+        }
+
+        /* header */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e9edf2;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #9945ff, #14f195);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo .sub {
+            font-size: 14px;
+            color: #5a6a7a;
+            -webkit-text-fill-color: #5a6a7a;
+            background: none;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+            background: #eef2f6;
+            padding: 4px;
+            border-radius: 40px;
+        }
+        .lang-switch button {
+            border: none;
+            background: transparent;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #5a6a7a;
+            transition: 0.2s;
+        }
+        .lang-switch button.active {
+            background: #ffffff;
+            color: #1a202c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .lang-switch button:hover:not(.active) {
+            color: #2d3748;
+        }
+        .badge {
+            background: #eef2f6;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        .badge span { color: #9945ff; font-weight: 600; }
+
+        /* sections */
+        .section { margin-bottom: 44px; }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid #9945ff;
+            padding-left: 16px;
+        }
+        .section-title .emoji { font-size: 24px; }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .card {
+            background: #f7fafc;
+            border-radius: 18px;
+            padding: 20px 22px;
+            border: 1px solid #e2e8f0;
+            transition: 0.15s ease;
+        }
+        .card:hover {
+            border-color: #cbd5e0;
+            background: #f9fcff;
+        }
+        .card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #2d3748;
+        }
+        .card p, .card li {
+            font-size: 14px;
+            color: #4a5568;
+        }
+        .card ul {
+            padding-left: 18px;
+            margin-top: 6px;
+        }
+        .card ul li { margin-bottom: 3px; }
+        .highlight {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin: 12px 0;
+        }
+        .highlight strong { color: #2b6cb0; }
+        .tag {
+            display: inline-block;
+            background: #e9d8fd;
+            color: #6b46c1;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-right: 4px;
+        }
+        .tag.green { background: #c6f6d5; color: #276749; }
+        .tag.orange { background: #feebc8; color: #9c6b2b; }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0 6px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 500px;
+        }
+        th {
+            background: #edf2f7;
+            text-align: left;
+            padding: 12px 14px;
+            font-weight: 600;
+            color: #2d3748;
+            border-bottom: 2px solid #d2d9e3;
+        }
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e9edf2;
+            vertical-align: top;
+        }
+        tr:last-child td { border-bottom: 0; }
+        .rate { font-weight: 600; color: #2d3748; }
+        .footnote {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 8px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 14px;
+        }
+        .ref {
+            font-size: 13px;
+            color: #4a5568;
+            background: #f1f4f9;
+            padding: 10px 16px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .ref a {
+            color: #2b6cb0;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .ref a:hover { text-decoration: underline; }
+        .flex-between {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .mt-2 { margin-top: 12px; }
+        .text-muted { color: #718096; font-size: 14px; }
+        .footer {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 24px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #5a6a7a;
+            text-align: center;
+        }
+        .footer a { color: #2b6cb0; text-decoration: none; }
+
+        /* i18n hidden */
+        .lang-zh { display: block; }
+        .lang-en { display: none; }
+        body.lang-en .lang-zh { display: none; }
+        body.lang-en .lang-en { display: block; }
+        body.lang-zh .lang-zh { display: block; }
+        body.lang-zh .lang-en { display: none; }
+
+        /* inline toggle for table cells etc */
+        .i18n-block { display: block; }
+        .i18n-inline { display: inline; }
+    </style>
+</head>
+<body class="lang-zh">
+
+<div class="container">
+
+    <!-- ========== HEADER ========== -->
+    <div class="header">
+        <div class="logo">
+            <h1>🌍 EACO · 地球最佳币</h1>
+            <div class="sub lang-zh">Earth's Best Coin &nbsp;|&nbsp; 唯一 $eaco in the universe</div>
+            <div class="sub lang-en">Earth's Best Coin &nbsp;|&nbsp; The only $eaco in the universe</div>
+        </div>
+        <div class="flex-between" style="gap:12px;">
+            <div class="badge">
+                ⚡ Solana &nbsp;·&nbsp; <span>CA</span> DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+            </div>
+            <div class="lang-switch">
+                <button class="active" data-lang="zh">中文</button>
+                <button data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 1. 项目概况 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">🚀</span> <span class="lang-zh">项目概况 · EACO Web3 教育生态</span><span class="lang-en">Overview · EACO Web3 Education Ecosystem</span></div>
+        <div class="card-grid">
+            <div class="card">
+                <h4 class="lang-zh">🎯 使命</h4>
+                <h4 class="lang-en">🎯 Mission</h4>
+                <p class="lang-zh">“计算劳动价值，量化地球资源”<br />地球村民自己的 MEMEcoin</p>
+                <p class="lang-en">"Calculate labor value, quantify Earth's resources"<br />Earth villagers' own MEMEcoin</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" class="lang-zh">EACO（Earth's best Coin）是一个宏大的 Web3 教育生态项目</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" class="lang-en">EACO (Earth's Best Coin) is a grand Web3 education ecosystem project</p>
+            </div>
+            <div class="card">
+                <h4 class="lang-zh">📚 百年教育体系</h4>
+                <h4 class="lang-en">📚 100-Year Education System</h4>
+                <ul class="lang-zh">
+                    <li>100 门核心学科</li>
+                    <li>小学 → 博士 全阶段</li>
+                    <li>15 个主要专业领域</li>
+                    <li>5 年目标：1500 万+ 学生</li>
+                </ul>
+                <ul class="lang-en">
+                    <li>100 core disciplines</li>
+                    <li>Primary → PhD full spectrum</li>
+                    <li>15 major specialized fields</li>
+                    <li>5-year goal: 15M+ students</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4 class="lang-zh">🌐 双轨平台</h4>
+                <h4 class="lang-en">🌐 Dual-Track Platforms</h4>
+                <p class="lang-zh"><strong>华语版</strong> (.cn) · 亚洲优先<br /><strong>国际版</strong> (.org) · 全球覆盖</p>
+                <p class="lang-en"><strong>Chinese version</strong> (.cn) · Asia优先<br /><strong>International version</strong> (.org) · Global coverage</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" class="lang-zh">功能：课程 · VR/AR · AI导师 · 社区DAO · NFT学位认证</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" class="lang-en">Features: Courses · VR/AR · AI tutors · Community DAO · NFT degree certification</p>
+            </div>
+            <div class="card">
+                <h4 class="lang-zh">⛓️ 技术栈</h4>
+                <h4 class="lang-en">⛓️ Tech Stack</h4>
+                <p class="lang-zh">Solana / 多链 · React/Next.js · Python AI</p>
+                <p class="lang-en">Solana / Multi-chain · React/Next.js · Python AI</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" class="lang-zh">文明进化远景：1000 年地球村 → 星际 → 多宇宙文明</p>
+                <p style="margin-top:6px;font-size:13px;color:#5a6a7a;" class="lang-en">Civilization evolution vision: 1000-year Global Village → Interstellar → Multiverse civilization</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 2. 三件小公益 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">❤️</span> <span class="lang-zh">每年三件 Web3 网友互助小公益</span><span class="lang-en">3 Web3 Mutual Aid Micro-Charities Per Year</span></div>
+        <div class="highlight">
+            <strong class="lang-zh">核心理念：</strong><span class="lang-zh">让每一次交易都带有温度，让每一个持币者都是公益的参与者。</span>
+            <strong class="lang-en">Core concept:</strong><span class="lang-en">Every transaction carries warmth, every token holder is a participant in public welfare.</span>
+        </div>
+
+        <div class="card-grid">
+            <div class="card" style="border-left:4px solid #48bb78;">
+                <h4 class="lang-zh">🌊 自然灾害紧急援助</h4>
+                <h4 class="lang-en">🌊 Natural Disaster Emergency Relief</h4>
+                <p class="lang-zh">为受灾社区捐赠稳定币（USDC），通过当地 NGO 兑换为物资。</p>
+                <p class="lang-en">Donate stablecoins (USDC) to disaster-hit communities, converted to supplies via local NGOs.</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" class="lang-zh">参考：Polygon 为尼泊尔洪水救援筹集 <strong>$168K</strong></p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" class="lang-en">Reference: Polygon raised <strong>$168K</strong> for Nepal flood relief</p>
+            </div>
+            <div class="card" style="border-left:4px solid #4299e1;">
+                <h4 class="lang-zh">📚 偏远地区数字教育</h4>
+                <h4 class="lang-en">📚 Digital Education for Remote Areas</h4>
+                <p class="lang-zh">捐赠平板电脑 + SOL 钱包，教授 Web3 基础使用。</p>
+                <p class="lang-en">Donate tablets + SOL wallets, teach Web3 basics.</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" class="lang-zh">参考：Pencil Finance 完成 <strong>$100 万</strong> 链上学生贷款，覆盖东南亚 6600 名学生</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" class="lang-en">Reference: Pencil Finance completed <strong>$1M</strong> on-chain student loans, covering 6,600 students in SE Asia</p>
+            </div>
+            <div class="card" style="border-left:4px solid #ed8936;">
+                <h4 class="lang-zh">🌱 社区植树 / 环保行动</h4>
+                <h4 class="lang-en">🌱 Community Tree Planting / Environmental Action</h4>
+                <p class="lang-zh">与环保组织合作，每笔捐赠对应一棵树的种植与追踪。</p>
+                <p class="lang-en">Partner with environmental orgs, each donation corresponds to a tree planted & tracked.</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" class="lang-zh">参考：EcoThailand 将红树林修复 token 化，验证链上影响</p>
+                <p style="font-size:13px;color:#5a6a7a;margin-top:4px;" class="lang-en">Reference: EcoThailand tokenized mangrove restoration, verified on-chain impact</p>
+            </div>
+        </div>
+
+        <div class="ref" style="margin-top:14px;">
+            <strong class="lang-zh">🔧 实施机制：</strong>
+            <strong class="lang-en">🔧 Implementation Mechanism:</strong>
+            <ul style="margin-top:6px;padding-left:20px;">
+                <li class="lang-zh"><strong>交易税自动捐赠</strong>：在 EACO/SOL 或 EACO/USDC 交易对中设置 1%-3% 手续费，自动流入公益多签钱包</li>
+                <li class="lang-en"><strong>Auto-donation via transaction tax</strong>: Set 1%-3% fee on EACO/SOL or EACO/USDC pairs, auto-flow to charity multisig wallet</li>
+                <li class="lang-zh"><strong>社区投票治理</strong>：成立 EACO 公益 DAO，持币者投票决定资金用途</li>
+                <li class="lang-en"><strong>Community voting governance</strong>: Establish EACO Charity DAO, token holders vote on fund allocation</li>
+                <li class="lang-zh"><strong>链上透明存证</strong>：所有收支记录在 Solana 链上，任何人可查（参考西班牙红十字会 <strong>RedChain</strong> 系统）</li>
+                <li class="lang-en"><strong>On-chain transparent records</strong>: All transactions recorded on Solana, publicly verifiable (ref: Spanish Red Cross <strong>RedChain</strong> system)</li>
+                <li class="lang-zh"><strong>NFT 纪念徽章</strong>：为每次公益行动铸造 NFT，分发给捐赠者和参与者</li>
+                <li class="lang-en"><strong>NFT Commemorative Badges</strong>: Mint NFTs for each charity action, distributed to donors and participants</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== 3. 全球法币兑换路径 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">💱</span> <span class="lang-zh">全球 Top 10 法币 → EACO 兑换路径</span><span class="lang-en">Top 10 Global Fiat → EACO Exchange Paths</span></div>
+        <p class="text-muted" style="margin-bottom:12px;">
+            <span class="lang-zh">基于 </span><span class="lang-en">Based on </span>
+            <a href="https://ucoingroup.github.io/eacoweb3-2026/eaco-exchange-analysis2025.html" target="_blank">EACO + SOL Global Exchange Analysis</a>
+            <span class="lang-zh"> 整理</span><span class="lang-en"> compiled</span>
+        </p>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th><span class="lang-zh">法币</span><span class="lang-en">Fiat</span></th>
+                        <th><span class="lang-zh">汇率参考</span><span class="lang-en">Ref. Rate</span></th>
+                        <th><span class="lang-zh">监管友好度</span><span class="lang-en">Regulatory Friendliness</span></th>
+                        <th><span class="lang-zh">兑换路径</span><span class="lang-en">Exchange Path</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>🇺🇸 USD</strong></td><td class="rate">1 USD ≈ 0.0119 SOL</td><td><span class="tag">高</span> <span class="lang-zh">亲加密政策；BTC/ETH ETF 已批</span><span class="lang-en">Pro-crypto; BTC/ETH ETFs approved</span></td><td><span class="lang-zh">USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)</span><span class="lang-en">USD → SOL (Coinbase/Stripe) → EACO (Jupiter/Orca)</span></td></tr>
+                    <tr><td><strong>🇪🇺 EUR</strong></td><td class="rate">1 EUR ≈ 0.0137 SOL</td><td><span class="tag">高</span> <span class="lang-zh">MiCA 法规 2024.12 生效</span><span class="lang-en">MiCA effective Dec 2024</span></td><td><span class="lang-zh">EUR → SOL (MYKOBO/Bitvavo) → EACO</span><span class="lang-en">EUR → SOL (MYKOBO/Bitvavo) → EACO</span></td></tr>
+                    <tr><td><strong>🇯🇵 JPY</strong></td><td class="rate">1 JPY ≈ 0.0000745 SOL</td><td><span class="tag">高</span> <span class="lang-zh">2017 年起监管；JVCEA 自律框架</span><span class="lang-en">Regulated since 2017; JVCEA self-regulatory</span></td><td><span class="lang-zh">JPY → SOL (Coincheck/bitFlyer) → EACO</span><span class="lang-en">JPY → SOL (Coincheck/bitFlyer) → EACO</span></td></tr>
+                    <tr><td><strong>🇬🇧 GBP</strong></td><td class="rate">1 GBP ≈ 0.0161 SOL</td><td><span class="tag">高</span> <span class="lang-zh">FCA 解禁零售加密 ETN</span><span class="lang-en">FCA lifted retail crypto ETN ban</span></td><td><span class="lang-zh">GBP → SOL (CoinList/Bitstamp) → EACO</span><span class="lang-en">GBP → SOL (CoinList/Bitstamp) → EACO</span></td></tr>
+                    <tr><td><strong>🇨🇳 CNH</strong></td><td class="rate">1 CNH ≈ 0.00165 SOL</td><td><span class="tag orange">中</span> <span class="lang-zh">内地受限；香港稳定币条例 2025.8 生效</span><span class="lang-en">Mainland restricted; HK Stablecoin Ordinance Aug 2025</span></td><td><span class="lang-zh">CNH → HKD → USDT (OTC) → SOL → EACO</span><span class="lang-en">CNH → HKD → USDT (OTC) → SOL → EACO</span></td></tr>
+                    <tr><td><strong>🇦🇺 AUD</strong></td><td class="rate">1 AUD ≈ 0.0083 SOL</td><td><span class="tag">高</span> <span class="lang-zh">AUSTRAC 注册；清晰牌照制度</span><span class="lang-en">AUSTRAC registered; clear licensing</span></td><td><span class="lang-zh">AUD → SOL (CoinSpot/BTC Markets) → EACO</span><span class="lang-en">AUD → SOL (CoinSpot/BTC Markets) → EACO</span></td></tr>
+                    <tr><td><strong>🇨🇦 CAD</strong></td><td class="rate">1 CAD ≈ 0.0084 SOL</td><td><span class="tag">高</span> <span class="lang-zh">全球首个 BTC ETF（Purpose）</span><span class="lang-en">World's first BTC ETF (Purpose)</span></td><td><span class="lang-zh">CAD → SOL (Wealthsimple/Netcoins) → EACO</span><span class="lang-en">CAD → SOL (Wealthsimple/Netcoins) → EACO</span></td></tr>
+                    <tr><td><strong>🇨🇭 CHF</strong></td><td class="rate">1 CHF ≈ 0.0147 SOL</td><td><span class="tag">高</span> <span class="lang-zh">FINMA 牌照；加密谷 Zug；DLT 法案</span><span class="lang-en">FINMA licensed; Crypto Valley Zug; DLT Act</span></td><td><span class="lang-zh">CHF → SOL (Sygnum/SEBA Bank) → EACO</span><span class="lang-en">CHF → SOL (Sygnum/SEBA Bank) → EACO</span></td></tr>
+                    <tr><td><strong>🇸🇬 SGD</strong></td><td class="rate">1 SGD ≈ 0.0090 SOL</td><td><span class="tag">高</span> <span class="lang-zh">MAS 支付服务法；全球最 Web3 友好辖区</span><span class="lang-en">MAS Payment Services Act; world's most Web3-friendly</span></td><td><span class="lang-zh">SGD → SOL (Independent Reserve/Gemini SG) → EACO</span><span class="lang-en">SGD → SOL (Independent Reserve/Gemini SG) → EACO</span></td></tr>
+                    <tr><td><strong>🇰🇷 KRW</strong></td><td class="rate">—</td><td><span class="tag">高</span> <span class="lang-zh">活跃交易市场；正制定数字资产基本法</span><span class="lang-en">Active trading; drafting Digital Asset Basic Act</span></td><td><span class="lang-zh">KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)</span><span class="lang-en">KRW → SOL (Upbit/Bithumb) → EACO (Jupiter)</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footnote">
+            ⚡ <span class="lang-zh">以上法币均可通过 <strong>中心化交易所买入 SOL</strong>，再通过 Solana DEX（Jupiter / Orca）兑换 EACO。</span>
+            <span class="lang-en">All above fiats can <strong>buy SOL via CEX</strong>, then swap to EACO via Solana DEX (Jupiter / Orca).</span>
+        </div>
+    </div>
+
+    <!-- ========== 4. 海外融资 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">🏦</span> <span class="lang-zh">海外融资 · SEC 加密资产条例（2026.8.18）</span><span class="lang-en">Overseas Financing · SEC Reg Crypto (2026.8.18)</span></div>
+
+        <div class="highlight">
+            <strong class="lang-zh">📅 事件：</strong><span class="lang-zh">2026 年 8 月 18 日，美国 SEC 正式发布《加密资产条例》（Regulation Crypto Assets）提案。</span>
+            <strong class="lang-en">📅 Event:</strong><span class="lang-en">On August 18, 2026, the U.S. SEC proposed "Regulation Crypto Assets".</span><br />
+            <strong class="lang-zh">🎯 目标：</strong><span class="lang-zh">“为加密资产创业者与市场参与者提供在联邦证券法下清晰的资本募集路径”[reference:0]。</span>
+            <strong class="lang-en">🎯 Goal:</strong><span class="lang-en">"Provide crypto asset entrepreneurs and market participants with clear pathways to raise capital under federal securities laws"[reference:1].</span>
+        </div>
+
+        <div class="card-grid">
+            <div class="card" style="border-left:4px solid #48bb78;">
+                <h4 class="lang-zh">🧾 Tier 1 · 小型豁免</h4>
+                <h4 class="lang-en">🧾 Tier 1 · Small Exemption</h4>
+                <p class="lang-zh"><strong>额度：</strong> 4 年内最高 <strong>500 万美元</strong>[reference:2]</p>
+                <p class="lang-en"><strong>Cap:</strong> Up to <strong>$5M</strong> over 4 years[reference:3]</p>
+                <p style="font-size:13px;color:#4a5568;" class="lang-zh">无需传统证券注册；需“基于原则的叙述性披露”[reference:4]</p>
+                <p style="font-size:13px;color:#4a5568;" class="lang-en">No traditional securities registration; requires "principles-based narrative disclosures"[reference:5]</p>
+            </div>
+            <div class="card" style="border-left:4px solid #4299e1;">
+                <h4 class="lang-zh">📊 Tier 2 · 大型豁免</h4>
+                <h4 class="lang-en">📊 Tier 2 · Large Exemption</h4>
+                <p class="lang-zh"><strong>额度：</strong> 任意 12 个月内最高 <strong>7500 万美元</strong>[reference:6]</p>
+                <p class="lang-en"><strong>Cap:</strong> Up to <strong>$75M</strong> in any 12-month period[reference:7]</p>
+                <p style="font-size:13px;color:#4a5568;" class="lang-zh">需提供财务报表 + 持续报告义务[reference:8]</p>
+                <p style="font-size:13px;color:#4a5568;" class="lang-en">Requires financial statements + ongoing reporting[reference:9]</p>
+            </div>
+            <div class="card" style="border-left:4px solid #9f7aea;">
+                <h4 class="lang-zh">🔒 条件式安全港</h4>
+                <h4 class="lang-en">🔒 Conditional Safe Harbor</h4>
+                <p class="lang-zh">当发行方完成“核心管理行为”后，代币可脱离“投资合同”定性、退出证券法管辖[reference:10]</p>
+                <p class="lang-en">Token can shed "investment contract" status once issuer completes "essential managerial efforts"[reference:11]</p>
+            </div>
+            <div class="card" style="border-left:4px solid #ed8936;">
+                <h4 class="lang-zh">🇺🇸 州法优先</h4>
+                <h4 class="lang-en">🇺🇸 State Preemption</h4>
+                <p class="lang-zh">豁免覆盖的发行及二级市场交易，可豁免各州证券注册要求[reference:12]</p>
+                <p class="lang-en">Preempts state registration requirements for covered offerings and secondary trades[reference:13]</p>
+            </div>
+        </div>
+
+        <div class="ref">
+            <strong class="lang-zh">💡 EACO 融资路径：</strong><span class="lang-zh">融合 <strong>SOL、USDT、USDC、wBNB、TRX、wETH、eCNH</strong> 等多币种，目标 <strong>$50-75M</strong>[reference:14]。</span>
+            <strong class="lang-en">💡 EACO Financing Path:</strong><span class="lang-en">Multi-currency <strong>SOL, USDT, USDC, wBNB, TRX, wETH, eCNH</strong>, target <strong>$50-75M</strong>[reference:15].</span><br />
+            <span style="font-size:13px;color:#5a6a7a;" class="lang-zh">种子轮 A：$5-10M（USDC/USDT）｜种子轮 B：$25-40M（USDC/USDT/SOL）｜种子轮 C：$20-35M（5 币种均衡）[reference:16]</span>
+            <span style="font-size:13px;color:#5a6a7a;" class="lang-en">Seed A: $5-10M (USDC/USDT)｜Seed B: $25-40M (USDC/USDT/SOL)｜Seed C: $20-35M (5-currency balanced)[reference:17]</span>
+        </div>
+    </div>
+
+    <!-- ========== 5. 流动性数据 ========== -->
+    <div class="section">
+        <div class="section-title"><span class="emoji">📊</span> <span class="lang-zh">当前流动性 · Meteora 池</span><span class="lang-en">Current Liquidity · Meteora Pool</span></div>
+
+        <div class="card-grid">
+            <div class="card">
+                <h4 class="lang-zh">💰 市值</h4>
+                <h4 class="lang-en">💰 Market Cap</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">~$39.8K</p>
+                <p class="text-muted"><span class="lang-zh">截至 2026 年 8 月</span><span class="lang-en">As of Aug 2026</span></p>
+            </div>
+            <div class="card">
+                <h4 class="lang-zh">💧 总流动性</h4>
+                <h4 class="lang-en">💧 Total Liquidity</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">~$758.6</p>
+                <p class="text-muted"><span class="lang-zh">Solana 主流 DEX 合计</span><span class="lang-en">Solana major DEX combined</span></p>
+            </div>
+            <div class="card">
+                <h4 class="lang-zh">📈 24h 交易量</h4>
+                <h4 class="lang-en">📈 24h Volume</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">$2.72</p>
+                <p class="text-muted"><span class="lang-zh">较前日 -46.89%</span><span class="lang-en">-46.89% vs previous day</span></p>
+            </div>
+            <div class="card">
+                <h4 class="lang-zh">👥 持币地址</h4>
+                <h4 class="lang-en">👥 Holders</h4>
+                <p style="font-size:20px;font-weight:700;color:#2d3748;">963</p>
+                <p class="text-muted"><span class="lang-zh">前 20 大持仓占比 24.64%</span><span class="lang-en">Top 20 holdings 24.64%</span></p>
+            </div>
+        </div>
+
+        <div class="highlight" style="border-left-color:#e53e3e;background:#fff5f5;">
+            <strong class="lang-zh">⚠️ 风险提示（Solflare 标记）：</strong>
+            <strong class="lang-en">⚠️ Risk Warning (Solflare flagged):</strong>
+            <ul style="margin-top:6px;padding-left:20px;">
+                <li class="lang-zh"><strong>Mutable</strong> — 代币元数据可修改</li>
+                <li class="lang-en"><strong>Mutable</strong> — Token metadata can be modified</li>
+                <li class="lang-zh"><strong>LP tokens 大量解锁</strong> — 流动性可随时移除</li>
+                <li class="lang-en"><strong>LP tokens unlocked</strong> — Liquidity can be removed at any time</li>
+                <li class="lang-zh"><strong>低流动性</strong> — 当前流动性极低</li>
+                <li class="lang-en"><strong>Low liquidity</strong> — Current liquidity is extremely low</li>
+                <li class="lang-zh"><strong>未验证代币</strong> — 多个代币可使用相同名称和符号</li>
+                <li class="lang-en"><strong>Unverified token</strong> — Multiple tokens may use same name & symbol</li>
+            </ul>
+            <p style="margin-top:6px;font-size:13px;color:#5a6a7a;">
+                📌 Meteora 池地址：
+                <a href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" style="word-break:break-all;">H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== 6. 总结 ========== -->
+    <div class="section" style="margin-bottom:12px;">
+        <div class="section-title"><span class="emoji">✨</span> <span class="lang-zh">总结 · 地球村共识</span><span class="lang-en">Summary · Global Village Consensus</span></div>
+        <div style="background:linear-gradient(135deg,#faf5ff,#f0f4ff);border-radius:18px;padding:20px 28px;border:1px solid #e2e8f0;">
+            <p style="font-size:15px;color:#2d3748;">
+                <span class="lang-zh"><strong>EACO</strong> 以“地球村民自己的 MEMEcoin”为定位，正在构建一个覆盖 <strong>100 门学科、1500 万+ 学生</strong>的 Web3 教育生态[reference:18]。
+                通过 <strong>每年三件链上公益</strong>、<strong>全球 10 种主流法币的清晰兑换路径</strong>[reference:19]，以及 <strong>SEC 新规下的合规融资通道</strong>（$5M–$75M）[reference:20]，
+                EACO 正逐步成为连接“地球村”共识与 Web3 现实落地的重要桥梁。</span>
+                <span class="lang-en"><strong>EACO</strong>, positioned as "Earth villagers' own MEMEcoin," is building a Web3 education ecosystem covering <strong>100 disciplines, 15M+ students</strong>[reference:21].
+                Through <strong>3 on-chain charities per year</strong>, <strong>clear exchange paths for 10 major fiat currencies</strong>[reference:22], and <strong>compliant financing channels under new SEC rules</strong> ($5M–$75M)[reference:23],
+                EACO is becoming a vital bridge connecting the "Global Village" consensus with Web3 real-world adoption.</span>
+            </p>
+            <p style="margin-top:10px;font-size:14px;color:#4a5568;">
+                🔗 <span class="lang-zh">合约地址</span><span class="lang-en">Contract Address</span>：
+                <code style="background:#edf2f7;padding:2px 10px;border-radius:6px;font-size:13px;">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div class="footer">
+        <p>
+            📄 <span class="lang-zh">数据来源</span><span class="lang-en">Sources</span>：
+            <a href="https://ucoingroup.github.io/eacoweb3-2026/eaco-exchange-analysis2025.html" target="_blank">EACO Exchange Analysis</a> ·
+            <a href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank">GitHub · eacoweb3-2026</a> ·
+            <a href="https://www.solflare.com/prices/eaco/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH/" target="_blank">Solflare</a>
+        </p>
+        <p style="margin-top:4px;font-size:13px;color:#8a9aa8;">
+            🌍 EACO — Earth's Best Coin · The only $eaco in the universe and the earth
+        </p>
+        <p style="margin-top:6px;font-size:12px;color:#a0aec0;">
+            <span class="lang-zh">本页面仅供信息参考，不构成任何投资建议。Web3 有风险，请自行研究（DYOR）。</span>
+            <span class="lang-en">This page is for informational purposes only and does not constitute investment advice. Web3 involves risks; please DYOR.</span>
+        </p>
+    </div>
+
+</div>
+
+<script>
+    (function() {
+        const zhBtn = document.querySelector('[data-lang="zh"]');
+        const enBtn = document.querySelector('[data-lang="en"]');
+        const body = document.body;
+
+        function setLang(lang) {
+            if (lang === 'en') {
+                body.classList.remove('lang-zh');
+                body.classList.add('lang-en');
+                zhBtn.classList.remove('active');
+                enBtn.classList.add('active');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-zh');
+                enBtn.classList.remove('active');
+                zhBtn.classList.add('active');
+            }
+        }
+
+        zhBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            setLang('zh');
+        });
+        enBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            setLang('en');
+        });
+
+        // detect browser language default
+        const browserLang = navigator.language || navigator.languages?.[0] || 'zh';
+        if (browserLang.startsWith('en')) {
+            setLang('en');
+        } else {
+            setLang('zh');
+        }
+    })();
+</script>
+
+</body>
+</html>
