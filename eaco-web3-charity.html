@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EACO Web3 Charity - Annual 3 Web3 Community Mutual Aid Initiatives. EACO = Energy x Attitude x Cooperation x Optimization. Earth's Best Coin on Solana. Total Supply: 1.35 Billion EACO.">
+<title>EACO Web3 Charity | Annual Community Mutual Aid</title>
+<style>
+/* ============ Theme: Star Blue (Default) ============ */
+:root{
+  --bg:#0a0e27; --bg2:#0d1339; --surface:#131a3e; --surface2:#1a2150;
+  --text:#e8ecf5; --text-soft:#a0aec8; --text-dim:#6b7a99;
+  --primary:#4fc3f7; --primary-deep:#29b6f6; --primary-soft:rgba(79,195,247,.12);
+  --accent:#ffd54f; --accent-soft:rgba(255,213,79,.12);
+  --success:#66bb6a; --warning:#ffa726; --danger:#ef5350;
+  --border:rgba(255,255,255,.08); --border-hover:rgba(79,195,247,.3);
+  --card-grad:linear-gradient(135deg,rgba(26,33,80,.6),rgba(19,26,62,.8));
+  --card-hover-grad:linear-gradient(135deg,rgba(33,41,100,.8),rgba(26,33,80,.9));
+  --shadow:0 8px 32px rgba(0,0,0,.3); --shadow-lg:0 16px 48px rgba(0,0,0,.4);
+  --radius:14px; --radius-sm:8px;
+  --topbar-bg:rgba(10,14,39,.85); --hero-glow:radial-gradient(ellipse at 50% 0%,rgba(79,195,247,.15),transparent 60%);
+  --font-ui:"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+  --font-mono:"JetBrains Mono","Fira Code","Consolas",monospace;
+  --star:rgba(255,255,255,.6);
+}
+/* ============ Theme: Military Green ============ */
+body[data-theme="military"]{
+  --bg:#1a2218; --bg2:#1f2920; --surface:#2a3528; --surface2:#334031;
+  --text:#e0e5db; --text-soft:#a8b5a0; --text-dim:#7a8a72;
+  --primary:#8bc34a; --primary-deep:#689f38; --primary-soft:rgba(139,195,74,.12);
+  --accent:#c0ca33; --accent-soft:rgba(192,202,51,.12);
+  --success:#7cb342; --warning:#ff8f00; --danger:#d84315;
+  --border:rgba(255,255,255,.06); --border-hover:rgba(139,195,74,.3);
+  --card-grad:linear-gradient(135deg,rgba(51,64,49,.6),rgba(42,53,40,.8));
+  --card-hover-grad:linear-gradient(135deg,rgba(60,75,57,.8),rgba(51,64,49,.9));
+  --shadow:0 8px 32px rgba(0,0,0,.25); --shadow-lg:0 16px 48px rgba(0,0,0,.35);
+  --topbar-bg:rgba(26,34,24,.85); --hero-glow:radial-gradient(ellipse at 50% 0%,rgba(139,195,74,.12),transparent 60%);
+  --star:rgba(200,220,180,.3);
+}
+/* ============ Theme: Classic Beige ============ */
+body[data-theme="classic"]{
+  --bg:#f5efe0; --bg2:#efe7d4; --surface:#fdf8ec; --surface2:#f8f0dc;
+  --text:#3a3225; --text-soft:#6b5f4d; --text-dim:#9a8d75;
+  --primary:#1f5c8b; --primary-deep:#174a70; --primary-soft:rgba(31,92,139,.08);
+  --accent:#b98a2f; --accent-soft:rgba(185,138,47,.1);
+  --success:#558b2f; --warning:#e65100; --danger:#bf360c;
+  --border:rgba(58,50,37,.12); --border-hover:rgba(31,92,139,.25);
+  --card-grad:linear-gradient(135deg,#fdf8ec,#f5ecd6);
+  --card-hover-grad:linear-gradient(135deg,#fff8e8,#f0e6cc);
+  --shadow:0 8px 32px rgba(58,50,37,.08); --shadow-lg:0 16px 48px rgba(58,50,37,.12);
+  --topbar-bg:rgba(245,239,224,.88); --hero-glow:radial-gradient(ellipse at 50% 0%,rgba(185,138,47,.1),transparent 60%);
+  --star:rgba(185,138,47,.2);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{animation:none!important;transition:none!important;}}
+body{
+  font-family:var(--font-ui);
+  background:var(--bg); color:var(--text);
+  line-height:1.75; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease,color .35s ease;
+}
+body[data-theme="classic"]{font-family:"Georgia","Microsoft YaHei","PingFang SC",serif;}
+body[dir="rtl"]{text-align:right;}
+::selection{background:var(--primary-soft);color:var(--primary);}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px;}
+
+/* Star field for dark themes */
+body:not([data-theme="classic"]) .stars{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+}
+body[data-theme="classic"] .stars{display:none;}
+
+/* ============ Topbar ============ */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--topbar-bg);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+  max-width:1160px;margin:0 auto;padding:10px 22px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.brand{
+  display:flex;align-items:center;gap:8px;
+  font-size:17px;font-weight:700;color:var(--primary);
+  white-space:nowrap;cursor:pointer;
+}
+.brand-logo{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;color:var(--bg);flex:none;
+}
+.nav-links{
+  display:flex;gap:2px;margin-left:auto;list-style:none;font-size:13.5px;
+}
+.nav-links a{
+  display:block;padding:6px 12px;border-radius:999px;
+  color:var(--text-soft);transition:all .18s;white-space:nowrap;
+}
+.nav-links a:hover{background:var(--primary-soft);color:var(--primary);}
+.ctrl-group{display:flex;align-items:center;gap:6px;}
+.lang-select,.theme-btns{display:flex;gap:3px;}
+.lang-btn,.theme-btn{
+  font-size:11.5px;font-weight:600;
+  padding:5px 10px;border-radius:999px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--text-soft);cursor:pointer;transition:all .15s;
+  font-family:var(--font-ui);
+}
+.lang-btn:hover,.theme-btn:hover{border-color:var(--border-hover);color:var(--primary);}
+.lang-btn.active,.theme-btn.active{
+  background:var(--primary);color:var(--bg);
+  border-color:var(--primary);
+}
+body[data-theme="classic"] .lang-btn.active,
+body[data-theme="classic"] .theme-btn.active{color:#fff;}
+.menu-toggle{
+  display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;
+}
+
+/* ============ Hero ============ */
+.hero{
+  position:relative;text-align:center;
+  padding:clamp(48px,9vw,96px) 22px clamp(36px,6vw,64px);
+  overflow:hidden;border-bottom:1px solid var(--border);
+}
+.hero::before{
+  content:"";position:absolute;inset:0;height:200px;
+  background:var(--hero-glow);pointer-events:none;
+}
+.hero-kicker{
+  display:inline-block;font-size:12px;letter-spacing:.35em;text-indent:.35em;
+  color:var(--accent);border:1px solid var(--accent);border-radius:999px;
+  padding:6px 18px 6px calc(18px + .35em);background:var(--accent-soft);
+  margin-bottom:24px;
+}
+.hero-title{
+  font-size:clamp(32px,6vw,64px);font-weight:800;
+  letter-spacing:.02em;color:var(--text);line-height:1.15;
+}
+.hero-title .grad{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  margin-top:16px;font-size:clamp(16px,2.8vw,22px);
+  color:var(--text-soft);max-width:680px;margin-left:auto;margin-right:auto;
+}
+.hero-contract{
+  margin-top:28px;display:inline-flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:999px;padding:8px 18px;font-family:var(--font-mono);
+  font-size:12.5px;color:var(--text-soft);cursor:pointer;
+  transition:all .18s;
+}
+.hero-contract:hover{border-color:var(--border-hover);box-shadow:var(--shadow);}
+.hero-contract .copy-icon{font-size:14px;}
+.hero-actions{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all .2s;border:none;font-family:var(--font-ui);
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--primary-deep));
+  color:#fff;box-shadow:0 8px 22px rgba(79,195,247,.25);
+}
+body[data-theme="classic"] .btn-primary{color:#fff;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,195,247,.35);}
+.btn-ghost{
+  background:transparent;border:1.5px solid var(--border-hover);
+  color:var(--text);
+}
+.btn-ghost:hover{background:var(--primary-soft);border-color:var(--primary);}
+
+/* ============ Section ============ */
+.section{padding:clamp(48px,7vw,80px) 22px;border-bottom:1px solid var(--border);}
+.section-head{text-align:center;margin-bottom:48px;}
+.section-icon{font-size:36px;margin-bottom:12px;}
+.section-title{
+  font-size:clamp(24px,4vw,36px);font-weight:700;
+  color:var(--text);margin-bottom:10px;
+}
+.section-title .accent{color:var(--primary);}
+.section-sub{
+  font-size:15px;color:var(--text-soft);max-width:640px;margin:0 auto;
+}
+
+/* ============ Philosophy ============ */
+.philosophy-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;max-width:960px;margin:0 auto;
+}
+.philo-card{
+  background:var(--card-grad);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px 24px;text-align:center;
+  transition:all .25s;
+}
+.philo-card:hover{
+  transform:translateY(-4px);border-color:var(--border-hover);
+  background:var(--card-hover-grad);box-shadow:var(--shadow-lg);
+}
+.philo-card .num{
+  font-size:32px;font-weight:800;color:var(--primary);
+  margin-bottom:8px;opacity:.5;
+}
+.philo-card .text{
+  font-size:16px;color:var(--text);line-height:1.6;
+}
+.philo-quote{
+  max-width:680px;margin:32px auto 0;text-align:center;
+  font-size:clamp(16px,2.5vw,20px);color:var(--accent);
+  font-style:italic;line-height:2;padding:0 22px;
+  border-top:1px solid var(--border);padding-top:32px;
+}
+
+/* ============ Charity Projects ============ */
+.year-tabs{
+  display:flex;gap:8px;justify-content:center;margin-bottom:36px;flex-wrap:wrap;
+}
+.year-tab{
+  padding:10px 24px;border-radius:999px;font-size:14px;font-weight:600;
+  border:1px solid var(--border);background:transparent;color:var(--text-soft);
+  cursor:pointer;transition:all .18s;font-family:var(--font-ui);
+}
+.year-tab:hover{border-color:var(--border-hover);color:var(--primary);}
+.year-tab.active{
+  background:var(--primary);color:var(--bg);border-color:var(--primary);
+}
+body[data-theme="classic"] .year-tab.active{color:#fff;}
+
+.charity-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+.charity-card{
+  background:var(--card-grad);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:all .25s;display:flex;flex-direction:column;
+}
+.charity-card:hover{
+  transform:translateY(-4px);border-color:var(--border-hover);
+  box-shadow:var(--shadow-lg);
+}
+.charity-card-header{
+  padding:24px 24px 16px;position:relative;
+  border-bottom:1px solid var(--border);
+}
+.charity-badge{
+  display:inline-block;font-size:11px;font-weight:700;
+  padding:4px 12px;border-radius:999px;margin-bottom:12px;
+  letter-spacing:.05em;
+}
+.badge-active{background:rgba(102,187,106,.15);color:var(--success);}
+.badge-done{background:var(--primary-soft);color:var(--primary);}
+.badge-planned{background:var(--accent-soft);color:var(--accent);}
+.charity-card .icon{font-size:36px;margin-bottom:8px;}
+.charity-card h3{
+  font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;
+}
+.charity-card .desc{
+  font-size:13.5px;color:var(--text-soft);line-height:1.65;
+}
+.charity-card-body{
+  padding:16px 24px;flex:1;
+}
+.charity-meta{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;
+}
+.meta-tag{
+  font-size:11px;padding:3px 10px;border-radius:6px;
+  background:var(--surface2);color:var(--text-dim);
+}
+.charity-progress{
+  margin:12px 0;
+}
+.progress-bar{
+  height:6px;border-radius:999px;background:var(--surface2);overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  transition:width .6s ease;
+}
+.progress-label{
+  display:flex;justify-content:space-between;
+  font-size:11px;color:var(--text-dim);margin-top:4px;
+}
+.charity-card-footer{
+  padding:16px 24px;border-top:1px solid var(--border);
+  display:flex;gap:8px;align-items:center;
+}
+.charity-link{
+  font-size:12.5px;color:var(--primary);font-weight:600;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.charity-link:hover{text-decoration:underline;}
+
+/* ============ Participation ============ */
+.steps-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;max-width:960px;margin:0 auto;
+}
+.step-card{
+  background:var(--card-grad);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px 22px;text-align:center;
+  position:relative;transition:all .25s;
+}
+.step-card:hover{transform:translateY(-3px);border-color:var(--border-hover);}
+.step-num{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-deep));
+  color:#fff;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-card .icon{font-size:28px;margin:8px 0 10px;}
+.step-card h4{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--text);}
+.step-card p{font-size:13px;color:var(--text-soft);line-height:1.6;}
+
+/* ============ Executive Team ============ */
+.team-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;
+}
+.exec-card{
+  background:var(--card-grad);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;transition:all .25s;
+}
+.exec-card:hover{
+  transform:translateY(-3px);border-color:var(--border-hover);
+  box-shadow:var(--shadow-lg);
+}
+.exec-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.exec-avatar{
+  width:48px;height:48px;border-radius:50%;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  background:linear-gradient(135deg,var(--primary-soft),var(--accent-soft));
+  border:2px solid var(--border);
+}
+.exec-info h4{font-size:15px;font-weight:700;color:var(--text);}
+.exec-info .role{font-size:12px;color:var(--primary);font-weight:600;}
+.exec-info .dept{font-size:11px;color:var(--text-dim);margin-top:2px;}
+.exec-desc{font-size:13px;color:var(--text-soft);line-height:1.6;margin-bottom:10px;}
+.exec-tag{
+  display:inline-block;font-size:11px;
+  padding:3px 8px;border-radius:6px;
+  background:var(--primary-soft);color:var(--primary);
+  margin-right:4px;margin-bottom:4px;
+}
+.orchestrator-card{
+  grid-column:1/-1;
+  background:var(--card-grad);border:1px solid var(--border-hover);
+  border-radius:var(--radius);padding:28px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.orchestrator-card .exec-avatar{width:64px;height:64px;font-size:30px;}
+.orchestrator-card .exec-info h4{font-size:18px;}
+.orchestrator-card .exec-desc{flex:1;min-width:200px;}
+
+/* ============ Meteora Pool ============ */
+.pool-box{
+  max-width:680px;margin:0 auto;
+  background:var(--card-grad);border:1px solid var(--border);
+  border-radius:var(--radius);padding:32px;
+}
+.pool-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.pool-row:last-child{border-bottom:none;}
+.pool-label{font-size:13.5px;color:var(--text-soft);}
+.pool-value{font-size:15px;font-weight:700;color:var(--text);font-family:var(--font-mono);}
+.pool-value .unit{font-size:12px;color:var(--text-dim);font-weight:400;margin-left:4px;}
+.pool-link{
+  margin-top:24px;text-align:center;
+}
+.pool-note{
+  margin-top:16px;font-size:12px;color:var(--text-dim);text-align:center;
+}
+
+/* ============ Financing ============ */
+.fin-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+.fin-card{
+  background:var(--card-grad);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px 24px;transition:all .25s;
+}
+.fin-card:hover{transform:translateY(-3px);border-color:var(--border-hover);}
+.fin-card .icon{font-size:32px;margin-bottom:10px;}
+.fin-card h4{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.fin-card p{font-size:13.5px;color:var(--text-soft);line-height:1.7;}
+.fin-card ul{margin:10px 0 0;padding-left:18px;}
+.fin-card li{font-size:12.5px;color:var(--text-soft);margin-bottom:4px;line-height:1.6;}
+
+/* ============ Footer ============ */
+.footer{
+  padding:48px 22px 28px;text-align:center;
+  border-top:1px solid var(--border);background:var(--bg2);
+}
+.footer-info{
+  max-width:680px;margin:0 auto 28px;
+}
+.footer-info p{
+  font-size:13px;color:var(--text-soft);margin-bottom:6px;line-height:1.7;
+}
+.footer-info .eaco-formula{
+  font-size:15px;font-weight:700;color:var(--primary);margin-bottom:10px;
+}
+.footer-info .contract{
+  font-family:var(--font-mono);font-size:12px;color:var(--text-dim);
+  word-break:break-all;
+}
+.footer-info .supply{
+  font-size:14px;color:var(--accent);font-weight:600;
+}
+.eco-links{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:8px;max-width:960px;margin:0 auto 28px;
+}
+.eco-link{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:var(--radius-sm);
+  background:var(--surface);border:1px solid var(--border);
+  font-size:12.5px;color:var(--text-soft);transition:all .18s;
+}
+.eco-link:hover{
+  border-color:var(--border-hover);color:var(--primary);
+  background:var(--primary-soft);
+}
+.eco-link .icon{font-size:16px;flex:none;}
+.footer-copy{
+  font-size:11.5px;color:var(--text-dim);margin-top:20px;
+}
+
+/* ============ Swap Explorer ============ */
+.swap-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:14px;max-width:960px;margin:0 auto;
+}
+.swap-card{
+  background:var(--card-grad);border:1px solid var(--border);
+  border-radius:var(--radius);padding:22px 18px;text-align:center;
+  transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.swap-card:hover{
+  transform:translateY(-4px);border-color:var(--border-hover);
+  background:var(--card-hover-grad);box-shadow:var(--shadow-lg);
+}
+.swap-card .swap-icon{font-size:32px;}
+.swap-card .swap-pair{
+  font-size:15px;font-weight:700;color:var(--text);
+}
+.swap-card .swap-pair .vs{color:var(--text-dim);font-weight:400;margin:0 4px;}
+.swap-card .swap-chain{
+  font-size:11px;color:var(--text-dim);
+}
+.swap-card .swap-link{
+  font-size:12.5px;color:var(--primary);font-weight:600;
+  display:inline-flex;align-items:center;gap:4px;margin-top:4px;
+}
+.swap-card .swap-link:hover{text-decoration:underline;}
+.swap-bottom{
+  text-align:center;margin-top:36px;
+}
+.swap-charity-link{
+  font-size:14px;padding:12px 28px;
+}
+
+/* ============ Copy Toast ============ */
+.toast{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--surface);border:1px solid var(--primary);
+  color:var(--primary);padding:12px 24px;border-radius:999px;
+  font-size:13px;font-weight:600;z-index:999;
+  opacity:0;transition:all .3s;pointer-events:none;
+  box-shadow:var(--shadow-lg);
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+/* ============ Back to Top ============ */
+.to-top{
+  position:fixed;bottom:24px;right:24px;width:44px;height:44px;
+  border-radius:50%;background:var(--primary);color:var(--bg);
+  border:none;font-size:20px;cursor:pointer;z-index:90;
+  display:none;align-items:center;justify-content:center;
+  box-shadow:var(--shadow);transition:all .2s;
+}
+body[data-theme="classic"] .to-top{color:#fff;}
+.to-top:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+
+/* ============ Responsive ============ */
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;background:var(--topbar-bg);padding:12px;gap:2px;
+    border-bottom:1px solid var(--border);}
+  .nav-links.open{display:flex;}
+  .nav-links a{padding:10px 16px;}
+  .menu-toggle{display:block;}
+  .ctrl-group{margin-left:auto;}
+  .orchestrator-card{flex-direction:column;text-align:center;}
+  .pool-row{flex-direction:column;align-items:flex-start;gap:4px;}
+}
+</style>
+</head>
+<body data-theme="starblue">
+<canvas class="stars" id="starCanvas"></canvas>
+
+<!-- ============ Topbar ============ -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" onclick="scrollTo({top:0,behavior:'smooth'})">
+      <div class="brand-logo">E</div>
+      <span>EACO Web3 Charity</span>
+    </div>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="#philosophy" data-i18n="nav_philo">Philosophy</a></li>
+      <li><a href="#charity" data-i18n="nav_charity">Charity</a></li>
+      <li><a href="#participate" data-i18n="nav_join">Participate</a></li>
+      <li><a href="#team" data-i18n="nav_team">Team</a></li>
+      <li><a href="#meteora" data-i18n="nav_pool">Liquidity</a></li>
+      <li><a href="#financing" data-i18n="nav_fin">Financing</a></li>
+      <li><a href="#swap" data-i18n="nav_swap">Swap</a></li>
+    </ul>
+    <div class="ctrl-group">
+      <div class="lang-select" id="langSelect"></div>
+      <div class="theme-btns" id="themeBtns"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ Hero ============ -->
+<section class="hero">
+  <span class="hero-kicker" data-i18n="hero_kicker">EACO Web3 Community Mutual Aid</span>
+  <h1 class="hero-title">
+    <span data-i18n="hero_title_1">Annual</span>
+    <span class="grad" data-i18n="hero_title_2">3 Web3 Charity</span>
+    <span data-i18n="hero_title_3">Initiatives</span>
+  </h1>
+  <p class="hero-sub" data-i18n="hero_sub">Every year, EACO community launches 3 Web3 mutual-aid charity projects, powered by the Solana blockchain, driven by global netizens, for a better Earth.</p>
+  <div class="hero-contract" id="contractCopy" title="Click to copy">
+    <span class="copy-icon">&#128203;</span>
+    <span>CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+  </div>
+  <div class="hero-actions">
+    <a href="#charity" class="btn btn-primary" data-i18n="hero_btn1">Explore Projects</a>
+    <a href="#participate" class="btn btn-ghost" data-i18n="hero_btn2">How to Join</a>
+  </div>
+</section>
+
+<!-- ============ Philosophy ============ -->
+<section class="section" id="philosophy">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-icon">&#129504;</div>
+      <h2 class="section-title" data-i18n="philo_title">The Power of Intention</h2>
+      <p class="section-sub" data-i18n="philo_sub">The philosophical foundation of EACO charity: intention shapes reality.</p>
+    </div>
+    <div class="philosophy-grid" id="philoGrid"></div>
+    <div class="philo-quote" data-i18n="philo_quote">"Maintain a positive mindset, and your intention will transform the world around you."</div>
+  </div>
+</section>
+
+<!-- ============ Annual 3 Charity Projects ============ -->
+<section class="section" id="charity">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-icon">&#127760;</div>
+      <h2 class="section-title"><span data-i18n="charity_title_1">Annual</span> <span class="accent" data-i18n="charity_title_2">3 Charity</span> <span data-i18n="charity_title_3">Projects</span></h2>
+      <p class="section-sub" data-i18n="charity_sub">Each year, the EACO community selects and executes 3 Web3 mutual-aid initiatives. Transparent on-chain, driven by community, open to all.</p>
+    </div>
+    <div class="year-tabs" id="yearTabs"></div>
+    <div class="charity-grid" id="charityGrid"></div>
+  </div>
+</section>
+
+<!-- ============ How to Participate ============ -->
+<section class="section" id="participate">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-icon">&#129309;</div>
+      <h2 class="section-title" data-i18n="join_title">How to Participate</h2>
+      <p class="section-sub" data-i18n="join_sub">Anyone can join EACO Web3 charity initiatives in 5 simple steps.</p>
+    </div>
+    <div class="steps-grid" id="stepsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ Virtual Executive Team ============ -->
+<section class="section" id="team">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-icon">&#129302;</div>
+      <h2 class="section-title" data-i18n="team_title">EACO Virtual Executive Team</h2>
+      <p class="section-sub" data-i18n="team_sub">8 AI-powered executive roles coordinating EACO charity operations worldwide, 24/7.</p>
+    </div>
+    <div class="team-grid" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- ============ Meteora Pool ============ -->
+<section class="section" id="meteora">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-icon">&#128167;</div>
+      <h2 class="section-title" data-i18n="pool_title">EACO Liquidity Pool</h2>
+      <p class="section-sub" data-i18n="pool_sub">Meteora DAMM v2 pool - the liquidity backbone of EACO charity funding.</p>
+    </div>
+    <div class="pool-box" id="poolBox"></div>
+  </div>
+</section>
+
+<!-- ============ Overseas Financing ============ -->
+<section class="section" id="financing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-icon">&#128176;</div>
+      <h2 class="section-title" data-i18n="fin_title">Overseas Financing Exploration</h2>
+      <p class="section-sub" data-i18n="fin_sub">Leveraging EACO on Solana for cross-border fundraising and global community financing.</p>
+    </div>
+    <div class="fin-grid" id="finGrid"></div>
+  </div>
+</section>
+
+<!-- ============ EACO Swap Explorer ============ -->
+<section class="section" id="swap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-icon">&#128260;</div>
+      <h2 class="section-title" data-i18n="swap_title">EACO Swap Explorer</h2>
+      <p class="section-sub" data-i18n="swap_sub">Explore EACO exchange pathways with SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - all on Solana chain.</p>
+    </div>
+    <div class="swap-grid" id="swapGrid"></div>
+    <div class="swap-bottom">
+      <a class="btn btn-ghost swap-charity-link" href="https://ucoingroup.github.io/eacoweb3-2026/eaco-charity2025.html" target="_blank" rel="noopener" data-i18n="swap_charity_link">EACO Charity 2025 \u2192</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="footer-info">
+    <p class="eaco-formula">EACO = Energy x Attitude x Cooperation x Optimization | Earth's Best Coin</p>
+    <p data-i18n="ft_chain">Chain: Solana</p>
+    <p class="contract">CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+    <p class="supply" data-i18n="ft_supply">Total Supply: 1.35 Billion EACO</p>
+  </div>
+  <div class="eco-links" id="ecoLinks"></div>
+  <p class="footer-copy">&copy; 2024-2026 EACO Community. Powered by Solana. Built with intention.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+<button class="to-top" id="toTop" onclick="scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ I18N Data ============ */
+var I18N = {
+  en:{
+    nav_philo:"Philosophy",nav_charity:"Charity",nav_join:"Participate",nav_team:"Team",nav_pool:"Liquidity",nav_fin:"Financing",nav_swap:"Swap",
+    hero_kicker:"EACO Web3 Community Mutual Aid",
+    hero_title_1:"Annual",hero_title_2:"3 Web3 Charity",hero_title_3:"Initiatives",
+    hero_sub:"Every year, the EACO community launches 3 Web3 mutual-aid charity projects, powered by Solana, driven by global netizens, for a better Earth.",
+    hero_btn1:"Explore Projects",hero_btn2:"How to Join",
+    philo_title:"The Power of Intention",
+    philo_sub:"The philosophical foundation of EACO charity: intention shapes reality.",
+    philo_quote:"Maintain a positive mindset, and your intention will transform the world around you.",
+    charity_title_1:"Annual",charity_title_2:"3 Charity",charity_title_3:"Projects",
+    charity_sub:"Each year, the EACO community selects and executes 3 Web3 mutual-aid initiatives. Transparent on-chain, driven by community, open to all.",
+    join_title:"How to Participate",
+    join_sub:"Anyone can join EACO Web3 charity initiatives in 5 simple steps.",
+    team_title:"EACO Virtual Executive Team",
+    team_sub:"8 AI-powered executive roles coordinating EACO charity operations worldwide, 24/7.",
+    pool_title:"EACO Liquidity Pool",
+    pool_sub:"Meteora DAMM v2 pool - the liquidity backbone of EACO charity funding.",
+    fin_title:"Overseas Financing Exploration",
+    fin_sub:"Leveraging EACO on Solana for cross-border fundraising and global community financing.",
+    ft_chain:"Chain: Solana",
+    ft_supply:"Total Supply: 1.35 Billion EACO",
+    toast_copy:"Contract address copied!",
+    badge_active:"Active",badge_done:"Completed",badge_planned:"Planned",
+    pool_visit:"View on Meteora",
+    pool_note:"Pool address: H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc | 100% permanently locked liquidity",
+    swap_title:"EACO Swap Explorer",
+    swap_sub:"Explore EACO exchange pathways with SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - all on Solana chain.",
+    swap_charity_link:"EACO Charity 2025 \u2192",
+    swap_view:"View on OrbMarkets",
+    swap_chain:"Solana Chain"
+  },
+  zh:{
+    nav_philo:"理念",nav_charity:"公益",nav_join:"参与",nav_team:"团队",nav_pool:"流动性",nav_fin:"融资",nav_swap:"兑换",
+    hero_kicker:"EACO Web3 社区互助",
+    hero_title_1:"每年",hero_title_2:"3项Web3公益",hero_title_3:"倡议",
+    hero_sub:"每年，EACO社区发起3项Web3互助公益项目，基于Solana区块链，由全球网友驱动，为了更好的地球。",
+    hero_btn1:"浏览项目",hero_btn2:"如何参与",
+    philo_title:"意念的力量",
+    philo_sub:"EACO公益的哲学基础：意念塑造现实。",
+    philo_quote:"保持积极的心态，你的意念将改变你周围的世界。",
+    charity_title_1:"年度",charity_title_2:"3项公益",charity_title_3:"项目",
+    charity_sub:"每年，EACO社区选拔并执行3项Web3互助公益倡议。链上透明，社区驱动，人人可参与。",
+    join_title:"如何参与",
+    join_sub:"任何人都可以通过5个简单步骤加入EACO Web3公益倡议。",
+    team_title:"EACO虚拟高管团队",
+    team_sub:"8个AI驱动的高管角色，全天候协调EACO全球公益运营。",
+    pool_title:"EACO流动性池",
+    pool_sub:"Meteora DAMM v2池 — EACO公益资金的流动性基石。",
+    fin_title:"海外融资探索",
+    fin_sub:"利用Solana上的EACO进行跨境筹款和全球社区融资。",
+    ft_chain:"链：Solana",
+    ft_supply:"总量：13.5亿枚 EACO",
+    toast_copy:"合约地址已复制！",
+    badge_active:"进行中",badge_done:"已完成",badge_planned:"计划中",
+    pool_visit:"在Meteora查看",
+    pool_note:"池地址：H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc | 100%永久锁仓流动性",
+    swap_title:"EACO兑换探索",
+    swap_sub:"探索EACO与SOL、USDT、USDC、wBNB、TRX、wETH、wBTC、eCNH的兑换路径 — 全部在Solana链内。",
+    swap_charity_link:"EACO公益2025 \u2192",
+    swap_view:"在OrbMarkets查看",
+    swap_chain:"Solana链"
+  },
+  es:{
+    nav_philo:"Filosofía",nav_charity:"Caridad",nav_join:"Participar",nav_team:"Equipo",nav_pool:"Liquidez",nav_fin:"Financiación",nav_swap:"Intercambio",
+    hero_kicker:"Ayuda Mutua Web3 de EACO",
+    hero_title_1:"Anuales",hero_title_2:"3 Caridades Web3",hero_title_3:"Iniciativas",
+    hero_sub:"Cada año, la comunidad EACO lanza 3 proyectos de caridad de ayuda mutua Web3, impulsados por Solana, por internautas globales, para una mejor Tierra.",
+    hero_btn1:"Explorar Proyectos",hero_btn2:"Cómo Participar",
+    philo_title:"El Poder de la Intención",
+    philo_sub:"La base filosófica de la caridad EACO: la intención da forma a la realidad.",
+    philo_quote:"Mantén una mentalidad positiva y tu intención transformará el mundo a tu alrededor.",
+    charity_title_1:"Anuales",charity_title_2:"3 Caridades",charity_title_3:"Proyectos",
+    charity_sub:"Cada año, la comunidad EACO selecciona y ejecuta 3 iniciativas de ayuda mutua Web3. Transparentes on-chain, impulsadas por la comunidad, abiertas a todos.",
+    join_title:"Cómo Participar",
+    join_sub:"Cualquiera puede unirse a las iniciativas de caridad Web3 de EACO en 5 simples pasos.",
+    team_title:"Equipo Ejecutivo Virtual EACO",
+    team_sub:"8 roles ejecutivos impulsados por IA coordinando operaciones de caridad EACO en todo el mundo, 24/7.",
+    pool_title:"Pool de Liquidez EACO",
+    pool_sub:"Pool Meteora DAMM v2 - la columna vertebral de liquidez de la financiación de caridad EACO.",
+    fin_title:"Exploración de Financiación en el Extranjero",
+    fin_sub:"Aprovechando EACO en Solana para recaudación transfronteriza y financiación comunitaria global.",
+    ft_chain:"Cadena: Solana",
+    ft_supply:"Suministro Total: 1.350 Millones EACO",
+    toast_copy:"¡Dirección de contrato copiada!",
+    badge_active:"Activo",badge_done:"Completado",badge_planned:"Planificado",
+    pool_visit:"Ver en Meteora",
+    pool_note:"Dirección del pool: H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc | Liquidez 100% bloqueada permanentemente",
+    swap_title:"Explorador de Intercambio EACO",
+    swap_sub:"Explora las rutas de intercambio de EACO con SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - todo en la cadena Solana.",
+    swap_charity_link:"EACO Caridad 2025 \u2192",
+    swap_view:"Ver en OrbMarkets",
+    swap_chain:"Cadena Solana"
+  },
+  fr:{
+    nav_philo:"Philosophie",nav_charity:"Charité",nav_join:"Participer",nav_team:"Équipe",nav_pool:"Liquidité",nav_fin:"Financement",nav_swap:"Échange",
+    hero_kicker:"Entraide Communautaire Web3 EACO",
+    hero_title_1:"Annuelles",hero_title_2:"3 Œuvres Web3",hero_title_3:"Initiatives",
+    hero_sub:"Chaque année, la communauté EACO lance 3 projets de charité d'entraide Web3, propulsés par Solana, par des internautes du monde entier, pour une meilleure Terre.",
+    hero_btn1:"Explorer les Projets",hero_btn2:"Comment Rejoindre",
+    philo_title:"Le Pouvoir de l'Intention",
+    philo_sub:"Le fondement philosophique de la charité EACO: l'intention façonne la réalité.",
+    philo_quote:"Gardez un état d'esprit positif et votre intention transformera le monde qui vous entoure.",
+    charity_title_1:"Annuelles",charity_title_2:"3 Œuvres",charity_title_3:"Projets",
+    charity_sub:"Chaque année, la communauté EACO sélectionne et exécute 3 initiatives d'entraide Web3. Transparentes on-chain, portées par la communauté, ouvertes à tous.",
+    join_title:"Comment Participer",
+    join_sub:"Tout le monde peut rejoindre les initiatives de charité Web3 EACO en 5 étapes simples.",
+    team_title:"Équipe Exécutive Virtuelle EACO",
+    team_sub:"8 rôles exécutifs alimentés par l'IA coordonnant les opérations de charité EACO dans le monde entier, 24h/24 et 7j/7.",
+    pool_title:"Pool de Liquidité EACO",
+    pool_sub:"Pool Meteora DAMM v2 - l'épine dorsale de liquidité du financement de charité EACO.",
+    fin_title:"Exploration du Financement à l'Étranger",
+    fin_sub:"Tirer parti d'EACO sur Solana pour la collecte de fonds transfrontalière et le financement communautaire mondial.",
+    ft_chain:"Chaîne: Solana",
+    ft_supply:"Offre Totale: 1,35 Milliard EACO",
+    toast_copy:"Adresse du contrat copiée!",
+    badge_active:"Actif",badge_done:"Terminé",badge_planned:"Planifié",
+    pool_visit:"Voir sur Meteora",
+    pool_note:"Adresse du pool: H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc | Liquidité 100% verrouillée en permanence",
+    swap_title:"Explorateur d'Échange EACO",
+    swap_sub:"Explorez les voies d'échange EACO avec SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - tout sur la chaîne Solana.",
+    swap_charity_link:"EACO Charité 2025 \u2192",
+    swap_view:"Voir sur OrbMarkets",
+    swap_chain:"Chaîne Solana"
+  },
+  ar:{
+    nav_philo:"الفلسفة",nav_charity:"الخيرية",nav_join:"المشاركة",nav_team:"الفريق",nav_pool:"السيولة",nav_fin:"التمويل",nav_swap:"تبادل",
+    hero_kicker:"EACO مساعدة Web3 المتبادلة",
+    hero_title_1:"سنوي",hero_title_2:"3 مشاريع Web3",hero_title_3:"خيرية",
+    hero_sub:"كل عام، يطلق مجتمع EACO 3 مشاريع خيرية للمساعدة المتبادلة عبر Web3، مدعومة بـ Solana، وبقيادة مستخدمي الإنترنت العالميين، من أجل أرض أفضل.",
+    hero_btn1:"استكشاف المشاريع",hero_btn2:"كيفية الانضمام",
+    philo_title:"قوة النية",
+    philo_sub:"الأساس الفلسفي للعمل الخيري EACO: النية تشكل الواقع.",
+    philo_quote:"حافظ على عقلية إيجابية، وستغير نيتك العالم من حولك.",
+    charity_title_1:"سنوي",charity_title_2:"3 مشاريع",charity_title_3:"خيرية",
+    charity_sub:"كل عام، يختار مجتمع EACO وينفذ 3 مبادرات مساعدة متبادلة عبر Web3. شفافة على السلسلة، بقيادة المجتمع، ومفتوحة للجميع.",
+    join_title:"كيفية المشاركة",
+    join_sub:"يمكن لأي شخص الانضمام إلى مبادرات EACO الخيرية عبر Web3 في 5 خطوات بسيطة.",
+    team_title:"فريق EACO التنفيذي الافتراضي",
+    team_sub:"8 أدوار تنفيذية مدعومة بالذكاء الاصطناعي تنسق عمليات EACO الخيرية في جميع أنحاء العالم، على مدار الساعة.",
+    pool_title:"مجمع سيولة EACO",
+    pool_sub:"مجمع Meteora DAMM v2 - العمود الفقري للسيولة لتمويل EACO الخيري.",
+    fin_title:"استكشاف التمويل الخارجي",
+    fin_sub:"استخدام EACO على Solana لجمع التبرعات العابرة للحدود والتمويل المجتمعي العالمي.",
+    ft_chain:"السلسلة: Solana",
+    ft_supply:"الإمداد الإجمالي: 1.35 مليار EACO",
+    toast_copy:"تم نسخ عنوان العقد!",
+    badge_active:"نشط",badge_done:"مكتمل",badge_planned:"مخطط",
+    pool_visit:"عرض على Meteora",
+    pool_note:"عنوان المجمع: H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc | سيولة مقفلة 100% بشكل دائم",
+    swap_title:"مستكشف تبادل EACO",
+    swap_sub:"استكشف مسارات تبادل EACO مع SOL و USDT و USDC و wBNB و TRX و wETH و wBTC و eCNH - كلها على سلسلة Solana.",
+    swap_charity_link:"EACO خيرية 2025 \u2192",
+    swap_view:"عرض على OrbMarkets",
+    swap_chain:"سلسلة Solana"
+  },
+  ru:{
+    nav_philo:"Философия",nav_charity:"Благотворительность",nav_join:"Участие",nav_team:"Команда",nav_pool:"Ликвидность",nav_fin:"Финансирование",nav_swap:"Обмен",
+    hero_kicker:"EACO Web3 Взаимопомощь",
+    hero_title_1:"Ежегодные",hero_title_2:"3 Web3 Благотворительные",hero_title_3:"Инициативы",
+    hero_sub:"Каждый год сообщество EACO запускает 3 проекта благотворительности взаимопомощи Web3, на базе Solana, инициированные глобальными пользователями, для лучшей Земли.",
+    hero_btn1:"Изучить Проекты",hero_btn2:"Как Участвовать",
+    philo_title:"Сила Намерения",
+    philo_sub:"Философская основа благотворительности EACO: намерение формирует реальность.",
+    philo_quote:"Сохраняйте позитивный настрой, и ваше намерение изменит мир вокруг вас.",
+    charity_title_1:"Ежегодные",charity_title_2:"3 Благотворительные",charity_title_3:"Проекты",
+    charity_sub:"Каждый год сообщество EACO отбирает и реализует 3 инициативы взаимопомощи Web3. Прозрачные on-chain, управляемые сообществом, открытые для всех.",
+    join_title:"Как Участвовать",
+    join_sub:"Любой может присоединиться к инициативам EACO Web3 благотворительности за 5 простых шагов.",
+    team_title:"Виртуальная Исполнительная Команда EACO",
+    team_sub:"8 ролей руководителей на базе ИИ координируют благотворительные операции EACO по всему миру, 24/7.",
+    pool_title:"Пул Ликвидности EACO",
+    pool_sub:"Пул Meteora DAMM v2 - основа ликвидности для финансирования благотворительности EACO.",
+    fin_title:"Исследование Зарубежного Финансирования",
+    fin_sub:"Использование EACO на Solana для трансграничного сбора средств и глобального общественное финансирования.",
+    ft_chain:"Сеть: Solana",
+    ft_supply:"Общее предложение: 1,35 Миллиарда EACO",
+    toast_copy:"Адрес контракта скопирован!",
+    badge_active:"Активен",badge_done:"Завершён",badge_planned:"Запланирован",
+    pool_visit:"Смотреть на Meteora",
+    pool_note:"Адрес пула: H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc | 100% навсегда заблокированная ликвидность",
+    swap_title:"Исследователь Обмена EACO",
+    swap_sub:"Изучите пути обмена EACO с SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - всё в сети Solana.",
+    swap_charity_link:"EACO Благотворительность 2025 \u2192",
+    swap_view:"Смотреть на OrbMarkets",
+    swap_chain:"Сеть Solana"
+  }
+};
+
+/* ============ Philosophy Data ============ */
+var PHILOSOPHY = [
+  {icon:"\u2728",texts:{
+    en:"Intention is the Creator",zh:"意念是造物主",
+    es:"La intención es el Creador",fr:"L'intention est le Créateur",
+    ar:"النية هي الخالق",ru:"Намерение - это Творец"
+  }},
+  {icon:"\u26A1",texts:{
+    en:"Intention is Energy",zh:"意念是能量",
+    es:"La intención es energía",fr:"L'intention est de l'énergie",
+    ar:"النية هي طاقة",ru:"Намерение - это энергия"
+  }},
+  {icon:"\u1F4E7",texts:{
+    en:"Energy transforms into Matter",zh:"能量能转化成物质",
+    es:"La energía se transforma en materia",fr:"L'énergie se transforme en matière",
+    ar:"الطاقة تتحول إلى مادة",ru:"Энергия превращается в материю"
+  }},
+  {icon:"\u1F30C",texts:{
+    en:"Intention becomes Phenomena",zh:"意念就可以变成现象",
+    es:"La intención se convierte en fenómenos",fr:"L'intention devient des phénomènes",
+    ar:"النية تصبح ظواهر",ru:"Намерение становится явлением"
+  }},
+  {icon:"\u1F9ED",texts:{
+    en:"Intention becomes Matter",zh:"意念就可以变成物质",
+    es:"La intención se convierte en materia",fr:"L'intention devient de la matière",
+    ar:"النية تصبح مادة",ru:"Намерение становится материей"
+  }},
+  {icon:"\u1F4A0",texts:{
+    en:"Thought changes Environment & Body",zh:"起心动念就可以改变环境和身体",
+    es:"El pensamiento cambia el entorno y el cuerpo",fr:"La pensée change l'environnement et le corps",
+    ar:"الفكر يغير البيئة والجسد",ru:"Мысль изменяет среду и тело"
+  }},
+  {icon:"\u1F6E1\uFE0F",texts:{
+    en:"Maintain a Positive Mindset",zh:"保存积极的心态",
+    es:"Mantén una mentalidad positiva",fr:"Gardez un état d'esprit positif",
+    ar:"حافظ على عقلية إيجابية",ru:"Сохраняйте позитивный настрой"
+  }}
+];
+
+/* ============ Charity Projects Data ============ */
+var CHARITY_YEARS = [
+  {
+    year:2026,
+    projects:[
+      {
+        status:"active",progress:65,icon:"\u1F4DA",
+        title:{en:"Web3 Education for All",zh:"Web3教育普惠",es:"Educación Web3 para Todos",fr:"Éducation Web3 pour Tous",ar:"تعليم Web3 للجميع",ru:"Образование Web3 для Всех"},
+        desc:{
+          en:"Free blockchain & Web3 courses in 6 languages, reaching 10,000+ learners in developing regions.",
+          zh:"6种语言的免费区块链与Web3课程，覆盖发展中地区10000+学习者。",
+          es:"Cursos gratuitos de blockchain y Web3 en 6 idiomas, llegando a más de 10,000 estudiantes en regiones en desarrollo.",
+          fr:"Cours gratuits de blockchain et Web3 en 6 langues, touchant plus de 10 000 apprenants dans les régions en développement.",
+          ar:"دورات مجانية في البلوك تشين و Web3 بـ 6 لغات، تصل إلى أكثر من 10000 متعلم في المناطق النامية.",
+          ru:"Бесплатные курсы по блокчейну и Web3 на 6 языках, охватывающие 10000+ учащихся в развивающихся регионах."
+        },
+        tags:{en:["Education","6 Languages","Free"],zh:["教育","6种语言","免费"],es:["Educación","6 Idiomas","Gratis"],fr:["Éducation","6 Langues","Gratuit"],ar:["تعليم","6 لغات","مجاني"],ru:["Образование","6 Языков","Бесплатно"]},
+        link:"https://ucoingroup.github.io/earth-100-friends/"
+      },
+      {
+        status:"active",progress:40,icon:"\u1F911",
+        title:{en:"EACO Micro-Grants",zh:"EACO微额资助",es:"Micro-Subvenciones EACO",fr:"Micro-Subventions EACO",ar:"منح EACO الصغيرة",ru:"Микро-гранты EACO"},
+        desc:{
+          en:"135 EACO micro-grants for developers and creators in developing countries, funded by community treasury.",
+          zh:"为发展中国家的开发者和创作者提供135枚EACO微额资助，由社区金库资助。",
+          es:"135 micro-subvenciones EACO para desarrolladores y creadores en países en desarrollo, financiadas por la tesorería comunitaria.",
+          fr:"135 micro-subventions EACO pour les développeurs et créateurs des pays en développement, financées par le trésor communautaire.",
+          ar:"135 منحة صغيرة من EACO للمطورين والمبدعين في البلدان النامية، بتمويل من خزانة المجتمع.",
+          ru:"135 микро-грантов EACO для разработчиков и творцов в развивающихся странах, финансируемых из общественной казны."
+        },
+        tags:{en:["Developers","135 Grants","Treasury"],zh:["开发者","135笔资助","金库"],es:["Desarrolladores","135 Subvenciones","Tesorería"],fr:["Développeurs","135 Subventions","Trésor"],ar:["مطورون","135 منحة","خزانة"],ru:["Разработчики","135 Грантов","Казна"]},
+        link:"https://ucoingroup.github.io/eaco-faucet/"
+      },
+      {
+        status:"active",progress:25,icon:"\u1F30D",
+        title:{en:"Earth Village Mutual Aid",zh:"地球村互助基金",es:"Fondo de Ayuda Mutua de la Aldea Global",fr:"Fonds d'Entraide du Village Terre",ar:"صندوق المساعدة المتبادلة لقرية الأرض",ru:"Фонд Взаимопомощи Деревни Земли"},
+        desc:{
+          en:"Decentralized emergency relief fund using EACO for community-vetted crisis support worldwide.",
+          zh:"使用EACO的去中心化紧急救助基金，为全球社区审核的危机提供支持。",
+          es:"Fondo descentralizado de ayuda de emergencia usando EACO para apoyo en crisis verificadas por la comunidad en todo el mundo.",
+          fr:"Fonds décentralisé de secours d'urgence utilisant EACO pour un soutien aux crises vérifiées par la communauté dans le monde entier.",
+          ar:"صندوق لامركزي للإغاثة الطارئة يستخدم EACO لدعم الأزمات التي تتحقق منها المجتمع في جميع أنحاء العالم.",
+          ru:"Децентрализованный фонд чрезвычайной помощи, использующий EACO для поддержки кризисов, проверенных сообществом по всему миру."
+        },
+        tags:{en:["Emergency","DAO","Global"],zh:["紧急","DAO","全球"],es:["Emergencia","DAO","Global"],fr:["Urgence","DAO","Mondial"],ar:["طوارئ","DAO","عالمي"],ru:["Чрезвычайные","DAO","Глобальный"]},
+        link:"https://discord.gg/bWCDME9Pkc"
+      }
+    ]
+  },
+  {
+    year:2025,
+    projects:[
+      {
+        status:"done",progress:100,icon:"\u1FA7E",
+        title:{en:"EACO Faucet Launch",zh:"EACO水龙头上线",es:"Lanzamiento del Faucet EACO",fr:"Lancement du Faucet EACO",ar:"إطلاق صنبور EACO",ru:"Запуск EACO Faucet"},
+        desc:{
+          en:"Free EACO token distribution faucet for new users, onboarding 5,000+ wallets to the Solana ecosystem.",
+          zh:"面向新用户的免费EACO代币分发水龙头，将5000+钱包引入Solana生态。",
+          es:"Distribución gratuita de tokens EACO para nuevos usuarios, incorporando más de 5,000 billeteras al ecosistema Solana.",
+          fr:"Distribution gratuite de jetons EACO pour les nouveaux utilisateurs, intégrant plus de 5 000 portefeuilles dans l'écosystème Solana.",
+          ar:"توزيع مجاني لرموز EACO للمستخدمين الجدد، مع إدخال أكثر من 5000 محفظة إلى نظام Solana البيئي.",
+          ru:"Бесплатная раздача токенов EACO для новых пользователей, привлекшая 5000+ кошельков в экосистему Solana."
+        },
+        tags:{en:["Onboarding","5000+ Wallets","Free"],zh:["入门","5000+钱包","免费"],es:["Incorporación","5000+ Billeteras","Gratis"],fr:["Intégration","5000+ Portefeuilles","Gratuit"],ar:["إدخال","5000+ محفظة","مجاني"],ru:["Онбординг","5000+ Кошельков","Бесплатно"]},
+        link:"https://ucoingroup.github.io/eaco-faucet/"
+      },
+      {
+        status:"done",progress:100,icon:"\u1F4DA",
+        title:{en:"Good Books Library",zh:"善书馆",es:"Biblioteca de Buenos Libros",fr:"Bibliothèque de Bons Livres",ar:"مكتبة الكتب الجيدة",ru:"Библиотека Добрых Книг"},
+        desc:{
+          en:"Decentralized knowledge sharing platform with 200+ bilingual classics freely accessible on-chain.",
+          zh:"去中心化知识分享平台，200+双 语经典免费链上访问。",
+          es:"Plataforma descentralizada de intercambio de conocimiento con más de 200 clásicos bilingües accesibles gratuitamente on-chain.",
+          fr:"Plateforme décentralisée de partage de connaissances avec plus de 200 classiques bilingues accessibles gratuitement on-chain.",
+          ar:"منصة لامركزية لمشاركة المعرفة مع أكثر من 200 كتاب كلاسيكي ثنائي اللغة متاحة مجاناً على السلسلة.",
+          ru:"Децентрализованная платформа обмена знаниями с 200+ двуязычными классиками, доступными бесплатно on-chain."
+        },
+        tags:{en:["Knowledge","200+ Books","Bilingual"],zh:["知识","200+本书","双语"],es:["Conocimiento","200+ Libros","Bilingüe"],fr:["Connaissance","200+ Livres","Bilingue"],ar:["معرفة","200+ كتاب","ثنائي اللغة"],ru:["Знания","200+ Книг","Двуязычные"]},
+        link:"https://ucoingroup.github.io/good-books/"
+      },
+      {
+        status:"done",progress:100,icon:"\u1F465",
+        title:{en:"Earth's 100 Friends",zh:"地球最好的100个朋友",es:"Los 100 Amigos de la Tierra",fr:"Les 100 Amis de la Terre",ar:"أفضل 100 صديق للأرض",ru:"100 Лучших Друзей Земли"},
+        desc:{
+          en:"Global community building initiative connecting 100 Web3 communities across 6 continents.",
+          zh:"全球社区建设倡议，连接6大洲100个Web3社区。",
+          es:"Iniciativa de construcción de comunidad global conectando 100 comunidades Web3 en 6 continentes.",
+          fr:"Initiative de construction de communauté mondiale connectant 100 communautés Web3 sur 6 continents.",
+          ar:"مبادرة بناء مجتمع عالمي تربط 100 مجتمع Web3 عبر 6 قارات.",
+          ru:"Инициатива по созданию глобального сообщества, объединяющая 100 сообществ Web3 на 6 континентах."
+        },
+        tags:{en:["Community","6 Continents","Web3"],zh:["社区","6大洲","Web3"],es:["Comunidad","6 Continentes","Web3"],fr:["Communauté","6 Continents","Web3"],ar:["مجتمع","6 قارات","Web3"],ru:["Сообщество","6 Континентов","Web3"]},
+        link:"https://ucoingroup.github.io/earth-100-friends/"
+      }
+    ]
+  },
+  {
+    year:2024,
+    projects:[
+      {
+        status:"done",progress:100,icon:"\u1F680",
+        title:{en:"EACO Token Launch",zh:"EACO代币发布",es:"Lanzamiento del Token EACO",fr:"Lancement du Jeton EACO",ar:"إطلاق رمز EACO",ru:"Запуск Токена EACO"},
+        desc:{
+          en:"Fair-launched EACO token on Solana with 100% permanently locked liquidity on Meteora DAMM v2.",
+          zh:"在Solana上公平发布的EACO代币，100%永久锁仓流动性在Meteora DAMM v2。",
+          es:"Lanzamiento justo del token EACO en Solana con liquidez 100% bloqueada permanentemente en Meteora DAMM v2.",
+          fr:"Lancement équitable du jeton EACO sur Solana avec liquidité 100% verrouillée en permanence sur Meteora DAMM v2.",
+          ar:"إطلاق عادل لرمز EACO على Solana مع سيولة مقفلة 100% بشكل دائم على Meteora DAMM v2.",
+          ru:"Честный запуск токена EACO на Solana с 100% навсегда заблокированной ликвидностью на Meteora DAMM v2."
+        },
+        tags:{en:["Fair Launch","Locked LP","Solana"],zh:["公平发布","锁仓LP","Solana"],es:["Lanzamiento Justo","LP Bloqueado","Solana"],fr:["Lancement Équitable","LP Verrouillé","Solana"],ar:["إطلاق عادل","LP مقفل","Solana"],ru:["Честный Запуск","LP Заблокирован","Solana"]},
+        link:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"
+      },
+      {
+        status:"done",progress:100,icon:"\u1F9ED",
+        title:{en:"Mohist Tech Open Source",zh:"墨家科技开源",es:"Código Abierto de Tecnología Moísta",fr:"Open Source de la Technologie Mohiste",ar:"مصدر مفتوح لتقنية الموحدين",ru:"Открытый Исходный Код Технологии Моистов"},
+        desc:{
+          en:"Open-sourced Mohist philosophy-inspired tech framework for decentralized governance.",
+          zh:"开源受墨家哲学启发的去中心化治理技术框架。",
+          es:"Framework tecnológico de código abierto inspirado en la filosofía moísta para gobernanza descentralizada.",
+          fr:"Framework technologique open source inspiré de la philosophie mohiste pour la gouvernance décentralisée.",
+          ar:"إطار تقني مفتوح المصدر مستوحى من فلسفة الموحدين للحوكمة اللامركزية.",
+          ru:"Технологический фреймворк с открытым исходным кодом, вдохновлённый философией моистов для децентрализованного управления."
+        },
+        tags:{en:["Open Source","Governance","Mohist"],zh:["开源","治理","墨家"],es:["Código Abierto","Gobernanza","Moísta"],fr:["Open Source","Gouvernance","Mohiste"],ar:["مصدر مفتوح","حوكمة","موحدين"],ru:["Открытый Код","Управление","Моисты"]},
+        link:"https://ucoingroup.github.io/Mohist-Tech/"
+      },
+      {
+        status:"done",progress:100,icon:"\u1F30C",
+        title:{en:"AU-Trade Platform",zh:"AU-Trade平台",es:"Plataforma AU-Trade",fr:"Plateforme AU-Trade",ar:"منصة AU-Trade",ru:"Платформа AU-Trade"},
+        desc:{
+          en:"Fair trade platform connecting Australia, Southeast Asia, and China using EACO for settlement.",
+          zh:"连接澳大利亚、东南亚和中国的公平贸易平台，使用EACO结算。",
+          es:"Plataforma de comercio justo conectando Australia, el Sudeste Asiático y China usando EACO para liquidación.",
+          fr:"Plateforme de commerce équitable connectant l'Australie, l'Asie du Sud-Est et la Chine utilisant EACO pour le règlement.",
+          ar:"منصة تجارة عادلة تربط أستراليا وجنوب شرق آسيا والصين باستخدام EACO للتسوية.",
+          ru:"Платформа честной торговли, соединяющая Австралию, Юго-Восточную Азию и Китай с использованием EACO для расчётов."
+        },
+        tags:{en:["Fair Trade","Cross-Border","EACO"],zh:["公平贸易","跨境","EACO"],es:["Comercio Justo","Transfronterizo","EACO"],fr:["Commerce Équitable","Transfrontalier","EACO"],ar:["تجارة عادلة","عبر الحدود","EACO"],ru:["Честная Торговля","Трансграничный","EACO"]},
+        link:"https://ucoingroup.github.io/au-trade/"
+      }
+    ]
+  }
+];
+
+/* ============ Steps Data ============ */
+var STEPS = [
+  {icon:"\u1F4F1",title:{en:"Get a Wallet",zh:"获取钱包",es:"Obtén una Billetera",fr:"Obtenez un Portefeuille",ar:"احصل على محفظة",ru:"Получите Кошелек"},desc:{en:"Download Phantom or Solflare wallet for Solana blockchain.",zh:"下载Phantom或Solflare钱包用于Solana区块链。",es:"Descarga Phantom o Solflare para la blockchain Solana.",fr:"Téléchargez Phantom ou Solflare pour la blockchain Solana.",ar:"قم بتنزيل Phantom أو Solflare لـ Solana blockchain.",ru:"Скачайте Phantom или Solflare для блокчейна Solana."}},
+  {icon:"\u1F4B0",title:{en:"Get EACO",zh:"获取EACO",es:"Obtén EACO",fr:"Obtenez EACO",ar:"احصل على EACO",ru:"Получите EACO"},desc:{en:"Swap SOL for EACO on Meteora or Jupiter DEX.",zh:"在Meteora或Jupiter DEX上将SOL兑换为EACO。",es:"Intercambia SOL por EACO en Meteora o Jupiter DEX.",fr:"Échangez SOL contre EACO sur Meteora ou Jupiter DEX.",ar:"قم بتبديل SOL إلى EACO على Meteora أو Jupiter DEX.",ru:"Обменяйте SOL на EACO на Meteora или Jupiter DEX."}},
+  {icon:"\u1F4DD",title:{en:"Join Community",zh:"加入社区",es:"Únete a la Comunidad",fr:"Rejoignez la Communauté",ar:"انضم إلى المجتمع",ru:"Присоединитесь к Сообществу"},desc:{en:"Join EACO Discord to participate in charity proposals and voting.",zh:"加入EACO Discord参与公益提案和投票。",es:"Únete al Discord de EACO para participar en propuestas y votaciones de caridad.",fr:"Rejoignez le Discord EACO pour participer aux propositions et votes de charité.",ar:"انضم إلى Discord EACO للمشاركة في اقتراحات وتصويتات الأعمال الخيرية.",ru:"Присоединитесь к Discord EACO для участия в предложениях и голосовании."}},
+  {icon:"\u1F4CA",title:{en:"Vote & Propose",zh:"投票与提案",es:"Vota y Propón",fr:"Votez et Proposez",ar:"صوّت واقترح",ru:"Голосуйте и Предлагайте"},desc:{en:"Propose new charity ideas or vote on existing initiatives on-chain.",zh:"在链上提出新的公益想法或对现有倡议投票。",es:"Propón nuevas ideas de caridad o vota en iniciativas existentes on-chain.",fr:"Proposez de nouvelles idées de charité ou votez sur les initiatives existantes on-chain.",ar:"اقترح أفكاراً خيرية جديدة أو صوّت على المبادرات القائمة على السلسلة.",ru:"Предлагайте новые благотворительные идеи или голосуйте за существующие инициативы on-chain."}},
+  {icon:"\u1F31F",title:{en:"Make Impact",zh:"产生影响",es:"Crea Impacto",fr:"Créez un Impact",ar:"اصنع تأثيراً",ru:"Создайте Влияние"},desc:{en:"Track results on-chain and see your contribution make real-world impact.",zh:"在链上追踪结果，看到你的贡献产生真实影响。",es:"Rastrea los resultados on-chain y ve cómo tu contribución crea impacto real.",fr:"Suivez les résultats on-chain et voyez votre contribution avoir un impact réel.",ar:"تتبع النتائج على السلسلة وشاهد مساهمتك تحدث تأثيراً حقيقياً.",ru:"Отслеживайте результаты on-chain и видеть, как ваш вклад создаёт реальное влияние."}}
+];
+
+/* ============ Executive Team Data ============ */
+var EXEC_TEAM = [
+  {role:"Executive Orchestrator",icon:"\u1F9E0",dept:{en:"Coordination Hub",zh:"调度中枢",es:"Centro de Coordinación",fr:"Centre de Coordination",ar:"مركز التنسيق",ru:"Центр Координации"},
+   desc:{en:"AI-powered central coordinator that dispatches tasks, monitors progress, and ensures seamless collaboration across all 8 executive roles for EACO charity operations.",zh:"AI驱动的中央协调器，负责调度任务、监控进度，确保8个高管角色在EACO公益运营中无缝协作。",es:"Coordinador central impulsado por IA que asigna tareas, monitorea el progreso y garantiza una colaboración fluida entre los 8 roles ejecutivos.",fr:"Coordinateur central alimenté par l'IA qui distribue les tâches, surveille les progrès et assure une collaboration fluide entre les 8 rôles exécutifs.",ar:"منسق مركزي مدعوم بالذكاء الاصطناعي يوزع المهام ويراقب التقدم ويضمن تعاوناً سلساً بين جميع الأدوار التنفيذية الثمانية.",ru:"Центральный координатор на базе ИИ, который распределяет задачи, отслеживает прогресс и обеспечивает беспрепятственное сотрудничество между всеми 8 ролями руководителей."},
+   tags:["AI","24/7","Coordinator"],isOrchestrator:true},
+  {role:"CSO",icon:"\u1F3AF",dept:{en:"Chief Strategy Officer",zh:"首席战略官",es:"Director de Estrategia",fr:"Directeur de la Stratégie",ar:"مدير الاستراتيجية",ru:"Директор по Стратегии"},
+   desc:{en:"Defines annual charity strategy, selects the 3 key initiatives, and aligns them with EACO's Earth-best mission.",zh:"制定年度公益战略，选拔3项重点倡议，并使其与EACO地球最佳使命对齐。",es:"Define la estrategia anual de caridad, selecciona las 3 iniciativas clave y las alinea con la misión de EACO.",fr:"Définit la stratégie annuelle de charité, sélectionne les 3 initiatives clés et les aligne avec la mission EACO.",ar:"يحدد استراتيجية العمل الخيري السنوية ويختار المبادرات الثلاث الرئيسية.",ru:"Определяет годовую благотворительную стратегию, отбирает 3 ключевые инициативы."},
+   tags:["Strategy","Planning","Mission"]},
+  {role:"CFO",icon:"\u1F4B0",dept:{en:"Chief Financial Officer",zh:"首席财务官",es:"Director Financiero",fr:"Directeur Financier",ar:"المدير المالي",ru:"Финансовый Директор"},
+   desc:{en:"Manages EACO treasury, ensures transparent fund allocation for charity projects, and reports on-chain.",zh:"管理EACO金库，确保公益项目资金透明分配，并在链上报告。",es:"Gestiona la tesorería EACO, garantiza una asignación transparente de fondos y reporta on-chain.",fr:"Gère le trésor EACO, assure une allocation transparente des fonds et rapporte on-chain.",ar:"يدير خزانة EACO ويضمن تخصيصاً شفافاً للأموال ويقدم التقارير على السلسلة.",ru:"Управляет казной EACO, обеспечивает прозрачное распределение средств и отчитывается on-chain."},
+   tags:["Treasury","Transparent","On-chain"]},
+  {role:"CHRO",icon:"\u1F465",dept:{en:"Chief HR Officer",zh:"首席人事官",es:"Director de RRHH",fr:"Directeur des RH",ar:"مدير الموارد البشرية",ru:"Директор по Персоналу"},
+   desc:{en:"Recruits and coordinates community volunteers, manages contributor recognition and EACO reward distribution.",zh:"招募和协调社区志愿者，管理贡献者认可和EACO奖励分发。",es:"Recluta y coordina voluntarios comunitarios, gestiona el reconocimiento de contribuyentes y la distribución de recompensas EACO.",fr:"Recrute et coordonne les bénévoles communautaires, gère la reconnaissance des contributeurs et la distribution des récompenses EACO.",ar:"يجند وينسق المتطوعين المجتمعيين ويدير تقدير المساهمين وتوزيع مكافآت EACO.",ru:"Нанимает и координирует волонтёров сообщества, управляет признанием участников и распределением наград EACO."},
+   tags:["Volunteers","Rewards","Community"]},
+  {role:"General Counsel",icon:"\u2696\uFE0F",dept:{en:"Legal & Compliance",zh:"法律顾问",es:"Asesor Legal",fr:"Conseil Juridique",ar:"مستشار قانوني",ru:"Юрист"},
+   desc:{en:"Ensures all charity initiatives comply with international regulations and Web3 legal frameworks across jurisdictions.",zh:"确保所有公益倡议符合国际法规和跨司法管辖区的Web3法律框架。",es:"Garantiza que todas las iniciativas de caridad cumplan con las regulaciones internacionales y los marcos legales Web3.",fr:"S'assure que toutes les initiatives de charité respectent les réglementations internationales et les cadres juridiques Web3.",ar:"يضمن امتثال جميع المبادرات الخيرية للأنظمة الدولية والأطر القانونية لـ Web3.",ru:"Обеспечивает соответствие всех благотворительных инициатив международным правилам и правовым рамкам Web3."},
+   tags:["Legal","Compliance","Global"]},
+  {role:"COO",icon:"\u1F527",dept:{en:"Chief Operating Officer",zh:"首席运营官",es:"Director de Operaciones",fr:"Directeur des Opérations",ar:"مدير العمليات",ru:"Операционный Директор"},
+   desc:{en:"Executes charity project operations, coordinates logistics, and tracks real-time progress of all 3 annual initiatives.",zh:"执行公益项目运营，协调后勤，并追踪3项年度倡议的实时进度。",es:"Ejecuta las operaciones de proyectos de caridad, coordina la logística y rastrea el progreso de las 3 iniciativas anuales.",fr:"Exécute les opérations des projets de charité, coordonne la logistique et suit le progrès des 3 initiatives annuelles.",ar:"ينفذ عمليات المشاريع الخيرية وينسق الخدمات اللوجستية ويتتبع التقدم في المبادرات السنوية الثلاث.",ru:"Выполняет операции благотворительных проектов, координирует логистику и отслеживает прогресс всех 3 ежегодных инициатив."},
+   tags:["Operations","Logistics","Tracking"]},
+  {role:"CMO",icon:"\u1F4E2",dept:{en:"Chief Marketing Officer",zh:"首席营销官",es:"Director de Marketing",fr:"Directeur du Marketing",ar:"مدير التسويق",ru:"Директор по Маркетингу"},
+   desc:{en:"Promotes EACO charity initiatives across 6 languages and global social media, driving awareness and participation.",zh:"用6种语言和全球社交媒体推广EACO公益倡议，推动关注和参与。",es:"Promueve las iniciativas de caridad EACO en 6 idiomas y redes sociales globales.",fr:"Promeut les initiatives de charité EACO en 6 langues et sur les réseaux sociaux mondiaux.",ar:"يعزز مبادرات EACO الخيرية بـ 6 لغات وعبر وسائل التواصل الاجتماعي العالمية.",ru:"Продвигает благотворительные инициативы EACO на 6 языках и в глобальных социальных сетях."},
+   tags:["Marketing","6 Languages","Social"]},
+  {role:"CPO",icon:"\u1F6E0\uFE0F",dept:{en:"Chief Product Officer",zh:"首席产品官",es:"Director de Producto",fr:"Directeur Produit",ar:"مدير المنتج",ru:"Директор по Продукту"},
+   desc:{en:"Designs and maintains EACO charity platform features, including proposal system, voting mechanism, and impact tracking.",zh:"设计和维护EACO公益平台功能，包括提案系统、投票机制和影响追踪。",es:"Diseña y mantiene las características de la plataforma de caridad EACO, incluyendo sistema de propuestas y votación.",fr:"Conçoit et maintient les fonctionnalités de la plateforme de charité EACO, y compris le système de propositions et de vote.",ar:"يصمم ويحافظ على ميزات منصة EACO الخيرية بما في ذلك نظام الاقتراحات والتصويت.",ru:"Проектирует и поддерживает функции благотворительной платформы EACO, включая систему предложений и голосования."},
+   tags:["Product","Platform","Features"]},
+  {role:"Board Comms",icon:"\u1F4AC",dept:{en:"Board Communications",zh:"董事会通讯",es:"Comunicaciones del Consejo",fr:"Communications du Conseil",ar:"اتصالات المجلس",ru:"Связь с Советом"},
+   desc:{en:"Manages transparent communication with the EACO community, publishing quarterly charity reports and impact metrics.",zh:"管理与EACO社区的透明沟通，发布季度公益报告和影响指标。",es:"Gestiona la comunicación transparente con la comunidad EACO, publicando informes trimestrales de caridad.",fr:"Gère la communication transparente avec la communauté EACO, publiant des rapports trimestriels de charité.",ar:"يدير التواصل الشفاف مع مجتمع EACO وينشر تقارير ربع سنوية للأعمال الخيرية.",ru:"Управляет прозрачной связью с сообществом EACO, публикуя ежеквартальные отчёты о благотворительности."},
+   tags:["Communications","Reports","Transparency"]}
+];
+
+/* ============ Pool Data ============ */
+var POOL_DATA = {
+  pairs:[
+    {label:{en:"Trading Pair",zh:"交易对",es:"Par de Comercio",fr:"Paire de Négociation",ar:"زوج التداول",ru:"Торговая Пара"},value:"EACO / SOL"},
+    {label:{en:"Pool Type",zh:"池类型",es:"Tipo de Pool",fr:"Type de Pool",ar:"نوع المجمع",ru:"Тип Пула"},value:"DAMM v2"},
+    {label:{en:"Liquidity Locked",zh:"流动性锁仓",es:"Liquidez Bloqueada",fr:"Liquidité Verrouillée",ar:"السيولة المقفلة",ru:"Ликвидность Заблокирована"},value:"100% Permanent"},
+    {label:{en:"Platform",zh:"平台",es:"Plataforma",fr:"Plateforme",ar:"المنصة",ru:"Платформа"},value:"Meteora"},
+    {label:{en:"Chain",zh:"链",es:"Cadena",fr:"Chaîne",ar:"السلسلة",ru:"Сеть"},value:"Solana"},
+    {label:{en:"EACO Total Supply",zh:"EACO总供应量",es:"Suministro Total EACO",fr:"Offre Totale EACO",ar:"الإمداد الإجمالي EACO",ru:"Общее Предложение EACO"},value:"1.35 Billion"}
+  ],
+  url:"https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc"
+};
+
+/* ============ Financing Data ============ */
+var FINANCING = [
+  {icon:"\u1F310",title:{en:"Cross-Border Fundraising",zh:"跨境筹款",es:"Recaudación Transfronteriza",fr:"Collecte Transfrontalière",ar:"جمع التبرعات العابرة للحدود",ru:"Трансграничный Сбор Средств"},
+   desc:{en:"EACO enables frictionless cross-border donations without traditional banking barriers.",zh:"EACO实现无摩擦跨境捐赠，无需传统银行壁垒。",es:"EACO permite donaciones transfronterizas sin fricción y sin barreras bancarias tradicionales.",fr:"EACO permet des dons transfrontaliers sans friction ni barrières bancaires traditionnelles.",ar:"يتيح EACO تبرعات عابرة للحدود دون احتكاك ودون حواجز مصرفية تقليدية.",ru:"EACO обеспечивает беспрепятственные трансграничные пожертвования без традиционных банковских барьеров."},
+   points:{en:["Solana fast & low-cost transfers","No bank account required","Transparent on-chain tracking"],zh:["Solana快速低成本转账","无需银行账户","链上透明追踪"],es:["Transferencias rápidas y de bajo costo en Solana","Sin cuenta bancaria","Seguimiento transparente on-chain"],fr:["Transferts rapides et peu coûteux sur Solana","Sans compte bancaire","Suivi transparent on-chain"],ar:["تحويلات سريعة ومنخفضة التكلفة على Solana","بدون حساب بنكي","تتبع شفاف على السلسلة"],ru:["Быстрые и дешёвые переводы на Solana","Без банковского счёта","Прозрачное отслеживание on-chain"]}},
+  {icon:"\u1F4B9",title:{en:"Liquidity Pool Funding",zh:"流动性池资助",es:"Financiación via Pool de Liquidez",fr:"Financement par Pool de Liquidité",ar:"التمويل عبر مجمع السيولة",ru:"Финансирование через Пул Ликвидности"},
+   desc:{en:"Meteora DAMM v2 pool provides sustainable funding through trading fees for charity initiatives.",zh:"Meteora DAMM v2池通过交易费用为公益倡议提供可持续资金。",es:"El pool Meteora DAMM v2 proporciona financiación sostenible через comisiones de trading para iniciativas de caridad.",fr:"Le pool Meteora DAMM v2 fournit un financement durable via les frais de trading pour les initiatives de charité.",ar:"يوفر مجمع Meteora DAMM v2 تمويلاً مستداماً من خلال رسوم التداول للمبادرات الخيرية.",ru:"Пул Meteora DAMM v2 обеспечивает устойчивое финансирование через торговые комиссии для благотворительных инициатив."},
+   points:{en:["100% permanently locked liquidity","Trading fees fund charity","Sustainable funding model"],zh:["100%永久锁仓流动性","交易费用资助公益","可持续资助模式"],es:["Liquidez 100% bloqueada permanentemente","Las comisiones financian la caridad","Modelo de financiación sostenible"],fr:["Liquidité 100% verrouillée en permanence","Les frais financent la charité","Modèle de financement durable"],ar:["سيولة مقفلة 100% بشكل دائم","الرسوم تمول الأعمال الخيرية","نموذج تمويل مستدام"],ru:["100% навсегда заблокированная ликвидность","Комиссии финансируют благотворительность","Устойчивая модель финансирования"]}},
+  {icon:"\u1F3DB\uFE0F",title:{en:"HK Gateway & CNH Bridge",zh:"香港通道与CNH桥梁",es:"Portal de HK y Puente CNH",fr:"Passerelle HK et Pont CNH",ar:"بوابة هونغ كونغ وجسر CNH",ru:"Шлюз Гонконга и Мост CNH"},
+   desc:{en:"Leverage HK Stablecoin Ordinance to bridge CNH capital via HKD/USDT to Solana for Chinese diaspora.",zh:"利用香港稳定币条例，通过HKD/USDT将人民币资本桥接至Solana，服务华侨社区。",es:"Aprovechar la Ordenanza de Monedas Estables de HK para puentear capital CNH vía HKD/USDT a Solana.",fr:"Exploiter l'Ordonnance sur les Stablecoins de HK pour ponter le capital CNH via HKD/USDT vers Solana.",ar:"استغلال نظام العملات المستقرة في هونغ كونغ لربط رأس المال عبر HKD/USDT إلى Solana.",ru:"Использовать Ордонанс о стейблкоинах Гонконга для моста капитала CNH через HKD/USDT в Solana."},
+   points:{en:["HK Stablecoin Ordinance compliant","CNH to Solana bridge","Chinese diaspora access"],zh:["符合香港稳定币条例","CNH到Solana桥梁","华侨社区接入"],es:["Cumple con la Ordenanza de Stablecoins de HK","Puente de CNH a Solana","Acceso para la diáspora china"],fr:["Conforme à l'Ordonnance Stablecoins de HK","Pont CNH vers Solana","Accès pour la diaspora chinoise"],ar:["متوافق مع نظام العملات المستقرة في هونغ كونغ","جسر CNH إلى Solana","وصول المغتربين الصينيين"],ru:["Соответствует Ордонансу Гонконга о стейблкоинах","Мост CNH в Solana","Доступ для китайской диаспоры"]}},
+  {icon:"\u1F4A1",title:{en:"DAO Governance Model",zh:"DAO治理模式",es:"Modelo de Gobernanza DAO",fr:"Modèle de Gouvernance DAO",ar:"نموذج حوكمة DAO",ru:"Модель Управления DAO"},
+   desc:{en:"EACO holders vote on charity project selection, fund allocation, and impact assessment through on-chain DAO.",zh:"EACO持有者通过链上DAO对公益项目选择、资金分配和影响评估进行投票。",es:"Los titulares de EACO votan sobre la selección de proyectos, asignación de fondos y evaluación de impacto a través de DAO on-chain.",fr:"Les détenteurs d'EACO votent sur la sélection des projets, l'allocation des fonds et l'évaluation d'impact via DAO on-chain.",ar:"يصوت حاملو EACO على اختيار المشاريع وتخصيص الأموال وتقييم الأثر عبر DAO على السلسلة.",ru:"Держатели EACO голосуют за выбор проектов, распределение средств и оценку воздействия через on-chain DAO."},
+   points:{en:["Community-driven decisions","On-chain voting","Transparent fund allocation"],zh:["社区驱动决策","链上投票","透明资金分配"],es:["Decisiones impulsadas por la comunidad","Votación on-chain","Asignación transparente de fondos"],fr:["Décisions communautaires","Vote on-chain","Allocation transparente des fonds"],ar:["قرارات مدفوعة بالمجتمع","تصويت على السلسلة","تخصيص شفاف للأموال"],ru:["Решения сообщества","Голосование on-chain","Прозрачное распределение средств"]}}
+];
+
+/* ============ Ecosystem Links ============ */
+var ECO_LINKS = [
+  {icon:"\u1F30D",url:"https://ucoingroup.github.io/earths-best-coin/",t:{en:"Earth's Best Coin",zh:"地球最佳货币",es:"Earth's Best Coin",fr:"Earth's Best Coin",ar:"Earth's Best Coin",ru:"Earth's Best Coin"}},
+  {icon:"\u1FA9E",url:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",t:{en:"OrbMarkets EACO",zh:"OrbMarkets EACO",es:"OrbMarkets EACO",fr:"OrbMarkets EACO",ar:"OrbMarkets EACO",ru:"OrbMarkets EACO"}},
+  {icon:"\u1F310",url:"https://ucoingroup.github.io/eaco-web3/",t:{en:"EACO Web3",zh:"EACO Web3",es:"EACO Web3",fr:"EACO Web3",ar:"EACO Web3",ru:"EACO Web3"}},
+  {icon:"\u1F30C",url:"https://ucoingroup.github.io/au-trade/",t:{en:"AU-Trade Platform",zh:"AU-Trade平台",es:"Plataforma AU-Trade",fr:"Plateforme AU-Trade",ar:"منصة AU-Trade",ru:"Платформа AU-Trade"}},
+  {icon:"\u1F4A7",url:"https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc",t:{en:"Meteora EACO Pool",zh:"Meteora EACO池",es:"Pool Meteora EACO",fr:"Pool Meteora EACO",ar:"مجمع Meteora EACO",ru:"Пул Meteora EACO"}},
+  {icon:"\u1F465",url:"https://ucoingroup.github.io/earth-100-friends/",t:{en:"Earth's 100 Friends",zh:"地球100个朋友",es:"100 Amigos de la Tierra",fr:"100 Amis de la Terre",ar:"100 أصدقاء الأرض",ru:"100 Друзей Земли"}},
+  {icon:"\u1F517",url:"https://ucoingroup.github.io/eacoSWAP/",t:{en:"EACO SWAP",zh:"EACO SWAP",es:"EACO SWAP",fr:"EACO SWAP",ar:"EACO SWAP",ru:"EACO SWAP"}},
+  {icon:"\u1F9ED",url:"https://ucoingroup.github.io/Mohist-Tech/",t:{en:"Mohist Tech",zh:"墨家科技",es:"Tecnología Moísta",fr:"Technologie Mohiste",ar:"تقنية الموحدين",ru:"Технология Моистов"}},
+  {icon:"\u1F4DA",url:"https://ucoingroup.github.io/good-books/",t:{en:"Good Books",zh:"善书馆",es:"Buenos Libros",fr:"Bons Livres",ar:"كتب جيدة",ru:"Добрые Книги"}},
+  {icon:"\u1F680",url:"https://ucoingroup.github.io/Footsteps-of-Civilization/",t:{en:"Footsteps of Civilization",zh:"文明的脚印",es:"Huellas de la Civilización",fr:"Pas de la Civilisation",ar:"خطوات الحضارة",ru:"Шаги Цивилизации"}},
+  {icon:"\u1F4E3",url:"https://discord.gg/bWCDME9Pkc",t:{en:"EACO Discord",zh:"EACO Discord",es:"EACO Discord",fr:"EACO Discord",ar:"EACO Discord",ru:"EACO Discord"}},
+  {icon:"\u1F6B0",url:"https://ucoingroup.github.io/eaco-faucet/",t:{en:"EACO Faucet",zh:"EACO水龙头",es:"Faucet EACO",fr:"Faucet EACO",ar:"صنبور EACO",ru:"EACO Faucet"}},
+  {icon:"\u1F50E",url:"https://ucoingroup.github.io/eaco50rate/",t:{en:"EACO 50 Rate",zh:"EACO 50汇率",es:"EACO 50 Tasa",fr:"EACO 50 Taux",ar:"EACO 50 سعر",ru:"EACO 50 Курс"}},
+  {icon:"\u1F4CA",url:"https://ucoingroup.github.io/eacoweb3-2026/eaco-exchange-analysis2025.html",t:{en:"Exchange Analysis",zh:"兑换分析",es:"Análisis de Cambio",fr:"Analyse de Change",ar:"تحليل الصرف",ru:"Анализ Обмена"}}
+];
+
+/* ============ Language & Theme Config ============ */
+var LANGS = [
+  {code:"en",label:"EN"},{code:"zh",label:"\u4E2D"},{code:"es",label:"ES"},
+  {code:"fr",label:"FR"},{code:"ar",label:"\u0639"},{code:"ru",label:"RU"}
+];
+var THEMES = [
+  {code:"starblue",label:"\u2605",title:"Star Blue"},
+  {code:"military",label:"\u2695",title:"Military Green"},
+  {code:"classic",label:"\u2696",title:"Classic Beige"}
+];
+
+var curLang = "en";
+var curYear = 2026;
+
+/* ============ Render Functions ============ */
+function t(key){return (I18N[curLang] && I18N[curLang][key]) || (I18N.en[key]) || key;}
+function tt(obj){return (obj && obj[curLang]) || (obj && obj.en) || "";}
+
+function applyLang(lang){
+  curLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+  document.body.setAttribute("dir",(lang === "ar") ? "rtl" : "ltr");
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    el.textContent = t(el.getAttribute("data-i18n"));
+  });
+  document.querySelectorAll(".lang-btn").forEach(function(b){
+    b.classList.toggle("active", b.getAttribute("data-lang") === lang);
+  });
+  renderPhilosophy();
+  renderCharity();
+  renderSteps();
+  renderTeam();
+  renderPool();
+  renderFinancing();
+  renderSwap();
+  renderEcoLinks();
+  try{localStorage.setItem("eaco-charity-lang",lang);}catch(e){}
+}
+
+function applyTheme(theme){
+  document.body.setAttribute("data-theme",theme);
+  document.querySelectorAll(".theme-btn").forEach(function(b){
+    b.classList.toggle("active", b.getAttribute("data-theme") === theme);
+  });
+  try{localStorage.setItem("eaco-charity-theme",theme);}catch(e){}
+}
+
+function renderLangSelect(){
+  var box = document.getElementById("langSelect");
+  box.innerHTML = LANGS.map(function(l){
+    return '<button class="lang-btn'+(l.code===curLang?" active":"")+'" data-lang="'+l.code+'" type="button">'+l.label+'</button>';
+  }).join("");
+  box.querySelectorAll(".lang-btn").forEach(function(b){
+    b.addEventListener("click",function(){applyLang(b.getAttribute("data-lang"));});
+  });
+}
+
+function renderThemeBtns(){
+  var box = document.getElementById("themeBtns");
+  box.innerHTML = THEMES.map(function(t){
+    return '<button class="theme-btn'+(t.code==="starblue"?" active":"")+'" data-theme="'+t.code+'" type="button" title="'+t.title+'">'+t.label+'</button>';
+  }).join("");
+  box.querySelectorAll(".theme-btn").forEach(function(b){
+    b.addEventListener("click",function(){applyTheme(b.getAttribute("data-theme"));});
+  });
+}
+
+function renderPhilosophy(){
+  var grid = document.getElementById("philoGrid");
+  grid.innerHTML = PHILOSOPHY.map(function(p,i){
+    return '<div class="philo-card"><div class="num">'+String(i+1).padStart(2,"0")+'</div><div style="font-size:28px;margin-bottom:8px;">'+p.icon+'</div><div class="text">'+tt(p.texts)+'</div></div>';
+  }).join("");
+}
+
+function renderYearTabs(){
+  var box = document.getElementById("yearTabs");
+  box.innerHTML = CHARITY_YEARS.map(function(y){
+    return '<button class="year-tab'+(y.year===curYear?" active":"")+'" data-year="'+y.year+'" type="button">'+y.year+'</button>';
+  }).join("");
+  box.querySelectorAll(".year-tab").forEach(function(b){
+    b.addEventListener("click",function(){
+      curYear = parseInt(b.getAttribute("data-year"));
+      renderYearTabs();
+      renderCharity();
+    });
+  });
+}
+
+function renderCharity(){
+  renderYearTabs();
+  var grid = document.getElementById("charityGrid");
+  var yearData = CHARITY_YEARS.find(function(y){return y.year === curYear;});
+  if(!yearData) return;
+  grid.innerHTML = yearData.projects.map(function(p){
+    var badgeClass = p.status==="active"?"badge-active":(p.status==="done"?"badge-done":"badge-planned");
+    var badgeText = t("badge_"+p.status);
+    var tagsHtml = (tt(p.tags)||[]).map(function(tag){return '<span class="meta-tag">'+tag+'</span>';}).join("");
+    var titleText = tt(p.title);
+    var descText = tt(p.desc);
+    return '<div class="charity-card">'+
+      '<div class="charity-card-header">'+
+        '<span class="charity-badge '+badgeClass+'">'+badgeText+'</span>'+
+        '<div class="icon">'+p.icon+'</div>'+
+        '<h3>'+titleText+'</h3>'+
+        '<p class="desc">'+descText+'</p>'+
+      '</div>'+
+      '<div class="charity-card-body">'+
+        '<div class="charity-meta">'+tagsHtml+'</div>'+
+        '<div class="charity-progress">'+
+          '<div class="progress-bar"><div class="progress-fill" style="width:'+p.progress+'%"></div></div>'+
+          '<div class="progress-label"><span>'+p.progress+'%</span><span>'+(p.status==="done"?"100%":(100-p.progress)+"% left")+'</span></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="charity-card-footer">'+
+        '<a class="charity-link" href="'+p.link+'" target="_blank" rel="noopener">'+(curLang==="zh"?"\u53C2\u4E0E":curLang==="es"?"Participar":curLang==="fr"?"Participer":curLang==="ar"?"\u0634\u0627\u0631\u0643":curLang==="ru"?"\u0423\u0447\u0430\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C":"Participate")+' \u2192</a>'+
+      '</div>'+
+    '</div>';
+  }).join("");
+}
+
+function renderSteps(){
+  var grid = document.getElementById("stepsGrid");
+  grid.innerHTML = STEPS.map(function(s,i){
+    return '<div class="step-card">'+
+      '<div class="step-num">'+(i+1)+'</div>'+
+      '<div class="icon">'+s.icon+'</div>'+
+      '<h4>'+tt(s.title)+'</h4>'+
+      '<p>'+tt(s.desc)+'</p>'+
+    '</div>';
+  }).join("");
+}
+
+function renderTeam(){
+  var grid = document.getElementById("teamGrid");
+  var orch = EXEC_TEAM[0];
+  var others = EXEC_TEAM.slice(1);
+  var orchHtml = '<div class="orchestrator-card">'+
+    '<div class="exec-avatar">'+orch.icon+'</div>'+
+    '<div class="exec-info"><h4>'+orch.role+'</h4><div class="role">'+tt(orch.dept)+'</div></div>'+
+    '<p class="exec-desc">'+tt(orch.desc)+'</p>'+
+    '</div>';
+  var othersHtml = others.map(function(e){
+    var tags = (e.tags||[]).map(function(t){return '<span class="exec-tag">'+t+'</span>';}).join("");
+    return '<div class="exec-card">'+
+      '<div class="exec-header">'+
+        '<div class="exec-avatar">'+e.icon+'</div>'+
+        '<div class="exec-info"><h4>'+e.role+'</h4><div class="role">'+tt(e.dept)+'</div></div>'+
+      '</div>'+
+      '<p class="exec-desc">'+tt(e.desc)+'</p>'+
+      '<div>'+tags+'</div>'+
+    '</div>';
+  }).join("");
+  grid.innerHTML = orchHtml + othersHtml;
+}
+
+function renderPool(){
+  var box = document.getElementById("poolBox");
+  var rows = POOL_DATA.pairs.map(function(p){
+    return '<div class="pool-row"><span class="pool-label">'+tt(p.label)+'</span><span class="pool-value">'+p.value+'</span></div>';
+  }).join("");
+  box.innerHTML = rows +
+    '<div class="pool-link"><a href="'+POOL_DATA.url+'" target="_blank" rel="noopener" class="btn btn-primary">'+t("pool_visit")+'</a></div>'+
+    '<p class="pool-note">'+t("pool_note")+'</p>';
+}
+
+function renderFinancing(){
+  var grid = document.getElementById("finGrid");
+  grid.innerHTML = FINANCING.map(function(f){
+    var points = (tt(f.points)||[]).map(function(pt){return "<li>"+pt+"</li>";}).join("");
+    return '<div class="fin-card">'+
+      '<div class="icon">'+f.icon+'</div>'+
+      '<h4>'+tt(f.title)+'</h4>'+
+      '<p>'+tt(f.desc)+'</p>'+
+      '<ul>'+points+'</ul>'+
+    '</div>';
+  }).join("");
+}
+
+/* ============ Swap Tokens Data ============ */
+var SWAP_TOKENS = [
+  {icon:"\u2600\uFE0F",pair:"SOL",url:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {icon:"\u1F4B2",pair:"USDT",url:"https://orbmarkets.io/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"},
+  {icon:"\u1F4B2",pair:"USDC",url:"https://orbmarkets.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"},
+  {icon:"\u1F708",pair:"wBNB",url:"https://orbmarkets.io/token/9gP2kCy3wA1ctvYWQk75guqXuHfrEomqydHLtcTCqiLa"},
+  {icon:"\u1F4A1",pair:"TRX",url:"https://orbmarkets.io/token/GbbesPbaYh5uiAZSYNXTc7w9jty1rpg3P9L4JeN4LkKc"},
+  {icon:"\u2696\uFE0F",pair:"wETH",url:"https://orbmarkets.io/token/7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs"},
+  {icon:"\u1FA99",pair:"wBTC",url:"https://orbmarkets.io/token/3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"},
+  {icon:"\u1F1ED\u1F1F0",pair:"eCNH",url:"https://orbmarkets.io/token/7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5"}
+];
+
+function renderSwap(){
+  var grid = document.getElementById("swapGrid");
+  if(!grid) return;
+  grid.innerHTML = SWAP_TOKENS.map(function(s){
+    return '<div class="swap-card">'+
+      '<div class="swap-icon">'+s.icon+'</div>'+
+      '<div class="swap-pair">EACO <span class="vs">\u2194</span> '+s.pair+'</div>'+
+      '<div class="swap-chain">'+t("swap_chain")+'</div>'+
+      '<a class="swap-link" href="'+s.url+'" target="_blank" rel="noopener">'+t("swap_view")+' \u2192</a>'+
+    '</div>';
+  }).join("");
+}
+
+function renderEcoLinks(){
+  var box = document.getElementById("ecoLinks");
+  box.innerHTML = ECO_LINKS.map(function(l){
+    return '<a class="eco-link" href="'+l.url+'" target="_blank" rel="noopener"><span class="icon">'+l.icon+'</span><span>'+tt(l.t)+'</span></a>';
+  }).join("");
+}
+
+/* ============ Star Canvas ============ */
+function initStars(){
+  var canvas = document.getElementById("starCanvas");
+  if(!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var stars = [];
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize",resize);
+  for(var i=0;i<80;i++){
+    stars.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*1.2+0.3,
+      o:Math.random()*0.6+0.2,
+      s:Math.random()*0.02+0.005
+    });
+  }
+  function draw(){
+    if(document.body.getAttribute("data-theme")==="classic"){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      requestAnimationFrame(draw);
+      return;
+    }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    var starColor = getComputedStyle(document.body).getPropertyValue("--star").trim() || "rgba(255,255,255,0.6)";
+    stars.forEach(function(s){
+      s.o += s.s;
+      if(s.o > 0.8 || s.o < 0.2) s.s = -s.s;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = starColor.replace(/[\d.]+\)$/,(Math.max(0.1,Math.min(0.8,s.o)))+")");
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+/* ============ Copy Contract ============ */
+function initCopy(){
+  var el = document.getElementById("contractCopy");
+  var toast = document.getElementById("toast");
+  if(!el) return;
+  el.addEventListener("click",function(){
+    var ca = "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH";
+    try{
+      navigator.clipboard.writeText(ca);
+    }catch(e){
+      var ta = document.createElement("textarea");
+      ta.value = ca;document.body.appendChild(ta);ta.select();
+      try{document.execCommand("copy");}catch(e2){}
+      document.body.removeChild(ta);
+    }
+    toast.textContent = t("toast_copy");
+    toast.classList.add("show");
+    setTimeout(function(){toast.classList.remove("show");},2000);
+  });
+}
+
+/* ============ Back to Top ============ */
+function initToTop(){
+  var btn = document.getElementById("toTop");
+  window.addEventListener("scroll",function(){
+    btn.style.display = (window.scrollY > 500) ? "flex" : "none";
+  },{passive:true});
+}
+
+/* ============ Init ============ */
+function init(){
+  var savedLang = null, savedTheme = null;
+  try{savedLang = localStorage.getItem("eaco-charity-lang");}catch(e){}
+  try{savedTheme = localStorage.getItem("eaco-charity-theme");}catch(e){}
+  if(savedLang && I18N[savedLang]) curLang = savedLang;
+  renderLangSelect();
+  renderThemeBtns();
+  applyLang(curLang);
+  if(savedTheme) applyTheme(savedTheme);
+  initCopy();
+  initToTop();
+  initStars();
+}
+
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded",init);
+}else{
+  init();
+}
+})();
+</script>
+</body>
+</html>
