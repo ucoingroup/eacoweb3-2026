@@ -1,0 +1,3680 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Token Factory | earth's best AI coin = eaco</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e1a;--bg2:#0f1525;--card:#141926;--card2:#1a2138;
+  --border:#1e2a45;--text:#e0e6f0;--text2:#8892b0;--text3:#5a6478;
+  --accent:#00d4aa;--accent2:#4a90d9;--accent3:#7c5cfc;
+  --warn:#f0a020;--danger:#e85d75;--radius:12px;
+  --gradient1:linear-gradient(135deg,#00d4aa,#4a90d9);
+  --gradient2:linear-gradient(135deg,#4a90d9,#7c5cfc);
+  --gradient3:linear-gradient(135deg,#7c5cfc,#e85d75);
+}
+html[dir="rtl"]{text-align:right}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans','Noto Sans SC','Noto Sans Arabic',sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.7;
+  min-height:100vh;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+  background:
+    radial-gradient(ellipse at 20% 0%,rgba(0,212,170,0.06),transparent 50%),
+    radial-gradient(ellipse at 80% 100%,rgba(74,144,217,0.06),transparent 50%),
+    radial-gradient(ellipse at 50% 50%,rgba(124,92,252,0.03),transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* Header */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,14,26,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;max-width:1100px;margin:0 auto;gap:16px;flex-wrap:wrap;
+}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--gradient1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:bold;color:#000;flex-shrink:0;
+  box-shadow:0 0 20px rgba(0,212,170,0.3);
+}
+.logo-text{font-size:18px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--accent)}
+.lang-switcher{display:flex;gap:4px;flex-wrap:wrap}
+.lang-btn{
+  padding:6px 12px;border-radius:8px;border:1px solid var(--border);
+  background:var(--card);color:var(--text2);font-size:13px;font-weight:600;
+  cursor:pointer;transition:all 0.2s;
+}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.lang-btn.active{background:var(--accent);color:#000;border-color:var(--accent)}
+
+/* Nav tabs */
+.nav-tabs{
+  display:flex;gap:4px;padding:0 20px;max-width:1100px;margin:0 auto;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.nav-tab{
+  padding:10px 18px;border:none;background:transparent;
+  color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;
+  border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;
+}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* Hero */
+.hero{padding:48px 0 32px;text-align:center}
+.hero h1{
+  font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-1px;
+  background:var(--gradient1);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:12px;
+}
+.hero p{font-size:clamp(15px,2.5vw,18px);color:var(--text2);max-width:700px;margin:0 auto}
+.hero-desc{font-size:14px;color:var(--text3);margin-top:8px}
+
+/* Content */
+.content{padding:32px 0 64px;display:none}
+.content.active{display:block;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Version badge */
+.version-badge{
+  display:inline-block;padding:6px 16px;border-radius:20px;
+  font-size:13px;font-weight:700;margin-bottom:16px;
+}
+.v1-badge{background:rgba(0,212,170,0.15);color:var(--accent);border:1px solid rgba(0,212,170,0.3)}
+.v2-badge{background:rgba(124,92,252,0.15);color:var(--accent3);border:1px solid rgba(124,92,252,0.3)}
+
+.content h2{
+  font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:8px;letter-spacing:-0.5px;
+}
+.content .subtitle{
+  font-size:16px;color:var(--text2);margin-bottom:32px;
+  padding-left:14px;border-left:3px solid var(--accent);
+}
+html[dir="rtl"] .content .subtitle{padding-left:0;padding-right:14px;border-left:none;border-right:3px solid var(--accent)}
+
+/* Section */
+.section{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;margin-bottom:20px;
+  transition:border-color 0.2s;
+}
+.section:hover{border-color:rgba(0,212,170,0.2)}
+.section h3{
+  font-size:19px;font-weight:700;margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.section h3::before{
+  content:'';width:4px;height:20px;border-radius:2px;
+  background:var(--gradient1);flex-shrink:0;
+}
+.section h4{
+  font-size:16px;font-weight:600;color:var(--accent);
+  margin:20px 0 10px;
+}
+.section p{color:var(--text2);margin-bottom:12px;font-size:15px}
+.section p strong{color:var(--text)}
+.section ul{list-style:none;padding:0;margin:12px 0}
+.section ul li{
+  padding:8px 0 8px 24px;color:var(--text2);font-size:15px;
+  position:relative;
+}
+.section ul li::before{
+  content:'';position:absolute;left:0;top:14px;
+  width:8px;height:8px;border-radius:50%;background:var(--accent);
+}
+html[dir="rtl"] .section ul li{padding:8px 24px 8px 0}
+html[dir="rtl"] .section ul li::before{left:auto;right:0}
+
+/* Table */
+.table-wrap{overflow-x:auto;margin:16px 0;border-radius:8px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:500px}
+th{
+  background:var(--card2);color:var(--text);font-weight:600;
+  padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);
+}
+html[dir="rtl"] th{text-align:right}
+td{
+  padding:12px 16px;color:var(--text2);
+  border-bottom:1px solid var(--border);vertical-align:top;
+}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(0,212,170,0.03)}
+
+/* Architecture layers */
+.arch-layers{margin:20px 0}
+.arch-layer{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:8px;padding:16px 20px;margin-bottom:8px;
+  text-align:center;position:relative;
+}
+.arch-layer-name{font-weight:700;color:var(--text);font-size:15px}
+.arch-layer-desc{font-size:13px;color:var(--text2);margin-top:4px}
+.arch-arrow{text-align:center;color:var(--text3);font-size:20px;margin:-4px 0}
+
+/* Comparison */
+.comparison-intro{text-align:center;margin-bottom:24px}
+.comparison-intro p{color:var(--text2);font-size:15px}
+.comparison-table th:nth-child(2){color:var(--accent)}
+.comparison-table th:nth-child(3){color:var(--accent3)}
+.comparison-table td:nth-child(1){font-weight:600;color:var(--text)}
+
+/* EACO footer */
+.eaco-footer{
+  background:var(--card);border-top:2px solid var(--accent);
+  border-radius:var(--radius) var(--radius) 0 0;
+  padding:40px 0;margin-top:48px;
+}
+.eaco-footer h2{
+  text-align:center;font-size:24px;font-weight:700;margin-bottom:24px;
+}
+.eaco-info-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;margin-bottom:28px;
+}
+.eaco-info-card{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:10px;padding:20px;
+}
+.eaco-info-card .label{
+  font-size:12px;color:var(--text3);text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:6px;
+}
+.eaco-info-card .value{font-size:15px;color:var(--text);font-weight:600;word-break:break-all}
+.eaco-info-card .value.mono{font-family:'Courier New',monospace;font-size:13px}
+.copy-btn{
+  margin-top:8px;padding:4px 12px;border-radius:6px;
+  border:1px solid var(--border);background:var(--card);
+  color:var(--accent);font-size:12px;cursor:pointer;transition:all 0.2s;
+}
+.copy-btn:hover{background:var(--accent);color:#000}
+.eaco-links{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+}
+.eaco-link{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:8px;
+  border:1px solid var(--border);background:var(--card2);
+  color:var(--text2);text-decoration:none;font-size:14px;
+  transition:all 0.2s;
+}
+.eaco-link:hover{
+  border-color:var(--accent);color:var(--accent);
+  transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,212,170,0.15);
+}
+
+/* Bottom bar */
+.bottom-bar{
+  text-align:center;padding:20px;font-size:13px;color:var(--text3);
+  border-top:1px solid var(--border);
+}
+
+/* Mobile */
+@media(max-width:640px){
+  .header-inner{padding:10px 16px}
+  .logo-text{font-size:16px}
+  .lang-btn{padding:5px 9px;font-size:12px}
+  .nav-tab{padding:8px 14px;font-size:13px}
+  .section{padding:20px 16px}
+  .hero{padding:32px 0 20px}
+  .eaco-info-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo" onclick="switchTab('v1')">
+      <div class="logo-icon">E</div>
+      <div class="logo-text">EACO <span>Token Factory</span></div>
+    </div>
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-btn" data-lang="en" title="English">EN</button>
+<button class="lang-btn" data-lang="zh" title="中文">中</button>
+<button class="lang-btn" data-lang="es" title="Español">ES</button>
+<button class="lang-btn" data-lang="ar" title="العربية">AR</button>
+<button class="lang-btn" data-lang="fr" title="Français">FR</button>
+<button class="lang-btn" data-lang="ru" title="Русский">RU</button>
+
+    </div>
+  </div>
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" data-tab="v1" onclick="switchTab('v1')"></button>
+    <button class="nav-tab" data-tab="v2" onclick="switchTab('v2')"></button>
+    <button class="nav-tab" data-tab="comparison" onclick="switchTab('comparison')"></button>
+    <button class="nav-tab" data-tab="eaco" onclick="switchTab('eaco')"></button>
+    <button class="nav-tab" data-tab="future" onclick="switchTab('future')"></button>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1 id="heroTitle"></h1>
+  <p id="heroSubtitle"></p>
+  <p class="hero-desc" id="heroDesc"></p>
+</div>
+
+<div class="container">
+  <div class="content active" id="content-v1"></div>
+  <div class="content" id="content-v2"></div>
+  <div class="content" id="content-comparison"></div>
+  <div class="content" id="content-eaco"></div>
+  <div class="content" id="content-future"></div>
+</div>
+
+<div class="bottom-bar">
+  EACO Token Factory &copy; 2026 | Earth's Best Coin | Solana Blockchain
+</div>
+
+<script>
+const LOCALES = {
+  'en': {
+    'meta': {
+      'siteTitle': 'EACO Token Factory',
+      'siteSubtitle': 'Two Models for the Global AI Token Economy',
+      'siteDescription': 'Exploring the compliant cross-border Token Factory and the decentralized EACO Web3 Token Factory'
+    },
+    'nav': {
+      'mainland': 'Mainland Compliance',
+      'overseas': 'Overseas EACO Web3',
+      'comparison': 'Comparison',
+      'eaco': 'EACO Info',
+      'future': 'Future Trends'
+    },
+    'v1': {
+      'badge': 'Version 1',
+      'title': 'Cross-Border Token Factory',
+      'subtitle': 'Compliance as cornerstone, going global as the course',
+      's1Title': 'Strategic Positioning',
+      's1Body': 'The mainland Token Factory\'s core positioning is not about issuing virtual currencies or tokens domestically, but about participating in the global AI Token industry chain through computing power service exports and cross-border data processing.\n\nIn June 2026, China\'s daily token call volume surged to nearly 175 trillion, making it the world\'s largest token consumer. Meanwhile, the National Data Bureau has explicitly designated Token economy as a core AI production factor. In April 2026, CAICT officially launched the \'AI Cloud Token Factory Full-Stack Service Capability Requirements\' assessment, marking the beginning of industry standard system development.',
+      's2Title': 'Core Business Model',
+      's2Subtitle': 'Complete Business Loop: Compute Call - Token Billing - Cross-Border Settlement - Multi-Party Ecosystem Profit Sharing',
+      's2_1Title': 'Business Substance: From Data Processing to Token Export',
+      's2_1Body': 'The mainland Token Factory\'s business logic is rooted in \'data processing\' - a cross-border data new business format that transforms raw data from overseas into ordered data products through governance, aggregation, and modeling, then exports them in Token form.\n\nIn August 2026, Qingdao Free Trade Zone and Inspur Cloud signed an agreement to build the first northern cross-border Token Factory, providing full-stack computing infrastructure, large model capabilities, and security compliance capabilities, building a token service platform based on trusted data space. Core functions include:',
+      's2_1Bullets': [
+        'Heterogeneous computing unified management: managing GPU chips from different vendors (including domestic chips like Ascend)',
+        'Multi-model centralized access: unified scheduling of DeepSeek, Kimi, and other models',
+        'Token standardized metering and pricing: using Token as the unified billing unit',
+        'Cross-border settlement and ecosystem profit sharing: completing the full chain from computing power to cash'
+      ],
+      's2_2Title': 'Revenue Structure: From Selling Compute to Selling Tokens',
+      's2_2Body': 'The traditional model charges by GPU card hours ($/GPU-Hour), while the Token Factory model charges by effective Token output ($/1M Tokens), tying revenue to actual AI output rather than hardware occupancy. Through computing-storage optimization, inference engine optimization, PD separation, and dynamic batching, service providers can enjoy 30%-50% high margin premiums.\n\nThe third-generation Token Factory\'s revenue structure has evolved into \'guaranteed computing + excess Token appreciation\' - combining stable rental income from infrastructure with value-added sharing from Token production exceeding expectations.',
+      's3Title': 'Technical Architecture and Compliance Framework',
+      's3_1Title': 'Tech Foundation',
+      's3_1Headers': [
+        'Layer',
+        'Components',
+        'Key Requirements'
+      ],
+      's3_1Rows': [
+        [
+          'Compute Layer',
+          'Heterogeneous GPU clusters (including domestic chips like Ascend 910C)',
+          'Domestic chip adaptation, computing utilization optimization'
+        ],
+        [
+          'Platform Layer',
+          'Unified scheduling system + inference engine optimization',
+          'Reduce first-token latency, increase concurrency'
+        ],
+        [
+          'Model Layer',
+          'Multi-model centralized access',
+          'Model routing and task-model matching'
+        ],
+        [
+          'Data Layer',
+          'Trusted data space',
+          'Cross-border data compliance, privacy protection'
+        ],
+        [
+          'Settlement Layer',
+          'Cross-border settlement system',
+          'Compliant foreign exchange settlement, multi-party profit sharing'
+        ]
+      ],
+      's3_2Title': 'Compliance Red Lines (Document No. 42 Framework)',
+      's3_2Body': 'On February 6, 2026, the People\'s Bank of China and seven other ministries jointly issued the \'Notice on Further Preventing and Handling Risks Related to Virtual Currencies\' (Yin Fa [2026] No. 42). Core requirements include:',
+      's3_2Headers': [
+        'Compliance Requirement',
+        'Impact and Response'
+      ],
+      's3_2Rows': [
+        [
+          'Virtual currency fully prohibited domestically',
+          'Token Factory must not issue any form of cryptocurrency or virtual currency domestically'
+        ],
+        [
+          'RWA tokenization business license liberalized (cross-border)',
+          'Can conduct cross-border business with computing service export and data processing as business substance'
+        ],
+        [
+          'Overseas virtual currency issuance requires approval',
+          'Cannot issue virtual currency overseas without relevant department approval'
+        ],
+        [
+          'Cross-border data compliance',
+          'Leverage FTZ institutional advantages for data cross-border innovation and security stress testing'
+        ]
+      ],
+      's3_3Title': 'Feasible Compliance Paths',
+      's3_3Body': '1. Leveraging Free Trade Zones: Qingdao FTZ, as a national-level opening-up experimental platform, has FTZ pilot institutional advantages for data cross-border innovation. The first northern cross-border Token Factory has been established.\n\n2. Leveraging Hong Kong\'s international platform: Inspur has built the Hong Kong Intelligent Computing Cloud International Token Platform, fully supporting Token export business. Hong Kong\'s stable regulatory environment and financial center status provide a compliant international springboard.\n\n3. Participating in industry standard setting: First batch to launch CAICT \'AI Cloud Token Factory Full-Stack Service Capability Requirements\' assessment, building market trust through compliance certification.\n\n4. Green Token export: In August 2026, the Green Token Export themed meeting was held in Hohhot, focusing on compliance paths, model selection, and pricing strategies for Token Factory export.',
+      's4Title': 'Typical Practices',
+      's4Headers': [
+        'Project',
+        'Scale',
+        'Characteristics'
+      ],
+      's4Rows': [
+        [
+          'Wuxi Suihong Huachuang Token Factory',
+          'First phase: 4 Ascend 384 super-node servers, 1,536 Ascend 910C chips',
+          'China\'s first East-Data-West-Compute, compute-power fusion mega domestic Token Factory'
+        ],
+        [
+          'Qingdao Cross-Border Token Factory',
+          'Inspur Cloud + Qingdao FTZ',
+          'First northern cross-border Token Factory, completing the compute-token-settlement-profit sharing loop'
+        ],
+        [
+          'Jingjing Technology',
+          'Daily trillion-level Token Factory in production',
+          'Focused on top model inference optimization, some mature businesses already profitable'
+        ],
+        [
+          'SiliconFlow',
+          '2025 token annual throughput ranked 4th, 1.5% market share',
+          'Filed HKEX IPO prospectus, potentially first HK-listed Token Factory concept stock'
+        ]
+      ],
+      's5Title': 'Core Risks and Responses',
+      's5Headers': [
+        'Risk',
+        'Response Strategy'
+      ],
+      's5Rows': [
+        [
+          'Regulatory policy changes',
+          'Leverage FTZ institutional advantages, closely follow policy windows'
+        ],
+        [
+          'Token price war',
+          'Focus on high-value-added Tokens (industry-specific Tokens), not low-price generic Tokens'
+        ],
+        [
+          'Domestic chip adaptation',
+          'Promote domestic chips into large-scale inference scenarios'
+        ],
+        [
+          'Low computing utilization',
+          'Improve utilization through scheduling optimization, PD separation, etc.'
+        ],
+        [
+          'Cross-border data compliance',
+          'Based on trusted data space, ensure full-chain token loop, safe and stable export'
+        ]
+      ],
+      's6Title': 'Conclusion',
+      's6Body': 'The feasible path for the mainland Token Factory is: using computing service export and data processing as business substance, leveraging FTZ institutional innovation and Hong Kong\'s international platform, operating compliantly within the No. 42 framework. It is not \'issuing coins\' but \'selling Token services\' - essentially exporting China\'s computing advantages and model capabilities to the global market through standardized Token metering.'
+    },
+    'v2': {
+      'badge': 'Version 2',
+      'title': 'Decentralized Token Factory',
+      'subtitle': 'AI Token (production means) + Blockchain Token + Privacy Computing = trustless, permissionless agent economy',
+      's1Title': 'Strategic Positioning',
+      's1Body': 'The ultimate form of the overseas Token Factory is not a centralized computing cluster, but a decentralized intelligent agent economy infrastructure - any AI Agent can autonomously call computing power, pay with Tokens, and complete delivery, forming an autonomous economic system driven by machine clients and settled by blockchain.\n\nHashKey Group Chairman Xiao Feng explicitly stated at the 2026 Hong Kong Web3 Carnival: \'In the future, all commercial institutions will become Token Factories.\' AI Tokens are the \'production means\' of intelligent agents, while blockchain Tokens are the \'blood\' of the agent economy - carrying payment and settlement functions.',
+      's2Title': 'Core Business Model: Three-Token Model',
+      's2Body': 'HashKey proposed the \'Three-Token Model\' in its 2026 \'Token Economics White Paper\':',
+      's2Headers': [
+        'Token Type',
+        'Function',
+        'Role in Token Factory'
+      ],
+      's2Rows': [
+        [
+          'Utility Token',
+          'Community-facing incentive mechanism',
+          'Payment medium for AI Agents calling computing power and purchasing Tokens'
+        ],
+        [
+          'Equity Token',
+          'Incentive for entrepreneurs and shareholders',
+          'Governance and revenue distribution of Token Factory'
+        ],
+        [
+          'NFT (Non-Fungible Token)',
+          'Value capture for specific scenarios',
+          'Model fine-tuning rights, data usage rights, and other specific rights'
+        ]
+      ],
+      's2_1Title': 'EACO Positioning',
+      's2_1Body': 'EACO (Earth Coin) is a Token project based on the Solana blockchain, positioned as \'Earth\'s MemeCoin.\' In the EACO ecosystem, the Token Factory\'s operational logic can be embedded in the following framework:',
+      's2_1Bullets': [
+        'Computing power tokenization: Transforming GPU computing assets into tradable Tokens, giving holders computing usage rights',
+        'AI Agent tokenization: Allowing users to create, tokenize, and trade AI agents',
+        'Decentralized inference market: Users can earn revenue by processing AI requests'
+      ],
+      's2_2Title': 'Decentralized AI Inference Market (Reference Case)',
+      's2_2Body': 'Warden Protocol launched the Halo P2P AI inference market beta on the Base chain in June 2026, processing over 8 billion AI Tokens within weeks, supporting over 200 models. The platform integrates with Virtuals Protocol, providing decentralized computing layers for over 18,000 tokenized AI agents. Users can pay inference fees with stablecoins or VIRTUAL tokens.\n\nThis is exactly the architecture that the EACO version Token Factory can reference.',
+      's3Title': 'Technical Architecture: AI Token + Blockchain Token + Privacy Computing',
+      's3_1Title': 'Three Tech Pillars',
+      's3_1Headers': [
+        'Tech Layer',
+        'Function',
+        'Key Breakthrough'
+      ],
+      's3_1Rows': [
+        [
+          'AI Token',
+          'Production means for intelligent agents',
+          'Token stream generated by large model inference'
+        ],
+        [
+          'Blockchain Token',
+          'Payment and settlement medium',
+          'Programmable, divisible, real-time settlement'
+        ],
+        [
+          'ZK / Fully Homomorphic Encryption',
+          'Privacy computing protection',
+          'FHE chips reaching 1000 tx/s performance in H2 2026'
+        ]
+      ],
+      's3_2Title': 'Privacy Computing Breakthrough',
+      's3_2Body': 'The transparent nature of blockchain causes data to \'run naked,\' which is the core obstacle preventing financial and medical data from going on-chain directly. However, Fully Homomorphic Encryption (FHE) dedicated chips are expected to be officially launched in H2 2026, with single-chip performance reaching approximately 1,000 encrypted computation transactions per second.\n\nThis means: medical data transformed into Tokens through FHE can be computed on-chain by anyone or any agent in a permissionless manner, without revealing any personal privacy information.\n\nHospitals thus transform from traditional data holders into \'Token Factories.\'',
+      's3_3Title': 'Decentralized Architecture',
+      's3_3Layers': [
+        {
+          'name': 'Fully Homomorphic Encryption Layer',
+          'desc': 'Data privacy protection'
+        },
+        {
+          'name': 'Blockchain Settlement Layer',
+          'desc': 'Utility Token | Equity Token | NFT'
+        },
+        {
+          'name': 'Decentralized Computing Layer',
+          'desc': 'P2P inference market'
+        },
+        {
+          'name': 'AI Agent Layer',
+          'desc': 'Autonomous procurement and delivery'
+        }
+      ],
+      's4Title': 'EACO Version\'s Unique Value',
+      's4_1Title': 'Machine Economy Infrastructure',
+      's4_1Body': 'Xiao Feng pointed out: AI Agent API calls may cost only a few cents each, and existing banking payment systems\' cost structure completely cannot support such micro instant payments. Therefore, a new financial service system designed for machines rather than humans will inevitably emerge.\n\nCore values of EACO Token Factory:',
+      's4_1Bullets': [
+        'Micro-payment capability: Blockchain Tokens support Agent-level micro-payments',
+        'Trustless: Agents can call services without KYC or signing contracts',
+        'Globally open: Breaking geographical restrictions, global Agents can freely access'
+      ],
+      's4_2Title': 'From Human Ordering to Agent Ordering',
+      's4_2Body': 'Today, humans place orders to Token Factories; in the future, the biggest customers of Token Factories may be Agents. When Agents can autonomously discover tasks, calculate expected returns, purchase Tokens, call other Agents, and deliver results to another Agent - Tokens transform from a model billing unit into production means for machine organizations.',
+      's4_3Title': 'New Dimensions of Asset Tokenization',
+      's4_3Bullets': [
+        'GPU-backed asset tokenization: Transforming GPU hardware and its cash flow into investable Token assets',
+        'AI agents as ownable digital assets: Allowing users to create, tokenize, and trade AI agents',
+        'Data asset tokenization: Individuals can put encrypted medical examination data on-chain, sending demands to global insurance companies'
+      ],
+      's5Title': 'Core Risks and Responses',
+      's5Headers': [
+        'Risk',
+        'Response Strategy'
+      ],
+      's5Rows': [
+        [
+          'Regulatory uncertainty',
+          'Choose compliant jurisdictions (e.g., Hong Kong, Singapore), monitor SEC safe harbor rules'
+        ],
+        [
+          'Token price volatility',
+          'Introduce stablecoin payment channels to hedge volatility risk'
+        ],
+        [
+          'Smart contract risk',
+          'Strict auditing, progressive decentralization'
+        ],
+        [
+          'Unstable computing supply',
+          'Multi-chain deployment, P2P computing market redundancy design'
+        ],
+        [
+          'Agent loss of control risk',
+          'Set Token budget limits, circuit breakers, manual audit nodes'
+        ]
+      ],
+      's6Title': 'Conclusion',
+      's6Body': 'The EACO overseas Token Factory is not a centralized data center, but a decentralized intelligent agent economy infrastructure. Its ultimate form is:\n\nAI Token (production means) + Blockchain Token (payment settlement) + Fully Homomorphic Encryption (privacy protection) - these three combined, achieving a disruptive business model that is trustless and permissionless.\n\nWhen Agents start buying Tokens themselves, a machine-driven economic system truly begins. And the EACO version Token Factory is the energy gateway to this new economic system.'
+    },
+    'comparison': {
+      'title': 'Two Versions Comparison',
+      'subtitle': 'Two forms of the same Token Factory under different regulatory frameworks',
+      'headers': [
+        'Dimension',
+        'Mainland Compliance',
+        'Overseas EACO Web3'
+      ],
+      'rows': [
+        [
+          'Core Positioning',
+          'Computing service export + cross-border data processing',
+          'Decentralized agent economy infrastructure'
+        ],
+        [
+          'Business Substance',
+          'Selling Token services ($/1M Tokens)',
+          'Tokenized AI assets + decentralized inference market'
+        ],
+        [
+          'Compliance Framework',
+          'No. 42 Document + FTZ + Hong Kong platform',
+          'Overseas regulation + smart contracts + DAO governance'
+        ],
+        [
+          'Settlement Method',
+          'Fiat cross-border settlement',
+          'Blockchain Tokens (including stablecoins)'
+        ],
+        [
+          'Customer Group',
+          'Overseas enterprises, going-global enterprises, OPC creators',
+          'AI Agents, Web3 developers, token holders'
+        ],
+        [
+          'Core Risks',
+          'Regulatory policy, price war, chip adaptation',
+          'Regulatory uncertainty, Token volatility, contract risk'
+        ],
+        [
+          'Development Path',
+          'Orders first, then capacity',
+          'Ecosystem first, then scale'
+        ]
+      ]
+    },
+    'eaco': {
+      'title': 'About EACO',
+      'name': 'EACO (Earth\'s Best Coin)',
+      'chain': 'Solana Blockchain',
+      'contractLabel': 'Contract Address',
+      'contract': 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH',
+      'supplyLabel': 'Total Supply',
+      'supply': '1.35 Billion EACO',
+      'positioningLabel': 'Positioning',
+      'positioning': 'AI + RWA + Web3 Earth Token - Energy, Attitude, Cooperation, Optimization',
+      'linksTitle': 'Ecosystem Links',
+      'copyBtn': 'Copy',
+      'copiedBtn': 'Copied!',
+      'links': [
+        {
+          'label': 'EACO Web3',
+          'url': 'https://ucoingroup.github.io/eacoweb3-2026/'
+        },
+        {
+          'label': 'EACO Faucet',
+          'url': 'https://ucoingroup.github.io/eaco-faucet/'
+        },
+        {
+          'label': 'AU-Trade Platform',
+          'url': 'https://ucoingroup.github.io/au-trade/'
+        },
+        {
+          'label': 'Solscan Explorer',
+          'url': 'https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH'
+        },
+        {
+          'label': 'Meteora Liquidity',
+          'url': 'https://meteora.ag/'
+        },
+        {
+          'label': 'GitHub',
+          'url': 'https://github.com/ucoingroup'
+        }
+      ]
+    },
+    'future': {
+      'badge': 'Future Vision',
+      'title': 'Earth Village Future Industries: 10-100 Year Trends',
+      'subtitle': 'How EACO integrates with the Top 10 hottest economic sectors of the next century',
+      'overviewTitle': 'Overview: The Great Convergence',
+      'overview': 'Over the next 10-100 years, Earth Village will witness an unprecedented convergence of demographic shifts, technological breakthroughs, and economic restructuring. The aging global population, climate urgency, AI autonomy, and space commercialization will reshape every industry.\n\nEACO, as Earth\'s native Web3 token, is uniquely positioned to serve as the connective tissue across these emerging economies. Its micro-payment capability, borderless nature, and AI-Agent-friendly design make it the ideal settlement layer for machine-to-machine and human-to-machine economic interactions.',
+      'industriesTitle': 'Top 10 Future Industries & EACO Integration',
+      'eacoMethodLabel': 'EACO Integration Path',
+      'conclusionTitle': 'Conclusion: EACO as Earth\'s Economic Layer',
+      'conclusion': 'Across all 10 future industries, EACO serves as a universal economic layer: enabling micro-payments for AI agents, tokenizing real-world assets from energy to healthcare data, facilitating borderless trade settlements, and creating incentive structures for sustainable and interstellar exploration.\n\nThe convergence of AI Token economy, blockchain settlement, and privacy computing creates a foundation where EACO becomes not just a cryptocurrency, but the native settlement currency of Earth Village\'s multi-species, multi-planetary economy. From silver-age care micropayments to interstellar trade clearing, EACO\'s design as a fast, low-cost, AI-native token on Solana makes it the natural choice for the next 100 years of economic evolution.',
+      'industries': [
+        {
+          'icon': '🧓',
+          'title': 'Silver Economy',
+          'tagline': 'Aging population services & healthcare',
+          'trend': 'By 2050, 1 in 6 people globally will be over 65. The silver economy spans smart healthcare, robotics-assisted living, longevity treatments, and digital legacy management. By 2100, life expectancy may exceed 100 in developed regions, creating an entirely new economic demographic.',
+          'eacoMethod': 'EACO enables micro-payment pensions, tokenized healthcare savings, and AI-agent-managed elderly care funds. Smart contracts can automate insurance payouts, while EACO tokens can reward healthy behaviors verified by wearable devices.',
+          'bullets': [
+            'Tokenized longevity insurance pools with transparent on-chain claims',
+            'AI agent auto-payments for nursing services and medication delivery',
+            'Digital inheritance: EACO-based smart wills and automated estate distribution',
+            'Cross-border pension portability via EACO settlement rails'
+          ]
+        },
+        {
+          'icon': '💖',
+          'title': 'Emotion Economy',
+          'tagline': 'Mental wellness, AI companions & emotional value',
+          'trend': 'The emotion economy encompasses AI companionship, mental health platforms, digital therapeutics, and personalized emotional experiences. As loneliness epidemics spread globally, AI companions and virtual emotional services will become a trillion-dollar market by 2035.',
+          'eacoMethod': 'EACO powers micro-payments for AI companion services, tokenizes emotional data with privacy protection (FHE), and creates incentive markets for mental wellness. Users earn EACO for sharing anonymized emotional data that improves AI models.',
+          'bullets': [
+            'Pay-per-conversation AI companion billing via EACO micro-transactions',
+            'Tokenized emotional data marketplace with FHE privacy protection',
+            'EACO reward system for meditation, therapy attendance, and wellness milestones',
+            'Decentralized mental health insurance pools governed by DAO'
+          ]
+        },
+        {
+          'icon': '🔄',
+          'title': 'Circular & Second-hand Economy',
+          'tagline': 'Sustainable reuse, recycling & resale markets',
+          'trend': 'The circular economy will reach $4.5 trillion by 2030. Second-hand marketplaces, product-as-a-service models, and tokenized recycling incentives are reshaping consumption. By 2050, 50% of consumer goods may be traded in circular markets.',
+          'eacoMethod': 'EACO tokens incentivize recycling behavior, authenticate second-hand goods via blockchain provenance, and enable fractional ownership of high-value used items. Smart contracts automate resale royalties and carbon credit distribution.',
+          'bullets': [
+            'EACO reward tokens for recycling actions verified by IoT sensors',
+            'Blockchain-authenticated product provenance for luxury second-hand goods',
+            'Fractional tokenized ownership of shared assets (vehicles, equipment)',
+            'Automated carbon credit trading via EACO-backed smart contracts'
+          ]
+        },
+        {
+          'icon': '💰',
+          'title': 'Affordable Consumption Economy',
+          'tagline': 'Value-driven mass market & micro-transactions',
+          'trend': 'Global economic pressure is driving consumers toward value-focused spending. The affordable consumption sector includes discount retail, micro-leasing, shared services, and AI-optimized price discovery. This represents a $10+ trillion market serving the global middle and lower classes.',
+          'eacoMethod': 'EACO enables frictionless micro-payments for affordable goods and services, powers AI-agent price comparison and auto-purchasing, and creates community group-buying incentives through token rewards.',
+          'bullets': [
+            'EACO micro-payments for pay-per-use shared goods and services',
+            'AI agent bulk purchasing with EACO settlement and automatic discounts',
+            'Token-based loyalty programs for affordable retail chains',
+            'Cross-border remittances at near-zero cost via EACO on Solana'
+          ]
+        },
+        {
+          'icon': '⚡',
+          'title': 'Energy Transition Economy',
+          'tagline': 'Clean energy, tokenized grids & carbon markets',
+          'trend': 'The global energy transition requires $4.4 trillion annual investment. Solar, wind, hydrogen, fusion R&D, and smart grids are converging with blockchain for decentralized energy trading. By 2050, 90% of electricity may come from renewables in developed nations.',
+          'eacoMethod': 'EACO tokenizes renewable energy production, enables P2P energy trading between households, and creates carbon offset markets. GPU-backed energy assets can be tokenized for investment, directly linking Token Factory compute capacity with green energy.',
+          'bullets': [
+            'Tokenized solar panel output traded peer-to-peer via EACO',
+            'Carbon credit marketplace with EACO as settlement currency',
+            'GPU compute energy sourcing tied to green energy certificates on-chain',
+            'AI agent-managed energy arbitrage: buying low, selling high in EACO'
+          ]
+        },
+        {
+          'icon': '🌍',
+          'title': 'Cross-border Trade Economy',
+          'tagline': 'Global commerce, logistics & supply chain finance',
+          'trend': 'Cross-border e-commerce will exceed $10 trillion by 2030. AI-powered logistics, blockchain customs, and stablecoin settlements are reducing friction. By 2050, autonomous supply chains with AI agents negotiating and executing trade deals will be standard.',
+          'eacoMethod': 'EACO serves as a borderless trade settlement token, particularly for AI-agent-to-agent cross-border micro-transactions. Smart contracts automate customs documentation, escrow, and multi-party supply chain finance.',
+          'bullets': [
+            'EACO as escrow currency for cross-border B2B trade with automated release',
+            'AI agent freight negotiation and payment settlement in EACO',
+            'Tokenized trade finance: fractional investment in shipping contracts',
+            'Real-time supply chain tracking with blockchain-verified provenance'
+          ]
+        },
+        {
+          'icon': '🚀',
+          'title': 'Interstellar Trade Exploration',
+          'tagline': 'Space economy, asteroid mining & orbital commerce',
+          'trend': 'The space economy will reach $1 trillion by 2040. Asteroid mining, lunar resource extraction, orbital manufacturing, and Mars colonization create entirely new trade routes. By 2100, interplanetary trade may require settlement systems that work across planetary distances.',
+          'eacoMethod': 'EACO provides a delay-tolerant, blockchain-based settlement layer for interplanetary trade. AI agents on different planets can execute EACO transactions via Solana\'s fast finality. Tokenized asteroid mining rights and orbital slot allocations create new asset classes.',
+          'bullets': [
+            'EACO as settlement currency for asteroid mining resource contracts',
+            'Tokenized orbital slot allocation and satellite bandwidth trading',
+            'AI agent-managed autonomous supply runs between Earth and lunar/Mars bases',
+            'DAO-governed interplanetary trade protocols with EACO treasury'
+          ]
+        },
+        {
+          'icon': '🤖',
+          'title': 'AI Agent Economy',
+          'tagline': 'Autonomous machine-to-machine commerce',
+          'trend': 'By 2035, there may be more AI agents than humans online. Agents will autonomously discover tasks, negotiate prices, purchase services, and deliver results. The AI agent economy requires a payment system designed for machines: micro-amounts, high-frequency, no-KYC, 24/7.',
+          'eacoMethod': 'EACO is the native payment token for AI agent micro-transactions. Agents maintain EACO wallets, set spending budgets, and execute autonomous trades. Token Factory compute resources are purchased and settled in EACO, creating a complete machine economy loop.',
+          'bullets': [
+            'Agent-to-agent EACO micro-payments for compute, data, and API calls',
+            'Tokenized AI agent ownership: create, train, and trade agents as NFTs',
+            'Autonomous EACO treasury management with budget caps and circuit breakers',
+            'Decentralized inference marketplace: agents pay EACO for model access'
+          ]
+        },
+        {
+          'icon': '🧬',
+          'title': 'Healthcare & Bio-tech Economy',
+          'tagline': 'Genomics, longevity, personalized medicine',
+          'trend': 'The bio-economy will exceed $3 trillion by 2035. Gene editing, synthetic biology, personalized medicine, and anti-aging therapies are converging with AI drug discovery. Health data tokenization with privacy computing enables new research models.',
+          'eacoMethod': 'EACO powers health data marketplaces with FHE protection, tokenizes genomic data for research access, and enables micro-payment for telemedicine and AI diagnostics. Patients earn EACO for contributing anonymized data to medical research.',
+          'bullets': [
+            'Tokenized genomic data marketplace with FHE privacy protection',
+            'EACO micro-payments for AI diagnostic services and second opinions',
+            'DAO-governed medical research funding pools',
+            'Tokenized clinical trial participation incentives paid in EACO'
+          ]
+        },
+        {
+          'icon': '🔒',
+          'title': 'Privacy Computing & Data Assets',
+          'tagline': 'FHE, ZK proofs & data sovereignty',
+          'trend': 'Fully Homomorphic Encryption (FHE) chips reaching 1000 tx/sec in 2026 will unlock data-asset tokenization. By 2030, individuals will own and monetize their data through privacy-preserving computation. The data economy will rival the oil economy in value.',
+          'eacoMethod': 'EACO serves as the settlement token for privacy-protected data transactions. Hospitals, research institutions, and individuals tokenize encrypted data assets on-chain, accessible only through FHE computation paid in EACO.',
+          'bullets': [
+            'EACO-settled FHE data marketplace: compute on encrypted data, pay in EACO',
+            'Personal data sovereignty: individuals earn EACO for data access rights',
+            'ZK-proof verified credentials traded as NFTs on EACO rails',
+            'Cross-institutional AI model training with privacy-preserving EACO payments'
+          ]
+        }
+      ]
+    }
+  },
+  'zh': {
+    'meta': {
+      'siteTitle': 'EACO Token 工厂',
+      'siteSubtitle': '全球 AI Token 经济的两种模式',
+      'siteDescription': '探索合规跨境 Token 工厂与去中心化 EACO Web3 Token 工厂'
+    },
+    'nav': {
+      'mainland': '大陆合规版',
+      'overseas': '海外 EACO Web3',
+      'comparison': '对比总结',
+      'eaco': 'EACO 信息',
+      'future': '未来趋势'
+    },
+    'v1': {
+      'badge': '版本一',
+      'title': '跨境 Token 工厂',
+      'subtitle': '以合规为基石，以出海为航道',
+      's1Title': '战略定位',
+      's1Body': '大陆版 Token 工厂的核心定位，不是境内发行虚拟货币或代币，而是以算力服务出口和数据跨境加工为业务实质，合规地参与全球 AI Token 产业链分工。\n\n2026年6月，我国日均词元调用量已激增至近175万亿，是全球词元调用量最大的国家。与此同时，国家数据局已明确将Token经济列为AI核心生产要素。中国信通院于2026年4月正式启动《人工智能云Token工厂全栈服务能力要求》评估工作，标志着行业标准体系开始建立。',
+      's2Title': '核心商业模式',
+      's2Subtitle': '算力调用—词元计费—跨境结算—多方生态分润 完整商业闭环',
+      's2_1Title': '业务实质：从来数加工到词元出海',
+      's2_1Body': '大陆版Token工厂的业务逻辑，根植于"来数加工"这一跨境数据新业态——将来自境外的原始数据通过治理、聚合、建模等加工程序，转化为有序数据产品，再以Token形式出口。\n\n2026年8月，青岛自贸片区与浪潮云签约搭建北方首个跨境Token工厂，提供全栈算力底座、大模型能力与安全合规能力，构建基于可信数据空间的词元服务平台。核心功能包括：',
+      's2_1Bullets': [
+        '异构算力统一纳管：纳管不同厂商的GPU芯片（含昇腾等国产芯片）',
+        '多类大模型集中接入：统一调度DeepSeek、Kimi等模型',
+        '词元标准化计量计价：以Token为统一计费单位',
+        '跨境结算与生态分润：打通从算力到现金的完整链路'
+      ],
+      's2_2Title': '收入结构：从卖算力到卖Token',
+      's2_2Body': '传统模式按GPU卡小时收费（$/GPU-Hour），Token工厂模式按产出的有效Token数量计费（$/1M Tokens），将收入与AI实际产出而非硬件占用绑定。通过存算优化、推理引擎优化、PD分离与动态Batching等技术手段，服务商可享有30%—50%的高毛利溢价。\n\n第三代Token工厂的收入结构已演变为"保底算力+超额Token增值"——既有基础设施的稳定租金收入，又有Token产量超预期的增值分成。',
+      's3Title': '技术架构与合规框架',
+      's3_1Title': '技术底座',
+      's3_1Headers': [
+        '层级',
+        '构成',
+        '关键要求'
+      ],
+      's3_1Rows': [
+        [
+          '算力层',
+          '异构GPU集群（含国产芯片如昇腾910C）',
+          '国产芯片适配、算力利用率优化'
+        ],
+        [
+          '平台层',
+          '统一调度系统 + 推理引擎优化',
+          '降低首字等待时间、提高并发量'
+        ],
+        [
+          '模型层',
+          '多类大模型集中接入',
+          '模型路由与任务-模型匹配'
+        ],
+        [
+          '数据层',
+          '可信数据空间',
+          '数据跨境合规、隐私保护'
+        ],
+        [
+          '结算层',
+          '跨境结算系统',
+          '合规外汇结算、多方分润'
+        ]
+      ],
+      's3_2Title': '合规红线（42号文框架）',
+      's3_2Body': '2026年2月6日，中国人民银行等八部委联合发布《关于进一步防范和处置虚拟货币等相关风险的通知》（银发〔2026〕42号），核心要求包括：',
+      's3_2Headers': [
+        '合规要求',
+        '对Token工厂的影响与应对'
+      ],
+      's3_2Rows': [
+        [
+          '虚拟货币境内全面禁止',
+          'Token工厂不得在境内发行任何形式的加密代币或虚拟货币'
+        ],
+        [
+          'RWA代币化业务许可放开（跨境端）',
+          '以算力服务出口、数据加工服务为业务实质，可合规开展跨境业务'
+        ],
+        [
+          '境外发行虚拟货币需审批',
+          '未经相关部门同意，不得在境外发行虚拟货币'
+        ],
+        [
+          '数据跨境合规',
+          '依托自贸试验区制度优势，开展数据跨境制度创新与安全压力测试'
+        ]
+      ],
+      's3_3Title': '可行的合规路径',
+      's3_3Body': '1. 依托自贸试验区：青岛自贸片区作为国家级对外开放试验平台，拥有自贸试验区先行先试制度优势，可开展数据跨境制度创新与安全压力测试。目前已落地北方首个跨境Token工厂。\n\n2. 依托香港国际化平台：浪潮已搭建香港智算云国际化Token总平台，全面支撑Token出海业务发展。香港的稳定监管环境与金融中心地位，为Token工厂提供了合规的国际化跳板。\n\n3. 参与行业标准制定：首批启动中国信通院《人工智能云Token工厂全栈服务能力要求》评估，以合规认证建立市场信任。\n\n4. 绿色Token出海：2026年8月，绿色Token出海专题会议在呼和浩特举行，重点探讨Token工厂出海的合规路径、模型选择与定价策略。',
+      's4Title': '典型实践',
+      's4Headers': [
+        '项目',
+        '规模',
+        '特点'
+      ],
+      's4Rows': [
+        [
+          '无锡燧弘华创Token工厂',
+          '首期部署4台昇腾384超节点服务器，合计1536颗昇腾910C芯片',
+          '国内首个"东数西算、算电融合"特大型国产Token工厂'
+        ],
+        [
+          '青岛跨境Token工厂',
+          '浪潮云 + 青岛自贸片区',
+          '北方首个跨境Token工厂，打通"算力调用—词元计费—跨境结算—多方生态分润"闭环'
+        ],
+        [
+          '趋境科技',
+          '日均万亿级Token工厂投产',
+          '专注头部模型推理优化，部分成熟业务已实现盈利'
+        ],
+        [
+          '硅基流动',
+          '2025年词元年吞吐量行业第四，市场份额1.5%',
+          '已递交港交所IPO招股书，有望成港股首只Token工厂概念股'
+        ]
+      ],
+      's5Title': '核心风险与应对',
+      's5Headers': [
+        '风险',
+        '应对策略'
+      ],
+      's5Rows': [
+        [
+          '监管政策变动',
+          '依托自贸试验区制度优势，紧跟政策窗口'
+        ],
+        [
+          'Token价格战',
+          '聚焦高附加值Token（行业专业Token），而非低价通用Token'
+        ],
+        [
+          '国产芯片适配',
+          '推动国产芯片进入大规模推理场景'
+        ],
+        [
+          '算力利用率低',
+          '通过调度优化、PD分离等技术提升利用率'
+        ],
+        [
+          '跨境数据合规',
+          '基于可信数据空间，保障词元全链路闭环、安全稳定出海'
+        ]
+      ],
+      's6Title': '结论',
+      's6Body': '大陆版Token工厂的可行路径是：以算力服务出口和数据加工为业务实质，依托自贸试验区的制度创新和香港的国际化平台，在42号文框架内合规运营。它不是"发币"，而是"卖Token服务"——本质上是将中国的算力优势和模型能力，通过标准化的Token计量，输出到全球市场。'
+    },
+    'v2': {
+      'badge': '版本二',
+      'title': '去中心化 Token 工厂',
+      'subtitle': 'AI Token（生产资料）+ 区块链Token + 隐私计算 = 无需信任、无需许可的智能体经济',
+      's1Title': '战略定位',
+      's1Body': '海外版Token工厂的终极形态，不是中心化的算力集群，而是一个去中心化的智能体经济基础设施——任何AI Agent都可以自主调用算力、支付Token、完成交付，形成一个由机器客户驱动、由区块链结算的自治经济系统。\n\nHashKey Group董事长肖风在2026年香港Web3嘉年华上明确提出：未来所有商业机构都将变成"Token工厂"。AI Token是智能体的"生产资料"，而区块链Token是智能体经济的"血液"——承担支付与结算功能。',
+      's2Title': '核心商业模式：三代币模型',
+      's2Body': 'HashKey在2026年《代币经济学白皮书》中提出的"三代币模型"：',
+      's2Headers': [
+        '代币类型',
+        '功能',
+        '在Token工厂中的角色'
+      ],
+      's2Rows': [
+        [
+          '功能型代币（Utility Token）',
+          '面向社区的激励机制',
+          'AI Agent调用算力、购买Token的支付媒介'
+        ],
+        [
+          '股权代币（Equity Token）',
+          '面向创业者与股东的激励机制',
+          'Token工厂的治理与收益分配'
+        ],
+        [
+          'NFT（非同质化代币）',
+          '面向特定场景的价值捕获',
+          '模型微调权、数据使用权等特定权益'
+        ]
+      ],
+      's2_1Title': 'EACO的定位',
+      's2_1Body': 'EACO（Earth Coin）是基于Solana区块链的Token项目，定位为"地球人的MemeCoin"。在EACO生态中，Token工厂的运作逻辑可以嵌入以下框架：',
+      's2_1Bullets': [
+        '算力Token化：将GPU算力资产转化为可交易的Token，让持有者获得算力使用权益',
+        'AI Agent代币化：允许用户创建、代币化并交易AI代理',
+        '去中心化推理市场：用户可通过处理AI请求赚取收益'
+      ],
+      's2_2Title': '去中心化AI推理市场（参考案例）',
+      's2_2Body': 'Warden Protocol于2026年6月在Base链上线Halo P2P AI推理市场公测版，上线数周内已处理超80亿AI Token，支持超200种模型。该平台与Virtuals Protocol整合，为超1.8万个代币化AI代理提供去中心化算力层。用户可使用稳定币或VIRTUAL代币支付推理费用。\n\n这正是EACO版本Token工厂可以参照的架构。',
+      's3Title': '技术架构：AI Token + 区块链Token + 隐私计算',
+      's3_1Title': '三大技术支柱',
+      's3_1Headers': [
+        '技术层',
+        '功能',
+        '关键突破'
+      ],
+      's3_1Rows': [
+        [
+          'AI Token',
+          '智能体的生产资料',
+          '大模型推理产生的Token流'
+        ],
+        [
+          '区块链Token',
+          '支付与结算媒介',
+          '可编程、可细分、可实时清算'
+        ],
+        [
+          'ZK/全同态加密',
+          '隐私计算保护',
+          '全同态加密芯片下半年达1000笔/秒性能'
+        ]
+      ],
+      's3_2Title': '隐私计算的商用突破',
+      's3_2Body': '区块链的公开透明特性导致数据"裸奔"，这是金融机构和医疗数据难以直接上链的核心障碍。但全同态加密（Fully Homomorphic Encryption）专用芯片预计在2026年下半年正式推出，单芯片性能可达每秒处理约1000笔交易的加密计算。\n\n这意味着：医疗数据经全同态加密后转化为Token，任何人或智能体都可以在区块链上以无需许可的方式调用这些数据进行计算，却无法获取任何个人隐私信息。\n\n医院因此从传统数据持有者，转变为"Token工厂"。',
+      's3_3Title': '去中心化架构',
+      's3_3Layers': [
+        {
+          'name': '全同态加密层',
+          'desc': '数据隐私保护'
+        },
+        {
+          'name': '区块链结算层',
+          'desc': '功能型代币 | 股权代币 | NFT'
+        },
+        {
+          'name': '去中心化算力层',
+          'desc': 'P2P推理市场'
+        },
+        {
+          'name': 'AI Agent层',
+          'desc': '自主采购与交付'
+        }
+      ],
+      's4Title': 'EACO版本的独特价值',
+      's4_1Title': '机器经济的基础设施',
+      's4_1Body': '肖风指出：AI Agent在调用API时，每次费用可能仅需几分钱，现有银行支付系统的成本结构完全无法支撑如此微小的即时支付。因此，未来一定会出现专为机器而非人类设计的全新金融服务体系。\n\nEACO版本Token工厂的核心价值在于：',
+      's4_1Bullets': [
+        '微支付能力：区块链Token可支持Agent级别的微支付',
+        '无需信任：Agent无需KYC、无需签署合同即可调用服务',
+        '全球开放：打破地域限制，全球Agent可自由接入'
+      ],
+      's4_2Title': '从人下单到Agent下单',
+      's4_2Body': '在今天，是人类向Token工厂下单；在未来，Token工厂最大的客户可能是Agent。当Agent能够自主发现任务、计算预期收益、购买Token、调用其他Agent，再把结果交付给另一个Agent——这时，Token就从模型的计费单位，变成了机器组织的生产资料。',
+      's4_3Title': '资产Token化的新维度',
+      's4_3Bullets': [
+        'GPU-backed资产Token化：将GPU硬件及其现金流转化为可投资的Token资产',
+        'AI代理作为可拥有数字资产：允许用户创建、代币化并交易AI代理',
+        '数据资产Token化：个人可将加密后的体检数据上链，向全球保险公司发出需求'
+      ],
+      's5Title': '核心风险与应对',
+      's5Headers': [
+        '风险',
+        '应对策略'
+      ],
+      's5Rows': [
+        [
+          '监管不确定性',
+          '选择合规jurisdiction（如香港、新加坡），关注SEC安全港规则'
+        ],
+        [
+          'Token价格波动',
+          '引入稳定币支付通道，对冲波动风险'
+        ],
+        [
+          '智能合约风险',
+          '严格审计、渐进式去中心化'
+        ],
+        [
+          '算力供给不稳定',
+          '多链部署、P2P算力市场冗余设计'
+        ],
+        [
+          'Agent失控风险',
+          '设置Token预算上限、熔断机制、人工审计节点'
+        ]
+      ],
+      's6Title': '结论',
+      's6Body': 'EACO海外版的Token工厂，不是一座中心化的机房，而是一个去中心化的智能体经济基础设施。它的终极形态是：\n\nAI Token（生产资料）+ 区块链Token（支付结算）+ 全同态加密（隐私保护）三者叠加，实现无需信任、无需许可的颠覆式商业模式。\n\n当Agent开始自己购买Token，一个属于机器的经济系统才真正开始运转。而EACO版本的Token工厂，正是这个新经济系统的能源入口。'
+    },
+    'comparison': {
+      'title': '两个版本对比总结',
+      'subtitle': '同一Token工厂在不同监管框架下的两种形态',
+      'headers': [
+        '维度',
+        '大陆合规版',
+        '海外EACO Web3版'
+      ],
+      'rows': [
+        [
+          '核心定位',
+          '算力服务出口 + 数据跨境加工',
+          '去中心化智能体经济基础设施'
+        ],
+        [
+          '业务实质',
+          '卖Token服务（$/1M Tokens）',
+          'Token化AI资产 + 去中心化推理市场'
+        ],
+        [
+          '合规框架',
+          '42号文 + 自贸试验区 + 香港平台',
+          '海外监管 + 智能合约 + DAO治理'
+        ],
+        [
+          '结算方式',
+          '法币跨境结算',
+          '区块链Token（含稳定币）'
+        ],
+        [
+          '客户群体',
+          '海外企业、出海企业、OPC创作者',
+          'AI Agent、Web3开发者、代币持有者'
+        ],
+        [
+          '核心风险',
+          '监管政策、价格战、芯片适配',
+          '监管不确定性、Token波动、合约风险'
+        ],
+        [
+          '发展路径',
+          '先有订单，再建产能',
+          '先建生态，再跑规模'
+        ]
+      ]
+    },
+    'eaco': {
+      'title': '关于 EACO',
+      'name': 'EACO (Earth\'s Best Coin)',
+      'chain': 'Solana 区块链',
+      'contractLabel': '合约地址',
+      'contract': 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH',
+      'supplyLabel': '总量',
+      'supply': '13.5亿 EACO',
+      'positioningLabel': '定位',
+      'positioning': 'AI + RWA + Web3 地球代币 — Energy, Attitude, Cooperation, Optimization',
+      'linksTitle': '生态链接',
+      'copyBtn': '复制',
+      'copiedBtn': '已复制！',
+      'links': [
+        {
+          'label': 'EACO Web3',
+          'url': 'https://ucoingroup.github.io/eacoweb3-2026/'
+        },
+        {
+          'label': 'EACO Faucet',
+          'url': 'https://ucoingroup.github.io/eaco-faucet/'
+        },
+        {
+          'label': 'AU-Trade 外贸平台',
+          'url': 'https://ucoingroup.github.io/au-trade/'
+        },
+        {
+          'label': 'Solscan 浏览器',
+          'url': 'https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH'
+        },
+        {
+          'label': 'Meteora 流动性池',
+          'url': 'https://meteora.ag/'
+        },
+        {
+          'label': 'GitHub',
+          'url': 'https://github.com/ucoingroup'
+        }
+      ]
+    },
+    'future': {
+      'badge': '未来愿景',
+      'title': '地球村未来10-100年热门行业趋势',
+      'subtitle': 'EACO如何结合未来百年前10大热门经济行业',
+      'overviewTitle': '总览：大融合时代',
+      'overview': '未来10-100年，地球村将见证人口结构变化、技术突破和经济重构的前所未有的大融合。全球老龄化、气候紧迫性、AI自主性和太空商业化将重塑每一个行业。\n\nEACO作为地球原生的Web3代币，天生具备成为这些新兴经济体之间连接组织的独特优势。其微支付能力、无国界特性和AI-Agent友好设计，使其成为机器对机器、人对机器经济互动的理想结算层。',
+      'industriesTitle': '前10大未来行业与EACO结合路径',
+      'eacoMethodLabel': 'EACO结合方式',
+      'conclusionTitle': '结论：EACO作为地球经济层',
+      'conclusion': '在全部10个未来行业中，EACO充当通用的经济层：为AI智能体启用微支付，将从能源到医疗数据的实物资产代币化，促进无国界贸易结算，并为可持续和星际探索创建激励结构。\n\nAI Token经济、区块链结算和隐私计算的融合，为EACO不仅成为一种加密货币，而是地球村多物种、多行星经济体的原生结算货币奠定了基础。从银发经济护理微支付到星际贸易清算，EACO在Solana链上快速、低成本、AI原生的设计，使其成为未来100年经济演化的自然选择。',
+      'industries': [
+        {
+          'icon': '🧓',
+          'title': '银发经济',
+          'tagline': '老龄化服务与健康护理',
+          'trend': '到2050年，全球每6人中就有1人超过65岁。银发经济涵盖智慧医疗、机器人辅助养老、长寿治疗和数字遗产管理。到2100年，发达地区预期寿命可能超过100岁，创造全新的人口经济结构。',
+          'eacoMethod': 'EACO实现微支付养老金、代币化医疗储蓄和AI智能体管理的养老基金。智能合约自动执行保险理赔，EACO代币奖励可穿戴设备验证的健康行为。',
+          'bullets': [
+            '代币化长寿保险池，链上透明理赔',
+            'AI智能体自动支付护理服务和药品配送',
+            '数字遗产：基于EACO的智能遗嘱和自动化遗产分配',
+            '跨境养老金便携性，通过EACO结算通道'
+          ]
+        },
+        {
+          'icon': '💖',
+          'title': '情绪经济',
+          'tagline': '心理健康、AI陪伴与情绪价值',
+          'trend': '情绪经济涵盖AI陪伴、心理健康平台、数字疗法和个性化情绪体验。随着全球孤独症蔓延，AI陪伴和虚拟情绪服务到2035年将成为万亿美元级市场。',
+          'eacoMethod': 'EACO为AI陪伴服务提供微支付，通过全同态加密(FHE)保护情绪数据代币化，创建心理健康激励市场。用户通过分享匿名情绪数据改善AI模型赚取EACO。',
+          'bullets': [
+            '按对话付费的AI陪伴计费，通过EACO微交易',
+            'FHE隐私保护的情绪数据代币化市场',
+            '冥想、治疗参与和健康里程碑的EACO奖励系统',
+            'DAO治理的去中心化心理健康保险池'
+          ]
+        },
+        {
+          'icon': '🔄',
+          'title': '二手循环经济',
+          'tagline': '可持续再利用、回收与转售市场',
+          'trend': '循环经济到2030年将达到4.5万亿美元。二手交易平台、产品即服务模式和代币化回收激励正在重塑消费。到2050年，50%的消费品可能在循环市场中交易。',
+          'eacoMethod': 'EACO代币激励回收行为，通过区块链溯源认证二手商品，实现高价值二手物品的 fractional ownership。智能合约自动执行转售版税和碳积分分配。',
+          'bullets': [
+            'IoT传感器验证的回收行为获得EACO奖励代币',
+            '奢侈品二手商品区块链溯源认证',
+            '共享资产（车辆、设备）的 fractional 代币化所有权',
+            'EACO背书的智能合约自动碳积分交易'
+          ]
+        },
+        {
+          'icon': '💰',
+          'title': '平价消费经济',
+          'tagline': '价值驱动的大众市场与微交易',
+          'trend': '全球经济压力推动消费者转向价值导向消费。平价消费领域包括折扣零售、微租赁、共享服务和AI优化价格发现。这是一个服务全球中低收入阶层的10万亿美元以上市场。',
+          'eacoMethod': 'EACO为平价商品和服务实现无摩擦微支付，驱动AI智能体比价和自动采购，通过代币奖励创建社区团购激励。',
+          'bullets': [
+            '按次付费共享商品和服务的EACO微支付',
+            'AI智能体批量采购，EACO结算并自动折扣',
+            '平价零售链的代币化忠诚度计划',
+            '通过Solana上的EACO实现近零成本跨境汇款'
+          ]
+        },
+        {
+          'icon': '⚡',
+          'title': '能源转型经济',
+          'tagline': '清洁能源、代币化电网与碳市场',
+          'trend': '全球能源转型需要每年4.4万亿美元投资。太阳能、风能、氢能、核聚变研发和智能电网正与区块链融合实现去中心化能源交易。到2050年，发达国家90%的电力可能来自可再生能源。',
+          'eacoMethod': 'EACO代币化可再生能源生产，实现家庭间P2P能源交易，创建碳抵消市场。GPU背书的能源资产可代币化供投资，直接将Token工厂算力与绿色能源关联。',
+          'bullets': [
+            '太阳能板产出代币化，通过EACO点对点交易',
+            'EACO作为结算货币的碳积分市场',
+            'GPU算力能源采购与链上绿色能源证书绑定',
+            'AI智能体管理的能源套利：低买高卖，EACO结算'
+          ]
+        },
+        {
+          'icon': '🌍',
+          'title': '外贸跨境经济',
+          'tagline': '全球贸易、物流与供应链金融',
+          'trend': '跨境电商到2030年将超过10万亿美元。AI驱动的物流、区块链清关和稳定币结算正在减少摩擦。到2050年，AI智能体自主谈判和执行贸易交易的供应链将成为标准。',
+          'eacoMethod': 'EACO作为无国界贸易结算代币，特别适用于AI智能体间的跨境微交易。智能合约自动处理清关文件、托管和多方供应链金融。',
+          'bullets': [
+            'EACO作为跨境B2B贸易托管货币，自动释放',
+            'AI智能体货运谈判和EACO支付结算',
+            '代币化贸易金融：航运合同的 fractional 投资',
+            '区块链验证溯源的实时供应链追踪'
+          ]
+        },
+        {
+          'icon': '🚀',
+          'title': '星际贸易探索',
+          'tagline': '太空经济、小行星采矿与轨道商业',
+          'trend': '太空经济到2040年将达到1万亿美元。小行星采矿、月球资源开采、轨道制造和火星殖民创造全新贸易路线。到2100年，星际贸易可能需要跨行星距离的结算系统。',
+          'eacoMethod': 'EACO提供容忍延迟的、基于区块链的星际贸易结算层。不同行星上的AI智能体可通过Solana的快速最终性执行EACO交易。代币化小行星采矿权和轨道位置分配创造新资产类别。',
+          'bullets': [
+            'EACO作为小行星采矿资源合同的结算货币',
+            '代币化轨道位置分配和卫星带宽交易',
+            'AI智能体管理的地月/地火自主补给任务',
+            'DAO治理的星际贸易协议，EACO国库管理'
+          ]
+        },
+        {
+          'icon': '🤖',
+          'title': 'AI智能体经济',
+          'tagline': '自主机器对机器商业',
+          'trend': '到2035年，在线AI智能体数量可能超过人类。智能体将自主发现任务、谈判价格、购买服务和交付结果。AI智能体经济需要一个为机器设计的支付系统：微金额、高频、无KYC、全天候。',
+          'eacoMethod': 'EACO是AI智能体微交易的原生支付代币。智能体维护EACO钱包、设置支出预算、执行自主交易。Token工厂算力资源以EACO购买和结算，形成完整的机器经济闭环。',
+          'bullets': [
+            '智能体间EACO微支付：算力、数据和API调用',
+            '代币化AI智能体所有权：创建、训练和交易智能体NFT',
+            '自主EACO国库管理，含预算上限和熔断机制',
+            '去中心化推理市场：智能体用EACO购买模型访问权'
+          ]
+        },
+        {
+          'icon': '🧬',
+          'title': '医疗生物科技经济',
+          'tagline': '基因组学、长寿、精准医疗',
+          'trend': '生物经济到2035年将超过3万亿美元。基因编辑、合成生物学、精准医疗和抗衰老疗法正与AI药物发现融合。隐私计算下的健康数据代币化开启新的研究模式。',
+          'eacoMethod': 'EACO驱动FHE保护的健康数据市场，代币化基因组数据供研究访问，实现远程医疗和AI诊断的微支付。患者通过贡献匿名数据参与医学研究赚取EACO。',
+          'bullets': [
+            'FHE隐私保护的基因组数据代币化市场',
+            'AI诊断服务和第二诊疗意见的EACO微支付',
+            'DAO治理的医学研究资金池',
+            '代币化临床试验参与激励，以EACO支付'
+          ]
+        },
+        {
+          'icon': '🔒',
+          'title': '隐私计算与数据资产',
+          'tagline': '全同态加密、零知识证明与数据主权',
+          'trend': '全同态加密(FHE)芯片在2026年达到每秒1000笔交易，将解锁数据资产代币化。到2030年，个人将通过隐私保护计算拥有和变现自己的数据。数据经济的价值将比肩石油经济。',
+          'eacoMethod': 'EACO作为隐私保护数据交易的结算代币。医院、研究机构和个人将加密数据资产代币化上链，只能通过以EACO支付的全同态加密计算来访问。',
+          'bullets': [
+            'EACO结算的FHE数据市场：对加密数据计算，以EACO支付',
+            '个人数据主权：个人通过数据访问权赚取EACO',
+            'ZK证明验证凭证作为NFT在EACO链上交易',
+            '跨机构AI模型训练，隐私保护的EACO支付'
+          ]
+        }
+      ]
+    }
+  },
+  'es': {
+    'meta': {
+      'siteTitle': 'Fabrica de Tokens EACO',
+      'siteSubtitle': 'Dos modelos para la economia global de tokens de IA',
+      'siteDescription': 'Explorando la Fabrica de Tokens transfronteriza conforme y la Fabrica de Tokens EACO Web3 descentralizada'
+    },
+    'nav': {
+      'mainland': 'Cumplimiento Continental',
+      'overseas': 'EACO Web3 en el Extranjero',
+      'comparison': 'Comparacion',
+      'eaco': 'Info EACO',
+      'future': 'Tendencias Futuras'
+    },
+    'v1': {
+      'badge': 'Version 1',
+      'title': 'Fabrica de Tokens Transfronteriza',
+      'subtitle': 'Cumplimiento como piedra angular, expansion global como rumbo',
+      's1Title': 'Posicionamiento Estrategico',
+      's1Body': 'El posicionamiento central de la Fabrica de Tokens continental no consiste en emitir monedas virtuales o tokens a nivel nacional, sino en participar de forma conforme en la cadena de valor global de tokens de IA, utilizando la exportacion de servicios de computo y el procesamiento transfronterizo de datos como sustancia empresarial.\n\nEn junio de 2026, las llamadas diarias de tokens en China alcanzaron casi 175 billones, siendo el pais con mayor volumen global. Meanwhile, la Administracion Nacional de Datos ha clasificado la economia de tokens como factor de produccion central de IA. El Instituto de Informacion y Comunicaciones de China inicio en abril de 2026 la evaluacion de los Requisitos de Capacidad de Servicio Integral de Fabricas de Tokens de Inteligencia Artificial en la Nube, marcando el inicio del sistema de estandares industriales.',
+      's2Title': 'Modelo de Negocio Central',
+      's2Subtitle': 'Ciclo comercial completo: Llamada de computo - Facturacion por tokens - Liquidacion transfronteriza - Distribucion de beneficios del ecosistema',
+      's2_1Title': 'Sustancia del Negocio: Del Procesamiento de Datos a la Exportacion de Tokens',
+      's2_1Body': 'La logica de negocio de la Fabrica de Tokens continental se basa en el procesamiento de datos transfronterizos: transformar los datos originales del extranjero mediante gobernanza, agregacion y modelado en productos de datos ordenados, para luego exportarlos en forma de Token.\n\nEn agosto de 2026, la Zona Franca de Qingdao y Inspur Cloud firmaron un acuerdo para construir la primera Fabrica de Tokens transfronteriza del norte de China. Sus funciones centrales incluyen:',
+      's2_1Bullets': [
+        'Gestion unificada de computo heterogeneo: administracion de chips GPU de diferentes fabricantes (incluidos chips nacionales como Ascend)',
+        'Acceso centralizado de multiples modelos: programacion unificada de DeepSeek, Kimi y otros modelos',
+        'Medicion y precios estandarizados de tokens: Token como unidad de facturacion unificada',
+        'Liquidacion transfronteriza y distribucion de beneficios: cadena completa desde computo hasta efectivo'
+      ],
+      's2_2Title': 'Estructura de Ingresos: De Vender Computo a Vender Tokens',
+      's2_2Body': 'El modelo tradicional cobra por horas de tarjeta GPU ($/GPU-Hour), mientras que el modelo de Fabrica de Tokens cobra por la cantidad de tokens validos producidos ($/1M Tokens), vinculando los ingresos con la produccion real de IA en lugar de con la ocupacion de hardware. Mediante optimizacion de almacenamiento y computo, optimizacion del motor de inferencia, separacion PD y Batching dinamico, los proveedores pueden disfrutar de un margen de ganancia del 30%-50%.\n\nLa estructura de ingresos de la tercera generacion de Fabricas de Tokens ha evolucionado a computo base + valor agregado de tokens excedentes, combinando ingresos estables de infraestructura con participacion en el exceso de produccion de tokens.',
+      's3Title': 'Arquitectura Tecnologica y Marco de Cumplimiento',
+      's3_1Title': 'Base Tecnologica',
+      's3_1Headers': [
+        'Capa',
+        'Componentes',
+        'Requisitos Clave'
+      ],
+      's3_1Rows': [
+        [
+          'Capa de Computo',
+          'Clusters de GPU heterogeneos (incluyendo chips nacionales como Ascend 910C)',
+          'Adaptacion de chips nacionales, optimizacion de utilizacion'
+        ],
+        [
+          'Capa de Plataforma',
+          'Sistema de programacion unificada + optimizacion del motor de inferencia',
+          'Reducir latencia, aumentar concurrencia'
+        ],
+        [
+          'Capa de Modelo',
+          'Acceso centralizado de multiples modelos grandes',
+          'Enrutamiento de modelos y coincidencia tarea-modelo'
+        ],
+        [
+          'Capa de Datos',
+          'Espacio de datos confiable',
+          'Cumplimiento transfronterizo de datos, proteccion de privacidad'
+        ],
+        [
+          'Capa de Liquidacion',
+          'Sistema de liquidacion transfronteriza',
+          'Liquidacion de divisas conforme, distribucion entre multiples partes'
+        ]
+      ],
+      's3_2Title': 'Lineas Rojas de Cumplimiento (Documento No. 42)',
+      's3_2Body': 'El 6 de febrero de 2026, el Banco Popular de China y otros siete ministerios emitieron conjuntamente la Notificacion sobre prevencion y disposicion de riesgos relacionados con monedas virtuales (Yin Fa [2026] No. 42). Los requisitos centrales incluyen:',
+      's3_2Headers': [
+        'Requisito de Cumplimiento',
+        'Impacto y Respuesta'
+      ],
+      's3_2Rows': [
+        [
+          'Prohibicion total de monedas virtuales a nivel nacional',
+          'La Fabrica de Tokens no debe emitir ningun tipo de criptomoneda o moneda virtual en el pais'
+        ],
+        [
+          'Licencia de tokenizacion RWA liberalizada (transfronteriza)',
+          'Con exportacion de servicios de computo y procesamiento de datos como sustancia, se pueden realizar operaciones transfronterizas conformes'
+        ],
+        [
+          'Emision de monedas virtuales en el extranjero requiere aprobacion',
+          'Sin aprobacion de los departamentos correspondientes, no se pueden emitir monedas virtuales en el extranjero'
+        ],
+        [
+          'Cumplimiento transfronterizo de datos',
+          'Basarse en las ventajas institucionales de las zonas francas para innovar en datos transfronterizos'
+        ]
+      ],
+      's3_3Title': 'Rutas de Cumplimiento Viables',
+      's3_3Body': '1. Basarse en zonas francas: La Zona Franca de Qingdao, como plataforma nacional de apertura, tiene ventajas de experimentacion institucional y puede realizar pruebas de innovacion y seguridad en datos transfronterizos. Ya se ha establecido la primera Fabrica de Tokens transfronteriza del norte.\n\n2. Basarse en la plataforma internacional de Hong Kong: Inspur ha establecido la plataforma internacional de Token de computo en la nube de Hong Kong, respaldando completamente el desarrollo de exportacion de tokens. El entorno regulatorio estable de Hong Kong y su posicion como centro financiero proporcionan un trampolin internacional conforme.\n\n3. Participar en la formulacion de estandares: Iniciar la evaluacion de los Requisitos de Capacidad de Servicio Integral de Fabricas de Tokens de IA en la Nube del Instituto de Informacion y Comunicaciones de China.\n\n4. Exportacion verde de tokens: En agosto de 2026 se celebro una reunion sobre exportacion verde de tokens en Hohhot, enfocada en rutas de cumplimiento, seleccion de modelos y estrategias de precios.',
+      's4Title': 'Practicas Tipicas',
+      's4Headers': [
+        'Proyecto',
+        'Escala',
+        'Caracteristicas'
+      ],
+      's4Rows': [
+        [
+          'Fabrica de Tokens Wuxi Suihong Huachuang',
+          'Primera fase: 4 servidores supernodo Ascend 384, 1536 chips Ascend 910C',
+          'Primera Fabrica de Tokens nacional con computo-electricidad fusionada'
+        ],
+        [
+          'Fabrica de Tokens Transfronteriza de Qingdao',
+          'Inspur Cloud + Zona Franca de Qingdao',
+          'Primera Fabrica de Tokens transfronteriza del norte'
+        ],
+        [
+          'Tecnologia Qujing',
+          'Produccion diaria a nivel de billones de tokens',
+          'Enfoque en optimizacion de inferencia de modelos principales'
+        ],
+        [
+          'SiliconFlow',
+          'Cuarto en produccion anual de tokens 2025, 1.5% de cuota',
+          'Presentada solicitud de IPO en la Bolsa de Hong Kong'
+        ]
+      ],
+      's5Title': 'Riesgos Centrales y Respuestas',
+      's5Headers': [
+        'Riesgo',
+        'Estrategia de Respuesta'
+      ],
+      's5Rows': [
+        [
+          'Cambios en politicas regulatorias',
+          'Basarse en ventajas institucionales de zonas francas, seguir de cerca las politicas'
+        ],
+        [
+          'Guerra de precios de tokens',
+          'Enfocarse en tokens de alto valor agregado (tokens especificos de industria)'
+        ],
+        [
+          'Adaptacion de chips nacionales',
+          'Impulsar chips nacionales hacia escenarios de inferencia a gran escala'
+        ],
+        [
+          'Baja utilizacion de computo',
+          'Mejorar utilizacion mediante optimizacion de programacion y separacion PD'
+        ],
+        [
+          'Cumplimiento transfronterizo de datos',
+          'Basarse en espacio de datos confiable para garantizar cadena cerrada de tokens'
+        ]
+      ],
+      's6Title': 'Conclusion',
+      's6Body': 'La ruta viable para la Fabrica de Tokens continental es: utilizar la exportacion de servicios de computo y el procesamiento de datos como sustancia empresarial, basarse en la innovacion institucional de las zonas francas y la plataforma internacional de Hong Kong, y operar conforme dentro del marco del Documento No. 42. No se trata de emitir monedas, sino de vender servicios de tokens: en esencia, exportar las ventajas de computo y capacidades de modelos de China al mercado global mediante medicion estandarizada de tokens.'
+    },
+    'v2': {
+      'badge': 'Version 2',
+      'title': 'Fabrica de Tokens Descentralizada',
+      'subtitle': 'Token de IA (medios de produccion) + Token blockchain + Computacion de privacidad = economia de agentes sin confianza y sin permiso',
+      's1Title': 'Posicionamiento Estrategico',
+      's1Body': 'La forma final de la Fabrica de Tokens en el extranjero no es un cluster de computo centralizado, sino una infraestructura economica de agentes inteligentes descentralizada: cualquier AI Agent puede invocar computo de forma autonoma, pagar con tokens y completar entregas, formando un sistema economico autonomo impulsado por clientes maquina y liquidado por blockchain.\n\nEl presidente de HashKey Group, Xiao Feng, senalo en el Carnaval Web3 de Hong Kong 2026: en el futuro, todas las instituciones comerciales se convertiran en Fabricas de Tokens. El token de IA son los medios de produccion de los agentes inteligentes, y el token de blockchain es la sangre de la economia de agentes inteligentes, asumiendo las funciones de pago y liquidacion.',
+      's2Title': 'Modelo de Negocio Central: Modelo de Tres Tokens',
+      's2Body': 'HashKey propuso el Modelo de Tres Tokens en su Libro Blanco de Economia de Tokens 2026:',
+      's2Headers': [
+        'Tipo de Token',
+        'Funcion',
+        'Rol en la Fabrica de Tokens'
+      ],
+      's2Rows': [
+        [
+          'Token de Utilidad',
+          'Mecanismo de incentivos para la comunidad',
+          'Medio de pago para que AI Agent invoque computo y compre tokens'
+        ],
+        [
+          'Token de Capital',
+          'Incentivo para emprendedores y accionistas',
+          'Gobernanza y distribucion de ingresos de la Fabrica de Tokens'
+        ],
+        [
+          'NFT (Token no fungible)',
+          'Captura de valor para escenarios especificos',
+          'Derechos especificos como ajuste de modelos y uso de datos'
+        ]
+      ],
+      's2_1Title': 'Posicionamiento de EACO',
+      's2_1Body': 'EACO (Earth Coin) es un proyecto de Token basado en la blockchain de Solana, posicionado como el MemeCoin de la Tierra. En el ecosistema EACO, la logica de operacion de la Fabrica de Tokens puede integrarse en el siguiente marco:',
+      's2_1Bullets': [
+        'Tokenizacion de computo: Transformar activos de computo GPU en tokens negociables',
+        'Tokenizacion de AI Agent: Permitir a los usuarios crear, tokenizar y negociar agentes de IA',
+        'Mercado de inferencia descentralizada: Los usuarios pueden ganar ingresos procesando solicitudes de IA'
+      ],
+      's2_2Title': 'Mercado de Inferencia de IA Descentralizada (Caso de Referencia)',
+      's2_2Body': 'Warden Protocol lanzo la version beta del mercado de inferencia de IA P2P Halo en la cadena Base en junio de 2026, procesando mas de 8 mil millones de tokens de IA en pocas semanas, soportando mas de 200 modelos. La plataforma se integra con Virtuals Protocol, proporcionando una capa de computo descentralizada para mas de 18,000 agentes de IA tokenizados. Los usuarios pueden pagar costos de inferencia con stablecoins o tokens VIRTUAL. Esta es exactamente la arquitectura que la version EACO de la Fabrica de Tokens puede seguir.',
+      's3Title': 'Arquitectura: Token de IA + Token Blockchain + Computacion de Privacidad',
+      's3_1Title': 'Tres Pilares Tecnologicos',
+      's3_1Headers': [
+        'Capa Tecnologica',
+        'Funcion',
+        'Avance Clave'
+      ],
+      's3_1Rows': [
+        [
+          'Token de IA',
+          'Medios de produccion para agentes inteligentes',
+          'Flujo de tokens generado por inferencia de modelos grandes'
+        ],
+        [
+          'Token Blockchain',
+          'Medio de pago y liquidacion',
+          'Programable, divisible, liquidacion en tiempo real'
+        ],
+        [
+          'ZK/Cifrado Homomorfico Completo',
+          'Proteccion de computacion de privacidad',
+          'Chips FHE alcanzan 1000 transacciones/segundo en H2 2026'
+        ]
+      ],
+      's3_2Title': 'Avance en Computacion de Privacidad',
+      's3_2Body': 'La naturaleza transparente de blockchain causa que los datos corran desnudos, lo cual es el obstaculo central para que instituciones financieras y medicas pongan datos directamente en cadena. Sin embargo, los chips dedicados de cifrado homomorfico completo (FHE) se espera que se lancen oficialmente en el segundo semestre de 2026, con un rendimiento de unos 1000 transacciones cifradas por segundo por chip.\n\nEsto significa: los datos medicos pueden convertirse en tokens tras el cifrado homomorfico completo, y cualquier persona o agente inteligente puede invocar estos datos para computacion en blockchain sin permiso, sin poder obtener ninguna informacion de privacidad personal. Los hospitales pasan de ser tenedores tradicionales de datos a convertirse en Fabricas de Tokens.',
+      's3_3Title': 'Arquitectura Descentralizada',
+      's3_3Layers': [
+        {
+          'name': 'Capa de Cifrado Homomorfico Completo',
+          'desc': 'Proteccion de privacidad de datos'
+        },
+        {
+          'name': 'Capa de Liquidacion Blockchain',
+          'desc': 'Token de Utilidad | Token de Capital | NFT'
+        },
+        {
+          'name': 'Capa de Computo Descentralizada',
+          'desc': 'Mercado de inferencia P2P'
+        },
+        {
+          'name': 'Capa de AI Agent',
+          'desc': 'Adquisicion y entrega autonoma'
+        }
+      ],
+      's4Title': 'Valor Unico de la Version EACO',
+      's4_1Title': 'Infraestructura de la Economia de Maquinas',
+      's4_1Body': 'Xiao Feng senalo: las llamadas API de AI Agent pueden costar solo unos centavos cada una, y la estructura de costos del sistema bancario actual no puede soportar pagos instantaneos tan pequenos. Por lo tanto, en el futuro inevitablemente aparecera un nuevo sistema de servicios financieros disenado para maquinas, no para humanos.\n\nEl valor central de la version EACO de la Fabrica de Tokens radica en:',
+      's4_1Bullets': [
+        'Capacidad de micropagos: Los tokens blockchain soportan micropagos a nivel de Agent',
+        'Sin confianza: Los Agentes pueden invocar servicios sin KYC ni contratos',
+        'Apertura global: Romper barreras geograficas, los Agentes globales pueden acceder libremente'
+      ],
+      's4_2Title': 'De Humanos a Agentes Haciendo Pedidos',
+      's4_2Body': 'Hoy, los humanos hacen pedidos a la Fabrica de Tokens; en el futuro, los mayores clientes de la Fabrica de Tokens podrian ser Agentes. Cuando los Agentes puedan descubrir tareas de forma autonoma, calcular ingresos esperados, comprar tokens, invocar otros Agentes y entregar resultados a otro Agent, los tokens pasaran de ser una unidad de facturacion de modelos a convertirse en medios de produccion de organizaciones maquina.',
+      's4_3Title': 'Nuevas Dimensiones de Tokenizacion de Activos',
+      's4_3Bullets': [
+        'Tokenizacion de activos respaldados por GPU: Transformar hardware GPU y sus flujos de efectivo en activos tokenizados invertibles',
+        'Agentes de IA como activos digitales poseibles: Permitir a los usuarios crear, tokenizar y negociar agentes de IA',
+        'Tokenizacion de activos de datos: Los individuos pueden subir datos de examenes medicos cifrados a cadena'
+      ],
+      's5Title': 'Riesgos Centrales y Respuestas',
+      's5Headers': [
+        'Riesgo',
+        'Estrategia de Respuesta'
+      ],
+      's5Rows': [
+        [
+          'Incertidumbre regulatoria',
+          'Elegir jurisdicciones conformes (ej. Hong Kong, Singapur)'
+        ],
+        [
+          'Volatilidad de precios de tokens',
+          'Introducir canales de pago con stablecoins para cobertura'
+        ],
+        [
+          'Riesgo de contratos inteligentes',
+          'Auditoria estricta, descentralizacion progresiva'
+        ],
+        [
+          'Suministro inestable de computo',
+          'Despliegue multichain, diseno redundante de mercado P2P'
+        ],
+        [
+          'Riesgo de perdida de control de Agent',
+          'Establecer limites de presupuesto de tokens, mecanismos de corte, auditoria humana'
+        ]
+      ],
+      's6Title': 'Conclusion',
+      's6Body': 'La Fabrica de Tokens EACO en el extranjero no es un centro de datos centralizado, sino una infraestructura economica de agentes inteligentes descentralizada. Su forma final es: Token de IA (medios de produccion) + Token de blockchain (pago y liquidacion) + cifrado homomorfico completo (proteccion de privacidad), los tres superpuestos para lograr un modelo comercial disruptivo sin confianza y sin permiso. Cuando los Agentes comiencen a comprar tokens por si mismos, un sistema economico de maquinas realmente comenzara a funcionar. Y la version EACO de la Fabrica de Tokens es la entrada de energia de este nuevo sistema economico.'
+    },
+    'comparison': {
+      'title': 'Comparacion de Dos Versiones',
+      'subtitle': 'Dos formas de la misma Fabrica de Tokens bajo diferentes marcos regulatorios',
+      'headers': [
+        'Dimension',
+        'Cumplimiento Continental',
+        'EACO Web3 en el Extranjero'
+      ],
+      'rows': [
+        [
+          'Posicionamiento Central',
+          'Exportacion de servicios de computo + procesamiento transfronterizo de datos',
+          'Infraestructura economica de agentes inteligentes descentralizada'
+        ],
+        [
+          'Sustancia del Negocio',
+          'Venta de servicios de tokens ($/1M Tokens)',
+          'Activos de IA tokenizados + mercado de inferencia descentralizado'
+        ],
+        [
+          'Marco de Cumplimiento',
+          'Documento No. 42 + Zonas Francas + Plataforma de Hong Kong',
+          'Regulacion en el extranjero + Contratos inteligentes + Gobernanza DAO'
+        ],
+        [
+          'Metodo de Liquidacion',
+          'Liquidacion transfronteriza en moneda fiduciaria',
+          'Token blockchain (incluyendo stablecoins)'
+        ],
+        [
+          'Cliente Objetivo',
+          'Empresas extranjeras, empresas que se expanden al exterior, creadores OPC',
+          'AI Agent, desarrolladores Web3, tenedores de tokens'
+        ],
+        [
+          'Riesgo Central',
+          'Politica regulatoria, guerra de precios, adaptacion de chips',
+          'Incertidumbre regulatoria, volatilidad de tokens, riesgo de contratos'
+        ],
+        [
+          'Ruta de Desarrollo',
+          'Primero pedidos, luego capacidad',
+          'Primero ecosistema, luego escala'
+        ]
+      ]
+    },
+    'eaco': {
+      'title': 'Acerca de EACO',
+      'name': 'EACO (Earth\'s Best Coin)',
+      'chain': 'Blockchain Solana',
+      'contractLabel': 'Direccion del Contrato',
+      'contract': 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH',
+      'supplyLabel': 'Suministro Total',
+      'supply': '1.35 Billion EACO',
+      'positioningLabel': 'Posicionamiento',
+      'positioning': 'Token de la Tierra AI + RWA + Web3 - Energia, Actitud, Cooperacion, Optimizacion',
+      'linksTitle': 'Enlaces del Ecosistema',
+      'copyBtn': 'Copiar',
+      'copiedBtn': 'Copiado!',
+      'links': [
+        {
+          'label': 'EACO Web3',
+          'url': 'https://ucoingroup.github.io/eacoweb3-2026/'
+        },
+        {
+          'label': 'EACO Faucet',
+          'url': 'https://ucoingroup.github.io/eaco-faucet/'
+        },
+        {
+          'label': 'AU-Trade Platform',
+          'url': 'https://ucoingroup.github.io/au-trade/'
+        },
+        {
+          'label': 'Solscan Explorer',
+          'url': 'https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH'
+        },
+        {
+          'label': 'Meteora Liquidity',
+          'url': 'https://meteora.ag/'
+        },
+        {
+          'label': 'GitHub',
+          'url': 'https://github.com/ucoingroup'
+        }
+      ]
+    },
+    'future': {
+      'badge': 'Vision Futura',
+      'title': 'Industrias Futuras de la Aldea Global: Tendencias 10-100 Anos',
+      'subtitle': 'Como EACO se integra con los 10 principales sectores economicos del proximo siglo',
+      'overviewTitle': 'Panorama: La Gran Convergencia',
+      'overview': 'En los proximos 10-100 anos, la Aldea Global presenciara una convergencia sin precedentes de cambios demograficos, avances tecnologicos y reestructuracion economica. El envejecimiento global, la urgencia climatica, la autonomia de IA y la comercializacion espacial remodelaran cada industria.\n\nEACO, como token Web3 nativo de la Tierra, esta unicamente posicionado para servir como tejido conectivo entre estas economias emergentes.',
+      'industriesTitle': 'Top 10 Industrias Futuras e Integracion EACO',
+      'eacoMethodLabel': 'Ruta de Integracion EACO',
+      'conclusionTitle': 'Conclusion: EACO como Capa Economica de la Tierra',
+      'conclusion': 'En las 10 industrias futuras, EACO sirve como capa economica universal: habilitando micropagos para agentes de IA, tokenizando activos del mundo real, facilitando liquidaciones comerciales sin fronteras y creando estructuras de incentivos para exploracion sostenible e interestelar.\n\nLa convergencia de economia de tokens de IA, liquidacion blockchain y computacion de privacidad crea una base donde EACO se convierte en la moneda de liquidacion nativa de la economia multi-especies y multi-planetaria de la Aldea Global.',
+      'industries': [
+        {
+          'icon': '🧓',
+          'title': 'Economia Plateada',
+          'tagline': 'Servicios para ancianos y salud',
+          'trend': 'Para 2050, 1 de cada 6 personas tendra mas de 65 anos. Incluye salud inteligente, robotica asistida, tratamientos de longevidad y gestion de legado digital.',
+          'eacoMethod': 'EACO habilita pensiones por micropago, ahorros de salud tokenizados y fondos de cuidado gestionados por agentes de IA.',
+          'bullets': [
+            'Pools de seguros de longevidad tokenizados con reclamaciones transparentes',
+            'Pagos automaticos de IA para servicios de enfermeria',
+            'Herencia digital: testamentos inteligentes basados en EACO',
+            'Portabilidad de pensiones transfronterizas'
+          ]
+        },
+        {
+          'icon': '💖',
+          'title': 'Economia Emocional',
+          'tagline': 'Bienestar mental, companeros IA',
+          'trend': 'La economia emocional abarca compania IA, salud mental, terapeutica digital. Para 2035, sera un mercado de billones de dolares.',
+          'eacoMethod': 'EACO impulsa micropagos para servicios de compania IA, tokeniza datos emocionales con FHE y crea mercados de incentivos de bienestar.',
+          'bullets': [
+            'Pago por conversacion con IA via micropagos EACO',
+            'Mercado de datos emocionales tokenizados con FHE',
+            'Recompensas EACO por meditacion y terapia',
+            'Seguros de salud mental descentralizados'
+          ]
+        },
+        {
+          'icon': '🔄',
+          'title': 'Economia Circular',
+          'tagline': 'Reutilizacion, reciclaje, reventa',
+          'trend': 'La economia circular alcanzara $4.5 billones para 2030. Para 2050, 50% de bienes de consumo podrian negociarse en mercados circulares.',
+          'eacoMethod': 'EACO incentiva el reciclaje, autentica bienes de segunda mano via blockchain y permite propiedad fraccional de articulos usados.',
+          'bullets': [
+            'Tokens EACO por reciclaje verificado por IoT',
+            'Provenancia de productos autenticada en blockchain',
+            'Propiedad fraccional tokenizada de activos compartidos',
+            'Comercio automatico de creditos de carbono'
+          ]
+        },
+        {
+          'icon': '💰',
+          'title': 'Consumo Asequible',
+          'tagline': 'Mercado masivo de valor',
+          'trend': 'Mercado de $10+ billones sirviendo a la clase media y baja global con venta minorista de descuento y micro-alquiler.',
+          'eacoMethod': 'EACO permite micropagos sin friccion para bienes asequibles y compras grupales comunitarias.',
+          'bullets': [
+            'Micropagos EACO para bienes compartidos de pago por uso',
+            'Compras masivas con IA y descuentos automaticos',
+            'Programas de lealtad tokenizados',
+            'Remesas transfronterizas a costo casi cero'
+          ]
+        },
+        {
+          'icon': '⚡',
+          'title': 'Transicion Energetica',
+          'tagline': 'Energia limpia y redes tokenizadas',
+          'trend': 'Requiere $4.4 billones de inversion anual. Para 2050, 90% de electricidad podria ser renovable en paises desarrollados.',
+          'eacoMethod': 'EACO tokeniza produccion de energia renovable, comercio P2P de energia y mercados de compensacion de carbono.',
+          'bullets': [
+            'Produccion solar tokenizada negociada P2P',
+            'Mercado de creditos de carbono con EACO',
+            'Certificados de energia verde en cadena',
+            'Arbitraje de energia gestionado por IA'
+          ]
+        },
+        {
+          'icon': '🌍',
+          'title': 'Comercio Transfronterizo',
+          'tagline': 'Comercio global y finanzas',
+          'trend': 'El e-commerce transfronterizo superara $10 billones para 2030 con logistica IA y aduanas blockchain.',
+          'eacoMethod': 'EACO sirve como token de liquidacion sin fronteras para micro-transacciones entre agentes IA.',
+          'bullets': [
+            'EACO como moneda de deposito en garantia B2B',
+            'Negociacion de flete por IA con EACO',
+            'Finanzas comerciales tokenizadas',
+            'Seguimiento de cadena de suminempo en tiempo real'
+          ]
+        },
+        {
+          'icon': '🚀',
+          'title': 'Comercio Interestelar',
+          'tagline': 'Economia espacial y mineria',
+          'trend': 'La economia espacial alcanzara $1 billon para 2040. Mineria de asteroides y colonizacion marciana crearan nuevas rutas comerciales.',
+          'eacoMethod': 'EACO proporciona una capa de liquidacion tolerante a retrasos para comercio interplanetario.',
+          'bullets': [
+            'EACO para contratos de mineria de asteroides',
+            'Tokenizacion de slots orbitales',
+            'Misiones de suministro autonomas gestionadas por IA',
+            'Protocolos comerciales interplanetarios gobernados por DAO'
+          ]
+        },
+        {
+          'icon': '🤖',
+          'title': 'Economia de Agentes IA',
+          'tagline': 'Comercio autonomo maquina a maquina',
+          'trend': 'Para 2035, puede haber mas agentes IA que humanos en linea. Requieren un sistema de pago disenado para maquinas.',
+          'eacoMethod': 'EACO es el token de pago nativo para micro-transacciones de agentes IA.',
+          'bullets': [
+            'Micropagos EACO entre agentes para computo y datos',
+            'Agentes IA tokenizados como NFTs',
+            'Gestion autonoma de tesoreria EACO',
+            'Mercado de inferencia descentralizado'
+          ]
+        },
+        {
+          'icon': '🧬',
+          'title': 'Biotecnologia y Salud',
+          'tagline': 'Genomica, longevidad, medicina personalizada',
+          'trend': 'La bioeconomia superara $3 billones para 2035 con edicion genetica y medicina personalizada.',
+          'eacoMethod': 'EACO impulsa mercados de datos de salud con FHE y tokeniza datos genomicos.',
+          'bullets': [
+            'Mercado de datos genomicos con FHE',
+            'Micropagos EACO para diagnostico IA',
+            'Pools de investigacion medica gobernados por DAO',
+            'Incentivos de ensayos clinicos tokenizados'
+          ]
+        },
+        {
+          'icon': '🔒',
+          'title': 'Computacion de Privacidad',
+          'tagline': 'FHE, ZK y soberania de datos',
+          'trend': 'Los chips FHE alcanzando 1000 tx/seg en 2026 desbloquearan la tokenizacion de activos de datos.',
+          'eacoMethod': 'EACO sirve como token de liquidacion para transacciones de datos protegidos por privacidad.',
+          'bullets': [
+            'Mercado de datos FHE con liquidacion EACO',
+            'Soberania de datos personales',
+            'Credenciales ZK verificadas como NFTs',
+            'Entrenamiento de modelos IA entre instituciones'
+          ]
+        }
+      ]
+    }
+  },
+  'ar': {
+    'meta': {
+      'siteTitle': 'مصنع الرموز EACO',
+      'siteSubtitle': 'نموذجان لاقتصاد الرموز العالمي للذكاء الاصطناعي',
+      'siteDescription': 'استكشاف مصنع الرموز العابر للحدود الممتثل ومصنع رموز EACO Web3 اللامركزي'
+    },
+    'nav': {
+      'mainland': 'الامتثال القاري',
+      'overseas': 'EACO Web3 الخارجية',
+      'comparison': 'المقارنة',
+      'eaco': 'معلومات EACO',
+      'future': 'الاتجاهات المستقبلية'
+    },
+    'v1': {
+      'badge': 'النسخة 1',
+      'title': 'مصنع الرموز العابر للحدود',
+      'subtitle': 'الامتثال كحجر الزاوية، والتوسع العالمي كمسار',
+      's1Title': 'التموضع الاستراتيجي',
+      's1Body': 'التموضع الأساسي لمصنع الرموز القاري لا يتمثل في إصدار العملات الافتراضية أو الرموز محلياً، بل في المشاركة بشكل ممتثل في سلسلة القيمة العالمية لرموز الذكاء الاصطناعي، باستخدام تصدير خدمات الحوسبة ومعالجة البيانات العابرة للحدود كجوهر أعمال.\n\nفي يونيو 2026، وصلت المكالمات اليومية للرموز في الصين إلى حوالي 175 تريليون، مما يجعلها أكبر دولة في العالم من حيث الحجم. وفي غضون ذلك، صنفت الإدارة الوطنية للبيانات اقتصاد الرموز كعامل إنتاج مركزي للذكاء الاصطناعي. أطلق المعهد الصيني للمعلومات والاتصالات في أبريل 2026 تقييم متطلبات قدرة خدمة المصنع المتكامل لرموز الذكاء الاصطناعي السحابي، مما يمثل بداية نظام معايير الصناعة.',
+      's2Title': 'نموذج الأعمال الأساسي',
+      's2Subtitle': 'دورة تجارية كاملة: استدعاء الحوسبة - فوترة الرموز - التسوية العابرة للحدود - توزيع منافع النظام البيئي',
+      's2_1Title': 'جوهر الأعمال: من معالجة البيانات إلى تصدير الرموز',
+      's2_1Body': 'يعتمد منطق أعمال مصنع الرموز القاري على معالجة البيانات العابرة للحدود: تحويل البيانات الأولية الواردة من الخارج عبر الحوكمة والتجميع والنمذجة إلى منتجات بيانات منظمة، ثم تصديرها في شكل Token.\n\nفي أغسطس 2026، وقعت منطقة تشينغداو للتجارة الحرة و Inspur Cloud اتفاقاً لبناء أول مصنع رموز عابر للحدود في شمال الصين. تشمل وظائفه الأساسية:',
+      's2_1Bullets': [
+        'الإدارة الموحدة للحوسبة غير المتجانسة: إدارة رقائق GPU من مختلف الشركات المصنعة (بما في ذلك الرقائق المحلية مثل Ascend)',
+        'الوصول المركزي متعدد النماذج: الجدولة الموحدة لـ DeepSeek و Kimi وغيرها',
+        'القياس والتسعير الموحد للرموز: Token كوحدة فوترة موحدة',
+        'التسوية العابرة للحدود وتوزيع المنافع: سلسلة كاملة من الحوسبة إلى النقد'
+      ],
+      's2_2Title': 'هيكل الإيرادات: من بيع الحوسبة إلى بيع الرموز',
+      's2_2Body': 'النموذج التقليدي يفرض رسوماً على ساعات بطاقة GPU ($/GPU-Hour)، بينما نموذج مصنع الرموز يفرض رسوماً على عدد الرموز الصحيحة المنتجة ($/1M Tokens)، مما يربط الإيرادات بالإنتاج الفعلي للذكاء الاصطناعي بدلاً من إشغال الأجهزة. من خلال تحسين التخزين والحوسبة، وتحسين محرك الاستدلال، وفصل PD والـ Batching الديناميكي، يمكن للمزودين الاستمتاع إلى هامش ربح 30%-50%.\n\nتطور هيكل إيرادات الجيل الثالث من مصانع الرموز إلى حوسبة أساسية + قيمة مضافة للرموز الفائضة، مما يجمع بين الإيرادات المستقرة للبنية التحتية والمشاركة في الفائض في إنتاج الرموز.',
+      's3Title': 'البنية التقنية وإطار الامتثال',
+      's3_1Title': 'القاعدة التقنية',
+      's3_1Headers': [
+        'الطبقة',
+        'المكونات',
+        'المتطلبات الرئيسية'
+      ],
+      's3_1Rows': [
+        [
+          'طبقة الحوسبة',
+          'مجموعات GPU غير متجانسة (بما في ذلك رقائق محلية مثل Ascend 910C)',
+          'تكييف الرقائق المحلية، تحسين الاستخدام'
+        ],
+        [
+          'طبقة المنصة',
+          'نظام جدولة موحد + تحسين محرك الاستدلال',
+          'تقليل زمن الاستجابة، زيادة التزامن'
+        ],
+        [
+          'طبقة النموذج',
+          'وصول مركزي لعدة نماذج كبيرة',
+          'توجيه النماذج ومطابقة المهمة مع النموذج'
+        ],
+        [
+          'طبقة البيانات',
+          'مساحة بيانات موثوقة',
+          'الامتثال العابر للحدود للبيانات، حماية الخصوصية'
+        ],
+        [
+          'طبقة التسوية',
+          'نظام تسوية عابر للحدود',
+          'تسوية.workة امتثالية، توزيع متعدد الأطراف'
+        ]
+      ],
+      's3_2Title': 'خطوط حمراء للامتثال (الوثيقة رقم 42)',
+      's3_2Body': 'في 6 فبراير 2026، أصدر بنك الشعب الصيني وسبعة وزارات أخرى بشكل مشترك الإشعار بشأن مزيد من الوقاية من مخاطر العملات الافتراضية والتعامل معها (Yin Fa [2026] No. 42). تشمل المتطلبات الأساسية:',
+      's3_2Headers': [
+        'متطلب الامتثال',
+        'التأثير والاستجابة'
+      ],
+      's3_2Rows': [
+        [
+          'حظر كامل للعملات الافتراضية محلياً',
+          'يجب ألا يصدر مصنع الرموز أي شكل من العملات المشفرة أو العملات الافتراضية في البلاد'
+        ],
+        [
+          'ترخيص توطين RWA تحرر (عابر للحدود)',
+          'مع تصدير خدمات الحوسبة ومعالجة البيانات كجوهر، يمكن إجراء عمليات عابرة للحدود ممتثلة'
+        ],
+        [
+          'إصدار العملات الافتراضية في الخارج يتطلب موافقة',
+          'بدون موافقة الإدارات المختصة، لا يمكن إصدار عملات افتراضية في الخارج'
+        ],
+        [
+          'الامتثال العابر للحدود للبيانات',
+          'الاعتماد على مزايا المناطق الحرة للابتكار في البيانات العابرة للحدود'
+        ]
+      ],
+      's3_3Title': 'مسارات امتثال قابلة للتطبيق',
+      's3_3Body': '1. الاعتماد على المناطق الحرة: منطقة تشينغداو للتجارة الحرة، كمنصة وطنية للانفتاح، تتمتع بمزايا التجريب المؤسسي ويمكنها إجراء اختبارات الابتكار والأمان في البيانات العابرة للحدود. تم بالفعل إنشاء أول مصنع رموز عابر للحدود في الشمال.\n\n2. الاعتماد على المنصة الدولية في هونغ كونغ: أنشأت Inspur منصة Token الدولية للحوسبة السحابية في هونغ كونغ، لدعم تطوير تصدير الرموز بالكامل. البيئة التنظيمية المستقرة في هونغ كونغ ومكانتها كمركز مالي توفر قفزة دولية ممتثلة.\n\n3. المشاركة في صياغة المعايير: إطلاق تقييم متطلبات قدرة الخدمة المتكاملة لمصانع رموز الذكاء الاصطناعي السحابي للمعهد الصيني للمعلومات والاتصالات.\n\n4. التصدير الأخضر للرموز: في أغسطس 2026، عُقد اجتماع حول التصدير الأخضر للرموز في هوهوت، يركز على مسارات الامتثال واختيار النماذج واستراتيجيات التسعير.',
+      's4Title': 'الممارسات النموذجية',
+      's4Headers': [
+        'المشروع',
+        'المقياس',
+        'الخصائص'
+      ],
+      's4Rows': [
+        [
+          'مصنع رموز Wuxi Suihong Huachuang',
+          'المرحلة الأولى: 4 خوادم Ascend 384، 1536 رقاقة Ascend 910C',
+          'أول مصنع رموز وطني مع دمج الحوسبة والكهرباء'
+        ],
+        [
+          'مصنع الرموز العابر للحدود في تشينغداو',
+          'Inspur Cloud + منطقة تشينغداو الحرة',
+          'أول مصنع رموز عابر للحدود في الشمال'
+        ],
+        [
+          'تكنولوجيا Qujing',
+          'إنتاج يومي بمستوى التريليونات من الرموز',
+          'التركيز على تحسين استدلال النماذج الرئيسية'
+        ],
+        [
+          'SiliconFlow',
+          'الرابع في الإنتاج السنوي للرموز 2025، حصة 1.5%',
+          'تم تقديم طلب الاكتتاب العام في بورصة هونغ كونغ'
+        ]
+      ],
+      's5Title': 'المخاطر الأساسية والاستجابات',
+      's5Headers': [
+        'المخاطر',
+        'استراتيجية الاستجابة'
+      ],
+      's5Rows': [
+        [
+          'تغيرات السياسة التنظيمية',
+          'الاعتماد على المزايا المؤسسية للمناطق الحرة، متابعة السياسات'
+        ],
+        [
+          'حرب أسعار الرموز',
+          'التركيز على الرموز عالية القيمة المضافة'
+        ],
+        [
+          'تكييف الرقائق المحلية',
+          'دفع الرقائق المحلية نحو الاستدلال واسع النطاق'
+        ],
+        [
+          'انخفاض استخدام الحوسبة',
+          'تحسين الاستخدام عبر تحسين الجدولة وفصل PD'
+        ],
+        [
+          'الامتثال العابر للحدود للبيانات',
+          'على أساس مساحة بيانات موثوقة لضمان سلسلة مغلقة من الرموز'
+        ]
+      ],
+      's6Title': 'الخلاصة',
+      's6Body': 'المسار القابل للتطبيق لمصنع الرموز القاري هو: استخدام تصدير خدمات الحوسبة ومعالجة البيانات كجوهر أعمال، والاعتماد على الابتكار المؤسسي للمناطق الحرة والمنصة الدولية في هونغ كونغ، والعمل بشكل ممتثل ضمن إطار الوثيقة رقم 42. الأمر لا يتعلق بإصدار العملات، بل ببيع خدمات الرموز: في جوهره، تصدير مزايا الحوسبة وقدرات النماذج الصينية إلى السوق العالمي من خلال القياس الموحد للرموز.'
+    },
+    'v2': {
+      'badge': 'النسخة 2',
+      'title': 'مصنع الرموز اللامركزي',
+      'subtitle': 'رمز الذكاء الاصطناعي (وسائل الإنتاج) + رمز البلوكشين + حساب الخصوصية = اقتصاد الوكلاء بدون ثقة وبدون إذن',
+      's1Title': 'التموضع الاستراتيجي',
+      's1Body': 'الشكل النهائي لمصنع الرموز في الخارج ليس مجموعة حوسبة مركزية، بل بنية تحتية لاقتصاد الوكلاء الأذكياء اللامركزية: يمكن لأي وكيل ذكاء اصطناعي استدعاء الحوسبة بشكل مستقل، والدفع بالرموز، وإكمال التسليمات، مما يشكل نظاماً اقتصادياً ذاتياً تقوده العملاء الآليون ويتم تسويته عبر البلوكشين.\n\nأشار رئيس مجموعة HashKey، شياو فينغ، في كرنفال Web3 في هونغ كونغ 2026: في المستقبل، ستصبح جميع المؤسسات التجارية مصانع رموز. رمز الذكاء الاصطناعي هو وسيلة إنتاج الوكلاء الأذكياء، ورمز البلوكشين هو دم اقتصاد الوكلاء الأذكياء - الذي يتولى وظائف الدفع والتسوية.',
+      's2Title': 'نموذج الأعمال الأساسي: نموذج الرموز الثلاثة',
+      's2Body': 'اقترحت HashKey نموذج الرموز الثلاثة في كتابها الأبيض لاقتصاد الرموز 2026:',
+      's2Headers': [
+        'نوع الرمز',
+        'الوظيفة',
+        'الدور في مصنع الرموز'
+      ],
+      's2Rows': [
+        [
+          'رمز المنفعة',
+          'آلية تحفيز للمجتمع',
+          'وسيلة دفع لاستدعاء الوكيل الذكي للحوسبة وشراء الرموز'
+        ],
+        [
+          'رمز الأسهم',
+          'تحفيز رواد الأعمال والمساهمين',
+          'حوكمة وتوزيع إيرادات مصنع الرموز'
+        ],
+        [
+          'NFT (رمز غير قابل للاستبدال)',
+          'التقاط القيمة للسيناريوهات المحددة',
+          'حقوق محددة مثل ضبط النماذج واستخدام البيانات'
+        ]
+      ],
+      's2_1Title': 'تموضع EACO',
+      's2_1Body': 'EACO (Earth Coin) هو مشروع Token يعتمد على بلوكشين Solana، يتموضع كـ MemeCoin للأرض. في نظام EACO البيئي، يمكن دمج منطق تشغيل مصنع الرموز في الإطار التالي:',
+      's2_1Bullets': [
+        'توكنة الحوسبة: تحويل أصول حوسبة GPU إلى رموز قابلة للتداول',
+        'توكنة وكيل الذكاء الاصطناعي: السماح للمستخدمين بإنشاء وتوكنة وتداول وكلاء الذكاء الاصطناعي',
+        'سوق الاستدلال اللامركزي: يمكن للمستخدمين كسب الدخل من خلال معالجة طلبات الذكاء الاصطناعي'
+      ],
+      's2_2Title': 'سوق استدلال الذكاء الاصطناعي اللامركزي (حالة مرجعية)',
+      's2_2Body': 'أطلق Warden Protocol النسخة التجريبية من سوق استدلال الذكاء الاصطناعي P2P Halo على سلسلة Base في يونيو 2026، معالجاً أكثر من 8 مليارات رمز ذكاء اصطناعي في غضون أسابيع، داعماً أكثر من 200 نموذج. تتكامل المنصة مع Virtuals Protocol، مما يوفر طبقة حوسبة لامركزية لأكثر من 18000 وكيل ذكاء اصطناعي مُوكن. يمكن للمستخدمين دفع تكاليف الاستدلال بالعملات المستقرة أو رموز VIRTUAL. هذا هو بالضبط البنية التي يمكن أن يتبعها إصدار EACO من مصنع الرموز.',
+      's3Title': 'البنية: رمز الذكاء الاصطناعي + رمز البلوكشين + حساب الخصوصية',
+      's3_1Title': 'الركائز التقنية الثلاث',
+      's3_1Headers': [
+        'الطبقة التقنية',
+        'الوظيفة',
+        'اختراق رئيسي'
+      ],
+      's3_1Rows': [
+        [
+          'رمز الذكاء الاصطناعي',
+          'وسائل الإنتاج للوكلاء الأذكياء',
+          'تدفق الرموز الناتج عن استدلال النماذج الكبيرة'
+        ],
+        [
+          'رمز البلوكشين',
+          'وسيلة الدفع والتسوية',
+          'قابل للبرمجة، قابل للقسمة، تسوية فورية'
+        ],
+        [
+          'ZK/التشفير المتماثل الكامل',
+          'حماية حساب الخصوصية',
+          'رقائق FHE تصل إلى 1000 معاملة/ثانية في النصف الثاني 2026'
+        ]
+      ],
+      's3_2Title': 'اختراق حساب الخصوصية',
+      's3_2Body': 'طبيعة البلوكشين الشفافة تجعل البيانات تعري مكشوفة، وهو العائق الأساسي الذي يمنع المؤسسات المالية والطبية من وضع البيانات مباشرة على السلسلة. ومع ذلك، من المتوقع إطلاق الرقائق المخصصة للتشفير المتماثل الكامل (FHE) رسمياً في النصف الثاني من عام 2026، بأداء يصل إلى حوالي 1000 معاملة مشفرة في الثانية لكل رقاقة.\n\nهذا يعني: يمكن تحويل البيانات الطبية إلى رموز بعد التشفير المتماثل الكامل، ويمكن لأي شخص أو وكيل ذكي استدعاء هذه البيانات للحوسبة على البلوكشين دون إذن، دون القدرة على الحصول على أي معلومات شخصية خاصة. تتحول المستشفيات من حاملي البيانات التقليديين إلى مصانع رموز.',
+      's3_3Title': 'البنية اللامركزية',
+      's3_3Layers': [
+        {
+          'name': 'طبقة التشفير المتماثل الكامل',
+          'desc': 'حماية خصوصية البيانات'
+        },
+        {
+          'name': 'طبقة تسوية البلوكشين',
+          'desc': 'رمز المنفعة | رمز الأسهم | NFT'
+        },
+        {
+          'name': 'طبقة الحوسبة اللامركزية',
+          'desc': 'سوق استدلال P2P'
+        },
+        {
+          'name': 'طبقة وكيل الذكاء الاصطناعي',
+          'desc': 'الشراء والتسليم المستقل'
+        }
+      ],
+      's4Title': 'القيمة الفريدة لإصدار EACO',
+      's4_1Title': 'بنية اقتصاد الآلات',
+      's4_1Body': 'أشار شياو فينغ: قد تكلف استدعاءات API لوكيل الذكاء الاصطناعي بضعة سنتات فقط لكل منها، وهيكل تكاليف نظام الدفع المصرفي الحالي لا يمكنه دعم مدفوعات فورية بهذا الصغر. لذلك، في المستقبل، سيظهر حتماً نظام خدمات مالية جديد مصمم للآلات وليس للبشر.\n\nتكمن القيمة الأساسية لإصدار EACO من مصنع الرموز في:',
+      's4_1Bullets': [
+        'قدرة الدفع المصغر: رموز البلوكشين تدعم الدفع المصغر على مستوى الوكيل',
+        'بدون ثقة: يمكن للوكلاء استدعاء الخدمات دون KYC أو توقيع عقود',
+        'انفتاح عالمي: كسر الحواجز الجغرافية، يمكن للوكلاء العالميين الانضمام بحرية'
+      ],
+      's4_2Title': 'من طلبات البشر إلى طلبات الوكلاء',
+      's4_2Body': 'اليوم، يقدم البشر طلبات إلى مصنع الرموز؛ في المستقبل، قد يكون أكبر عملاء مصنع الرموز هم الوكلاء. عندما يتمكن الوكلاء من اكتشاف المهام بشكل مستقل، وحساب الإيرادات المتوقعة، وشراء الرموز، واستدعاء وكلاء آخرين، وتسليم النتائج إلى وكيل آخر، حينها تتحول الرموز من وحدة فوترة النماذج إلى وسائل إنتاج لمنظمات الآلات.',
+      's4_3Title': 'أبعاد جديدة لتوكنة الأصول',
+      's4_3Bullets': [
+        'توكنة الأصول المدعومة بـ GPU: تحويل أجهزة GPU وتدفقاتها النقدية إلى أصول مُوكنة قابلة للاستثمار',
+        'وكلاء الذكاء الاصطناعي كأصول رقمية قابلة للتملك: السماح للمستخدمين بإنشاء وتوكنة وتداول وكلاء الذكاء الاصطناعي',
+        'توكنة أصول البيانات: يمكن للأفراد تحميل بيانات الفحص الطبي المشفرة إلى السلسلة'
+      ],
+      's5Title': 'المخاطر الأساسية والاستجابات',
+      's5Headers': [
+        'المخاطر',
+        'استراتيجية الاستجابة'
+      ],
+      's5Rows': [
+        [
+          'عدم اليقين التنظيمي',
+          'اختيار الولايات القضائية الممتثلة (مثل هونغ كونغ، سنغافورة)'
+        ],
+        [
+          'تقلب أسعار الرموز',
+          'إدخال قنوات الدفع بالعملات المستقرة للتحوط'
+        ],
+        [
+          'مخاطر العقود الذكية',
+          'تدقيق صارم، لامركزية تدريجية'
+        ],
+        [
+          'عرض حوسبة غير مستقر',
+          'نشر متعدد السلاسل، تصميم زائد للسوق P2P'
+        ],
+        [
+          'مخاطر فقدان السيطرة على الوكيل',
+          'تحديد حدود ميزانية الرموز، آليات القطع، تدقيق بشري'
+        ]
+      ],
+      's6Title': 'الخلاصة',
+      's6Body': 'مصنع رموز EACO في الخارج ليس مركز بيانات مركزي، بل بنية تحتية لاقتصاد الوكلاء الأذكياء اللامركزية. شكله النهائي هو: رمز الذكاء الاصطناعي (وسائل الإنتاج) + رمز البلوكشين (الدفع والتسوية) + التشفير المتماثل الكامل (حماية الخصوصية)، الثلاثة مجتمعة لتحقيق نموذج تجاري ثوري بدون ثقة وبدون إذن. عندما يبدأ الوكلاء في شراء الرموز بأنفسهم، سيبدأ نظام اقتصاد الآلات حقاً في العمل. وإصدار EACO من مصنع الرموز هو مدخل الطاقة لهذا النظام الاقتصادي الجديد.'
+    },
+    'comparison': {
+      'title': 'مقارنة النسختين',
+      'subtitle': 'شكلان لنفس مصنع الرموز في إطارين تنظيميين مختلفين',
+      'headers': [
+        'البعد',
+        'الامتثال القاري',
+        'EACO Web3 الخارجية'
+      ],
+      'rows': [
+        [
+          'التموضع الأساسي',
+          'تصدير خدمات الحوسبة + معالجة البيانات العابرة للحدود',
+          'بنية تحتية لامركزية لاقتصاد الوكلاء الأذكياء'
+        ],
+        [
+          'جوهر الأعمال',
+          'بيع خدمات الرموز ($/1M Tokens)',
+          'أصول ذكاء اصطناعي مُوكنة + سوق استدلال لامركزي'
+        ],
+        [
+          'إطار الامتثال',
+          'الوثيقة رقم 42 + المناطق الحرة + منصة هونغ كونغ',
+          'تنظيم خارجي + عقود ذكية + حوكمة DAO'
+        ],
+        [
+          'طريقة التسوية',
+          'تسوية عابرة للحدود بالعملة الورقية',
+          'رمز البلوكشين (بما في ذلك العملات المستقرة)'
+        ],
+        [
+          'العملاء المستهدفون',
+          'شركات أجنبية، شركات تتوسع خارجياً، منشئو OPC',
+          'وكيل الذكاء الاصطناعي، مطورو Web3، حاملو الرموز'
+        ],
+        [
+          'المخاطر الرئيسية',
+          'السياسة التنظيمية، حرب الأسعار، تكييف الرقائق',
+          'عدم اليقين التنظيمي، تقلب الرموز، مخاطر العقود'
+        ],
+        [
+          'مسار التطوير',
+          'الطلبات أولاً، ثم الطاقة الإنتاجية',
+          'النظام البيئي أولاً، ثم الحجم'
+        ]
+      ]
+    },
+    'eaco': {
+      'title': 'حول EACO',
+      'name': 'EACO (Earth\'s Best Coin)',
+      'chain': 'بلوكشين Solana',
+      'contractLabel': 'عنوان العقد',
+      'contract': 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH',
+      'supplyLabel': 'إجمالي العرض',
+      'supply': '1.35 Billion EACO',
+      'positioningLabel': 'التموضع',
+      'positioning': 'رمز الأرض للذكاء الاصطناعي + RWA + Web3 - الطاقة، الموقف، التعاون، التحسين',
+      'linksTitle': 'روابط النظام البيئي',
+      'copyBtn': 'نسخ',
+      'copiedBtn': 'تم النسخ!',
+      'links': [
+        {
+          'label': 'EACO Web3',
+          'url': 'https://ucoingroup.github.io/eacoweb3-2026/'
+        },
+        {
+          'label': 'EACO Faucet',
+          'url': 'https://ucoingroup.github.io/eaco-faucet/'
+        },
+        {
+          'label': 'AU-Trade Platform',
+          'url': 'https://ucoingroup.github.io/au-trade/'
+        },
+        {
+          'label': 'Solscan Explorer',
+          'url': 'https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH'
+        },
+        {
+          'label': 'Meteora Liquidity',
+          'url': 'https://meteora.ag/'
+        },
+        {
+          'label': 'GitHub',
+          'url': 'https://github.com/ucoingroup'
+        }
+      ]
+    },
+    'future': {
+      'badge': 'رؤية المستقبل',
+      'title': 'الصناعات المستقبلية للقرية العالمية: اتجاهات 10-100 سنة',
+      'subtitle': 'كيف تتكامل EACO مع أهم 10 قطاعات اقتصادية في القرن القادم',
+      'overviewTitle': 'نظرة عامة: التقارب الكبير',
+      'overview': 'خلال الـ 10-100 سنة القادمة، ستشهد القرية العالمية تقارباً غير مسبوق للتحولات الديموغرافية والاختراقات التكنولوجية وإعادة الهيكلة الاقتصادية. سيُعيد الشيخوخة العالمية والإلحاح المناخي واستقلالية الذكاء الاصطناعي وتسويق الفضاء تشكيل كل صناعة.\n\nEACO، كرمز Web3 الأصلي للأرض، في وضع فريد للعمل كنسيج ضام بين هذه الاقتصادات الناشئة.',
+      'industriesTitle': 'أهم 10 صناعات مستقبلية وتكامل EACO',
+      'eacoMethodLabel': 'مسار تكامل EACO',
+      'conclusionTitle': 'الخلاصة: EACO كطبقة اقتصادية للأرض',
+      'conclusion': 'في جميع الصناعات المستقبلية العشر، تعمل EACO كطبقة اقتصادية عالمية: تمكين المدفوعات الصغيرة لوكلاء الذكاء الاصطناعي، وتوكنة الأصول الحقيقية، وتسهيل التسويات التجارية بلا حدود، وإنشاء هياكل تحفيزية للاستكشاف المستدام والبيننجومي.\n\nتقارب اقتصاد رموز الذكاء الاصطناعي وتسوية البلوكشين وحساب الخصوصية يخلق أساساً تصبح فيه EACO العملة الأصلية للتسوية في اقتصاد القرية العالمية متعدد الأنواع والكواكب.',
+      'industries': [
+        {
+          'icon': '🧓',
+          'title': 'الاقتصاد الفضي',
+          'tagline': 'خدمات كبار السن والرعاية الصحية',
+          'trend': 'بحلول 2050، 1 من كل 6 أشخاص سيكون فوق 65 سنة. يشمل الرعاية الصحية الذكية والروبوتات وإدارة التركة الرقمية.',
+          'eacoMethod': 'تمكّن EACO معاشات الدفع الصغير ومدخرات الرعاية الصحية المُوكنة والأموال المدارة بوكلاء الذكاء الاصطناعي.',
+          'bullets': [
+            'مجموعات تأمين طول العمر المُوكنة',
+            'مدفوعات تلقائية للذكاء الاصطناعي لخدمات التمريض',
+            'الميراث الرقمي: وصايا ذكية على EACO',
+            'نقل المعاشات عبر الحدود'
+          ]
+        },
+        {
+          'icon': '💖',
+          'title': 'الاقتصاد العاطفي',
+          'tagline': 'الصحة النفسية ورفاق الذكاء الاصطناعي',
+          'trend': 'يشمل رفاقة الذكاء الاصطناعي والصحة النفسية والعلاج الرقمي. بحلول 2035 سيكون سوقاً تريلونياً.',
+          'eacoMethod': 'تشغل EACO المدفوعات الصغيرة لخدمات رفاقة الذكاء الاصطناعي وتوكن البيانات العاطفية مع FHE.',
+          'bullets': [
+            'الدفع لكل محادثة مع الذكاء الاصطناعي عبر EACO',
+            'سوق البيانات العاطفية المُوكنة مع FHE',
+            'مكافآت EACO للتأمل والعلاج',
+            'تأمين صحي نفسي لامركزي'
+          ]
+        },
+        {
+          'icon': '🔄',
+          'title': 'الاقتصاد الدائري',
+          'tagline': 'إعادة الاستخدام وال reciclaje',
+          'trend': 'سيصل إلى 4.5 تريلون دولار بحلول 2030. بحلول 2050 قد يتداول 50% من السلع في أسواق دائرية.',
+          'eacoMethod': 'تحفز EACO إعادة التدقيق وتوثق السلع المستعملة عبر البلوكشين.',
+          'bullets': [
+            'رموز EACO لإعادة التدوير عبر IoT',
+            'مصدر المنتجات موثق على البلوكشين',
+            'الملكية الجزئية للسلع المشتركة',
+            'التجارة التلقائية لأرصدة الكربون'
+          ]
+        },
+        {
+          'icon': '💰',
+          'title': 'اقتصاد الاستهلاك الميسور',
+          'tagline': 'سوق جماهيري بقيمة',
+          'trend': 'سوق 10+ تريلون دولار يخدم الطبقة المتوسطة والدنيا بتجزئة مخفضة وإيجار_micro.',
+          'eacoMethod': 'تمكّن EACO المدفوعات الصغيرة بلا احتكاك للسلع الميسورة والشراء الجماعي.',
+          'bullets': [
+            'مدفوعات EACO صغيرة للسلع المشتركة',
+            'شراء جماعي بالذكاء الاصطناعي بخصومات تلقائية',
+            'برامج ولاء مُوكنة',
+            'تحويلات عبر الحدود بتكلفة شبه صفر'
+          ]
+        },
+        {
+          'icon': '⚡',
+          'title': 'انتقال الطاقة',
+          'tagline': 'طاقة نظيفة وشبكات مُوكنة',
+          'trend': 'يتطلب 4.4 تريلون دولار استثمار سنوي. بحلول 2050 قد تكون 90% من الكهرباء متجددة.',
+          'eacoMethod': 'توكن EACO إنتاج الطاقة المتجددة وتجارة الطاقة P2P وأسواق تعويض الكربون.',
+          'bullets': [
+            'إنتاج طاقة شمسية مُوكن يتداول P2P',
+            'سوق أرصدة الكربون بـ EACO',
+            'شهادات طاقة خضراء على السلسلة',
+            'تحكيم طاقة بالذكاء الاصطناعي'
+          ]
+        },
+        {
+          'icon': '🌍',
+          'title': 'التجارة العابرة للحدود',
+          'tagline': 'تجارة عالمية وتمويل',
+          'trend': 'ستتجاوز التجارة الإلكترونية 10 تريلون دولار بحلول 2030 مع لوجستيات الذكاء الاصطناعي و جمارك البلوكشين.',
+          'eacoMethod': 'تعمل EACO كرمز تسوية بلا حدود للمبايعات الصغيرة بين وكلاء الذكاء الاصطناعي.',
+          'bullets': [
+            'EACO كعملة ضمان B2B',
+            'تفاوض شحن بالذكاء الاصطناعي بـ EACO',
+            'تمويل تجاري مُوكن',
+            'تتبع سلسلة التوريد'
+          ]
+        },
+        {
+          'icon': '🚀',
+          'title': 'التجارة بين النجوم',
+          'tagline': 'اقتصاد الفضاء والتعدين',
+          'trend': 'سيصل اقتصاد الفضاء إلى 1 تريلون دولار بحلول 2040. تعدين الكويكبات واستعمار المريخ يخلقان مسارات تجارية جديدة.',
+          'eacoMethod': 'توفر EACO طبقة تسوية تتحمل التأخير للتجارة بين الكواكب.',
+          'bullets': [
+            'EACO لعقود تعدين الكويكبات',
+            'توكنة الفتحات المدارية',
+            'مهام إمداد ذاتية بالذكاء الاصطناعي',
+            'بروتوكولات تجارة بين الكواكب بـ DAO'
+          ]
+        },
+        {
+          'icon': '🤖',
+          'title': 'اقتصاد وكلاء الذكاء الاصطناعي',
+          'tagline': 'تجارة مستقلة بين الآلات',
+          'trend': 'بحلول 2035 قد يكون هناك وكلاء ذكاء اصطناعي أكثر من البشر. يحتاجون نظام دفع للآلات.',
+          'eacoMethod': 'EACO هي رمز الدفع الأصلي للمبايعات الصغيرة لوكلاء الذكاء الاصطناعي.',
+          'bullets': [
+            'مدفوعات EACO صغيرة بين الوكلاء',
+            'وكلاء ذكاء اصطناعي مُوكنون كـ NFT',
+            'إدارة خزينة EACO ذاتية',
+            'سوق استدلال لامركزي'
+          ]
+        },
+        {
+          'icon': '🧬',
+          'title': 'التكنولوجيا الحيوية والصحة',
+          'tagline': 'جينوميات وطول العمر وطب شخصي',
+          'trend': 'ستتجاوز البيواقتصاد 3 تريلون دولار بحلول 2035 مع تحرير الجينات والطب الشخصي.',
+          'eacoMethod': 'تشغل EACO أسواق بيانات صحية مع FHE وتوكن البيانات الجينومية.',
+          'bullets': [
+            'سوق بيانات جينومية مع FHE',
+            'مدفوعات EACO لتشخيص الذكاء الاصطناعي',
+            'مجموعات بحث طبي بـ DAO',
+            'حوافز تجارب سريرية مُوكنة'
+          ]
+        },
+        {
+          'icon': '🔒',
+          'title': 'حساب الخصوصية',
+          'tagline': 'FHE و ZK وسيادة البيانات',
+          'trend': 'رقائق FHE تصل 1000 معاملة/ثانية في 2026 ستفتح توكنة أصول البيانات.',
+          'eacoMethod': 'تعمل EACO كرمز تسوية لمعاملات البيانات المحمية بالخصوصية.',
+          'bullets': [
+            'سوق بيانات FHE بتسوية EACO',
+            'سيادة البيانات الشخصية',
+            'اعتمادات ZK كـ NFT',
+            'تدريب نماذج ذكاء اصطناعي بين المؤسسات'
+          ]
+        }
+      ]
+    }
+  },
+  'fr': {
+    'meta': {
+      'siteTitle': 'Usine de Tokens EACO',
+      'siteSubtitle': 'Deux modeles pour l\'economie mondiale des tokens IA',
+      'siteDescription': 'Exploration de l\'Usine de Tokens transfrontaliere conforme et de l\'Usine de Tokens EACO Web3 decentree'
+    },
+    'nav': {
+      'mainland': 'Conformite Continentale',
+      'overseas': 'EACO Web3 International',
+      'comparison': 'Comparaison',
+      'eaco': 'Info EACO',
+      'future': 'Tendances Futures'
+    },
+    'v1': {
+      'badge': 'Version 1',
+      'title': 'Usine de Tokens Transfrontaliere',
+      'subtitle': 'La conformite comme pierre angulaire, l\'expansion mondiale comme cap',
+      's1Title': 'Positionnement Strategique',
+      's1Body': 'Le positionnement central de l\'Usine de Tokens continentale ne consiste pas a emettre des monnaies virtuelles ou des tokens au niveau national, mais a participer de maniere conforme a la chaine de valeur mondiale des tokens IA, en utilisant l\'exportation de services de calcul et le traitement transfrontalier des donnees comme substance commerciale.\n\nEn juin 2026, les appels quotidiens de tokens en Chine ont atteint pres de 175 milliards, faisant du pays le plus grand volume mondial. Parallelement, l\'Administration Nationale des Donnees a classe l\'economie des tokens comme facteur de production central de l\'IA. L\'Institut Chinois d\'Information et de Communications a lance en avril 2026 l\'evaluation des Exigences de Capacite de Service Integral des Usines de Tokens d\'IA en Nuage, marquant le debut du systeme de normes industrielles.',
+      's2Title': 'Modele Commercial Central',
+      's2Subtitle': 'Boucle commerciale complete: Appel de calcul - Facturation par tokens - Reglement transfrontalier - Partage des benefices de l\'ecosysteme',
+      's2_1Title': 'Substance Commerciale: Du Traitement des Donnees a l\'Exportation de Tokens',
+      's2_1Body': 'La logique commerciale de l\'Usine de Tokens continentale est basee sur le traitement des donnees transfrontalieres: transformer les donnees brutes etrangeres par la gouvernance, l\'agregation et la modelisation en produits de donnes ordonnes, puis les exporter sous forme de Token.\n\nEn aout 2026, la Zone Franche de Qingdao et Inspur Cloud ont signe un accord pour construire la premiere Usine de Tokens transfrontaliere du nord de la Chine. Ses fonctions centrales incluent:',
+      's2_1Bullets': [
+        'Gestion unifiee du calcul heterogene: gestion des puces GPU de differents fabricants (y compris les puces nationales comme Ascend)',
+        'Acces centralise multi-modeles: planification unifiee de DeepSeek, Kimi et autres modeles',
+        'Mesure et tarification standardisees des tokens: Token comme unite de facturation unifiee',
+        'Reglement transfrontalier et partage des benefices: chaine complete du calcul au tresorerie'
+      ],
+      's2_2Title': 'Structure des Revenus: De Vendre du Calcul a Vendre des Tokens',
+      's2_2Body': 'Le modele traditionnel facture a l\'heure de carte GPU ($/GPU-Heure), tandis que le modele Usine de Tokens facture au nombre de tokens valides produits ($/1M Tokens), liant les revenus a la production reelle d\'IA plutot qu\'a l\'occupation du materiel. Grace a l\'optimisation stockage-calcul, l\'optimisation du moteur d\'inference, la separation PD et le Batching dynamique, les fournisseurs peuvent beneficier d\'une marge beneficiaire de 30%-50%.\n\nLa structure de revenus de la troisieme generation d\'Usines de Tokens a evolue vers calcul de base + valeur ajoutee des tokens excedentaires, combinant des revenus stables d\'infrastructure avec une participation au surplus de production de tokens.',
+      's3Title': 'Architecture Technique et Cadre de Conformite',
+      's3_1Title': 'Base Technique',
+      's3_1Headers': [
+        'Couche',
+        'Composants',
+        'Exigences Cles'
+      ],
+      's3_1Rows': [
+        [
+          'Couche de Calcul',
+          'Clusters de GPU heterogenes (y compris puces nationales comme Ascend 910C)',
+          'Adaptation des puces nationales, optimisation de l\'utilisation'
+        ],
+        [
+          'Couche Plateforme',
+          'Systeme de planification unifiee + optimisation du moteur d\'inference',
+          'Reduire la latence, augmenter la concurrence'
+        ],
+        [
+          'Couche Modele',
+          'Acces centralise de multiples grands modeles',
+          'Routage des modeles et correspondance tache-modele'
+        ],
+        [
+          'Couche Donnees',
+          'Espace de donnees fiable',
+          'Conformite transfrontaliere des donnees, protection de la confidentialite'
+        ],
+        [
+          'Couche Reglement',
+          'Systeme de reglement transfrontalier',
+          'Reglement de devises conforme, partage multipartite'
+        ]
+      ],
+      's3_2Title': 'Lignes Rouges de Conformite (Document No. 42)',
+      's3_2Body': 'Le 6 fevrier 2026, la Banque Populaire de Chine et sept autres ministeres ont conjointement publie la Notification sur la prevention et le traitement des risques lies aux monnaies virtuelles (Yin Fa [2026] No. 42). Les exigences centrales incluent:',
+      's3_2Headers': [
+        'Exigence de Conformite',
+        'Impact et Reponse'
+      ],
+      's3_2Rows': [
+        [
+          'Prohibition totale des monnaies virtuelles au niveau national',
+          'L\'Usine de Tokens ne doit emettre aucune forme de cryptomonnaie ou monnaie virtuelle dans le pays'
+        ],
+        [
+          'Licence de tokenisation RWA liberalisee (transfrontaliere)',
+          'Avec l\'exportation de services de calcul et le traitement de donnees comme substance, des operations transfrontalieres conformes sont possibles'
+        ],
+        [
+          'L\'emission de monnaies virtuelles a l\'etranger necessite une approbation',
+          'Sans l\'accord des departements concernes, impossible d\'emettre des monnaies virtuelles a l\'etranger'
+        ],
+        [
+          'Conformite transfrontaliere des donnees',
+          'S\'appuyer sur les avantages institutionnels des zones franches pour innover en donnees transfrontalieres'
+        ]
+      ],
+      's3_3Title': 'Voies de Conformite Viables',
+      's3_3Body': '1. S\'appuyer sur les zones franches: La Zone Franche de Qingdao, en tant que plateforme nationale d\'ouverture, dispose d\'avantages d\'experimentation institutionnelle et peut realiser des tests d\'innovation et de securite en donnees transfrontalieres. La premiere Usine de Tokens transfrontaliere du nord a deja ete etablie.\n\n2. S\'appuyer sur la plateforme internationale de Hong Kong: Inspur a etabli la plateforme internationale de Token de calcul en nuage a Hong Kong, soutenant pleinement le developpement de l\'exportation de tokens. L\'environnement regulatorio stable de Hong Kong et sa position de centre financier fournissent un tremplin international conforme.\n\n3. Participer a la formulation des normes: Lancer l\'evaluation des Exigences de Capacite de Service Integral des Usines de Tokens d\'IA en Nuage de l\'Institut Chinois d\'Information et de Communications.\n\n4. Exportation verte de tokens: En aout 2026, une reunion sur l\'exportation verte de tokens s\'est tenue a Hohhot, axe sur les voies de conformite, la selection de modeles et les strategies de prix.',
+      's4Title': 'Pratiques Typiques',
+      's4Headers': [
+        'Projet',
+        'Echelle',
+        'Caracteristiques'
+      ],
+      's4Rows': [
+        [
+          'Usine de Tokens Wuxi Suihong Huachuang',
+          'Premiere phase: 4 serveurs supernoeud Ascend 384, 1536 puces Ascend 910C',
+          'Premiere Usine de Tokens nationale avec fusion calcul-electricite'
+        ],
+        [
+          'Usine de Tokens Transfrontaliere de Qingdao',
+          'Inspur Cloud + Zone Franche de Qingdao',
+          'Premiere Usine de Tokens transfrontaliere du nord'
+        ],
+        [
+          'Technologie Qujing',
+          'Production journaliere au niveau des milliards de tokens',
+          'Axee sur l\'optimisation d\'inference de modeles principaux'
+        ],
+        [
+          'SiliconFlow',
+          'Quatrieme en production annuelle de tokens 2025, 1.5% de part de marche',
+          'Demande d\'IPO deposee a la Bourse de Hong Kong'
+        ]
+      ],
+      's5Title': 'Risques Centraux et Reponses',
+      's5Headers': [
+        'Risque',
+        'Strategie de Reponse'
+      ],
+      's5Rows': [
+        [
+          'Changements de politiques regulatories',
+          'S\'appuyer sur les avantages institutionnels des zones franches, suivre les politiques'
+        ],
+        [
+          'Guerre des prix de tokens',
+          'Se concentrer sur les tokens a haute valeur ajoutee (tokens specifiques a l\'industrie)'
+        ],
+        [
+          'Adaptation des puces nationales',
+          'Impulser les puces nationales vers l\'inference a grande echelle'
+        ],
+        [
+          'Faible utilisation du calcul',
+          'Ameliorer l\'utilisation par l\'optimisation de planification et la separation PD'
+        ],
+        [
+          'Conformite transfrontaliere des donnees',
+          'Basée sur un espace de donnees fiable pour garantir la chaine fermee de tokens'
+        ]
+      ],
+      's6Title': 'Conclusion',
+      's6Body': 'La voie viable pour l\'Usine de Tokens continentale est: utiliser l\'exportation de services de calcul et le traitement de donnees comme substance commerciale, s\'appuyer sur l\'innovation institutionnelle des zones franches et la plateforme internationale de Hong Kong, et operer de maniere conforme dans le cadre du Document No. 42. Il ne s\'agit pas d\'emettre des monnaies, mais de vendre des services de tokens: en essence, exporter les avantages de calcul et les capacites de modeles de la Chine vers le marche mondial par une mesure standardisee des tokens.'
+    },
+    'v2': {
+      'badge': 'Version 2',
+      'title': 'Usine de Tokens Decentralisee',
+      'subtitle': 'Token IA (moyens de production) + Token blockchain + Calcul de confidentialite = economie d\'agents sans confiance et sans permission',
+      's1Title': 'Positionnement Strategique',
+      's1Body': 'La forme finale de l\'Usine de Tokens a l\'etranger n\'est pas un cluster de calcul centralise, mais une infrastructure economique d\'agents intelligents decentree: tout AI Agent peut invoquer du calcul de maniere autonome, payer avec des tokens et completer des livraisons, formant un systeme economique autonome pilote par des clients machine et regle par blockchain.\n\nLe president de HashKey Group, Xiao Feng, a souligne au Carnaval Web3 de Hong Kong 2026: a l\'avenir, toutes les institutions commerciales deviendront des Usines de Tokens. Le token IA est le moyen de production des agents intelligents, et le token blockchain est le sang de l\'economie des agents intelligents, assumant les fonctions de paiement et de reglement.',
+      's2Title': 'Modele Commercial Central: Modele a Trois Tokens',
+      's2Body': 'HashKey a propose le Modele a Trois Tokens dans son Livre Blanc d\'Economie de Tokens 2026:',
+      's2Headers': [
+        'Type de Token',
+        'Fonction',
+        'Role dans l\'Usine de Tokens'
+      ],
+      's2Rows': [
+        [
+          'Token d\'Utilite',
+          'Mecanisme d\'incitation pour la communaute',
+          'Moyen de paiement pour qu\'AI Agent invoque du calcul et achete des tokens'
+        ],
+        [
+          'Token de Capital',
+          'Incitation pour les entrepreneurs et actionnaires',
+          'Gouvernance et distribution des revenus de l\'Usine de Tokens'
+        ],
+        [
+          'NFT (Jeton non fongible)',
+          'Capture de valeur pour scenarios specifiques',
+          'Droits specifiques comme ajustement de modeles et utilisation de donnees'
+        ]
+      ],
+      's2_1Title': 'Positionnement d\'EACO',
+      's2_1Body': 'EACO (Earth Coin) est un projet de Token base sur la blockchain Solana, positionne comme le MemeCoin de la Terre. Dans l\'ecosysteme EACO, la logique de fonctionnement de l\'Usine de Tokens peut s\'integrer dans le cadre suivant:',
+      's2_1Bullets': [
+        'Tokenisation du calcul: Transformer les actifs de calcul GPU en tokens negociables',
+        'Tokenisation d\'AI Agent: Permettre aux utilisateurs de creer, tokeniser et negocier des agents IA',
+        'Marche d\'inference decentre: Les utilisateurs peuvent gagner des revenus en traitant des requetes IA'
+      ],
+      's2_2Title': 'Marche d\'Inference IA Decentralise (Cas de Reference)',
+      's2_2Body': 'Warden Protocol a lance la version beta du marche d\'inference IA P2P Halo sur la chaine Base en juin 2026, traitant plus de 8 milliards de tokens IA en quelques semaines, supportant plus de 200 modeles. La plateforme s\'integre avec Virtuals Protocol, fournissant une couche de calcul decentree pour plus de 18 000 agents IA tokenises. Les utilisateurs peuvent payer les couts d\'inference avec des stablecoins ou des tokens VIRTUAL. C\'est exactement l\'architecture que la version EACO de l\'Usine de Tokens peut suivre.',
+      's3Title': 'Architecture: Token IA + Token Blockchain + Calcul de Confidentialite',
+      's3_1Title': 'Trois Piliers Techniques',
+      's3_1Headers': [
+        'Couche Technique',
+        'Fonction',
+        'Avancee Cle'
+      ],
+      's3_1Rows': [
+        [
+          'Token IA',
+          'Moyens de production pour agents intelligents',
+          'Flux de tokens genere par l\'inference de grands modeles'
+        ],
+        [
+          'Token Blockchain',
+          'Moyen de paiement et de reglement',
+          'Programmable, divisible, reglement en temps reel'
+        ],
+        [
+          'ZK/Chiffrement Homomorphe Complet',
+          'Protection du calcul de confidentialite',
+          'Puces FHE atteignent 1000 transactions/seconde au S2 2026'
+        ]
+      ],
+      's3_2Title': 'Avancee du Calcul de Confidentialite',
+      's3_2Body': 'La nature transparente de la blockchain fait que les donnees tournent nues, ce qui est l\'obstacle central empechant les institutions financieres et medicales de mettre des donnees directement sur chaine. Cependant, les puces dediees au chiffrement homomorphe complet (FHE) devraient etre lancees officiellement au deuxieme semestre 2026, avec une performance d\'environ 1000 transactions chiffrees par seconde par puce.\n\nCela signifie: les donnees medicales peuvent devenir des tokens apres chiffrement homomorphe complet, et toute personne ou agent intelligent peut invoquer ces donnees pour le calcul sur blockchain sans permission, sans pouvoir obtenir d\'information personnelle privee. Les hopitaux passent de detenteurs traditionnels de donnees a des Usines de Tokens.',
+      's3_3Title': 'Architecture Decentralisee',
+      's3_3Layers': [
+        {
+          'name': 'Couche de Chiffrement Homomorphe Complet',
+          'desc': 'Protection de la confidentialite des donnees'
+        },
+        {
+          'name': 'Couche de Reglement Blockchain',
+          'desc': 'Token d\'Utilite | Token de Capital | NFT'
+        },
+        {
+          'name': 'Couche de Calcul Decentralise',
+          'desc': 'Marche d\'inference P2P'
+        },
+        {
+          'name': 'Couche AI Agent',
+          'desc': 'Acquisition et livraison autonomes'
+        }
+      ],
+      's4Title': 'Valeur Unique de la Version EACO',
+      's4_1Title': 'Infrastructure de l\'Economie des Machines',
+      's4_1Body': 'Xiao Feng a souligne: les appels d\'API d\'AI Agent peuvent ne couter que quelques centimes chacun, et la structure de couts du systeme bancaire actuel ne peut pas supporter des paiements instantanes si petits. Par consequent, a l\'avenir, un nouveau systeme de services financiers concu pour les machines et non pour les humains apparaitra inevitablement.\n\nLa valeur centrale de la version EACO de l\'Usine de Tokens reside dans:',
+      's4_1Bullets': [
+        'Capacite de micro-paiement: Les tokens blockchain supportent les micro-paiements au niveau Agent',
+        'Sans confiance: Les Agents peuvent invoquer des services sans KYC ni contrats',
+        'Ouverture mondiale: Briser les barrieres geographiques, les Agents mondiaux peuvent acceder librement'
+      ],
+      's4_2Title': 'De l\'Humain a l\'Agent Passant Commande',
+      's4_2Body': 'Aujourd\'hui, les humains passent commande a l\'Usine de Tokens; a l\'avenir, les plus grands clients de l\'Usine de Tokens pourraient etre des Agents. Quand les Agents pourront decouvrir des taches de maniere autonome, calculer les revenus attendus, acheter des tokens, invoquer d\'autres Agents et livrer les resultats a un autre Agent, les tokens passeront d\'unite de facturation des modeles a moyens de production d\'organisations machines.',
+      's4_3Title': 'Nouvelles Dimensions de Tokenisation d\'Actifs',
+      's4_3Bullets': [
+        'Tokenisation d\'actifs garantis par GPU: Transformer le materiel GPU et ses flux de tresorerie en actifs tokenises investissables',
+        'Agents IA comme actifs numeriques possedables: Permettre aux utilisateurs de creer, tokeniser et negocier des agents IA',
+        'Tokenisation d\'actifs de donnees: Les individus peuvent televerser des donnees d\'examens medicaux chiffrees sur chaine'
+      ],
+      's5Title': 'Risques Centraux et Reponses',
+      's5Headers': [
+        'Risque',
+        'Strategie de Reponse'
+      ],
+      's5Rows': [
+        [
+          'Incertitude regulatorie',
+          'Choisir des juridictions conformes (ex. Hong Kong, Singapour)'
+        ],
+        [
+          'Volatilite des prix des tokens',
+          'Introduire des canaux de paiement en stablecoins pour couverture'
+        ],
+        [
+          'Risque de contrats intelligents',
+          'Audit strict, decentralisation progressive'
+        ],
+        [
+          'Approvisionnement instable en calcul',
+          'Deploiement multichain, conception redondante de marche P2P'
+        ],
+        [
+          'Risque de perte de controle d\'Agent',
+          'Etablir des limites de budget de tokens, mecanismes de coupure, audit humain'
+        ]
+      ],
+      's6Title': 'Conclusion',
+      's6Body': 'L\'Usine de Tokens EACO a l\'etranger n\'est pas un centre de donnees centralise, mais une infrastructure economique d\'agents intelligents decentree. Sa forme finale est: Token IA (moyens de production) + Token blockchain (paiement et reglement) + chiffrement homomorphe complet (protection de la confidentialite), les trois superposes pour realiser un modele commercial disruptif sans confiance et sans permission. Quand les Agents commenceront a acheter des tokens eux-memes, un systeme economique de machines commencera veritablement a fonctionner. Et la version EACO de l\'Usine de Tokens est le portail d\'energie de ce nouveau systeme economique.'
+    },
+    'comparison': {
+      'title': 'Comparaison des Deux Versions',
+      'subtitle': 'Deux formes de la meme Usine de Tokens sous differents cadres regulatories',
+      'headers': [
+        'Dimension',
+        'Conformite Continentale',
+        'EACO Web3 International'
+      ],
+      'rows': [
+        [
+          'Positionnement Central',
+          'Exportation de services de calcul + traitement transfrontalier de donnees',
+          'Infrastructure economique d\'agents intelligents decentree'
+        ],
+        [
+          'Substance Commerciale',
+          'Vente de services de tokens ($/1M Tokens)',
+          'Actifs IA tokenises + marche d\'inference decentre'
+        ],
+        [
+          'Cadre de Conformite',
+          'Document No. 42 + Zones Franches + Plateforme Hong Kong',
+          'Regulation etrangere + Contrats intelligents + Gouvernance DAO'
+        ],
+        [
+          'Methode de Reglement',
+          'Reglement transfrontalier en monnaie fiduciaire',
+          'Token blockchain (y compris stablecoins)'
+        ],
+        [
+          'Clientele Cible',
+          'Entreprises etrangeres, entreprises s\'etendant a l\'etranger, createurs OPC',
+          'AI Agent, developpeurs Web3, detenteurs de tokens'
+        ],
+        [
+          'Risque Central',
+          'Politique regulatorie, guerre des prix, adaptation de puces',
+          'Incertitude regulatorie, volatilite des tokens, risque de contrats'
+        ],
+        [
+          'Voie de Developpement',
+          'D\'abord les commandes, puis la capacite',
+          'D\'abord l\'ecosysteme, puis l\'echelle'
+        ]
+      ]
+    },
+    'eaco': {
+      'title': 'A propos d\'EACO',
+      'name': 'EACO (Earth\'s Best Coin)',
+      'chain': 'Blockchain Solana',
+      'contractLabel': 'Adresse du Contrat',
+      'contract': 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH',
+      'supplyLabel': 'Offre Totale',
+      'supply': '1.35 Billion EACO',
+      'positioningLabel': 'Positionnement',
+      'positioning': 'Token de la Terre IA + RWA + Web3 - Energie, Attitude, Cooperation, Optimisation',
+      'linksTitle': 'Liens de l\'Ecosysteme',
+      'copyBtn': 'Copier',
+      'copiedBtn': 'Copie!',
+      'links': [
+        {
+          'label': 'EACO Web3',
+          'url': 'https://ucoingroup.github.io/eacoweb3-2026/'
+        },
+        {
+          'label': 'EACO Faucet',
+          'url': 'https://ucoingroup.github.io/eaco-faucet/'
+        },
+        {
+          'label': 'AU-Trade Platform',
+          'url': 'https://ucoingroup.github.io/au-trade/'
+        },
+        {
+          'label': 'Solscan Explorer',
+          'url': 'https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH'
+        },
+        {
+          'label': 'Meteora Liquidity',
+          'url': 'https://meteora.ag/'
+        },
+        {
+          'label': 'GitHub',
+          'url': 'https://github.com/ucoingroup'
+        }
+      ]
+    },
+    'future': {
+      'badge': 'Vision Future',
+      'title': 'Industries Futures du Village Terrestre: Tendances 10-100 Ans',
+      'subtitle': 'Comment EACO s\'integre aux 10 principaux secteurs economiques du prochain siecle',
+      'overviewTitle': 'Panorama: La Grande Convergence',
+      'overview': 'Au cours des 10-100 prochaines annees, le Village Terrestre assistera a une convergence sans precedent de changements demographiques, de percées technologiques et de restructuration economique. Le vieillissement global, l\'urgence climatique, l\'autonomie de l\'IA et la commercialisation spatiale remodeleront chaque industrie.\n\nEACO, en tant que token Web3 natif de la Terre, est uniquelement positionne pour servir de tissu conjonctif entre ces economies emergentes.',
+      'industriesTitle': 'Top 10 Industries Futures et Integration EACO',
+      'eacoMethodLabel': 'Voie d\'Integration EACO',
+      'conclusionTitle': 'Conclusion: EACO comme Couche Economique de la Terre',
+      'conclusion': 'A travers les 10 industries futures, EACO sert de couche economique universelle: enableant les micro-paiements pour les agents IA, tokenisant les actifs du monde reel, facilitant les reglements commerciaux sans frontieres et creant des structures d\'incitation pour l\'exploration durable et interstellaire.\n\nLa convergence de l\'economie des tokens IA, du reglement blockchain et du calcul de confidentialite cree une base ou EACO devient la monnaie de reglement native de l\'economie multi-especes et multi-planetaire du Village Terrestre.',
+      'industries': [
+        {
+          'icon': '🧓',
+          'title': 'Economie Argentee',
+          'tagline': 'Services aux personnes agees et sante',
+          'trend': 'D\'ici 2050, 1 personne sur 6 aura plus de 65 ans. Inclut sante intelligente, robotique assistee, traitements de longevite et gestion de patrimoine digital.',
+          'eacoMethod': 'EACO permet les pensions par micro-paiement, les epargnes de sante tokenisees et les fonds de soins geres par agents IA.',
+          'bullets': [
+            'Pools d\'assurance longevite tokenises avec reclamations transparentes',
+            'Paiements automatiques IA pour services de soins',
+            'Heritage digital: testaments intelligents bases sur EACO',
+            'Portabilite transfrontaliere des pensions'
+          ]
+        },
+        {
+          'icon': '💖',
+          'title': 'Economie Emotionnelle',
+          'tagline': 'Bien-etre mental, compagnons IA',
+          'trend': 'L\'economie emotionnelle englobe la compagnie IA, la sante mentale et la therapeutique digitale. D\'ici 2035, ce sera un marche de milliers de milliards.',
+          'eacoMethod': 'EACO alimente les micro-paiements pour services de compagnie IA, tokenise les donnees emotionnelles avec FHE.',
+          'bullets': [
+            'Paiement par conversation IA via micro-paiements EACO',
+            'Marche de donnees emotionnelles tokenisees avec FHE',
+            'Recompenses EACO pour meditation et therapie',
+            'Assurances sante mentale decentralisees'
+          ]
+        },
+        {
+          'icon': '🔄',
+          'title': 'Economie Circulaire',
+          'tagline': 'Reutilisation, recyclage, revente',
+          'trend': 'L\'economie circulaire atteindra 4,5 billions $ d\'ici 2030. D\'ici 2050, 50% des biens de consommation pourraient etre echanges en marche circulaire.',
+          'eacoMethod': 'EACO tokenise le recyclage, authentifie les biens de seconde main via blockchain et permet la propriete fractionnee.',
+          'bullets': [
+            'Tokens EACO pour recyclage verifie par IoT',
+            'Provenance de produits authentifiee sur blockchain',
+            'Propriete fractionnee tokenisee d\'actifs partages',
+            'Commerce automatique de credits carbone'
+          ]
+        },
+        {
+          'icon': '💰',
+          'title': 'Consommation Abordable',
+          'tagline': 'Marche de masse axee sur la valeur',
+          'trend': 'Marche de 10+ billions $ servant la classe moyenne et inferieure mondiale avec vente au detail a prix reduit.',
+          'eacoMethod': 'EACO permet les micro-paiements sans friction pour les biens abordables et les achats groupes.',
+          'bullets': [
+            'Micro-paiements EACO pour biens partages a l\'usage',
+            'Achats en gros par IA avec remises automatiques',
+            'Programmes de fidelite tokenises',
+            'Remesses transfrontalieres a cout quasi nul'
+          ]
+        },
+        {
+          'icon': '⚡',
+          'title': 'Transition Energetique',
+          'tagline': 'Energie propre et reseaux tokenises',
+          'trend': 'Necessite 4,4 billions $ d\'investissement annuel. D\'ici 2050, 90% de l\'electricite pourrait etre renouvelable.',
+          'eacoMethod': 'EACO tokenise la production d\'energie renouvelable, le commerce P2P d\'energie et les marches de compensation carbone.',
+          'bullets': [
+            'Production solaire tokenisee echangee P2P',
+            'Marche de credits carbone avec EACO',
+            'Certificats d\'energie verte sur chaine',
+            'Arbitrage energetique gere par IA'
+          ]
+        },
+        {
+          'icon': '🌍',
+          'title': 'Commerce Transfrontalier',
+          'tagline': 'Commerce global et finance',
+          'trend': 'L\'e-commerce transfrontalier depassera 10 billions $ d\'ici 2030 avec logistique IA et douanes blockchain.',
+          'eacoMethod': 'EACO sert de token de reglement sans frontieres pour les micro-transactions entre agents IA.',
+          'bullets': [
+            'EACO comme monnaie de garantie B2B',
+            'Negociation de fret par IA avec EACO',
+            'Finance commerciale tokenisee',
+            'Suivi de chaine d\'approvisionnement en temps reel'
+          ]
+        },
+        {
+          'icon': '🚀',
+          'title': 'Commerce Interstellaire',
+          'tagline': 'Economie spatiale et minage',
+          'trend': 'L\'economie spatiale atteindra 1 billion $ d\'ici 2040. Minage d\'asteroides et colonisation martienne creeront de nouvelles routes commerciales.',
+          'eacoMethod': 'EACO fournit une couche de reglement tolérante aux delais pour le commerce interplanetaire.',
+          'bullets': [
+            'EACO pour contrats de minage d\'asteroides',
+            'Tokenisation de slots orbitaux',
+            'Missions de ravitaillement autonomes par IA',
+            'Protocoles commerciaux interplanetaires gouvernes par DAO'
+          ]
+        },
+        {
+          'icon': '🤖',
+          'title': 'Economie d\'Agents IA',
+          'tagline': 'Commerce autonome machine a machine',
+          'trend': 'D\'ici 2035, il pourrait y avoir plus d\'agents IA que d\'humains en ligne. Necessitent un systeme de paiement concu pour les machines.',
+          'eacoMethod': 'EACO est le token de paiement natif pour les micro-transactions d\'agents IA.',
+          'bullets': [
+            'Micro-paiements EACO entre agents pour calcul et donnees',
+            'Agents IA tokenises comme NFTs',
+            'Gestion autonome de tresorerie EACO',
+            'Marche d\'inference decentralise'
+          ]
+        },
+        {
+          'icon': '🧬',
+          'title': 'Biotechnologie et Sante',
+          'tagline': 'Genomique, longevite, medicine personnalisee',
+          'trend': 'La bioeconomie depassera 3 billions $ d\'ici 2035 avec edition genetique et medicine personnalisee.',
+          'eacoMethod': 'EACO alimente les marches de donnees de sante avec FHE et tokenise les donnees genomiques.',
+          'bullets': [
+            'Marche de donnees genomiques avec FHE',
+            'Micro-paiements EACO pour diagnostic IA',
+            'Pools de recherche medicale gouvernes par DAO',
+            'Incitations d\'essais cliniques tokenises'
+          ]
+        },
+        {
+          'icon': '🔒',
+          'title': 'Calcul de Confidentialite',
+          'tagline': 'FHE, ZK et souverainete des donnees',
+          'trend': 'Les puces FHE atteignant 1000 tx/sec en 2026 deverrouilleront la tokenisation d\'actifs de donnees.',
+          'eacoMethod': 'EACO sert de token de reglement pour les transactions de donnees protegees par la confidentialite.',
+          'bullets': [
+            'Marche de donnees FHE avec reglement EACO',
+            'Souverainete des donnees personnelles',
+            'Credentiels ZK verifies comme NFTs',
+            'Formation de modeles IA inter-institutions'
+          ]
+        }
+      ]
+    }
+  },
+  'ru': {
+    'meta': {
+      'siteTitle': 'Фабрика Токенов EACO',
+      'siteSubtitle': 'Две модели для глобальной экономики токенов ИИ',
+      'siteDescription': 'Исследование трансграничной Фабрики Токенов с соблюдением требований и децентрализованной Фабрики Токенов EACO Web3'
+    },
+    'nav': {
+      'mainland': 'Континентальное соответствие',
+      'overseas': 'EACO Web3 зарубежом',
+      'comparison': 'Сравнение',
+      'eaco': 'Инфо EACO',
+      'future': 'Будущие Тренды'
+    },
+    'v1': {
+      'badge': 'Версия 1',
+      'title': 'Трансграничная Фабрика Токенов',
+      'subtitle': 'Соответствие как краеугольный камень, глобальная экспансия как курс',
+      's1Title': 'Стратегическое позиционирование',
+      's1Body': 'Основное позиционирование континентальной Фабрики Токенов заключается не в выпуске виртуальных валют или токенов внутри страны, а в участии с соблюдением требований в глобальной цепочке создания стоимости токенов ИИ, используя экспорт вычислительных услуг и трансграничную обработку данных как суть бизнеса.\n\nВ июне 2026 года ежедневные вызовы токенов в Китае достигли почти 175 триллионов, что делает страну крупнейшим в мире по объему. Тем временем Национальное управление данных классифицировало экономику токенов как ключевой фактор производства ИИ. Китайский институт информационных и коммуникационных технологий в апреле 2026 года запустил оценку Требований к комплексной сервисной способности фабрик токенов ИИ в облаке, что знаменует начало системы отраслевых стандартов.',
+      's2Title': 'Основная бизнес-модель',
+      's2Subtitle': 'Полный коммерческий цикл: Вызов вычислений - Биллинг токенов - Трансграничный расчет - Распределение выгод экосистемы',
+      's2_1Title': 'Суть бизнеса: От обработки данных к экспорту токенов',
+      's2_1Body': 'Бизнес-логика континентальной Фабрики Токенов основана на трансграничной обработке данных: преобразование исходных данных из-за рубежа посредством управления, агрегации и моделирования в упорядоченные продукты данных с последующим экспортом в форме Token.\n\nВ августе 2026 года свободная зона Циндао и Inspur Cloud подписали соглашение о строительстве первой трансграничной Фабрики Токенов на севере Китая. Её основные функции включают:',
+      's2_1Bullets': [
+        'Унифицированное управление гетерогенными вычислениями: управление чипами GPU разных производителей (включая отечественные чипы如 Ascend)',
+        'Централизованный доступ к нескольким моделям: единое планирование DeepSeek, Kimi и других моделей',
+        'Стандартизированные измерение и ценообразование токенов: Token как единая единица биллинга',
+        'Трансграничный расчет и распределение выгод: полная цепочка от вычислений до наличных'
+      ],
+      's2_2Title': 'Структура доходов: От продажи вычислений к продаже токенов',
+      's2_2Body': 'Традиционная модель взимает плату за часы работы карты GPU ($/GPU-час), тогда как модель Фабрики Токенов взимает плату за количество произведенных валидных токенов ($/1M Tokens), связывая доходы с фактическим производством ИИ, а не с занятостью оборудования. Посредством оптимизации хранения-вычислений, оптимизации движка вывода, разделения PD и динамического Batching поставщики могут получать маржу прибыли 30%-50%.\n\nСтруктура доходов третьего поколения Фабрик Токенов эволюционировала в базовые вычисления + добавленную стоимость избыточных токенов, сочетая стабильные доходы от инфраструктуры с долей в превышении производства токенов.',
+      's3Title': 'Техническая архитектура и рамки соответствия',
+      's3_1Title': 'Технологическая база',
+      's3_1Headers': [
+        'Уровень',
+        'Компоненты',
+        'Ключевые требования'
+      ],
+      's3_1Rows': [
+        [
+          'Уровень вычислений',
+          'Гетерогенные кластеры GPU (включая отечественные чипы如 Ascend 910C)',
+          'Адаптация отечественных чипов, оптимизация утилизации'
+        ],
+        [
+          'Уровень платформы',
+          'Единая система планирования + оптимизация движка вывода',
+          'Снижение задержки, увеличение параллелизма'
+        ],
+        [
+          'Уровень моделей',
+          'Централизованный доступ к нескольким большим моделям',
+          'Маршрутизация моделей и сопоставление задача-модель'
+        ],
+        [
+          'Уровень данных',
+          'Доверенное пространство данных',
+          'Трансграничное соответствие данных, защита конфиденциальности'
+        ],
+        [
+          'Уровень расчетов',
+          'Система трансграничных расчетов',
+          'Соответствующий валютный расчет, многостороннее распределение'
+        ]
+      ],
+      's3_2Title': 'Красные линии соответствия (Документ No. 42)',
+      's3_2Body': '6 февраля 2026 года Народный банк Китая и семь других министерств совместно издали Уведомление о дальнейшем предотвращении и урегулировании рисков, связанных с виртуальными валютами (Yin Fa [2026] No. 42). Ключевые требования включают:',
+      's3_2Headers': [
+        'Требование соответствия',
+        'Влияние и ответные меры'
+      ],
+      's3_2Rows': [
+        [
+          'Полный запрет на виртуальные валюты внутри страны',
+          'Фабрика Токенов не должна выпускать какие-либо формы криптовалют или виртуальных валют в стране'
+        ],
+        [
+          'Лицензия на токенизацию RWA либерализована (трансграничная)',
+          'При экспорте вычислительных услуг и обработке данных как сути бизнеса возможны соответствующие трансграничные операции'
+        ],
+        [
+          'Выпуск виртуальных валют за рубежом требует одобрения',
+          'Без согласования с соответствующими ведомствами нельзя выпускать виртуальные валюты за рубежом'
+        ],
+        [
+          'Трансграничное соответствие данных',
+          'Опираться на преимущества свободных экономических зон для инноваций в трансграничных данных'
+        ]
+      ],
+      's3_3Title': 'Жизнеспособные пути соответствия',
+      's3_3Body': '1. Опора на свободные экономические зоны: Свободная зона Циндао, как национальная платформа открытости, имеет преимущества институционального экспериментирования и может проводить тесты инноваций и безопасности трансграничных данных. Уже создана первая трансграничная Фабрика Токенов на севере.\n\n2. Опора на международную платформу Гонконга: Inspur создала международную платформу Token облачных вычислений в Гонконге, полностью поддерживая развитие экспорта токенов. Стабильная нормативная среда Гонконга и его статус финансового центра обеспечивают соответствующий международный трамплин.\n\n3. Участие в разработке стандартов: Запуск оценки Требований к комплексной сервисной способности фабрик токенов ИИ в облаке Китайского института информационных и коммуникационных технологий.\n\n4. Зеленый экспорт токенов: В августе 2026 года в Хух-Хото состоялось совещание по зеленому экспорту токенов, сосредоточенное на путях соответствия, выборе моделей и стратегиях ценообразования.',
+      's4Title': 'Типичные практики',
+      's4Headers': [
+        'Проект',
+        'Масштаб',
+        'Особенности'
+      ],
+      's4Rows': [
+        [
+          'Фабрика Токенов Wuxi Suihong Huachuang',
+          'Первая фаза: 4 сервера supernode Ascend 384, 1536 чипов Ascend 910C',
+          'Первая национальная Фабрика Токенов с интеграцией вычислений и электричества'
+        ],
+        [
+          'Трансграничная Фабрика Токенов Циндао',
+          'Inspur Cloud + свободная зона Циндао',
+          'Первая трансграничная Фабрика Токенов на севере'
+        ],
+        [
+          'Технология Qujing',
+          'Дневное производство на уровне триллионов токенов',
+          'Фокус на оптимизации вывода основных моделей'
+        ],
+        [
+          'SiliconFlow',
+          'Четвертое место по годовой добыче токенов 2025, 1.5% доли рынка',
+          'Подана заявка на IPO на бирже Гонконга'
+        ]
+      ],
+      's5Title': 'Основные риски и ответы',
+      's5Headers': [
+        'Риск',
+        'Стратегия ответа'
+      ],
+      's5Rows': [
+        [
+          'Изменения нормативной политики',
+          'Опираться на институциональные преимущества свободных зон, следовать за политикой'
+        ],
+        [
+          'Ценовая война токенов',
+          'Сосредоточиться на токенах с высокой добавленной стоимостью'
+        ],
+        [
+          'Адаптация отечественных чипов',
+          'Продвигать отечественные чипы для大规模 вывода'
+        ],
+        [
+          'Низкая утилизация вычислений',
+          'Повысить утилизацию через оптимизацию планирования и разделение PD'
+        ],
+        [
+          'Трансграничное соответствие данных',
+          'На основе доверенного пространства данных обеспечить замкнутую цепочку токенов'
+        ]
+      ],
+      's6Title': 'Заключение',
+      's6Body': 'Жизнеспособный путь для континентальной Фабрики Токенов: использовать экспорт вычислительных услуг и обработку данных как суть бизнеса, опираться на институциональные инновации свободных экономических зон и международную платформу Гонконга, работать в соответствии с требованиями в рамках Документа No. 42. Речь идет не о выпуске монет, а о продаже токен-услуг: по сути, экспорте вычислительных преимуществ и возможностей моделей Китая на мировой рынок через стандартизированное измерение токенов.'
+    },
+    'v2': {
+      'badge': 'Версия 2',
+      'title': 'Децентрализованная Фабрика Токенов',
+      'subtitle': 'Токен ИИ (средства производства) + Токен блокчейна + Вычисления конфиденциальности = экономика агентов без доверия и без разрешений',
+      's1Title': 'Стратегическое позиционирование',
+      's1Body': 'Конечная форма зарубежной Фабрики Токенов — это не централизованный вычислительный кластер, а децентрализованная инфраструктура экономики интеллектуальных агентов: любой AI Agent может автономно вызывать вычисления, платить токенами и завершать поставки, формируя автономную экономическую систему, управляемую машинными клиентами и рассчитываемую блокчейном.\n\nПредседатель HashKey Group Сяо Фэн отметил на Карнавале Web3 в Гонконге 2026: в будущем все коммерческие учреждения станут Фабриками Токенов. Токен ИИ — это средства производства интеллектуальных агентов, а токен блокчейна — кровь экономики интеллектуальных агентов, выполняющая функции платежа и расчета.',
+      's2Title': 'Основная бизнес-модель: Модель трех токенов',
+      's2Body': 'HashKey предложил Модель трех токенов в своем Белом книге по экономике токенов 2026:',
+      's2Headers': [
+        'Тип токена',
+        'Функция',
+        'Роль в Фабрике Токенов'
+      ],
+      's2Rows': [
+        [
+          'Утилитарный токен',
+          'Механизм стимулирования для сообщества',
+          'Средство платежа для вызова вычислений AI Agent и покупки токенов'
+        ],
+        [
+          'Токен капитала',
+          'Стимул для предпринимателей и акционеров',
+          'Управление и распределение доходов Фабрики Токенов'
+        ],
+        [
+          'NFT (невзаимозаменяемый токен)',
+          'Захват ценности для конкретных сценариев',
+          'Конкретные права如 настройка моделей и использование данных'
+        ]
+      ],
+      's2_1Title': 'Позиционирование EACO',
+      's2_1Body': 'EACO (Earth Coin) — это проект Token на основе блокчейна Solana, позиционируемый как MemeCoin Земли. В экосистеме EACO логика работы Фабрики Токенов может быть встроена в следующую структуру:',
+      's2_1Bullets': [
+        'Токенизация вычислений: Преобразование активов вычислений GPU в торгуемые токены',
+        'Токенизация AI Agent: Позволяет пользователям создавать, токенизировать и торговать агентами ИИ',
+        'Децентрализованный рынок вывода: Пользователи могут зарабатывать на обработке запросов ИИ'
+      ],
+      's2_2Title': 'Децентрализованный рынок вывода ИИ (эталонный пример)',
+      's2_2Body': 'Warden Protocol запустил бета-версию P2P рынка вывода ИИ Halo на цепочке Base в июне 2026 года, обработав более 8 миллиардов токенов ИИ за несколько недель, поддерживая более 200 моделей. Платформа интегрирована с Virtuals Protocol, предоставляя децентрализованный вычислительный слой для более чем 18 000 токенизированных агентов ИИ. Пользователи могут оплачивать вывод с помощью стейблкоинов или токенов VIRTUAL. Это именно та архитектура, на которую может опираться версия EACO Фабрики Токенов.',
+      's3Title': 'Архитектура: Токен ИИ + Токен блокчейна + Вычисления конфиденциальности',
+      's3_1Title': 'Три технологических столпа',
+      's3_1Headers': [
+        'Тех. уровень',
+        'Функция',
+        'Ключевой прорыв'
+      ],
+      's3_1Rows': [
+        [
+          'Токен ИИ',
+          'Средства производства для интеллектуальных агентов',
+          'Поток токенов от вывода больших моделей'
+        ],
+        [
+          'Токен блокчейна',
+          'Средство платежа и расчета',
+          'Программируемый, делимый, расчет в реальном времени'
+        ],
+        [
+          'ZK/Полностью гомоморфное шифрование',
+          'Защита вычислений конфиденциальности',
+          'Чипы FHE достигают 1000 транз./сек во 2-м пол. 2026'
+        ]
+      ],
+      's3_2Title': 'Прорыв в вычислениях конфиденциальности',
+      's3_2Body': 'Прозрачность блокчейна приводит к тому, что данные бегают голыми, что является главным препятствием для прямого размещения финансовых и медицинских данных в цепочке. Однако специализированные чипы полностью гомоморфного шифрования (FHE) ожидается к официальному выпуску во втором полугодии 2026 года с производительностью около 1000 зашифрованных транзакций в секунду на чип.\n\nЭто означает: медицинские данные могут быть преобразованы в токены после полностью гомоморфного шифрования, и любое лицо или интеллектуальный агент может вызывать эти данные для вычислений в блокчейне без разрешения, не получая никакой личной конфиденциальной информации. Больницы превращаются из традиционных держателей данных в Фабрики Токенов.',
+      's3_3Title': 'Децентрализованная архитектура',
+      's3_3Layers': [
+        {
+          'name': 'Слой полностью гомоморфного шифрования',
+          'desc': 'Защита конфиденциальности данных'
+        },
+        {
+          'name': 'Слой расчетов блокчейна',
+          'desc': 'Утилитарный токен | Токен капитала | NFT'
+        },
+        {
+          'name': 'Слой децентрализованных вычислений',
+          'desc': 'P2P рынок вывода'
+        },
+        {
+          'name': 'Слой AI Agent',
+          'desc': 'Автономная закупка и поставка'
+        }
+      ],
+      's4Title': 'Уникальная ценность версии EACO',
+      's4_1Title': 'Инфраструктура машинной экономики',
+      's4_1Body': 'Сяо Фэн отметил: вызовы API AI Agent могут стоить всего несколько центов каждый, и структура затрат существующей банковской платежной системы не может поддерживать такие мелкие мгновенные платежи. Поэтому в будущем неизбежно появится совершенно новая система финансовых услуг, разработанная для машин, а не для людей.\n\nОсновная ценность версии EACO Фабрики Токенов заключается в:',
+      's4_1Bullets': [
+        'Способность микроплатежей: Токены блокчейна поддерживают микроплатежи на уровне Agent',
+        'Без доверия: Агенты могут вызывать услуги без KYC и без подписания контрактов',
+        'Глобальная открытость: Преодоление географических барьеров, глобальные агенты могут свободно подключаться'
+      ],
+      's4_2Title': 'От заказов человека к заказам агента',
+      's4_2Body': 'Сегодня люди размещают заказы на Фабрике Токенов; в будущем крупнейшими клиентами Фабрики Токенов могут стать Агенты. Когда Агенты смогут автономно обнаруживать задачи, рассчитывать ожидаемый доход, покупать токены, вызывать других Агентов и доставлять результаты другому Агенту, токены превратятся из единицы биллинга моделей в средства производства машинных организаций.',
+      's4_3Title': 'Новые измерения токенизации активов',
+      's4_3Bullets': [
+        'Токенизация активов на базе GPU: Преобразование оборудования GPU и его денежных потоков в инвестируемые токенизированные активы',
+        'Агенты ИИ как принадлежащие цифровые активы: Позволяет пользователям создавать, токенизировать и торговать агентами ИИ',
+        'Токенизация данных: Частные лица могут загружать зашифрованные медицинские данные в цепочку'
+      ],
+      's5Title': 'Основные риски и ответы',
+      's5Headers': [
+        'Риск',
+        'Стратегия ответа'
+      ],
+      's5Rows': [
+        [
+          'Нормативная неопределенность',
+          'Выбирать соответствующие юрисдикции (напр. Гонконг, Сингапур)'
+        ],
+        [
+          'Волатильность цен токенов',
+          'Внедрить каналы оплаты стейблкоинами для хеджирования'
+        ],
+        [
+          'Риск смарт-контрактов',
+          'Строгий аудит, поэтапная децентрализация'
+        ],
+        [
+          'Нестабильное предложение вычислений',
+          'Мультичейн развертывание, резервное проектирование P2P рынка'
+        ],
+        [
+          'Риск потери контроля агента',
+          'Установить лимиты бюджета токенов, механизмы отключения, человеческий аудит'
+        ]
+      ],
+      's6Title': 'Заключение',
+      's6Body': 'Зарубежная Фабрика Токенов EACO — это не централизованный центр обработки данных, а децентрализованная инфраструктура экономики интеллектуальных агентов. Её конечная форма: Токен ИИ (средства производства) + Токен блокчейна (платеж и расчет) + полностью гомоморфное шифрование (защита конфиденциальности), три составляющих вместе создают разрушительную бизнес-модель без доверия и без разрешений. Когда Агенты начнут самостоятельно покупать токены, машинная экономическая система действительно начнет функционировать. И версия EACO Фабрики Токенов — это энергетический вход этой новой экономической системы.'
+    },
+    'comparison': {
+      'title': 'Сравнение двух версий',
+      'subtitle': 'Две формы одной Фабрики Токенов в разных нормативных рамках',
+      'headers': [
+        'Измерение',
+        'Континентальное соответствие',
+        'EACO Web3 зарубежом'
+      ],
+      'rows': [
+        [
+          'Основное позиционирование',
+          'Экспорт вычислительных услуг + трансграничная обработка данных',
+          'Децентрализованная инфраструктура экономики интеллектуальных агентов'
+        ],
+        [
+          'Суть бизнеса',
+          'Продажа токен-услуг ($/1M Tokens)',
+          'Токенизированные ИИ-активы + децентрализованный рынок вывода'
+        ],
+        [
+          'Рамки соответствия',
+          'Документ No. 42 + Свободные зоны + Платформа Гонконга',
+          'Зарубежное регулирование + Смарт-контракты + Управление DAO'
+        ],
+        [
+          'Метод расчета',
+          'Трансграничный расчет в фиатных деньгах',
+          'Токен блокчейна (включая стейблкоины)'
+        ],
+        [
+          'Целевая аудитория',
+          'Зарубежные предприятия, экспансирующиеся компании, создатели OPC',
+          'AI Agent, разработчики Web3, держатели токенов'
+        ],
+        [
+          'Основной риск',
+          'Нормативная политика, ценовая война, адаптация чипов',
+          'Нормативная неопределенность, волатильность токенов, риск контрактов'
+        ],
+        [
+          'Путь развития',
+          'Сначала заказы, затем мощности',
+          'Сначала экосистема, затем масштаб'
+        ]
+      ]
+    },
+    'eaco': {
+      'title': 'О EACO',
+      'name': 'EACO (Earth\'s Best Coin)',
+      'chain': 'Блокчейн Solana',
+      'contractLabel': 'Адрес контракта',
+      'contract': 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH',
+      'supplyLabel': 'Общий объем',
+      'supply': '1.35 Billion EACO',
+      'positioningLabel': 'Позиционирование',
+      'positioning': 'Токен Земли ИИ + RWA + Web3 - Энергия, Отношение, Сотрудничество, Оптимизация',
+      'linksTitle': 'Ссылки экосистемы',
+      'copyBtn': 'Копировать',
+      'copiedBtn': 'Скопировано!',
+      'links': [
+        {
+          'label': 'EACO Web3',
+          'url': 'https://ucoingroup.github.io/eacoweb3-2026/'
+        },
+        {
+          'label': 'EACO Faucet',
+          'url': 'https://ucoingroup.github.io/eaco-faucet/'
+        },
+        {
+          'label': 'AU-Trade Platform',
+          'url': 'https://ucoingroup.github.io/au-trade/'
+        },
+        {
+          'label': 'Solscan Explorer',
+          'url': 'https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH'
+        },
+        {
+          'label': 'Meteora Liquidity',
+          'url': 'https://meteora.ag/'
+        },
+        {
+          'label': 'GitHub',
+          'url': 'https://github.com/ucoingroup'
+        }
+      ]
+    },
+    'future': {
+      'badge': 'Будущее Видение',
+      'title': 'Будущие Отрасли Глобальной Деревни: Тренды 10-100 Лет',
+      'subtitle': 'Как EACO интегрируется с 10 главными экономическими секторами следующего века',
+      'overviewTitle': 'Обзор: Великая Конвергенция',
+      'overview': 'В ближайшие 10-100 лет Глобальная Деревня станет свидетелем беспрецедентной конвергенции демографических сдвигов, технологических прорывов и экономической реструктуризации. Глобальное старение, климатическая срочность, автономность ИИ и коммерциализация космоса переформируют каждую отрасль.\n\nEACO, как нативный Web3 токен Земли, уникально позиционирован чтобы служить соединительной тканью между этими развивающимися экономиками.',
+      'industriesTitle': 'Топ 10 Будущих Отраслей и Интеграция EACO',
+      'eacoMethodLabel': 'Путь Интеграции EACO',
+      'conclusionTitle': 'Заключение: EACO как Экономический Слой Земли',
+      'conclusion': 'Во всех 10 будущих отраслях EACO служит универсальным экономическим слоем: обеспечивая микроплатежи для агентов ИИ, токенизируя реальные активы, облегчая безграничные торговые расчеты и создавая структуры стимулов для устойчивого и межзвездного исследования.\n\nКонвергенция экономики токенов ИИ, блокчейн-расчетов и вычислений конфиденциальности создает основу, где EACO становится нативной расчетной валютой многоотраслевой и многопланетной экономики Глобальной Деревни.',
+      'industries': [
+        {
+          'icon': '🧓',
+          'title': 'Серебряная Экономика',
+          'tagline': 'Услуги для пожилых и здравоохранение',
+          'trend': 'К 2050 году 1 из 6 человек будет старше 65 лет. Включает умное здравоохранение, роботизированный уход и управление цифровым наследием.',
+          'eacoMethod': 'EACO обеспечивает микроплатежные пенсии, токенизированные сбережения и фонды ухода управляемые агентами ИИ.',
+          'bullets': [
+            'Токенизированные пулы страхования долголетия',
+            'Автоматические платежи ИИ для услуг ухода',
+            'Цифровое наследие: смарт-завещания на EACO',
+            'Трансграничная портативность пенсий'
+          ]
+        },
+        {
+          'icon': '💖',
+          'title': 'Эмоциональная Экономика',
+          'tagline': 'Ментальное здоровье, ИИ-компаньоны',
+          'trend': 'Включает ИИ-сопровождение, ментальное здоровье и цифровую терапию. К 2035 году станет триллионным рынком.',
+          'eacoMethod': 'EACO питает микроплатежи для сервисов ИИ-компаньонов и токенизирует эмоциональные данные с FHE.',
+          'bullets': [
+            'Оплата за разговор с ИИ через микроплатежи EACO',
+            'Рынок токенизированных эмоциональных данных с FHE',
+            'Награды EACO за медитацию и терапию',
+            'Децентрализованные страховки ментального здоровья'
+          ]
+        },
+        {
+          'icon': '🔄',
+          'title': 'Циркулярная Экономика',
+          'tagline': 'Повторное использование, переработка',
+          'trend': 'Достигнет $4.5 трлн к 2030. К 2050 году 50% потребительских товаров могут торговаться на циркулярных рынках.',
+          'eacoMethod': 'EACO токенизирует переработку, аутентифицирует подержанные товары и обеспечивает долевую собственность.',
+          'bullets': [
+            'Токены EACO за переработку через IoT',
+            'Происхождение товаров на блокчейне',
+            'Долевая токенизированная собственность',
+            'Автоматическая торговля углеродными кредитами'
+          ]
+        },
+        {
+          'icon': '💰',
+          'title': 'Экономика Доступного Потребления',
+          'tagline': 'Массовый рынок ценности',
+          'trend': 'Рынок $10+ трлн для среднего и нижнего класса со скидочным ритейлом и микро-лизингом.',
+          'eacoMethod': 'EACO обеспечивает микроплатежи для доступных товаров и групповые закупки.',
+          'bullets': [
+            'Микроплатежи EACO для общих товаров',
+            'Оптовые закупки ИИ с автоскидками',
+            'Токенизированные программы лояльности',
+            'Трансграничные переводы почти бесплатно'
+          ]
+        },
+        {
+          'icon': '⚡',
+          'title': 'Энергетический Переход',
+          'tagline': 'Чистая энергия и токенизированные сети',
+          'trend': 'Требует $4.4 трлн годовых инвестиций. К 2050 году 90% электричества может быть возобновляемым.',
+          'eacoMethod': 'EACO токенизирует производство возобновляемой энергии и P2P торговлю энергией.',
+          'bullets': [
+            'Токенизированная солнечная энергия P2P',
+            'Рынок углеродных кредитов с EACO',
+            'Сертификаты зеленой энергии на цепи',
+            'Энергетический арбитраж через ИИ'
+          ]
+        },
+        {
+          'icon': '🌍',
+          'title': 'Трансграничная Торговля',
+          'tagline': 'Глобальная торговля и финансы',
+          'trend': 'E-commerce превысит $10 трлн к 2030 с ИИ-логистикой и блокчейн-таможней.',
+          'eacoMethod': 'EACO служит безграничным расчетным токеном для микротранзакций между агентами ИИ.',
+          'bullets': [
+            'EACO как валюта эскроу B2B',
+            'ИИ-переговоры по фрахту с EACO',
+            'Токенизированная торговая финанс',
+            'Отслеживание цепочки поставок'
+          ]
+        },
+        {
+          'icon': '🚀',
+          'title': 'Межзвездная Торговля',
+          'tagline': 'Космическая экономика и добыча',
+          'trend': 'Космическая экономика достигнет $1 трлн к 2040. Добыча астероидов и колонизация Марса создадут новые торговые пути.',
+          'eacoMethod': 'EACO обеспечивает устойчивый к задержкам расчетный слой для межпланетной торговли.',
+          'bullets': [
+            'EACO для контрактов добычи астероидов',
+            'Токенизация орбитальных слотов',
+            'Автономные снабженческие миссии ИИ',
+            'Межпланетарные протоколы DAO'
+          ]
+        },
+        {
+          'icon': '🤖',
+          'title': 'Экономика Агентов ИИ',
+          'tagline': 'Автономная машина-машине торговля',
+          'trend': 'К 2035 году агентов ИИ может быть больше чем людей онлайн. Нужна платежная система для машин.',
+          'eacoMethod': 'EACO — нативный платежный токен для микротранзакций агентов ИИ.',
+          'bullets': [
+            'Микроплатежи EACO между агентами',
+            'Токенизированные агенты ИИ как NFT',
+            'Автономное управление казной EACO',
+            'Децентрализованный рынок вывода'
+          ]
+        },
+        {
+          'icon': '🧬',
+          'title': 'Биотехнологии и Здравоохранение',
+          'tagline': 'Геномика, долголетие, персональная медицина',
+          'trend': 'Биоэкономика превысит $3 трлн к 2035 с редактированием генов и персональной медициной.',
+          'eacoMethod': 'EACO питает рынки данных здоровья с FHE и токенизирует геномные данные.',
+          'bullets': [
+            'Рынок геномных данных с FHE',
+            'Микроплатежи EACO для ИИ-диагностики',
+            'DAO-управляемые пулы исследований',
+            'Токенизированные стимулы клинических испытаний'
+          ]
+        },
+        {
+          'icon': '🔒',
+          'title': 'Вычисления Конфиденциальности',
+          'tagline': 'FHE, ZK и суверенитет данных',
+          'trend': 'Чипы FHE достигающие 1000 транз/сек в 2026 разблокируют токенизацию данных.',
+          'eacoMethod': 'EACO служит расчетным токеном для транзакций данных защищенных конфиденциальностью.',
+          'bullets': [
+            'Рынок данных FHE с расчетом EACO',
+            'Суверенитет персональных данных',
+            'ZK-верифицированные учетные данные как NFT',
+            'Межинституциональное обучение ИИ'
+          ]
+        }
+      ]
+    }
+  },
+};
+
+const LANG_NAMES = {"en": "English", "zh": "\u4e2d\u6587", "es": "Espa\u00f1ol", "ar": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629", "fr": "Fran\u00e7ais", "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439"};
+const RTL_LANGS = ['ar'];
+let currentLang = localStorage.getItem('eaco-tf-lang') || 'en';
+let currentTab = 'v1';
+
+function esc(s){
+  if(!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderBody(text){
+  if(!text) return '';
+  let parts = esc(text).split('\n\n');
+  return parts.map(p => {
+    if(p.startsWith('1.') || p.startsWith('2.') || p.startsWith('3.') || p.startsWith('4.')){
+      let lines = p.split('\n');
+      let html = '';
+      let inList = false;
+      for(let line of lines){
+        if(/^\d+\./.test(line)){
+          if(inList){ html += '</ol>'; inList=false; }
+          html += '<p>' + line + '</p>';
+        } else {
+          if(!inList){ html += '<ol>'; inList=true; }
+          html += '<li>' + line + '</li>';
+        }
+      }
+      if(inList) html += '</ol>';
+      return html;
+    }
+    return '<p>' + p.replace(/\n/g,'<br>') + '</p>';
+  }).join('');
+}
+
+function renderBullets(bullets){
+  if(!bullets || !bullets.length) return '';
+  return '<ul>' + bullets.map(b => '<li>' + esc(b) + '</li>').join('') + '</ul>';
+}
+
+function renderTable(headers, rows){
+  if(!headers || !rows) return '';
+  let html = '<div class="table-wrap"><table>';
+  html += '<thead><tr>' + headers.map(h => '<th>' + esc(h) + '</th>').join('') + '</tr></thead>';
+  html += '<tbody>';
+  rows.forEach(row => {
+    html += '<tr>' + row.map(cell => '<td>' + esc(cell) + '</td>').join('') + '</tr>';
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function renderArchLayers(layers){
+  if(!layers || !layers.length) return '';
+  let html = '<div class="arch-layers">';
+  layers.forEach((layer, i) => {
+    if(i > 0) html += '<div class="arch-arrow">&#9660;</div>';
+    html += '<div class="arch-layer"><div class="arch-layer-name">' + esc(layer.name) + '</div><div class="arch-layer-desc">' + esc(layer.desc) + '</div></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderV1(d){
+  if(!d) return '<p>Loading...</p>';
+  return `
+    <div class="version-badge v1-badge">${esc(d.badge)}</div>
+    <h2>${esc(d.title)}</h2>
+    <div class="subtitle">${esc(d.subtitle)}</div>
+
+    <div class="section">
+      <h3>${esc(d.s1Title)}</h3>
+      ${renderBody(d.s1Body)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s2Title)}</h3>
+      <p><strong>${esc(d.s2Subtitle)}</strong></p>
+      <h4>${esc(d.s2_1Title)}</h4>
+      ${renderBody(d.s2_1Body)}
+      ${renderBullets(d.s2_1Bullets)}
+      <h4>${esc(d.s2_2Title)}</h4>
+      ${renderBody(d.s2_2Body)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s3Title)}</h3>
+      <h4>${esc(d.s3_1Title)}</h4>
+      ${renderTable(d.s3_1Headers, d.s3_1Rows)}
+      <h4>${esc(d.s3_2Title)}</h4>
+      ${renderBody(d.s3_2Body)}
+      ${renderTable(d.s3_2Headers, d.s3_2Rows)}
+      <h4>${esc(d.s3_3Title)}</h4>
+      ${renderBody(d.s3_3Body)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s4Title)}</h3>
+      ${renderTable(d.s4Headers, d.s4Rows)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s5Title)}</h3>
+      ${renderTable(d.s5Headers, d.s5Rows)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s6Title)}</h3>
+      ${renderBody(d.s6Body)}
+    </div>
+  `;
+}
+
+function renderV2(d){
+  if(!d) return '<p>Loading...</p>';
+  return `
+    <div class="version-badge v2-badge">${esc(d.badge)}</div>
+    <h2>${esc(d.title)}</h2>
+    <div class="subtitle">${esc(d.subtitle)}</div>
+
+    <div class="section">
+      <h3>${esc(d.s1Title)}</h3>
+      ${renderBody(d.s1Body)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s2Title)}</h3>
+      ${renderBody(d.s2Body)}
+      ${renderTable(d.s2Headers, d.s2Rows)}
+      <h4>${esc(d.s2_1Title)}</h4>
+      ${renderBody(d.s2_1Body)}
+      ${renderBullets(d.s2_1Bullets)}
+      <h4>${esc(d.s2_2Title)}</h4>
+      ${renderBody(d.s2_2Body)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s3Title)}</h3>
+      <h4>${esc(d.s3_1Title)}</h4>
+      ${renderTable(d.s3_1Headers, d.s3_1Rows)}
+      <h4>${esc(d.s3_2Title)}</h4>
+      ${renderBody(d.s3_2Body)}
+      <h4>${esc(d.s3_3Title)}</h4>
+      ${renderArchLayers(d.s3_3Layers)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s4Title)}</h3>
+      <h4>${esc(d.s4_1Title)}</h4>
+      ${renderBody(d.s4_1Body)}
+      ${renderBullets(d.s4_1Bullets)}
+      <h4>${esc(d.s4_2Title)}</h4>
+      ${renderBody(d.s4_2Body)}
+      <h4>${esc(d.s4_3Title)}</h4>
+      ${renderBullets(d.s4_3Bullets)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s5Title)}</h3>
+      ${renderTable(d.s5Headers, d.s5Rows)}
+    </div>
+
+    <div class="section">
+      <h3>${esc(d.s6Title)}</h3>
+      ${renderBody(d.s6Body)}
+    </div>
+  `;
+}
+
+function renderComparison(d){
+  if(!d) return '<p>Loading...</p>';
+  return `
+    <div class="comparison-intro">
+      <h2>${esc(d.title)}</h2>
+      <p>${esc(d.subtitle)}</p>
+    </div>
+    <div class="section">
+      ${renderTable(d.headers, d.rows)}
+    </div>
+  `;
+}
+
+
+function renderFuture(d){
+  if(!d) return '<p>Loading...</p>';
+  let industriesHtml = (d.industries||[]).map((ind, i) => {
+    let bulletsHtml = (ind.bullets||[]).map(b => '<li>' + esc(b) + '</li>').join('');
+    return `
+      <div class="industry-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;border-left:4px solid var(--accent${(i%3)+1})">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <span style="font-size:28px">${ind.icon||'&#128640;'}</span>
+          <div>
+            <h3 style="color:var(--accent);font-size:18px;margin:0">${esc(ind.title)}</h3>
+            <div style="color:var(--text3);font-size:13px">${esc(ind.tagline||'')}</div>
+          </div>
+        </div>
+        <p style="color:var(--text2);margin-bottom:12px">${esc(ind.trend||'')}</p>
+        <div style="background:var(--bg2);border-radius:8px;padding:12px 16px;margin-bottom:8px">
+          <strong style="color:var(--accent2)">${esc(d.eacoMethodLabel||'EACO Integration')}</strong>
+          <p style="color:var(--text2);margin-top:4px">${esc(ind.eacoMethod||'')}</p>
+        </div>
+        ${bulletsHtml ? '<ul style="margin:8px 0 0 20px;color:var(--text2)">' + bulletsHtml + '</ul>' : ''}
+      </div>
+    `;
+  }).join('');
+  let conclusionHtml = '';
+  if(d.conclusion){
+    conclusionHtml = `
+      <div class="section" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:24px">
+        <h3 style="color:var(--accent3)">${esc(d.conclusionTitle||'Conclusion')}</h3>
+        ${renderBody(d.conclusion)}
+      </div>
+    `;
+  }
+  return `
+    <div class="version-badge" style="background:var(--gradient3)">${esc(d.badge||'Future')}</div>
+    <h2>${esc(d.title)}</h2>
+    <div class="subtitle">${esc(d.subtitle||'')}</div>
+    <div class="section">
+      <h3>${esc(d.overviewTitle||'Overview')}</h3>
+      ${renderBody(d.overview||'')}
+    </div>
+    <div class="section">
+      <h3>${esc(d.industriesTitle||'Top 10 Industries')}</h3>
+      ${industriesHtml}
+    </div>
+    ${conclusionHtml}
+  `;
+}
+
+function renderEaco(d){
+  if(!d) return '<p>Loading...</p>';
+  let linksHtml = (d.links||[]).map(l =>
+    '<a class="eaco-link" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>'
+  ).join('');
+  return `
+    <div class="eaco-footer">
+      <div class="container">
+        <h2>${esc(d.title)}</h2>
+        <div class="eaco-info-grid">
+          <div class="eaco-info-card">
+            <div class="label">${esc(d.name || '')}</div>
+          </div>
+          <div class="eaco-info-card">
+            <div class="label">${esc(d.chain || '')}</div>
+          </div>
+          <div class="eaco-info-card">
+            <div class="label">${esc(d.contractLabel || '')}</div>
+            <div class="value mono" id="contractAddr">${esc(d.contract || '')}</div>
+            <button class="copy-btn" onclick="copyContract()">${esc(d.copyBtn || 'Copy')}</button>
+          </div>
+          <div class="eaco-info-card">
+            <div class="label">${esc(d.supplyLabel || '')}</div>
+            <div class="value">${esc(d.supply || '')}</div>
+          </div>
+          <div class="eaco-info-card">
+            <div class="label">${esc(d.positioningLabel || '')}</div>
+            <div class="value">${esc(d.positioning || '')}</div>
+          </div>
+        </div>
+        <h4 style="text-align:center;margin-bottom:16px;color:var(--text)">${esc(d.linksTitle || '')}</h4>
+        <div class="eaco-links">${linksHtml}</div>
+      </div>
+    </div>
+  `;
+}
+
+function copyContract(){
+  const addr = document.getElementById('contractAddr').textContent;
+  navigator.clipboard.writeText(addr).then(() => {
+    const btn = event.target;
+    const original = btn.textContent;
+    const d = LOCALES[currentLang]?.eaco;
+    btn.textContent = d?.copiedBtn || 'Copied!';
+    setTimeout(() => { btn.textContent = original; }, 2000);
+  });
+}
+
+function updateTexts(){
+  const d = LOCALES[currentLang] || LOCALES['en'];
+  const meta = d.meta || {};
+  const nav = d.nav || {};
+
+  document.title = meta.siteTitle || 'EACO Token Factory';
+  document.getElementById('heroTitle').textContent = meta.siteTitle || '';
+  document.getElementById('heroSubtitle').textContent = meta.siteSubtitle || '';
+  document.getElementById('heroDesc').textContent = meta.siteDescription || '';
+
+  const tabs = document.querySelectorAll('.nav-tab');
+  tabs[0].textContent = nav.mainland || '';
+  tabs[1].textContent = nav.overseas || '';
+  tabs[2].textContent = nav.comparison || '';
+  tabs[3].textContent = nav.eaco || '';
+  tabs[4].textContent = nav.future || '';
+
+  document.getElementById('content-v1').innerHTML = renderV1(d.v1);
+  document.getElementById('content-v2').innerHTML = renderV2(d.v2);
+  document.getElementById('content-comparison').innerHTML = renderComparison(d.comparison);
+  document.getElementById('content-eaco').innerHTML = renderEaco(d.eaco);
+  document.getElementById('content-future').innerHTML = renderFuture(d.future);
+
+  // RTL
+  if(RTL_LANGS.includes(currentLang)){
+    document.documentElement.setAttribute('dir','rtl');
+  } else {
+    document.documentElement.setAttribute('dir','ltr');
+  }
+
+  // Update active lang button
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  });
+}
+
+function switchTab(tab){
+  currentTab = tab;
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+  document.getElementById('content-' + tab).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === tab);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchLang(lang){
+  currentLang = lang;
+  localStorage.setItem('eaco-tf-lang', lang);
+  document.documentElement.lang = lang;
+  updateTexts();
+}
+
+// Init
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+});
+
+switchLang(currentLang);
+</script>
+
+</body>
+</html>
