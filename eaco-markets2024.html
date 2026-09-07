@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EACO | Orbmarkets.io Token Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orbDark: '#0F141E',
+                        orbCard: '#171E2D',
+                        orbPrimary: '#3B82F6',
+                        orbGreen: '#22C55E',
+                        orbRed: '#EF4444'
+                    },
+                    fontFamily: {
+                        inter: ['Inter','system-ui','sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto { content-visibility:auto; }
+            .table-cell-base { @apply px-3 py-3 text-sm border-b border-slate-700; }
+            .card-shadow { box-shadow:0 2px 16px rgba(0,0,0,0.35); }
+        }
+        body { background-color:#0F141E; font-family:Inter,system-ui; color:#E5E7EB; }
+    </style>
+</head>
+<body class="min-h-screen">
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+                <h1 class="text-[clamp(1.4rem,3vw,2rem)] font-bold text-white flex items-center gap-3">
+                    <i class="fa fa-globe text-orbPrimary text-2xl"></i>
+                    EACO <span class="text-slate-400 font-normal">($EACO)</span>
+                </h1>
+                <p class="text-slate-400 mt-1">Earth‑Village Universal Value Token · Solana SPL Token</p>
+                <div class="mt-2 text-xs text-slate-500 break-all">
+                    Mint Address:
+                    <code class="bg-orbCard px-2 py-1 rounded text-slate-300">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank"
+                   class="bg-orbPrimary hover:bg-blue-600 transition px-4 py-2 rounded-lg text-sm">
+                    <i class="fa fa-external-link mr-1"></i> View on OrbMarkets
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Stats Card -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">Price</div>
+            <div class="text-xl font-semibold mt-1">$0.00<span class="text-orbGreen">+0.00%</span></div>
+        </div>
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">Holders</div>
+            <div class="text-xl font-semibold mt-1">--</div>
+        </div>
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">24H Volume</div>
+            <div class="text-xl font-semibold mt-1">$--</div>
+        </div>
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">Liquidity</div>
+            <div class="text-xl font-semibold mt-1">$--</div>
+        </div>
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">Supply</div>
+            <div class="text-xl font-semibold mt-1">--</div>
+        </div>
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">Market Cap</div>
+            <div class="text-xl font-semibold mt-1">$--</div>
+        </div>
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">FDV</div>
+            <div class="text-xl font-semibold mt-1">$--</div>
+        </div>
+        <div class="bg-orbCard rounded-xl p-5 card-shadow">
+            <div class="text-slate-400 text-xs uppercase">Token Program</div>
+            <div class="text-base font-semibold mt-1">SPL‑Token Program</div>
+        </div>
+    </div>
+
+    <!-- EACO Business Intro -->
+    <div class="bg-orbCard rounded-xl p-6 card-shadow mb-8">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+            <i class="fa fa-book text-orbPrimary"></i> EACO · Earth‑Village Business Overview
+        </h2>
+        <p class="text-slate‑300 text-sm leading-relaxed">
+EACO 定位地球村通用价值凭证，面向未来10‑100年十大热门赛道：银发经济、情绪精神经济、二手循环商品经济、平价普惠消费、新能源储能碳经济、跨境外贸、星际探索贸易、RWA实体资产通证、AI人本服务、全球公益共生经济。
+作为 Solana SPL Token，承担跨境结算介质、权益通证、社区激励、DAO治理、RWA收益流转载体、文明叙事载体六大角色。
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap‑4 mt‑4 text‑sm">
+            <div class="bg‑orbDark p‑3 rounded‑lg">
+                <div class="text‑orbGreen font‑medium">Short‑term (0‑10Y)</div>
+                <div class="text‑slate‑400 mt‑1">RWA新能源、跨境外贸、二手循环、银发备老资产、情绪社区、普惠消费落地</div>
+            </div>
+            <div class="bg‑orbDark p‑3 rounded‑lg">
+                <div class="text‑orbPrimary font‑medium">Long‑term (10‑100Y)</div>
+                <div class="text‑slate‑400 mt‑1">RWA大规模普及、AI人本服务、太空星际贸易叙事与产业对接</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Markets Table -->
+    <div class="bg‑orbCard rounded‑xl p‑6 card‑shadow mb‑8">
+        <h2 class="text‑lg font‑semibold mb‑4">Top Markets</h2>
+        <div class="overflow‑x‑auto">
+            <table class="w‑full">
+                <thead>
+                <tr class="text‑xs text‑slate‑400 uppercase">
+                    <th class="text‑left px‑3 py‑2 border‑b border‑slate‑700">Market</th>
+                    <th class="text‑right px‑3 py‑2 border‑b border‑slate‑700">Rate</th>
+                    <th class="text‑right px‑3 py‑2 border‑b border‑slate‑700">Liquidity</th>
+                    <th class="text‑right px‑3 py‑2 border‑b border‑slate‑700">24H Volume</th>
+                    <th class="text‑right px‑3 py‑2 border‑b border‑slate‑700">Trades(24H)</th>
+                    <th class="text‑right px‑3 py‑2 border‑b border‑slate‑700">Unique(24H)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="table‑cell‑base">‑</td>
+                    <td class="table‑cell‑base text‑right">‑</td>
+                    <td class="table‑cell‑base text‑right">‑</td>
+                    <td class="table‑cell‑base text‑right">‑</td>
+                    <td class="table‑cell‑base text‑right">‑</td>
+                    <td class="table‑cell‑base text‑right">‑</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text‑xs text‑slate‑500 mt‑3">Page 1 | Rows per page</div>
+    </div>
+
+    <!-- FAQ Section (From Fetch Document) -->
+    <div class="bg‑orbCard rounded‑xl p‑6 card‑shadow mb‑8">
+        <h2 class="text‑lg font‑semibold mb‑4">Frequently Asked Questions</h2>
+        <div class="space‑y‑5">
+            <div>
+                <div class="font‑medium text‑white">What token program was EACO created with?</div>
+                <div class="text‑slate‑400 text‑sm mt‑1">EACO was created with the <span class="text‑orbPrimary">SPL Token Program</span> on Solana.</div>
+            </div>
+            <div>
+                <div class="font‑medium text‑white">How can I trade EACO?</div>
+                <div class="text‑slate‑400 text‑sm mt‑1">You can trade EACO on decentralized exchanges on Solana. Use the Markets tab to view active trading pairs sorted by volume and liquidity.</div>
+            </div>
+            <div>
+                <div class="font‑medium text‑white">What blockchain is EACO on?</div>
+                <div class="text‑slate‑400 text‑sm mt‑1">EACO is a token on the Solana blockchain. Mint address:
+                    <code class="bg‑orbDark px‑2 py‑0.5 rounded text‑slate‑300 break‑all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>.
+                    Solana is high‑performance blockchain with fast transactions & low fees.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Risk Notice -->
+    <div class="bg‑amber‑900/30 border border‑amber‑700 rounded‑xl p‑4 text‑sm text‑amber‑200">
+        <div class="font‑medium mb‑1"><i class="fa fa‑warning mr‑1"></i>Disclaimer</div>
+        <div>
+This static HTML page is a demo mock‑up, for conceptual demonstration only. Not real‑time on‑chain data, not investment advice. Web3 tokens are subject to local regulatory requirements. All business models are scenario conception.
+        </div>
+    </div>
+</div>
+</body>
+</html>
