@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>eacoSWAP - Solana DEX Navigation Hub | earth's best web3 coin = eaco</title>
+<meta name="description" content="EACO Swap navigation hub integrating top 10 Solana DEX platforms. Swap EACO for SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - all on Solana chain.">
+<style>
+:root{
+--bg:#0a0e27;--bg2:#121944;--card:#1a2150;--card2:#232c66;--text:#e0e8ff;--text2:#8896c4;
+--accent:#4fc3f7;--accent2:#7c4dff;--accent3:#00e676;--border:rgba(79,195,247,.25);
+--glow:0 0 20px rgba(79,195,247,.15);--radius:12px;--font:'Segoe UI',system-ui,-apple-system,sans-serif;
+}
+[data-theme="green"]{
+--bg:#1b2a1b;--bg2:#243524;--card:#2d3e2d;--card2:#365636;--text:#d4e8d4;--text2:#8aaa8a;
+--accent:#8bc34a;--accent2:#ffd54f;--accent3:#ff9800;--border:rgba(139,195,74,.25);
+--glow:0 0 20px rgba(139,195,74,.12);--font:'Courier New',monospace;
+}
+[data-theme="beige"]{
+--bg:#f5f0e1;--bg2:#ede5d0;--card:#fff8e7;--card2:#f0e8d5;--text:#3d3020;--text2:#7a6850;
+--accent:#8b6914;--accent2:#a0522d;--accent3:#6b4423;--border:rgba(139,105,20,.3);
+--glow:none;--radius:4px;--font:'Georgia','Times New Roman',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;transition:background .4s,color .4s;min-height:100vh}
+a{color:var(--accent);text-decoration:none;transition:opacity .2s}
+a:hover{opacity:.75}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Top Bar */
+.topbar{position:sticky;top:0;z-index:100;background:var(--bg2);border-bottom:1px solid var(--border);backdrop-filter:blur(10px)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:10px 20px;max-width:1200px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:8px;font-size:1.2rem;font-weight:bold;color:var(--accent)}
+.brand-icon{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:bold}
+.controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lang-select,.theme-btn{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);padding:6px 12px;font-size:.85rem;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.lang-select:hover,.theme-btn:hover{border-color:var(--accent);background:var(--card2)}
+.theme-btn.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+
+/* Hero */
+.hero{text-align:center;padding:50px 20px 30px;position:relative;overflow:hidden}
+[data-theme="blue"] .hero{background:radial-gradient(ellipse at center,var(--bg2) 0%,var(--bg) 70%)}
+.hero h1{font-size:2.4rem;margin-bottom:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+[data-theme="beige"] .hero h1{-webkit-text-fill-color:var(--accent)}
+.hero p{color:var(--text2);font-size:1.05rem;max-width:700px;margin:0 auto 20px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:4px 16px;font-size:.85rem;color:var(--accent);margin-bottom:20px}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Contract Bar */
+.contract-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin:20px auto;max-width:700px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.contract-bar .label{font-size:.8rem;color:var(--text2)}
+.contract-bar .addr{font-family:monospace;font-size:.85rem;color:var(--accent);word-break:break-all;flex:1;min-width:200px}
+.copy-btn{background:var(--accent);color:var(--bg);border:none;border-radius:6px;padding:6px 14px;font-size:.8rem;cursor:pointer;white-space:nowrap;font-family:var(--font)}
+.copy-btn:hover{opacity:.85}
+
+/* Section */
+.section{padding:40px 0}
+.section-title{font-size:1.6rem;font-weight:bold;margin-bottom:6px;color:var(--text)}
+.section-title .accent{color:var(--accent)}
+.section-desc{color:var(--text2);font-size:.9rem;margin-bottom:24px}
+
+/* DEX Grid */
+.dex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.dex-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .3s;cursor:pointer;display:flex;flex-direction:column;gap:8px}
+.dex-card:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateY(-2px)}
+.dex-card .dex-rank{font-size:1.8rem;font-weight:bold;color:var(--accent2);opacity:.5}
+.dex-card .dex-name{font-size:1.1rem;font-weight:bold;color:var(--text)}
+.dex-card .dex-desc{font-size:.82rem;color:var(--text2);flex:1}
+.dex-card .dex-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.dex-card .dex-tag{background:var(--card2);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:.7rem;color:var(--accent)}
+.dex-card .dex-link{margin-top:8px;display:inline-flex;align-items:center;gap:4px;font-size:.85rem;color:var(--accent)}
+
+/* Swap Table */
+.swap-table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
+.swap-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.swap-table th{background:var(--card2);color:var(--accent);padding:12px 16px;text-align:left;font-weight:600;white-space:nowrap}
+.swap-table td{padding:12px 16px;border-top:1px solid var(--border);color:var(--text)}
+.swap-table tr:hover{background:var(--card)}
+.swap-table .pair{font-weight:bold;color:var(--accent)}
+.swap-table .chain-badge{display:inline-block;background:var(--card2);color:var(--accent3);border-radius:4px;padding:2px 8px;font-size:.72rem;font-weight:bold}
+.swap-table .swap-link{color:var(--accent);font-size:.85rem;white-space:nowrap}
+
+/* Token Cards */
+.token-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.token-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:all .3s}
+.token-card:hover{border-color:var(--accent);box-shadow:var(--glow)}
+.token-card .tc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.token-card .tc-symbol{font-size:1.15rem;font-weight:bold;color:var(--accent)}
+.token-card .tc-chain{font-size:.7rem;color:var(--accent3);background:var(--card2);border-radius:4px;padding:2px 8px}
+.token-card .tc-addr{font-family:monospace;font-size:.75rem;color:var(--text2);word-break:break-all;margin-bottom:10px;border:1px dashed var(--border);padding:6px 8px;border-radius:4px}
+.token-card .tc-links{display:flex;gap:8px;flex-wrap:wrap}
+.token-card .tc-link{font-size:.8rem;padding:4px 10px;border:1px solid var(--border);border-radius:6px;color:var(--accent);background:var(--card2)}
+
+/* Info Section */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.info-card h3{color:var(--accent);font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.info-card .info-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.info-card .info-row:last-child{border-bottom:none}
+.info-card .info-key{color:var(--text2);white-space:nowrap;margin-right:12px}
+.info-card .info-val{color:var(--text);text-align:right;word-break:break-all;font-family:monospace;font-size:.82rem}
+
+/* Charity */
+.charity-section{text-align:center;padding:40px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin:24px 0}
+.charity-section h2{color:var(--accent);font-size:1.4rem;margin-bottom:12px}
+.charity-section p{color:var(--text2);margin-bottom:20px;font-size:.9rem}
+.charity-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:12px 32px;border-radius:var(--radius);font-size:1rem;font-weight:bold;transition:all .3s}
+[data-theme="beige"] .charity-btn{color:#fff}
+.charity-btn:hover{transform:scale(1.05);box-shadow:var(--glow)}
+
+/* Footer */
+.footer{text-align:center;padding:30px 20px;border-top:1px solid var(--border);color:var(--text2);font-size:.85rem}
+.footer .footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.footer .footer-links a{color:var(--accent);font-size:.85rem}
+
+/* Responsive */
+@media(max-width:600px){
+.hero h1{font-size:1.6rem}
+.dex-grid{grid-template-columns:1fr}
+.token-grid{grid-template-columns:1fr}
+.contract-bar{flex-direction:column;text-align:center}
+}
+
+/* RTL for Arabic */
+[dir="rtl"] .contract-bar,[dir="rtl"] .info-card .info-row{flex-direction:row-reverse}
+[dir="rtl"] .info-card .info-val{text-align:left}
+[dir="rtl"] .info-card .info-key{margin-right:0;margin-left:12px}
+</style>
+</head>
+<body data-theme="blue">
+
+<!-- Top Bar -->
+<div class="topbar">
+<div class="topbar-inner">
+<div class="brand">
+<span class="brand-icon">E</span>
+<span>eacoSWAP</span>
+</div>
+<div class="controls">
+<select class="lang-select" id="langSelect" onchange="switchLang(this.value)">
+<option value="en">English</option>
+<option value="zh">中文</option>
+<option value="es">Espanol</option>
+<option value="fr">Francais</option>
+<option value="ar">العربية</option>
+<option value="ru">Русский</option>
+</select>
+<button class="theme-btn active" data-theme="blue" onclick="switchTheme('blue',this)">Cosmic</button>
+<button class="theme-btn" data-theme="green" onclick="switchTheme('green',this)">Military</button>
+<button class="theme-btn" data-theme="beige" onclick="switchTheme('beige',this)">Classic</button>
+</div>
+</div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+<div class="hero-badge"><span class="dot"></span><span data-i18n="live_on_sol">All swaps on Solana Chain</span></div>
+<h1 data-i18n="hero_title">eacoSWAP Navigation</h1>
+<p data-i18n="hero_desc">Integrating the world's top 10 Solana DEX platforms. Swap EACO for SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - all on-chain, all on Solana.</p>
+<div class="contract-bar">
+<div>
+<span class="label" data-i18n="contract">EACO Contract Address</span><br>
+<span class="addr" id="eacoAddr">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+</div>
+<button class="copy-btn" onclick="copyContract()" data-i18n="copy">Copy</button>
+</div>
+</div>
+
+<!-- Top 10 DEX -->
+<div class="container">
+<div class="section">
+<h2 class="section-title"><span class="accent" data-i18n="dex_title">Top 10 Solana DEX Platforms</span></h2>
+<p class="section-desc" data-i18n="dex_desc">Navigate to the world's leading decentralized exchanges on Solana. All support EACO (Earth's Best Coin) and SPL token trading.</p>
+<div class="dex-grid" id="dexGrid"></div>
+</div>
+</div>
+
+<!-- Swap Pairs -->
+<div class="container">
+<div class="section">
+<h2 class="section-title"><span class="accent" data-i18n="swap_title">EACO Swap Pairs (All on Solana)</span></h2>
+<p class="section-desc" data-i18n="swap_desc">EACO can be swapped for all major tokens directly on Solana chain. Click any swap link to execute on Jupiter aggregator.</p>
+<div class="swap-table-wrap">
+<table class="swap-table">
+<thead>
+<tr>
+<th data-i18n="th_pair">Swap Pair</th>
+<th data-i18n="th_token">Target Token</th>
+<th data-i18n="th_chain">Chain</th>
+<th data-i18n="th_dex">DEX Route</th>
+<th data-i18n="th_action">Action</th>
+</tr>
+</thead>
+<tbody id="swapBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- Token Info -->
+<div class="container">
+<div class="section">
+<h2 class="section-title"><span class="accent" data-i18n="token_title">Token Information & Links</span></h2>
+<p class="section-desc" data-i18n="token_desc">All tokens are SPL tokens on Solana. View live data on OrbMarkets.</p>
+<div class="token-grid" id="tokenGrid"></div>
+</div>
+</div>
+
+<!-- EACO Info -->
+<div class="container">
+<div class="section">
+<h2 class="section-title"><span class="accent" data-i18n="eaco_title">EACO Basic Information</span></h2>
+<div class="info-grid">
+<div class="info-card">
+<h3 data-i18n="info_basics">Token Basics</h3>
+<div class="info-row"><span class="info-key" data-i18n="info_name">Name</span><span class="info-val">EACO (Earth's Best Coin)</span></div>
+<div class="info-row"><span class="info-key" data-i18n="info_chain">Blockchain</span><span class="info-val">Solana (SPL)</span></div>
+<div class="info-row"><span class="info-key" data-i18n="info_supply">Total Supply</span><span class="info-val">1,350,000,000 EACO</span></div>
+<div class="info-row"><span class="info-key" data-i18n="info_type">Type</span><span class="info-val">AI + RWA + Web3</span></div>
+</div>
+<div class="info-card">
+<h3 data-i18n="info_onchain">On-Chain Data</h3>
+<div class="info-row"><span class="info-key" data-i18n="info_contract">Contract</span><span class="info-val">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span></div>
+<div class="info-row"><span class="info-key" data-i18n="info_pool">Liquidity Pool</span><span class="info-val">H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc</span></div>
+<div class="info-row"><span class="info-key" data-i18n="info_pool_type">Pool Type</span><span class="info-val">Meteora DAMM v2</span></div>
+<div class="info-row"><span class="info-key" data-i18n="info_orb">OrbMarkets</span><span class="info-val"><a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">View EACO</a></span></div>
+</div>
+<div class="info-card">
+<h3 data-i18n="info_narrative">Narrative & Keywords</h3>
+<div class="info-row"><span class="info-key">E</span><span class="info-val">Energy</span></div>
+<div class="info-row"><span class="info-key">A</span><span class="info-val">Attitude</span></div>
+<div class="info-row"><span class="info-key">C</span><span class="info-val">Cooperation</span></div>
+<div class="info-row"><span class="info-key">O</span><span class="info-val">Optimization</span></div>
+<div class="info-row"><span class="info-key" data-i18n="info_concept">Concept</span><span class="info-val" data-i18n="info_concept_val">SOL (Sun) & EACO (Earth) stellar-planetary synergy</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Charity -->
+<div class="container">
+<div class="charity-section">
+<h2 data-i18n="charity_title">EACO Charity 2025</h2>
+<p data-i18n="charity_desc">EACO Web3 Annual Mutual Charity - Building a self-healing civilization through blockchain.</p>
+<a class="charity-btn" href="https://ucoingroup.github.io/eacoweb3-2026/eaco-charity2025.html" target="_blank" rel="noopener">
+<span data-i18n="charity_btn">Visit Charity Page</span>
+&rsaquo;
+</a>
+</div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<div class="footer-links">
+<a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">EACO on OrbMarkets</a>
+<a href="https://ucoingroup.github.io/eacoweb3-2026/" target="_blank" rel="noopener">EACO Web3</a>
+<a href="https://ucoingroup.github.io/eacoweb3-2026/eaco-charity2025.html" target="_blank" rel="noopener">EACO Charity 2025</a>
+<a href="https://orbmarkets.io/token/7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5" target="_blank" rel="noopener">eCNH on OrbMarkets</a>
+</div>
+<p>&copy; 2025-2026 EACO Ecosystem. <span data-i18n="footer_rights">All rights reserved.</span></p>
+<p style="margin-top:6px;font-size:.78rem">EACO Contract: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH &middot; <span data-i18n="footer_disclaimer">Not financial advice. DYOR.</span></p>
+</div>
+
+<script>
+// ========== Data ==========
+var EACO_MINT="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH";
+var SOL_MINT="So11111111111111111111111111111111111111112";
+
+var DEX_LIST=[
+{rank:1,name:"Jupiter",url:"https://jup.ag/swap",desc_en:"The leading Solana DEX aggregator, routing ~95% of Solana swap volume. Best rates via multi-DEX routing.",desc_key:"dex_jupiter",tags:["Aggregator","Best Rate","95% Volume"]},
+{rank:2,name:"Meteora",url:"https://www.meteora.ag/",desc_en:"Dynamic Liquidity Market Maker (DLMM). EACO's primary liquidity venue with dynamic fees and anti-sniper protection.",desc_key:"dex_meteora",tags:["DLMM","EACO Pool","Dynamic Fees"]},
+{rank:3,name:"Raydium",url:"https://raydium.io/swap/",desc_en:"Solana's most established DEX with CLMM + CPMM + Perpetuals + Launchlab. Deep liquidity, 1000+ pairs.",desc_key:"dex_raydium",tags:["CLMM","CPMM","Launchlab"]},
+{rank:4,name:"Orca",url:"https://www.orca.so/",desc_en:"User-friendly CLMM DEX with Whirlpools. 2300+ pairs, 33.6% market share. Best for stablecoin LP.",desc_key:"dex_orca",tags:["Whirlpools","CLMM","2300+ Pairs"]},
+{rank:5,name:"PumpSwap",url:"https://pump.fun/",desc_en:"Pump.fun's native DEX, capturing ~42% meme coin swap volume on Solana. Fair launch platform.",desc_key:"dex_pump",tags:["Meme","Fair Launch","42% Share"]},
+{rank:6,name:"Phoenix",url:"https://phoenix.trade/",desc_en:"High-performance order book DEX on Solana. Sub-millisecond matching with institutional-grade infrastructure.",desc_key:"dex_phoenix",tags:["Order Book","Fast","Institutional"]},
+{rank:7,name:"Drift Protocol",url:"https://drift.trade/",desc_en:"Order book DEX with perpetuals up to 250x leverage. Spot + perps trading on Solana.",desc_key:"dex_drift",tags:["Perps","250x Leverage","Order Book"]},
+{rank:8,name:"Zeta Markets",url:"https://zetamarkets.xyz/",desc_en:"Perpetuals-focused DEX on Solana with order book model. Deep options and derivatives market.",desc_key:"dex_zeta",tags:["Perps","Derivatives","Order Book"]},
+{rank:9,name:"Manifest",url:"https://manifest.so/",desc_en:"Order book + AMM hybrid DEX. Ultra-low slippage and MEV protection for large trades.",desc_key:"dex_manifest",tags:["Hybrid","Low Slippage","Anti-MEV"]},
+{rank:10,name:"Humidifi",url:"https://humidifi.com/",desc_en:"Institutional-grade dark pool DEX with proprietary AMM. Near-zero slippage for large orders.",desc_key:"dex_humidifi",tags:["Dark Pool","Prop AMM","Institutional"]}
+];
+
+var SWAP_PAIRS=[
+{pair:"EACO / SOL",token:"SOL",mint:SOL_MINT,orb:"https://orbmarkets.io/token/"+SOL_MINT},
+{pair:"EACO / USDT",token:"USDT",mint:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",orb:"https://orbmarkets.io/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"},
+{pair:"EACO / USDC",token:"USDC",mint:"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",orb:"https://orbmarkets.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"},
+{pair:"EACO / wBNB",token:"wBNB",mint:"9gP2kCy3wA1ctvYWQk75guqXuHfrEomqydHLtcTCqiLa",orb:"https://orbmarkets.io/token/9gP2kCy3wA1ctvYWQk75guqXuHfrEomqydHLtcTCqiLa"},
+{pair:"EACO / TRX",token:"TRX",mint:"GbbesPbaYh5uiAZSYNXTc7w9jty1rpg3P9L4JeN4LkKc",orb:"https://orbmarkets.io/token/GbbesPbaYh5uiAZSYNXTc7w9jty1rpg3P9L4JeN4LkKc"},
+{pair:"EACO / wETH",token:"wETH",mint:"7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",orb:"https://orbmarkets.io/token/7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs"},
+{pair:"EACO / wBTC",token:"wBTC",mint:"3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",orb:"https://orbmarkets.io/token/3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"},
+{pair:"EACO / eCNH",token:"eCNH",mint:"7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5",orb:"https://orbmarkets.io/token/7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5"}
+];
+
+var TOKENS=[
+{sym:"EACO",name:"Earth's Best Coin",mint:EACO_MINT,orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+{sym:"eCNH",name:"eCNH Stablecoin",mint:"7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5",orb:"https://orbmarkets.io/token/7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5"},
+{sym:"TRX",name:"Tron (Wrapped)",mint:"GbbesPbaYh5uiAZSYNXTc7w9jty1rpg3P9L4JeN4LkKc",orb:"https://orbmarkets.io/token/GbbesPbaYh5uiAZSYNXTc7w9jty1rpg3P9L4JeN4LkKc"},
+{sym:"wBTC",name:"Wrapped Bitcoin",mint:"3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",orb:"https://orbmarkets.io/token/3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"},
+{sym:"wBNB",name:"Wrapped BNB",mint:"9gP2kCy3wA1ctvYWQk75guqXuHfrEomqydHLtcTCqiLa",orb:"https://orbmarkets.io/token/9gP2kCy3wA1ctvYWQk75guqXuHfrEomqydHLtcTCqiLa"},
+{sym:"USDC",name:"USD Coin",mint:"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",orb:"https://orbmarkets.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"},
+{sym:"USDT",name:"Tether USD",mint:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",orb:"https://orbmarkets.io/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"},
+{sym:"WETH",name:"Wrapped Ethereum",mint:"7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",orb:"https://orbmarkets.io/token/7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs"}
+];
+
+// ========== Translations ==========
+var I18N={
+en:{
+live_on_sol:"All swaps on Solana Chain",hero_title:"eacoSWAP Navigation",hero_desc:"Integrating the world's top 10 Solana DEX platforms. Swap EACO for SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - all on-chain, all on Solana.",
+contract:"EACO Contract Address",copy:"Copy",copied:"Copied!",
+dex_title:"Top 10 Solana DEX Platforms",dex_desc:"Navigate to the world's leading decentralized exchanges on Solana. All support EACO (Earth's Best Coin) and SPL token trading.",
+visit_dex:"Visit DEX",swap_title:"EACO Swap Pairs (All on Solana)",swap_desc:"EACO can be swapped for all major tokens directly on Solana chain. Click any swap link to execute on Jupiter aggregator.",
+th_pair:"Swap Pair",th_token:"Target Token",th_chain:"Chain",th_dex:"DEX Route",th_action:"Action",
+swap_now:"Swap Now",token_title:"Token Information & Links",token_desc:"All tokens are SPL tokens on Solana. View live data on OrbMarkets.",
+view_orb:"OrbMarkets",view_jup:"Jupiter",eaco_title:"EACO Basic Information",
+info_basics:"Token Basics",info_name:"Name",info_chain:"Blockchain",info_supply:"Total Supply",info_type:"Type",
+info_onchain:"On-Chain Data",info_contract:"Contract",info_pool:"Liquidity Pool",info_pool_type:"Pool Type",info_orb:"OrbMarkets",
+info_narrative:"Narrative & Keywords",info_concept:"Concept",info_concept_val:"SOL (Sun) & EACO (Earth) stellar-planetary synergy",
+charity_title:"EACO Charity 2025",charity_desc:"EACO Web3 Annual Mutual Charity - Building a self-healing civilization through blockchain.",charity_btn:"Visit Charity Page",
+footer_rights:"All rights reserved.",footer_disclaimer:"Not financial advice. DYOR.",
+dex_jupiter:"The leading Solana DEX aggregator, routing ~95% of Solana swap volume. Best rates via multi-DEX routing.",
+dex_meteora:"Dynamic Liquidity Market Maker (DLMM). EACO's primary liquidity venue with dynamic fees and anti-sniper protection.",
+dex_raydium:"Solana's most established DEX with CLMM + CPMM + Perpetuals + Launchlab. Deep liquidity, 1000+ pairs.",
+dex_orca:"User-friendly CLMM DEX with Whirlpools. 2300+ pairs, 33.6% market share. Best for stablecoin LP.",
+dex_pump:"Pump.fun's native DEX, capturing ~42% meme coin swap volume on Solana. Fair launch platform.",
+dex_phoenix:"High-performance order book DEX on Solana. Sub-millisecond matching with institutional-grade infrastructure.",
+dex_drift:"Order book DEX with perpetuals up to 250x leverage. Spot + perps trading on Solana.",
+dex_zeta:"Perpetuals-focused DEX on Solana with order book model. Deep options and derivatives market.",
+dex_manifest:"Order book + AMM hybrid DEX. Ultra-low slippage and MEV protection for large trades.",
+dex_humidifi:"Institutional-grade dark pool DEX with proprietary AMM. Near-zero slippage for large orders.",
+chain_sol:"Solana",route_jup:"Jupiter + Meteora + Raydium"
+},
+zh:{
+live_on_sol:"全部在 Solana 链内完成",hero_title:"eacoSWAP 导航",hero_desc:"集成全球前10大 Solana DEX 平台。EACO 兑换 SOL、USDT、USDC、wBNB、TRX、wETH、wBTC、eCNH — 全部链上完成，全部在 Solana。",
+contract:"EACO 合约地址",copy:"复制",copied:"已复制!",
+dex_title:"全球前10大 Solana DEX 平台",dex_desc:"导航至全球领先的 Solana 去中心化交易所。均支持 EACO（地球最佳代币）及 SPL 代币交易。",
+visit_dex:"访问 DEX",swap_title:"EACO 兑换对（全部在 Solana 链内）",swap_desc:"EACO 可直接在 Solana 链上兑换所有主流代币。点击兑换链接即可在 Jupiter 聚合器执行。",
+th_pair:"兑换对",th_token:"目标代币",th_chain:"链",th_dex:"DEX 路由",th_action:"操作",
+swap_now:"立即兑换",token_title:"代币信息与链接",token_desc:"所有代币均为 Solana 链上的 SPL 代币。在 OrbMarkets 查看实时数据。",
+view_orb:"OrbMarkets",view_jup:"Jupiter",eaco_title:"EACO 基本信息",
+info_basics:"代币基础",info_name:"名称",info_chain:"区块链",info_supply:"总量",info_type:"类型",
+info_onchain:"链上数据",info_contract:"合约",info_pool:"流动性池",info_pool_type:"池类型",info_orb:"OrbMarkets",
+info_narrative:"叙事与关键词",info_concept:"概念",info_concept_val:"SOL（太阳）与 EACO（地球）恒星-行星协同叙事",
+charity_title:"EACO 公益 2025",charity_desc:"EACO Web3 年度互助公益 — 通过区块链建设自愈文明。",charity_btn:"访问公益页面",
+footer_rights:"保留所有权利。",footer_disclaimer:"非投资建议。请自行研究 (DYOR)。",
+dex_jupiter:"Solana 领先的 DEX 聚合器，路由约 95% 的 Solana 兑换量。通过多 DEX 路由获得最优价格。",
+dex_meteora:"动态流动性做市商 (DLMM)。EACO 主要流动性场所，支持动态费率和反狙击保护。",
+dex_raydium:"Solana 最成熟的 DEX，集成 CLMM + CPMM + 永续合约 + Launchlab。深度流动性，1000+ 交易对。",
+dex_orca:"用户友好的 CLMM DEX，采用 Whirlpools 漩涡池。2300+ 交易对，33.6% 市场份额。适合稳定币 LP。",
+dex_pump:"Pump.fun 原生 DEX，占据约 42% Solana Meme 币兑换量。公平发射平台。",
+dex_phoenix:"Solana 上高性能订单簿 DEX。亚毫秒撮合，机构级基础设施。",
+dex_drift:"订单簿 DEX，支持最高 250 倍杠杆永续合约。Solana 上的现货+永续交易。",
+dex_zeta:"专注永续合约的 Solana DEX，采用订单簿模型。深度期权与衍生品市场。",
+dex_manifest:"订单簿 + AMM 混合 DEX。超大额交易超低滑点和 MEV 防护。",
+dex_humidifi:"机构级暗池 DEX，采用专有 AMM。大额订单近零滑点。",
+chain_sol:"Solana",route_jup:"Jupiter + Meteora + Raydium"
+},
+es:{
+live_on_sol:"Todos los swaps en la cadena Solana",hero_title:"Navegacion eacoSWAP",hero_desc:"Integrando las 10 principales DEX de Solana del mundo. Intercambia EACO por SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - todo en cadena, todo en Solana.",
+contract:"Direccion del contrato EACO",copy:"Copiar",copied:"Copiado!",
+dex_title:"Top 10 Plataformas DEX de Solana",dex_desc:"Navega a los principales intercambios descentralizados de Solana. Todos soportan EACO y tokens SPL.",
+visit_dex:"Visitar DEX",swap_title:"Pares de intercambio EACO (todo en Solana)",swap_desc:"EACO puede intercambiarse por todos los tokens principales directamente en la cadena Solana.",
+th_pair:"Par",th_token:"Token objetivo",th_chain:"Cadena",th_dex:"Ruta DEX",th_action:"Accion",
+swap_now:"Intercambiar",token_title:"Informacion y enlaces de tokens",token_desc:"Todos los tokens son SPL en Solana. Ver datos en OrbMarkets.",
+view_orb:"OrbMarkets",view_jup:"Jupiter",eaco_title:"Informacion basica de EACO",
+info_basics:"Conceptos basicos",info_name:"Nombre",info_chain:"Blockchain",info_supply:"Suministro total",info_type:"Tipo",
+info_onchain:"Datos on-chain",info_contract:"Contrato",info_pool:"Pool de liquidez",info_pool_type:"Tipo de pool",info_orb:"OrbMarkets",
+info_narrative:"Narrativa y palabras clave",info_concept:"Concepto",info_concept_val:"SOL (Sol) y EACO (Tierra) sinergia estelar-planetaria",
+charity_title:"Caridad EACO 2025",charity_desc:"Caridad mutua anual EACO Web3 - Construyendo una civilizacion auto-sanable.",charity_btn:"Visitar pagina de caridad",
+footer_rights:"Todos los derechos reservados.",footer_disclaimer:"No es consejo financiero. DYOR.",
+dex_jupiter:"El principal agregador DEX de Solana, enrutando ~95% del volumen. Mejores tasas via multi-DEX.",
+dex_meteora:"DLMM. Principal venue de liquidez de EACO con tarifas dinamicas y proteccion anti-sniper.",
+dex_raydium:"DEX mas establecido de Solana con CLMM + CPMM + Perpetuales + Launchlab.",
+dex_orca:"DEX CLMM facil de usar con Whirlpools. 2300+ pares, 33.6% cuota de mercado.",
+dex_pump:"DEX nativo de Pump.fun, capturando ~42% del volumen meme en Solana.",
+dex_phoenix:"DEX de order book de alto rendimiento en Solana. Emparejamiento sub-milisegundo.",
+dex_drift:"DEX de order book con perpetuales hasta 250x. Spot + perps en Solana.",
+dex_zeta:"DEX enfocado en perpetuales en Solana con modelo de order book.",
+dex_manifest:"DEX hibrido de order book + AMM. Slippage ultra bajo y proteccion MEV.",
+dex_humidifi:"DEX dark pool institucional con AMM propietario. Slippage casi cero.",
+chain_sol:"Solana",route_jup:"Jupiter + Meteora + Raydium"
+},
+fr:{
+live_on_sol:"Tous les swaps sur la chaine Solana",hero_title:"Navigation eacoSWAP",hero_desc:"Integrant les 10 principales DEX de Solana. Echangez EACO contre SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - tout on-chain.",
+contract:"Adresse du contrat EACO",copy:"Copier",copied:"Copie!",
+dex_title:"Top 10 Plateformes DEX Solana",dex_desc:"Accedez aux principaux echanges decentralises de Solana. Tous supportent EACO et les tokens SPL.",
+visit_dex:"Visiter DEX",swap_title:"Paires de swap EACO (tout sur Solana)",swap_desc:"EACO peut etre echange contre tous les tokens majeurs directement sur la chaine Solana.",
+th_pair:"Paire",th_token:"Token cible",th_chain:"Chaine",th_dex:"Route DEX",th_action:"Action",
+swap_now:"Swapper",token_title:"Informations et liens des tokens",token_desc:"Tous les tokens sont SPL sur Solana. Voir les donnees sur OrbMarkets.",
+view_orb:"OrbMarkets",view_jup:"Jupiter",eaco_title:"Informations de base EACO",
+info_basics:"Bases du token",info_name:"Nom",info_chain:"Blockchain",info_supply:"Offre totale",info_type:"Type",
+info_onchain:"Donnees on-chain",info_contract:"Contrat",info_pool:"Pool de liquidite",info_pool_type:"Type de pool",info_orb:"OrbMarkets",
+info_narrative:"Narrative et mots-cles",info_concept:"Concept",info_concept_val:"SOL (Soleil) et EACO (Terre) synergie stellaire-planetaire",
+charity_title:"Charite EACO 2025",charity_desc:"Charite mutuelle annuelle EACO Web3 - Construire une civilite auto-guerissante.",charity_btn:"Visiter la page de charite",
+footer_rights:"Tous droits reserves.",footer_disclaimer:"Pas un conseil financier. DYOR.",
+dex_jupiter:"Principal agregateur DEX Solana, routant ~95% du volume. Meilleurs taux via multi-DEX.",
+dex_meteora:"DLMM. Principal lieu de liquidite d'EACO avec frais dynamiques et protection anti-sniper.",
+dex_raydium:"DEX le plus etabli de Solana avec CLMM + CPMM + Perpetuels + Launchlab.",
+dex_orca:"DEX CLMM convivial avec Whirlpools. 2300+ paires, 33.6% part de marche.",
+dex_pump:"DEX natif de Pump.fun, capturant ~42% du volume meme sur Solana.",
+dex_phoenix:"DEX carnet d'ordres haute performance sur Solana. Correspondance sub-milliseconde.",
+dex_drift:"DEX carnet d'ordres avec perpetuels jusqu'a 250x. Spot + perps sur Solana.",
+dex_zeta:"DEX axe sur les perpetuels sur Solana avec modele carnet d'ordres.",
+dex_manifest:"DEX hybride carnet d'ordres + AMM. Slippage ultra faible et protection MEV.",
+dex_humidifi:"DEX dark pool institutionnel avec AMM proprietaire. Slippage presque nul.",
+chain_sol:"Solana",route_jup:"Jupiter + Meteora + Raydium"
+},
+ar:{
+live_on_sol:"جميع المبادلات على سلسلة سولانا",hero_title:"ملاحة eacoSWAP",hero_desc:"دمج أفضل 10 منصات DEX على سولانا. قم بتبديل EACO مقابل SOL و USDT و USDC و wBNB و TRX و wETH و wBTC و eCNH - جميعها على السلسلة.",
+contract:"عنوان عقد EACO",copy:"نسخ",copied:"تم النسخ!",
+dex_title:"أفضل 10 منصات DEX على سولانا",dex_desc:"انتقل إلى.leading منصات التداول اللامركزية على سولانا. جميعها تدعم EACO ورموز SPL.",
+visit_dex:"زيارة DEX",swap_title:"أزواج مبادلة EACO (الكل على سولانا)",swap_desc:"يمكن تبديل EACO مقابل جميع الرموز الرئيسية مباشرة على سلسلة سولانا.",
+th_pair:"الزوج",th_token:"الرمز المستهدف",th_chain:"السلسلة",th_dex:"مسار DEX",th_action:"إجراء",
+swap_now:"مبادلة الآن",token_title:"معلومات وروابط الرموز",token_desc:"جميع الرموز هي SPL على سولانا. عرض البيانات على OrbMarkets.",
+view_orb:"OrbMarkets",view_jup:"Jupiter",eaco_title:"معلومات أساسية عن EACO",
+info_basics:"أساسيات الرمز",info_name:"الاسم",info_chain:"البلوكتشين",info_supply:"العرض الإجمالي",info_type:"النوع",
+info_onchain:"بيانات على السلسلة",info_contract:"العقد",info_pool:"سيولة",info_pool_type:"نوع المجمع",info_orb:"OrbMarkets",
+info_narrative:"السرد والكلمات الرئيسية",info_concept:"المفهوم",info_concept_val:"SOL (الشمس) و EACO (الأرض) تآزر نجمي-كوكبي",
+charity_title:"جمعية EACO الخيرية 2025",charity_desc:"جمعية EACO Web3 السنوية للعمل الخيري المتبادل - بناء حضارة ذاتية الشفاء.",charity_btn:"زيارة صفحة الجمعية الخيرية",
+footer_rights:"جميع الحقوق محفوظة.",footer_disclaimer:"ليست نصيحة مالية. ابحث بنفسك.",
+dex_jupiter:"مجمع DEX الرائد في سولانا، يوجه حوالي 95٪ من حجم المبادلات. أفضل الأسعار عبر توجيه متعدد DEX.",
+dex_meteora:"صانع سوق السيولة الديناميكي (DLMM). المكان الرئيسي لسيولة EACO مع رسوم ديناميكية وحماية مضادة للقناصين.",
+dex_raydium:"أقدم DEX في سولانا مع CLMM + CPMM + عقود مستقبلية + Launchlab. سيولة عميقة، أكثر من 1000 زوج.",
+dex_orca:"DEX سهل الاستخدام مع Whirlpools. أكثر من 2300 زوج، 33.6٪ حصة سوقية. الأفضل لـ stablecoin LP.",
+dex_pump:"DEX الأصلي لـ Pump.fun، يستحوذ على حوالي 42٪ من حجم مبادلات meme في سولانا.",
+dex_phoenix:"DEX عالي الأداء بكتاب أوامر على سولانا. مطابقة دون المللي ثانية.",
+dex_drift:"DEX بكتاب أوامر مع عقود مستقبلية حتى 250x. تداول فوري + عقود على سولانا.",
+dex_zeta:"DEX يركز على العقود المستقبلية على سولانا بنموذج كتاب الأوامر.",
+dex_manifest:"DEX هجين بكتاب أوامر + AMM. انزلاق منخفض للغاية وحماية MEV.",
+dex_humidifi:"DEX بركة مظلمة مؤسسي مع AMM خاص. انزلاق شبه معدوم.",
+chain_sol:"سولانا",route_jup:"Jupiter + Meteora + Raydium"
+},
+ru:{
+live_on_sol:"Все обмены в сети Solana",hero_title:"Навигация eacoSWAP",hero_desc:"Интеграция топ-10 DEX Solana в мире. Обменивайте EACO на SOL, USDT, USDC, wBNB, TRX, wETH, wBTC, eCNH - все on-chain.",
+contract:"Адрес контракта EACO",copy:"Копировать",copied:"Скопировано!",
+dex_title:"Топ-10 DEX платформ Solana",dex_desc:"Перейдите к ведущим децентрализованным биржам Solana. Все поддерживают EACO и SPL токены.",
+visit_dex:"Посетить DEX",swap_title:"Пары обмена EACO (все на Solana)",swap_desc:"EACO можно обменять на все основные токены прямо в сети Solana.",
+th_pair:"Пара",th_token:"Целевой токен",th_chain:"Сеть",th_dex:"Маршрут DEX",th_action:"Действие",
+swap_now:"Обменять",token_title:"Информация и ссылки токенов",token_desc:"Все токены - SPL на Solana. Данные на OrbMarkets.",
+view_orb:"OrbMarkets",view_jup:"Jupiter",eaco_title:"Базовая информация EACO",
+info_basics:"Основы токена",info_name:"Название",info_chain:"Блокчейн",info_supply:"Общее предложение",info_type:"Тип",
+info_onchain:"On-chain данные",info_contract:"Контракт",info_pool:"Пул ликвидности",info_pool_type:"Тип пула",info_orb:"OrbMarkets",
+info_narrative:"Нарратив и ключевые слова",info_concept:"Концепция",info_concept_val:"SOL (Солнце) и EACO (Земля) звездно-планетарная синергия",
+charity_title:"Благотворительность EACO 2025",charity_desc:"Ежегодная взаимная благотворительность EACO Web3 - Создание самовосстанавливающейся цивилизации.",charity_btn:"Посетить страницу благотворительности",
+footer_rights:"Все права защищены.",footer_disclaimer:"Не финансовый совет. DYOR.",
+dex_jupiter:"Ведущий агрегатор DEX Solana, маршрутизирует ~95% объема. Лучшие курсы через мульти-DEX.",
+dex_meteora:"DLMM. Основное место ликвидности EACO с динамическими комиссиями и защитой от снайперов.",
+dex_raydium:"Самая старая DEX Solana с CLMM + CPMM + Перпетуалы + Launchlab. Глубокая ликвидность.",
+dex_orca:"Удобная CLMM DEX с Whirlpools. 2300+ пар, 33.6% доля рынка.",
+dex_pump:"Родная DEX Pump.fun, захватившая ~42% объема meme на Solana.",
+dex_phoenix:"Высокопроизводительная DEX на книге ордеров на Solana. Сопоставление за доли миллисекунды.",
+dex_drift:"DEX на книге ордеров с перпетуалами до 250x. Спот + перпы на Solana.",
+dex_zeta:"DEX с фокусом на перпетуалы на Solana с моделью книги ордеров.",
+dex_manifest:"Гибридная DEX книга ордеров + AMM. Сверхнизкое проскальзывание и защита от MEV.",
+dex_humidifi:"Институциональная DEX dark pool с проприетарным AMM. Почти нулевое проскальзывание.",
+chain_sol:"Solana",route_jup:"Jupiter + Meteora + Raydium"
+}
+};
+
+// ========== Render ==========
+function renderDEX(lang){
+var t=I18N[lang]||I18N.en;
+var h="";
+DEX_LIST.forEach(function(d){
+h+='<div class="dex-card" onclick="window.open(\''+d.url+'\',\'_blank\')">';
+h+='<div style="display:flex;justify-content:space-between;align-items:flex-start">';
+h+='<div><div class="dex-rank">#'+d.rank+'</div>';
+h+='<div class="dex-name">'+d.name+'</div></div></div>';
+h+='<div class="dex-desc">'+(t[d.desc_key]||d.desc_en)+'</div>';
+h+='<div class="dex-tags">';
+d.tags.forEach(function(tg){h+='<span class="dex-tag">'+tg+'</span>'});
+h+='</div><a class="dex-link" href="'+d.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+(t.visit_dex||"Visit DEX")+' &rsaquo;</a>';
+h+='</div>';
+});
+document.getElementById("dexGrid").innerHTML=h;
+}
+
+function renderSwap(lang){
+var t=I18N[lang]||I18N.en;
+var h="";
+SWAP_PAIRS.forEach(function(p){
+var jupUrl="https://jup.ag/swap/"+EACO_MINT+"/"+p.mint;
+h+='<tr>';
+h+='<td class="pair">'+p.pair+'</td>';
+h+='<td>'+p.token+'</td>';
+h+='<td><span class="chain-badge">'+t.chain_sol+'</span></td>';
+h+='<td>'+t.route_jup+'</td>';
+h+='<td><a class="swap-link" href="'+jupUrl+'" target="_blank" rel="noopener">'+t.swap_now+' &rsaquo;</a></td>';
+h+='</tr>';
+});
+document.getElementById("swapBody").innerHTML=h;
+}
+
+function renderTokens(lang){
+var t=I18N[lang]||I18N.en;
+var h="";
+TOKENS.forEach(function(tk){
+h+='<div class="token-card">';
+h+='<div class="tc-head"><span class="tc-symbol">'+tk.sym+'</span><span class="tc-chain">'+t.chain_sol+'</span></div>';
+h+='<div style="font-size:.8rem;color:var(--text2);margin-bottom:8px">'+tk.name+'</div>';
+h+='<div class="tc-addr">'+tk.mint+'</div>';
+h+='<div class="tc-links">';
+h+='<a class="tc-link" href="'+tk.orb+'" target="_blank" rel="noopener">'+t.view_orb+'</a>';
+if(tk.sym!=="EACO"){
+var jupUrl="https://jup.ag/swap/"+EACO_MINT+"/"+tk.mint;
+h+='<a class="tc-link" href="'+jupUrl+'" target="_blank" rel="noopener">'+t.view_jup+'</a>';
+}
+h+='</div></div>';
+});
+document.getElementById("tokenGrid").innerHTML=h;
+}
+
+function applyI18n(lang){
+var t=I18N[lang]||I18N.en;
+document.querySelectorAll("[data-i18n]").forEach(function(el){
+var k=el.getAttribute("data-i18n");
+if(t[k]){el.textContent=t[k]}
+});
+document.documentElement.lang=lang;
+document.documentElement.dir=(lang==="ar")?"rtl":"ltr";
+}
+
+function switchLang(lang){
+applyI18n(lang);
+renderDEX(lang);
+renderSwap(lang);
+renderTokens(lang);
+try{localStorage.setItem("eaco_lang",lang)}catch(e){}
+}
+
+function switchTheme(theme,btn){
+document.body.setAttribute("data-theme",theme);
+document.querySelectorAll(".theme-btn").forEach(function(b){b.classList.remove("active")});
+if(btn){btn.classList.add("active")}
+try{localStorage.setItem("eaco_theme",theme)}catch(e){}
+}
+
+function copyContract(){
+var addr=document.getElementById("eacoAddr").textContent;
+var ta=document.createElement("textarea");
+ta.value=addr;
+document.body.appendChild(ta);
+ta.select();
+try{document.execCommand("copy")}catch(e){}
+document.body.removeChild(ta);
+var btn=event.target;
+var orig=btn.textContent;
+btn.textContent=I18N[document.getElementById("langSelect").value||"en"].copied||"Copied!";
+setTimeout(function(){btn.textContent=orig},2000);
+}
+
+// Auto-detect language
+function detectLang(){
+var saved="";
+try{saved=localStorage.getItem("eaco_lang")}catch(e){}
+if(saved&&I18N[saved]){return saved}
+var nav=(navigator.language||navigator.userLanguage||"en").slice(0,2);
+if(I18N[nav]){return nav}
+return"en";
+}
+
+function detectTheme(){
+var saved="";
+try{saved=localStorage.getItem("eaco_theme")}catch(e){}
+if(saved){return saved}
+return"blue";
+}
+
+// Init
+(function(){
+var lang=detectLang();
+var theme=detectTheme();
+document.getElementById("langSelect").value=lang;
+switchTheme(theme,null);
+var themeBtns=document.querySelectorAll(".theme-btn");
+themeBtns.forEach(function(b){if(b.getAttribute("data-theme")===theme){b.classList.add("active")}else{b.classList.remove("active")}});
+switchLang(lang);
+})();
+</script>
+</body>
+</html>
