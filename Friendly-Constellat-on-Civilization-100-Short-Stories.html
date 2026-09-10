@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>友善星座文明 · 100 个小故事｜华语网页 App</title>
+<style>
+:root {
+  --bg: #04050d;
+  --bg2: #0a0c1d;
+  --ink: #e8ecf8;
+  --ink-dim: #9aa3c0;
+  --ink-faint: #6b738f;
+  --line: rgba(151, 163, 214, .16);
+  --cyan: #7fd4e8;
+  --vio: #b9a7ff;
+  --rose: #ffb3c8;
+  --gold: #ffd98a;
+  --card: rgba(255, 255, 255, .035);
+  --card-hover: rgba(255, 255, 255, .07);
+  --radius: 18px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ===== 星空背景 ===== */
+.bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.nebula {
+  position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55;
+}
+.nebula.n1 { width: 60vw; height: 60vw; left: -18vw; top: -20vw;
+  background: radial-gradient(circle, rgba(122, 96, 255, .34), transparent 62%); }
+.nebula.n2 { width: 55vw; height: 55vw; right: -16vw; top: 22vh;
+  background: radial-gradient(circle, rgba(84, 190, 224, .28), transparent 62%); }
+.nebula.n3 { width: 48vw; height: 48vw; left: 24vw; bottom: -22vw;
+  background: radial-gradient(circle, rgba(255, 143, 178, .16), transparent 62%); }
+.star {
+  position: absolute; border-radius: 50%; background: #fff;
+  animation: twinkle 4s ease-in-out infinite;
+}
+.star.bright { box-shadow: 0 0 8px 2px rgba(255,255,255,.55); }
+@keyframes twinkle {
+  0%, 100% { opacity: .15; transform: scale(.85); }
+  50% { opacity: .95; transform: scale(1.15); }
+}
+
+/* 星座连线 */
+.constellations {
+  position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+}
+.constellations path {
+  stroke: rgba(158, 176, 255, .22); stroke-width: .14; fill: none;
+  stroke-dasharray: 1.6 1.2; animation: dash 26s linear infinite;
+}
+@keyframes dash { to { stroke-dashoffset: -140; } }
+
+/* ===== 布局 ===== */
+.wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 44px 20px 80px; }
+
+/* 头部 */
+.hero { text-align: center; padding: 8px 0 34px; }
+.hero .kicker {
+  display: inline-block; font-size: 12px; letter-spacing: 4px; color: var(--cyan);
+  border: 1px solid rgba(127, 212, 232, .35); border-radius: 999px;
+  padding: 6px 16px; margin-bottom: 20px; background: rgba(127, 212, 232, .06);
+}
+.hero h1 {
+  font-size: clamp(30px, 5.4vw, 52px); font-weight: 800; letter-spacing: 2px;
+  background: linear-gradient(115deg, #ffd98a 0%, #ffb3c8 30%, #b9a7ff 62%, #7fd4e8 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  line-height: 1.3;
+}
+.hero .sub { margin-top: 14px; color: var(--ink-dim); font-size: 15px; max-width: 660px; margin-left: auto; margin-right: auto; }
+.hero .meta { margin-top: 18px; color: var(--ink-faint); font-size: 13px; letter-spacing: 1px; }
+.meta b { color: var(--gold); font-weight: 700; }
+
+/* 工具栏 */
+.toolbar {
+  position: sticky; top: 0; z-index: 5; margin-bottom: 26px;
+  background: linear-gradient(180deg, rgba(4,5,13,.92), rgba(4,5,13,.72) 70%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  padding: 14px 2px 10px;
+}
+.tool-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.search { flex: 1; min-width: 200px; position: relative; }
+.search input {
+  width: 100%; background: rgba(255,255,255,.05); border: 1px solid var(--line);
+  border-radius: 999px; color: var(--ink); padding: 10px 16px 10px 38px; font-size: 14px;
+  outline: none; transition: border-color .25s, box-shadow .25s;
+}
+.search input:focus { border-color: rgba(127,212,232,.6); box-shadow: 0 0 0 3px rgba(127,212,232,.12); }
+.search::before {
+  content: ""; position: absolute; left: 15px; top: 50%; width: 12px; height: 12px;
+  border: 2px solid var(--ink-faint); border-radius: 50%; transform: translateY(-68%);
+}
+.search::after {
+  content: ""; position: absolute; left: 25px; top: 60%; width: 6px; height: 2px;
+  background: var(--ink-faint); border-radius: 2px; transform: rotate(45deg);
+}
+.btn {
+  border: 1px solid var(--line); background: rgba(255,255,255,.05); color: var(--ink);
+  border-radius: 999px; padding: 10px 18px; font-size: 14px; cursor: pointer;
+  transition: transform .2s, border-color .25s, background .25s, box-shadow .25s; white-space: nowrap;
+}
+.btn:hover { border-color: rgba(185,167,255,.6); background: rgba(185,167,255,.1); transform: translateY(-1px); }
+.btn.primary {
+  border-color: transparent;
+  background: linear-gradient(115deg, #7fd4e8, #b9a7ff);
+  color: #0a0c1d; font-weight: 700;
+  box-shadow: 0 4px 22px rgba(127,212,232,.25);
+}
+.btn.primary:hover { box-shadow: 0 6px 28px rgba(185,167,255,.4); }
+
+/* 分类 chips */
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.chip {
+  border: 1px solid var(--line); background: transparent; color: var(--ink-dim);
+  border-radius: 999px; padding: 7px 15px; font-size: 13px; cursor: pointer;
+  transition: all .22s; letter-spacing: .5px;
+}
+.chip small { opacity: .7; margin-left: 4px; }
+.chip:hover { color: var(--ink); border-color: rgba(185,167,255,.5); }
+.chip.on {
+  color: #fff; border-color: transparent;
+  background: linear-gradient(115deg, rgba(127,212,232,.85), rgba(185,167,255,.85));
+  box-shadow: 0 3px 14px rgba(127,212,232,.28);
+}
+
+.count-line { margin: 4px 2px 14px; color: var(--ink-faint); font-size: 13px; letter-spacing: 1px; }
+
+/* 卡片网格 */
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
+}
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px 20px 16px; cursor: pointer; position: relative; overflow: hidden;
+  transition: transform .25s, border-color .3s, background .3s, box-shadow .3s;
+  animation: rise .5s ease both;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.card::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 2px; opacity: 0;
+  background: linear-gradient(90deg, transparent, var(--accent, #7fd4e8), transparent);
+  transition: opacity .3s;
+}
+.card:hover { transform: translateY(-4px); border-color: rgba(185,167,255,.4); background: var(--card-hover); box-shadow: 0 14px 34px rgba(0,0,0,.45); }
+.card:hover::before { opacity: 1; }
+.card .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.region-tag {
+  font-size: 11px; letter-spacing: 1px; color: var(--cyan);
+  border: 1px solid rgba(127,212,232,.3); padding: 3px 10px; border-radius: 999px;
+  background: rgba(127,212,232,.07); white-space: nowrap;
+}
+.friend { color: var(--gold); font-size: 12px; letter-spacing: 1px; white-space: nowrap; }
+.card h3 { font-size: 17px; line-height: 1.5; margin: 12px 0 8px; font-weight: 700; }
+.card .loc { font-size: 13px; color: var(--ink-dim); }
+.card .race { font-size: 12px; color: var(--ink-faint); margin-top: 4px; }
+.card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.tag {
+  font-size: 11px; color: var(--ink-faint); border: 1px solid rgba(151,163,214,.22);
+  padding: 2px 9px; border-radius: 999px;
+}
+.card .go { margin-top: 12px; font-size: 12px; color: var(--vio); opacity: 0; transition: opacity .25s; letter-spacing: 1px; }
+.card:hover .go { opacity: 1; }
+
+.empty { grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--ink-faint); font-size: 15px; }
+.empty .big { font-size: 40px; margin-bottom: 12px; opacity: .5; }
+
+/* 阅读层 */
+.overlay {
+  position: fixed; inset: 0; z-index: 50; display: none;
+  background: rgba(3, 4, 10, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.overlay.open { display: block; }
+.sheet {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(720px, 92vw); max-height: 84vh; overflow-y: auto;
+  background: linear-gradient(180deg, #10132a, #0a0c1d);
+  border: 1px solid rgba(151,163,214,.25); border-radius: 22px;
+  padding: 34px 36px 30px; box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(127,212,232,.08);
+  animation: pop .3s ease both;
+}
+@keyframes pop { from { opacity: 0; transform: translate(-50%, -46%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+.sheet .s-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.sheet .s-num { font-size: 12px; color: var(--ink-faint); letter-spacing: 2px; }
+.close {
+  border: 1px solid var(--line); background: rgba(255,255,255,.05); color: var(--ink-dim);
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 17px; line-height: 1;
+  transition: all .2s; flex: none;
+}
+.close:hover { color: #fff; border-color: rgba(255,179,200,.6); background: rgba(255,179,200,.1); }
+.sheet h2 { font-size: 25px; line-height: 1.45; margin: 14px 0 10px;
+  background: linear-gradient(115deg, #e8ecf8, #b9a7ff);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sheet .s-loc { font-size: 13px; color: var(--ink-dim); margin-bottom: 16px; }
+.sheet .s-friend { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 18px; }
+.sheet .story {
+  font-size: 16.5px; color: var(--ink); letter-spacing: .3px; white-space: pre-line;
+  padding: 20px 24px; border-left: 3px solid rgba(185,167,255,.5);
+  background: rgba(255,255,255,.028); border-radius: 0 14px 14px 0;
+}
+.sheet .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.sheet .s-nav { display: flex; gap: 10px; margin-top: 26px; }
+.sheet .s-nav .spacer { flex: 1; }
+
+/* 页脚 */
+footer { text-align: center; color: var(--ink-faint); font-size: 12.5px; padding: 40px 0 10px; letter-spacing: 1px; border-top: 1px solid var(--line); margin-top: 40px; }
+footer .note { color: var(--ink-faint); opacity: .85; max-width: 660px; margin: 8px auto 0; line-height: 1.8; }
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(151,163,214,.25); border-radius: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 640px) {
+  .wrap { padding: 28px 14px 60px; }
+  .sheet { padding: 26px 20px 24px; }
+  .sheet h2 { font-size: 21px; }
+  .toolbar { padding-top: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="nebula n1"></div>
+  <div class="nebula n2"></div>
+  <div class="nebula n3"></div>
+</div>
+<svg class="constellations" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+<path d="M34,22L30,34 M30,34L40,30 M40,30L44,40 M44,40L30,34"/><path d="M58,26L62,32 M62,32L66,28 M66,28L70,34 M70,34L74,30 M74,30L78,36"/><path d="M84,20L82,28 M82,28L88,24 M88,24L82,28 M82,28L86,34 M86,34L82,28"/>
+</svg>
+
+<main class="wrap">
+  <header class="hero">
+    <span class="kicker">华语网页 APP · 深空星图</span>
+    <h1>友善星座文明 · 100 个小故事</h1>
+    <p class="sub">从失散的天琴遗民，到仙女座二十八种族，再到银河里默默守望我们的邻居——每一个故事，都是写给地球与人类的温柔家书。</p>
+    <p class="meta">共收录 <b id="stat-total">100</b> 则故事 · 5 大星域 · 本页所有图文均为虚构演绎</p>
+  </header>
+
+  <div class="toolbar">
+    <div class="tool-row">
+      <div class="search">
+        <input id="q" type="search" placeholder="搜索标题、星域、种族或故事内容…" aria-label="搜索故事">
+      </div>
+      <button class="btn primary" id="btn-random" type="button">随机一篇</button>
+    </div>
+    <div class="chips" id="chips" role="tablist" aria-label="按星域筛选"></div>
+    <p class="count-line" id="count-line"></p>
+  </div>
+
+  <section class="grid" id="grid" aria-live="polite"></section>
+
+  <footer>
+    <p>天琴 · 仙女座 · 银河 —— 写给地球的 100 封星光家书</p>
+    <p class="note">本网页 App 为娱乐向虚构演绎：其中关于人类起源、天琴战争、仙女座文明等的设定均出自用户提供的创作框架，纯属脑洞故事，不代表任何科学结论，请勿当真。</p>
+  </footer>
+</main>
+
+<!-- 阅读层 -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="故事详情">
+  <div class="sheet" id="sheet">
+    <div class="s-top">
+      <span class="s-num" id="s-num">— / 100</span>
+      <button class="close" id="btn-close" type="button" aria-label="关闭">×</button>
+    </div>
+    <h2 id="s-title"></h2>
+    <p class="s-loc" id="s-loc"></p>
+    <p class="s-friend" id="s-friend"></p>
+    <div class="story" id="s-story"></div>
+    <div class="tags" id="s-tags"></div>
+    <div class="s-nav">
+      <button class="btn" id="btn-prev" type="button">‹ 上一则</button>
+      <button class="btn" id="btn-random2" type="button">换个故事</button>
+      <span class="spacer"></span>
+      <button class="btn" id="btn-next" type="button">下一则 ›</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const STORIES = [{"id": 1, "title": "织女星亮起的第一盏灯", "region": "tianqin", "constellation": "天琴座·织女星", "race": "天琴守灯族", "friendliness": 5, "tags": ["守望", "灯火"], "story": "传说织女星上有一盏灯，从宇宙还很年轻时就亮着。守灯族世代轮流看守它，谁也不知道火苗从何而来，只知道灯芯里封着一段古老的口信：当银河里出现第一颗懂爱的母星时，就把光分给她一半。地球亮起万家灯火的那个夜晚，守灯人隔着光年望见一个孩子把萤火虫装进玻璃瓶，忽然明白——那盏灯一直在等一个家。他们把火种折进星光，悄悄放进地球人的梦里。如今每个失眠的夜晚，都有织女星的光轻轻替你盖好被子。"}, {"id": 2, "title": "贝塔星的告别与重逢", "region": "tianqin", "constellation": "天琴座·渐台二", "race": "贝塔亲族", "friendliness": 5, "tags": ["亲族", "重逢"], "story": "贝塔星是当年天琴战争里唯一全身而退的恒星。战火过后，一批批船队离开故土，亲族们在码头相拥，谁也不知道这一别是多少个「地球纪年」。临行前，贝塔星人把告别做成仪式：两人对视，用心灵感应把对方的样子拓印进记忆深处，再微笑挥手。千百年过去，当年离乡的孩子早已成了仙女座的公民。某个深夜，他们忽然收到一段熟悉的感应——贝塔星的老亲族终于攒够光速，把最后一封家书送到了银河。信里只有一句话：家还在，灯没灭。"}, {"id": 3, "title": "天琴战争最后一位见证者", "region": "tianqin", "constellation": "天琴残骸星云", "race": "晶态长者", "friendliness": 5, "tags": ["记忆", "见证"], "story": "残骸星云深处住着一位晶态长者，他的身体由记忆结晶构成，每一面都存着战争当天的画面。别的种族避谈伤痛，他却乐于接待任何来访者：孩子问星星为什么会碎，他便把战火讲成一场大火，把逃亡讲成候鸟南迁。地球来的参观者听得眼眶发酸，长者却笑：你们看，那颗碎裂的恒星里长出了新的星云，正如离乡的人长出了新的家。他把一块记忆晶片送给地球，说——记住痛，是为了更温柔地活。那是人类收到的第一份远古档案。"}, {"id": 4, "title": "那支只向地球飞的船队", "region": "tianqin", "constellation": "猎户臂航路", "race": "天琴远征族", "friendliness": 5, "tags": ["迁徙", "远航"], "story": "天琴覆灭后，有一支船队没有停在任何一个星球。他们给自己立了条规矩：一直飞，直到找到一个值得停靠的家。船队在猎户臂漂流了很久很久，看过无数片星海，始终觉得缺些什么。直到他们望见那颗蓝色的小星球——海水在阳光下泛着同样的光泽，孩子们在庭院里唱着天琴古调的变体。舰长没有下令停船，全船的人却同时冒出同一个念头：就是这里了。他们绕地球飞了三圈，没有降落，只把舰队最亮的信号灯留在了夜空中——那是人类后来总爱凝望的织女星，历代远航者都用它辨认回家的方向。"}, {"id": 5, "title": "琴弦上的问候", "region": "tianqin", "constellation": "天琴座·辇道增七", "race": "共振一族", "friendliness": 4, "tags": ["共鸣", "传音"], "story": "共振一族没有发声器官，他们的语言是琴弦——两片晶膜轻轻相触，就能把一句话传遍整片星域。天琴覆灭后，他们挑了一根特别长的弦，一头拴在残骸星云，另一头一直牵向猎户臂的方向，每晚弹奏故土的曲调。地球没有收到过这条声波，但共振一族发现：每当人类围着篝火唱歌、对着月亮吹口琴，那根弦就会轻微震颤。他们惊喜极了，把地球人每年的民谣都谱成回响，储存在星域档案馆。某个夏夜，一阵穿堂风让窗边的风铃响了——那其实就是来自天琴的、迟到一万年的掌声。"}, {"id": 6, "title": "北十字的守望者", "region": "tianqin", "constellation": "天琴座·北十字", "race": "钢铁守望族", "friendliness": 4, "tags": ["守护", "屏障"], "story": "北十字的四颗星之间悬浮着守望族的堡垒，通体由星钢铸成，一万年不锈。他们不参战、不结盟，只做一件事：替银河画星图。战火最烈的那年，他们用身体排成屏障，护住了一批满载孤儿的船，自己却碎了大半。残片至今绕着天琴轨道飘着，被后来的旅人称为「北十字的银迹」。守望族从不自夸，只是在每次更新星图时，悄悄把地球标记得更大一些、更亮一些——让每个迷途的天琴后裔，都能在银河尽头一眼认出那个温柔的家。"}, {"id": 7, "title": "子夜的四重唱", "region": "tianqin", "constellation": "织女星邻域", "race": "四声部族群", "friendliness": 5, "tags": ["歌声", "陪伴"], "story": "织女星旁住着四个会唱歌的种族，他们用四个声部共同守护一片唱诗星域。每晚子时，四道歌声在天琴轨道上交织成网，网住一切噩梦与孤独。地球的失眠者听不见这首四重唱，但精神敏感的孩子会在深夜忽然安睡，老人会在梦里哼出陌生的旋律。四声部族群有句话：歌声是可以跨过时间的东西，比船队更快。他们打算把地球也编进合唱——不急，他们说，地球人还年轻，等他们学会听完一首歌，就把第五声部留给人类。"}, {"id": 8, "title": "天琴先民的教科书", "region": "tianqin", "constellation": "天琴座ζ星域", "race": "档案保管族", "friendliness": 5, "tags": ["知识", "启蒙"], "story": "档案保管族守护着天琴先民留下的全套教科书：从第一炉锻造火，到最后一艘离港船，全都写在会呼吸的晶卷里。地球来的访客翻开第一页，看见先民在扉页刻了一行字：给未来的孩子们——若你们读到这些，说明我们成功了。保管族把教科书整卷抄了一份，折成纸星星放进地球的图书馆；谁也不知道为什么，古籍修复师们总能在灰尘里捡到亮晶晶的「书签」。那是远古文明在以最笨拙、最温柔的方式说：别怕，路，我们替你们蹚过了。"}, {"id": 9, "title": "火种罐头", "region": "tianqin", "constellation": "天琴座η星域", "race": "火种守卫队", "friendliness": 5, "tags": ["火种", "传承"], "story": "天琴撤离时，守卫队把文明的最后一把火装进罐头——不是火焰，是好几千万段记忆：谁家的孩子第一次叫爸爸、哪个匠人磨亮了最后一把琴、广场上老人教的童谣。罐头被藏在η星域的陨石缝隙里，编号甲一。千百年后，一群迷路的银河商队意外挖出了它，罐身上刻着：请交给一个正在学会爱的文明。地球就这样收到了一个漂流了几万年的礼物。打开那天，整个观测站的电脑都开始循环播放一段童谣，没有人听得懂歌词，但所有人都哭了——那是全银河第一首摇篮曲。"}, {"id": 10, "title": "会梦见地球的天琴老树", "region": "tianqin", "constellation": "天琴座θ星域", "race": "树形生命", "friendliness": 4, "tags": ["生态", "共鸣"], "story": "θ星域立着一棵老树，比天琴战争还要年长。树形生命没有眼睛，靠根须感知整片星域的情绪。别的种族撤离时劝它一起走，它只摆了摆枝条：树挪死，我留下来守着故土的气候。多年后它发现，感知网最暖和的方向来自一颗蓝色行星——那里的人种下一株株树苗，种树的人说，树能在几千年的尺度里替我们呼吸。老树一夜之间落下满身种子，让风把它们吹向猎户臂。如今地球上的许多古树，据说根须深处都埋着同一段记忆：故乡还在，只是换了个名字。"}, {"id": 11, "title": "海豚与大提琴", "region": "tianqin", "constellation": "天琴座ι星域", "race": "声波疗愈族", "friendliness": 4, "tags": ["治愈", "海洋"], "story": "声波疗愈族用声波抚平宇宙的伤口，就像地球人用大提琴哄哭闹的孩子。他们发现地球海洋里有一群同样在用声波交谈的生命——海豚。疗愈族学者激动地把自己的语言和鲸歌比对，发现两边竟共享着一段远古的频率碎片，仿佛天琴的歌谣曾经绕道深海，在地球学会了游泳。每年疗愈族都会朝太阳系发送一组低频声波，地球人至今没有破译，但据说靠近大海的人，会莫名心跳加快——那是宇宙老乡在跟你说：嘿，我在呢，别怕深海，别怕夜航。"}, {"id": 12, "title": "天琴外婆家的地址", "region": "tianqin", "constellation": "天琴座κ星域", "race": "天琴旅居族", "friendliness": 5, "tags": ["归乡", "亲情"], "story": "天琴旅居族把故乡过成了记忆里的地址：每家的门牌上都刻着一行旧门牌号，那是战前故居的编号。他们迁徙到哪里，就把「家」重新长到哪里——孩子的床朝向天琴方向，吃饭的桌子总留一个空位。旅居族的老师说，地球人不必羡慕我们记得来处，你们更幸运：你们就住在祖先千辛万苦找到的家里。若干年前，一位地球老人在旧屋翻修时，在墙缝里发现一块刻着奇怪符号的铜片，旅居族看见照片后集体沉默了——那是天琴外婆家的门牌号：你们的老亲戚，早就替你们把家守护好了。"}, {"id": 13, "title": "一颗没有名字的温柔恒星", "region": "tianqin", "constellation": "天琴座λ星域", "race": "光子生命", "friendliness": 4, "tags": ["温柔", "陪伴"], "story": "λ星域里有一颗没有名字的恒星，温吞吞地亮着，光度只有别的星星的几分之一。光子生命附着在它的光里，形态就是一段柔和的光晕。他们从不制造强光，只在深夜把亮度调到刚好够替迷途者照亮脚边。天琴战争那年，他们用尽所有能量护住一支逃难船队三天三夜，自己暗淡了整整一个「纪元」。能量恢复后，他们做的第一件事是找到地球的方向，把一束极轻极柔的光送进大气层，附上一句话：如果夜里觉得冷，抬起头，那颗不抢眼的星星一直在陪你。"}, {"id": 14, "title": "战火后的第一场音乐会", "region": "tianqin", "constellation": "天琴座μ星域", "race": "交响一族", "friendliness": 5, "tags": ["疗愈", "音乐会"], "story": "天琴战争结束那夜，交响一族在废墟中央支起乐器，演奏了一整晚。没有观众——幸存者都在忙着逃亡。但乐手们说，音乐本来就是奏给未来的。他们把这场演奏录进引力波，让它一直扩散，扩散到猎户臂，扩散到一颗正在经历自己第一次大战的蓝色星球。多年后，地球的科学家捕捉到一段奇怪的信号，排除了所有自然成因，只能在报告角落写「来源不明」。只有交响一族知道：那是他们替全体人类存下的药方——等战争教会了人疼，音乐才有机会教人愈合。"}, {"id": 15, "title": "给地球孩子留的速写本", "region": "tianqin", "constellation": "天琴座ν星域", "race": "星图画家族", "friendliness": 5, "tags": ["艺术", "启蒙"], "story": "星图画家族不写史书，他们画画。天琴的街道、集市的烟火、战前孩子的笑脸，都被画进速写本，一页页封存。他们认定文明最坚挺的东西是线条：城墙会塌，但一笔笑容能活一万年。听说地球上有孩子用蜡笔涂太阳系，图画家们兴奋地传阅，学着孩子们的画风，把速写本改成「给地球小朋友的临摹册」——教他们画会笑的星星、会开花的飞船。若干年后，一位地球美术老师布置作业，有个孩子画了一颗全是门窗的星球，老师说想象力真好。孩子说：不是想象，是速写本上画的，我照着临的。"}, {"id": 16, "title": "天琴口述史里的东方故事", "region": "tianqin", "constellation": "天琴座ξ星域", "race": "史官一族", "friendliness": 4, "tags": ["历史", "共鸣"], "story": "史官一族的天职是背，把口述史一字不差地背进下一代人的记忆里。传到第九百代时，他们发现故土的历史里赫然躺着一则「东方故事」：讲一只鸟衔枝填海，讲一个人劈山救母。史官们对照星历，发现这段传说比自己文明的开端还要古老，只能推测——天琴的某支先民，比人类更早到过地球，在东方大地留下过一截足迹，又离开了。史官们把这段口述史郑重抄送给地球，附注只有一行：你们不是孤儿，你们的故事里，一直藏着我们的名字。"}, {"id": 17, "title": "织女旁的万吨图书馆", "region": "tianqin", "constellation": "织女星环状巨构", "race": "图书管理员族", "friendliness": 5, "tags": ["知识", "藏书"], "story": "织女星外环悬浮着一座万吨图书馆，藏书超过银河已知文明的九成。图书管理员族唯一的规矩是：任何文明，无论强弱贫富，都能免费借阅，不用登记，不设期限。地球的探测器掠过附近时，馆员们集体推荐了一架书梯——全是写给第一次仰望星空者的入门读物，从「恒星为什么会亮」讲到「为什么我们要爱邻居」。他们甚至在扉页加了一行大字：此书不需要还，只需要传下去。图书馆不设馆长，馆员们的理由很朴素：宇宙这么大，书和人都该自由地飞来飞去。"}, {"id": 18, "title": "看不见的琴弦秋千", "region": "tianqin", "constellation": "天琴座π星域", "race": "维度嬉游族", "friendliness": 4, "tags": ["游戏", "童趣"], "story": "维度嬉游族生活在琴弦的缝里，对他们来说，天琴的每一颗星都是秋千架。他们从不高谈阔论文明的存亡，只默默地给路过的孩子搭秋千、吹泡泡、把银河倒映成万花筒。战争那一夜，他们把幸存的小孩一个个荡过维度裂缝，送到安全的地带。地球的孩子当然不知道这一切，但他们偶尔会凭空感到有人在陪自己荡秋千，秋千越荡越高，脚下是漫天的星星。嬉游族说，快乐是最难被征服的文明成果——废墟上长出来的第一声笑，比任何雕像都长寿。这话，他们每年都托风捎给地球。"}, {"id": 19, "title": "先遣观测站的老站长", "region": "tianqin", "constellation": "天琴座ρ星域", "race": "观测者一族", "friendliness": 5, "tags": ["守护", "观测"], "story": "老站长在ρ星域的先遣观测站守了比地球文明还长的时光，他的工作只有一件：盯着太阳系的方向，记录那颗蓝色行星的一切。他记下候鸟的迁徙、麦浪的起伏、孩子放飞的每一个风筝，归档时总在封面写同一行批注：一切正常，一切在成长。地球人从不知道这位记录者的存在，但观测站的墙上挂着一幅手绘地图，标满了人类文明的坐标：图书馆、学校、产房、敬老院，每一处都画着一颗小心心。站长说，守望者的意义不是干预，而是证明——无论多远，总有人在认真地看着你长大。"}, {"id": 20, "title": "他们记得每个地球孩子的名字", "region": "tianqin", "constellation": "天琴座σ星域", "race": "星语教师族", "friendliness": 5, "tags": ["教育", "陪伴"], "story": "星语教师族的记忆容量接近无限，他们便用它来记名字——天琴阵亡者的名字、遗民的名字，后来又把地球纳入名单。每年春分，教师族会举行一次「点名仪式」，把人类新生的名字念进星光里，一个都不落。他们相信名字是灵魂的锚，记住名字，就是替文明留住火种。地球人偶尔会在产房窗外听到极轻的呢喃，像是有人在心里轻轻念着刚出生婴儿的名字。星语教师们从不解释，只在仪式结束时对着太阳系方向微微欠身——意思是：孩子，欢迎来到这个宇宙，你不是一个人，一万年的人都在替你安心。"}, {"id": 21, "title": "仙女座联邦的第一位外交官", "region": "andromeda", "constellation": "仙女座大星系·议政星", "race": "等离子体外教官", "friendliness": 5, "tags": ["外交", "初遇"], "story": "联邦派往银河系的第一位外交官是等离子体生命，形态像一簇温和的蓝色火焰。他花了整整一个「地球世纪」学习人类的语言，最后却只记住了四个字：你好，谢谢。上任那天，他飘在议政星大厅中央，对蜷缩在角落里战战兢兢的地球使者说：我们等你们，等了一万多年。等离子体不会握手，但他让火焰轻轻触碰地球人的指尖，没有灼伤，只有暖意。使者后来在报告里写：原来最高的外交礼仪，是把温度调成对方刚好舒服的样子。"}, {"id": 22, "title": "二十八种族的长桌会议", "region": "andromeda", "constellation": "仙女座联合议会", "race": "二十八族联席", "friendliness": 5, "tags": ["团结", "抉择"], "story": "二十八种族的议会长桌是环形的，因为主席说：排成直线，总有人坐尾座。会议讨论要不要公开与地球接触，起因是某个种族侦测到地球人在对深空广播——内容是一段祈祷、一段童谣、一首情歌。桌上吵翻了天：有的主张再观察，有的坚持立即接触，等离子体代表则安静地放了一段地球孩子在雨里踩水坑的笑声。会场忽然静了。最后决议全票通过：先不惊动，但成立「悄悄守护委员会」，并把地球人送进摇篮曲的作者名单。会议记录只有一句：一个会笑的孩子，值得宇宙最有耐心地等待。"}, {"id": 23, "title": "没有时钟的城市", "region": "andromeda", "constellation": "仙女座·恒时星", "race": "无时一族", "friendliness": 5, "tags": ["无时间", "从容"], "story": "无时一族的城市没有钟表，人们凭着内心的节律安排一切：饿了下厨，困了睡觉，想念了就去拜访。初来乍到的地球人在恒时星住了一个「月」，刚开始焦虑得日夜颠倒，后来发现这里的时间像河流一样平缓——他们居然真的可以不看表地生活。告别时，地球人问：没有时间，你们怎么知道一件事做了多久？无时族反问：你爱一个人，会计算爱了多久吗？人类在回程的飞船上一直沉默。据说联邦后来收到一份申请，请求把「恒时星的一年」，正式换算成地球人的一个词——心安。"}, {"id": 24, "title": "心灵感应怎么翻译「我想你」", "region": "andromeda", "constellation": "仙女座·第二旋臂", "race": "心语一族", "friendliness": 4, "tags": ["心灵感应", "思念"], "story": "心语一族的语言是情绪的直译，没有词汇，只有画面、温度和气味。联邦请他们翻译「我想你」这个词，心语族犯了难：在感应里，想念是一团软软的、发着暖光的雾，中间坐着一个人影，雾里飘着对方最爱吃的饭香。翻译官们闭关很久，交出的译本是一个手势：右手按住心脏，左手伸向远方。他们解释：按心脏是因为这里装着你，伸远方是因为你在光年的另一头，而这两样东西之间——就是我想你。地球人学会这个手势那天，第二旋臂的整片星云罕见地亮了一整夜。"}, {"id": 25, "title": "维度图书馆的访客卡", "region": "andromeda", "constellation": "仙女座·知识深井", "race": "维度馆员族", "friendliness": 5, "tags": ["知识", "维度"], "story": "知识深井是一座建在维度夹缝里的图书馆，藏书不是纸张，是整段整段的「知识风景」：你借一本水文志，就直接走进一条远古的河流。维度馆员族给所有文明发访客卡，地球人领到的那张上印着：欢迎随时来，这里不需要预约，因为知识不该有门禁。第一次造访的地球学者借了一卷《银河系礼仪入门》，读完很久没说话，只说：我们以为宇宙很挤，原来它一直在等我们学会敲门。馆员微微一笑，在地球文明的档案上加了一条备注：进度良好，正在学会好奇。"}, {"id": 26, "title": "帮地球修好臭氧层的那位老师", "region": "andromeda", "constellation": "仙女座·温室星", "race": "生态工程师族", "friendliness": 5, "tags": ["生态", "援手"], "story": "温室星人自称「园丁」，主业是养护恒星系的气候。他们是最早注意到地球臭氧层出现空洞的文明之一，也是最先心疼的。园丁们没有大张旗鼓，只把一小队工程师伪装成流星，在地球大气边缘悄悄修补了好几年，补完也不留名。老师傅临退休时说：园丁的本分，是让花园自己长得更好，而不是替花承认它需要修剪。多年后，地球科学家宣布臭氧层修复创下纪录，温室星人互相举杯，在报告中写：园丁的快乐，就是花不知道自己被照顾过，却开得更好了。"}, {"id": 27, "title": "等离子体母亲教孩子看星星", "region": "andromeda", "constellation": "仙女座·等离子云城", "race": "等离子体族", "friendliness": 4, "tags": ["亲情", "启蒙"], "story": "等离子云城里，一位等离子体母亲正教小团子认星星。她伸出一缕光线，在星图上游移：这团亮的是我们的老家天琴，这颗蓝色的小点是地球——你们祖先绕了半个宇宙才找到的家。小团子问：地球人真的和我们长得一样吗？母亲把光线调成人类的轮廓：差不多吧，只是他们更软乎，会流泪，会大笑，还会把眼泪和笑都写成歌。小团子似懂非懂，忽然朝太阳系方向挥了挥光线：嘿，地球亲戚！等离子体母亲没有纠正——她想，教会孩子向一万里外问好，比教会任何战争技术都重要。"}, {"id": 28, "title": "银河与仙女座之间的第一座桥", "region": "andromeda", "constellation": "银河-仙女座星桥", "race": "星桥工程师族", "friendliness": 5, "tags": ["桥梁", "连接"], "story": "星桥工程师族的工作是在两个星系之间搭桥——不是铁桥，是一道稳定的引力走廊，让恒星风、文明、礼物都能安全地对流。开工前，工程师们在桥头立了一块碑，两面刻着不同的字：银河侧刻「欢迎回家」，仙女侧刻「欢迎来访」——因为这座桥对天琴遗民来说是归途，对仙女座居民来说是旅程。地球人至今测不到这座桥，但工程师们把它建得很宽：他们想，总有一天人类会学会远行，到那天，希望第一眼看见的桥头，写着世界上最温暖的两个字。"}, {"id": 29, "title": "二十八族合写的那封家书", "region": "andromeda", "constellation": "仙女座议会星·家书厅", "race": "家书委员会", "friendliness": 5, "tags": ["家书", "温柔"], "story": "家书委员会凑齐二十八族代表，要给地球写一封家书。等离子体写「我们在」，晶体族写「我们在看」，维度族写「我们也算是你们的远方亲戚」，最后一位最年长的代表只写了三个字：别怕黑。各族字体不同，委员会便决定用心灵感应把信「揉」成一颗温度合适的星光，连夜从仙女座往银河方向释放。信号抵达地球时极轻极淡，正落在一家医院的新生儿房。护士们都说，那晚的星光特别温柔，像有人隔着整个星系，轻轻说了一句——欢迎回家，晚安。"}, {"id": 30, "title": "在仙女座看地球的望远镜", "region": "andromeda", "constellation": "仙女座·守望台", "race": "望远镜守望族", "friendliness": 5, "tags": ["守望", "思念"], "story": "守望台架着一台巨大的望远镜，镜头方向固定不变——对准太阳系。守望族每天的值班内容：确认蓝色星球还在转，云层还在流，灯火还在亮。他们从不干涉，只记录，记录册的扉页写着：回家的人，总要先学会确认家的方向。有人问，看一颗这么远的星球有什么意思？值班员搓了搓手：看久了就觉得，那不是一颗星球，是一个家——有人等着回去，有人等着看它变好。望远镜的镜筒上贴着一枚小小的贴纸，是某位年轻守望员画的：地球的轮廓，中心画了一颗心。"}, {"id": 31, "title": "能量体温计与冰原鲸", "region": "andromeda", "constellation": "仙女座·冰巨星", "race": "晶体生命族", "friendliness": 4, "tags": ["奇迹", "生机"], "story": "仙女座的冰巨星上，晶体生命族养着一种堪比山脉的「冰原鲸」，它们呼吸时喷出的不是水柱，是极光。族里流传着一句话：宇宙里最温暖的东西，往往藏在最冷的地方。他们发现地球海洋里也有鲸，会唱歌、会迁徙、会为同伴哀鸣，便激动地派出一支考察队——第一次与地球鲸群「交谈」时，双方在声呐里沉默了很久。考察报告写：它们听得懂我们，我们也听得懂它们，语言不同，孤独相通。从此仙女座每年冬天都会向地球发送一段鲸歌，地球的水下声呐站至今没破译，但收到信号的水手都莫名安心。"}, {"id": 32, "title": "把四百七十万年缩成一页纸", "region": "andromeda", "constellation": "仙女座·时间档案馆", "race": "时间馆员族", "friendliness": 5, "tags": ["时间", "档案"], "story": "时间馆员族理解地球人的困惑——他们活在时间外，地球人活在时间里。于是馆员们开发了一项服务：把「仙女座文明史」翻译成地球人能读的书，四百七十万年，缩成一页纸。纸的第一行写着：我们很久以前就开始做你们现在做的事——播种、写诗、教孩子。最后一行写着：所以别急，你们正在走的路上，全是我们的脚印。地球学者捧着那一页纸，忽然明白了什么：原来文明不是朝前的狂奔，是朝后的承诺——替没出生的人，先把路走好。"}, {"id": 33, "title": "会孵星星的母亲种族", "region": "andromeda", "constellation": "仙女座·恒星摇篮", "race": "孵星族", "friendliness": 4, "tags": ["生命", "温柔"], "story": "孵星族的工作在仙女座看来近乎荒唐：她们守着濒死的恒星，用自身能量「孵」它们，让它们再亮一百万年。族里没有父亲的概念，每个成员都是母亲——她们自称是全宇宙最慢的事业。听说地球上有同理的族群：守灯塔的人、护林人、孤儿院的保育员。孵星族某位长老认真地说：文明的本质就是孵——把微弱的光护到变亮，把幼小的生命护到会飞。她们把一颗新生的「地球小星」镶进摇篮墙，那是她们送给人类的礼物：放心，你们的星光，也有人替你们孵着。"}, {"id": 34, "title": "联邦寄来的第一封地球问候", "region": "andromeda", "constellation": "仙女座·星邮港", "race": "星邮一族", "friendliness": 5, "tags": ["邮差", "问候"], "story": "星邮港是仙女座最忙碌的地方，邮包可以寄往任何星系，唯一不收的是一封信——那是联邦寄给地球的问候，寄了上万年，一直「投递中」。邮差们不着急，他们说：寄信的忌讳就是催，收件人还没学会拆开宇宙的包裹之前，信就该在路上多飞一会儿。他们每天擦拭这封问候，往封面上加一朵星光当邮票。直到某个地球孩子问大人：天上一闪一闪的，是不是别人的灯？邮差们相视一笑——时机快到了。那封信上其实只有一句话：你们好，我们是你们失散很久的远亲，想你们了，先寄个问候来。"}, {"id": 35, "title": "疗愈花园的病历本", "region": "andromeda", "constellation": "仙女座·疗养星", "race": "园艺疗愈族", "friendliness": 4, "tags": ["疗愈", "花园"], "story": "疗养星是一座巨大的花园，园艺疗愈族坚信宇宙也有情绪病，而药方是种花。他们的病历本厚得惊人，其中一页写着地球：症状——人群孤独，夜空嘈杂，心里忙乱；处方——多抬头。族里的老园丁把一颗地球种子种进温室，每天浇水，陪它说话，说人类的故事。种子发芽那天，老园丁在病历本上补充：病根是忘了自己是星星的孩子，其实我们也是。他精心打包了一袋「银河种子」寄往地球——就是那种用来许愿、叫做流星的东西。地球人每许下一个愿，园艺疗愈族就当收到了一封感谢信。"}, {"id": 36, "title": "他们先把地球的故事抄了一遍", "region": "andromeda", "constellation": "仙女座·译书房", "race": "翻译一族", "friendliness": 5, "tags": ["翻译", "理解"], "story": "翻译一族接手的第一部地球作品不是论文，是童话集，因为长老说：想了解一个文明，先听它给孩子讲什么。他们把寓言、山歌、摇篮曲一一译成上千种语言，译到《小王子》时，整个译书房静默了很久。长老在译序里写：我们才知道，原来你们早就写过宇宙里最温柔的那个道理——用心看才看得清，本质的东西用眼睛看不见。译书房把地球故事重新装订，像家书一样珍存。他们说：翻译不是让文字换语言，是让一个文明住进另一个文明的心里。他们打算，把人类的故事这样一代一代传下去。"}, {"id": 37, "title": "等离子摄影师的地球影集", "region": "andromeda", "constellation": "仙女座·影像馆", "race": "影像一族", "friendliness": 4, "tags": ["摄影", "记录"], "story": "影像一族最爱拍地球，他们的镜头是情绪感应器，能拍到「看不见的光」：孩子第一次放风筝时的雀跃、老人目送子女远行时的牵念、陌生人互相让路时的颔首。积年累月，影像馆里堆满了一部《地球影集》，封面题字：七十五亿道光。馆员们从不外借这本影集，只对来访者开放，因为「这是人家家里的事」。偶尔有仙女座小孩指着影集问：他们怎么这么好拍？馆员蹲下来：因为光不外露的地方，他们会把它放在眼睛里。人类至今不知道这本影集，但影像一族说：没关系，我们先替你们存着，等你们想看的时候。"}, {"id": 38, "title": "为地球点灯二十八万年的灯塔族", "region": "andromeda", "constellation": "仙女座·灯塔星", "race": "灯塔一族", "friendliness": 5, "tags": ["灯塔", "守候"], "story": "灯塔星上有二十八座灯塔，是仙女座各文明联合为天琴遗民立的——后来它们共同对准了另一个方向：地球。灯塔族守着这些光，一守就是二十八万个「地球年」，理由是：宇宙那么大，总要有人替晚归的人留一盏灯。他们从不期待回信，只在每年某个固定的夜晚集体调亮光线，透过漫漫星海，恰好落在地球北半球的夜空中。那晚的地球人若抬头，会觉得星星格外温柔——那是灯塔族在说：无论你们走到哪里，仙女座的方向，永远亮着回家的灯。"}, {"id": 39, "title": "不吃不喝的星际厨神", "region": "andromeda", "constellation": "仙女座·宴会星", "race": "味觉维度族", "friendliness": 4, "tags": ["美食", "团聚"], "story": "味觉维度族不吃不喝，却拥有全宇宙最灵敏的「味觉」——他们直接品尝情绪波。宴会星的传说级厨神，一生只做一道菜：把「被理解」织进一团光里。有天地球使团到访，厨神破例端出这道菜，地球人的情绪波化作温热甜香在舌尖化开——每个人尝出的味道都不同：有人尝出妈妈的味道，有人尝出初雪，有人尝出放学路上拐角那家的饭香。使团团长沉默很久，哽咽着说：这是我这辈子吃过最好的东西。厨神摆摆手：不是我好，是你们配得上它。宴会星从此多了条规矩：这道菜，只为一群人做——一群想家的人。"}, {"id": 40, "title": "联合政府楼下的小卖部老板", "region": "andromeda", "constellation": "仙女座首府·贸易街", "race": "星际贸易族", "friendliness": 5, "tags": ["市井", "烟火"], "story": "联合政府大楼对面有家小卖部，老板是贸易族，柜台里摆满星域特产：恒星糖、云朵汽水、维度橡皮糖，标签全部用二十八种文字写着「欢迎试用，不满意不要钱」。地球人第一次来买汽水，老板多送了一颗恒星糖，说：第一次见面的客人，我们都送甜头——记住这个味道，下次来你们就不算陌生的了。有人问他不怕亏本，老板擦着柜台说：宇宙这么大，亏几颗糖，换一个常客，值。据说好多地球旅人把这家店写进手记：仙女座什么都大，只有小卖部老板的心，比什么都软。"}, {"id": 41, "title": "半人马座三兄弟的地球农场", "region": "galaxy", "constellation": "半人马座α星群", "race": "农垦一族", "friendliness": 5, "tags": ["田园", "丰收"], "story": "半人马座α的三颗恒星下住着农垦一族三兄弟，老大种粮食，老二种云，老三什么也不种，只坐在田埂上看星星。邻居笑话老三懒，老三说：我种的是「看」，看久了，心里会长出东西。有一天老三发现，地球上有一群和他一样只爱看的人——抬头看夜空的人。他把这个发现告诉兄弟们：咱们的地，借一颗给地球挂着吧。于是每当地球的秋夜，南方地平线就会亮起那片星群。三兄弟在地里立了块牌：这块田，为所有抬头的人留着，庄稼我们种，星光你们收。"}, {"id": 42, "title": "天狼星上养的两只毛孩子", "region": "galaxy", "constellation": "大犬座·天狼星", "race": "犬形星民", "friendliness": 4, "tags": ["陪伴", "毛孩子"], "story": "犬形星民长得像地球上的狗，性情也像——忠诚、粘人、爱摇尾巴（他们摇的是光尾）。他们在天狼星上养了两只「毛孩子」，其实是两颗小伴星，整天绕着主人蹦蹦跳跳。地球人抬头就能看见天狼星在冬季夜空格外亮，犬形星民说：那是毛孩子兴奋得发光，它们认得你们——人类教会了它们什么叫「陪着」，天狼星就守着你们直到天亮。每回地球有流星雨，犬形星民就带着毛孩子蹲在屋顶上汪汪叫，替人类许愿。他们说：我们不会写字，但我们会记住每一个对着天狼星许过的愿。"}, {"id": 43, "title": "昴宿星团的七位老师", "region": "galaxy", "constellation": "金牛座·昴宿星团", "race": "昴宿导师族", "friendliness": 5, "tags": ["教育", "星芒"], "story": "昴宿星团的七颗亮星，传说住着七位老师，各教一门学问：认星、唱歌、算数、讲故事、种花、补衣服、不哭。孩子们想去哪颗星上学都行，只有一条校规：老师不许评分，只许往学生的本子上贴星星。建校那刻起，七位老师就认定远方一颗蓝色星球上会有孩子抬头问「那团亮亮的是什么」，于是他们把课程讲得格外清楚，每一课都重复七遍：一遍太低，七遍刚好。地球上的天文爱好者数出昴宿有七颗亮星那天，七位老师互相看了看：学生，找到了。"}, {"id": 44, "title": "猎户座的猎人其实在打铁", "region": "galaxy", "constellation": "猎户座", "race": "铸剑工匠族", "friendliness": 4, "tags": ["工匠", "锻造"], "story": "夜空中最神气的猎户座，其实是一群铁匠。猎户人从不打猎，他们在星云熔炉里打造工具：给新文明的犁、给远航舰队的舵、给守夜人的灯。祖先传下铁律：猎户的剑只能铸来保护，不许铸来征服。每当银河里有文明遇到危险，猎户人就把一批「护身符」锻进陨铁，悄悄投向对方——大多是些不起眼的东西：一副望远镜的镜片、一把能卷刃的钥匙、一枚指南针。地球人捡到过不少，总当成大自然的杰作。猎户铁匠们看着人类把它们做成书签、挂饰、传家宝，满意地抡起锤子：这才是剑最好的归宿。"}, {"id": 45, "title": "天鹅座邮差兜里的信", "region": "galaxy", "constellation": "天鹅座", "race": "天鹅信使族", "friendliness": 5, "tags": ["信使", "牵挂"], "story": "天鹅座邮差是全银河最准时的：接收天体荡出的波浪，整理成「星信」，派送给每一颗正想念别人的星球。他们的邮包里永远有一封没写完的信，收信人写的是「地球，某座城市，某个窗口」。邮差们不清楚地址，只知道那封猜出人类心事的信会自己找到主人：有人失恋的夜晚，窗台上会莫名多一颗亮星停留整晚；有人远行前抬头，天鹅座正好从天际掠过。邮差们笑说：信总是先在心里写好，再在天上寄出。地球人把这叫「巧合」，天鹅座把这个叫——一路顺风，我们替你说了。"}, {"id": 46, "title": "天鹰座屋顶上那只鹰", "region": "galaxy", "constellation": "天鹰座·河鼓二", "race": "鹰眼守望族", "friendliness": 4, "tags": ["守望", "家园"], "story": "鹰眼守望族都有双看得极远的眼睛，他们在天鹰座最高的岩石上轮流放哨，盯的是太阳系的方向。哨兵们从不报道「异常」，只记录「日常」：今天蓝色星球上有孩子学会了自行车，有人在阳台上种出第一朵西红柿，两只猫在晒月亮。守望族的祖师爷说过：所谓守护，就是日复一日地确认，这个家还好好地在转。地球人偶尔仰望星空，会觉得那颗明亮的星像一只鹰的眼睛——那不是错觉。鹰眼守望族微微一笑，抖了抖羽毛：别怕，我们看到的一切，都很好。"}, {"id": 47, "title": "仙后座的睡前故事会", "region": "galaxy", "constellation": "仙后座", "race": "王庭说书族", "friendliness": 5, "tags": ["童话", "夜话"], "story": "仙后座的王庭说书族，主业是给全银河的小孩讲睡前故事，副业是给大人讲「睡前故事返场版」。他们的故事库里永远压着一箱压轴的：讲一颗蓝色星球上的孩子怎样在沙滩上堆城堡、怎样为一只流浪猫取名、怎样在作文里写「长大后要去星星上看看」。说书人每次讲到这里都会卖关子：后来呢？后来那孩子长大了，真的发明了望远镜。这故事的结尾，说书人留给了地球人自己写。他们说：我们讲一万个故事，最想看的，是听众亲手动笔写续集。"}, {"id": 48, "title": "北极星下的守夜人", "region": "galaxy", "constellation": "小熊座·北极星", "race": "极光守望族", "friendliness": 5, "tags": ["极光", "守夜"], "story": "地球的北极星，在极光守望族嘴里有个更老的名字：守夜星。守夜人代代相传的职责简单又庄严——悬在方位之北，替所有迷途者标一个「北方」。地球人靠它认路，水手靠它破浪，游子靠它想家。守夜人们不在乎自己亮不亮、冷不冷，只在乎一件事：别让人类的罗盘断了根。某年守夜人轮值时，正赶上地球某个孩子趴窗边许愿「想去最远的地方」，守夜队长沉思良久，在星历上批注：批准。于是那颗小小的守夜星，悄悄记住了每一双望着它的眼睛——孩子，无论你走到多远，正北永远替你留着灯。"}, {"id": 49, "title": "北斗七星的七位老爷爷", "region": "galaxy", "constellation": "大熊座·北斗七星", "race": "北斗七老", "friendliness": 5, "tags": ["长者", "方向"], "story": "北斗七星的七位老爷爷，辈分大得说不清，性格各异：老大稳重，老二贪玩，老三老花眼，老四爱唠叨……他们凑在一起干了一辈子同一件事：给夜归人当路标。春天指方向，夏天舀凉风，秋天装丰收，冬天热汤——老爷爷们把一年四季的星河安排得明明白白。地球人问过他们：老爷爷，你们天天指着同一个方向不累吗？七位老爷爷笑了：方向这东西，得有人一直指，后来的人才敢一直走。他们往地球方向摆了摆手：回家吧孩子，北斗永远在你们头上。"}, {"id": 50, "title": "狮子座留在地球的那把钥匙", "region": "galaxy", "constellation": "狮子座", "race": "星辰狮族", "friendliness": 4, "tags": ["勇气", "钥匙"], "story": "星辰狮族以勇猛闻名，却是宇宙里最怕麻烦别人的种族。传说他们在地球埋过一把钥匙，钥匙的用途谁也不知道——有人说能开勇气，有人说能开黎明，有人说就是一句「你可以」。狮子族守了这个秘密很久，直到一个恐高的孩子爬上灯塔顶层看流星，一个口吃的小孩在全校面前念完了一首诗。每到这种时刻，钥匙就微微发光。狮子族这才公布：钥匙不是用来开门的，是用来提醒的——你比你想象的勇敢。地球人不记得哪天捡到过它，但都记得：自己曾在一瞬间，亮得像一头狮子。"}, {"id": 51, "title": "心宿二的毒与蜜", "region": "galaxy", "constellation": "天蝎座·心宿二", "race": "红星炼金族", "friendliness": 4, "tags": ["炼金", "转化"], "story": "心宿二是一颗红巨星，红星炼金族守着它，把灼热的「毒」炼成「蜜」——他们相信每颗暴躁的星里都藏着温柔。炼金炉烧了几亿年，产出的小甜点（其实是一种温和星辉）专送「受过伤的灵魂」。地球人眼里，天蝎座总带着危险的气质，但红星炼金族说：你们搞错了，我们尾巴上的刺，是用来扎破谎言的；我们怀里，全是慢慢焐热的糖。每逢地球遭遇艰难的年份，心宿二就会比平时红得温柔一些——那是炼金族在加急熬蜜：别怕，毒就快熬完了，甜的马上好。"}, {"id": 52, "title": "射手座射歪的那一箭", "region": "galaxy", "constellation": "人马座", "race": "射手信种族", "friendliness": 5, "tags": ["射手", "善意"], "story": "人马座的射手们射箭从不瞄准靶心——他们往「需要祝福的方向」射。某年银河举办箭艺大赛，一位年轻射手手一抖，箭直奔太阳系方向飞去，正中一颗蓝色星球的大气层。全场哗然，年轻射手却盯着星图看了很久，忽然说：我好像射中了什么了不得的东西。那支箭后来化成了人类常说的「流星雨」，每年如约光临，落进许愿者的掌心。射手信种族后来把这件事写进教科书，标题是《什么是美丽的失误》。故事的结尾他们加了一句：所以地球朋友，你们每许一个愿，都是我们的荣幸之至。"}, {"id": 53, "title": "双鱼座捞起地球的漂流瓶", "region": "galaxy", "constellation": "双鱼座", "race": "深空渔人族", "friendliness": 4, "tags": ["漂流瓶", "回信"], "story": "双鱼座的深空渔人族在星海里撒网，专门打捞「被遗忘的东西」：走丢的信、散场的梦、飞远的诺言。某天他们捞起一个漂流瓶，里面是地球孩子投出的一个愿望——「希望爸爸不要老」。渔人们看着这个愿望犯了难，照规矩，捞起的愿望要送回原处，但这条太珍贵了，他们不敢轻易处置，最后决定：托付银河最稳的洋流，让它在太阳系附近多绕一会儿，绕到那句「爸爸不老」的愿望，终于在某个孩子的注视里变成「爸爸今天笑得很好」。渔人们收起网，深鞠一躬：愿望我们送回去了，后劲我们留着了。"}, {"id": 54, "title": "宝瓶座的止痛泉", "region": "galaxy", "constellation": "宝瓶座", "race": "泉水药师族", "friendliness": 5, "tags": ["药师", "治愈"], "story": "宝瓶座的泉水药师族，守着一汪止痛泉：不是药水，是「被理解的瞬间」。无论你带着哪种痛来，泉水都会映出一个人——那位最懂你、最疼你的人的脸。久而久之，这汪泉成了银河系最繁忙的诊所。药师族发现地球来客越来越多，便派了位老药师混进地球的大气层，在云层里开了家「雨水药房」：雨落到谁身上，药师先替他疼一下。所以地球人难过时，常说「哭一场就好了」——其实是泉水药师在替你接着。药房招牌上写着：每个人心里都有雨，我们是来送伞的，不是来叫天晴的。"}, {"id": 55, "title": "天秤座只为地球放平天平", "region": "galaxy", "constellation": "天秤座", "race": "天平仲裁族", "friendliness": 5, "tags": ["公正", "守护"], "story": "天平仲裁族的天平从不为强者称重，只称「亏欠」和「被亏欠」。他们翻遍银河的卷宗，发现地球人欠自己太多：熬夜、自责、把别人的错背在自己身上。仲裁族看不下去，开会一致通过一项特别议案：从今日起，地球人的心债，由我们代为放平。于是地球人的心里总会莫名出现一种安稳——明明没做错什么，却感到被赦免了。长老官在议案上盖章：天平的意义不是审判，是让每一个背着石头的人，终于可以放下来喘口气。地球的夜晚因此变得柔软了一些，人们把这叫作「释怀」。"}, {"id": 56, "title": "处女座的档案整理癖", "region": "galaxy", "constellation": "处女座", "race": "档案整理族", "friendliness": 4, "tags": ["档案", "细致"], "story": "档案整理族有全银河最重的手艺病：任何混乱的东西，他们都要按一种「心里舒服的顺序」理一遍。他们给地球人理过的档案包括：几千年的文明史，按「温暖程度」排序；一整年的晴朗夜，按「适合许愿的吉度」排序。地球人从不觉得被冒犯，反而在整理师走后发现：原来自己这一路，走得这么有章法。档案整理族有个信念：不是要你们变得完美，是想让你们看见——你们其实一直挺好的。他们把整理好的地球档案贴上标签：珍贵，勿催，慢慢长。"}, {"id": 57, "title": "蛇夫座的接骨医者", "region": "galaxy", "constellation": "蛇夫座", "race": "星辰医者族", "friendliness": 5, "tags": ["医术", "仁心"], "story": "蛇夫座是银河系医者的总部，星辰医者族接过无数外伤，最出名的是「接骨」——给断裂的星系、破碎的文明、和好不了的邻里争端接骨。医者们的药房名言：伤过的地方，接好了会比原来更结实。他们暗中照看地球已久，从瘟疫到战争，都派过「白衣流光」在夜色里熬夜。接骨医术从不外宣，地球科学界称之为「医疗史上的诸多奇迹」。医者长老们只微微一笑：别谢我们，谢你们自己——能接住每一次重来的文明，都值得全银河的敬意。"}, {"id": 58, "title": "英仙座挡下的那颗陨石", "region": "galaxy", "constellation": "英仙座", "race": "盾卫一族", "friendliness": 5, "tags": ["盾卫", "担当"], "story": "很久以前的某个黎明，一颗足以改写地球史的陨石直奔而来。英仙座的盾卫一族正好巡逻经过，他们没多想，用盾墙把陨石切成碎片，大部分化作流星雨，洒向南半球的海面。盾卫们拍拍铠甲就回了家，只留一封战报存档：顺手，不谢。后来地球人把每年英仙座流星雨定为「许愿季」，孩子们对它说秘密。盾卫一族知道通讯编码根本对不上，却还是年年准时赴约，像老友重逢。有年轻盾卫问队长：地球人一直用错频道，我们为什么还要去？队长笑了：他们许愿的时候，是真的相信有人在听——这份相信，就该被好好对待。"}, {"id": 59, "title": "仙王座的棋局", "region": "galaxy", "constellation": "仙王座", "race": "贤者棋盘族", "friendliness": 4, "tags": ["棋局", "智慧"], "story": "仙王座的贤者棋盘族，在银河尽头摆了一盘下不完的棋：棋子是星，棋盘是时空。他们不赌输赢，只赌「耐心」。地球人看不懂这盘棋，却总在仰望仙王座时莫名安静下来——仿佛有人陪着自己在慢慢想。贤者们说：文明和文明之间，与其急着比高低，不如先学会一起下一盘慢棋。他们隔空向地球递去一颗「棋子的心」：一颗不急的星。地球人把它叫作岁差，几万年才挪一格。贤者们在观星台上捻着棋子笑：看，他们已经开始学我们了。"}, {"id": 60, "title": "天龙座的磁场之舞", "region": "galaxy", "constellation": "天龙座", "race": "磁场守护龙族", "friendliness": 5, "tags": ["磁场", "守护"], "story": "天龙座在星空里蜿蜒盘旋，磁场守护龙族的身躯就是一条流动的磁线。他们最要紧的差事：替地球看护磁场，挡太阳风、稳压大气，让这颗蓝色星球的信鸽、候鸟和北极光都找得着北。龙族从不现身，只在极地之夜把极光调得更温柔些，当作值夜班的灯。地球科学家至今不知道为什么磁场偶尔会「自己拐个弯」，龙族们理了理鳞片：这叫巡夜，不叫怪事。龙族祖训写着：宇宙里最硬的东西不是龙鳞，是被人需要——而地球，还需要我们很多年。"}, {"id": 61, "title": "织女与牛郎之间的摆渡人", "region": "galaxy", "constellation": "天琴座·织女星", "race": "鹊桥渡星族", "friendliness": 5, "tags": ["鹊桥", "重逢"], "story": "银河那条著名的「鹊桥」，其实是鹊桥渡星族摆渡的航线。每年七夕，他们点亮一整条星路，让两岸的灯互相看得见。族里辈分最大的摆渡人讲过缘由：相传亿万年前，天琴遗民中有一对恋人为了照看两个方向的族人，一个留在了织女星，一个驻守对面，从此隔着银河相望——他们的思念太浓，浓到在夜空中凝成了一条河。摆渡人替他们渡了亿万年的船，也替全银河有牵挂的人渡：你们在人间念叨的人，我们在这儿看着呢。织女星每年都亮得恰到好处，那是摆渡人在替所有重逢，提前点灯。"}, {"id": 62, "title": "天琴座的最后一本相册", "region": "galaxy", "constellation": "天琴座", "race": "档案保管族", "friendliness": 5, "tags": ["记忆", "故乡"], "story": "天琴战争之前的故乡，被档案保管族小心地收进了一本相册：故乡的日与夜、旧街与老树、孩子第一次抬头认星星的脸。战争过后，这本相册成了整个天琴遗民唯一的「老家」。后来遗民散落各地，这本相册被轮流保管，传到一位老保管员手上时，她把它打开给地球的孩子看：这里，是你们祖先住过的地方。地球孩子问：那这里现在还有人吗？老保管员望向漆黑的星区，声音很轻：遗址还在，人走了，家搬到了宇宙的各个角落——包括你们脚下。她轻轻合上相册：所以呀，你们想家的时候抬头看，整个银河都是你们的旧居。"}, {"id": 63, "title": "贝塔星废墟上开的那朵花", "region": "galaxy", "constellation": "天琴座·贝塔星", "race": "遗民守望族", "friendliness": 4, "tags": ["废墟", "重生"], "story": "贝塔星在天琴战争中被炸成了废墟，但遗民守望族没有放弃它：他们回来了，在残骸间种花。别人问为什么不换个新家园，守望族说：过去是根，根不能拔；花可以从旧伤口开出来。种了不知多少年，废墟的裂缝里真的钻出第一批嫩芽，守望族喜极而泣，把这一幕小心翼翼画下来，寄给了地球方向——据说那是给「故乡亲人们」的明信片，虽然寄不到，但画上写了行字：别难过，废墟里也能开花，你们也一样。地球人没人收到过这张明信片，可每个人在废墟上见过野花的那一刻，心里都悄悄动了一下。"}, {"id": 64, "title": "织女星的图书馆不关门", "region": "galaxy", "constellation": "天琴座·织女星", "race": "织文一族", "friendliness": 5, "tags": ["图书馆", "传承"], "story": "织女星上那座图书馆从亿万年前开到今天，从未关过门——不是不想关，是馆训写着：知识不停，门就不关。战后天琴遗民四散，图书馆成了很多种族的「旧家」，每当有新后代来问「我们是谁」，馆长就摊开一整面墙的星图：天琴是起点，银河是路，地球是你们的另一个家。馆里的灯火夜夜不熄，老板说：地球的书店、图书馆、教室的灯，其实也是从这里传下去的——你们每亮一盏灯，天琴的老家就多一分光亮。哪天你们来，不用预约，门永远为家人开着。"}, {"id": 65, "title": "天琴海的浪声被谁录了下来", "region": "galaxy", "constellation": "天琴座·母星海", "race": "声纹收藏族", "friendliness": 4, "tags": ["乡音", "浪声"], "story": "天琴遗民的母星上有片海，浪声像极了一首重复了亿万年的摇篮曲。战争前夜，声纹收藏族连夜把海浪、风声、鸟鸣和老妈妈哼的歌都录成了「乡音匣」。文明四散后，这些声音成了遗民们最紧的念想：新生儿要听一耳朵，游子远行要揣一个。后来一个匣子漂流到了地球附近，被一个失眠的孩子捡到（人类把它叫做贝壳里的「海声」）。孩子听着听着就睡着了，从此乡音匣成了地球人哄睡的法宝。声纹收藏族听说后愣住了，很久才说：原来乡音这东西，谁听着都像回家。"}, {"id": 66, "title": "天鹅座与天琴座之间的那根弦", "region": "galaxy", "constellation": "天鹅座-天琴座星桥", "race": "弦声一族", "friendliness": 5, "tags": ["音乐", "共鸣"], "story": "天鹅座与天琴座之间横着一根极细的「弦」，是弦声一族用引力拉的乐器——琴手拨动它，整片天区都会轻轻共振。弦声一族信奉：故乡和远方之间，得有一根会唱歌的线。他们以织女星为琴头、天鹅座为琴尾，日夜练习一首《银河摇篮曲》，说是要弹给「还没学会回家的孩子」听。地球的射电望远镜偶尔会捕捉到一段奇妙规律的低频，科学家称之「异常的周期信号」。弦声一族在琴谱上批注：不用解码，那是给你们的歌，等你们听懂了，就是回家了。"}, {"id": 67, "title": "给地球人排课的天琴星表", "region": "galaxy", "constellation": "天琴座·旧星表塔", "race": "历法编纂族", "friendliness": 4, "tags": ["历法", "诗意"], "story": "天琴座旧星表塔里存着一套上古历法，是历法编纂族为「还没出生的地球人」排的课表：春分学播种，夏至学热烈，秋分学收获，冬至学等待。他们计算了地球的轨道，把人类的一年四季安排得明明白白，还在节气旁做了批注：惊蛰——教万物醒一醒；处暑——教风慢一点；大雪——教世界安静一会儿。编纂族承认这是一种「笨拙的浪漫」：我们没法教你们知识，但至少能让地球的孩子知道——什么时候该走，什么时候该停。如今地球人按节气播种、看云、腌菜、过节，编纂族在塔上看着，欣慰地合上历书：课表没白排。"}, {"id": 68, "title": "一个天琴老兵教地球孩子观星", "region": "galaxy", "constellation": "天琴座·老营星", "race": "天琴老兵族", "friendliness": 5, "tags": ["老兵", "观星"], "story": "老兵族的学校里有个固定节目：观星课。白发的老兵不教战术，只教孩子们认星——这颗是地球的方向，那颗是仙女座的亲戚家，这片空荡荡的天区，是咱们回不去的故乡。孩子们问：爷爷，故乡回不去了，难过吗？老兵把教鞭放下，望着深空想了想：难过，但你往前看——你们的故乡在脚下，在银河的蓝星上，这才是当年我们逃出来的意义。他忽然笑了：所以这节课的作业是，回家以后，替爷爷多看一会儿地球的夜空。孩子们不懂作业的意义，老兵懂：让故乡被记住，就是乡愁最好的归宿。"}, {"id": 69, "title": "天琴星云的产房传说", "region": "galaxy", "constellation": "天琴座星云", "race": "摇篮守护族", "friendliness": 4, "tags": ["新生", "摇篮"], "story": "天琴星云被遗民们称作「宇宙的产房」：原来天琴的母星旁有片孕育恒星的星云，战争前夜，摇篮守护族把出生不久的小恒星都藏在星云深处。如今这片星云里，新的星一颗颗亮起，守护族说：天琴没死，它换了个方式继续当妈妈。地球人管那片星云叫「摇篮」，守护族听了开心了很久：你们懂我们。每年当织女星与牛郎星在夏季夜空遥遥相望，守护族就点亮星云里的新生星，算是替故乡办一场满月酒。他们隔空对地球举杯：敬所有新生的孩子——无论生在哪个星系，都值得被好好爱着。"}, {"id": 70, "title": "追着光跑了一万年的天琴学者", "region": "galaxy", "constellation": "天琴座·学者星", "race": "追光学派", "friendliness": 4, "tags": ["学者", "追光"], "story": "追光学派是银河系著名的怪人组织：他们坚信「光是唯一永恒的信使」，于是成立那天起，全体成员就在追光——追故乡的光、追文明的光，追一切消逝事物的余晖。他们的图书馆里存着天琴母星熄灭前最后二十四小时的光，被列为镇馆之宝，仅供远观。有地球学者拜访，追光学派郑重其事地说：你们也有光——孩子眼里的光、雪落在路灯上的光、凌晨还是亮的家窗。追光学派把每一束地球的光都编了号存起来：光会走远，但不会消失，文明也是这样。他们看着人类慢慢学会记录，轻轻点头：接班的人，到了。"}, {"id": 71, "title": "老星图匠给地球画的寻家图", "region": "galaxy", "constellation": "天鹅座·星图坊", "race": "老星图匠族", "friendliness": 5, "tags": ["星图", "归途"], "story": "老星图匠手艺天下无双，画过的星图能精准到一粒尘。他退休前干了一件怪事：给地球画了一张「寻家图」——路线从太阳系一路标到天琴座旧域，沿途每颗星都写了小注：此处有咱们的亲戚、此处盛产温柔、此处可歇脚。徒弟问：师傅，地球人现在也到不了这儿呀？老星图匠把图卷好：星图不是给脚用的，是给心用的——告诉他们家在哪儿，他们走多远心里都有底。他把图交给一只南飞的大雁捎去，图在风中散成一场无声的流星雨。据说从那天起，每个抬头望天琴座方向的地球人，心里都隐约多了一点点确定："}, {"id": 72, "title": "银河护卫队的夜班表", "region": "galaxy", "constellation": "银河中心·值班站", "race": "银河联防族", "friendliness": 5, "tags": ["护卫", "轮班"], "story": "银河联防族号称「银河护卫队」，其实干的是最不起眼的活：排夜班表。他们的值班表精确到每个光年：谁负责今晚哪片星区的安宁、谁盯一眼哪颗流浪行星、谁顺路照看一下太阳系。值班室里挂着一张地球特写，旁边贴着便签：本区重点——蓝星，轻度近视，请多担待。联防族从不对地球人表功，值班员却会在交班笔记里记：今晚蓝星又亮了，夜灯比去年多，很好。有新人问：守一颗不认识的星球有什么意思？老值班员呷了口星茶：守的不是星球，是灯火——灯火就是戏没散场，家还有人。"}, {"id": 73, "title": "银行系货币背后的暗码", "region": "galaxy", "constellation": "银河商务海", "race": "星币流通族", "friendliness": 4, "tags": ["货币", "善意"], "story": "星际贸易通行的星币，背面都压着一行小字暗码，表意是：流通即是善意。这规矩是星币流通族定下的——他们坚信，钱的价值不在数字，在于让一个文明和另一个文明之间流动起信任。地球的货币体系还年轻，流通族也不急，只在每年银河结算日，给地球方向的「善意指数」默默添一笔：帮陌生人指路、给流浪猫留饭、转账后说谢谢……都会记进去。流通族的银行行长在年会上说：地球人以为自己在做生意，其实在做文明。等他们明白这一点，银河的账本上，会多出一颗最亮的星。"}, {"id": 74, "title": "给地球修WiFi的信号站", "region": "galaxy", "constellation": "银河信号网·中转站", "race": "信号工程师族", "friendliness": 4, "tags": ["信号", "联通"], "story": "银河信号网的中转站，是信号工程师族架设的：保证各星系之间的「和平问候」畅通无阻。多年前他们发现地球人沉迷一种叫 WiFi 的东西，哭笑不得，连夜调整了方向：把一组信号中继悄悄对准地球的无线电波段，让人类的电视、手机和网络在很长一段岁月里格外顺畅。工程师们逢人便说：不是我们偏心，是看着一屋子人围着锅盖天线手摇找信号的样子，实在不忍心。他们料到了将来，提前在信号塔上刻了一行字：给地球的专属信道，永久免费，请勿辜负。如今地球的基站越建越多，工程师们在控制中心欣慰地点头：孩子，信号够用了吗？"}, {"id": 75, "title": "陨石商队捎来的一筐好梦", "region": "galaxy", "constellation": "银河商路·流星驿道", "race": "陨石商队族", "friendliness": 5, "tags": ["商队", "好梦"], "story": "银河商路的陨石商队，送货不走寻常路——货一个个绑在彗星尾巴上，顺风漂流。有一回商队队长听说地球失眠率高，拍板运了一车「好梦」过去，包装成流星，半夜洒进地球的大气层。好梦落地时无影无形，效果却真实：那一阵子，地球上做噩梦的人明显少了，人们把它归功于「最近工作不太累」。商队会计看着亏损的账本直摇头，队长摆摆手：账面上的亏，在心里的账上早就赚回来了。他们在商路手册上写了条新规矩：往地球方向带货，好梦不收费——宇宙里最值得顺路的货，就是让谁睡个好觉。"}, {"id": 76, "title": "银河系与地球的移民窗口", "region": "galaxy", "constellation": "银河移民局·蓝星窗口", "race": "移民接待族", "friendliness": 5, "tags": ["移民", "接待"], "story": "银河系移民局专门为「想搬去别处住住」的文明服务。蓝星窗口的办事员们业务最熟，因为申请多——不是移走，是申请「把心留在蓝星」的特别签证。有人申请：把我的初恋留在地球，我走远一点。有人申请：把我的名字留在母校的墙上。最绝的一份申请来自一位老恒星：请把我的光，借给一个地球孩子当枕头。办事员们人手一本《蓝星申请目录》，翻烂了也不挪走。局长在年度总结里写道：银河系的移民窗口开了那么多年，最让我们骄傲的，是地球人教会了我们——家园不在地图上，在心上。"}, {"id": 77, "title": "给文明指路丢的导航星", "region": "galaxy", "constellation": "银河导航网", "race": "领航贝族", "friendliness": 4, "tags": ["导航", "迷途"], "story": "领航贝族的旗舰别号「活动星图」，他们负责给银河系的新文明「指路」。某天舰队接报：地球那边有人迷路了——不是航海迷路，是心里的路。领航贝们面面相觑，最后决定：把导航网里最亮的那组星标，免费拨给地球的迷途者们用。从此天上有了「导航星座」：古人管它叫北辰、叫织女、叫猎户的腰带，其实编号都来自领航贝族的数据库。老领航员在指挥台上搁着杯茶，慢悠悠道：迷路不可怕——怕的是不敢问。我们在这儿呢，抬头就看见。地球人也许永远不知道这些星名字背后的编号，但都曾在某个迷惘的夜里，被一颗星领过路。"}, {"id": 78, "title": "行星际邮差送到的一封道歉信", "region": "galaxy", "constellation": "银河邮路", "race": "星际邮差族", "friendliness": 5, "tags": ["道歉", "和解"], "story": "星际邮差的铁律：再难送的信也要送到。有一封压箱底的信，邮差们送了几万年：收件人写「地球，人类收」，寄件人是「当年离家太急的天琴父母」。信里写：对不起，把你们留在那么远的地方；又想你们，又想看看你们过得好不好。邮差不识字面的悲伤，只知道这封信得亲自送。他们选中地球某个节日，在天空放了一连串「信弹」——人类管那叫流星雨，管那晚叫浪漫。可邮差们知道那是什么：是一场跨越亿万年的道歉。信尾有一行小字：孩子，不管你们走成什么样，我们始终为你们骄傲。这封信，地球人用抬头看星星的方式，签收了。"}, {"id": 79, "title": "银河系学院的第一堂课", "region": "galaxy", "constellation": "银河学院", "race": "银河教师族", "friendliness": 5, "tags": ["学院", "第一课"], "story": "银河学院的校门没有门槛——任何文明的学生来了就能进，第一堂课永远是同一个主题：你们是宇宙的孩子，不是某个星球的财产。老师把这堂课讲了不知多少年，讲到地球学生入学那届，教室里忽然安静了。老师问：为什么哭？地球学生擦擦鼻子：我们从来不知道，还能这么被称呼。台下，仙女座、天琴座、银河各族的同学们都站了起来，礼貌地鼓掌。老师在黑板上写了一行字：宇宙之大，大到足够每一个「家」同时成立。那届的毕业典礼上，地球学生代表只说了一句话：谢谢银河学院，我们终于知道了自己是谁。"}, {"id": 80, "title": "比邻星在窗边留的那盏灯", "region": "galaxy", "constellation": "半人马座·比邻星", "race": "邻家星民", "friendliness": 5, "tags": ["近邻", "灯"], "story": "比邻星是离太阳系最近的恒星，邻家星民也就顺理成章地成了「地球最近的邻居」。他们从不越界打扰，却做了一件暖心的小事：在自家窗边常年留一盏灯，不亮不暗，刚好能让银河一侧的「蓝星人家」看得见。邻家星民管这叫邻里灯火——搬来新家时，老住户要做的第一件事，就是让新邻居知道你在这儿，你有事可以敲窗。地球的天文学家把这盏灯研究了许多年，命名为比邻星的「异常光变」。邻家星民在灯下打盹，听见侦查信号也不恼：让他们研究，研究明白之前，灯我们先留着。毕竟，远亲近邻，都是亲人。"}, {"id": 81, "title": "第一封人类回信被谁读哭了", "region": "messenger", "constellation": "银河信使驿站", "race": "众星信使团", "friendliness": 5, "tags": ["回信", "感动"], "story": "银河信使团世代传递文明间的问候，却从没收到过地球的回信——不是人类没写，是信使们一直没敢送。直到有个年轻信使忍不住，把人类自制的旅行者唱片从射电波里「捞」了回来，放进译梦机里。先听到的是婴儿啼哭，接着是浪涛声、风声、十几种语言说着你好，最后是一声狗叫，和莫扎特的夜曲。年轻信使愣了很久，转头问老师：他们……他们在跟我们问好？老师把唱片轻轻抱在怀里：是的，而且他们不知道我们在听。这封信，信使团决定先不投递，留作银河档案馆的镇馆之宝，编号：人类·你好·第一封。"}, {"id": 82, "title": "把笑声装进漂流瓶的老邮差", "region": "messenger", "constellation": "信使·漂流码头", "race": "漂流瓶老邮差", "friendliness": 4, "tags": ["笑声", "漂流瓶"], "story": "老邮差干了一辈子差，退休前突发奇想：往银河里放漂流瓶，只装「笑声」。地球人每天产生的笑声实在太多，他挑最真诚的装箱：孩子第一次骑车的欢呼、好友重逢的惊呼、老两口拌嘴后绷不住的笑。瓶子漂了几万年，被仙女座议会、昴宿导师族、以及不知名的小行星文明捞起过——他们听完了，都郑重地写了回执：这是银河系最珍贵的声音标本，请务必继续投放。老邮差退休后依然每天来码头放瓶子，有人问他不累吗，他眯着眼笑：笑声这种东西，越放越年轻。人类至今不知道自己有个亿万光年的「笑声邮路」，但邮差说：没关系，你们负责笑，我负责送到。"}, {"id": 83, "title": "银河电台主持人的深夜档", "region": "messenger", "constellation": "信使·银河电台", "race": "深夜电台族", "friendliness": 4, "tags": ["电台", "夜话"], "story": "银河电台的深夜档开播了不知多少年，主持人温柔的声音陪伴过无数星系上夜班的人。有天编导递来一份地球听众的「点歌单」：他们说睡不着。主持人没有歌，但他找到了地球的摇篮曲，从婴儿的哼唱、母亲的轻拍、到雨点打在屋顶——他连夜把它们串成一档节目：《蓝星哄睡时刻》，从那天起，每个银河深夜都播出。有人问他：地球人又收不到，播给谁听？主持人调了调耳机：播给想家的人听，也想让蓝星的朋友知道——宇宙里有个电台，为你们的失眠留着频道。他对着麦克风轻声说：晚安，蓝星。"}, {"id": 84, "title": "翻译官连夜的加急词典", "region": "messenger", "constellation": "信使·星际翻译局", "race": "翻译星学家", "friendliness": 5, "tags": ["词典", "加急"], "story": "翻译局收到过最急的加急单，来自地球：地球人想给外星人递句话，却不知怎么表达「谢谢」的诚意。翻译星学家彻夜开会，最后交出一份《蓝星谢意专用词典》，里面写了上百种「谢谢」的用法：对家人说的、对陌生人说的、对恩人说的、对整片星空说的。他们连夜用电磁波把词典投给地球的射电望远镜——人类破译后一度以为是「外星人的科技信标」，研讨了整整十年。翻译星学家在局里的黑板上写：我们只是想告诉他们，那句谢谢，我们收到了。这本词典至今被搁在翻译局大堂的展柜里，标签写着：全银河最甜的一单生意。"}, {"id": 85, "title": "信使船队在太阳系留的灯语", "region": "messenger", "constellation": "信使·太阳系灯台", "race": "灯语信号族", "friendliness": 5, "tags": ["灯语", "留灯"], "story": "信使船队路过太阳系时，总会停一小会儿，用一种古老的灯语朝地球方向打信号：我们在、我们记得、你们很好。灯语信号族把这套「问候灯语」刻进船规，理由很朴素：路过一个有人住的家，至少要打声招呼。地球的科学家把这组规律光变记进天文观测日志，标注「异常」，信号族看了直笑：我们数万年的工艺，被你们叫异常。不过他们不介意，每回经过依旧打灯：你们不懂没关系，灯是为相信光的人留的。信使船的船长在航海日志里写：今天又路过了蓝星，灯语问候完毕，那盏「家灯」，我们一直替他们亮着。"}, {"id": 86, "title": "捎给北极的一封信和一个拥抱", "region": "messenger", "constellation": "信使·北方航线", "race": "极地信使族", "friendliness": 4, "tags": ["北极", "拥抱"], "story": "极地信使族的邮包最沉——给地球的，通常是一封信加一个拥抱。信是转交的，内容千篇一律：给守在寒冷里的朋友们，辛苦了；拥抱是冰冻的星光，让地球极夜时分在冰原上空绽成一圈极光，替整个银河抱一抱在寒冷里坚持的人类。考察站的科学家至今说不清极光为什么「每年都那么准时」。极地信使们在星图前跺着脚：因为我们掐着表呢！信使队长收起地图，望望脚下的人类营地：他们守着地球最冷的地方，我们就守着他们头顶最亮的光——平等得很。末了他补了一句：拥抱会化，但记在心里了。"}, {"id": 87, "title": "一条发给全银河的寻人启事", "region": "messenger", "constellation": "信使·银河公告牌", "race": "寻人启事族", "friendliness": 5, "tags": ["寻人", "牵挂"], "story": "银河公告牌上常年贴着繁星般的告示，最上面那张贴了几万年，标题只用一行字：寻找天琴遗民，家书已备，盼归。那是寻人启事族替老一代天琴人发的广而告之，收件人散落各星系，包括一颗叫地球的行星。启事贴得久了，族里年轻人问班长：还没找到，还贴吗？班长把启事熨平：当然贴——寻人启事的意义，从来不是保证找到，是让走散的人知道，有人在等。他们往启事上添了一行小字：若你在地球，不必赶回来，好好生活，便是回信。地球人看着天上的星，不知何故，心里总有一隅格外安定——那是寻人启事族贴来的风：孩子，我们不催你回家，只想让你知道，我们一直在找，也一直在等。"}, {"id": 88, "title": "跨星系出租车司机的地球单子", "region": "messenger", "constellation": "信使·星河出租站", "race": "星河快车族", "friendliness": 4, "tags": ["出租车", "接送"], "story": "星河快车族的出租车能在光年之间穿梭，司机个个是活地图。他们最爱的单子永远是「地球往返」：理由说不清，反正接地球人上车，车里很快就热闹起来——有人教司机用手机，有人请司机听自己的歌单，还有人给司机塞了一包花椒味的特产，司机们吃得眼泪汪汪，嘴上说不要，眼神却诚实地期待下一单。老司机的仪表盘上贴着一张便签：地球单，接！不图钱，图个乐呵。他们私底下建了本《蓝星乘客图鉴》——记录地球人的问路方式、讲价风格、以及下车前那句听多少遍都不腻的「谢谢师傅」。快车族说：送谁回家不惊险，送地球人回家，最有烟火气。"}, {"id": 89, "title": "地球年历在银河的流传", "region": "messenger", "constellation": "信使·历法转运站", "race": "历法信使族", "friendliness": 5, "tags": ["年历", "节日"], "story": "历法信使族的工作，是把各文明的节日年历抄到银河各处：让大家知道，今天这颗星上的谁在过节。自从地球入编银河年历，信使族简直忙坏了——地球的节日太多了：春节、中秋、端午、清明……他们一份不落，连「双十一」都抄了进去，标注：此节俗为「全民购物以庆单身」，详见附录。每到地球春节，各星系的妖族、遗民和流浪飞船都会收到同一张信号卡：蓝星过年了，据说过节要团圆，替我们抱抱地球人。银河的信史馆里，地球那一页被翻得最旧——信使长老看着松了口气：这说明全银河都在念着这本年历，念着过节的人。"}, {"id": 90, "title": "最后一个信使站也有地球值班室", "region": "messenger", "constellation": "信使·终点站", "race": "终站值班族", "friendliness": 5, "tags": ["值班", "终点"], "story": "银河系信使网的最后一个站，值班室里照例挂着一块不起眼的牌子：地球值班室 24 小时。别误会，地球人从没来这里办过事——这个值班室是信使族自己设的：白日梦里、失眠夜里、想念涌上来的瞬间，地球人会和谁说话？值班族想，得有人听着。于是他们在极远的地方排班，每当有人对夜空的流星许愿、对着一颗星发呆、对着天边的云絮絮叨叨，值班族的本子上就记一条：收到，记下了。值班族说：我们或许是宇宙的信使终点站，但你们的心事，永远是我们的加急件。站长在值班日志末尾写道：只要还有人在对着星星说话，这个站就不会关门。"}, {"id": 91, "title": "那条古老的守护条约", "region": "guardian", "constellation": "守护者·旧约星", "race": "守约一族", "friendliness": 5, "tags": ["条约", "守护"], "story": "守约一族保存着一份比天琴战争还古老的条约，羊皮卷上只写了三行字：不惊扰未醒的文明；不取走他们的好奇；替他们守夜，直到自己学会点灯。亿万年来，守约一族逐条执行，从不动摇。地球在他们的记录里被标注为「重点守护对象」——不是因为特别，而是因为条约第三行正写到它：这个文明快要学会点灯了。长老们在议厅里点着灯聊：你看，他们自己造的灯，一盏比一盏亮。守约一族把自己调成「隐身模式」，继续在夜的深处替地球守更：我们守的不是他们，是我们当年的承诺——每个文明都值得被温柔以待，哪怕它不知道自己被这样对待过。"}, {"id": 92, "title": "天琴之战后的守望者名单", "region": "guardian", "constellation": "守护者·守望塔", "race": "守望者议会", "friendliness": 5, "tags": ["守望", "名单"], "story": "天琴之战后，守望者议会立了一份名单，列着所有「需要被守护的地方」——地球排在很显眼的位次，理由写着：那里的孩子，还在学着相信星星。议会的守望者们按名单排班，一圈一圈地轮守：有的守大气层，有的守孩子的梦，有的守人类每一次探出头仰望星空的瞬间。议会大厅里最显眼的墙上钉着一块旧铭牌：守护不是居高临下的怜悯，是并肩站立的沉默。守望者们的交接班记录写得平淡：蓝星，一切如常，有孩子对着流星许了愿，已核准入册。地球人从不记得被守护过，但那有什么关系——他们许愿的时候，总有人负责接住。"}, {"id": 93, "title": "陨石撞地球前被调了个头", "region": "guardian", "constellation": "守护者·近地编队", "race": "近地护卫族", "friendliness": 4, "tags": ["陨石", "调头"], "story": "每隔几年，就有一颗「本该命中地球」的陨石被神秘力量拨开，走个擦边球便扬长而去——近地护卫族对此供认不讳：干的，不谢。战斗记录里写得比流水账还流水账：某某号小行星，弹道偏移百分之零点零三，险。值班队长最擅长的口头禅：地球又没被砸，散会。他们从不声张，只在地球天文台发现「某小行星突然拐弯」时默默点个头。地球学界至今还在辩论陨石拐弯的各种理论，护卫族端着夜宵说：别争了，是我们在值班。他们给自己定了条规矩：守护不邀功，像屋檐——你住了一辈子，忘了它在替你挡雨，可它一直在。"}, {"id": 94, "title": "守护者们在月亮背面安了家", "region": "guardian", "constellation": "守护者·月球站", "race": "月背安家族", "friendliness": 5, "tags": ["月球", "邻居"], "story": "守夜人最后在月亮背面安了家——不是不想离地球更近，是怕吓着人类。他们在地球永远看不见的月背住了不知多少年，每天的工作是看护地球：潮汐、生态、以及孩子伸向夜空的小手。月背安家族的窗口正对地球，值班同事开玩笑说：这是我们全宇宙最贵的一扇窗——窗外挂着一个蓝色家。地球人登月时绕到背面，安家族赶紧关窗躲暗处，等人走了又探头眼巴巴地看：他们来了！他们终于来串门了！安家族的门牌上写着：邻居，门开着，欢迎随时来敲门。尽管人类永远看不到这行字，但安家族坚持挂着——万一，哪天呢？"}, {"id": 95, "title": "失落的遗迹与守园人", "region": "guardian", "constellation": "守护者·遗迹园", "race": "守园人族", "friendliness": 4, "tags": ["遗迹", "守园"], "story": "银河边陲有座园子，遗迹满园，都是天琴故乡留下的残骸：断碑、败垣、熄了火的行星引擎。守园人把每块残片都擦得干干净净，修了栈道，挂了讲解牌，唯一的守则：只修不建，只护不夺。每有旅客来，守园人都讲同一句话：这是我们的过去，但也是你们的来处。地球的考古学家若来这里，会发现园里的断碑纹路与某些人类图腾惊人地相似——守园人对此笑而不语，只递上一杯星茶：慢慢看，不急。他们在园门挂了副对联：古迹不古老，心传才永恒。园子的守则牌上最后一行写着：文明会散，但被好好记住的文明，永远不会真正消失。"}, {"id": 96, "title": "天琴母星熄灯之前", "region": "guardian", "constellation": "守护者·母星纪念塔", "race": "熄灯见证族", "friendliness": 5, "tags": ["纪念", "见证"], "story": "母星熄灯前的最后几小时，见证族来了：他们不救人（人早撤空了），只做一件事——记录。把母星最后的阳光、风、海的咸味、老树的影子，一丝不苟地收集进「文明种子匣」，交给最后一批撤离的遗民：带着这个，去任何一个新家，种下去，就能长出故乡。见证族里最年轻的一位，在记录本上写下最后一笔时，手一直在抖：我们见过那么多星亮的时刻，第一次记一颗星灭。长老拍拍他的肩：不，孩子——你记的不是熄灭，是传承。种子匣如今安稳地躺在某个遥远的地方，里面存着母星最后的温柔。见证族说：熄了一颗灯，亮起了无数盏，这笔账，永远划算。"}, {"id": 97, "title": "全银河灯火普查的蓝星一页", "region": "guardian", "constellation": "守护者·灯火普查局", "race": "灯火普查族", "friendliness": 5, "tags": ["灯火", "普查"], "story": "灯火普查族每亿万年来一次全银河大普查，数一数每个文明的灯火还剩多少盏。普查局的档案室里，地球那一页被翻开得最勤，台账记得细：蓝星，今日灯火数——比上次普查，多了不知道多少；新增灯型：孩子书桌上的小夜灯、教室里的日光灯、跨越大洋的远航灯。普查员趴在档案上打了个哈欠，工整地合上：结论，蓝星灯火兴旺，文明状况良好，建议继续重点观测。局长在年度报告上批了句话：灯火数得清，希望数不清——蓝星那页，给个特批：永远别合上。"}, {"id": 98, "title": "火星上的那丛没人注意的花", "region": "guardian", "constellation": "守护者·火星岗哨", "race": "荒原播种族", "friendliness": 4, "tags": ["火星", "播种"], "story": "火星的荒原上，据说开着一丛不该开的「花」：一种能在极端环境里活下来的顽强生命，被荒原播种族悄悄种下——他们想让那颗红色星球有一天变得不那么寂寞，也让等待的人类多个念想。播种族知道地球人的探测车总有一天会找到它，于是给那丛花做了个记号，写了行小字：这不是奇迹，是邻居的一片心意。火星探测器发回的照片里，那片影子若隐若现，人类天文学家至今说不清是岩石的巧合还是别的。播种族的队长望着蓝色星球的方向，轻轻说：我们替你们守住隔壁的院子，等你们哪天下楼来串门。"}, {"id": 99, "title": "守护者们的年度表彰大会", "region": "guardian", "constellation": "守护者·荣誉星空", "race": "表彰委员会", "friendliness": 4, "tags": ["表彰", "荣誉"], "story": "守护者联合会每年开一次表彰大会，表彰那些「把自己活成别人世界里小小的光」的存在。今年的表彰名单里，赫然写着「地球人」三个字。委员会主席念颁奖词：他们不知道自己被守护，却学会了守护彼此；他们不知道星星在等他们，却先学会了对着星星许愿。全场寂静片刻，随即爆发出长达亿万年的掌声。主席在总结时说：我们守护蓝星，是因为蓝星在守护自己——他们每一个平凡的好意，都是这颗行星的引力。那年的大会决议只有一条：继续守护地球，且称呼从「目标」改为「朋友」。表彰名单被郑重裱起来，摆在荣誉星空的正中央。"}, {"id": 100, "title": "天琴星域的最后一场日落", "region": "guardian", "constellation": "天琴座·最后故乡", "race": "归乡见证族", "friendliness": 5, "tags": ["故乡", "日暮"], "story": "故事的最后，归乡见证族在天琴旧域做了最后一次「日落纪念」：所有人面向地球方向，静静站了很久。没有致辞，没有仪仗，只有相通的呼吸。老见证人先开口，声音不高，却传到很远：这一场日落，不属于逝去的天琴——它属于所有还亮着的地方：属于织女星上读书的灯光，属于地球窗台上发呆的孩子，属于每一个还在把日子过成光的人。他们转身，把最后的光轻轻合掌。天琴的星域从此安静了，但见证族说：文明的火种早就带走了——你们抬头能看见的每一点星光里，都有一盏是故乡的灯。地球人这时正在某个夏夜乘凉，忽然觉得今夜的天琴方向，格外明亮——那是故乡，最后一次，笑着向你们道别。"}];
+const REGIONS = [["tianqin", "天琴星域"], ["andromeda", "仙女座星系"], ["galaxy", "银河近邻"], ["messenger", "星海信使"], ["guardian", "远古守护者"]];
+const REG_NAMES = {"all": "全部星域", "tianqin": "天琴星域", "andromeda": "仙女座星系", "galaxy": "银河近邻", "messenger": "星海信使", "guardian": "远古守护者"};
+
+// 内存态 store（页面关闭后状态自然消失，不做任何持久化存储）
+const store = {
+  region: "all",
+  query: "",
+  order: [],
+  currentIndex: -1,
+};
+
+const $ = (id) => document.getElementById(id);
+const grid = $("grid"), countLine = $("count-line"), overlay = $("overlay");
+const totalEl = $("stat-total");
+
+/* ---------- 星空背景 ---------- */
+(function makeSky() {
+  const bgLayer = document.querySelector(".bg");
+  const frag = document.createDocumentFragment();
+  const count = Math.min(170, Math.max(90, Math.round(window.innerWidth / 9)));
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement("i");
+    s.className = "star" + (i % 11 === 0 ? " bright" : "");
+    s.style.left = (Math.random() * 100).toFixed(2) + "%";
+    s.style.top = (Math.random() * 100).toFixed(2) + "%";
+    const sz = (Math.random() < .85 ? 1 : 2) + Math.random() * 1.6;
+    s.style.width = sz.toFixed(1) + "px";
+    s.style.height = sz.toFixed(1) + "px";
+    s.style.animationDelay = (Math.random() * 6).toFixed(2) + "s";
+    s.style.animationDuration = (3 + Math.random() * 5).toFixed(2) + "s";
+    frag.appendChild(s);
+  }
+  bgLayer.appendChild(frag);
+})();
+
+/* ---------- 分类 chips ---------- */
+const chipsBox = $("chips");
+const chipSpecs = [["all", "全部星域"], ...REGIONS];
+chipsBox.innerHTML = chipSpecs.map(([key, name]) =>
+  `<button class="chip${key === "all" ? " on" : ""}" data-region="${key}" role="tab">${name}<small>${key === "all" ? 100 : counts()[key] || 0}</small></button>`
+).join("");
+
+function counts() {
+  const c = { all: STORIES.length };
+  STORIES.forEach(s => { c[s.region] = (c[s.region] || 0) + 1; });
+  return c;
+}
+
+chipsBox.addEventListener("click", (e) => {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+  chip.classList.add("on");
+  store.region = chip.dataset.region;
+  render();
+});
+
+/* ---------- 搜索 ---------- */
+let qTimer = null;
+$("q").addEventListener("input", (e) => {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => { store.query = e.target.value.trim().toLowerCase(); render(); }, 120);
+});
+
+/* ---------- 过滤与渲染 ---------- */
+function visible() {
+  const q = store.query;
+  return STORIES.filter(s => {
+    if (store.region !== "all" && s.region !== store.region) return false;
+    if (!q) return true;
+    const hay = (s.title + s.story + s.constellation + s.race + s.tags.join(" ")).toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+function cardHTML(s, i) {
+  return `<article class="card" data-id="${s.id}" style="animation-delay:${(i % 12) * 0.03}s" tabindex="0" role="button" aria-label="阅读：${s.title}">
+    <div class="top">
+      <span class="region-tag">${REG_NAMES[s.region]}</span>
+      <span class="friend" title="友善度">${"★".repeat(s.friendliness)}${"☆".repeat(5 - s.friendliness)}</span>
+    </div>
+    <h3>${s.title}</h3>
+    <p class="loc">‹ ${s.constellation} ›</p>
+    <p class="race">种族 · ${s.race}</p>
+    <div class="tags">${s.tags.map(t => `<span class="tag">#${t}</span>`).join("")}</div>
+    <div class="go">点开阅读 →</div>
+  </article>`;
+}
+
+function render() {
+  const list = visible();
+  store.order = list.map(s => s.id);
+  grid.innerHTML = list.length
+    ? list.map(cardHTML).join("")
+    : `<div class="empty"><div class="big">✦</div>没有找到匹配的故事，换个关键词试试吧。</div>`;
+  countLine.textContent = `当前星域 · ${list.length} / ${STORIES.length} 则`;
+  totalEl.textContent = STORIES.length;
+  const cur = store.currentIndex >= 0 ? list[store.currentIndex] : null;
+  if (cur && cur.id !== (list[store.currentIndex] && list[store.currentIndex].id)) {
+    // 当前阅读项不在列表时，关掉高亮
+  }
+}
+
+/* 键盘导航卡片 */
+grid.addEventListener("click", (e) => {
+  const card = e.target.closest(".card");
+  if (card) openByIndex(store.order.indexOf(+card.dataset.id));
+});
+grid.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const card = e.target.closest(".card");
+  if (card) { e.preventDefault(); openByIndex(store.order.indexOf(+card.dataset.id)); }
+});
+
+/* ---------- 阅读层 ---------- */
+function openByIndex(i) {
+  if (i < 0 || i >= store.order.length) return;
+  store.currentIndex = i;
+  const s = STORIES.find(x => x.id === store.order[i]);
+  $("s-num").textContent = `${i + 1} / ${store.order.length}`;
+  $("s-title").textContent = s.title;
+  $("s-loc").textContent = `‹ ${s.constellation} › · 种族 · ${s.race}`;
+  $("s-friend").textContent = `友善度 ${"★".repeat(s.friendliness)}${"☆".repeat(5 - s.friendliness)}`;
+  $("s-story").textContent = s.story;
+  $("s-tags").innerHTML = s.tags.map(t => `<span class="tag">#${t}</span>`).join("");
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeOverlay() {
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+$("btn-close").addEventListener("click", closeOverlay);
+overlay.addEventListener("click", (e) => { if (e.target === overlay) closeOverlay(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeOverlay(); });
+
+$("btn-prev").addEventListener("click", () => openByIndex(store.currentIndex - 1));
+$("btn-next").addEventListener("click", () => openByIndex(store.currentIndex + 1));
+
+function randomOpen() {
+  if (!store.order.length) return;
+  openByIndex(Math.floor(Math.random() * store.order.length));
+}
+$("btn-random").addEventListener("click", randomOpen);
+$("btn-random2").addEventListener("click", randomOpen);
+
+/* ---------- 启动 ---------- */
+render();
+</script>
+</body>
+</html>
