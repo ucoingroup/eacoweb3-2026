@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EACO CrossChain Bridge doge | 地球EACO跨链桥探索2024</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            dark: '#0f172a',
+            cardBg: '#1e293b',
+            accent: '#0ea5e9'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto { content-visibility: auto; }
+      .glass { background: rgba(30,41,59,0.7); backdrop-filter: blur(12px); border:1px solid rgba(255,255,255,0.1); }
+    }
+  </style>
+</head>
+<body class="bg-dark text-gray-100 min-h-screen">
+  <script>
+    // ====== 6国语言字典 ======
+    const i18n = {
+      "zh-CN": {
+        siteTitle: "EACO跨链桥探索2025",
+        navHome: "首页",
+        navBridge: "跨链兑换",
+        navAssets: "资产",
+        navHistory: "交易记录",
+        navDocs: "文档",
+        selectLang: "语言",
+        connectWallet: "连接钱包",
+        bridgeTitle: "跨链资产转移",
+        fromChain: "源链",
+        toChain: "目标链",
+        asset: "资产",
+        amount: "数量",
+        balance: "余额",
+        estimateFee: "预估手续费",
+        estimateTime: "预估到账时间",
+        recipientAddr: "接收地址",
+        submitBridge: "发起跨链",
+        warningTitle: "风险提示",
+        warningText: "本项目仅为技术原型演示。跨链桥存在合约漏洞、中继节点、资产托管等风险。加密资产波动极大，请自行承担全部风险。EarthCoin(EAC)为实验资产，流动性极低。",
+        chainList: {
+          doge: "Dogecoin 原生狗狗币",
+          eac: "EarthCoin EAC地球币(实验)",
+          bsc: "BNB Smart Chain(BSC)",
+          sol: "Solana"
+        },
+        assetList: {
+          DOGE:"DOGE狗狗币",
+          EAC:"EAC地球币",
+          wBNB:"wBNB",
+          wETH:"wETH",
+          wBTC:"wBTC",
+          USDT:"USDT",
+          USDC:"USDC",
+          SOL:"SOL"
+        },
+        txHash:"交易哈希",
+        status:"状态",
+        waitingConfirm:"等待确认",
+        minting:"铸造映射币",
+        completed:"跨链完成"
+      },
+      "en-US": {
+        siteTitle: "EACO CrossChain Bridge 2025",
+        navHome: "Home",
+        navBridge: "Bridge",
+        navAssets: "Assets",
+        navHistory: "Tx History",
+        navDocs: "Docs",
+        selectLang: "Language",
+        connectWallet: "Connect Wallet",
+        bridgeTitle: "Cross-Chain Transfer",
+        fromChain: "From Chain",
+        toChain: "To Chain",
+        asset: "Asset",
+        amount: "Amount",
+        balance: "Balance",
+        estimateFee: "Est Fee",
+        estimateTime: "Est Arrival Time",
+        recipientAddr: "Recipient Address",
+        submitBridge: "Bridge Now",
+        warningTitle: "Risk Warning",
+        warningText: "This is only a tech prototype. Cross-chain bridges carry risks including contract bugs, relayer failures and custody risk. Crypto assets are highly volatile, use at your own risk. EarthCoin(EAC) is experimental with very low liquidity.",
+        chainList: {
+          doge: "Dogecoin Native",
+          eac: "EarthCoin EAC(Experimental)",
+          bsc: "BNB Smart Chain(BSC)",
+          sol: "Solana"
+        },
+        assetList: {
+          DOGE:"DOGE",
+          EAC:"EAC EarthCoin",
+          wBNB:"wBNB",
+          wETH:"wETH",
+          wBTC:"wBTC",
+          USDT:"USDT",
+          USDC:"USDC",
+          SOL:"SOL"
+        },
+        txHash:"Tx Hash",
+        status:"Status",
+        waitingConfirm:"Waiting Confirm",
+        minting:"Minting Wrapped Token",
+        completed:"Completed"
+      },
+      "es-ES": {
+        siteTitle: "Puente CrossChain EACO 2025",
+        navHome: "Inicio",
+        navBridge: "Puente",
+        navAssets: "Activos",
+        navHistory: "Historial",
+        navDocs: "Docs",
+        selectLang: "Idioma",
+        connectWallet: "Conectar billetera",
+        bridgeTitle: "Transferencia entre cadenas",
+        fromChain: "Desde red",
+        toChain: "Hacia red",
+        asset: "Activo",
+        amount: "Cantidad",
+        balance: "Saldo",
+        estimateFee: "Comisión estimada",
+        estimateTime: "Tiempo estimado",
+        recipientAddr: "Dirección destino",
+        submitBridge: "Hacer puente",
+        warningTitle: "Aviso de riesgo",
+        warningText: "Solo prototipo técnico. Puentes cross-chain tienen riesgos de contratos, relés y custodia. Los criptoactivos son volátiles, usa bajo tu responsabilidad. EarthCoin(EAC) es experimental y de baja liquidez.",
+        chainList: {
+          doge: "Dogecoin Nativo",
+          eac: "EarthCoin EAC(Exp.)",
+          bsc: "BNB Smart Chain",
+          sol: "Solana"
+        },
+        assetList: {
+          DOGE:"DOGE",
+          EAC:"EAC EarthCoin",
+          wBNB:"wBNB",
+          wETH:"wETH",
+          wBTC:"wBTC",
+          USDT:"USDT",
+          USDC:"USDC",
+          SOL:"SOL"
+        },
+        txHash:"Hash transacción",
+        status:"Estado",
+        waitingConfirm:"Esperando confirmación",
+        minting:"Acuñando token envuelto",
+        completed:"Completado"
+      },
+      "fr-FR": {
+        siteTitle: "Pont CrossChain EACO 2025",
+        navHome: "Accueil",
+        navBridge: "Pont",
+        navAssets: "Actifs",
+        navHistory: "Historique",
+        navDocs: "Docs",
+        selectLang: "Langue",
+        connectWallet: "Connecter portefeuille",
+        bridgeTitle: "Transfert inter-chaînes",
+        fromChain: "Depuis chaîne",
+        toChain: "Vers chaîne",
+        asset: "Actif",
+        amount: "Montant",
+        balance: "Solde",
+        estimateFee: "Frais estimés",
+        estimateTime: "Temps estimé",
+        recipientAddr: "Adresse destinataire",
+        submitBridge: "Lancer le pont",
+        warningTitle: "Avertissement risque",
+        warningText: "Ceci est un prototype technique. Les ponts inter-chaînes comportent des risques de bug contrat, relais et garde. Actifs crypto très volatils, utilisation à vos risques. EarthCoin(EAC) est expérimental et peu liquide.",
+        chainList: {
+          doge: "Dogecoin Natif",
+          eac: "EarthCoin EAC(Exp.)",
+          bsc: "BNB Smart Chain",
+          sol: "Solana"
+        },
+        assetList: {
+          DOGE:"DOGE",
+          EAC:"EAC EarthCoin",
+          wBNB:"wBNB",
+          wETH:"wETH",
+          wBTC:"wBTC",
+          USDT:"USDT",
+          USDC:"USDC",
+          SOL:"SOL"
+        },
+        txHash:"Hash tx",
+        status:"Statut",
+        waitingConfirm:"Attente confirmation",
+        minting:"Frappe token wrappé",
+        completed:"Terminé"
+      },
+      "ru-RU": {
+        siteTitle: "Мост EACO CrossChain 2025",
+        navHome: "Главная",
+        navBridge: "Мост",
+        navAssets: "Активы",
+        navHistory: "История",
+        navDocs: "Документы",
+        selectLang: "Язык",
+        connectWallet: "Подключить кошелек",
+        bridgeTitle: "Межсетевая передача",
+        fromChain: "Из сети",
+        toChain: "В сеть",
+        asset: "Актив",
+        amount: "Сумма",
+        balance: "Баланс",
+        estimateFee: "Оцен. комиссия",
+        estimateTime: "Оцен. время",
+        recipientAddr: "Адрес получателя",
+        submitBridge: "Запустить мост",
+        warningTitle: "Предупреждение рисков",
+        warningText: "Это технический прототип. Межсетевые мосты имеют риски багов, релеев и хранения. Криптоактивы волатильны, все риски на вас. EarthCoin(EAC) эксперимент, малая ликвидность.",
+        chainList: {
+          doge: "Dogecoin натив",
+          eac: "EarthCoin EAC(Эксп.)",
+          bsc: "BNB Smart Chain",
+          sol: "Solana"
+        },
+        assetList: {
+          DOGE:"DOGE",
+          EAC:"EAC EarthCoin",
+          wBNB:"wBNB",
+          wETH:"wETH",
+          wBTC:"wBTC",
+          USDT:"USDT",
+          USDC:"USDC",
+          SOL:"SOL"
+        },
+        txHash:"Хэш транзакции",
+        status:"Статус",
+        waitingConfirm:"Ожид подтверждения",
+        minting:"Чеканка обернутого токена",
+        completed:"Завершено"
+      },
+      "ar-SA": {
+        siteTitle: "جسر EACO عبر السلاسل 2025",
+        navHome: "الرئيسية",
+        navBridge: "الجسر",
+        navAssets: "الأصول",
+        navHistory: "السجل",
+        navDocs: "المستندات",
+        selectLang: "اللغة",
+        connectWallet: "ربط المحفظة",
+        bridgeTitle: "نقل عبر السلاسل",
+        fromChain: "من السلسلة",
+        toChain: "إلى السلسلة",
+        asset: "الأصل",
+        amount: "المبلغ",
+        balance: "الرصيد",
+        estimateFee: "الرسوم المقدرة",
+        estimateTime: "الوقت المتوقع",
+        recipientAddr: "عنوان المستلم",
+        submitBridge: "تنفيذ الجسر",
+        warningTitle: "تحذير المخاطر",
+        warningText: "هذا نموذج تقني فقط. جسور السلاسل تحمل مخاطر أخطاء العقود والمرحلات والحفظ. الأصول المشفرة متقلبة، استخدمها على مسؤوليتك. EarthCoin(EAC) تجريبي وانخفاض السيولة.",
+        chainList: {
+          doge: "Dogecoin أصلي",
+          eac: "EarthCoin EAC(تجريبي)",
+          bsc: "BNB Smart Chain",
+          sol: "Solana"
+        },
+        assetList: {
+          DOGE:"DOGE",
+          EAC:"EAC EarthCoin",
+          wBNB:"wBNB",
+          wETH:"wETH",
+          wBTC:"wBTC",
+          USDT:"USDT",
+          USDC:"USDC",
+          SOL:"SOL"
+        },
+        txHash:"هاش المعاملة",
+        status:"الحالة",
+        waitingConfirm:"بانتظار التأكيد",
+        minting:"سك العملة المغلفة",
+        completed:"مكتمل"
+      }
+    }
+    let currentLang = "zh-CN";
+    function setLang(lang){
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      renderI18n();
+    }
+    function renderI18n(){
+      const t = i18n[currentLang];
+      document.querySelector("#siteTitle").innerText = t.siteTitle;
+      document.querySelector("#navHome").innerText = t.navHome;
+      document.querySelector("#navBridge").innerText = t.navBridge;
+      document.querySelector("#navAssets").innerText = t.navAssets;
+      document.querySelector("#navHistory").innerText = t.navHistory;
+      document.querySelector("#navDocs").innerText = t.navDocs;
+      document.querySelector("#selectLangTxt").innerText = t.selectLang;
+      document.querySelector("#connectWallet").innerText = t.connectWallet;
+      document.querySelector("#bridgeTitle").innerText = t.bridgeTitle;
+      document.querySelector("#fromChainTxt").innerText = t.fromChain;
+      document.querySelector("#toChainTxt").innerText = t.toChain;
+      document.querySelector("#assetTxt").innerText = t.asset;
+      document.querySelector("#amountTxt").innerText = t.amount;
+      document.querySelector("#balanceTxt").innerText = t.balance;
+      document.querySelector("#feeTxt").innerText = t.estimateFee;
+      document.querySelector("#timeTxt").innerText = t.estimateTime;
+      document.querySelector("#recipientTxt").innerText = t.recipientAddr;
+      document.querySelector("#submitBtn").innerText = t.submitBridge;
+      document.querySelector("#warnTitle").innerText = t.warningTitle;
+      document.querySelector("#warnText").innerText = t.warningText;
+    }
+  </script>
+</head>
+<body>
+<!-- Header Navbar -->
+<header class="glass sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="text-xl font-bold text-accent" id="siteTitle">EACO跨链桥探索2025</div>
+    <nav class="hidden md:flex gap-6">
+      <a href="#" id="navHome" class="hover:text-accent">首页</a>
+      <a href="#" id="navBridge" class="text-accent font-semibold">跨链兑换</a>
+      <a href="#" id="navAssets" class="hover:text-accent">资产</a>
+      <a href="#" id="navHistory" class="hover:text-accent">交易记录</a>
+      <a href="#" id="navDocs" class="hover:text-accent">文档</a>
+    </nav>
+    <div class="flex gap-4 items-center">
+      <div class="relative">
+        <button class="px-3 py-1 rounded border border-gray-600 flex items-center gap-1">
+          <i class="fa fa-globe"></i>
+          <span id="selectLangTxt">语言</span>
+        </button>
+        <div class="absolute right-0 mt-2 w-40 glass rounded p-2 z-50">
+          <div onclick="setLang('zh-CN')" class="p-1 cursor-pointer hover:text-accent">中文</div>
+          <div onclick="setLang('en-US')" class="p-1 cursor-pointer hover:text-accent">English</div>
+          <div onclick="setLang('es-ES')" class="p-1 cursor-pointer hover:text-accent">Español</div>
+          <div onclick="setLang('fr-FR')" class="p-1 cursor-pointer hover:text-accent">Français</div>
+          <div onclick="setLang('ru-RU')" class="p-1 cursor-pointer hover:text-accent">Русский</div>
+          <div onclick="setLang('ar-SA')" class="p-1 cursor-pointer hover:text-accent">العربية</div>
+        </div>
+      </div>
+      <button id="connectWallet" class="bg-primary hover:bg-blue-700 px-4 py-2 rounded-lg">连接钱包</button>
+    </div>
+  </div>
+</header>
+
+<main class="container mx-auto px-4 py-10">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-center" id="bridgeTitle">跨链资产转移</h2>
+    <div class="glass p-6 rounded-xl">
+      <!-- From Chain -->
+      <div class="mb-4">
+        <label class="block text-gray-300 mb-2" id="fromChainTxt">源链</label>
+        <select class="w-full bg-dark border border-gray-600 rounded p-3">
+          <option>Dogecoin 原生狗狗币</option>
+          <option>EarthCoin EAC地球币(实验)</option>
+          <option>BNB Smart Chain(BSC)</option>
+          <option>Solana</option>
+        </select>
+      </div>
+      <!-- To Chain -->
+      <div class="mb-4">
+        <label class="block text-gray-300 mb-2" id="toChainTxt">目标链</label>
+        <select class="w-full bg-dark border border-gray-600 rounded p-3">
+          <option>Dogecoin 原生狗狗币</option>
+          <option>EarthCoin EAC地球币(实验)</option>
+          <option>BNB Smart Chain(BSC)</option>
+          <option>Solana</option>
+        </select>
+      </div>
+      <!-- Asset & Amount -->
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-300 mb-2" id="assetTxt">资产</label>
+          <select class="w-full bg-dark border border-gray-600 rounded p-3">
+            <option>DOGE狗狗币</option>
+            <option>EAC地球币</option>
+            <option>wBNB</option>
+            <option>wETH</option>
+            <option>wBTC</option>
+            <option>USDT</option>
+            <option>USDC</option>
+            <option>SOL</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-300 mb-2" id="amountTxt">数量</label>
+          <input class="w-full bg-dark border border-gray-600 rounded p-3" placeholder="0.0" />
+        </div>
+      </div>
+      <div class="text-sm text-gray-400 mb-4">
+        <span id="balanceTxt">余额：</span> 0.00
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-300 mb-2" id="recipientTxt">接收地址</label>
+        <input class="w-full bg-dark border border-gray-600 rounded p-3" placeholder="粘贴目标钱包地址"/>
+      </div>
+      <div class="grid grid-cols-2 gap-4 my-4 text-sm">
+        <div><span id="feeTxt">预估手续费：</span> ~0.001</div>
+        <div><span id="timeTxt">预估到账时间：</span> 5-20 min</div>
+      </div>
+      <button id="submitBtn" class="w-full bg-accent hover:bg-sky-600 py-3 rounded-lg font-semibold">发起跨链</button>
+    </div>
+
+    <!-- Risk Warning -->
+    <div class="glass p-5 rounded-xl mt-8 border border-red-800/60">
+      <h3 class="text-red-400 font-bold mb-2" id="warnTitle">风险提示</h3>
+      <p class="text-gray-300 text-sm" id="warnText">本项目仅为技术原型演示。跨链桥存在合约漏洞、中继节点、资产托管等风险。加密资产波动极大，请自行承担全部风险。EarthCoin(EAC)为实验资产，流动性极低。</p>
+    </div>
+
+    <!-- Asset Address Reference -->
+    <div class="glass p-5 rounded-xl mt-8">
+      <h3 class="font-bold mb-4">合约地址参考（静态）</h3>
+      <div class="text-xs text-gray-300 space-y-2 break-all">
+        <p>EACO: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</p>
+        <p>DOGE-SPL: DoGEV7LASBkQbibMc5k5vKnTZoMg423GpJ5QtJEGfm7R</p>
+        <p>BEP20 DOGE: 0xba2ae424d960c26247dd6c32edc70b295c744c43</p>
+        <p>SOL SPL: So11111111111111111111111111111111111111112</p>
+        <p>BSC wBNB: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="mt-12 py-6 border-t border-gray-800 text-center text-gray-500 text-sm">
+  EACO CrossChain Bridge Demo | 仅前端原型演示，无真实链交互
+</footer>
+
+<script>
+renderI18n();
+</script>
+</body>
+</html>
