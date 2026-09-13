@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="eaco - a neutral community information page. Open-source digital currency with a friendly brand based on the Earth meme.">
+<title>eaco - Earth Meme. Friendly Brand. Open Source.</title>
+<style>
+  :root{
+    --bg-0:#eafaf4; --bg-1:#dcf3ef; --bg-2:#cdeee9;
+    --ink:#10343a; --muted:#4b6f74; --accent:#0e8f86; --accent-2:#5ec0a9;
+    --card:#ffffff; --line:#cfeae4; --chip:#eefaf6;
+    --radius:22px; --radius-sm:14px;
+    --shadow:0 10px 30px rgba(14,143,134,.10);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none!important; transition:none!important;} }
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Noto Sans SC",sans-serif;
+    color:var(--ink); line-height:1.6;
+    background:linear-gradient(180deg,var(--bg-0),var(--bg-1) 45%,var(--bg-2));
+    background-attachment:fixed; min-height:100vh;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 22px;}
+
+  /* header */
+  header.site{position:sticky; top:0; z-index:50; background:rgba(234,250,244,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .bar{display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:14px 0;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.12rem; letter-spacing:.2px;}
+  .brand svg{width:34px; height:34px;}
+  nav.main{display:flex; gap:4px; flex-wrap:wrap; margin-left:auto;}
+  nav.main a{padding:7px 12px; border-radius:999px; color:var(--ink); font-size:.92rem; font-weight:600;}
+  nav.main a:hover{background:var(--chip); text-decoration:none;}
+  .lang{margin-left:2px;}
+  .lang .label{display:block; font-size:.72rem; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.5px;}
+  .lang-btns{display:flex; gap:6px; flex-wrap:wrap;}
+  .lang-btns button{
+    border:1px solid var(--line); background:var(--card); color:var(--ink);
+    border-radius:999px; padding:5px 11px; font-size:.82rem; font-weight:600; cursor:pointer;
+    transition:background .15s, border-color .15s; font-family:inherit;
+  }
+  .lang-btns button:hover{border-color:var(--accent-2);}
+  .lang-btns button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff;}
+
+  /* hero */
+  .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:34px; align-items:center; padding:64px 0 56px;}
+  .kicker{display:inline-flex; align-items:center; gap:8px; background:var(--chip); border:1px solid var(--line); color:var(--accent); font-weight:700; font-size:.8rem; letter-spacing:.6px; text-transform:uppercase; border-radius:999px; padding:6px 14px; margin-bottom:18px;}
+  .hero h1{font-size:clamp(2.2rem,5.6vw,3.6rem); line-height:1.08; letter-spacing:-.5px; margin-bottom:18px;}
+  .hero h1 .sub{display:block; font-size:clamp(1.05rem,2.4vw,1.5rem); color:var(--muted); font-weight:600; letter-spacing:-.2px; margin-top:14px;}
+  .hero p.lead{font-size:1.05rem; color:var(--muted); max-width:52ch; margin-bottom:24px;}
+  .hero .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{display:inline-block; border-radius:999px; padding:11px 22px; font-weight:700; font-size:.95rem; border:1px solid transparent; cursor:pointer; text-align:center; font-family:inherit;}
+  .btn.primary{background:var(--accent); color:#fff;}
+  .btn.primary:hover{background:#0b7f77; text-decoration:none;}
+  .btn.ghost{background:transparent; border-color:var(--line); color:var(--ink);}
+  .btn.ghost:hover{border-color:var(--accent-2); text-decoration:none;}
+  .earth{display:flex; justify-content:center; align-items:center;}
+  .earth svg{width:min(100%,360px); height:auto; filter:drop-shadow(0 18px 30px rgba(14,143,134,.18));}
+
+  /* sections */
+  section{padding:60px 0;}
+  .sec-head{margin-bottom:30px;}
+  .sec-head h2{font-size:clamp(1.6rem,3.4vw,2.3rem); letter-spacing:-.3px; margin-bottom:8px;}
+  .sec-head p{color:var(--muted); max-width:58ch;}
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow);}
+  .card .ico{width:46px; height:46px; border-radius:14px; background:var(--chip); display:flex; align-items:center; justify-content:center; margin-bottom:14px; color:var(--accent);}
+  .card h3{font-size:1.08rem; margin-bottom:8px;}
+  .card p{color:var(--muted); font-size:.95rem;}
+
+  .info-panel{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow); max-width:760px;}
+  .info-row{display:flex; align-items:flex-start; gap:14px; padding:13px 0; border-bottom:1px solid var(--line); flex-wrap:wrap;}
+  .info-row:last-of-type{border-bottom:none;}
+  .info-row .k{flex:0 0 210px; color:var(--muted); font-weight:600; font-size:.92rem;}
+  .info-row .v{flex:1; min-width:200px; font-weight:600; word-break:break-all;}
+  .info-row .v code{background:var(--chip); border-radius:10px; padding:4px 10px; font-size:.85rem; font-family:ui-monospace,SFMono-Regular,Consolas,monospace;}
+  .note{font-size:.85rem; color:var(--muted); margin-top:14px;}
+
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .duo .card{display:flex; flex-direction:column;}
+  .duo .card .ico{margin-bottom:12px;}
+  .notice-panel{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow); border-left:6px solid var(--accent-2);}
+  .notice-panel p{color:var(--muted); margin-top:10px; max-width:70ch;}
+
+  .formula{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 26px; box-shadow:var(--shadow); font-weight:700; font-size:clamp(.95rem,2vw,1.15rem); letter-spacing:.2px; margin-bottom:20px; text-align:center;}
+  .words{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:4px;}
+  .words span{background:var(--chip); border:1px solid var(--line); border-radius:999px; padding:6px 16px; font-size:.85rem; font-weight:600; color:var(--accent);}
+  .goals li::marker{color:var(--accent);}
+  ul.clean{list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin-top:18px;}
+  ul.clean li{background:var(--chip); border:1px solid var(--line); border-radius:12px; padding:9px 15px; font-size:.92rem;}
+  .links{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+  .links .card{padding:20px;}
+  .links h3{font-size:1rem; margin-bottom:8px;}
+  .links ul{list-style:none; margin-top:8px;}
+  .links li{margin:7px 0; font-size:.9rem;}
+  .links a{word-break:break-all;}
+  .goals{list-style:disc; max-width:720px; margin:6px auto 0; padding-left:26px; display:grid; gap:8px;}
+  .pill-title{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px;}
+  .pill-title .pill{background:var(--accent); color:#fff; border-radius:999px; padding:3px 12px; font-size:.72rem; font-weight:700; letter-spacing:.4px; text-transform:uppercase;}
+
+  footer.site{border-top:1px solid var(--line); padding:26px 0 40px; background:rgba(255,255,255,.35);}
+  .foot{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:.88rem;}
+  .foot b{color:var(--ink);}
+
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr; padding:42px 0 34px;}
+    .earth{order:-1;}
+    .earth svg{width:min(100%,240px);}
+    .duo{grid-template-columns:1fr;}
+    .info-row .k{flex-basis:150px;}
+  }
+  @media (max-width:520px){
+    .bar{gap:10px;}
+    nav.main{width:100%; margin-left:0;}
+    .lang{margin-left:0; width:100%;}
+    section{padding:44px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <div class="brand" aria-label="eaco">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="29" fill="#0e8f86"/>
+        <circle cx="32" cy="32" r="29" fill="none" stroke="#cdeee9" stroke-width="1.5"/>
+        <path d="M14 34c6-2 11-6 16-4 4 1.6 8 5 14 3 3-1 5-3 8-4" fill="none" stroke="#dff7ef" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="25" cy="41" r="1.8" fill="#dff7ef"/>
+        <circle cx="36" cy="42" r="1.8" fill="#dff7ef"/>
+        <path d="M24 46c5 2.4 11 2.4 16 0" fill="none" stroke="#dff7ef" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="45" cy="15" r="4" fill="#5ec0a9"/>
+        <circle cx="17" cy="18" r="2.4" fill="#7fd4bd"/>
+        <circle cx="50" cy="34" r="2" fill="#7fd4bd"/>
+      </svg>
+      <span>eaco</span>
+    </div>
+    <nav class="main" aria-label="Page navigation">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#vision" data-i18n="nav.vision">EACO vision</a>
+      <a href="#token" data-i18n="nav.token">Token info</a>
+      <a href="#virtual" data-i18n="nav.virtual">Virtual Earth</a>
+      <a href="#simulation" data-i18n="nav.sim">Simulation Earth</a>
+      <a href="#resources" data-i18n="nav.resources">Resources</a>
+      <a href="#community" data-i18n="nav.community">Community</a>
+      <a href="#notice" data-i18n="nav.notice">Notice</a>
+    </nav>
+    <div class="lang">
+      <span class="label" data-i18n="lang.label">Language</span>
+      <div class="lang-btns" role="group" aria-label="Language">
+        <button type="button" lang="en" aria-pressed="true" data-lang="en">English</button>
+        <button type="button" lang="zh" aria-pressed="false" data-lang="zh">华语</button>
+        <button type="button" lang="de" aria-pressed="false" data-lang="de">Deutsch</button>
+        <button type="button" lang="fr" aria-pressed="false" data-lang="fr">Français</button>
+        <button type="button" lang="es" aria-pressed="false" data-lang="es">Español</button>
+        <button type="button" lang="it" aria-pressed="false" data-lang="it">Italiano</button>
+        <button type="button" lang="pt" aria-pressed="false" data-lang="pt">Português</button>
+        <button type="button" lang="ru" aria-pressed="false" data-lang="ru">Русский</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <!-- Hero -->
+    <section class="hero" aria-label="eaco introduction">
+      <div>
+        <span class="kicker" data-i18n="hero.kicker">Open-source digital currency</span>
+        <h1>eaco
+          <span class="sub" data-i18n="hero.title2">Earth meme. Friendly brand. Open source.</span>
+        </h1>
+        <p class="lead" data-i18n="hero.sub">eaco is an open-source digital currency favoured by a global community for its friendly brand based on the Earth meme.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#token" data-i18n="hero.cta1">View token info</a>
+          <a class="btn ghost" href="#community" data-i18n="hero.cta2">Join the community</a>
+        </div>
+      </div>
+      <div class="earth" aria-hidden="true">
+        <svg viewBox="0 0 420 420">
+          <defs>
+            <radialGradient id="earthGrad" cx="38%" cy="34%" r="75%">
+              <stop offset="0%" stop-color="#7fd4bd"/>
+              <stop offset="55%" stop-color="#0e8f86"/>
+              <stop offset="100%" stop-color="#0a6f68"/>
+            </radialGradient>
+          </defs>
+          <circle cx="210" cy="210" r="150" fill="url(#earthGrad)"/>
+          <ellipse cx="210" cy="210" rx="150" ry="150" fill="none" stroke="#cdeee9" stroke-width="3"/>
+          <path d="M60 240c50-28 90-18 118 4 26 20 48 8 74-6 20-11 52-12 84 4" fill="none" stroke="#dff7ef" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+          <path d="M84 168c38-16 74-12 100 8 24 18 52 20 80 6" fill="none" stroke="#dff7ef" stroke-width="6" stroke-linecap="round" opacity=".75"/>
+          <path d="M120 300c34-14 64-8 88 8 22 15 46 16 74 4" fill="none" stroke="#dff7ef" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+          <circle cx="132" cy="152" r="5" fill="#eafaf4"/>
+          <circle cx="288" cy="148" r="4" fill="#eafaf4"/>
+          <circle cx="330" cy="240" r="4" fill="#eafaf4"/>
+          <circle cx="152" cy="318" r="4" fill="#eafaf4"/>
+          <path d="M42 210a175 175 0 0 0 336 0" fill="none" stroke="#5ec0a9" stroke-width="2" stroke-dasharray="6 12" opacity=".9"/>
+          <circle cx="378" cy="210" r="7" fill="#5ec0a9"/>
+          <circle cx="42" cy="210" r="5" fill="#5ec0a9" opacity=".7"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="sec-head">
+        <h2 id="about-title" data-i18n="about.title">About eaco</h2>
+        <p data-i18n="about.sub">A friendly, open-source currency project built around the Earth meme and shared with the world.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.6a2 2 0 0 1 1.4.6l3.4 3.4a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2Z"/><path d="M14 4v4h4"/></svg>
+          </div>
+          <h3 data-i18n="card1.title">Open source</h3>
+          <p data-i18n="card1.text">The project is open source, inviting community review and participation.</p>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 2.6 4.2 5.7 4.2 9S14.8 18.4 12 21c-2.8-2.6-4.2-5.7-4.2-9S9.2 5.6 12 3Z"/></svg>
+          </div>
+          <h3 data-i18n="card2.title">Global community</h3>
+          <p data-i18n="card2.text">A global community favours eaco for its friendly and approachable brand.</p>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7c3 2.5 4.5 5.8 4.5 9.5M12 7C9 9.5 7.5 12.8 7.5 16.5M5.5 11.5C8 13 10.2 12.6 12 11c1.8 1.6 4 2 6.5.5"/></svg>
+          </div>
+          <h3 data-i18n="card3.title">Earth meme identity</h3>
+          <p data-i18n="card3.text">A warm, recognisable identity built on the Earth meme.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision -->
+    <section id="vision" aria-labelledby="vision-title">
+      <div class="sec-head">
+        <h2 id="vision-title" data-i18n="vision.title">EACO vision</h2>
+        <p data-i18n="vision.sub">Earth's Best Coin = EACO = E. An open-source AI + RWA + Web3 coin for the Earth meme.</p>
+      </div>
+      <div class="formula" data-i18n="vision.formula">EACO = Positive Energy &times; Positive Mindset &times; Global Collaboration &times; Continuous Optimization</div>
+      <div class="words" role="list">
+        <span role="listitem" data-i18n="vision.w1">Energy</span>
+        <span role="listitem" data-i18n="vision.w2">Attitude</span>
+        <span role="listitem" data-i18n="vision.w3">Cooperation</span>
+        <span role="listitem" data-i18n="vision.w4">Optimization</span>
+      </div>
+      <div class="pill-title" style="margin-top:22px;">
+        <span class="pill" data-i18n="vision.goals">Core goals</span>
+      </div>
+      <ul class="goals">
+        <li data-i18n="vision.g1">Elevate individual cognition</li>
+        <li data-i18n="vision.g2">Improve organisational efficiency</li>
+        <li data-i18n="vision.g3">Advance social civilisation</li>
+        <li data-i18n="vision.g4">Promote sustainable development of the Earth</li>
+        <li data-i18n="vision.g5">Integrate with 100 cognitive models</li>
+      </ul>
+    </section>
+
+    <!-- Token info -->
+    <section id="token" aria-labelledby="token-title">
+      <div class="sec-head">
+        <h2 id="token-title" data-i18n="token.title">Token information</h2>
+        <p data-i18n="token.sub">Public technical information shared openly by the community.</p>
+      </div>
+      <div class="info-panel">
+        <div class="info-row">
+          <span class="k" data-i18n="token.name">Name</span>
+          <span class="v">eaco</span>
+        </div>
+        <div class="info-row">
+          <span class="k" data-i18n="token.symbol">Symbol</span>
+          <span class="v">E</span>
+        </div>
+        <div class="info-row">
+          <span class="k" data-i18n="token.address">Address (community-provided)</span>
+          <span class="v"><code>DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></span>
+        </div>
+        <p class="note" data-i18n="token.caNote">This address is shown as community-provided public information. Always verify against official documentation.</p>
+      </div>
+    </section>
+
+    <!-- Virtual Earth -->
+    <section id="virtual" aria-labelledby="virtual-title">
+      <div class="sec-head">
+        <h2 id="virtual-title" data-i18n="ve.title">Virtual Earth</h2>
+        <p data-i18n="ve.tag">Digital twin + Global Village + Web3</p>
+      </div>
+      <ul class="clean">
+        <li data-i18n="ve.t1">Digital twin of the Earth</li>
+        <li data-i18n="ve.t2">Metaverse cities / Global Village</li>
+        <li data-i18n="ve.t3">On-chain identity (DID)</li>
+        <li data-i18n="ve.t4">On-chain assets, RWA, NFT</li>
+        <li data-i18n="ve.t5">DAO global collaboration</li>
+        <li data-i18n="ve.t6">AI education and civilisation knowledge base</li>
+        <li data-i18n="ve.t7">Sustainable development and green economy</li>
+      </ul>
+      <div class="pill-title" style="margin-top:22px;">
+        <span class="pill" data-i18n="ve.core">Core idea</span>
+      </div>
+      <p data-i18n="ve.idea">Mapping the real Earth into a digital Earth where people can participate, collaborate and create value.</p>
+    </section>
+
+    <!-- Simulation Earth -->
+    <section id="simulation" aria-labelledby="simulation-title">
+      <div class="sec-head">
+        <h2 id="simulation-title" data-i18n="se.title">Simulation Earth</h2>
+        <p data-i18n="se.tag">AI civilisation simulation + Resource optimisation + Interstellar sandbox</p>
+      </div>
+      <ul class="clean">
+        <li data-i18n="se.t1">Civilisation development path simulation</li>
+        <li data-i18n="se.t2">Climate and ecology simulation</li>
+        <li data-i18n="se.t3">Energy and resource allocation models</li>
+        <li data-i18n="se.t4">Global economy and wealth flow simulation</li>
+        <li data-i18n="se.t5">Population and urban development simulation</li>
+        <li data-i18n="se.t6">AI / technology development simulation</li>
+        <li data-i18n="se.t7">Lunar base simulation</li>
+        <li data-i18n="se.t8">Mars colonisation simulation</li>
+        <li data-i18n="se.t9">Interstellar travel and civilisation sandbox</li>
+      </ul>
+      <div class="pill-title" style="margin-top:22px;">
+        <span class="pill" data-i18n="se.core">Core idea</span>
+      </div>
+      <p data-i18n="se.idea">Simulate the future in the digital world first, then help the real world make better decisions.</p>
+      <p class="note" data-i18n="se.route">Real Earth &rarr; Virtual Earth &rarr; Simulation Earth &rarr; Moon &rarr; Mars &rarr; Interstellar civilisation</p>
+    </section>
+
+    <!-- Resources -->
+    <section id="resources" aria-labelledby="resources-title">
+      <div class="sec-head">
+        <h2 id="resources-title" data-i18n="res.title">Project resources</h2>
+        <p data-i18n="res.sub">Public project links: code repositories, web platforms and community channels.</p>
+      </div>
+      <div class="links">
+        <div class="card">
+          <h3 data-i18n="res.g1">Code &amp; docs</h3>
+          <ul>
+            <li><a href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank" rel="noopener">GitHub &middot; eacoweb3-2026</a></li>
+            <li><a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener">Earth's Best Coin</a></li>
+            <li><a href="https://ucoingroup.github.io/eaco-web3/" target="_blank" rel="noopener">eaco-web3</a></li>
+            <li><a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" rel="noopener">eacoSWAP</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 data-i18n="res.g2">Web platforms</h3>
+          <ul>
+            <li><a href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener">eaco-build-world</a></li>
+            <li><a href="https://eaco-web3.base44.app" target="_blank" rel="noopener">eaco-web3 app</a></li>
+            <li><a href="https://earth-eaco-web3.base44.app/eaco-team" target="_blank" rel="noopener">eaco-team</a></li>
+            <li><a href="https://eastcoin.base44.app/" target="_blank" rel="noopener">eastcoin</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 data-i18n="res.g3">Knowledge &amp; content</h3>
+          <ul>
+            <li><a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" rel="noopener">100 Ways To Wealth</a></li>
+            <li><a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" rel="noopener">Earth 100 Friends</a></li>
+            <li><a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener">eaco50rate</a></li>
+            <li><a href="https://ucoingroup.github.io/good-books/" target="_blank" rel="noopener">Good Books</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 data-i18n="res.g4">Community &amp; culture</h3>
+          <ul>
+            <li><a href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">Discord community</a></li>
+            <li><a href="https://ucoingroup.github.io/eur-eaco/" target="_blank" rel="noopener">eur-eaco</a></li>
+            <li><a href="https://ucoingroup.github.io/au-trade/" target="_blank" rel="noopener">au-trade</a></li>
+            <li><a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" rel="noopener">Mohist-Tech</a></li>
+            <li><a href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank" rel="noopener">Footsteps of Civilisation</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section id="community" aria-labelledby="community-title">
+      <div class="sec-head">
+        <h2 id="community-title" data-i18n="community.title">Community</h2>
+        <p data-i18n="community.sub">England &amp; Europe eaco group &mdash; a friendly home for the eaco community in the UK and across Europe.</p>
+      </div>
+      <div class="duo">
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21c0-4 4-6 9-6s9 2 9 6"/><circle cx="12" cy="8" r="4"/></svg>
+          </div>
+          <h3 data-i18n="community.card1t">England &amp; Europe</h3>
+          <p data-i18n="community.card1d">A welcoming group for eaco fans and friends in the UK and across Europe.</p>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.5"/></svg>
+          </div>
+          <h3 data-i18n="community.card2t">Open spirit</h3>
+          <p data-i18n="community.card2d">Share ideas, artwork and the Earth meme, guided by the open-source spirit.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notice -->
+    <section id="notice" aria-labelledby="notice-title">
+      <div class="notice-panel">
+        <h2 id="notice-title" data-i18n="notice.title">Neutral notice</h2>
+        <p data-i18n="notice.text1">This page is a neutral community information page. It is not investment advice and contains no purchase, trading or liquidity-pool links.</p>
+        <p data-i18n="notice.text2">eaco is an open-source project. Digital currencies can be volatile - always do your own research and rely on official public documentation.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <span><b>eaco</b> &mdash; <span data-i18n="footer1">neutral community information page.</span></span>
+    <span data-i18n="footer2">Not affiliated with any exchange. Not investment advice.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var I18N = {
+    en: {
+      "nav.about":"About", "nav.vision":"EACO vision", "nav.token":"Token info", "nav.virtual":"Virtual Earth", "nav.sim":"Simulation Earth", "nav.resources":"Resources", "nav.community":"Community", "nav.notice":"Notice",
+      "lang.label":"Language",
+      "hero.kicker":"Open-source digital currency",
+      "hero.title2":"Earth meme. Friendly brand. Open source.",
+      "hero.sub":"eaco is an open-source digital currency favoured by a global community for its friendly brand based on the Earth meme.",
+      "hero.cta1":"View token info", "hero.cta2":"Join the community",
+      "about.title":"About eaco",
+      "about.sub":"A friendly, open-source currency project built around the Earth meme and shared with the world.",
+      "card1.title":"Open source",
+      "card1.text":"The project is open source, inviting community review and participation.",
+      "card2.title":"Global community",
+      "card2.text":"A global community favours eaco for its friendly and approachable brand.",
+      "card3.title":"Earth meme identity",
+      "card3.text":"A warm, recognisable identity built on the Earth meme.",
+      "vision.title":"EACO vision",
+      "vision.sub":"Earth's Best Coin = EACO = E. An open-source AI + RWA + Web3 coin for the Earth meme.",
+      "vision.formula":"EACO = Positive Energy \u00d7 Positive Mindset \u00d7 Global Collaboration \u00d7 Continuous Optimization",
+      "vision.w1":"Energy", "vision.w2":"Attitude", "vision.w3":"Cooperation", "vision.w4":"Optimization",
+      "vision.goals":"Core goals",
+      "vision.g1":"Elevate individual cognition",
+      "vision.g2":"Improve organisational efficiency",
+      "vision.g3":"Advance social civilisation",
+      "vision.g4":"Promote sustainable development of the Earth",
+      "vision.g5":"Integrate with 100 cognitive models",
+      "token.title":"Token information",
+      "token.sub":"Public technical information shared openly by the community.",
+      "token.name":"Name", "token.symbol":"Symbol",
+      "token.address":"Address (community-provided)",
+      "token.caNote":"This address is shown as community-provided public information. Always verify against official documentation.",
+      "ve.title":"Virtual Earth",
+      "ve.tag":"Digital twin + Global Village + Web3",
+      "ve.t1":"Digital twin of the Earth",
+      "ve.t2":"Metaverse cities / Global Village",
+      "ve.t3":"On-chain identity (DID)",
+      "ve.t4":"On-chain assets, RWA, NFT",
+      "ve.t5":"DAO global collaboration",
+      "ve.t6":"AI education and civilisation knowledge base",
+      "ve.t7":"Sustainable development and green economy",
+      "ve.core":"Core idea",
+      "ve.idea":"Mapping the real Earth into a digital Earth where people can participate, collaborate and create value.",
+      "se.title":"Simulation Earth",
+      "se.tag":"AI civilisation simulation + Resource optimisation + Interstellar sandbox",
+      "se.t1":"Civilisation development path simulation",
+      "se.t2":"Climate and ecology simulation",
+      "se.t3":"Energy and resource allocation models",
+      "se.t4":"Global economy and wealth flow simulation",
+      "se.t5":"Population and urban development simulation",
+      "se.t6":"AI / technology development simulation",
+      "se.t7":"Lunar base simulation",
+      "se.t8":"Mars colonisation simulation",
+      "se.t9":"Interstellar travel and civilisation sandbox",
+      "se.core":"Core idea",
+      "se.idea":"Simulate the future in the digital world first, then help the real world make better decisions.",
+      "se.route":"Real Earth \u2192 Virtual Earth \u2192 Simulation Earth \u2192 Moon \u2192 Mars \u2192 Interstellar civilisation",
+      "res.title":"Project resources",
+      "res.sub":"Public project links: code repositories, web platforms and community channels.",
+      "res.g1":"Code & docs",
+      "res.g2":"Web platforms",
+      "res.g3":"Knowledge & content",
+      "res.g4":"Community & culture",
+      "community.title":"Community",
+      "community.sub":"England & Europe eaco group - a friendly home for the eaco community in the UK and across Europe.",
+      "community.card1t":"England & Europe",
+      "community.card1d":"A welcoming group for eaco fans and friends in the UK and across Europe.",
+      "community.card2t":"Open spirit",
+      "community.card2d":"Share ideas, artwork and the Earth meme, guided by the open-source spirit.",
+      "notice.title":"Neutral notice",
+      "notice.text1":"This page is a neutral community information page. It is not investment advice and contains no purchase, trading or liquidity-pool links.",
+      "notice.text2":"eaco is an open-source project. Digital currencies can be volatile - always do your own research and rely on official public documentation.",
+      "footer1":"neutral community information page.",
+      "footer2":"Not affiliated with any exchange. Not investment advice."
+    },
+    de: {
+      "nav.about":"Über eaco", "nav.vision":"EACO-Vision", "nav.token":"Token-Infos", "nav.virtual":"Virtuelle Erde", "nav.sim":"Simulierte Erde", "nav.resources":"Ressourcen", "nav.community":"Gemeinschaft", "nav.notice":"Hinweis",
+      "lang.label":"Sprache",
+      "hero.kicker":"Open-Source-Digitalwährung",
+      "hero.title2":"Earth-Meme. Freundliche Marke. Open Source.",
+      "hero.sub":"eaco ist eine Open-Source-Digitalwährung, die von einer globalen Gemeinschaft für ihre freundliche, auf dem Earth-Meme basierende Marke geschätzt wird.",
+      "hero.cta1":"Token-Infos ansehen", "hero.cta2":"Gemeinschaft beitreten",
+      "about.title":"Über eaco",
+      "about.sub":"Ein freundliches Open-Source-Währungsprojekt rund um das Earth-Meme, geteilt mit der ganzen Welt.",
+      "card1.title":"Open Source",
+      "card1.text":"Das Projekt ist Open Source und lädt zur Prüfung und Beteiligung durch die Gemeinschaft ein.",
+      "card2.title":"Globale Gemeinschaft",
+      "card2.text":"Eine globale Gemeinschaft schätzt eaco für seine freundliche und zugängliche Marke.",
+      "card3.title":"Earth-Meme-Identität",
+      "card3.text":"Eine warme, wiedererkennbare Identität auf Basis des Earth-Memes.",
+      "vision.title":"EACO-Vision",
+      "vision.sub":"Earth's Best Coin = EACO = E. Eine Open-Source-Münze mit KI + RWA + Web3 für das Earth-Meme.",
+      "vision.formula":"EACO = Positive Energie \u00d7 Positive Einstellung \u00d7 Globale Zusammenarbeit \u00d7 Kontinuierliche Optimierung",
+      "vision.w1":"Energie", "vision.w2":"Einstellung", "vision.w3":"Zusammenarbeit", "vision.w4":"Optimierung",
+      "vision.goals":"Kernziele",
+      "vision.g1":"Individuelle Erkenntnis erweitern",
+      "vision.g2":"Organisatorische Effizienz verbessern",
+      "vision.g3":"Soziale Zivilisation voranbringen",
+      "vision.g4":"Nachhaltige Entwicklung der Erde fördern",
+      "vision.g5":"Mit 100 kognitiven Modellen verbinden",
+      "token.title":"Token-Informationen",
+      "token.sub":"Öffentliche technische Informationen, offen von der Gemeinschaft geteilt.",
+      "token.name":"Name", "token.symbol":"Symbol",
+      "token.address":"Adresse (von der Gemeinschaft bereitgestellt)",
+      "token.caNote":"Diese Adresse erscheint als öffentliche, von der Gemeinschaft bereitgestellte Information. Prüfen Sie sie stets anhand offizieller Dokumentation.",
+      "ve.title":"Virtuelle Erde",
+      "ve.tag":"Digitaler Zwilling + Globales Dorf + Web3",
+      "ve.t1":"Digitaler Zwilling der Erde",
+      "ve.t2":"Metaverse-Städte / Globales Dorf",
+      "ve.t3":"Identität auf der Chain (DID)",
+      "ve.t4":"On-Chain-Assets, RWA, NFT",
+      "ve.t5":"DAO-globale Zusammenarbeit",
+      "ve.t6":"KI-Bildung und Wissensbasis der Zivilisation",
+      "ve.t7":"Nachhaltige Entwicklung und grüne Wirtschaft",
+      "ve.core":"Kernidee",
+      "ve.idea":"Die reale Erde in eine digitale Erde abbilden, an der Menschen teilnehmen, zusammenarbeiten und Werte schaffen können.",
+      "se.title":"Simulierte Erde",
+      "se.tag":"KI-Zivilisationssimulation + Ressourcenoptimierung + Interstellares Labor",
+      "se.t1":"Simulation von Entwicklungswegen der Zivilisation",
+      "se.t2":"Klima- und Ökologiesimulation",
+      "se.t3":"Energie- und Ressourcenverteilungsmodelle",
+      "se.t4":"Simulation globaler Wirtschaft und Geldflüsse",
+      "se.t5":"Simulation von Bevölkerung und Stadtentwicklung",
+      "se.t6":"Simulation von KI- / Technologieentwicklung",
+      "se.t7":"Simulation einer Mondbasis",
+      "se.t8":"Simulation der Marsbesiedelung",
+      "se.t9":"Interstellare Reise und Sandbox der Zivilisation",
+      "se.core":"Kernidee",
+      "se.idea":"Zuerst die Zukunft in der digitalen Welt simulieren, dann der realen Welt helfen, bessere Entscheidungen zu treffen.",
+      "se.route":"Reale Erde \u2192 Virtuelle Erde \u2192 Simulierte Erde \u2192 Mond \u2192 Mars \u2192 Interstellare Zivilisation",
+      "res.title":"Projektressourcen",
+      "res.sub":"Öffentliche Projektlinks: Code-Repositories, Webplattformen und Gemeinschaftskanäle.",
+      "res.g1":"Code & Dokumente",
+      "res.g2":"Webplattformen",
+      "res.g3":"Wissen & Inhalte",
+      "res.g4":"Gemeinschaft & Kultur",
+      "community.title":"Gemeinschaft",
+      "community.sub":"England & Europe eaco group - ein freundlicher Ort für die eaco-Gemeinschaft im Vereinigten Königreich und in Europa.",
+      "community.card1t":"England & Europa",
+      "community.card1d":"Eine einladende Gruppe für eaco-Fans und Freunde im Vereinigten Königreich und in Europa.",
+      "community.card2t":"Offener Geist",
+      "community.card2d":"Teilen Sie Ideen, Kunstwerke und das Earth-Meme - getragen vom Open-Source-Geist.",
+      "notice.title":"Neutraler Hinweis",
+      "notice.text1":"Diese Seite ist eine neutrale Informationsseite der Gemeinschaft. Sie ist keine Anlageberatung und enthält keine Kauf-, Handels- oder Liquiditätspool-Links.",
+      "notice.text2":"eaco ist ein Open-Source-Projekt. Digitale Währungen können volatil sein - informieren Sie sich selbst und verlassen Sie sich auf offizielle öffentliche Dokumentation.",
+      "footer1":"neutrale Informationsseite der Gemeinschaft.",
+      "footer2":"Mit keiner Börse verbunden. Keine Anlageberatung."
+    },
+    fr: {
+      "nav.about":"À propos", "nav.vision":"Vision EACO", "nav.token":"Infos jeton", "nav.virtual":"Terre virtuelle", "nav.sim":"Terre simulée", "nav.resources":"Ressources", "nav.community":"Communauté", "nav.notice":"Avis",
+      "lang.label":"Langue",
+      "hero.kicker":"Monnaie numérique open source",
+      "hero.title2":"Mème Terre. Marque conviviale. Open source.",
+      "hero.sub":"eaco est une monnaie numérique open source appréciée par une communauté mondiale pour sa marque conviviale fondée sur le mème de la Terre.",
+      "hero.cta1":"Voir les infos du jeton", "hero.cta2":"Rejoindre la communauté",
+      "about.title":"À propos d'eaco",
+      "about.sub":"Un projet de monnaie open source convivial, construit autour du mème de la Terre et partagé avec le monde.",
+      "card1.title":"Open source",
+      "card1.text":"Le projet est open source et invite la communauté à l'examiner et à y participer.",
+      "card2.title":"Communauté mondiale",
+      "card2.text":"Une communauté mondiale apprécie eaco pour sa marque conviviale et accessible.",
+      "card3.title":"Identité mème Terre",
+      "card3.text":"Une identité chaleureuse et reconnaissable fondée sur le mème de la Terre.",
+      "vision.title":"Vision EACO",
+      "vision.sub":"Earth's Best Coin = EACO = E. Une monnaie open source IA + RWA + Web3 pour le mème de la Terre.",
+      "vision.formula":"EACO = Énergie positive \u00d7 Mentalité positive \u00d7 Collaboration mondiale \u00d7 Optimisation continue",
+      "vision.w1":"Énergie", "vision.w2":"Attitude", "vision.w3":"Coopération", "vision.w4":"Optimisation",
+      "vision.goals":"Objectifs fondamentaux",
+      "vision.g1":"Élever la cognition individuelle",
+      "vision.g2":"Améliorer l'efficacité organisationnelle",
+      "vision.g3":"Faire progresser la civilisation sociale",
+      "vision.g4":"Promouvoir le développement durable de la Terre",
+      "vision.g5":"S'intégrer avec 100 modèles cognitifs",
+      "token.title":"Informations sur le jeton",
+      "token.sub":"Informations techniques publiques partagées ouvertement par la communauté.",
+      "token.name":"Nom", "token.symbol":"Symbole",
+      "token.address":"Adresse (fournie par la communauté)",
+      "token.caNote":"Cette adresse est présentée comme une information publique fournie par la communauté. Vérifiez toujours auprès de la documentation officielle.",
+      "ve.title":"Terre virtuelle",
+      "ve.tag":"Jumeau numérique + Village mondial + Web3",
+      "ve.t1":"Jumeau numérique de la Terre",
+      "ve.t2":"Villes métavers / Village mondial",
+      "ve.t3":"Identité en chaîne (DID)",
+      "ve.t4":"Actifs en chaîne, RWA, NFT",
+      "ve.t5":"Collaboration mondiale en DAO",
+      "ve.t6":"Éducation IA et base de connaissances de la civilisation",
+      "ve.t7":"Développement durable et économie verte",
+      "ve.core":"Idée centrale",
+      "ve.idea":"Représenter la Terre réelle dans une Terre numérique où chacun peut participer, collaborer et créer de la valeur.",
+      "se.title":"Terre simulée",
+      "se.tag":"Simulation de civilisation IA + Optimisation des ressources + Laboratoire interstellaire",
+      "se.t1":"Simulation des parcours de développement de la civilisation",
+      "se.t2":"Simulation du climat et de l'écologie",
+      "se.t3":"Modèles d'allocation de l'énergie et des ressources",
+      "se.t4":"Simulation de l'économie mondiale et des flux de richesses",
+      "se.t5":"Simulation de la population et du développement urbain",
+      "se.t6":"Simulation du développement de l'IA / de la technologie",
+      "se.t7":"Simulation d'une base lunaire",
+      "se.t8":"Simulation de la colonisation de Mars",
+      "se.t9":"Voyage interstellaire et laboratoire de civilisation",
+      "se.core":"Idée centrale",
+      "se.idea":"Simuler d'abord l'avenir dans le monde numérique, puis aider le monde réel à prendre de meilleures décisions.",
+      "se.route":"Terre réelle \u2192 Terre virtuelle \u2192 Terre simulée \u2192 Lune \u2192 Mars \u2192 Civilisation interstellaire",
+      "res.title":"Ressources du projet",
+      "res.sub":"Liens publics du projet : dépôts de code, plateformes web et canaux communautaires.",
+      "res.g1":"Code & documentation",
+      "res.g2":"Plateformes web",
+      "res.g3":"Savoirs & contenus",
+      "res.g4":"Communauté & culture",
+      "community.title":"Communauté",
+      "community.sub":"England & Europe eaco group - un lieu convivial pour la communauté eaco au Royaume-Uni et en Europe.",
+      "community.card1t":"Angleterre & Europe",
+      "community.card1d":"Un groupe accueillant pour les fans et amis d'eaco au Royaume-Uni et en Europe.",
+      "community.card2t":"Esprit ouvert",
+      "community.card2d":"Partagez des idées, des créations et le mème de la Terre, guidés par l'esprit open source.",
+      "notice.title":"Avis neutre",
+      "notice.text1":"Cette page est une page d'information neutre de la communauté. Elle ne constitue pas un conseil en investissement et ne contient aucun lien d'achat, de trading ou de pool de liquidité.",
+      "notice.text2":"eaco est un projet open source. Les monnaies numériques peuvent être volatiles - faites toujours vos propres recherches et appuyez-vous sur la documentation officielle publique.",
+      "footer1":"page d'information neutre de la communauté.",
+      "footer2":"Aucune affiliation avec une bourse. Pas de conseil en investissement."
+    },
+    es: {
+      "nav.about":"Acerca de", "nav.vision":"Visión EACO", "nav.token":"Info del token", "nav.virtual":"Tierra virtual", "nav.sim":"Tierra simulada", "nav.resources":"Recursos", "nav.community":"Comunidad", "nav.notice":"Aviso",
+      "lang.label":"Idioma",
+      "hero.kicker":"Moneda digital de código abierto",
+      "hero.title2":"Meme de la Tierra. Marca amigable. Código abierto.",
+      "hero.sub":"eaco es una moneda digital de código abierto apreciada por una comunidad global por su marca amigable basada en el meme de la Tierra.",
+      "hero.cta1":"Ver información del token", "hero.cta2":"Unirse a la comunidad",
+      "about.title":"Acerca de eaco",
+      "about.sub":"Un proyecto de moneda de código abierto y amigable, construido en torno al meme de la Tierra y compartido con el mundo.",
+      "card1.title":"Código abierto",
+      "card1.text":"El proyecto es de código abierto e invita a la comunidad a revisarlo y participar.",
+      "card2.title":"Comunidad global",
+      "card2.text":"Una comunidad global aprecia eaco por su marca amigable y accesible.",
+      "card3.title":"Identidad meme de la Tierra",
+      "card3.text":"Una identidad cálida y reconocible construida sobre el meme de la Tierra.",
+      "vision.title":"Visión EACO",
+      "vision.sub":"Earth's Best Coin = EACO = E. Una moneda de código abierto con IA + RWA + Web3 para el meme de la Tierra.",
+      "vision.formula":"EACO = Energía positiva \u00d7 Mentalidad positiva \u00d7 Colaboración global \u00d7 Optimización continua",
+      "vision.w1":"Energía", "vision.w2":"Actitud", "vision.w3":"Cooperación", "vision.w4":"Optimización",
+      "vision.goals":"Objetivos fundamentales",
+      "vision.g1":"Elevar la cognición individual",
+      "vision.g2":"Mejorar la eficiencia organizacional",
+      "vision.g3":"Avanzar la civilización social",
+      "vision.g4":"Promover el desarrollo sostenible de la Tierra",
+      "vision.g5":"Integrarse con 100 modelos cognitivos",
+      "token.title":"Información del token",
+      "token.sub":"Información técnica pública compartida abiertamente por la comunidad.",
+      "token.name":"Nombre", "token.symbol":"Símbolo",
+      "token.address":"Dirección (proporcionada por la comunidad)",
+      "token.caNote":"Esta dirección se muestra como información pública proporcionada por la comunidad. Verifícala siempre con la documentación oficial.",
+      "ve.title":"Tierra virtual",
+      "ve.tag":"Gemelo digital + Aldea global + Web3",
+      "ve.t1":"Gemelo digital de la Tierra",
+      "ve.t2":"Ciudades metaverso / Aldea global",
+      "ve.t3":"Identidad en cadena (DID)",
+      "ve.t4":"Activos en cadena, RWA, NFT",
+      "ve.t5":"Colaboración global en DAO",
+      "ve.t6":"Educación con IA y base de conocimiento de la civilización",
+      "ve.t7":"Desarrollo sostenible y economía verde",
+      "ve.core":"Idea central",
+      "ve.idea":"Mapear la Tierra real en una Tierra digital donde las personas puedan participar, colaborar y crear valor.",
+      "se.title":"Tierra simulada",
+      "se.tag":"Simulación de civilización IA + Optimización de recursos + Laboratorio interestelar",
+      "se.t1":"Simulación de rutas de desarrollo de la civilización",
+      "se.t2":"Simulación de clima y ecología",
+      "se.t3":"Modelos de asignación de energía y recursos",
+      "se.t4":"Simulación de la economía global y flujos de riqueza",
+      "se.t5":"Simulación de población y desarrollo urbano",
+      "se.t6":"Simulación del desarrollo de IA / tecnología",
+      "se.t7":"Simulación de una base lunar",
+      "se.t8":"Simulación de la colonización de Marte",
+      "se.t9":"Viaje interestelar y laboratorio de civilización",
+      "se.core":"Idea central",
+      "se.idea":"Simular primero el futuro en el mundo digital y luego ayudar al mundo real a tomar mejores decisiones.",
+      "se.route":"Tierra real \u2192 Tierra virtual \u2192 Tierra simulada \u2192 Luna \u2192 Marte \u2192 Civilización interestelar",
+      "res.title":"Recursos del proyecto",
+      "res.sub":"Enlaces públicos del proyecto: repositorios de código, plataformas web y canales comunitarios.",
+      "res.g1":"Código y documentación",
+      "res.g2":"Plataformas web",
+      "res.g3":"Conocimiento y contenido",
+      "res.g4":"Comunidad y cultura",
+      "community.title":"Comunidad",
+      "community.sub":"England & Europe eaco group - un lugar amigable para la comunidad eaco en el Reino Unido y Europa.",
+      "community.card1t":"Inglaterra y Europa",
+      "community.card1d":"Un grupo acogedor para fans y amigos de eaco en el Reino Unido y Europa.",
+      "community.card2t":"Espíritu abierto",
+      "community.card2d":"Comparte ideas, arte y el meme de la Tierra, guiados por el espíritu del código abierto.",
+      "notice.title":"Aviso neutral",
+      "notice.text1":"Esta página es una página de información neutral de la comunidad. No es asesoramiento de inversión y no contiene enlaces de compra, negociación ni pools de liquidez.",
+      "notice.text2":"eaco es un proyecto de código abierto. Las monedas digitales pueden ser volátiles - investiga siempre por tu cuenta y confía en la documentación pública oficial.",
+      "footer1":"página de información neutral de la comunidad.",
+      "footer2":"Sin afiliación con ningún exchange. No es asesoramiento de inversión."
+    },
+    it: {
+      "nav.about":"Informazioni", "nav.vision":"Visione EACO", "nav.token":"Info token", "nav.virtual":"Terra virtuale", "nav.sim":"Terra simulata", "nav.resources":"Risorse", "nav.community":"Comunità", "nav.notice":"Avviso",
+      "lang.label":"Lingua",
+      "hero.kicker":"Valuta digitale open source",
+      "hero.title2":"Meme della Terra. Marchio amichevole. Open source.",
+      "hero.sub":"eaco è una valuta digitale open source apprezzata da una comunità globale per il suo marchio amichevole basato sul meme della Terra.",
+      "hero.cta1":"Vedi info token", "hero.cta2":"Unisciti alla comunità",
+      "about.title":"Informazioni su eaco",
+      "about.sub":"Un progetto di valuta open source amichevole, costruito attorno al meme della Terra e condiviso con il mondo.",
+      "card1.title":"Open source",
+      "card1.text":"Il progetto è open source e invita la comunità a esaminarlo e a partecipare.",
+      "card2.title":"Comunità globale",
+      "card2.text":"Una comunità globale apprezza eaco per il suo marchio amichevole e accessibile.",
+      "card3.title":"Identità meme della Terra",
+      "card3.text":"Un'identità calda e riconoscibile costruita sul meme della Terra.",
+      "vision.title":"Visione EACO",
+      "vision.sub":"Earth's Best Coin = EACO = E. Una moneta open source con IA + RWA + Web3 per il meme della Terra.",
+      "vision.formula":"EACO = Energia positiva \u00d7 Mentalità positiva \u00d7 Collaborazione globale \u00d7 Ottimizzazione continua",
+      "vision.w1":"Energia", "vision.w2":"Atteggiamento", "vision.w3":"Cooperazione", "vision.w4":"Ottimizzazione",
+      "vision.goals":"Obiettivi fondamentali",
+      "vision.g1":"Elevare la cognizione individuale",
+      "vision.g2":"Migliorare l'efficienza organizzativa",
+      "vision.g3":"Avanzare la civiltà sociale",
+      "vision.g4":"Promuovere lo sviluppo sostenibile della Terra",
+      "vision.g5":"Integrarsi con 100 modelli cognitivi",
+      "token.title":"Informazioni sul token",
+      "token.sub":"Informazioni tecniche pubbliche condivise apertamente dalla comunità.",
+      "token.name":"Nome", "token.symbol":"Simbolo",
+      "token.address":"Indirizzo (fornito dalla comunità)",
+      "token.caNote":"Questo indirizzo è mostrato come informazione pubblica fornita dalla comunità. Verifica sempre con la documentazione ufficiale.",
+      "ve.title":"Terra virtuale",
+      "ve.tag":"Gemello digitale + Villaggio globale + Web3",
+      "ve.t1":"Gemello digitale della Terra",
+      "ve.t2":"Città metaverse / Villaggio globale",
+      "ve.t3":"Identità on-chain (DID)",
+      "ve.t4":"Asset on-chain, RWA, NFT",
+      "ve.t5":"Collaborazione globale in DAO",
+      "ve.t6":"Educazione con IA e base di conoscenza della civiltà",
+      "ve.t7":"Sviluppo sostenibile ed economia verde",
+      "ve.core":"Idea centrale",
+      "ve.idea":"Mappare la Terra reale in una Terra digitale dove le persone possano partecipare, collaborare e creare valore.",
+      "se.title":"Terra simulata",
+      "se.tag":"Simulazione di civiltà IA + Ottimizzazione delle risorse + Laboratorio interstellare",
+      "se.t1":"Simulazione dei percorsi di sviluppo della civiltà",
+      "se.t2":"Simulazione di clima ed ecologia",
+      "se.t3":"Modelli di allocazione di energia e risorse",
+      "se.t4":"Simulazione dell'economia globale e dei flussi di ricchezza",
+      "se.t5":"Simulazione di popolazione e sviluppo urbano",
+      "se.t6":"Simulazione dello sviluppo di IA / tecnologia",
+      "se.t7":"Simulazione di una base lunare",
+      "se.t8":"Simulazione della colonizzazione di Marte",
+      "se.t9":"Viaggio interstellare e sandbox di civiltà",
+      "se.core":"Idea centrale",
+      "se.idea":"Simulare prima il futuro nel mondo digitale, poi aiutare il mondo reale a prendere decisioni migliori.",
+      "se.route":"Terra reale \u2192 Terra virtuale \u2192 Terra simulata \u2192 Luna \u2192 Marte \u2192 Civiltà interstellare",
+      "res.title":"Risorse del progetto",
+      "res.sub":"Link pubblici del progetto: repository di codice, piattaforme web e canali della comunità.",
+      "res.g1":"Codice e documentazione",
+      "res.g2":"Piattaforme web",
+      "res.g3":"Conoscenza e contenuti",
+      "res.g4":"Comunità e cultura",
+      "community.title":"Comunità",
+      "community.sub":"England & Europe eaco group - un luogo amichevole per la comunità eaco nel Regno Unito e in Europa.",
+      "community.card1t":"Inghilterra ed Europa",
+      "community.card1d":"Un gruppo accogliente per fan e amici di eaco nel Regno Unito e in Europa.",
+      "community.card2t":"Spirito aperto",
+      "community.card2d":"Condividi idee, opere e il meme della Terra, guidati dallo spirito open source.",
+      "notice.title":"Avviso neutrale",
+      "notice.text1":"Questa pagina è una pagina informativa neutrale della comunità. Non è un consiglio di investimento e non contiene link di acquisto, trading o pool di liquidità.",
+      "notice.text2":"eaco è un progetto open source. Le valute digitali possono essere volatili - fai sempre le tue ricerche e affidati alla documentazione pubblica ufficiale.",
+      "footer1":"pagina informativa neutrale della comunità.",
+      "footer2":"Nessuna affiliazione con exchange. Non è un consiglio di investimento."
+    },
+    pt: {
+      "nav.about":"Sobre", "nav.vision":"Visão EACO", "nav.token":"Info token", "nav.virtual":"Terra virtual", "nav.sim":"Terra simulada", "nav.resources":"Recursos", "nav.community":"Comunidade", "nav.notice":"Aviso",
+      "lang.label":"Idioma",
+      "hero.kicker":"Moeda digital de código aberto",
+      "hero.title2":"Meme da Terra. Marca amigável. Código aberto.",
+      "hero.sub":"eaco é uma moeda digital de código aberto apreciada por uma comunidade global pela sua marca amigável baseada no meme da Terra.",
+      "hero.cta1":"Ver informações do token", "hero.cta2":"Juntar-se à comunidade",
+      "about.title":"Sobre o eaco",
+      "about.sub":"Um projeto de moeda de código aberto amigável, construído em torno do meme da Terra e partilhado com o mundo.",
+      "card1.title":"Código aberto",
+      "card1.text":"O projeto é de código aberto e convida a comunidade a analisá-lo e a participar.",
+      "card2.title":"Comunidade global",
+      "card2.text":"Uma comunidade global aprecia o eaco pela sua marca amigável e acessível.",
+      "card3.title":"Identidade meme da Terra",
+      "card3.text":"Uma identidade calorosa e reconhecível construída sobre o meme da Terra.",
+      "vision.title":"Visão EACO",
+      "vision.sub":"Earth's Best Coin = EACO = E. Uma moeda de código aberto com IA + RWA + Web3 para o meme da Terra.",
+      "vision.formula":"EACO = Energia positiva \u00d7 Mentalidade positiva \u00d7 Colaboração global \u00d7 Otimização contínua",
+      "vision.w1":"Energia", "vision.w2":"Atitude", "vision.w3":"Cooperação", "vision.w4":"Otimização",
+      "vision.goals":"Objetivos fundamentais",
+      "vision.g1":"Elevar a cognição individual",
+      "vision.g2":"Melhorar a eficiência organizacional",
+      "vision.g3":"Avançar a civilização social",
+      "vision.g4":"Promover o desenvolvimento sustentável da Terra",
+      "vision.g5":"Integrar-se com 100 modelos cognitivos",
+      "token.title":"Informações do token",
+      "token.sub":"Informações técnicas públicas partilhadas abertamente pela comunidade.",
+      "token.name":"Nome", "token.symbol":"Símbolo",
+      "token.address":"Endereço (fornecido pela comunidade)",
+      "token.caNote":"Este endereço é mostrado como informação pública fornecida pela comunidade. Verifique sempre com a documentação oficial.",
+      "ve.title":"Terra virtual",
+      "ve.tag":"Gémeo digital + Aldeia global + Web3",
+      "ve.t1":"Gémeo digital da Terra",
+      "ve.t2":"Cidades metaverso / Aldeia global",
+      "ve.t3":"Identidade na cadeia (DID)",
+      "ve.t4":"Ativos na cadeia, RWA, NFT",
+      "ve.t5":"Colaboração global em DAO",
+      "ve.t6":"Educação com IA e base de conhecimento da civilização",
+      "ve.t7":"Desenvolvimento sustentável e economia verde",
+      "ve.core":"Ideia central",
+      "ve.idea":"Mapear a Terra real numa Terra digital onde as pessoas possam participar, colaborar e criar valor.",
+      "se.title":"Terra simulada",
+      "se.tag":"Simulação de civilização IA + Otimização de recursos + Laboratório interestelar",
+      "se.t1":"Simulação de percursos de desenvolvimento da civilização",
+      "se.t2":"Simulação de clima e ecologia",
+      "se.t3":"Modelos de alocação de energia e recursos",
+      "se.t4":"Simulação da economia global e fluxos de riqueza",
+      "se.t5":"Simulação da população e do desenvolvimento urbano",
+      "se.t6":"Simulação do desenvolvimento de IA / tecnologia",
+      "se.t7":"Simulação de uma base lunar",
+      "se.t8":"Simulação da colonização de Marte",
+      "se.t9":"Viagem interestelar e sandbox de civilização",
+      "se.core":"Ideia central",
+      "se.idea":"Simular primeiro o futuro no mundo digital e depois ajudar o mundo real a tomar melhores decisões.",
+      "se.route":"Terra real \u2192 Terra virtual \u2192 Terra simulada \u2192 Lua \u2192 Marte \u2192 Civilização interestelar",
+      "res.title":"Recursos do projeto",
+      "res.sub":"Links públicos do projeto: repositórios de código, plataformas web e canais da comunidade.",
+      "res.g1":"Código e documentação",
+      "res.g2":"Plataformas web",
+      "res.g3":"Conhecimento e conteúdo",
+      "res.g4":"Comunidade e cultura",
+      "community.title":"Comunidade",
+      "community.sub":"England & Europe eaco group - um lugar amigável para a comunidade eaco no Reino Unido e na Europa.",
+      "community.card1t":"Inglaterra e Europa",
+      "community.card1d":"Um grupo acolhedor para fãs e amigos do eaco no Reino Unido e na Europa.",
+      "community.card2t":"Espírito aberto",
+      "community.card2d":"Partilhe ideias, arte e o meme da Terra, guiados pelo espírito do código aberto.",
+      "notice.title":"Aviso neutro",
+      "notice.text1":"Esta página é uma página de informação neutra da comunidade. Não é aconselhamento de investimento e não contém links de compra, negociação ou pools de liquidez.",
+      "notice.text2":"eaco é um projeto de código aberto. As moedas digitais podem ser voláteis - faça sempre a sua própria pesquisa e confie na documentação pública oficial.",
+      "footer1":"página de informação neutra da comunidade.",
+      "footer2":"Sem afiliação com exchanges. Não é aconselhamento de investimento."
+    },
+    ru: {
+      "nav.about":"О проекте", "nav.vision":"Видение EACO", "nav.token":"О токене", "nav.virtual":"Виртуальная Земля", "nav.sim":"Симуляция Земли", "nav.resources":"Ресурсы", "nav.community":"Сообщество", "nav.notice":"Уведомление",
+      "lang.label":"Язык",
+      "hero.kicker":"Цифровая валюта с открытым исходным кодом",
+      "hero.title2":"Мем о Земле. Дружелюбный бренд. Открытый код.",
+      "hero.sub":"eaco - цифровая валюта с открытым исходным кодом, которую глобальное сообщество ценит за дружелюбный бренд, основанный на меме о Земле.",
+      "hero.cta1":"Информация о токене", "hero.cta2":"Присоединиться к сообществу",
+      "about.title":"О проекте eaco",
+      "about.sub":"Дружелюбный проект валюты с открытым исходным кодом, построенный вокруг мема о Земле и открытый для всего мира.",
+      "card1.title":"Открытый код",
+      "card1.text":"Проект имеет открытый исходный код и приглашает сообщество к проверке и участию.",
+      "card2.title":"Глобальное сообщество",
+      "card2.text":"Глобальное сообщество ценит eaco за дружелюбный и доступный бренд.",
+      "card3.title":"Мем о Земле",
+      "card3.text":"Тёплая, узнаваемая идентичность, основанная на меме о Земле.",
+      "vision.title":"Видение EACO",
+      "vision.sub":"Earth's Best Coin = EACO = E. Монета с открытым исходным кодом, ИИ + RWA + Web3, для мема о Земле.",
+      "vision.formula":"EACO = Позитивная энергия \u00d7 Позитивный настрой \u00d7 Глобальное сотрудничество \u00d7 Постоянная оптимизация",
+      "vision.w1":"Энергия", "vision.w2":"Отношение", "vision.w3":"Сотрудничество", "vision.w4":"Оптимизация",
+      "vision.goals":"Основные цели",
+      "vision.g1":"Повышать личное познание",
+      "vision.g2":"Улучшать эффективность организаций",
+      "vision.g3":"Продвигать социальную цивилизацию",
+      "vision.g4":"Содействовать устойчивому развитию Земли",
+      "vision.g5":"Сочетаться со 100 когнитивными моделями",
+      "token.title":"Информация о токене",
+      "token.sub":"Публичная техническая информация, открыто предоставленная сообществом.",
+      "token.name":"Название", "token.symbol":"Символ",
+      "token.address":"Адрес (предоставлен сообществом)",
+      "token.caNote":"Этот адрес показан как публичная информация, предоставленная сообществом. Всегда сверяйтесь с официальной документацией.",
+      "ve.title":"Виртуальная Земля",
+      "ve.tag":"Цифровой двойник + Глобальная деревня + Web3",
+      "ve.t1":"Цифровой двойник Земли",
+      "ve.t2":"Метавселенные города / Глобальная деревня",
+      "ve.t3":"Идентичность в блокчейне (DID)",
+      "ve.t4":"Активы в блокчейне, RWA, NFT",
+      "ve.t5":"Глобальное сотрудничество в DAO",
+      "ve.t6":"ИИ-образование и база знаний цивилизации",
+      "ve.t7":"Устойчивое развитие и зелёная экономика",
+      "ve.core":"Основная идея",
+      "ve.idea":"Отобразить реальную Землю в цифровую Землю, где люди могут участвовать, сотрудничать и создавать ценность.",
+      "se.title":"Симуляция Земли",
+      "se.tag":"Симуляция цивилизации ИИ + Оптимизация ресурсов + Межзвёздная песочница",
+      "se.t1":"Симуляция путей развития цивилизации",
+      "se.t2":"Симуляция климата и экологии",
+      "se.t3":"Модели распределения энергии и ресурсов",
+      "se.t4":"Симуляция мировой экономики и потоков богатства",
+      "se.t5":"Симуляция населения и развития городов",
+      "se.t6":"Симуляция развития ИИ / технологий",
+      "se.t7":"Симуляция лунной базы",
+      "se.t8":"Симуляция колонизации Марса",
+      "se.t9":"Межзвёздные путешествия и песочница цивилизации",
+      "se.core":"Основная идея",
+      "se.idea":"Сначала симулировать будущее в цифровом мире, затем помочь реальному миру принимать лучшие решения.",
+      "se.route":"Реальная Земля \u2192 Виртуальная Земля \u2192 Симуляция Земли \u2192 Луна \u2192 Марс \u2192 Межзвёздная цивилизация",
+      "res.title":"Ресурсы проекта",
+      "res.sub":"Публичные ссылки проекта: репозитории кода, веб-платформы и каналы сообщества.",
+      "res.g1":"Код и документация",
+      "res.g2":"Веб-платформы",
+      "res.g3":"Знания и контент",
+      "res.g4":"Сообщество и культура",
+      "community.title":"Сообщество",
+      "community.sub":"England & Europe eaco group - дружелюбное место для сообщества eaco в Великобритании и Европе.",
+      "community.card1t":"Англия и Европа",
+      "community.card1d":"Гостеприимная группа для поклонников и друзей eaco в Великобритании и Европе.",
+      "community.card2t":"Открытый дух",
+      "community.card2d":"Делитесь идеями, работами и мемом о Земле в духе открытого исходного кода.",
+      "notice.title":"Нейтральное уведомление",
+      "notice.text1":"Эта страница - нейтральная информационная страница сообщества. Она не является инвестиционной рекомендацией и не содержит ссылок на покупку, торговлю или пулы ликвидности.",
+      "notice.text2":"eaco - проект с открытым исходным кодом. Цифровые валюты могут быть волатильными - всегда проводите собственное исследование и опирайтесь на официальную публичную документацию.",
+      "footer1":"нейтральная информационная страница сообщества.",
+      "footer2":"Не связана с биржами. Не является инвестиционной рекомендацией."
+    },
+    zh: {
+      "nav.about":"关于", "nav.vision":"EACO 愿景", "nav.token":"代币信息", "nav.virtual":"虚拟地球", "nav.sim":"模拟地球", "nav.resources":"资源", "nav.community":"社区", "nav.notice":"声明",
+      "lang.label":"语言",
+      "hero.kicker":"开源数字货币",
+      "hero.title2":"地球迷因。友好品牌。开源。",
+      "hero.sub":"eaco 是一种开源数字货币，因其基于地球迷因的友好品牌而受到全球社区的喜爱。",
+      "hero.cta1":"查看代币信息", "hero.cta2":"加入社区",
+      "about.title":"关于 eaco",
+      "about.sub":"一个围绕地球迷因构建、与全世界共享的友好开源货币项目。",
+      "card1.title":"开源",
+      "card1.text":"项目完全开源，欢迎社区审查与参与。",
+      "card2.title":"全球社区",
+      "card2.text":"全球社区因 eaco 友好亲切的品牌而喜爱它。",
+      "card3.title":"地球迷因形象",
+      "card3.text":"以地球迷因为基础，打造温暖、辨识度高的品牌形象。",
+      "vision.title":"EACO 愿景",
+      "vision.sub":"Earth's Best Coin = EACO = E。面向地球迷因的开源 AI + RWA + Web3 货币。",
+      "vision.formula":"EACO = 正向能量 × 积极心态 × 全球协作 × 持续优化",
+      "vision.w1":"能量", "vision.w2":"态度", "vision.w3":"协作", "vision.w4":"优化",
+      "vision.goals":"核心目标",
+      "vision.g1":"提升个人认知",
+      "vision.g2":"提升组织效率",
+      "vision.g3":"推动社会文明进步",
+      "vision.g4":"促进地球可持续发展",
+      "vision.g5":"与 100 个认知模型结合",
+      "token.title":"代币信息",
+      "token.sub":"社区公开分享的公开技术信息。",
+      "token.name":"名称", "token.symbol":"符号",
+      "token.address":"合约地址（社区提供）",
+      "token.caNote":"该地址为社区提供的公开信息，请务必以社区文档为准进行核实。",
+      "ve.title":"虚拟地球",
+      "ve.tag":"数字孪生 + 地球村 + Web3",
+      "ve.t1":"地球数字孪生",
+      "ve.t2":"元宇宙城市 / 地球村",
+      "ve.t3":"链上身份 DID",
+      "ve.t4":"链上资产、RWA、NFT",
+      "ve.t5":"DAO 全球协作",
+      "ve.t6":"AI 教育与文明知识库",
+      "ve.t7":"可持续发展与绿色经济",
+      "ve.core":"核心理念",
+      "ve.idea":"把现实地球映射成一个可以参与、协作、创造价值的数字地球。",
+      "se.title":"模拟地球",
+      "se.tag":"AI 文明模拟 + 资源优化 + 星际沙盘",
+      "se.t1":"文明发展路径模拟",
+      "se.t2":"气候与生态模拟",
+      "se.t3":"能源与资源分配模型",
+      "se.t4":"全球经济与财富流动模拟",
+      "se.t5":"人口与城市发展模拟",
+      "se.t6":"AI / 科技发展模拟",
+      "se.t7":"月球基地模拟",
+      "se.t8":"火星殖民模拟",
+      "se.t9":"星际航行与星际文明沙盘",
+      "se.core":"核心理念",
+      "se.idea":"先在数字世界模拟未来，再帮助现实世界做更好的决策。",
+      "se.route":"现实地球 → 虚拟地球 → 模拟地球 → 月球 → 火星 → 星际文明",
+      "res.title":"项目资源",
+      "res.sub":"项目公开链接：代码仓库、网页平台与社区渠道。",
+      "res.g1":"代码与文档",
+      "res.g2":"网页平台",
+      "res.g3":"知识与内容",
+      "res.g4":"社区与文化",
+      "community.title":"社区",
+      "community.sub":"England & Europe eaco group - 为英国及欧洲的 eaco 社区打造的友好家园。",
+      "community.card1t":"英国与欧洲",
+      "community.card1d":"为英国及欧洲的 eaco 爱好者与朋友打造的温馨群体。",
+      "community.card2t":"开放精神",
+      "community.card2d":"在开源精神的指引下，分享创意、作品与地球迷因。",
+      "notice.title":"中立声明",
+      "notice.text1":"本页面为中立社区信息页，不构成投资建议，且不含任何购买、交易或流动性池链接。",
+      "notice.text2":"eaco 是开源项目。数字货币可能波动较大 - 请务必自行研究，并以社区公开文档为准。",
+      "footer1":"中立社区信息页。",
+      "footer2":"与任何交易所无关。不构成投资建议。"
+    }
+  };
+
+  var TITLES = {
+    en: "eaco - Earth Meme. Friendly Brand. Open Source.",
+    de: "eaco - Earth-Meme. Freundliche Marke. Open Source.",
+    fr: "eaco - Mème Terre. Marque conviviale. Open source.",
+    es: "eaco - Meme de la Tierra. Marca amigable. Código abierto.",
+    it: "eaco - Meme della Terra. Marchio amichevole. Open source.",
+    pt: "eaco - Meme da Terra. Marca amigável. Código aberto.",
+    ru: "eaco - Мем о Земле. Дружелюбный бренд. Открытый код.",
+    zh: "eaco - 地球迷因。友好品牌。开源。"
+  };
+
+  var state = { lang: "en" };
+
+  function applyLang(lang) {
+    state.lang = lang;
+    var dict = I18N[lang];
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-i18n");
+      if (dict && dict[key] != null) {
+        nodes[i].textContent = dict[key];
+      }
+    }
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang] || TITLES.en;
+    var buttons = document.querySelectorAll(".lang-btns button");
+    for (var j = 0; j < buttons.length; j++) {
+      buttons[j].setAttribute("aria-pressed", buttons[j].getAttribute("data-lang") === lang ? "true" : "false");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var buttons = document.querySelectorAll(".lang-btns button");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function () {
+        applyLang(this.getAttribute("data-lang"));
+      });
+    }
+    applyLang("en");
+  });
+})();
+</script>
+</body>
+</html>
