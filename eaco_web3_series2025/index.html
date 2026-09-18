@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eaco · Web3 Friendly World — Top 100 Countries & Top 20 Cities</title>
+<meta name="description" content="eaco (e) Web3 ecosystem: the most web3-friendly countries (Top 100) and cities (Top 20) in the world, multi-language, multi-theme. EACO/DOGE Pool 2026 online now.">
+<style>
+/* ============ THEMES (3 styles: tech blue / apple green / classic beige) ============ */
+:root{
+  --bg:#0b1020; --bg2:#111831; --card:#16203f; --card2:#1c2a52;
+  --txt:#eaf0ff; --mut:#9fb0d8; --line:#2b3a6b;
+  --acc:#2f7bff; --acc2:#00d9ff; --brand:#2f7bff;
+  --grad:linear-gradient(135deg,#2f7bff 0%,#00d9ff 100%);
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:16px;
+}
+html[data-theme="blue"]{ /* tech blue */
+  --bg:#0b1020; --bg2:#101a36; --card:#16223f; --card2:#1b2a52;
+  --txt:#eaf2ff; --mut:#a4b4dd; --line:#2b3d70;
+  --acc:#2f7bff; --acc2:#00d9ff; --brand:#2f7bff;
+  --grad:linear-gradient(135deg,#2f7bff 0%,#00d9ff 100%);
+}
+html[data-theme="green"]{ /* apple green */
+  --bg:#0c1a10; --bg2:#112317; --card:#16301d; --card2:#1c3f26;
+  --txt:#e8fff0; --mut:#a5d8b5; --line:#2c5a37;
+  --acc:#30c46a; --acc2:#8bff5e; --brand:#30c46a;
+  --grad:linear-gradient(135deg,#30c46a 0%,#8bff5e 100%);
+}
+html[data-theme="beige"]{ /* classic beige */
+  --bg:#f3e9d6; --bg2:#ece0c8; --card:#fff8e8; --card2:#fdf1d9;
+  --txt:#4a3824; --mut:#8a7350; --line:#d9c49a;
+  --acc:#b3802e; --acc2:#8b5e2c; --brand:#b3802e;
+  --grad:linear-gradient(135deg,#b3802e 0%,#8b5e2c 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue','Noto Sans','Noto Sans SC','Noto Sans Arabic','Noto Sans Devanagari',sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;transition:background .4s,color .4s}
+.dark-cover{display:block}
+body:lang(ar),body[dir="rtl"]{direction:rtl}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ============ TOP BAR ============ */
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+.logo .dot{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--shadow)}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{padding:7px 12px;border-radius:20px;font-size:14px;color:var(--mut);font-weight:600}
+nav a:hover{color:var(--txt);background:var(--card)}
+nav a.on{color:#fff;background:var(--grad)}
+.controls{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sel{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:20px;padding:7px 12px;font-size:13px;cursor:pointer;outline:none}
+.sel option{background:var(--card);color:var(--txt)}
+.seg{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:4px}
+.seg button{border:none;background:transparent;color:var(--mut);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1}
+.seg button.on{background:var(--grad);color:#fff}
+
+/* ============ HERO ============ */
+.hero{position:relative;overflow:hidden;padding:64px 0 54px;text-align:center;background:
+  radial-gradient(60rem 24rem at 50% -10%,color-mix(in srgb,var(--acc) 26%,transparent),transparent 60%)}
+.hero h1{font-size:clamp(30px,5vw,56px);font-weight:900;letter-spacing:.5px}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{max-width:760px;margin:18px auto 0;color:var(--mut);font-size:clamp(15px,2vw,19px)}
+.pill{display:inline-block;margin-top:22px;padding:9px 20px;border-radius:30px;border:1px solid var(--grad);color:var(--acc);font-weight:700;font-size:14px;background:color-mix(in srgb,var(--acc) 10%,transparent)}
+
+/* ============ POOL BANNER ============ */
+.pool{background:var(--grad);color:#fff;padding:20px;border-radius:var(--radius);margin:34px 0;box-shadow:var(--shadow)}
+.pool .in{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.pool .tt{font-size:clamp(17px,2.4vw,24px);font-weight:800}
+.pool .tt .live{display:inline-block;background:#fff;color:#111;font-size:11px;border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:middle;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+.pool p{color:rgba(255,255,255,.92);font-size:14px;margin-top:4px}
+.pool .lnk{display:flex;gap:10px;flex-wrap:wrap}
+.pool .lnk a{background:#fff;color:#111;font-weight:700;font-size:13px;padding:9px 16px;border-radius:24px}
+.pool .lnk a:hover{text-decoration:none;transform:translateY(-1px)}
+.pool .lnk a.ghost{background:transparent;border:1px solid #fff;color:#fff}
+
+/* ============ SECTIONS ============ */
+section{padding:26px 0 30px}
+.sec-head{margin-bottom:22px}
+.sec-head h2{font-size:clamp(23px,3.5vw,34px);font-weight:800}
+.sec-head p{color:var(--mut);max-width:780px;margin-top:8px}
+.stats{display:flex;gap:16px;flex-wrap:wrap;margin:18px 0 26px}
+.stat{flex:1;min-width:150px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;text-align:center}
+.stat b{display:block;font-size:30px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
+.stat span{color:var(--mut);font-size:13px}
+
+/* ============ TABLE ============ */
+.table-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{background:var(--card2);text-align:left;padding:13px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);position:sticky;top:58px}
+tbody td{padding:12px 16px;border-top:1px solid var(--line)}
+tbody tr:hover{background:color-mix(in srgb,var(--acc) 8%,transparent)}
+.rank{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;font-weight:800;background:var(--card2);color:var(--acc)}
+tr.topr .rank{background:var(--grad);color:#fff}
+.cty{font-weight:700}
+.reg{color:var(--mut);font-size:12px}
+.score{font-weight:800;color:var(--acc)}
+.bar{display:block;height:6px;width:100%;background:var(--card2);border-radius:4px;margin-top:5px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--grad);border-radius:4px}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc);margin-right:4px}
+.cities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.city{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.city .top{display:flex;align-items:center;gap:12px}
+.city .nm{font-weight:800;font-size:17px}
+.city .when{color:var(--mut);font-size:12px;margin-top:2px}
+.city .hi{color:var(--mut);font-size:13px;margin-top:10px;min-height:42px}
+
+/* ============ COMMUNITY / POSITIVE ============ */
+.positive{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;margin-bottom:30px;box-shadow:var(--shadow)}
+.positive h3{font-size:22px;margin-bottom:12px}
+.positive .cols{display:flex;gap:16px;flex-wrap:wrap}
+.positive .cols .c{flex:1;min-width:230px;background:var(--card2);border-radius:12px;padding:18px}
+.positive .cols .c b{display:block;margin-bottom:6px;color:var(--acc)}
+.positive .cols .c p{color:var(--mut);font-size:14px}
+
+/* ============ FOOTER ============ */
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:40px 0 30px;margin-top:30px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+footer h4{font-size:15px;margin-bottom:12px;color:var(--acc)}
+footer ul{list-style:none}
+footer li{font-size:14px;margin-bottom:8px;color:var(--mut)}
+footer li b{color:var(--txt)}
+footer li a{color:var(--acc)}
+.foot-note{margin-top:26px;border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:var(--mut);line-height:1.8}
+.copy{margin-top:16px;font-size:13px;color:var(--mut);text-align:center}
+.ca{font-family:monospace;background:var(--card);border:1px solid var(--line);padding:2px 7px;border-radius:6px;font-size:12px;word-break:break-all}
+@media (max-width:900px){thead th{position:static}.stats{flex-direction:column}}
+</style>
+</head>
+<body data-lang="en">
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo"><span class="dot">e</span> eaco <span style="color:var(--mut);font-size:13px">Web3 Friendly World</span></div>
+    <nav>
+      <a href="#countries" data-i="nav-countries">Countries</a>
+      <a href="#cities" data-i="nav-cities">Cities</a>
+      <a href="#community" data-i="nav-community">Community</a>
+      <a href="#eaco" data-i="nav-eaco">About eaco</a>
+    </nav>
+    <div class="controls">
+      <div class="seg" id="themeSeg" title="Theme">
+        <button data-theme="blue" class="on" title="Tech Blue" style="color:#2f7bff">🟦</button>
+        <button data-theme="green" title="Apple Green" style="color:#30c46a">🟩</button>
+        <button data-theme="beige" title="Classic Beige" style="color:#b3802e">🟨</button>
+      </div>
+      <select class="sel" id="langSel">
+        <option value="en">English</option>
+        <option value="zh">华语</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+        <option value="ru">Русский</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="pill" data-i="hero-pill">🌍 Built on eaco · Web3</span>
+    <h1 data-i="hero-title">The <em>Web3 Friendly</em> World</h1>
+    <p class="sub" data-i="hero-sub">Top 100 web3-friendly countries & top 20 cities on Earth — the places embracing blockchain, digital freedom and positive on-chain energy. Empowering builders across the UK, Europe and beyond to discover and use eaco.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- POOL BANNER -->
+  <div class="pool">
+    <div class="in">
+      <div>
+        <div class="tt">EACO / DOGE Pool — 2026 Online Now <span class="live">● LIVE</span></div>
+        <p data-i="pool-desc">The eaco (e) · doge liquidity pool is now live. Provide liquidity, swap and earn on Orca. Verify on-chain at Orb Markets.</p>
+      </div>
+      <div class="lnk">
+        <a href="https://www.orca.so/pools/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank" rel="noopener">Orca · e/DOGE Pool ↗</a>
+        <a class="ghost" href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34/" target="_blank" rel="noopener">Orb Markets ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ COUNTRIES ============ -->
+  <section id="countries">
+    <div class="sec-head">
+      <h2 data-i="c-title">🌏 Top 100 Web3-Friendly Countries</h2>
+      <p data-i="c-sub">A composite view of the world's most web3-friendly nations, drawn from leading public indices (Coincub Global Web3 Index, Bybit &amp; DL Research, Chainalysis adoption data and Multipolitan) as of 2025–2026, combined with taxation, regulation and ecosystem strength.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="stCountr">100</b><span data-i="c-s1">Web3-Friendly Countries</span></div>
+      <div class="stat"><b id="stCity">20</b><span data-i="c-s2">Web3-Friendly Cities</span></div>
+      <div class="stat"><b id="stCont">6</b><span data-i="c-s3">Continents</span></div>
+      <div class="stat"><b>6</b><span data-i="c-s4">Languages / 3 Themes</span></div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead><tr><th data-i="th-rank">Rank</th><th data-i="th-country">Country / Region</th><th data-i="th-reg">Region</th><th data-i="th-score">Index</th></tr></thead>
+        <tbody id="countryBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ CITIES ============ -->
+  <section id="cities">
+    <div class="sec-head">
+      <h2 data-i="city-title">🏙️ Top 20 Web3-Friendly Cities</h2>
+      <p data-i="city-sub">The world's leading crypto-friendly cities: regulatory clarity, low/zero taxation, digital infrastructure and a thriving on-chain community — the new financial capitals of tomorrow.</p>
+    </div>
+    <div class="cities-grid" id="cityGrid"></div>
+  </section>
+
+  <!-- ============ COMMUNITY / POSITIVE ============ -->
+  <section id="community">
+    <div class="positive">
+      <h3 data-i="pos-title">💚 Positive Energy, Global Community</h3>
+      <p data-i="pos-into" style="color:var(--mut);margin-bottom:16px">We build the web3 community with positive values — across the UK, Europe and the wider world.</p>
+      <div class="cols">
+        <div class="c"><b data-i="p1-t">✨ Do Good Things</b><p data-i="p1-d">Use web3 to create real, positive value — education, inclusion and fair access for all.</p></div>
+        <div class="c"><b data-i="p2-t">🌐 Open & Free</b><p data-i="p2-d">Decentralized, borderless, permissionless money and ideas that stay open to everyone.</p></div>
+        <div class="c"><b data-i="p3-t">🤝 United Community</b><p data-i="p3-d">UK, Europe and beyond — grow, learn and build together with the eaco community.</p></div>
+        <div class="c"><b data-i="p4-t">🚀 eaco for All</b><p data-i="p4-d">Discover how eaco enables liquid, positive and transparent on-chain ecosystems.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FOOTER : EACO ==== -->
+<footer id="eaco">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4 data-i="f1t">⚡ eaco (e) — Project Snapshot</h4>
+        <ul>
+          <li><b>eaco</b> — Web3 ecosystem token</li>
+          <li data-i="f-ca"><b>Token CA:</b></li>
+          <li><span class="ca">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span></li>
+          <li data-i="f-pool"><b>EACO / DOGE Pool:</b> Online · 2026</li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i="f2t">🔗 Official Links</h4>
+        <ul>
+          <li><a href="https://www.orca.so/pools/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank" rel="noopener" data-i="f-l1">Orca Pool · e/DOGE ↗</a></li>
+          <li><a href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34/" target="_blank" rel="noopener" data-i="f-l2">Orb Markets · On-chain ↗</a></li>
+          <li data-i="f-group"><b>Community:</b> by email & social</li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i="f3t">🌍 eaco Top 20 City Group</h4>
+        <ul>
+          <li data-i="f3d">Join the eaco top-20 web3 friendly city community network.</li>
+          <li><b data-i="f3e">Group email:</b> <a href="mailto:eaco2cc@gmail.com">eaco2cc@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i="f4t">💬 Get in touch</h4>
+        <ul>
+          <li data-i="f4d">Reach out to the eaco community in the UK, Europe and worldwide.</li>
+          <li><a href="mailto:eaco2cc@gmail.com">eaco2cc@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel" style="margin:18px 0 10px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.18)">
+      <h4 data-i="rel">📂 eaco · web3 系列网页</h4>
+      <ul style="list-style:none;padding:0">
+        <li><a href="eaco_web3_friendly.html" data-i="rel1">🌍 eaco Web3 友善世界（Top100 国家 / Top20 城市）</a></li>
+        <li><a href="overseas_chinese_friendly.html" data-i="rel2">🏮 对海外华人最友善 Top20 国家 / 城市</a></li>
+        <li><a href="chinese_top10_currency.html" data-i="rel3">💱 华人友善 TOP10 · 主权货币 · eaco 兑换</a></li>
+      </ul>
+      <p style="font-size:.78rem;opacity:.65;margin:6px 0 0" data-i="reltip">提示：把本文件夹内 3 个 HTML 放在同一目录，即可在页脚互相跳转。</p>
+    </div>
+    <div class="foot-note" data-i="disclaimer">Disclaimer: Rankings on this page are an aggregate, editorial representation of widely-cited public crypto/web3-friendliness indices (Coincub, Bybit &amp; DL Research, Chainalysis, Multipolitan) as of 2025–2026, and are intended for general information and community education only, not investment advice. Always do your own research (DYOR).</div>
+    <div class="copy">© 2026 eaco · This page is an independent community reference • <span data-i="copy">Made with 💚 for the global web3 community</span></div>
+  </div>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+var COUNTRY_DATA=[
+[1,"Switzerland","瑞士","Europe",98],
+[2,"Singapore","新加坡","Asia-Pacific",97],
+[3,"United Arab Emirates","阿联酋","Middle East",96],
+[4,"United States","美国","North America",95],
+[5,"El Salvador","萨尔瓦多","Latin America",93],
+[6,"Canada","加拿大","North America",92],
+[7,"Germany","德国","Europe",91],
+[8,"Türkiye","土耳其","Middle East / Europe",90],
+[9,"Hong Kong","香港","Asia-Pacific",90],
+[10,"Lithuania","立陶宛","Europe",89],
+[11,"Australia","澳大利亚","Asia-Pacific",88],
+[12,"Estonia","爱沙尼亚","Europe",87],
+[13,"Portugal","葡萄牙","Europe",87],
+[14,"Malta","马耳他","Europe",86],
+[15,"United Kingdom","英国","Europe",86],
+[16,"Austria","奥地利","Europe",85],
+[17,"Netherlands","荷兰","Europe",85],
+[18,"Luxembourg","卢森堡","Europe",84],
+[19,"Liechtenstein","列支敦士登","Europe",84],
+[20,"Gibraltar","直布罗陀","Europe",83],
+[21,"Norway","挪威","Europe",83],
+[22,"Sweden","瑞典","Europe",82],
+[23,"Finland","芬兰","Europe",82],
+[24,"Denmark","丹麦","Europe",81],
+[25,"Belgium","比利时","Europe",81],
+[26,"France","法国","Europe",80],
+[27,"Spain","西班牙","Europe",80],
+[28,"Italy","意大利","Europe",79],
+[29,"Poland","波兰","Europe",79],
+[30,"Czechia","捷克","Europe",78],
+[31,"Slovakia","斯洛伐克","Europe",78],
+[32,"Romania","罗马尼亚","Europe",77],
+[33,"Bulgaria","保加利亚","Europe",77],
+[34,"Hungary","匈牙利","Europe",76],
+[35,"Slovenia","斯洛文尼亚","Europe",76],
+[36,"Croatia","克罗地亚","Europe",75],
+[37,"Greece","希腊","Europe",75],
+[38,"Ireland","爱尔兰","Europe",74],
+[39,"Cyprus","塞浦路斯","Europe",74],
+[40,"Latvia","拉脱维亚","Europe",73],
+[41,"Japan","日本","Asia-Pacific",73],
+[42,"South Korea","韩国","Asia-Pacific",73],
+[43,"Taiwan","台湾","Asia-Pacific",72],
+[44,"Thailand","泰国","Asia-Pacific",72],
+[45,"Vietnam","越南","Asia-Pacific",71],
+[46,"Philippines","菲律宾","Asia-Pacific",71],
+[47,"Malaysia","马来西亚","Asia-Pacific",70],
+[48,"Indonesia","印尼","Asia-Pacific",70],
+[49,"India","印度","Asia-Pacific",69],
+[50,"Pakistan","巴基斯坦","Asia-Pacific",68],
+[51,"Kazakhstan","哈萨克斯坦","Central Asia",68],
+[52,"Mongolia","蒙古","Asia-Pacific",67],
+[53,"Sri Lanka","斯里兰卡","Asia-Pacific",66],
+[54,"New Zealand","新西兰","Asia-Pacific",66],
+[55,"Israel","以色列","Middle East",66],
+[56,"Bahrain","巴林","Middle East",65],
+[57,"Saudi Arabia","沙特阿拉伯","Middle East",65],
+[58,"Qatar","卡塔尔","Middle East",64],
+[59,"Oman","阿曼","Middle East",63],
+[60,"Kuwait","科威特","Middle East",62],
+[61,"Jordan","约旦","Middle East",61],
+[62,"Georgia","格鲁吉亚","Europe / Caucasus",61],
+[63,"Montenegro","黑山","Europe",60],
+[64,"Serbia","塞尔维亚","Europe",60],
+[65,"Albania","阿尔巴尼亚","Europe",59],
+[66,"North Macedonia","北马其顿","Europe",58],
+[67,"Bosnia & Herzegovina","波黑","Europe",58],
+[68,"Ukraine","乌克兰","Europe",57],
+[69,"Nigeria","尼日利亚","Africa",57],
+[70,"South Africa","南非","Africa",56],
+[71,"Kenya","肯尼亚","Africa",56],
+[72,"Egypt","埃及","Africa",55],
+[73,"Ghana","加纳","Africa",54],
+[74,"Rwanda","卢旺达","Africa",53],
+[75,"Ethiopia","埃塞俄比亚","Africa",52],
+[76,"Seychelles","塞舌尔","Africa",52],
+[77,"Mauritius","毛里求斯","Africa",51],
+[78,"Morocco","摩洛哥","Africa",51],
+[79,"Tunisia","突尼斯","Africa",50],
+[80,"Brazil","巴西","Latin America",50],
+[81,"Argentina","阿根廷","Latin America",49],
+[82,"Mexico","墨西哥","North America",49],
+[83,"Colombia","哥伦比亚","Latin America",48],
+[84,"Chile","智利","Latin America",48],
+[85,"Peru","秘鲁","Latin America",47],
+[86,"Venezuela","委内瑞拉","Latin America",47],
+[87,"Uruguay","乌拉圭","Latin America",46],
+[88,"Paraguay","巴拉圭","Latin America",45],
+[89,"Ecuador","厄瓜多尔","Latin America",45],
+[90,"Bolivia","玻利维亚","Latin America",44],
+[91,"Panama","巴拿马","Latin America",44],
+[92,"Costa Rica","哥斯达黎加","Latin America",43],
+[93,"Guatemala","危地马拉","Latin America",42],
+[94,"Dominican Republic","多米尼加","Caribbean",42],
+[95,"Jamaica","牙买加","Caribbean",41],
+[96,"The Bahamas","巴哈马","Caribbean",41],
+[97,"Bermuda","百慕大","North Atlantic",40],
+[98,"Cayman Islands","开曼群岛","Caribbean",39],
+[99,"Cuba","古巴","Caribbean",38],
+[100,"Uzbekistan","乌兹别克斯坦","Central Asia",38]
+];
+var CITY_DATA=[
+[1,"Singapore","Singapore",97,"Global leader in crypto-friendly regulation; clear framework, strong institutions."],
+[2,"Dubai","UAE",96,"Zero personal income tax, VARA regulation, DMCC Crypto Centre draws global builders."],
+[3,"Hong Kong","Hong Kong",94,"0% capital gains for investors; licensed exchanges and spot crypto ETFs."],
+[4,"Zug (Crypto Valley)","Switzerland",93,"The heart of the blockchain industry; 0% capital gains for private investors."],
+[5,"London","United Kingdom",91,"Mature institutional hub; growing clarity across crypto and stablecoins."],
+[6,"Bangkok","Thailand",90,"Regulatory sandbox and tax incentives; thriving regional Web3 activity."],
+[7,"Seoul","South Korea",89,"One of Asia's most active developer and trading ecosystems."],
+[8,"Kuala Lumpur","Malaysia",88,"Government-backed blockchain adoption, e-residency and friendly sandboxes."],
+[9,"Taipei","Taiwan",87,"Strong regulatory clarity and an energetic, open on-chain community."],
+[10,"Lisbon","Portugal",86,"0% long-term gains (365-day hold); a magnet for founders and digital nomads."],
+[11,"Abu Dhabi","UAE",86,"ADGM licensed digital-asset ecosystem; strong institutional support."],
+[12,"Lugano","Switzerland",85,"Hundreds of merchants accept BTC/USDT; city accepts crypto for taxes & fees."],
+[13,"Prague","Czechia",84,"Crypto held 3+ years sells tax-free; one of Europe's densest scenes."],
+[14,"Vienna","Austria",83,"120+ merchants accept Bitcoin; Bitpanda HQ, strong MiCA-aligned framework."],
+[15,"Miami","United States",82,"Access to capital and networking; a major US hub despite federal taxes."],
+[16,"George Town","Cayman Islands",81,"Zero tax jurisdiction: no corporate, income or capital-gains tax."],
+[17,"Berlin","Germany",80,"Zero tax on 1-year holdings; deep developer and open-source culture."],
+[18,"San Salvador","El Salvador",79,"Bitcoin is legal tender; 0% capital gains on BTC and most digital assets."],
+[19,"Phuket","Thailand",78,"Crypto-nomad hotspot; VAT removed on crypto trading, tourism pilots."],
+[20,"Zürich","Switzerland",78,"Global financial centre integrating digital assets and quality digital life."]
+];
+
+/* ================= TRANSLATIONS (6 languages) ================= */
+var L={
+en:{
+ "nav-countries":"Countries","nav-cities":"Cities","nav-community":"Community","nav-eaco":"About eaco",
+ "hero-pill":"🌍 Built on eaco · Web3","hero-title":"The <em>Web3 Friendly</em> World",
+ "hero-sub":"Top 100 web3-friendly countries & top 20 cities on Earth — the places embracing blockchain, digital freedom and positive on-chain energy. Empowering builders across the UK, Europe and beyond to discover and use eaco.",
+ "pool-desc":"The eaco (e) · doge liquidity pool is now live. Provide liquidity, swap and earn on Orca. Verify on-chain at Orb Markets.",
+ "c-title":"🌏 Top 100 Web3-Friendly Countries",
+ "c-sub":"A composite view of the world's most web3-friendly nations, drawn from leading public indices (Coincub Global Web3 Index, Bybit & DL Research, Chainalysis adoption data and Multipolitan) as of 2025–2026, combined with taxation, regulation and ecosystem strength.",
+ "c-s1":"Web3-Friendly Countries","c-s2":"Web3-Friendly Cities","c-s3":"Continents","c-s4":"Languages / Themes",
+ "th-rank":"Rank","th-country":"Country / Region","th-reg":"Region","th-score":"Index",
+ "city-title":"🏙️ Top 20 Web3-Friendly Cities",
+ "city-sub":"The world's leading crypto-friendly cities: regulatory clarity, low/zero taxation, digital infrastructure and a thriving on-chain community — the new financial capitals of tomorrow.",
+ "pos-title":"💚 Positive Energy, Global Community","pos-into":"We build the web3 community with positive values — across the UK, Europe and the wider world.",
+ "p1-t":"✨ Do Good Things","p1-d":"Use web3 to create real, positive value — education, inclusion and fair access for all.",
+ "p2-t":"🌐 Open & Free","p2-d":"Decentralized, borderless, permissionless money and ideas that stay open to everyone.",
+ "p3-t":"🤝 United Community","p3-d":"UK, Europe and beyond — grow, learn and build together with the eaco community.",
+ "p4-t":"🚀 eaco for All","p4-d":"Discover how eaco enables liquid, positive and transparent on-chain ecosystems.",
+ "f1t":"⚡ eaco (e) — Project Snapshot","f-ca":"Token CA:","f-pool":"EACO / DOGE Pool: Online · 2026",
+ "f2t":"🔗 Official Links","f-l1":"Orca Pool · e/DOGE ↗","f-l2":"Orb Markets · On-chain ↗","f-group":"Community: by email & social",
+ "f3t":"🌍 eaco Top 20 City Group","f3d":"Join the eaco top-20 web3 friendly city community network.","f3e":"Group email:",
+ "f4t":"💬 Get in touch","f4d":"Reach out to the eaco community in the UK, Europe and worldwide.",
+ "disclaimer":"Disclaimer: Rankings on this page are an aggregate, editorial representation of widely-cited public crypto/web3-friendliness indices (Coincub, Bybit & DL Research, Chainalysis, Multipolitan) as of 2025–2026, and are intended for general information and community education only, not investment advice. Always do your own research (DYOR).",
+ "rel":"📂 eaco · web3 web series","rel1":"🌍 eaco Web3-Friendly World (Top100 / Top20 cities)","rel2":"🏮 Top20 Chinese-Friendly Countries / Cities","rel3":"💱 Top10 CN-Friendly · Currency · eaco swap","reltip":"Tip: keep the 3 HTML files together to jump between pages from the footer.","copy":"Made with 💚 for the global web3 community"
+},
+zh:{
+ "nav-countries":"国家","nav-cities":"城市","nav-community":"社区","nav-eaco":"关于eaco",
+ "hero-pill":"🌍 基于 eaco · Web3","hero-title":"Web3 友善的世界",
+ "hero-sub":"地球上最友善的 Web3 前100国家和前20城市——拥抱区块链、数字自由与正向链上能量的地方。赋能英国、欧洲乃至全球的构建者了解和使用 eaco。",
+ "pool-desc":"eaco (e) · doge 流动性池现已上线。可在 Orca 提供流动性、兑换与赚取收益。可在 Orb Markets 链上验证。",
+ "c-title":"🌏 全球最友善 Web3 前100国家",
+ "c-sub":"综合主流公开指数（Coincub 全球 Web3 指数、Bybit 与 DL Research、Chainalysis 采用数据、Multipolitan），并结合税收、监管与生态实力，形成 2025–2026 全球最友善 Web3 国家的综合视图。",
+ "c-s1":"Web3 友善国家","c-s2":"Web3 友善城市","c-s3":"大洲","c-s4":"语言 / 主题",
+ "th-rank":"排名","th-country":"国家 / 地区","th-reg":"区域","th-score":"指数",
+ "city-title":"🏙️ 全球最友善 Web3 前20城市",
+ "city-sub":"全球领先的加密友善城市：监管清晰、低税或零税、数字基础设施完善、链上社区繁荣——明天的全新金融中心。",
+ "pos-title":"💚 正能量，全球社区","pos-into":"以正向价值观构建 Web3 社区——连接英国、欧洲与更广阔的世界。",
+ "p1-t":"✨ 做正能量的事","p1-d":"用 Web3 创造真实、正向的价值——教育、普惠与人人公平参与。",
+ "p2-t":"🌐 开放与自由","p2-d":"去中心化、无国界、无需许可的货币与思想，对所有人保持开放。",
+ "p3-t":"🤝 团结的社区","p3-d":"英国、欧洲乃至全球——与 eaco 社区一起成长、学习与共建。",
+ "p4-t":"🚀 eaco 惠及人人","p4-d":"探索 eaco 如何支撑流动、正向、透明的链上生态。",
+ "f1t":"⚡ eaco (e) — 项目档案","f-ca":"合约地址 CA：","f-pool":"EACO / DOGE 池：已上线 · 2026",
+ "f2t":"🔗 官方链接","f-l1":"Orca 池 · e/DOGE ↗","f-l2":"Orb Markets · 链上 ↗","f-group":"社区：邮件与社交",
+ "f3t":"🌍 eaco 前20城市小组","f3d":"加入 eaco 前20 Web3 友善城市社区网络。","f3e":"小组邮箱：",
+ "f4t":"💬 联系我们","f4d":"联系英国、欧洲及全球的 eaco 社区。",
+ "disclaimer":"免责声明：本页排名是对广为引用的公开加密/Web3 友善指数（Coincub、Bybit 与 DL Research、Chainalysis、Multipolitan，2025–2026）的综合、编辑性呈现，仅供一般信息与社区教育之用，不构成投资建议。请自行研究（DYOR）。",
+ "rel":"📂 eaco · web3 系列网页","rel1":"🌍 eaco Web3 友善世界（Top100 国家 / Top20 城市）","rel2":"🏮 对海外华人最友善 Top20 国家 / 城市","rel3":"💱 华人友善 TOP10 · 主权货币 · eaco 兑换","reltip":"提示：把本文件夹内 3 个 HTML 放在同一目录，即可在页脚互相跳转。","copy":"为全球 Web3 社区用心打造 💚"
+},
+es:{
+ "nav-countries":"Países","nav-cities":"Ciudades","nav-community":"Comunidad","nav-eaco":"Sobre eaco",
+ "hero-pill":"🌍 Construido sobre eaco · Web3","hero-title":"El Mundo <em>Amigo del Web3</em>",
+ "hero-sub":"Los 100 países y 20 ciudades más amigables con el Web3 en la Tierra: lugares que abrazan blockchain, libertad digital y energía on-chain positiva. Empoderando a constructores en el Reino Unido, Europa y más allá para descubrir y usar eaco.",
+ "pool-desc":"El pool de liquidez eaco (e) · doge ya está disponible. Aporta liquidez, intercambia y gana en Orca. Verifica on-chain en Orb Markets.",
+ "c-title":"🌏 Top 100 Países Amigables con Web3",
+ "c-sub":"Una vista combinada de las naciones más amigables con el Web3, basada en índices públicos líderes (Coincub Global Web3 Index, Bybit & DL Research, adopción de Chainalysis y Multipolitan) 2025–2026, junto con impuestos, regulación y fortaleza del ecosistema.",
+ "c-s1":"Países Web3","c-s2":"Ciudades Web3","c-s3":"Continentes","c-s4":"Idiomas / Temas",
+ "th-rank":"Ranking","th-country":"País / Región","th-reg":"Región","th-score":"Índice",
+ "city-title":"🏙️ Top 20 Ciudades Amigables con Web3",
+ "city-sub":"Las principales ciudades cripto-amigables: claridad regulatoria, impuestos bajos/cero, infraestructura digital y una próspera comunidad on-chain.",
+ "pos-title":"💚 Energía Positiva, Comunidad Global","pos-into":"Construimos la comunidad web3 con valores positivos — en el Reino Unido, Europa y el mundo.",
+ "p1-t":"✨ Haz Buenas Cosas","p1-d":"Usa web3 para crear valor positivo real: educación, inclusión y acceso justo para todos.",
+ "p2-t":"🌐 Abierto y Libre","p2-d":"Dinero e ideas descentralizados, sin fronteras, abiertos a todos.",
+ "p3-t":"🤝 Comunidad Unida","p3-d":"Reino Unido, Europa y más allá: crece y construye con la comunidad eaco.",
+ "p4-t":"🚀 eaco para Todos","p4-d":"Descubre cómo eaco impulsa ecosistemas on-chain líquidos y transparentes.",
+ "f1t":"⚡ eaco (e) — Resumen","f-ca":"CA del token:","f-pool":"Pool EACO/DOGE: En línea · 2026",
+ "f2t":"🔗 Enlaces Oficiales","f-l1":"Pool Orca · e/DOGE ↗","f-l2":"Orb Markets · On-chain ↗","f-group":"Comunidad: email y redes",
+ "f3t":"🌍 Grupo Top 20 Ciudad eaco","f3d":"Únete a la red comunitaria de ciudades web3 eaco top-20.","f3e":"Email del grupo:",
+ "f4t":"💬 Contacto","f4d":"Contacta a la comunidad eaco en el Reino Unido, Europa y el mundo.",
+ "disclaimer":"Descargo: los rankings de esta página son una representación editorial agregada de índices públicos ampliamente citados (Coincub, Bybit & DL Research, Chainalysis, Multipolitan) 2025–2026, solo informativa, no es asesoría de inversión. Investiga por ti mismo (DYOR).",
+ "rel":"📂 Serie web eaco · web3","rel1":"🌍 Mundo eaco amigable con web3 (Top100 / Top20)","rel2":"🏮 Top20 países/ciudades amigables con chin@s","rel3":"💱 Top10 chino-amigable · Moneda · eaco","reltip":"Consejo: guarda los 3 HTML juntos para saltar entre páginas.","copy":"Hecho con 💚 para la comunidad web3 global"
+},
+fr:{
+ "nav-countries":"Pays","nav-cities":"Villes","nav-community":"Communauté","nav-eaco":"À propos d'eaco",
+ "hero-pill":"🌍 Construit sur eaco · Web3","hero-title":"Le Monde <em>Friendly Web3</em>",
+ "hero-sub":"Les 100 pays et 20 villes les plus favorables au Web3 sur Terre — des lieux qui embrassent la blockchain, la liberté numérique et l'énergie positive on-chain. Autonomisons les builders au Royaume-Uni, en Europe et ailleurs pour découvrir eaco.",
+ "pool-desc":"Le pool de liquidité eaco (e) · doge est en ligne. Apportez de la liquidité, échangez et gagnez sur Orca. Vérifiez on-chain sur Orb Markets.",
+ "c-title":"🌏 Top 100 des Pays Favorables au Web3",
+ "c-sub":"Une vue composite des nations les plus favorables au Web3, issue des principaux indices publics (Coincub Global Web3 Index, Bybit & DL Research, adoption Chainalysis, Multipolitan) 2025–2026, combinée à la fiscalité, la régulation et la solidité de l'écosystème.",
+ "c-s1":"Pays Web3","c-s2":"Villes Web3","c-s3":"Continents","c-s4":"Langues / Thèmes",
+ "th-rank":"Rang","th-country":"Pays / Région","th-reg":"Région","th-score":"Indice",
+ "city-title":"🏙️ Top 20 des Villes Favorables au Web3",
+ "city-sub":"Les principales villes crypto-friendly : clarté réglementaire, fiscalité faible ou nulle, infrastructure numérique et communauté on-chain florissante.",
+ "pos-title":"💚 Énergie Positive, Communauté Globale","pos-into":"Nous construisons la communauté web3 avec des valeurs positives — au Royaume-Uni, en Europe et dans le monde.",
+ "p1-t":"✨ Faire le Bien","p1-d":"Utilisez le web3 pour créer une valeur positive réelle : éducation, inclusion et accès équitable.",
+ "p2-t":"🌐 Ouvert et Libre","p2-d":"Argent et idées décentralisés, sans frontières, ouverts à tous.",
+ "p3-t":"🤝 Communauté Unie","p3-d":"Royaume-Uni, Europe et au-delà : grandissez et construisez avec eaco.",
+ "p4-t":"🚀 eaco pour Tous","p4-d":"Découvrez comment eaco alimente des écosystèmes on-chain liquides et transparents.",
+ "f1t":"⚡ eaco (e) — En bref","f-ca":"CA du token :","f-pool":"Pool EACO/DOGE : En ligne · 2026",
+ "f2t":"🔗 Liens Officiels","f-l1":"Pool Orca · e/DOGE ↗","f-l2":"Orb Markets · On-chain ↗","f-group":"Communauté : email & réseaux",
+ "f3t":"🌍 Groupe eaco Top 20 Villes","f3d":"Rejoignez le réseau des villes web3-friendly eaco top-20.","f3e":"Email du groupe :",
+ "f4t":"💬 Contact","f4d":"Contactez la communauté eaco au Royaume-Uni, en Europe et dans le monde.",
+ "disclaimer":"Avertissement : les classements de cette page sont une représentation éditoriale agrégée d'indices publics largement cités (Coincub, Bybit & DL Research, Chainalysis, Multipolitan) 2025–2026, à titre informatif uniquement, pas un conseil d'investissement. Faites vos propres recherches (DYOR).",
+ "rel":"📂 Série web eaco · web3","rel1":"🌍 Monde eaco-friendly web3 (Top100 / Top20)","rel2":"🏮 Top20 pays/villes amicaux des Chinois","rel3":"💱 Top10 chino-amical · Devise · swap eaco","reltip":"Astuce: gardez les 3 HTML ensemble pour naviguer.","copy":"Fait avec 💚 pour la communauté web3 mondiale"
+},
+ar:{
+ "nav-countries":"الدول","nav-cities":"المدن","nav-community":"المجتمع","nav-eaco":"حول eaco",
+ "hero-pill":"🌍 مبني على eaco · Web3","hero-title":"العالم <em>الصديق للويب3</em>",
+ "hero-sub":"أكثر 100 دولة و20 مدينة صديقة للويب3 على الأرض — أماكن تحتضن البلوكشين والحرية الرقمية والطاقة الإيجابية على السلسلة. تمكين البنّائين في المملكة المتحدة وأوروبا وخارجها لاكتشاف واستخدام eaco.",
+ "pool-desc":"مجمع سيولة eaco (e) · doge يعمل الآن. وفّر سيولة وبادل واربح على Orca. تحقق على السلسلة عبر Orb Markets.",
+ "c-title":"🌏 أفضل 100 دولة صديقة للويب3",
+ "c-sub":"نظرة مركّبة لأكثر الدول صديقةً للويب3، مستندة إلى مؤشرات عامة رائدة (مؤشر Coincub العالمي للويب3، Bybit و DL Research، بيانات اعتماد Chainalysis و Multipolitan) 2025–2026، مع الضرائب والتنظيم وقوة النظام البيئي.",
+ "c-s1":"دول صديقة للويب3","c-s2":"مدن صديقة للويب3","c-s3":"قارات","c-s4":"لغات / ثيمات",
+ "th-rank":"الترتيب","th-country":"الدولة / المنطقة","th-reg":"المنطقة","th-score":"المؤشر",
+ "city-title":"🏙️ أفضل 20 مدينة صديقة للويب3",
+ "city-sub":"المدن العالمية الرائدة الصديقة للعملات الرقمية: وضوح تنظيمي، ضرائب منخفضة أو صفرية، بنية رقمية ومجتمع مزدهر على السلسلة.",
+ "pos-title":"💚 طاقة إيجابية، مجتمع عالمي","pos-into":"نبني مجتمع الويب3 بقيم إيجابية — في المملكة المتحدة وأوروبا والعالم.",
+ "p1-t":"✨ افعل الخير","p1-d":"استخدم الويب3 لخلق قيمة إيجابية حقيقية: تعليم وشمولية ووصول عادل للجميع.",
+ "p2-t":"🌐 منفتح وحر","p2-d":"نقود وأفكار لامركزية بلا حدود، مفتوحة للجميع.",
+ "p3-t":"🤝 مجتمع متحد","p3-d":"المملكة المتحدة وأوروبا وخارجها: انمُ وتعلم وابنِ مع مجتمع eaco.",
+ "p4-t":"🚀 eaco للجميع","p4-d":"اكتشف كيف يمكّن eaco أنظمةً إيكولوجية على السلسلة سائلة وإيجابية وشفافة.",
+ "f1t":"⚡ eaco (e) — نبذة المشروع","f-ca":"عنوان العقد:","f-pool":"مجمع EACO/DOGE: يعمل · 2026",
+ "f2t":"🔗 روابط رسمية","f-l1":"مجمع Orca · e/DOGE ↗","f-l2":"Orb Markets · على السلسلة ↗","f-group":"المجتمع: بريد إلكتروني ووسائل تواصل",
+ "f3t":"🌍 مجموعة eaco أفضل 20 مدينة","f3d":"انضم إلى شبكة مدن الويب3 الصديقة eaco أفضل 20.","f3e":"بريد المجموعة:",
+ "f4t":"💬 تواصل معنا","f4d":"تواصل مع مجتمع eaco في المملكة المتحدة وأوروبا والعالم.",
+ "disclaimer":"إخلاء مسؤولية: ترتيبات هذه الصفحة تمثيل تحريري مجمّع لمؤشرات عامة موسّع الاستشهاد (Coincub، Bybit & DL Research، Chainalysis، Multipolitan) 2025–2026، لأغراض إعلامية وتعليمية فقط، وليست نصيحة استثمارية. ابحث بنفسك (DYOR).",
+ "rel":"📂 سلسلة eaco · web3","rel1":"🌍 عالم eaco الصديق للويب3 (Top100 / Top20)","rel2":"🏮 أهم20 دولة/مدينة صديقة للصينيين","rel3":"💱 أفضل10 · عملة · صرف eaco","reltip":"نصيحة: احتفظ بملفات HTML الثلاثة معًا للتنقل.","copy":"صُنع بـ💚 لمجتمع الويب3 العالمي"
+},
+ru:{
+ "nav-countries":"Страны","nav-cities":"Города","nav-community":"Сообщество","nav-eaco":"О eaco",
+ "hero-pill":"🌍 Построено на eaco · Web3","hero-title":"Мир, <em>дружелюбный к Web3</em>",
+ "hero-sub":"Топ-100 дружелюбных к Web3 стран и топ-20 городов на Земле — места, принимающие блокчейн, цифровую свободу и позитивную on-chain энергию. Даём возможность строителям в Великобритании, Европе и за её пределами открыть и использовать eaco.",
+ "pool-desc":"Пул ликвидности eaco (e) · doge уже онлайн. Поставляйте ликвидность, меняйте и зарабатывайте на Orca. Проверьте on-chain на Orb Markets.",
+ "c-title":"🌏 Топ-100 стран, дружелюбных к Web3",
+ "c-sub":"Комплексный взгляд на самые дружелюбные к Web3 страны на основе ведущих публичных индексов (Coincub Global Web3 Index, Bybit & DL Research, данные внедрения Chainalysis, Multipolitan) 2025–2026, с учётом налогов, регулирования и силы экосистемы.",
+ "c-s1":"Дружелюбные к Web3 страны","c-s2":"Дружелюбные к Web3 города","c-s3":"Континенты","c-s4":"Языки / Темы",
+ "th-rank":"Ранг","th-country":"Страна / Регион","th-reg":"Регион","th-score":"Индекс",
+ "city-title":"🏙️ Топ-20 городов, дружелюбных к Web3",
+ "city-sub":"Ведущие мировые крипто-дружелюбные города: ясное регулирование, низкие или нулевые налоги, цифровая инфраструктура и процветающее on-chain сообщество.",
+ "pos-title":"💚 Позитивная энергия, глобальное сообщество","pos-into":"Мы строим web3-сообщество с позитивными ценностями — в Великобритании, Европе и по всему миру.",
+ "p1-t":"✨ Делайте добрые дела","p1-d":"Используйте web3 для создания реальной позитивной ценности: образование, доступность и честный доступ для всех.",
+ "p2-t":"🌐 Открыто и свободно","p2-d":"Децентрализованные, без границ, без разрешений деньги и идеи — открытые для всех.",
+ "p3-t":"🤝 Единое сообщество","p3-d":"Великобритания, Европа и далее: растите, учитесь и создавайте вместе с сообществом eaco.",
+ "p4-t":"🚀 eaco для всех","p4-d":"Узнайте, как eaco обеспечивает ликвидные, положительные и прозрачные on-chain экосистемы.",
+ "f1t":"⚡ eaco (e) — о проекте","f-ca":"CA токена:","f-pool":"Пул EACO/DOGE: онлайн · 2026",
+ "f2t":"🔗 Официальные ссылки","f-l1":"Пул Orca · e/DOGE ↗","f-l2":"Orb Markets · on-chain ↗","f-group":"Сообщество: email и соцсети",
+ "f3t":"🌍 Группа eaco топ-20 городов","f3d":"Присоединяйтесь к сети дружелюбных к Web3 городов eaco топ-20.","f3e":"Email группы:",
+ "f4t":"💬 Свяжитесь с нами","f4d":"Обратитесь к сообществу eaco в Великобритании, Европе и мире.",
+ "disclaimer":"Отказ от ответственности: рейтинги на этой странице — агрегированное редакционное представление широко цитируемых публичных индексов (Coincub, Bybit & DL Research, Chainalysis, Multipolitan) 2025–2026, только для информации и обучения, не инвестиционная рекомендация. Проведите собственное исследование (DYOR).",
+ "rel":"📂 Серия eaco · web3","rel1":"🌍 Мир eaco, дружелюбный к web3 (Top100 / Top20)","rel2":"🏮 ТОП20 дружелюбных к китайцам стран/городов","rel3":"💱 ТОП10 · Валюта · обмен eaco","reltip":"Совет: храните 3 HTML вместе для навигации.","copy":"Сделано с 💚 для глобального web3-сообщества"
+}
+};
+
+/* ================= RENDER ================= */
+function render(){
+  var l=L[document.body.getAttribute('data-lang')]||L.en;
+  document.querySelectorAll('[data-i]').forEach(function(el){
+    var k=el.getAttribute('data-i');
+    if(l[k]!=null) el.innerHTML=l[k];
+  });
+  document.title = lang==='zh'?'eaco · Web3 友善世界 — 前100国家与前20城市'
+   : lang==='es'?'eaco · Mundo Web3 — Top 100 Países y Top 20 Ciudades'
+   : lang==='fr'?'eaco · Monde Web3 — Top 100 Pays et Top 20 Villes'
+   : lang==='ar'?'eaco · عالم Web3 — أفضل 100 دولة و 20 مدينة'
+   : lang==='ru'?'eaco · Мир Web3 — Топ-100 стран и Топ-20 городов'
+   :'eaco · Web3 Friendly World — Top 100 Countries & Top 20 Cities';
+
+  // Countries table
+  var cb=document.getElementById('countryBody');cb.innerHTML='';
+  COUNTRY_DATA.forEach(function(r){
+    var name = lang==='zh'?r[2]:r[1];
+    var tr=document.createElement('tr');if(r[0]<=10)tr.className='topr';
+    tr.innerHTML='<td><span class="rank">'+r[0]+'</span></td>'+
+      '<td><span class="cty">'+name+'</span></td>'+
+      '<td><span class="reg">'+r[3]+'</span></td>'+
+      '<td style="min-width:120px"><span class="score">'+r[4]+'</span><span class="bar"><i style="width:'+r[4]+'%"></i></span></td>';
+    cb.appendChild(tr);
+  });
+  // Cities
+  var g=document.getElementById('cityGrid');g.innerHTML='';
+  CITY_DATA.forEach(function(c){
+    var name = lang==='zh'?(c[2]?c[2]+' · '+c[1]:c[1]):c[1];
+    var d=document.createElement('div');d.className='city';
+    d.innerHTML='<div class="top"><span class="rank" style="color:#fff">'+c[0]+'</span><div><div class="nm">'+name+'</div><div class="when">'+c[3]+'</div></div></div>'+
+      '<div class="hi">'+c[4]+'</div>'+
+      '<span class="score" style="margin-top:8px;display:inline-block">Index '+c[5]+'</span><span class="bar" style="margin-top:4px;width:70%"><i style="width:'+c[5]+'%"></i></span>';
+    g.appendChild(d);
+  });
+}
+
+/* ================= CONTROLS ================= */
+var lang='en';
+document.getElementById('langSel').addEventListener('change',function(e){
+  lang=e.target.value;document.body.setAttribute('data-lang',lang);
+  if(lang==='ar'||lang==='ru'){} else {}
+  document.body.dir = (lang==='ar')?'rtl':'ltr';
+  render();
+});
+document.getElementById('themeSeg').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  document.documentElement.setAttribute('data-theme',b.getAttribute('data-theme'));
+  this.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');
+});
+render();
+</script>
+</body>
+</html>
