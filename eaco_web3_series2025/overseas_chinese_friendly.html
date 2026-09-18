@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外华人最友善的 20 个国家 & 20 个城市 | Friendly Destinations for Overseas Chinese</title>
+<meta name="description" content="对海外华人最友善的20个国家和20个城市：全球华人聚居、文化包容、华语便利的友善目的地排行榜。Top 20 friendly countries & cities for overseas Chinese worldwide.">
+<style>
+:root{
+  --bg:#f6f1e7; --bg2:#efe7d6; --card:#fffaf0; --card2:#f9efdc;
+  --txt:#3d2f1d; --mut:#8a7650; --line:#ddc9a0;
+  --accent:#c0392b; --accent2:#e08a2e; --gold:#b3802e;
+  --grad:linear-gradient(135deg,#c0392b 0%,#e08a2e 100%);
+  --red:#c0392b;
+  --radius:16px; --shadow:0 10px 30px rgba(90,60,20,.14);
+}
+html[data-theme="classic"]{
+  --bg:#f6f1e7; --bg2:#efe7d6; --card:#fffaf0; --card2:#f9efdc;
+  --txt:#3d2f1d; --mut:#8a7650; --line:#ddc9a0;
+  --accent:#c0392b; --accent2:#e08a2e; --gold:#b3802e;
+  --grad:linear-gradient(135deg,#c0392b 0%,#e08a2e 100%);
+}
+html[data-theme="modern"]{
+  --bg:#0d1b2a; --bg2:#12233b;
+  --card:#152740; --card2:#1a2f4d;
+  --txt:#ecf3ff; --mut:#9fb3d6; --line:#29405f;
+  --accent:#3a86ff; --accent2:#e05d2e; --gold:#ffb74d;
+  --grad:linear-gradient(135deg,#3a86ff 0%,#e05d2e 100%);
+  --shadow:0 10px 30px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;transition:background .4s,color .4s}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:12px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
+.logo .dot{width:30px;height:30px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--shadow)}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{padding:7px 12px;border-radius:20px;font-size:14px;color:var(--mut);font-weight:600}
+nav a:hover{color:var(--txt);background:var(--card)}
+nav a.on{color:#fff;background:var(--grad)}
+.hm{margin-left:auto;display:flex;gap:10px;align-items:center}
+.seg{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:4px}
+.seg button{border:none;background:transparent;color:var(--mut);width:30px;height:26px;border-radius:16px;cursor:pointer;font-size:12px;padding:0 9px;font-weight:600}
+.seg button.on{background:var(--grad);color:#fff}
+.sel{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:20px;padding:7px 12px;font-size:13px;cursor:pointer;outline:none}
+.sel option{background:var(--card);color:var(--txt)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:60px 0 50px;text-align:center;
+  background:radial-gradient(50rem 22rem at 50% -8%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 62%)}
+.hero .pill{display:inline-block;padding:8px 18px;border-radius:30px;border:1px solid var(--line);color:var(--accent);font-weight:700;font-size:13px;background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.hero h1{font-size:clamp(28px,5vw,52px);font-weight:900;margin-top:18px}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{max-width:740px;margin:16px auto 0;color:var(--mut);font-size:clamp(14px,2vw,18px)}
+.hero .red{display:inline-block;margin-top:20px;font-size:14px;font-weight:700;color:#fff;background:var(--red);padding:8px 18px;border-radius:24px}
+
+/* sections */
+section{padding:24px 0 28px}
+.sec-head{margin-bottom:20px}
+.sec-head h2{font-size:clamp(22px,3.2vw,32px);font-weight:800}
+.sec-head p{color:var(--mut);max-width:780px;margin-top:8px;font-size:15px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0 26px}
+.stat{flex:1;min-width:150px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;text-align:center}
+.stat b{display:block;font-size:30px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
+.stat span{color:var(--mut);font-size:13px}
+
+/* table */
+.table-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{background:var(--card2);text-align:left;padding:13px 15px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut)}
+tbody td{padding:12px 15px;border-top:1px solid var(--line)}
+tbody tr:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.rank{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;font-weight:800;background:var(--card2);color:var(--accent)}
+tr.topr .rank{background:var(--grad);color:#fff}
+.cty{font-weight:700}
+.reg{color:var(--mut);font-size:12px}
+.score{font-weight:800;color:var(--accent)}
+.bar{display:block;height:6px;width:100%;background:var(--card2);border-radius:4px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--grad);border-radius:4px}
+.tag{display:inline-block;font-size:10px;padding:1px 7px;border-radius:10px;background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);margin:2px 3px 0 0}
+
+/* cities */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.city{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.city .top{display:flex;align-items:center;gap:12px}
+.city .nm{font-weight:800;font-size:16px}
+.city .when{color:var(--mut);font-size:12px;margin-top:3px}
+.city .hi{color:var(--mut);font-size:13px;margin-top:10px;min-height:40px}
+
+/* message */
+.message{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;margin:14px 0 8px;box-shadow:var(--shadow)}
+.message h3{font-size:21px;margin-bottom:12px;color:var(--accent)}
+.message .cols{display:flex;gap:14px;flex-wrap:wrap}
+.message .cols .c{flex:1;min-width:220px;background:var(--card2);border-radius:12px;padding:16px}
+.message .cols .c b{display:block;margin-bottom:6px}
+.message .cols .c p{color:var(--mut);font-size:14px}
+
+/* footer */
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:34px 0 24px;margin-top:26px}
+footer h4{font-size:14px;margin-bottom:10px;color:var(--accent)}
+footer ul{list-style:none}
+footer li{font-size:13px;margin-bottom:7px;color:var(--mut)}
+.copy{margin-top:22px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--mut);text-align:center;line-height:1.8}
+@media (max-width:860px){thead th{position:static}.stats{flex-direction:column}}
+</style>
+</head>
+<body data-lang="zh">
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo"><span class="dot">华</span> <span data-i="app-name">海外华人友好世界</span></div>
+    <nav>
+      <a href="#countries" data-i="nav-c">20个国家</a>
+      <a href="#cities" data-i="nav-cities">20个城市</a>
+      <a href="#about" data-i="nav-about">关于</a>
+    </nav>
+    <div class="hm">
+      <div class="seg" id="themeSeg">
+        <button data-theme="classic" class="on" data-i="th-cla">🏮</button>
+        <button data-theme="modern" data-i="th-mod">🌆</button>
+      </div>
+      <select class="sel" id="langSel">
+        <option value="zh">华语</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="pill" data-i="hero-pill">🌍 全球华人的第二故乡 · Home for Chinese Abroad</span>
+    <h1 data-i="hero-title">对海外华人<em>最友善</em>的地方</h1>
+    <p class="sub" data-i="hero-sub">根据华人聚居规模、文化包容度、华语服务便利性、语言环境与政策友好度，为你整理全球对海外华人最友善的 20 个国家与 20 个城市——让你的远行更安心、更有归属。</p>
+    <span class="red" data-i="hero-red">🇨🇳 无论身在何方，心安即是家</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- COUNTRIES -->
+  <section id="countries">
+    <div class="sec-head">
+      <h2 data-i="c-title">🌏 对海外华人最友善的 20 个国家</h2>
+      <p data-i="c-sub">综合华人社群规模（人口占比、聚居历史）、社会文化包容度、华语通用程度、华语服务便利性、移民与居留政策等维度综合评估。数据参考华人移民适应度、Condé Nast Traveller 欧洲友好度、各移民局与欧盟统计局等公开资料（2025–2026）。</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>20</b><span data-i="s1">友善国家</span></div>
+      <div class="stat"><b>20</b><span data-i="s2">友善城市</span></div>
+      <div class="stat"><b>5</b><span data-i="s3">大洲</span></div>
+      <div class="stat"><b>双</b><span data-i="s4">中英文 / 双主题</span></div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead><tr><th data-i="th-r">排名</th><th data-i="th-n">国家</th><th data-i="th-reg">地区</th><th data-i="th-s">友善指数</th></tr></thead>
+        <tbody id="cb"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CITIES -->
+  <section id="cities">
+    <div class="sec-head">
+      <h2 data-i="city-t">🏙️ 对海外华人最友善的 20 个城市</h2>
+      <p data-i="city-s">拥有成熟唐人街、庞大华人社区、便利华语服务与温暖跨文化氛围的城市——全球华人在海外最自在的地方。</p>
+    </div>
+    <div class="grid" id="cg"></div>
+  </section>
+
+  <!-- ABOUT / message -->
+  <section id="about">
+    <div class="message">
+      <h3 data-i="msg-t">💛 给远行的你一句温暖的话</h3>
+      <div class="cols">
+        <div class="c"><b data-i="m1t">🏘️ 家的味道</b><p data-i="m1d">好的华人社区，让你在异国也能吃上家乡菜、听到熟悉的乡音。</p></div>
+        <div class="c"><b data-i="m2t">🤝 文化被尊重</b><p data-i="m2d">友善的国家尊重并包容中华文化，节日与习俗在这里延续。</p></div>
+        <div class="c"><b data-i="m3t">🛟 安心的保障</b><p data-i="m3d">健全的医疗、教育与安全保障，让家人无后顾之忧。</p></div>
+        <div class="c"><b data-i="m4t">📈 机遇与成长</b><p data-i="m4d">既保有文化根脉，也拥抱全球机遇，成就更好的自己。</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px">
+    <div>
+      <h4 data-i="f1t">🌏 关于本项目</h4>
+      <ul><li data-i="f1d">一份面向海外华人的友善目的地参考与社区学习页面，仅作一般信息参考，不作专业移民/投资建议。请结合个人情况评估。</li></ul>
+    </div>
+    <div>
+      <h4 data-i="f2t">📚 数据参考</h4>
+      <ul>
+        <li data-i="f2a">· 华人移民适应度 / 聚居规模</li>
+        <li data-i="f2b">· Condé Nast Traveller 友好度</li>
+        <li data-i="f2c">· 各国移民局 / 欧盟统计局</li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i="f3t">💬 反馈</h4>
+      <ul><li data-i="f3d">欢迎留言补充你心中最友善的地方，让这份参考更完整。</li></ul>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:18px">
+    <div style="padding-top:14px;border-top:1px dashed rgba(0,0,0,.15)">
+      <h5 data-i="rel">📂 eaco · web3 系列网页</h5>
+      <ul style="list-style:none;padding:0">
+        <li><a href="eaco_web3_friendly.html" data-i="rel1" style="color:var(--acc2);text-decoration:none">🌍 eaco Web3 友善世界（Top100 国家 / Top20 城市）</a></li>
+        <li><a href="overseas_chinese_friendly.html" data-i="rel2" style="color:var(--acc2);text-decoration:none">🏮 对海外华人最友善 Top20 国家 / 城市</a></li>
+        <li><a href="chinese_top10_currency.html" data-i="rel3" style="color:var(--acc2);text-decoration:none">💱 华人友善 TOP10 · 主权货币 · eaco 兑换</a></li>
+      </ul>
+      <p style="font-size:.78rem;opacity:.6;margin:6px 0 0" data-i="reltip">提示：把本文件夹内 3 个 HTML 放在同一目录，即可在页脚互相跳转。</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="copy"><span data-i="copy">© 2026 · 为全球海外华人制作 💛 · 无论身在何方，心安即是家</span></div>
+  </div>
+</footer>
+
+<script>
+var C=[ /* rank, nameEn, nameZh, regionEn, regionZh, score, hiEn, hiZh */
+[1,"Singapore","新加坡","Asia-Pacific","亚太",96,"Hua is an official language; ~74% Chinese; supreme integration & convenience.","华语为官方语言之一，华人占比约74%，语言文化零障碍，融入度最高。"],
+[2,"Malaysia","马来西亚","Southeast Asia","东南亚",94,"~23% Chinese; Mandarin/Cantonese widely used; food & festivals close to home.","华人约占23%，华语粤语通用，饮食节庆与故土最为接近，养老宜居。"],
+[3,"Thailand","Thailand","Southeast Asia","东南亚",93,"~10M Chinese heritage; Bangkok Chinatown thrives; warm & inclusive culture.","华人祖籍规模约千万，曼谷唐人街全球最繁华之一，文化亲和包容。"],
+[4,"Canada","加拿大","North America","北美",93,"Multicultural; mature Chinese communities in Vancouver & Toronto.","多元文化典范，温哥华/多伦多华人社区成熟，华语服务丰富，教育医疗优。"],
+[5,"Australia","澳大利亚","Oceania","大洋洲",92,"High quality of life; big Chinese communities in Sydney & Melbourne.","生活品质高，悉尼/墨尔本华人社区庞大，社会多元包容，适应难度低。"],
+[6,"New Zealand","新西兰","Oceania","大洋洲",90,"Very safe & friendly; strong community in Auckland; peaceful pace.","安全友善、生活宁静，奥克兰华人社区较大，注重家庭与社会福祉。"],
+[7,"United States","美国","North America","北美",89,"~5M Chinese; Chinatowns nationwide; rich opportunities & resources.","华人约500万，全国遍布唐人街，教育资源全球领先，华人圈庞大。"],
+[8,"United Kingdom","英国","Europe","欧洲",87,"Mature Chinese communities in London & Manchester; strong education.","伦敦/曼彻斯特华人社区成熟，教育体系卓越，华语团体互助氛围浓厚。"],
+[9,"Portugal","葡萄牙","Europe","欧洲",85,"Active Chinese community; Chinese taught in 21 public schools; golden visa.","华人社区活跃，21所公立中学开华语课，黄金签证友好，气候宜人。"],
+[10,"Spain","Spain","Europe","欧洲",84,"Long-standing friendly ties; well-integrated Chinese; rich life quality.","中欧友好，华人分布于餐饮零售等各行业融入良好，医疗教育完善。"],
+[11,"Greece","Greece","Europe","欧洲",82,"Solid China ties; respected Chinese community; golden visa hub.","中希关系稳固，华人社区受尊重，购房永居黄金签证热门目的地。"],
+[12,"United Arab Emirates","阿联酋","Middle East","中东",81,"~230K Chinese; English-friendly, vibrant, zero-income-tax hub.","华人约23万，英语通用、营商环境好、零个人所得税，机遇多元。"],
+[13,"Japan","Japan","Asia","亚洲",81,"~820K Chinese; high convenience, safety and smart-city living.","华人约82万，生活安全便利、城市治理精细，教育优质，适应舒适。"],
+[14,"South Korea","South Korea","Asia","亚洲",79,"Great for families/kids; modern infrastructure; growing Chinese community.","现代基础设施完善，宜居适学，华人社区持续成长，多元包容。"],
+[15,"Hungary","Hungary","Europe","欧洲",77,"Central-EU trade hub; low-threshold residency; Chinese-friendly trade town.","中欧商贸枢纽，居留门槛低，吸引大量华商创业，签证友好。"],
+[16,"Netherlands","Netherlands","Europe","欧洲",76,"Rotterdam & Amsterdam logistics/restaurant hubs; smooth paths to PR.","鹿特丹/阿姆斯特丹餐饮物流华人稳定扩张，转永居渠道成熟。"],
+[17,"Germany","Germany","Europe","欧洲",75,"Skilled migration rising; Chinese communities in Hamburg & Düsseldorf.","技术移民占比逐年上升，汉堡/杜塞尔多夫有商贸华人圈，社会秩序好。"],
+[18,"France","France","Europe","欧洲",74,"Large long-established community; major Chinatown in Paris (13th).","法国拥有欧洲规模较大、历史悠久的华社，巴黎13区唐人街知名。"],
+[19,"Italy","Italy","Europe","欧洲",73,"Traditionally largest EU Chinese hub: Prato, Milan & Rome.","欧洲华人传统最大聚集地之一：普拉托、米兰、罗马商贸根基深厚。"],
+[20,"Ireland","Ireland","Europe","欧洲",72,"Very safe, friendly and family-oriented; growing appeal.","安全友善、重家庭与教育，华人友好度与生活品质不断提升。"]
+];
+var CT=[ /* cities: rank,nameEn,nameZh,countryEn,countryZh,score,hiZh-en-union handled by lang below: keep zh hi and en note -> simpler: provide both */
+[1,"Singapore","新加坡","Singapore","新加坡",96,"华语通用、社区完善、安全宜人，华人属地归属感最强。","Hua-friendly official language; unmatched convenience and safety."],
+[2,"Bangkok","曼谷","Thailand","泰国",94,"全球最繁华唐人街之一，饮食文化相通，包容热情。","One of the world's largest Chinatowns; warm, food-friendly culture."],
+[3,"Kuala Lumpur","吉隆坡","Malaysia","马来西亚",93,"华人占比较高，普通话/粤语通用，商贸氛围浓。","Large Chinese community; Mandarin & Cantonese widely spoken."],
+[4,"George Town (Penang)","槟城","Malaysia","马来西亚",92,"南洋华人文化深厚，华文教育完善，人情味浓。","Deep Nyonya-Chinese heritage; strong Chinese-medium education."],
+[5,"Vancouver","温哥华","Canada","加拿大",93,"北美第二大唐人街，华人社区成熟，气候宜人。","North America's 2nd largest Chinatown; mature & welcoming."],
+[6,"Toronto","多伦多","Canada","加拿大",91,"多元文化突出，华人社区庞大，机会众多。","Highly multicultural; large, dynamic Chinese community."],
+[7,"Sydney","悉尼","Australia","澳大利亚",90,"华人社区规模大，生活随机遇兼具，海港之城。","Big Chinese community; lifestyle meets opportunity."],
+[8,"Melbourne","墨尔本","Australia","澳大利亚",89,"多元包容、宜居有多彩文化，华人服务便利。","Livable, multicultural and inclusive with Chinese amenities."],
+[9,"Auckland","奥克兰","New Zealand","新西兰",88,"华人社区较大，环境优美，生活平和友善。","Friendly & peaceful with a sizable Chinese community."],
+[10,"London","伦敦","United Kingdom","英国",88,"标志性唐人街，华人团体丰富，教育卓越。","Iconic Chinatown; strong Chinese associations & education."],
+[11,"Manchester","曼彻斯特","United Kingdom","英国",85,"华人社区活跃，求学与生活兼顾的新兴华人城。","Active Chinese community; a study-and-live hub."],
+[12,"Paris","巴黎","France","法国",84,"13区唐人街声名远扬，华社历史深厚。","Renowned 13th-arr. Chinatown with historical depth."],
+[13,"San Francisco","旧金山","United States","美国",86,"北美最大华人聚居地，华人文化浓郁。","The largest Chinatown in North America; rich heritage."],
+[14,"Los Angeles","洛杉矶","United States","美国",86,"华人聚居广阔，行业多元，机会丰富。","Sprawling Chinese districts across diverse industries."],
+[15,"New York","纽约","United States","美国",84,"曼哈顿/布鲁克林/法拉盛多处华埠，春节成法定假日。","Multiple Chinatowns; Lunar New Year is a school holiday."],
+[16,"Seattle","西雅图","United States","美国",82,"科技重镇，华人背景便利，环境宜居。","Tech hub with convenient Chinese community life."],
+[17,"Dubai","迪拜","United Arab Emirates","阿联酋",82,"英语通用、华人社区增长，多元开放机遇多。","English-friendly, growing Chinese community, open economy."],
+[18,"Tokyo","东京","Japan","日本",82,"安全便利、华人约数十万，宜居宜业。","Safe, convenient; tens of thousands of Chinese residents."],
+[19,"Madrid","马德里","Spain","西班牙",80,"融入良好，华语服务渐增，生活品质佳。","Well integrated with growing Chinese services."],
+[20,"Lisbon","里斯本","Portugal","葡萄牙",80,"华语教育普及、宜居，华人社区活跃。","Chinese taught locally; active & livable community."]
+];
+
+var T={
+zh:{
+"app-name":"海外华人友好世界","nav-c":"20个国家","nav-cities":"20个城市","nav-about":"关于",
+"th-cla":"🏮","th-mod":"🌆",
+"hero-pill":"🌍 全球华人的第二故乡 · Home for Chinese Abroad",
+"hero-title":"对海外华人<em>最友善</em>的地方",
+"hero-sub":"根据华人聚居规模、文化包容度、华语服务便利性、语言环境与政策友好度，为你整理全球对海外华人最友善的 20 个国家与 20 个城市——让你的远行更安心、更有归属。",
+"hero-red":"🇨🇳 无论身在何方，心安即是家",
+"c-title":"🌏 对海外华人最友善的 20 个国家","c-sub":"综合华人社群规模、文化包容度、华语通用程度、华语服务便利性与移民居留政策等维度评估。数据参考华人移民适应度、Condé Nast Traveller 友好度、各国移民局与欧盟统计局等公开资料（2025–2026）。",
+"s1":"友善国家","s2":"友善城市","s3":"大洲","s4":"中英文 / 双主题",
+"th-r":"排名","th-n":"国家","th-reg":"地区","th-s":"友善指数",
+"city-t":"🏙️ 对海外华人最友善的 20 个城市","city-s":"拥有成熟唐人街、庞大华人社区、便利华语服务与温暖跨文化氛围的城市——全球华人在海外最自在的地方。",
+"msg-t":"💛 给远行的你一句温暖的话",
+"m1t":"🏘️ 家的味道","m1d":"好的华人社区，让你在异国也能吃上家乡菜、听到熟悉的乡音。",
+"m2t":"🤝 文化被尊重","m2d":"友善的国家尊重并包容中华文化，节日与习俗在这里延续。",
+"m3t":"🛟 安心的保障","m3d":"健全的医疗、教育与安全保障，让家人无后顾之忧。",
+"m4t":"📈 机遇与成长","m4d":"既保有文化根脉，也拥抱全球机遇，成就更好的自己。",
+"f1t":"🌏 关于本项目","f1d":"一份面向海外华人的友善目的地参考与社区学习页面，仅作一般信息参考，不作专业移民/投资建议。请结合个人情况评估。",
+"f2t":"📚 数据参考","f2a":"· 华人移民适应度 / 聚居规模","f2b":"· Condé Nast Traveller 友好度","f2c":"· 各国移民局 / 欧盟统计局",
+"f3t":"💬 反馈","f3d":"欢迎留言补充你心中最友善的地方，让这份参考更完整。",
+"rel":"📂 eaco · web3 系列网页","rel1":"🌍 eaco Web3 友善世界（Top100 国家 / Top20 城市）","rel2":"🏮 对海外华人最友善 Top20 国家 / 城市","rel3":"💱 华人友善 TOP10 · 主权货币 · eaco 兑换","reltip":"提示：把本文件夹内 3 个 HTML 放在同一目录，即可在页脚互相跳转。","copy":"© 2026 · 为全球海外华人制作 💛 · 无论身在何方，心安即是家"
+},
+en:{
+"app-name":"World Friendly for Overseas Chinese","nav-c":"20 Countries","nav-cities":"20 Cities","nav-about":"About",
+"th-cla":"🏮","th-mod":"🌆",
+"hero-pill":"🌍 Home for Chinese Abroad · 海外华人友好世界",
+"hero-title":"<em>Friendliest</em> Places for Overseas Chinese",
+"hero-sub":"Ranked by Chinese community size, cultural inclusiveness, Chinese-language convenience and policy friendliness — discover the 20 most welcoming countries and 20 cities worldwide for Chinese expats.",
+"hero-red":"🇨🇳 Wherever you go, home is where the heart is",
+"c-title":"🌏 Top 20 Friendliest Countries for Overseas Chinese",
+"c-sub":"Based on Chinese community scale, cultural inclusiveness, Mandarin accessibility and migration/policy friendliness. Sourced from Chinese-immigrant adaptation studies, Condé Nast Traveller, immigration bureaus & Eurostat (2025–2026).",
+"s1":"Friendly Countries","s2":"Friendly Cities","s3":"Continents","s4":"EN/华语 · 2 themes",
+"th-r":"Rank","th-n":"Country","th-reg":"Region","th-s":"Friendliness",
+"city-t":"🏙️ Top 20 Friendliest Cities for Overseas Chinese",
+"city-s":"Cities with established Chinatowns, large Chinese communities, convenient Chinese services and a warm cross-cultural atmosphere — the most comfortable places for Chinese abroad.",
+"msg-t":"💛 A warm word for those far from home",
+"m1t":"🏘️ Taste of Home","m1d":"A strong Chinese community brings home flavors and familiar dialects anywhere.",
+"m2t":"🤝 Culture Respected","m2d":"Friendly nations respect and embrace Chinese culture, traditions and festivals.",
+"m3t":"🛟 Peace of Mind","m3d":"Sound healthcare, education and safety let families thrive without worry.",
+"m4t":"📈 Opportunity & Growth","m4d":"Keep your cultural roots while embracing global opportunities.",
+"f1t":"🌏 About this page","f1d":"An informative community reference for overseas Chinese destinations, not professional immigration or investment advice. Evaluate based on your own situation.",
+"f2t":"📚 Data sources","f2a":"· Chinese-immigrant adaptation / communities","f2b":"· Condé Nast Traveller friendliness","f2c":"· Immigration bureaus / Eurostat",
+"f3t":"💬 Feedback","f3d":"Tell us your favorite place to make this reference more complete.",
+"rel":"📂 eaco · web3 web series","rel1":"🌍 eaco Web3-Friendly World (Top100 / Top20 cities)","rel2":"🏮 Top20 Chinese-Friendly Countries / Cities","rel3":"💱 Top10 CN-Friendly · Currency · eaco swap","reltip":"Tip: keep the 3 HTML files together to jump between pages from the footer.","copy":"© 2026 · Made with 💛 for Chinese abroad · Wherever you go, home is where the heart is"
+}
+};
+
+function render(){
+  var lang=document.body.getAttribute('data-lang');
+  var t=T[lang]||T.zh;
+  document.title = lang==='en'?'Top 20 Friendly Countries & Cities for Overseas Chinese':'海外华人最友善的 20 个国家 & 20 个城市';
+  document.querySelectorAll('[data-i]').forEach(function(el){
+    var k=el.getAttribute('data-i');if(t[k]!=null)el.innerHTML=t[k];
+  });
+  var zh=(lang==='zh');
+  var cb=document.getElementById('cb');cb.innerHTML='';
+  C.forEach(function(r){
+    var tr=document.createElement('tr');if(r[0]<=5)tr.className='topr';
+    tr.innerHTML='<td><span class="rank">'+r[0]+'</span></td>'+
+      '<td><span class="cty">'+(zh?r[2]:r[1])+'</span></td>'+
+      '<td><span class="reg">'+(zh?r[4]:r[3])+'</span></td>'+
+      '<td style="min-width:120px"><span class="score">'+r[5]+'</span><span class="bar"><i style="width:'+r[5]+'%"></i></span><div><span class="tag">'+(zh?r[7]:r[6])+'</span></div></td>';
+    cb.appendChild(tr);
+  });
+  var g=document.getElementById('cg');g.innerHTML='';
+  CT.forEach(function(c){
+    var d=document.createElement('div');d.className='city';
+    d.innerHTML='<div class="top"><span class="rank" style="color:#fff">'+c[0]+'</span><div><div class="nm">'+(zh?c[2]:c[1])+'</div><div class="when">'+(zh?c[4]:c[3])+'</div></div></div>'+
+      '<div class="hi">'+(zh?c[6]:c[7])+'</div>'+
+      '<span class="score" style="margin-top:8px;display:inline-block">'+c[5]+'</span><span class="bar" style="margin-top:4px;width:70%"><i style="width:'+c[5]+'%"></i></span>';
+    g.appendChild(d);
+  });
+}
+document.getElementById('langSel').addEventListener('change',function(e){document.body.setAttribute('data-lang',e.target.value);render();});
+document.getElementById('themeSeg').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  document.documentElement.setAttribute('data-theme',b.getAttribute('data-theme'));
+  this.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>对海外华人最友善 TOP 10 国家 · 主权货币 · eaco(Web3)兑换</title>
+<meta name="description" content="对海外华人最友善的TOP10国家及其主权货币，其中对web3友善、可兑换eaco的国家。Top 10 most Chinese-friendly countries, their sovereign currencies & web3/eaco status.">
+<style>
+:root{
+  --bg:#f6f1e7;--bg2:#efe7d6;--card:#fffaf0;--card2:#f9efdc;--txt:#3d2f1d;--mut:#8a7650;--line:#ddc9a0;
+  --acc:#c0392b;--acc2:#e08a2e;--red:#c0392b;
+  --grad:linear-gradient(135deg,#c0392b 0%,#e08a2e 100%);
+  --ok:#1e8e3e;--shadow:0 10px 30px rgba(90,60,20,.13);--radius:16px;
+}
+html[data-theme="classic"]{
+  --bg:#f6f1e7;--bg2:#efe7d6;--card:#fffaf0;--card2:#f9efdc;--txt:#3d2f1d;--mut:#8a7650;--line:#ddc9a0;
+  --acc:#c0392b;--acc2:#e08a2e;--red:#c0392b;
+  --grad:linear-gradient(135deg,#c0392b 0%,#e08a2e 100%);
+}
+html[data-theme="modern"]{
+  --bg:#0d1b2a;--bg2:#12233b;--card:#152740;--card2:#1a2f4d;--txt:#ecf3ff;--mut:#9fb3d6;--line:#29405f;
+  --acc:#3a86ff;--acc2:#e05d2e;--red:#ff4d4d;
+  --grad:linear-gradient(135deg,#3a86ff 0%,#e05d2e 100%);
+  --ok:#35d07f;--shadow:0 10px 30px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;transition:background .4s,color .4s}
+a{color:var(--acc);text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.logo .dot{width:30px;height:30px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:900}
+.hm{margin-left:auto;display:flex;gap:10px;align-items:center}
+.seg{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:4px}
+.seg button{border:none;background:transparent;color:var(--mut);height:26px;border-radius:16px;cursor:pointer;font-size:12px;padding:0 9px;font-weight:600}
+.seg button.on{background:var(--grad);color:#fff}
+.sel{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:20px;padding:7px 12px;font-size:13px;cursor:pointer;outline:none}
+.sel option{background:var(--card);color:var(--txt)}
+.hero{position:relative;overflow:hidden;padding:54px 0 44px;text-align:center;background:radial-gradient(48rem 20rem at 50% -8%,color-mix(in srgb,var(--acc) 22%,transparent),transparent 62%)}
+.hero h1{font-size:clamp(26px,4.6vw,48px);font-weight:900;margin-top:14px}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{max-width:720px;margin:14px auto 0;color:var(--mut);font-size:clamp(14px,2vw,17px)}
+section{padding:22px 0 26px}
+.sec-head{margin-bottom:18px}
+.sec-head h2{font-size:clamp(21px,3vw,30px);font-weight:800}
+.sec-head p{color:var(--mut);max-width:800px;margin-top:8px;font-size:15px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.cc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.cc .top{display:flex;align-items:center;gap:12px}
+.flag{font-size:34px}
+.cc .nm{font-weight:800;font-size:17px}
+.cc .when{color:var(--mut);font-size:12px}
+.money{margin-top:12px;border-top:1px dashed var(--line);padding-top:11px}
+.money .sym{font-size:22px;font-weight:900;color:var(--acc);margin-right:8px}
+.money .mn{font-weight:700}
+.money .code{font-family:monospace;background:var(--card2);border:1px solid var(--line);padding:1px 8px;border-radius:8px;font-size:12px;margin-left:6px}
+.lv{margin-top:11px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:14px}
+.b-web{color:#fff}
+.b-cn{background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc)}
+.bar{display:block;height:6px;width:100%;background:var(--card2);border-radius:4px;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--grad);border-radius:4px}
+.b-high{background:linear-gradient(135deg,#1e8e3e,#35d07f)}
+.b-mid{background:linear-gradient(135deg,#2f7bff,#00d9ff)}
+.b-low{background:linear-gradient(135deg,#b3802e,#e0a04e)}
+.hi{color:var(--mut);font-size:13px;margin-top:9px}
+
+/* eaco block */
+.eaco{background:var(--grad);color:#fff;border-radius:var(--radius);padding:26px;margin:14px 0;box-shadow:var(--shadow)}
+.eaco h3{font-size:20px;margin-bottom:10px}
+.eaco p{color:rgba(255,255,255,.94);font-size:14px;margin-bottom:8px}
+.eaco .ca{display:inline-block;font-family:monospace;background:rgba(0,0,0,.22);padding:3px 10px;border-radius:8px;font-size:12px;margin:4px 0;word-break:break-all}
+.eaco .lnks{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+.eaco .lnks a{background:#fff;color:#111;font-weight:700;font-size:13px;padding:9px 15px;border-radius:22px}
+.eaco .ok{font-weight:800}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0 4px;font-size:13px;color:var(--mut)}
+.legend .b{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+
+/* ensure honest note */
+.note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;font-size:13px;color:var(--mut);margin-top:14px}
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:26px 0 20px;margin-top:24px}
+footer h4{font-size:14px;margin-bottom:8px;color:var(--acc)}
+footer ul{list-style:none;font-size:13px;color:var(--mut)}
+footer li{margin-bottom:6px}
+.copy{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--mut);text-align:center}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-lang="zh">
+<div class="topbar"><div class="wrap">
+  <div class="logo"><span class="dot">华</span><span data-i="app">华人友善 TOP10 · 货币 · eaco</span></div>
+  <div class="hm">
+    <div class="seg" id="themeSeg">
+      <button data-theme="classic" class="on">🏮</button><button data-theme="modern">🌆</button>
+    </div>
+    <select class="sel" id="langSel"><option value="zh">华语</option><option value="en">English</option></select>
+  </div>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <h1 data-i="h1">对海外华人最友善的 <em>TOP 10</em> 国家</h1>
+  <p class="sub" data-i="sub">每个国家的主权货币一览，并特别标注其中<b>对 web3 友善、可兑换 eaco (e)</b> 的国家。</p>
+</div></header>
+
+<div class="wrap">
+  <div class="legend">
+    <span><span class="b" style="background:linear-gradient(135deg,#1e8e3e,#35d07f)"></span><span data-i="lg-high">Web3 非常友善</span></span>
+    <span><span class="b" style="background:linear-gradient(135deg,#2f7bff,#00d9ff)"></span><span data-i="lg-mid">Web3 友善 / 监管清晰</span></span>
+    <span><span class="b" style="background:linear-gradient(135deg,#b3802e,#e0a04e)"></span><span data-i="lg-low">发展中 / 中性</span></span>
+  </div>
+
+  <section>
+    <div class="sec-head"><h2 data-i="s1t">🌏 TOP10 国家 · 主权货币 · Web3 友善度</h2></div>
+    <div class="grid" id="g"></div>
+  </section>
+
+  <div class="eaco">
+    <h3 data-i="e-t">⚡ 其中可兑换 eaco (e) 的国家</h3>
+    <p data-i="e-desc">eaco 是 <b>Solana 链上的去中心化代币</b>，通过 Orca DEX 的 <b>e/DOGE 流动性池</b>交易。由于它去中心化、无需许可（permissionless），<b>全球任何国家的用户只要有 Solana 钱包（如 Phantom）与 SOL，都能在链上自由兑换 eaco，不受国家限制</b>。上表中标记 ⭐ 的「Web3 友善」国家，则为持有者提供了更友好的监管环境、银行通道与参与生态，更适合长期持有与建设。</p>
+    <span class="ca">Token CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+    <div class="lnks">
+      <a href="https://www.orca.so/pools/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank" rel="noopener" data-i="e-l1">Orca · e/DOGE Pool ↗</a>
+      <a href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34/" target="_blank" rel="noopener" data-i="e-l2">Orb Markets ↗</a>
+    </div>
+  </div>
+
+  <div class="note" data-i="note">说明：华人友善度基于社区规模、文化包容度、华语服务等综合呈现；Web3 友善度为参考性标注（参考 Coincub / Bybit-DL / Chainalysis 等主流指数）。货币为主权法定货币。eaco 为去中心化链上代币，全球可兑换。本页仅供信息参考，不构成投资建议，请自行研究（DYOR）。</div>
+</div>
+
+<section class="tu">
+  <style>
+  .tu{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:26px}
+  .tu h3{font-size:1.3rem;color:var(--txt)}
+  .tu h5{font-size:1.02rem;margin:6px 0 10px;color:var(--acc2)}
+  .tu ol li{padding:9px 0 9px 6px;border-bottom:1px dashed var(--line);line-height:1.7}
+  .tu ol li:last-child{border-bottom:none}
+  #cex{width:100%;border-collapse:collapse;margin:10px 0}
+  #cex th{background:var(--acc2);color:#fff;text-align:left;padding:9px 10px;font-size:.88rem}
+  #cex td{padding:9px 10px;border-bottom:1px solid var(--line);line-height:1.6;font-size:.92rem;vertical-align:top}
+  #cex td:first-child{width:34px;font-weight:700;color:var(--acc2)}
+  .rel{margin:20px 0 6px;padding-top:16px;border-top:1px dashed var(--line)}
+  .rel h5{margin-bottom:8px;color:var(--acc2)}
+  .rel ul{list-style:none;padding:0;margin:0}
+  .rel li{margin:6px 0}
+  .rel a{color:var(--acc2);text-decoration:none;font-weight:600}
+  .rel a:hover{text-decoration:underline}
+  .rel .tip{font-size:.8rem;color:var(--mut);margin:8px 0 0}
+  </style>
+  <h3 data-i="tu-t">🔁 海外 10 个 Web3 友善国家网友 · 兑换 eaco (e) 教程</h3>
+
+  <div class="eaco">
+    <h5 data-i="tu-l1">① 方法一：DEX 去中心化兑换（全球 10 国通用 · 推荐）</h5>
+    <p data-i="tu-why">只要任何支持 <b>Solana 链</b>代币兑换的 DEX（去中心化交易所），都能添加并交易 eaco。去中心化、无需许可，不受你所在国家限制。</p>
+    <ol data-i-list="st1,st2,st3,st4,st5"></ol>
+  </div>
+
+  <div class="eaco">
+    <h5 data-i="tu-l2">② 方法二：本地主流 CEX 交易所（法币入金 · 买 SOL / USDC）</h5>
+    <p data-i="tu-cex-desc">各国网友可先在本国可用/合规的主流 CEX 用法币买入 SOL 或 USDC，再提现到 Solana 钱包，用方法一在 DEX 兑换 eaco。下列为各国主流的 CEX 参考：</p>
+    <table id="cex"></table>
+    <p class="note" data-i="tu-note"></p>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="rel">
+    <h5 data-i="rel">📂 eaco · web3 系列网页</h5>
+    <ul>
+      <li><a href="eaco_web3_friendly.html" data-i="rel1">🌍 eaco Web3 友善世界（Top100 国家 / Top20 城市）</a></li>
+      <li><a href="overseas_chinese_friendly.html" data-i="rel2">🏮 对海外华人最友善 Top20 国家 / 城市</a></li>
+      <li><a href="chinese_top10_currency.html" data-i="rel3">💱 华人友善 TOP10 · 主权货币 · eaco 兑换</a></li>
+    </ul>
+    <p class="tip" data-i="reltip">提示：把本文件夹内 3 个 HTML 放在同一目录，即可在页脚互相跳转。</p>
+  </div>
+  <h4 data-i="ft">💛 愿每一位海外华人在异乡被善待 · 也与全球共享 web3 的正能量</h4>
+  <ul><li data-i="fl">社区的温暖源于彼此，web3 的友善通向更自由、更开放的世界。</li></ul>
+  <div class="copy"><span data-i="copy">© 2026 · 为全球海外华人制作<br>Made for Chinese abroad & the open web3 world</span></div>
+</div></footer>
+
+<script>
+/* rank, flag, nameEn, nameZh, curEn, curZh, code, sym, cnIdx, webTier(high/mid/low), hiEn, hiZh */
+var D=[
+[1,"🇸🇬","Singapore","新加坡","Singapore Dollar","新加坡元","SGD","S$",96,"high","Top-tier web3 hub; clear regulation & strong ecosystem.","全球顶尖web3枢纽，监管清晰、生态强，华人融入度最高。"],
+[2,"🇲🇾","Malaysia","马来西亚","Malaysian Ringgit","林吉特","MYR","RM",94,"mid","Regulated & growing crypto landscape; Chinese-friendly.","监管向好、加密生态增长，华人社群大且语言通用。"],
+[3,"🇹🇭","Thailand","泰国","Thai Baht","泰铢","THB","฿",93,"mid","Sandbox & pilots; trading allowed, payments restricted.","有监管沙盒与试点，可交易但支付受限，文化亲切。"],
+[4,"🇨🇦","Canada","Canada","Canadian Dollar","加拿大元","CAD","C$",93,"high","Consistently rank high in global web3 friendliness.","全球web3友善常年名列前茅，多元包容、社区成熟。"],
+[5,"🇦🇺","Australia","澳大利亚","Australian Dollar","澳元","AUD","A$",92,"high","Supportive digital-asset environment; strong ecosystem.","数字资产环境积极、生态强劲，生活随机遇并重。"],
+[6,"🇳🇿","New Zealand","新西兰","New Zealand Dollar","新西兰元","NZD","NZ$",90,"low","Neutral/developing framework; friendly & safe society.","监管中性/发展中，社会安全友善、生活平和。"],
+[7,"🇺🇸","United States","美国","US Dollar","美元","USD","$",89,"high","World-leading market; institutional & mainstream adoption.","全球领先市场，机构与主流采用度高，机会众多。"],
+[8,"🇬🇧","United Kingdom","英国","British Pound","英镑","GBP","£",87,"high","Pro-crypto momentum; mature fintech & stablecoin clarity.","加密政策积极、金融科技成熟、稳定币监管渐明。"],
+[9,"🇵🇹","Portugal","葡萄牙","Euro","欧元","EUR","€",85,"mid","Powered-favorable: 0% gains on 1-year+ holds; active community.","曾为加密天堂，持有一年以上零税，华语教育普及。"],
+[10,"🇪🇸","Spain","Spain","西班牙","Euro","欧元","EUR","€",84,"mid","MiCA-aligned regulation; well-integrated Chinese community.","遵循MiCA规范、监管明确，华人融入良好。"]
+];
+var CEXD=[
+["🇸🇬","Singapore","新加坡","Coinbase · Kraken · Bybit · OKX · Independent Reserve (local)","Coinbase · Kraken · Bybit · OKX · Independent Reserve（本地）"],
+["🇲🇾","Malaysia","马来西亚","Bybit · OKX · Hata (local) · Luno","Bybit · OKX · Hata（本地）· Luno"],
+["🇹🇭","Thailand","泰国","Bitkub (largest local) · Bitazza · Binance TH · Bybit","Bitkub（本地最大）· Bitazza · Binance TH · Bybit"],
+["🇨🇦","Canada","加拿大","Coinbase · Kraken · Newton · Bitbuy","Coinbase · Kraken · Newton · Bitbuy"],
+["🇦🇺","Australia","澳大利亚","Coinbase · Kraken · Swyftx · Independent Reserve","Coinbase · Kraken · Swyftx · Independent Reserve"],
+["🇳🇿","New Zealand","新西兰","Easy Crypto · Independent Reserve · Kraken · Coinbase","Easy Crypto · Independent Reserve · Kraken · Coinbase"],
+["🇺🇸","United States","美国","Coinbase · Kraken · Gemini · Crypto.com · Robinhood","Coinbase · Kraken · Gemini · Crypto.com · Robinhood"],
+["🇬🇧","United Kingdom","英国","Coinbase · Kraken · OKX · Binance (FCA-regulated)","Coinbase · Kraken · OKX · Binance（受监管）"],
+["🇵🇹","Portugal","葡萄牙","Binance · Coinbase · Kraken · OKX · Bybit","Binance · Coinbase · Kraken · OKX · Bybit"],
+["🇪🇸","Spain","西班牙","Binance (registered) · Coinbase · Kraken · Bitvavo · OKX","Binance（已注册）· Coinbase · Kraken · Bitvavo · OKX"]
+];
+var T={
+zh:{
+"app":"华人友善 TOP10 · 货币 · eaco","h1":"对海外华人最友善的 <em>TOP 10</em> 国家","sub":"每个国家的主权货币一览，并特别标注其中<b>对 web3 友善、可兑换 eaco (e)</b> 的国家。",
+"lg-high":"Web3 非常友善","lg-mid":"Web3 友善 / 监管清晰","lg-low":"发展中 / 中性",
+"s1t":"🌏 TOP10 国家 · 主权货币 · Web3 友善度",
+"e-t":"⚡ 其中可兑换 eaco (e) 的国家",
+"e-desc":"eaco 是 <b>Solana 链上的去中心化代币</b>，通过 Orca DEX 的 <b>e/DOGE 流动性池</b>交易。由于它去中心化、无需许可，<b>全球任何国家的用户只要有 Solana 钱包（如 Phantom）与 SOL，就能在链上自由兑换 eaco，不受国家限制</b>。上表中标记 ⭐ 的「Web3 友善」国家，则为持有者提供了更友好的监管环境、银行通道与参与生态，更适合长期持有与建设。",
+"e-l1":"Orca · e/DOGE Pool ↗","e-l2":"Orb Markets ↗",
+"note":"说明：华人友善度基于社区规模、文化包容度、华语服务等综合呈现；Web3 友善度为参考性标注（参考 Coincub / Bybit-DL / Chainalysis 等主流指数）。货币为主权法定货币。eaco 为去中心化链上代币，全球可兑换。本页仅供信息参考，不构成投资建议，请自行研究（DYOR）。",
+"ft":"💛 愿每一位海外华人在异乡被善待 · 也与全球共享 web3 的正能量","fl":"社区的温暖源于彼此，web3 的友善通向更自由、更开放的世界。",
+"copy":"© 2026 · 为全球海外华人制作<br>Made for Chinese abroad & the open web3 world",
+"tu-t":"🔁 海外 10 个 Web3 友善国家网友 · 兑换 eaco (e) 教程",
+"tu-l1":"① 方法一：DEX 去中心化兑换（全球 10 国通用 · 推荐）",
+"tu-why":"只要任何支持 <b>Solana 链</b>代币兑换的 DEX（去中心化交易所），都能添加并交易 eaco。去中心化、无需许可，不受你所在国家限制。",
+"st1":"创建 Solana 钱包：下载 Phantom / Backpack / Solflare（浏览器插件或手机 App），创建并安全备份助记词。",
+"st2":"为钱包充值 SOL：在本地 CEX 买入 SOL 或 USDC，提现（Withdraw）到你的 Solana 钱包地址，网络务必选 Solana。",
+"st3":"打开支持 Solana 代币的 DEX（如 Orca）：点击上方链接进入 e/DOGE 池，或连接钱包后粘贴 eaco 合约地址添加代币。",
+"st4":"用 SOL / USDC 兑换 eaco：选择买入 eaco，输入数量，确认并签名，链上即时到账、无需许可。",
+"st5":"（可选）在 e/DOGE 池提供流动性赚取收益；可在 Orb Markets 查看链上池数据，随时掌控。",
+"tu-l2":"② 方法二：本地主流 CEX 交易所（法币入金 · 买 SOL / USDC）",
+"tu-cex-desc":"各国网友可先在本国可用/合规的主流 CEX 用法币买入 SOL 或 USDC，再提现到 Solana 钱包，用方法一在 DEX 兑换 eaco。下列为各国主流的 CEX 参考：",
+"tu-note":"⚠️ 重要说明：eaco 为 Solana 链上代币，其主兑换路径在 DEX；CEX 在此主要用于法币入金与购买 SOL/USDC（OKX/Coinbase等若已上线 eaco 现货也可直接交易，请自行核实）。各国 CEX 可用性受当地监管影响会变动（如 Binance 在部分国家受限/退出），表格仅供参考，请务必以交易所官网与其所在地合规要求为准。",
+"tu-cexhead":"国家","tu-cexcex":"可用的主流 CEX（示意）",
+"rel":"📂 eaco · web3 系列网页","rel1":"🌍 eaco Web3 友善世界（Top100 国家 / Top20 城市）","rel2":"🏮 对海外华人最友善 Top20 国家 / 城市","rel3":"💱 华人友善 TOP10 · 主权货币 · eaco 兑换",
+"reltip":"提示：把本文件夹内 3 个 HTML 放在同一目录，即可在页脚互相跳转。",
+"lh-high":"⭐ Web3 非常友善","lh-mid":"Web3 友善 / 监管清晰","lh-low":"◐ 发展中 / 中性"
+},
+en:{
+"app":"CN-Friendly Top10 · Currency · eaco","h1":"Top 10 <em>Most Chinese-Friendly</em> Countries","sub":"See each country's sovereign currency, and which are <b>web3-friendly & allow eaco (e)</b>.",
+"lg-high":"Very web3-friendly","lg-mid":"Web3-friendly / clear regulation","lg-low":"Developing / neutral",
+"s1t":"🌏 Top 10 Countries · Sovereign Currency · Web3",
+"e-t":"⚡ Where you can swap eaco (e)",
+"e-desc":"eaco is a <b>decentralized token on Solana</b>, traded via the <b>e/DOGE liquidity pool</b> on Orca DEX. Being decentralized and permissionless, <b>users in ANY country can freely swap eaco on-chain with a Solana wallet (e.g. Phantom) + SOL — no national boundaries</b>. 'Web3-friendly' countries marked ⭐ above simply offer holders a friendlier regulatory environment, banking access and ecosystem to build on. Always DYOR.",
+"e-l1":"Orca · e/DOGE Pool ↗","e-l2":"Orb Markets ↗",
+"note":"Note: Chinese-friendliness is a composite of community size, culture and services; web3-friendliness is a reference label (per Coincub / Bybit-DL / Chainalysis etc.). Currencies are sovereign fiat. eaco is a decentralized on-chain token, swappable globally. For information only, not investment advice.",
+"ft":"💛 May every Chinese abroad be treated kindly — and share web3's positive energy","fl":"Warmth comes from community; web3 leads to a freer, more open world.",
+"copy":"© 2026 · Made for Chinese abroad & the open web3 world",
+"tu-t":"🔁 How to swap eaco (e) — for users in the 10 web3-friendly countries",
+"tu-l1":"① Method 1: DEX decentralized swap (works in ALL 10 countries · recommended)",
+"tu-why":"Any DEX (decentralized exchange) that swaps <b>Solana</b>-chain tokens can add & trade eaco. It's decentralized & permissionless — no national boundaries.",
+"st1":"Create a Solana wallet: install Phantom / Backpack / Solflare (extension or mobile app), create & securely back up your seed phrase.",
+"st2":"Fund the wallet with SOL: buy SOL or USDC on a local CEX, then withdraw to your Solana wallet address — always pick the Solana network.",
+"st3":"Open a Solana DEX (e.g. Orca): click the link above to open the e/DOGE pool, or connect your wallet and paste the eaco contract address to add the token.",
+"st4":"Swap SOL / USDC for eaco: select eaco as buy token, enter amount, confirm & sign. It arrives on-chain instantly — no permission needed.",
+"st5":"(Optional) Provide liquidity in the e/DOGE pool to earn rewards; track on-chain pool data on Orb Markets.",
+"tu-l2":"② Method 2: Local mainstream CEX exchanges (fiat on-ramp · buy SOL / USDC)",
+"tu-cex-desc":"Users in each country can first buy SOL or USDC with fiat on a locally available/compliant CEX, withdraw to a Solana wallet, then swap for eaco via Method 1. Reference to mainstream CEX per country:",
+"tu-note":"⚠️ Important: eaco is an on-chain Solana token — its primary swap route is DEX; CEX here mainly serves as the fiat on-ramp & SOL/USDC gateway (if a CEX like OKX/Coinbase lists eaco spot, you may trade directly — verify yourself). CEX availability changes with local regulation (e.g. Binance restricted/exited in some countries); table is indicative only. Always check the exchange's official site & its local compliance requirements.",
+"tu-cexhead":"Country","tu-cexcex":"Mainstream CEX available (indicative)",
+"rel":"📂 eaco · web3 web series","rel1":"🌍 eaco Web3-Friendly World (Top100 countries / Top20 cities)","rel2":"🏮 Top20 Chinese-Friendly Countries / Cities","rel3":"💱 Top10 CN-Friendly · Currency · eaco swap",
+"reltip":"Tip: keep the 3 HTML files in this folder together to jump between pages from the footer.",
+"lh-high":"⭐ Very web3-friendly","lh-mid":"Web3-friendly / clear","lh-low":"◐ Developing / neutral"
+}
+};
+function render(){
+  var lang=document.body.getAttribute('data-lang'),zh=(lang==='zh'),t=T[lang]||T.zh;
+  document.title=zh?'对海外华人最友善 TOP 10 国家 · 主权货币 · eaco兑换':'Top 10 Chinese-Friendly Countries · Currencies · eaco';
+  document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(t[k]!=null)el.innerHTML=t[k];});
+  var tierLabel={high:zh?t['lh-high']:T.en['lh-high'],mid:zh?t['lh-mid']:T.en['lh-mid'],low:zh?t['lh-low']:T.en['lh-low']};
+  var cls={high:'b-high',mid:'b-mid',low:'b-low'};
+  var g=document.getElementById('g');g.innerHTML='';
+  D.forEach(function(r){
+    var d=document.createElement('div');d.className='cc';
+    var star=r[5]==='high'?' ⭐':'';
+    d.innerHTML='<div class="top"><span class="flag">'+r[1]+'</span><div><div class="nm">'+r[0]+'. '+(zh?r[3]:r[2])+'</div><div class="when">'+(zh?'主权货币':'Sovereign currency')+'</div></div></div>'+
+      '<div class="money"><span class="sym">'+r[7]+'</span><span class="mn">'+r[7]+'</span><span class="mn"> '+(zh?r[5]:r[4])+'</span><span class="code">'+r[6]+'</span></div>'+
+      '<div class="lv"><span class="badge b-cn" data-i="cn">⭐ '+(zh?'华人友善':'CN-friendly')+'</span>'+
+      '<span class="badge b-web '+cls[r[8]]+'" style="background:'+ (r[8]==='high'?'linear-gradient(135deg,#1e8e3e,#35d07f)':r[8]==='mid'?'linear-gradient(135deg,#2f7bff,#00d9ff)':'linear-gradient(135deg,#b3802e,#e0a04e)') +'">'+(zh?t['lh-'+r[8]]+star:T.en['lh-'+r[8]]+star)+'</span></div>'+
+      '<div class="hi">'+(zh?r[11]:r[10])+'</div>'+
+      '<span style="font-size:12px;color:var(--mut)">'+(zh?'友善指数':'Friendliness')+' '+r[9]+'</span><span class="bar"><i style="width:'+r[9]+'%"></i></span>';
+    g.appendChild(d);
+  });
+  /* tutorial steps */
+  document.querySelectorAll('[data-i-list]').forEach(function(ul){
+    var keys=ul.getAttribute('data-i-list').split(',');
+    ul.innerHTML=keys.map(function(k){return '<li>'+(t[k]!=null?t[k]:'')+'</li>';}).join('');
+  });
+  /* cex table */
+  var tb=document.getElementById('cex');
+  if(tb){
+    var th=zh?t['tu-cexhead']:T.en['tu-cexhead'], tc=zh?t['tu-cexcex']:T.en['tu-cexcex'];
+    var rows='<tr><th>#</th><th>'+th+'</th><th>'+tc+'</th></tr>';
+    CEXD.forEach(function(c,i){rows+='<tr><td>'+ (i+1) +'</td><td>'+c[0]+' '+(zh?c[2]:c[1])+'</td><td>'+(zh?c[4]:c[3])+'</td></tr>';});
+    tb.innerHTML=rows;
+  }
+}
+document.getElementById('langSel').addEventListener('change',function(e){document.body.setAttribute('data-lang',e.target.value);render();});
+document.getElementById('themeSeg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;document.documentElement.setAttribute('data-theme',b.getAttribute('data-theme'));this.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');});
+render();
+</script>
+</body>
+</html>
