@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="EACO - Solana DEX for the global village. Build EACO only in the world's top 9 WEB3-friendly cities and countries, Tier-1 first: Singapore, Dubai, Hong Kong.">
+<title>EACO · Top-9 WEB3 Markets · Solana Node DEX</title>
+<meta name="design-suite-artifact-kind" content="website">
+<meta name="design-suite-delivery-adapter" content="static-export">
+<meta name="design-suite-delivery-format" content="single-html">
+<meta name="design-suite-asset-policy" content="inline-base64">
+<meta name="design-suite-export-mode" content="single-file">
+<meta name="design-suite-contract-sha256" content="a8e557500a3f4124d201f5b24e05ce36eef5c1dd250945d5ab7912a0006ea9b2">
+<style>
+:root{
+  --bg0:#070f1f; --bg1:#0b1f3a; --bg2:#10294f; --card:#0e2544; --card2:#123059;
+  --line:#1d3a66; --line2:#2a4c80; --text:#eaf3ff; --muted:#93a8c8;
+  --accent:#58a6ff; --accent2:#7ee0c0; --gold:#ffd479; --shadow:rgba(0,0,0,.45);
+  --radius:18px; --maxw:1180px;
+  --font-latin:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --font-cjk:'PingFang SC','Microsoft YaHei','Noto Sans SC','Segoe UI',sans-serif;
+  --font-ar:'Segoe UI','Tahoma','Noto Kufi Arabic',Arial,sans-serif;
+}
+[data-theme="olive"]{
+  --bg0:#141a0f; --bg1:#22281c; --bg2:#2c3623; --card:#232b1b; --card2:#2b3620;
+  --line:#3a4a2c; --line2:#4b6038; --text:#f0f4e6; --muted:#a8b394;
+  --accent:#9aaa6f; --accent2:#d8c98a; --gold:#e3d9a0; --shadow:rgba(10,12,6,.5);
+}
+[data-theme="beige"]{
+  --bg0:#eae1cf; --bg1:#f3ecdf; --bg2:#faf6ec; --card:#f6efe0; --card2:#fbf6ea;
+  --line:#d9cdb4; --line2:#c3b393; --text:#26332f; --muted:#69756c;
+  --accent:#2c5f5a; --accent2:#a76f2f; --gold:#8a5a12; --shadow:rgba(90,75,45,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  font-family:var(--font-latin);background:var(--bg0);color:var(--text);
+  line-height:1.62;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 600px at 80% -10%, var(--bg2) 0%, transparent 60%),
+                   radial-gradient(900px 500px at -10% 30%, var(--bg2) 0%, transparent 55%);
+  background-attachment:fixed;
+}
+body[lang="zh"],body[lang="ja"],body[lang="ko"]{font-family:var(--font-cjk)}
+body[lang="ar"]{font-family:var(--font-ar)}
+a{color:var(--accent);text-decoration:none}
+h1,h2,h3{line-height:1.22;text-wrap:balance}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+section{padding:72px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:18px}
+h2{font-size:clamp(26px,3.6vw,40px);margin-bottom:10px}
+.sub{color:var(--muted);max-width:720px;margin-bottom:34px;font-size:16px}
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg0) 82%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap;padding:8px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:.02em}
+.brand .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
+.navlinks{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}
+.navlinks a{padding:7px 13px;border-radius:999px;color:var(--muted);font-size:14.5px;font-weight:600}
+.navlinks a:hover{color:var(--text)}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.seg{display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:5px 11px;cursor:pointer;font-size:13.5px;font-weight:600;font-family:inherit}
+.seg button:hover{color:var(--text)}
+.seg button.on{background:var(--accent);color:var(--bg0)}
+.theme-dot{width:13px;height:13px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:-2px;border:1px solid rgba(255,255,255,.35)}
+[data-theme="cosmic"] .theme-dot.cosmic{background:#58a6ff}
+[data-theme="olive"] .theme-dot.olive{background:#9aaa6f}
+[data-theme="beige"] .theme-dot.beige{background:#2c5f5a}
+/* ---------- hero ---------- */
+.hero{padding:92px 0 80px;text-align:center;position:relative}
+.hero h1{font-size:clamp(30px,5.4vw,58px);font-weight:800;max-width:960px;margin:0 auto 18px}
+.hero h1 .hl{color:var(--accent)}
+.hero .sub{margin:0 auto 28px;font-size:18px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:color-mix(in srgb,var(--gold) 14%,transparent);
+  border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);color:var(--gold);
+  border-radius:999px;padding:8px 18px;font-weight:700;font-size:14.5px;margin-bottom:26px}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:14px;padding:14px 26px;font-weight:700;font-size:15.5px;
+  border:1px solid var(--line2);cursor:pointer;background:var(--card);color:var(--text);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px var(--shadow);border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--bg0);border-color:transparent}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:46px}
+.stat{flex:1;min-width:150px;max-width:210px;border:1px solid var(--line);border-radius:16px;padding:16px 10px;background:var(--card)}
+.stat b{display:block;font-size:30px;color:var(--accent);line-height:1.15}
+.stat span{color:var(--muted);font-size:13.5px}
+/* ---------- strategy cards ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--card);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:.85}
+.card h3{font-size:20px;margin:14px 0 8px}
+.card p{color:var(--muted);font-size:15px}
+.num{font-size:13px;font-weight:800;color:var(--accent2);letter-spacing:.12em}
+/* ---------- markets ---------- */
+.markets{background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg2) 60%,transparent) 40%,transparent)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;color:var(--muted);font-size:14px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mcard{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--card);transition:border-color .18s ease,transform .18s ease}
+.mcard:hover{border-color:var(--accent);transform:translateY(-3px)}
+.mcard.t1{border-color:color-mix(in srgb,var(--gold) 55%,var(--line));background:color-mix(in srgb,var(--gold) 7%,var(--card))}
+.mtop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.rank{font-size:30px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.tagt{margin-top:8px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.06em;border-radius:999px;padding:4px 10px}
+.tag.t1{background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent)}
+.tag.t2{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);border:1px solid var(--line2)}
+.mcard h3{font-size:18px;margin-bottom:2px}
+.mcard .cn{font-size:13.5px;color:var(--accent2);font-weight:600;margin-bottom:6px}
+.mcard p{font-size:14px;color:var(--muted)}
+.footnote{margin-top:26px;font-size:12.5px;color:var(--muted);border-left:3px solid var(--line2);padding:8px 14px;background:var(--card);border-radius:0 12px 12px 0}
+/* ---------- nodes ---------- */
+.orbit-wrap{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;margin-bottom:26px}
+.orbit{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.orbit svg{width:100%;height:auto;display:block}
+.orbit .ocaption{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+.node-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ncard{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--card2)}
+.nhead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.nid{font-size:11.5px;font-weight:800;color:var(--bg0);background:var(--accent);border-radius:999px;padding:3px 10px;letter-spacing:.05em}
+.ncard h3{font-size:16.5px}
+.ncard .rl{font-size:12.5px;color:var(--accent2);font-weight:700;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11.5px;border:1px solid var(--line2);border-radius:999px;padding:3px 9px;color:var(--muted)}
+/* ---------- partners ---------- */
+.partners{background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg2) 60%,transparent) 40%,transparent)}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--card);display:flex;flex-direction:column;gap:10px}
+.pico{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--line2)}
+.pico svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.pcard h3{font-size:17.5px}
+.pcard p{color:var(--muted);font-size:14.5px;flex:1}
+.mini{font-size:13.5px;font-weight:700}
+/* ---- 5 technical partnership modes (expandable cards) ---- */
+.gridp{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.dcard{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);overflow:hidden}
+.dcard[data-top]{border-color:color-mix(in srgb,var(--gold) 55%,var(--line));background:color-mix(in srgb,var(--gold) 6%,var(--card))}
+.dcard summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:20px}
+.dcard summary::-webkit-details-marker{display:none}
+.dcard summary:hover{background:color-mix(in srgb,var(--bg2) 45%,transparent)}
+.dcard .pico{flex:none;margin-top:2px}
+.dcard .phead{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;padding-top:2px}
+.dcard .phead b{font-size:17px;line-height:1.35}
+.dcard .phead i{font-style:normal;font-size:13px;color:var(--muted);font-weight:600}
+.badge2{display:inline-block;font-size:11px;font-weight:800;background:var(--gold);color:var(--bg0);border-radius:999px;padding:2px 9px;margin-inline-start:8px;vertical-align:2px;width:max-content}
+.dcard .plus{font-size:22px;color:var(--muted);font-weight:700;line-height:1;padding-top:6px;transition:transform .25s ease}
+.dcard[open] .plus{transform:rotate(45deg);color:var(--accent)}
+.dcard .pbody{padding:14px 20px 20px;border-top:1px dashed var(--line)}
+.depth{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 14px}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.col{background:var(--bg0);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.col h4{font-size:12.5px;color:var(--accent2);margin-bottom:8px;font-weight:800;letter-spacing:.03em}
+.col ul{margin:0;padding:0;list-style:none}
+.col li{font-size:13.5px;color:var(--muted);padding-inline-start:15px;position:relative;margin-bottom:6px}
+.col li:last-child{margin-bottom:0}
+.col li::before{content:"›";position:absolute;inset-inline-start:0;color:var(--accent);font-weight:800}
+.mech{margin:0 0 12px}
+.mech>div{border:1px solid var(--line);border-inline-start:3px solid var(--accent);border-radius:0 12px 12px 0;padding:9px 13px;margin-bottom:8px}
+.mech b{font-size:12.5px;font-weight:800;color:var(--text);display:block}
+.mech p{font-size:13.5px;color:var(--muted);margin:2px 0 0}
+.fits{font-size:12.5px;color:var(--muted);font-style:italic;margin:0 0 12px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ftag{flex:none;font-style:normal;font-weight:800;color:var(--bg0);background:var(--accent);border-radius:999px;padding:2px 10px;font-size:11.5px;letter-spacing:.04em}
+.apply-mini{margin-inline-start:auto}
+@media (max-width:1024px){.gridp{grid-template-columns:1fr}.columns{grid-template-columns:1fr}}
+/* ---------- apply ---------- */
+.apply-card{max-width:640px;margin:0 auto;border:1px solid var(--line);border-radius:20px;padding:32px;background:var(--card);box-shadow:0 24px 60px var(--shadow)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld.full{grid-column:1/-1}
+label{font-size:13.5px;font-weight:600;color:var(--muted)}
+input,select,textarea{font:inherit;color:var(--text);background:var(--bg0);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;outline:none;min-width:0;max-width:100%}
+select{width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+textarea{min-height:96px;resize:vertical}
+.privacy{grid-column:1/-1;font-size:12.5px;color:var(--muted)}
+.btn-submit{grid-column:1/-1;justify-content:center;background:var(--accent);color:var(--bg0);border-color:transparent}
+/* ---------- toast ---------- */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,70px);z-index:90;background:var(--accent);
+  color:var(--bg0);font-weight:700;padding:13px 22px;border-radius:14px;box-shadow:0 14px 34px var(--shadow);
+  opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease;max-width:90vw;text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast.err{background:#e5484d}
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:44px 0 56px;font-size:13.5px;color:var(--muted)}
+.ft-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:26px}
+.ft-code{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+code{font-family:Consolas,'Courier New',monospace;background:var(--bg0);border:1px solid var(--line2);
+  border-radius:10px;padding:8px 12px;font-size:13px;color:var(--accent2);word-break:break-all;direction:ltr;unicode-bidi:embed}
+.ft-box{padding:14px 18px;border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:12px}
+.ft-t{font-weight:800;color:var(--text);font-size:14px;margin-bottom:6px}
+.terms{color:var(--accent);font-weight:700}
+footer .copybtn{border:1px solid var(--line2);background:var(--card);color:var(--text);border-radius:10px;padding:8px 14px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+footer .copybtn:hover{border-color:var(--accent)}
+.footrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:22px;font-size:12px}
+.ft-brand{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.ft-brand-line{font-size:12px;color:var(--muted)}
+.ft-brand-addr{margin-top:4px;max-width:100%}
+.ft-brand-addr code{display:inline-block;font-size:11px;word-break:break-all;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text)}
+.ft-brand-tag{font-size:13px;font-weight:800;color:var(--accent)}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .reveal{opacity:1;transform:none}
+}
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  .grid3,.grid9,.grid6,.node-grid{grid-template-columns:repeat(2,1fr)}
+  .orbit-wrap{grid-template-columns:1fr}
+  section{padding:56px 0}
+}
+@media (max-width:760px){
+  .navlinks{order:3;width:100%;justify-content:flex-start;overflow-x:auto;padding-bottom:4px}
+  .hero{padding:64px 0 56px}
+  .ft-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .grid3,.grid9,.grid6,.node-grid{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  .container{padding:0 16px}
+  section{padding:44px 0}
+  .stats{flex-direction:column;align-items:stretch}
+  .stat{max-width:none}
+}
+@media (max-width:380px){
+  .seg button{padding:4px 8px;font-size:12.5px}
+  .btn{padding:12px 18px;font-size:14.5px}
+}
+html[dir="rtl"] .card::before{background:linear-gradient(270deg,var(--accent),var(--accent2))}
+html[dir="rtl"] .footnote{border-left:0;border-right:3px solid var(--line2);border-radius:12px 0 0 12px}
+html[dir="rtl"] .brand .dot{margin-inline-start:0}
+</style>
+</head>
+<body data-theme="cosmic">
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>EACO</a>
+    <nav class="navlinks" aria-label="Primary">
+      <a href="#markets" data-i18n="nav.markets">Markets</a>
+      <a href="#nodes" data-i18n="nav.nodes">Nodes</a>
+      <a href="#partners" data-i18n="nav.partners">Partners</a>
+      <a href="#apply" data-i18n="nav.apply">Apply</a>
+    </nav>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-lang="zh" title="华语" aria-label="华语">华语</button>
+        <button type="button" data-lang="en" title="English" aria-label="English">EN</button>
+        <button type="button" data-lang="fr" title="Français" aria-label="Français">FR</button>
+        <button type="button" data-lang="ru" title="Русский" aria-label="Русский">RU</button>
+        <button type="button" data-lang="es" title="Español" aria-label="Español">ES</button>
+        <button type="button" data-lang="ar" title="العربية" aria-label="العربية">AR</button>
+      </div>
+      <div class="seg" role="group" aria-label="Theme">
+        <button type="button" data-theme-btn="cosmic" data-i18n="theme.cosmic"><span class="theme-dot cosmic" aria-hidden="true"></span><span data-i18n="theme.cosmic">Cosmic</span></button>
+        <button type="button" data-theme-btn="olive" data-i18n="theme.olive"><span class="theme-dot olive" aria-hidden="true"></span><span data-i18n="theme.olive">Olive</span></button>
+        <button type="button" data-theme-btn="beige" data-i18n="theme.beige"><span class="theme-dot beige" aria-hidden="true"></span><span data-i18n="theme.beige">Beige</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow" data-i18n="hero.eyebrow">Solana DEX for the Global Village</span>
+      <h1 data-i18n="hero.title">Develop <span class="hl">EACO</span> only in the world's top <span class="hl">9</span> WEB3-friendly cities &amp; countries</h1>
+      <p class="sub" data-i18n="hero.sub">Tier-1 priority: Singapore · Dubai · Hong Kong. Nine EACO node DEXs, six global languages, one public contract.</p>
+      <div><span class="badge" data-i18n="hero.badge">Tier-1 markets first</span></div>
+      <div class="cta-row">
+        <a class="btn primary" href="#markets" data-i18n="hero.cta1">See the 9 markets</a>
+        <a class="btn" href="#apply" data-i18n="hero.cta2">Become a node</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>9</b><span id="statM" data-i18n="hero.stat.m">markets</span></div>
+        <div class="stat"><b>9</b><span id="statN" data-i18n="hero.stat.n">node DEXs</span></div>
+        <div class="stat"><b>6</b><span id="statL" data-i18n="hero.stat.l">languages</span></div>
+        <div class="stat"><b>Solana</b><span id="statC" data-i18n="hero.stat.c">chain</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATEGY -->
+  <section id="strategy" aria-labelledby="strategy-h">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="strategy.why">Why</span>
+        <h2 id="strategy-h" data-i18n="strategy.h">Why only nine cities?</h2>
+        <p class="sub" data-i18n="strategy.sub">Focused expansion inside clear regulation — where WEB3 is genuinely welcomed, EACO builds deeply.</p>
+      </div>
+      <div class="grid3">
+        <article class="card reveal"><span class="num">01</span><h3 data-i18n="strategy.c1t">Clear regulation</h3><p data-i18n="strategy.c1d">Licensing frameworks you can plan against: MAS, VARA, VASP licensing and equivalents.</p></article>
+        <article class="card reveal"><span class="num">02</span><h3 data-i18n="strategy.c2t">Tax-friendly</h3><p data-i18n="strategy.c2d">Markets where trading, staking and mining face light or no taxation.</p></article>
+        <article class="card reveal"><span class="num">03</span><h3 data-i18n="strategy.c3t">Dense users</h3><p data-i18n="strategy.c3d">High developer density and consumer adoption accelerate liquidity and community.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETS -->
+  <section id="markets" class="markets" aria-labelledby="markets-h">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="nav.markets">Markets</span>
+        <h2 id="markets-h" data-i18n="markets.h">Top 9 WEB3-friendly markets</h2>
+        <p class="sub" data-i18n="markets.sub">Ranks from the 2026 global crypto-friendliness index; the Tier-1 trio is where EACO starts.</p>
+        <div class="legend">
+          <span><i style="background:var(--gold)"></i><span data-i18n="markets.t1">Tier 1 · start here</span></span>
+          <span><i style="background:var(--accent)"></i><span data-i18n="markets.t2">Tier 2 · sequencing</span></span>
+        </div>
+      </div>
+      <div id="marketGrid" class="grid9"></div>
+      <p class="footnote reveal" data-i18n="markets.footnote">Data: 2026 crypto-friendliness index (regulation · tax · infrastructure · adoption). Thailand, the UK, Cyprus and the Bahamas are reported in a shared 7–10 band; this page lists the first three. Snapshot 2026-09; market entry always follows local compliance and team readiness.</p>
+    </div>
+  </section>
+
+  <!-- NODES -->
+  <section id="nodes" aria-labelledby="nodes-h">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="nav.nodes">Nodes</span>
+        <h2 id="nodes-h" data-i18n="nodes.h">Nine EACO node DEXs</h2>
+        <p class="sub" data-i18n="nodes.sub">One hub per market — operated by local EACO teams, connected on Solana.</p>
+      </div>
+      <div class="orbit-wrap">
+        <div class="orbit reveal" aria-hidden="true">
+          <svg viewBox="0 0 420 420" role="img">
+            <defs>
+              <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#58a6ff"/><stop offset="1" stop-color="#7ee0c0"/>
+              </linearGradient>
+            </defs>
+            <circle cx="210" cy="210" r="150" fill="none" stroke="var(--line)" stroke-dasharray="4 7"/>
+            <circle cx="210" cy="210" r="104" fill="none" stroke="var(--line)" stroke-dasharray="2 9"/>
+            <g id="links"></g>
+            <circle cx="210" cy="210" r="38" fill="url(#lg1)"/>
+            <text x="210" y="216" text-anchor="middle" font-size="17" font-weight="800" fill="#071020" font-family="Arial">EACO</text>
+            <g id="dots"></g>
+          </svg>
+          <p class="ocaption" data-i18n="nodes.hubcap">Hub-and-spoke: local nodes, one shared on-chain liquidity core</p>
+        </div>
+        <div class="reveal">
+          <div id="nodeGrid" class="node-grid" style="grid-template-columns:1fr"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section id="partners" class="partners" aria-labelledby="partners-h">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="nav.partners">Partners</span>
+        <h2 id="partners-h" data-i18n="partners.h">Ways to partner</h2>
+        <p class="sub" data-i18n="partners.sub">For Solana DEX developers and technical partners.</p>
+        <p class="sub" style="margin-top:-18px;font-size:14.5px" data-i18n="partners.subtip">Five technical partnership models — expand each card for mechanisms and revenue.</p>
+      </div>
+      <div id="partnerGrid" class="gridp"></div>
+    </div>
+  </section>
+
+  <!-- APPLY -->
+  <section id="apply" aria-labelledby="apply-h">
+    <div class="container">
+      <div class="reveal apply-card">
+        <h2 id="apply-h" data-i18n="apply.h">Apply to build with EACO</h2>
+        <p class="sub" data-i18n="apply.sub">Tell us your city and role — the local node team follows up within the week.</p>
+        <form id="applyForm" novalidate>
+          <div class="fld">
+            <label for="fName" data-i18n="apply.name">Your name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="fld">
+            <label for="fRole" data-i18n="apply.role">Role</label>
+            <select id="fRole" name="role" required>
+              <option value="" data-i18n="apply.ro.placeholder">Select a role…</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label for="fEmail" data-i18n="apply.email">Email</label>
+            <input id="fEmail" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="fld">
+            <label for="fCity" data-i18n="apply.city">City</label>
+            <input id="fCity" name="city" type="text" autocomplete="address-level2" required>
+          </div>
+          <div class="fld full">
+            <label for="fMsg" data-i18n="apply.msg">Message</label>
+            <textarea id="fMsg" name="message"></textarea>
+          </div>
+          <p class="privacy" data-i18n="apply.privacy">Your data stays inside this page — nothing is sent to a server yet.</p>
+          <button class="btn btn-submit" type="submit" data-i18n="apply.submit">Submit application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-box">
+          <p class="ft-t" data-i18n="footer.contract">Contract</p>
+          <div class="ft-code">
+            <code id="contractAddr" dir="ltr">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+            <button type="button" class="copybtn" id="copyBtn" data-i18n="footer.copy">Select address</button>
+          </div>
+        </div>
+        <p class="ft-box terms" data-i18n="footer.terms">Terms used: 华语 · 公益 · CNH</p>
+      </div>
+      <div>
+        <p class="ft-box" data-i18n="footer.disclaimer">Concept page for the EACO global expansion plan. Not investment advice; contract address displayed as public information only.</p>
+        <p class="ft-box" data-i18n="footer.source">Index source: 2026 crypto-friendliness index via public reports.</p>
+      </div>
+    </div>
+    <div class="footrow">
+      <span>EACO · <span id="yearNow"></span></span>
+      <span data-i18n="footer.i18n">华语 / English / Français / Русский / Español / العربية</span>
+    </div>
+    <div class="ft-brand" role="note" aria-label="EACO brand">
+      <p class="ft-brand-line" data-i18n="footer.brand.l1">eaco, Global netizens' own MEMEcoin; #WEB3</p>
+      <p class="ft-brand-line" data-i18n="footer.brand.l2">Calculate labor value and quantify Earth's resources. #RWA</p>
+      <p class="ft-brand-line" data-i18n="footer.brand.l3">eaco for earth people; #AI</p>
+      <p class="ft-brand-addr"><code dir="ltr" data-i18n="footer.brand.addr">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></p>
+      <p class="ft-brand-tag" data-i18n="footer.brand.tag">#eaco</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var I18N = {
+    en: {
+      "nav.markets": "Markets", "nav.nodes": "Nodes", "nav.partners": "Partners", "nav.apply": "Apply",
+      "hero.eyebrow": "Solana DEX for the Global Village",
+      "hero.title": "Develop EACO only in the world's top 9 WEB3-friendly cities & countries",
+      "hero.sub": "Tier-1 priority: Singapore · Dubai · Hong Kong. Nine EACO node DEXs, six global languages, one public contract.",
+      "hero.badge": "Tier-1 markets first",
+      "hero.cta1": "See the 9 markets", "hero.cta2": "Become a node",
+      "hero.stat.m": "markets", "hero.stat.n": "node DEXs", "hero.stat.l": "languages", "hero.stat.c": "chain",
+      "strategy.why": "Why", "strategy.h": "Why only nine cities?",
+      "strategy.sub": "Focused expansion inside clear regulation — where WEB3 is genuinely welcomed, EACO builds deeply.",
+      "strategy.c1t": "Clear regulation", "strategy.c1d": "Licensing frameworks you can plan against: MAS, VARA, VASP licensing and equivalents.",
+      "strategy.c2t": "Tax-friendly", "strategy.c2d": "Markets where trading, staking and mining face light or no taxation.",
+      "strategy.c3t": "Dense users", "strategy.c3d": "High developer density and consumer adoption accelerate liquidity and community.",
+      "markets.h": "Top 9 WEB3-friendly markets", "markets.sub": "Ranks from the 2026 global crypto-friendliness index; the Tier-1 trio is where EACO starts.",
+      "markets.t1": "Tier 1 · start here", "markets.t2": "Tier 2 · sequencing",
+      "markets.footnote": "Data: 2026 crypto-friendliness index (regulation · tax · infrastructure · adoption). Thailand, the UK, Cyprus and the Bahamas are reported in a shared 7–10 band; this page lists the first three. Snapshot 2026-09; market entry always follows local compliance and team readiness.",
+      "nodes.h": "Nine EACO node DEXs", "nodes.sub": "One hub per market — operated by local EACO teams, connected on Solana.",
+      "nodes.hubcap": "Hub-and-spoke: local nodes, one shared on-chain liquidity core",
+      "duty.community": "Community", "duty.liquidity": "Liquidity", "duty.compliance": "Compliance", "duty.dev": "Developer ecosystem",
+      "partners.h": "Ways to partner", "partners.sub": "For Solana DEX developers and technical partners.",
+      "partners.subtip": "Five technical partnership models — expand each card for mechanisms and revenue.",
+      "partner.devlab": "Developer delivers & takes on", "partner.eacolab": "EACO provides & takes on",
+      "partner.tech": "Technical partner", "partner.tech.d": "Co-build the AMM and liquidity engine; join contract audits and on-chain upgrade governance.",
+      "partner.node": "Node operator", "partner.node.d": "Operate one city's EACO node DEX: local liquidity, market-making and community governance.",
+      "partner.dev": "Developer grants", "partner.dev.d": "Integrate EACO contracts via SDK/API for aggregators, bots and tools; share routing revenue.",
+      "partner.lp": "Liquidity cooperation", "partner.lp.d": "Supply SOL-ecosystem assets to pools and earn trading fees under pool rules.",
+      "partner.int": "Ecosystem integration", "partner.int.d": "Wallets, price feeds, bridges and asset-management tools integrating EACO.",
+      "partner.amb": "Community ambassador", "partner.amb.d": "Host local communities, content and events in all six languages.",
+      "partner.join": "Join this mode",
+      "apply.h": "Apply to build with EACO", "apply.sub": "Tell us your city and role — the local node team follows up within the week.",
+      "apply.name": "Your name", "apply.role": "Role", "apply.email": "Email", "apply.city": "City", "apply.msg": "Message",
+      "apply.ro.placeholder": "Select a role…", "apply.submit": "Submit application",
+      "apply.privacy": "Your data stays inside this page — nothing is sent to a server yet.",
+      "apply.ro.tech": "Technical partner", "apply.ro.node": "Node operator", "apply.ro.dev": "DEX developer",
+      "apply.ro.lp": "Liquidity provider", "apply.ro.int": "Integrator", "apply.ro.amb": "Ambassador",
+      "toast.ok": "Application received. The local node team will contact you by email.",
+      "toast.err": "Please fill in the required fields.",
+      "toast.copied": "Address selected — copy it manually (Ctrl+C / Cmd+C).",
+      "footer.contract": "Contract", "footer.copy": "Select address",
+      "footer.terms": "Terms used: 华语 · 公益 · CNH",
+      "footer.disclaimer": "Concept page for the EACO global expansion plan. Not investment advice; contract address displayed as public information only.",
+      "footer.source": "Index source: 2026 crypto-friendliness index via public reports.",
+      "footer.i18n": "语言：华语 / English / Français / Русский / Español / العربية",
+      "footer.brand.l1": "eaco, Global netizens' own MEMEcoin; #WEB3",
+      "footer.brand.l2": "Calculate labor value and quantify Earth's resources. #RWA",
+      "footer.brand.l3": "eaco for earth people; #AI",
+      "footer.brand.addr": "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+      "footer.brand.tag": "#eaco",
+      "theme.cosmic": "Cosmic", "theme.olive": "Olive", "theme.beige": "Beige"
+    },
+    zh: {
+      "nav.markets": "市场", "nav.nodes": "节点", "nav.partners": "合作", "nav.apply": "申请",
+      "hero.eyebrow": "SOL 链 · 地球村去中心化交易所",
+      "hero.title": "只在全球对 WEB3 友善的前 9 大城市/国家发展 EACO",
+      "hero.sub": "前 3 优先：新加坡 · 迪拜 · 香港。9 个 EACO 小组节点 DEX，6 种地球村通用语言，1 个公开合约。",
+      "hero.badge": "前 3 优先市场",
+      "hero.cta1": "查看 9 大市场", "hero.cta2": "申请成为节点",
+      "hero.stat.m": "大市场", "hero.stat.n": "个节点 DEX", "hero.stat.l": "种语言", "hero.stat.c": "条链",
+      "strategy.why": "为什么", "strategy.h": "为什么只在 9 城？",
+      "strategy.sub": "在监管清晰的沃土深耕——WEB3 真正被欢迎的地方，EACO 才扎根。",
+      "strategy.c1t": "监管清晰", "strategy.c1d": "可规划的牌照框架：新加坡 MAS、迪拜 VARA、香港 VASP 发牌等。",
+      "strategy.c2t": "税务友好", "strategy.c2d": "交易、质押与挖矿税负极低甚至为零的市场。",
+      "strategy.c3t": "用户密集", "strategy.c3d": "开发者密度与消费级采用高，流动性与社区更快成形。",
+      "markets.h": "全球对 WEB3 友善的前 9 大市场", "markets.sub": "排名依据 2026 年加密友好指数；前 3 优先市场即 EACO 的起点。",
+      "markets.t1": "Tier 1 · 优先落地", "markets.t2": "Tier 2 · 依次推进",
+      "markets.footnote": "数据口径：2026 年加密友好指数（监管·税务·基础设施·普及度四维）。报道中泰国、英国、塞浦路斯与巴哈马并列第 7–10 名区间，本页取前三列入前 9。快照 2026-09；实际进入以本地合规与团队落地为准。",
+      "nodes.h": "9 个 EACO 小组节点 DEX", "nodes.sub": "每个市场一个小组节点，由本地 EACO 团队运营，在 Solana 上互联。",
+      "nodes.hubcap": "枢纽-辐条结构：本地节点共享一个链上流动性核心",
+      "duty.community": "社区运营", "duty.liquidity": "流动性建设", "duty.compliance": "本地合规", "duty.dev": "开发者生态",
+      "partners.h": "合作方式", "partners.sub": "面向 SOL 链 DEX 开发者与技术合伙人。",
+      "partners.subtip": "5 种技术合伙模式——展开查看机制与收益分配。",
+      "partner.devlab": "开发者交付与承担", "partner.eacolab": "EACO 提供与承担",
+      "partner.tech": "技术合伙人", "partner.tech.d": "共同研发 AMM 与流动性引擎，参与合约审计与链上升级治理。",
+      "partner.node": "节点运营商", "partner.node.d": "运营一座城市的 EACO 小组节点 DEX：本地流动性、做市与社区治理。",
+      "partner.dev": "开发者接入", "partner.dev.d": "以 EACO 合约 SDK/API 构建聚合器、机器人或工具，按协议共享路由收益。",
+      "partner.lp": "流动性合作", "partner.lp.d": "以 SOL 生态资产注入池子，按池协议分享交易费与激励。",
+      "partner.int": "生态集成", "partner.int.d": "钱包、行情、跨链桥与资管工具集成 EACO。",
+      "partner.amb": "社区大使", "partner.amb.d": "以华语、英语等 6 种语言主持本地社区、内容与活动。",
+      "partner.join": "加入该模式",
+      "apply.h": "申请与 EACO 共建", "apply.sub": "告诉我们你的城市与角色——本地节点小组将在本周内与你联系。",
+      "apply.name": "称呼", "apply.role": "角色", "apply.email": "邮箱", "apply.city": "城市", "apply.msg": "留言",
+      "apply.ro.placeholder": "请选择角色…", "apply.submit": "提交申请",
+      "apply.privacy": "你的信息只留在本页面，暂不发送到任何服务器。",
+      "apply.ro.tech": "技术合伙人", "apply.ro.node": "节点运营商", "apply.ro.dev": "DEX 开发者",
+      "apply.ro.lp": "流动性提供方", "apply.ro.int": "生态集成方", "apply.ro.amb": "社区大使",
+      "toast.ok": "已收到申请。本地节点小组将按邮箱与你联系。",
+      "toast.err": "请填写必填项。",
+      "toast.copied": "地址已选中——请手动复制（Ctrl+C / Cmd+C）。",
+      "footer.contract": "合约地址", "footer.copy": "选中地址",
+      "footer.terms": "术语约定：华语 · 公益 · CNH",
+      "footer.disclaimer": "本页为 EACO 全球拓展计划概念页，不构成投资建议；合约地址仅作公开信息展示。",
+      "footer.source": "指数来源：2026 年加密友好指数公开报道。",
+      "footer.i18n": "Language: 华语 / English / Français / Русский / Español / العربية",
+      "footer.brand.l1": "eaco，地球村网民自己的 MEME 币；#WEB3",
+      "footer.brand.l2": "计算劳动价值，量化地球资源。#RWA",
+      "footer.brand.l3": "eaco 为地球人而生；#AI",
+      "footer.brand.addr": "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+      "footer.brand.tag": "#eaco",
+      "theme.cosmic": "宇宙蓝", "theme.olive": "军绿", "theme.beige": "米黄"
+    },
+    fr: {
+      "nav.markets": "Marchés", "nav.nodes": "Nœuds", "nav.partners": "Partenariats", "nav.apply": "Candidater",
+      "hero.eyebrow": "DEX Solana pour le village mondial",
+      "hero.title": "Développer EACO uniquement dans le top 9 des villes/pays les plus favorables au WEB3",
+      "hero.sub": "Priorité Tier-1 : Singapour · Dubaï · Hong Kong. Neuf DEX de nœuds EACO, six langues mondiales, un contrat public.",
+      "hero.badge": "Marchés Tier-1 d'abord",
+      "hero.cta1": "Voir les 9 marchés", "hero.cta2": "Devenir un nœud",
+      "hero.stat.m": "marchés", "hero.stat.n": "DEX de nœuds", "hero.stat.l": "langues", "hero.stat.c": "chaîne",
+      "strategy.why": "Pourquoi", "strategy.h": "Pourquoi seulement 9 villes ?",
+      "strategy.sub": "Une expansion ciblée dans une régulation claire : là où le WEB3 est vraiment accueilli, EACO construit en profondeur.",
+      "strategy.c1t": "Régulation claire", "strategy.c1d": "Des cadres de licence planifiables : MAS, VARA, licence VASP et équivalents.",
+      "strategy.c2t": "Fiscalité favorable", "strategy.c2d": "Des marchés où trading, staking et minage sont peu ou pas taxés.",
+      "strategy.c3t": "Utilisateurs denses", "strategy.c3d": "Densité de développeurs et adoption grand public élevées : liquidité et communauté accélèrent.",
+      "markets.h": "Top 9 des marchés favorables au WEB3", "markets.sub": "Classement d'après l'indice 2026 de convivialité crypto ; le trio Tier-1 est le point de départ d'EACO.",
+      "markets.t1": "Tier 1 · démarrer ici", "markets.t2": "Tier 2 · séquençage",
+      "markets.footnote": "Source : indice 2026 de convivialité crypto (régulation · fiscalité · infrastructures · adoption). La Thaïlande, le Royaume-Uni, Chypre et les Bahamas partagent la bande 7–10 ; cette page retient les trois premiers. Instantané 09/2026 ; l'entrée sur chaque marché suit la conformité locale.",
+      "nodes.h": "Neuf DEX de nœuds EACO", "nodes.sub": "Un nœud par marché, opéré par des équipes EACO locales, connectés sur Solana.",
+      "nodes.hubcap": "Structure hub-and-spoke : nœuds locaux, un cœur de liquidité on-chain partagé",
+      "duty.community": "Communauté", "duty.liquidity": "Liquidité", "duty.compliance": "Conformité", "duty.dev": "Écosystème dev",
+      "partners.h": "Formules de partenariat", "partners.sub": "Pour les développeurs de DEX Solana et les partenaires techniques.",
+      "partners.subtip": "Cinq modèles de partenariat technique — dépliez chaque carte pour les mécanismes et les revenus.",
+      "partner.devlab": "Le développeur livre & assume", "partner.eacolab": "EACO fournit & assume",
+      "partner.tech": "Partenaire technique", "partner.tech.d": "Co-développer le moteur AMM et de liquidité ; participer aux audits et à la gouvernance on-chain.",
+      "partner.node": "Opérateur de nœud", "partner.node.d": "Exploiter le DEX de nœud d'une ville : liquidité locale, market-making, gouvernance communautaire.",
+      "partner.dev": "Grants développeurs", "partner.dev.d": "Intégrer les contrats EACO via SDK/API (agrégateurs, bots, outils) et partager les revenus de routage.",
+      "partner.lp": "Coopération liquidité", "partner.lp.d": "Apporter des actifs de l'écosystème SOL aux pools et percevoir des frais selon les règles du pool.",
+      "partner.int": "Intégration écosystème", "partner.int.d": "Wallets, flux de prix, ponts et outils de gestion d'actifs intégrant EACO.",
+      "partner.amb": "Ambassadeur communauté", "partner.amb.d": "Animer communautés, contenus et événements dans les six langues.",
+      "partner.join": "Rejoindre ce mode",
+      "apply.h": "Candidater avec EACO", "apply.sub": "Indiquez votre ville et votre rôle — l'équipe locale vous répond sous une semaine.",
+      "apply.name": "Nom", "apply.role": "Rôle", "apply.email": "E-mail", "apply.city": "Ville", "apply.msg": "Message",
+      "apply.ro.placeholder": "Choisir un rôle…", "apply.submit": "Envoyer la candidature",
+      "apply.privacy": "Vos données restent dans cette page — rien n'est envoyé à un serveur pour l'instant.",
+      "apply.ro.tech": "Partenaire technique", "apply.ro.node": "Opérateur de nœud", "apply.ro.dev": "Développeur DEX",
+      "apply.ro.lp": "Fournisseur de liquidité", "apply.ro.int": "Intégrateur", "apply.ro.amb": "Ambassadeur",
+      "toast.ok": "Candidature reçue. L'équipe locale vous contactera par e-mail.",
+      "toast.err": "Merci de remplir les champs obligatoires.",
+      "toast.copied": "Adresse sélectionnée — copiez-la manuellement (Ctrl+C / Cmd+C).",
+      "footer.contract": "Contrat", "footer.copy": "Sélectionner l'adresse",
+      "footer.terms": "Termes utilisés : 华语 · 公益 · CNH",
+      "footer.disclaimer": "Page concept pour le plan d'expansion mondial EACO. Pas un conseil en investissement ; l'adresse du contrat est affichée comme information publique.",
+      "footer.source": "Source : indice 2026 de convivialité crypto via rapports publics.",
+      "footer.i18n": "Language: 华语 / English / Français / Русский / Español / العربية",
+      "footer.brand.l1": "eaco, le MEMEcoin des internautes du village mondial ; #WEB3",
+      "footer.brand.l2": "Calculer la valeur du travail et quantifier les ressources de la Terre. #RWA",
+      "footer.brand.l3": "eaco pour les Terriens ; #AI",
+      "footer.brand.addr": "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+      "footer.brand.tag": "#eaco",
+      "theme.cosmic": "Cosmique", "theme.olive": "Olive", "theme.beige": "Beige"
+    },
+    ru: {
+      "nav.markets": "Рынки", "nav.nodes": "Ноды", "nav.partners": "Партнёрства", "nav.apply": "Заявка",
+      "hero.eyebrow": "DEX на Solana для мировой деревни",
+      "hero.title": "Развивать EACO только в топ-9 городах/странах, дружественных к WEB3",
+      "hero.sub": "Приоритет Tier-1: Сингапур · Дубай · Гонконг. Девять нод-DEX EACO, шесть мировых языков, один публичный контракт.",
+      "hero.badge": "Сначала рынки Tier-1",
+      "hero.cta1": "Смотреть 9 рынков", "hero.cta2": "Стать нодой",
+      "hero.stat.m": "рынков", "hero.stat.n": "нод-DEX", "hero.stat.l": "языков", "hero.stat.c": "цепочка",
+      "strategy.why": "Почему", "strategy.h": "Почему только 9 городов?",
+      "strategy.sub": "Сфокусированная экспансия в ясном регулировании: EACO строится там, где WEB3 действительно приветствуют.",
+      "strategy.c1t": "Ясное регулирование", "strategy.c1d": "Лицензионные рамки, по которым можно планировать: MAS, VARA, лицензии VASP и аналоги.",
+      "strategy.c2t": "Налоговая дружелюбность", "strategy.c2d": "Рынки, где торговля, стейкинг и майнинг почти или полностью освобождены от налогов.",
+      "strategy.c3t": "Плотные пользователи", "strategy.c3d": "Высокая плотность разработчиков и массовое принятие ускоряют ликвидность и сообщество.",
+      "markets.h": "Топ-9 дружественных к WEB3 рынков", "markets.sub": "Рейтинг по индексу криптодружественности 2026; тройка Tier-1 — стартовая точка EACO.",
+      "markets.t1": "Tier 1 · начать здесь", "markets.t2": "Tier 2 · последовательно",
+      "markets.footnote": "Источник: индекс криптодружественности 2026 (регулирование · налоги · инфраструктура · принятие). Таиланд, Великобритания, Кипр и Багамы указаны в общей зоне 7–10; на странице — первые три. Срез: 09/2026; выход на рынок всегда следует локальной готовности к комплаенсу.",
+      "nodes.h": "Девять нод-DEX EACO", "nodes.sub": "Одна нода на рынок — управляется локальными командами EACO, связана в Solana.",
+      "nodes.hubcap": "Структура «хаб и спицы»: локальные ноды, единое ядро ликвидности on-chain",
+      "duty.community": "Сообщество", "duty.liquidity": "Ликвидность", "duty.compliance": "Комплаенс", "duty.dev": "Экосистема разработчиков",
+      "partners.h": "Форматы партнёрства", "partners.sub": "Для SOL-разработчиков DEX и технических партнёров.",
+      "partners.subtip": "Пять моделей технического партнёрства — раскройте карточку, чтобы увидеть механизмы и доход.",
+      "partner.devlab": "Разработчик поставляет и отвечает", "partner.eacolab": "EACO предоставляет и берёт на себя",
+      "partner.tech": "Технический партнёр", "partner.tech.d": "Совместно развивать AMM и движок ликвидности; участвовать в аудите контрактов и on-chain-управлении.",
+      "partner.node": "Оператор ноды", "partner.node.d": "Управлять нод-DEX города: локальная ликвидность, маркет-мейкинг и управление сообществом.",
+      "partner.dev": "Гранты разработчикам", "partner.dev.d": "Интегрировать контракты EACO через SDK/API для агрегаторов, ботов и инструментов; делить доход от маршрутизации.",
+      "partner.lp": "Сотрудничество по ликвидности", "partner.lp.d": "Поставлять активы экосистемы SOL в пулы и получать торговые комиссии по правилам пула.",
+      "partner.int": "Интеграция экосистемы", "partner.int.d": "Кошельки, ценовые каналы, мосты и инструменты управления активами, интегрирующие EACO.",
+      "partner.amb": "Амбассадор сообщества", "partner.amb.d": "Вести локальные сообщества, контент и мероприятия на шести языках.",
+      "partner.join": "Присоединиться к этому режиму",
+      "apply.h": "Подать заявку на сотрудничество", "apply.sub": "Укажите город и роль — локальная команда свяжется в течение недели.",
+      "apply.name": "Имя", "apply.role": "Роль", "apply.email": "Почта", "apply.city": "Город", "apply.msg": "Сообщение",
+      "apply.ro.placeholder": "Выберите роль…", "apply.submit": "Отправить заявку",
+      "apply.privacy": "Ваши данные остаются на этой странице — пока ничего не отправляется на сервер.",
+      "apply.ro.tech": "Технический партнёр", "apply.ro.node": "Оператор ноды", "apply.ro.dev": "Разработчик DEX",
+      "apply.ro.lp": "Поставщик ликвидности", "apply.ro.int": "Интегратор", "apply.ro.amb": "Амбассадор",
+      "toast.ok": "Заявка получена. Локальная команда напишет вам на почту.",
+      "toast.err": "Заполните обязательные поля.",
+      "toast.copied": "Адрес выбран — скопируйте вручную (Ctrl+C / Cmd+C).",
+      "footer.contract": "Контракт", "footer.copy": "Выбрать адрес",
+      "footer.terms": "Используемые термины: 华语 · 公益 · CNH",
+      "footer.disclaimer": "Концепт-страница плана глобальной экспансии EACO. Не инвестиционная рекомендация; адрес контракта показан как публичная информация.",
+      "footer.source": "Источник индекса: индекс криптодружественности 2026, публичные отчёты.",
+      "footer.i18n": "Language: 华语 / English / Français / Русский / Español / العربية",
+      "footer.brand.l1": "eaco — собственная MEME-монета нетизенов глобальной деревни; #WEB3",
+      "footer.brand.l2": "Рассчитывать стоимость труда и количественно оценивать ресурсы Земли. #RWA",
+      "footer.brand.l3": "eaco для жителей Земли ; #AI",
+      "footer.brand.addr": "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+      "footer.brand.tag": "#eaco",
+      "theme.cosmic": "Космос", "theme.olive": "Олива", "theme.beige": "Бежевый"
+    },
+    es: {
+      "nav.markets": "Mercados", "nav.nodes": "Nodos", "nav.partners": "Alianzas", "nav.apply": "Postular",
+      "hero.eyebrow": "DEX en Solana para la aldea global",
+      "hero.title": "Desarrollar EACO solo en las 9 ciudades/países más amigables con WEB3",
+      "hero.sub": "Prioridad Tier-1: Singapur · Dubái · Hong Kong. Nueve DEX de nodo EACO, seis idiomas globales, un contrato público.",
+      "hero.badge": "Mercados Tier-1 primero",
+      "hero.cta1": "Ver los 9 mercados", "hero.cta2": "Hazte nodo",
+      "hero.stat.m": "mercados", "hero.stat.n": "DEX de nodo", "hero.stat.l": "idiomas", "hero.stat.c": "cadena",
+      "strategy.why": "Por qué", "strategy.h": "¿Por qué solo 9 ciudades?",
+      "strategy.sub": "Expansión enfocada dentro de una regulación clara: donde WEB3 es realmente bienvenido, EACO construye a fondo.",
+      "strategy.c1t": "Regulación clara", "strategy.c1d": "Marcos de licencias planificables: MAS, VARA, licencia VASP y equivalentes.",
+      "strategy.c2t": "Fiscalidad amable", "strategy.c2d": "Mercados donde operar, staking y minería pagan poco o ningún impuesto.",
+      "strategy.c3t": "Usuarios densos", "strategy.c3d": "Alta densidad de desarrolladores y adopción de consumo aceleran liquidez y comunidad.",
+      "markets.h": "Top 9 mercados amigables con WEB3", "markets.sub": "Ránking según el índice de amabilidad cripto 2026; el trío Tier-1 es el punto de partida de EACO.",
+      "markets.t1": "Tier 1 · empezar aquí", "markets.t2": "Tier 2 · secuenciar",
+      "markets.footnote": "Fuente: índice de amabilidad cripto 2026 (regulación · impuestos · infraestructura · adopción). Tailandia, Reino Unido, Chipre y Bahamas comparten la franja 7–10; esta página lista los tres primeros. Corte 09/2026; la entrada en cada mercado sigue el cumplimiento local.",
+      "nodes.h": "Nueve DEX de nodo EACO", "nodes.sub": "Un nodo por mercado, operado por equipos EACO locales, conectados en Solana.",
+      "nodes.hubcap": "Estructura hub-and-spoke: nodos locales, un núcleo de liquidez on-chain compartido",
+      "duty.community": "Comunidad", "duty.liquidity": "Liquidez", "duty.compliance": "Cumplimiento", "duty.dev": "Ecosistema dev",
+      "partners.h": "Formas de alianza", "partners.sub": "Para desarrolladores de DEX en Solana y socios técnicos.",
+      "partners.subtip": "Cinco modelos de alianza técnica: despliega cada tarjeta para ver mecanismos e ingresos.",
+      "partner.devlab": "El desarrollador entrega & asume", "partner.eacolab": "EACO aporta & asume",
+      "partner.tech": "Socio técnico", "partner.tech.d": "Co-construir el motor AMM y de liquidez; unirse a auditorías de contratos y gobernanza on-chain.",
+      "partner.node": "Operador de nodo", "partner.node.d": "Operar el DEX de nodo de una ciudad: liquidez local, market-making y gobernanza comunitaria.",
+      "partner.dev": "Grants para devs", "partner.dev.d": "Integrar contratos EACO vía SDK/API para agregadores, bots y herramientas; compartir ingresos de enrutado.",
+      "partner.lp": "Cooperación de liquidez", "partner.lp.d": "Aportar activos del ecosistema SOL a los pools y ganar comisiones según las reglas del pool.",
+      "partner.int": "Integración de ecosistema", "partner.int.d": "Wallets, feeds de precios, puentes y herramientas de gestión de activos que integran EACO.",
+      "partner.amb": "Embajador de comunidad", "partner.amb.d": "Dirigir comunidades, contenidos y eventos locales en los seis idiomas.",
+      "partner.join": "Únete a este modo",
+      "apply.h": "Postula para construir con EACO", "apply.sub": "Cuéntanos tu ciudad y rol: el equipo del nodo local responde en la semana.",
+      "apply.name": "Nombre", "apply.role": "Rol", "apply.email": "Correo", "apply.city": "Ciudad", "apply.msg": "Mensaje",
+      "apply.ro.placeholder": "Selecciona un rol…", "apply.submit": "Enviar postulación",
+      "apply.privacy": "Tus datos quedan en esta página: aún no se envía nada a un servidor.",
+      "apply.ro.tech": "Socio técnico", "apply.ro.node": "Operador de nodo", "apply.ro.dev": "Desarrollador DEX",
+      "apply.ro.lp": "Proveedor de liquidez", "apply.ro.int": "Integrador", "apply.ro.amb": "Embajador",
+      "toast.ok": "Postulación recibida. El equipo local contactará por correo.",
+      "toast.err": "Completa los campos obligatorios.",
+      "toast.copied": "Dirección seleccionada: cópiala manualmente (Ctrl+C / Cmd+C).",
+      "footer.contract": "Contrato", "footer.copy": "Seleccionar dirección",
+      "footer.terms": "Términos usados: 华语 · 公益 · CNH",
+      "footer.disclaimer": "Página conceptual del plan de expansión global de EACO. No es consejo de inversión; la dirección del contrato se muestra solo como información pública.",
+      "footer.source": "Fuente del índice: amabilidad cripto 2026 vía informes públicos.",
+      "footer.i18n": "Language: 华语 / English / Français / Русский / Español / العربية",
+      "footer.brand.l1": "eaco, el MEMEcoin de los internautas de la aldea global ; #WEB3",
+      "footer.brand.l2": "Calcular el valor del trabajo y cuantificar los recursos de la Tierra. #RWA",
+      "footer.brand.l3": "eaco para los terrícolas ; #AI",
+      "footer.brand.addr": "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+      "footer.brand.tag": "#eaco",
+      "theme.cosmic": "Cósmico", "theme.olive": "Oliva", "theme.beige": "Beige"
+    },
+    ar: {
+      "nav.markets": "الأسواق", "nav.nodes": "العُقَد", "nav.partners": "الشراكات", "nav.apply": "تقديم طلب",
+      "hero.eyebrow": "منصة تبادل لامركزية على سولانا لأهل الأرض",
+      "hero.title": "تطوير EACO فقط في أفضل 9 مدن/دول صديقة لـWEB3 عالميًا",
+      "hero.sub": "الأولوية (Tier-1): سنغافورة · دبي · هونغ كونغ. تسع عُقد DEX لـEACO، ست لغات عالمية، وعقد واحد علني.",
+      "hero.badge": "أسواق Tier-1 أولًا",
+      "hero.cta1": "عرض الأسواق التسعة", "hero.cta2": "كن عقدة",
+      "hero.stat.m": "أسواق", "hero.stat.n": "عُقد DEX", "hero.stat.l": "لغات", "hero.stat.c": "سلسلة",
+      "strategy.why": "لماذا", "strategy.h": "لماذا تسع مدن فقط؟",
+      "strategy.sub": "توسّع مركّز داخل تنظيم واضح: حيث يُرحَّب بـWEB3 فعلًا، يبني EACO بعمق.",
+      "strategy.c1t": "تنظيم واضح", "strategy.c1d": "أُطر ترخيص قابلة للتخطيط: MAS وسلطة VARA وترخيص VASP وما يعادلها.",
+      "strategy.c2t": "بيئة ضريبية ميسّرة", "strategy.c2d": "أسواق تُعفى فيها التداول والتخزين (Staking) والتعدين من الضرائب كليًا أو جزئيًا.",
+      "strategy.c3t": "كثافة مستخدمين", "strategy.c3d": "كثافة عالية للمطورين وتبنٍّ واسع يسرّعان السيولة والمجتمع.",
+      "markets.h": "أفضل 9 أسواق صديقة لـWEB3", "markets.sub": "الترتيب وفق مؤشر 2026 لملاءمة العملات الرقمية؛ ثلاثية Tier-1 هي نقطة انطلاق EACO.",
+      "markets.t1": "Tier 1 · نبدأ هنا", "markets.t2": "Tier 2 · تباعًا",
+      "markets.footnote": "المصدر: مؤشر ملاءمة العملات الرقمية لعام 2026 (التنظيم · الضرائب · البنية التحتية · التبني). تايلاند والمملكة المتحدة وقبرص وجزر البهاما في نطاق 7–10 المشترك؛ الصفحة تعرض الثلاثة الأولى. لقطة 09/2026؛ الدخول لأي سوق يخضع للامتثال المحلي وجاهزية الفريق.",
+      "nodes.h": "تسع عُقد DEX لـEACO", "nodes.sub": "عقدة واحدة لكل سوق — تُدار بفرق EACO محلية ومتصلة عبر سولانا.",
+      "nodes.hubcap": "بنية المحور والأذرع: عُقد محلية ونواة سيولة واحدة على السلسلة",
+      "duty.community": "المجتمع", "duty.liquidity": "السيولة", "duty.compliance": "الامتثال", "duty.dev": "نظام المطورين",
+      "partners.h": "أشكال الشراكة", "partners.sub": "لمطوّري DEX على سولانا والشركاء التقنيين.",
+      "partners.subtip": "خمسة نماذج شراكة تقنية — افتح كل بطاقة لرؤية الآليات والإيرادات.",
+      "partner.devlab": "يسلّم المطوّر ويتحمل", "partner.eacolab": "توفر EACO وتتحمل",
+      "partner.tech": "شريك تقني", "partner.tech.d": "تطوير محرك AMM والسيولة معًا؛ والمشاركة في تدقيق العقود وحوكمة السلسلة.",
+      "partner.node": "مشغّل عقدة", "partner.node.d": "تشغيل DEX العقدة لمدينة: سيولة محلية وصناعة سوق وحوكمة مجتمع.",
+      "partner.dev": "منح للمطورين", "partner.dev.d": "دمج عقود EACO عبر SDK/API للجامعين والروبوتات والأدوات مع تقاسم إيرادات التوجيه.",
+      "partner.lp": "شراكة سيولة", "partner.lp.d": "ضخ أصول من نظام SOL في المجمعات وكسب رسوم التداول وفق قواعد المجمع.",
+      "partner.int": "تكامل النظام البيئي", "partner.int.d": "محافظ وخلاصات أسعار وجسور وأدوات إدارة أصول تدمج EACO.",
+      "partner.amb": "سفير المجتمع", "partner.amb.d": "إدارة المجتمعات والمحتوى والفعاليات المحلية بست لغات.",
+      "partner.join": "انضم لهذا النمط",
+      "apply.h": "قدّم طلبًا للبناء مع EACO", "apply.sub": "أخبرنا بمدينتك ودورك — يرد عليك فريق العقدة المحلية خلال أسبوع.",
+      "apply.name": "الاسم", "apply.role": "الدور", "apply.email": "البريد", "apply.city": "المدينة", "apply.msg": "رسالتك",
+      "apply.ro.placeholder": "اختر دورًا…", "apply.submit": "إرسال الطلب",
+      "apply.privacy": "بياناتك تبقى داخل هذه الصفحة — لا شيء يُرسل إلى خادم بعد.",
+      "apply.ro.tech": "شريك تقني", "apply.ro.node": "مشغّل عقدة", "apply.ro.dev": "مطوّر DEX",
+      "apply.ro.lp": "موفّر سيولة", "apply.ro.int": "مُدمِج", "apply.ro.amb": "سفير",
+      "toast.ok": "استلمنا طلبك؛ سيتواصل معك فريق العقدة المحلية عبر البريد.",
+      "toast.err": "يرجى ملء الحقول الإلزامية.",
+      "toast.copied": "تم تحديد العنوان — انسخه يدويًا (Ctrl+C / Cmd+C).",
+      "footer.contract": "عنوان العقد", "footer.copy": "تحديد العنوان",
+      "footer.terms": "المصطلحات المعتمدة: 华语 · 公益 · CNH",
+      "footer.disclaimer": "صفحة مفاهيمية لخطة التوسع العالمي لـEACO؛ ليست نصيحة استثمارية، والعنوان معروض كمعلومة عامة فقط.",
+      "footer.source": "مصدر الفهرس: مؤشر ملاءمة العملات الرقمية 2026 عبر تقارير عامة.",
+      "footer.i18n": "Language: 华语 / English / Français / Русский / Español / العربية",
+      "footer.brand.l1": "eaco، عملة الميم الخاصة بمستخدمي القرية العالمية؛ #WEB3",
+      "footer.brand.l2": "حساب قيمة العمل وقياس موارد الأرض. #RWA",
+      "footer.brand.l3": "eaco من أجل أهل الأرض ؛ #AI",
+      "footer.brand.addr": "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+      "footer.brand.tag": "#eaco",
+      "theme.cosmic": "كوني", "theme.olive": "زيتي", "theme.beige": "بيج"
+    }
+  };
+
+  var META = {
+    en: [
+      {r:1,t:1,city:"Singapore",country:"Singapore",point:"#1 globally for 4 straight years — full marks in innovation & technology."},
+      {r:2,t:1,city:"Dubai",country:"United Arab Emirates",point:"Perfect tax score: no tax on trading, staking or mining under the VARA framework."},
+      {r:3,t:1,city:"Hong Kong",country:"China",point:"Top infrastructure reach & economic factors; VASP licensing framework."},
+      {r:4,t:2,city:"New York",country:"United States",point:"Full marks in public adoption; highest institutional & developer density."},
+      {r:5,t:2,city:"Zug / Zürich",country:"Switzerland",point:"Crypto Valley — Europe's innovation and technology stronghold."},
+      {r:6,t:2,city:"Valletta / Sliema",country:"Malta",point:"Highest regulatory environment score; EU-friendly crypto hub."},
+      {r:7,t:2,city:"Bangkok",country:"Thailand",point:"Active consumer adoption; payments and merchant penetration growing."},
+      {r:8,t:2,city:"London",country:"United Kingdom",point:"Seasoned financial centre with mature institutional on-ramps."},
+      {r:9,t:2,city:"Limassol",country:"Cyprus",point:"Fund- and company-friendly jurisdiction in the shared 7–10 band."}
+    ],
+    zh: [
+      {r:1,t:1,city:"新加坡",country:"新加坡",point:"连续四年全球第一，创新与技术维度满分。"},
+      {r:2,t:1,city:"迪拜",country:"阿联酋",point:"税务友好度满分：VARA 框架下交易、质押与挖矿不征税。"},
+      {r:3,t:1,city:"香港",country:"中国",point:"基础设施普及度与经济因素最高，VASP 发牌框架。"},
+      {r:4,t:2,city:"纽约",country:"美国",point:"公众普及度满分，机构与开发者密度最高。"},
+      {r:5,t:2,city:"楚格 / 苏黎世",country:"瑞士",point:"加密谷 Crypto Valley——欧洲创新与技术高地。"},
+      {r:6,t:2,city:"瓦莱塔 / 斯利马",country:"马耳他",point:"监管环境得分最高（10分），欧盟内加密友好区。"},
+      {r:7,t:2,city:"曼谷",country:"泰国",point:"消费级采用活跃，支付与商户渗透不断加深。"},
+      {r:8,t:2,city:"伦敦",country:"英国",point:"老牌金融中心，机构入场通道成熟。"},
+      {r:9,t:2,city:"利马索尔",country:"塞浦路斯",point:"加密基金与公司友好司法辖区（并列第 7–10 名区间）。"}
+    ],
+    fr: [
+      {r:1,t:1,city:"Singapour",country:"Singapour",point:"N°1 mondial pour la 4e année consécutive — pleins points en innovation & technologie."},
+      {r:2,t:1,city:"Dubaï",country:"Émirats arabes unis",point:"Note fiscale parfaite : aucun impôt sur trading, staking ou minage sous le cadre VARA."},
+      {r:3,t:1,city:"Hong Kong",country:"Chine",point:"Meilleure portée d'infrastructure et facteurs économiques ; cadre de licence VASP."},
+      {r:4,t:2,city:"New York",country:"États-Unis",point:"Pleins points en adoption publique ; plus forte densité institutionnelle et de développeurs."},
+      {r:5,t:2,city:"Zoug / Zurich",country:"Suisse",point:"Crypto Valley — bastion européen de l'innovation et de la technologie."},
+      {r:6,t:2,city:"La Valette / Sliema",country:"Malte",point:"Meilleur score d'environnement réglementaire ; hub crypto favorable au sein de l'UE."},
+      {r:7,t:2,city:"Bangkok",country:"Thaïlande",point:"Adoption grand public active ; paiements et pénétration commerçante en hausse."},
+      {r:8,t:2,city:"Londres",country:"Royaume-Uni",point:"Centre financier aguerri avec des entrées institutionnelles matures."},
+      {r:9,t:2,city:"Limassol",country:"Chypre",point:"Juridiction favorable aux fonds et aux sociétés (bande commune 7–10)."}
+    ],
+    ru: [
+      {r:1,t:1,city:"Сингапур",country:"Сингапур",point:"4-й год подряд №1 в мире — максимум баллов за инновации и технологии."},
+      {r:2,t:1,city:"Дубай",country:"ОАЭ",point:"Идеальный налоговый балл: нет налога на торговлю, стейкинг и майнинг в рамках VARA."},
+      {r:3,t:1,city:"Гонконг",country:"Китай",point:"Лучшая инфраструктурная доступность и экономика; лицензирование VASP."},
+      {r:4,t:2,city:"Нью-Йорк",country:"США",point:"Максимум за публичное принятие; высочайшая плотность институций и разработчиков."},
+      {r:5,t:2,city:"Цуг / Цюрих",country:"Швейцария",point:"Crypto Valley — европейская крепость инноваций и технологий."},
+      {r:6,t:2,city:"Валлетта / Слима",country:"Мальта",point:"Лучший балл регуляторной среды; крипто-хаб в ЕС."},
+      {r:7,t:2,city:"Бангкок",country:"Таиланд",point:"Активное массовое принятие; растут платежи и проникновение у мерчантов."},
+      {r:8,t:2,city:"Лондон",country:"Великобритания",point:"Зрелый финансовый центр с развитыми институциональными входами."},
+      {r:9,t:2,city:"Лимасол",country:"Кипр",point:"Юрисдикция, дружественная к фондам и компаниям (зона 7–10)."}
+    ],
+    es: [
+      {r:1,t:1,city:"Singapur",country:"Singapur",point:"N.º 1 mundial 4 años seguidos: puntuación máxima en innovación y tecnología."},
+      {r:2,t:1,city:"Dubái",country:"Emiratos Árabes Unidos",point:"Puntuación fiscal perfecta: sin impuestos a trading, staking o minería bajo VARA."},
+      {r:3,t:1,city:"Hong Kong",country:"China",point:"Mayor alcance de infraestructura y factores económicos; marco de licencias VASP."},
+      {r:4,t:2,city:"Nueva York",country:"Estados Unidos",point:"Máxima puntuación en adopción pública; mayor densidad institucional y de devs."},
+      {r:5,t:2,city:"Zug / Zúrich",country:"Suiza",point:"Crypto Valley: el bastión europeo de innovación y tecnología."},
+      {r:6,t:2,city:"La Valeta / Sliema",country:"Malta",point:"Mayor puntuación en entorno regulatorio; hub cripto amigable en la UE."},
+      {r:7,t:2,city:"Bangkok",country:"Tailandia",point:"Adopción de consumo activa; crecen pagos y penetración comercial."},
+      {r:8,t:2,city:"Londres",country:"Reino Unido",point:"Centro financiero maduro con rampas institucionales establecidas."},
+      {r:9,t:2,city:"Limasol",country:"Chipre",point:"Jurisdicción amigable para fondos y empresas (franja 7–10)."}
+    ],
+    ar: [
+      {r:1,t:1,city:"سنغافورة",country:"سنغافورة",point:"الأول عالميًا للسنة الرابعة توالياً — علامة كاملة في الابتكار والتقنية."},
+      {r:2,t:1,city:"دبي",country:"الإمارات",point:"علامة ضريبية كاملة: لا ضرائب على التداول أو التخزين أو التعدين في إطار VARA."},
+      {r:3,t:1,city:"هونغ كونغ",country:"الصين",point:"أعلى انتشار للبنية التحتية وعوامل اقتصادية؛ إطار ترخيص VASP."},
+      {r:4,t:2,city:"نيويورك",country:"الولايات المتحدة",point:"علامة كاملة في التبني العام؛ أعلى كثافة مؤسسية ومطورين."},
+      {r:5,t:2,city:"زوغ / زيورخ",country:"سويسرا",point:"وادي العملات الرقمية — معقل الابتكار والتقنية في أوروبا."},
+      {r:6,t:2,city:"فاليتا / سليما",country:"مالطا",point:"أعلى علامة في البيئة التنظيمية؛ مركز عملات رقمي صديق داخل الاتحاد الأوروبي."},
+      {r:7,t:2,city:"بانكوك",country:"تايلاند",point:"تبنٍّ استهلاكي نشط؛ نمو في المدفوعات وانتشار التجار."},
+      {r:8,t:2,city:"لندن",country:"المملكة المتحدة",point:"مركز مالي راسخ بمسارات مؤسسية ناضجة."},
+      {r:9,t:2,city:"ليماسول",country:"قبرص",point:"ولاية قضائية صديقة للصناديق والشركات (نطاق 7–10 المشترك)."}
+    ]
+  };
+
+  var NODES = {
+    en: [
+      {id:"N1",city:"Singapore",role:"Global hub",duty:["community","liquidity","dev"]},
+      {id:"N2",city:"Dubai",role:"Capital hub",duty:["community","liquidity","compliance"]},
+      {id:"N3",city:"Hong Kong",role:"Chinese-language bridgehead",duty:["community","liquidity","compliance"]},
+      {id:"N4",city:"New York",role:"North America gateway",duty:["dev","liquidity","community"]},
+      {id:"N5",city:"Zug / Zürich",role:"Continental Europe",duty:["compliance","dev","liquidity"]},
+      {id:"N6",city:"Valletta / Sliema",role:"Mediterranean node",duty:["compliance","community"]},
+      {id:"N7",city:"Bangkok",role:"Southeast Asia node",duty:["community","liquidity"]},
+      {id:"N8",city:"London",role:"European financial centre",duty:["compliance","liquidity","dev"]},
+      {id:"N9",city:"Limassol",role:"Fund-friendly hub",duty:["compliance","community"]}
+    ],
+    zh: [
+      {id:"N1",city:"新加坡",role:"全球枢纽",duty:["community","liquidity","dev"]},
+      {id:"N2",city:"迪拜",role:"资金枢纽",duty:["community","liquidity","compliance"]},
+      {id:"N3",city:"香港",role:"华语桥头堡",duty:["community","liquidity","compliance"]},
+      {id:"N4",city:"纽约",role:"北美门户",duty:["dev","liquidity","community"]},
+      {id:"N5",city:"楚格 / 苏黎世",role:"欧洲大陆创新点",duty:["compliance","dev","liquidity"]},
+      {id:"N6",city:"瓦莱塔 / 斯利马",role:"地中海节点",duty:["compliance","community"]},
+      {id:"N7",city:"曼谷",role:"东南亚节点",duty:["community","liquidity"]},
+      {id:"N8",city:"伦敦",role:"欧洲金融中心",duty:["compliance","liquidity","dev"]},
+      {id:"N9",city:"利马索尔",role:"基金友好区",duty:["compliance","community"]}
+    ],
+    fr: [
+      {id:"N1",city:"Singapour",role:"Hub mondial",duty:["community","liquidity","dev"]},
+      {id:"N2",city:"Dubaï",role:"Hub financier",duty:["community","liquidity","compliance"]},
+      {id:"N3",city:"Hong Kong",role:"Tête de pont chinoise",duty:["community","liquidity","compliance"]},
+      {id:"N4",city:"New York",role:"Porte nord-américaine",duty:["dev","liquidity","community"]},
+      {id:"N5",city:"Zoug / Zurich",role:"Europe continentale",duty:["compliance","dev","liquidity"]},
+      {id:"N6",city:"La Valette / Sliema",role:"Nœud méditerranéen",duty:["compliance","community"]},
+      {id:"N7",city:"Bangkok",role:"Nœud Asie du Sud-Est",duty:["community","liquidity"]},
+      {id:"N8",city:"Londres",role:"Centre financier européen",duty:["compliance","liquidity","dev"]},
+      {id:"N9",city:"Limassol",role:"Hub favorable aux fonds",duty:["compliance","community"]}
+    ],
+    ru: [
+      {id:"N1",city:"Сингапур",role:"Глобальный хаб",duty:["community","liquidity","dev"]},
+      {id:"N2",city:"Дубай",role:"Финансовый хаб",duty:["community","liquidity","compliance"]},
+      {id:"N3",city:"Гонконг",role:"Мост для китайского языка",duty:["community","liquidity","compliance"]},
+      {id:"N4",city:"Нью-Йорк",role:"Ворота в Северную Америку",duty:["dev","liquidity","community"]},
+      {id:"N5",city:"Цуг / Цюрих",role:"Континентальная Европа",duty:["compliance","dev","liquidity"]},
+      {id:"N6",city:"Валлетта / Слима",role:"Средиземноморская нода",duty:["compliance","community"]},
+      {id:"N7",city:"Бангкок",role:"Юго-Восточная Азия",duty:["community","liquidity"]},
+      {id:"N8",city:"Лондон",role:"Европейский финансовый центр",duty:["compliance","liquidity","dev"]},
+      {id:"N9",city:"Лимасол",role:"Хаб для фондов",duty:["compliance","community"]}
+    ],
+    es: [
+      {id:"N1",city:"Singapur",role:"Hub global",duty:["community","liquidity","dev"]},
+      {id:"N2",city:"Dubái",role:"Hub de capital",duty:["community","liquidity","compliance"]},
+      {id:"N3",city:"Hong Kong",role:"Puente chino",duty:["community","liquidity","compliance"]},
+      {id:"N4",city:"Nueva York",role:"Puerta de Norteamérica",duty:["dev","liquidity","community"]},
+      {id:"N5",city:"Zug / Zúrich",role:"Europa continental",duty:["compliance","dev","liquidity"]},
+      {id:"N6",city:"La Valeta / Sliema",role:"Nodo mediterráneo",duty:["compliance","community"]},
+      {id:"N7",city:"Bangkok",role:"Nodo del Sudeste Asiático",duty:["community","liquidity"]},
+      {id:"N8",city:"Londres",role:"Centro financiero europeo",duty:["compliance","liquidity","dev"]},
+      {id:"N9",city:"Limasol",role:"Hub amigo de fondos",duty:["compliance","community"]}
+    ],
+    ar: [
+      {id:"N1",city:"سنغافورة",role:"المركز العالمي",duty:["community","liquidity","dev"]},
+      {id:"N2",city:"دبي",role:"مركز رأس المال",duty:["community","liquidity","compliance"]},
+      {id:"N3",city:"هونغ كونغ",role:"جسر اللغة الصينية",duty:["community","liquidity","compliance"]},
+      {id:"N4",city:"نيويورك",role:"بوابة أمريكا الشمالية",duty:["dev","liquidity","community"]},
+      {id:"N5",city:"زوغ / زيورخ",role:"أوروبا القارية",duty:["compliance","dev","liquidity"]},
+      {id:"N6",city:"فاليتا / سليما",role:"عقدة البحر المتوسط",duty:["compliance","community"]},
+      {id:"N7",city:"بانكوك",role:"عقدة جنوب شرق آسيا",duty:["community","liquidity"]},
+      {id:"N8",city:"لندن",role:"المركز المالي الأوروبي",duty:["compliance","liquidity","dev"]},
+      {id:"N9",city:"ليماسول",role:"مركز صديق للصناديق",duty:["compliance","community"]}
+    ]
+  };
+
+  var PICO = {
+    build: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="7.8" height="17.6" rx="2"/>' +
+      '<rect x="13" y="3.2" width="7.8" height="11" rx="2"/><path d="M15.4 17.4h3M15.4 19.6h3"/></svg>',
+    cpi: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.4" y="6.4" width="8.6" height="11.2" rx="2"/>' +
+      '<rect x="13" y="6.4" width="8.6" height="11.2" rx="2"/><path d="M11 12h2.2M13 9.6l2.4 2.4-2.4 2.4"/></svg>',
+    rpc: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.4"/>' +
+      '<path d="M12 2.6v5.2M12 16.2v5.2M2.6 12h5.2M16.2 12h5.2"/><circle cx="12" cy="12" r="8" stroke-dasharray="2.4 3.4"/></svg>',
+    dao: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.8" r="2"/>' +
+      '<circle cx="4.6" cy="13.6" r="2"/><circle cx="19.4" cy="13.6" r="2"/><path d="M10.4 6.2 6 11.9M13.6 6.2 18 11.9M7.2 13.6h9.6"/></svg>',
+    b2b: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.4" y="7" width="19.2" height="10.6" rx="2.4"/>' +
+      '<path d="M8.2 7V5.6a1.7 1.7 0 0 1 1.7-1.7h4.2a1.7 1.7 0 0 1 1.7 1.7V7M2.4 10.4h5.4M16.2 10.4h5.4M9 13.8h6"/></svg>'
+  };
+
+  var PARTNERS = {
+    en: [
+      { id: "m1", icon: "build", tag: "", t: "Contract Co-build Partnership", tagline: "Deep co-build · code partnership", open: false,
+        depth: "Co-build the core contracts with the 6-region EACO groups, with code, treasury and governance jointly operated.",
+        dev: ["Solana Anchor/Rust AMM / order-book core contracts", "SDK and test suites", "Ongoing security audits and vulnerability fixes"],
+        eaco: ["6-region DAO governance layer and multi-sig treasury PDA", "Global node network, brand narrative and community traffic", "6-region group operations and liquidity"],
+        mech: [["Upgrade authority", "Governed by the 6-group multi-sig; major upgrades sit behind a time lock"], ["Revenue split", "DEX trading fees auto-split via PDA: developer share + 6-region EACO group treasuries"]],
+        fits: "Best for teams that want code and governance deeply bound together." },
+      { id: "m2", icon: "cpi", tag: "Recommended", t: "Modular CPI Plugin Integration", tagline: "Low coupling · recommended first step", open: true,
+        depth: "The DEX developer keeps IP of the core protocol and exposes only CPI cross-program interfaces. Best first step.",
+        dev: ["Keep control of the core contracts; no full source-code handover", "Expose only CPI cross-program invocation interfaces"],
+        eaco: ["Adopt the DEX as the built-in trading module of the EACO ecosystem", "EACO independently builds 6-group governance plugins, staking incentives, node voting and Gauge liquidity-weight modules"],
+        mech: [["Invocation", "EACO governance contracts call DEX swap, LP creation and pool-parameter interfaces via CPI"], ["Return model", "Fixed development fee + long-term trading-fee share"]],
+        fits: "For developers who do not want to hand over control of the underlying contracts." },
+      { id: "m3", icon: "rpc", tag: "", t: "Distributed Node Infrastructure Partnership", tagline: "Operations partnership · global footprint", open: false,
+        depth: "EACO's 6 regional groups run the global distributed infrastructure on top of the developer's DEX contracts.",
+        dev: ["DEX contracts developed and deployed by the developer", "Focus on on-chain program development and security fixes"],
+        eaco: ["Independent RPC clusters, pre-trade routing and MEV protection", "On-chain event indexing, dashboards and node staking governance", "Global RPC sharing, real-time monitoring and cross-region disaster recovery"],
+        mech: [["Incentive", "Node stakers earn from the fee pool; the technical side gets a base long-term share of protocol revenue"]],
+        fits: "For teams with strong infrastructure operations who want to co-build the global base layer." },
+      { id: "m4", icon: "dao", tag: "", t: "DAO Incubator Steward Partnership", tagline: "Ecosystem contribution · council seat", open: false,
+        depth: "A cross-jurisdiction DAO treasury funds development; the DEX developer joins the EACO global council as a core contributing steward.",
+        dev: ["Become a core contributing steward of the EACO global council", "Hold proposal rights in the cross-jurisdiction DAO treasury"],
+        eaco: ["Cross-jurisdiction DAO treasury covers contract development and security audit funds"],
+        mech: [["On-chain decisions", "DEX fees, LP incentives and pool whitelists are decided by DAO proposals and on-chain votes initiated by the 6 node groups"], ["Multi-sig safety", "Contract upgrades and large treasury transfers must meet preset multi-sig thresholds"]],
+        fits: "For long-term deep co-builders who want to integrate into the EACO civilizational self-healing narrative." },
+      { id: "m5", icon: "b2b", tag: "", t: "Independent B2B Technical Services Partnership", tagline: "Lightest cooperation mode", open: false,
+        depth: "The lightest model: an external service provider delivers contracts and support without governance rights.",
+        dev: ["Deliver DEX contracts, front-end components and technical operations support", "No council seat, no governance signing rights", "Responsible for post-sales iteration and security maintenance"],
+        eaco: ["EACO fully owns DEX protocol operations and governance", "Sign an off-chain technical service contract"],
+        mech: [["Compensation", "One-time development fee + recurring technical service fee based on trading volume"]],
+        fits: "For teams that prefer a light commercial relationship without governance entanglement." }
+    ],
+    zh: [
+      { id: "m1", icon: "build", tag: "", t: "合约共建合伙", tagline: "深度共建 · 代码合伙", open: false,
+        depth: "与 6 地 EACO 小组共建核心合约，代码、国库、治理共同运营。",
+        dev: ["Solana Anchor/Rust AMM / 订单簿核心合约", "SDK 与测试用例", "持续安全审计与漏洞修复"],
+        eaco: ["6 地 DAO 治理层与多签国库 PDA", "全球节点网络、品牌叙事与全球社区流量", "6 地小组运营与流动性"],
+        mech: [["升级权限", "6 小组多签共管，重大升级设置时间锁"], ["收益分配", "DEX 交易手续费自动分账 PDA：开发者分成 + 6 地 EACO 小组金库"]],
+        fits: "适合希望代码与治理深度绑定的技术团队。" },
+      { id: "m2", icon: "cpi", tag: "推荐首选", t: "模块化 CPI 插件集成合伙", tagline: "低耦合 · 推荐首选", open: true,
+        depth: "DEX 底层协议知识产权归属开发者，仅开放 CPI 跨程序调用接口，EACO 作为生态内置交易模块接入。",
+        dev: ["保留底层合约控制权，不交付完整源码", "仅开放 CPI 跨程序调用接口"],
+        eaco: ["将 DEX 作为 EACO 生态内置交易模块", "独立开发 6 小组治理插件、质押激励、节点投票、Gauge 流动性权重模块"],
+        mech: [["调用方式", "EACO 治理合约通过 CPI 调用 DEX swap、LP 创建、池参数修改接口"], ["回报模式", "固定开发服务费 + 长期交易手续费分成"]],
+        fits: "适合不想移交底层合约控制权的开发者。" },
+      { id: "m3", icon: "rpc", tag: "", t: "分布式节点基础设施合伙", tagline: "运维合伙 · 全球分布式", open: false,
+        depth: "DEX 合约由开发者开发部署，6 个地域小组负责全球分布式基础设施与节点质押治理。",
+        dev: ["负责链上程序开发与安全修复", "专注 DEX 合约质量与迭代"],
+        eaco: ["独立 RPC 集群、交易前置路由、MEV 防护", "链上事件索引、数据看板、节点质押治理", "全球 RPC 分担、实时监控、异地灾备"],
+        mech: [["激励", "节点质押参与者从手续费池获取奖励；技术方拿到协议基础长期分成"]],
+        fits: "适合运维能力强的团队共建全球基础设施底层。" },
+      { id: "m4", icon: "dao", tag: "", t: "DAO 孵化理事合伙", tagline: "生态贡献 · 理事会合伙", open: false,
+        depth: "跨辖区 DAO 国库出资开发与审计，DEX 开发者成为 EACO 全球理事会核心贡献理事。",
+        dev: ["成为 EACO 全球理事会核心贡献理事", "拥有跨辖区 DAO 国库提案权"],
+        eaco: ["设立跨辖区 DAO 国库，承担合约开发与安全审计资金"],
+        mech: [["链上决策", "DEX 费率、LP 激励、交易池白名单由 6 小组节点发起 DAO 提案、链上投票"], ["多签安全", "合约升级、国库大额转出必须达到预设多签阈值"]],
+        fits: "适合长期深度共建、融入 EACO 文明自愈叙事体系的团队。" },
+      { id: "m5", icon: "b2b", tag: "", t: "独立 B2B 技术服务商合伙", tagline: "最轻合作模式", open: false,
+        depth: "最轻模式：作为外部服务商交付合约与前端，不进入理事会、不持有治理签名权。",
+        dev: ["交付 DEX 合约、前端组件、技术运维支持", "不进入 EACO 理事会，不持有治理签名权", "负责售后迭代与安全维护"],
+        eaco: ["完整拥有 DEX 协议运营与治理权", "签署链下技术服务合同"],
+        mech: [["报酬", "一次性开发款 + 按交易量计提持续技术服务费"]],
+        fits: "适合希望轻量商业合作、不参与治理的团队。" }
+    ],
+    fr: [
+      { id: "m1", icon: "build", tag: "", t: "Partenariat de co-développement de contrats", tagline: "Co-développement profond · partenariat de code", open: false,
+        depth: "Co-développez les contrats de base avec les groupes EACO des 6 régions : code, trésorerie et gouvernance exploités ensemble.",
+        dev: ["Contrats de base AMM / carnet d'ordres en Anchor/Rust sur Solana", "SDK et suites de tests", "Audits de sécurité continus et corrections de vulnérabilités"],
+        eaco: ["Couche de gouvernance DAO des 6 régions et trésorerie multi-sig PDA", "Réseau mondial de nœuds, récit de marque et trafic communautaire", "Opérations et liquidité des groupes des 6 régions"],
+        mech: [["Droits de mise à niveau", "Gérés par multi-sig des 6 groupes ; mises à niveau majeures derrière un time lock"], ["Répartition des revenus", "Frais de trading répartis automatiquement via PDA : part développeur + trésoreries des groupes EACO"]],
+        fits: "Idéal pour les équipes qui veulent lier code et gouvernance en profondeur." },
+      { id: "m2", icon: "cpi", tag: "Recommandé", t: "Intégration de plugin CPI modulaire", tagline: "Faible couplage · première étape recommandée", open: true,
+        depth: "Le développeur DEX garde la propriété du protocole de base et n'expose que des interfaces d'appel inter-programmes CPI.",
+        dev: ["Garder le contrôle des contrats de base ; aucune cession du code source complet", "Exposer uniquement les interfaces d'appel CPI"],
+        eaco: ["Adopter le DEX comme module de trading intégré de l'écosystème EACO", "Développer en interne plugins de gouvernance, incitations au staking, vote des nœuds et modules Gauge"],
+        mech: [["Invocation", "Les contrats de gouvernance EACO appellent swap, création de LP et paramètres de pool via CPI"], ["Modèle de retour", "Frais de développement fixes + part des frais de trading à long terme"]],
+        fits: "Pour les développeurs qui ne veulent pas céder le contrôle des contrats de base." },
+      { id: "m3", icon: "rpc", tag: "", t: "Partenariat d'infrastructure de nœuds distribués", tagline: "Partenariat d'exploitation · empreinte mondiale", open: false,
+        depth: "Les contrats DEX sont développés et déployés par le développeur ; les 6 groupes régionaux gèrent l'infrastructure mondiale.",
+        dev: ["Développement de programmes on-chain et corrections de sécurité", "Se concentrer sur la qualité et l'itération des contrats DEX"],
+        eaco: ["Clusters RPC indépendants, routage pré-transaction et protection MEV", "Indexation d'événements on-chain, tableaux de bord, gouvernance du staking", "Couverture RPC mondiale, supervision en temps réel, reprise après sinistre"],
+        mech: [["Incitation", "Les stakeurs de nœuds reçoivent des récompenses du pool de frais ; le partenaire technique obtient une part de base à long terme"]],
+        fits: "Pour les équipes d'infrastructure solides qui veulent construire la couche de base mondiale." },
+      { id: "m4", icon: "dao", tag: "", t: "Partenariat d'incubateur DAO (steward)", tagline: "Contribution à l'écosystème · siège au conseil", open: false,
+        depth: "Une trésorerie DAO transfrontalière finance le développement ; le développeur DEX devient steward contributeur du conseil mondial EACO.",
+        dev: ["Devenir steward contributeur clé du conseil mondial EACO", "Détenir des droits de proposition dans la trésorerie DAO"],
+        eaco: ["Trésorerie DAO transfrontalière pour le développement des contrats et les audits de sécurité"],
+        mech: [["Décisions on-chain", "Frais DEX, incitations LP et listes blanches via propositions DAO et votes on-chain des 6 groupes"], ["Sécurité multi-sig", "Mises à niveau de contrats et gros transferts exigent des seuils multi-sig prédéfinis"]],
+        fits: "Pour les co-constructeurs de long terme intégrés au récit d'auto-guérison d'EACO." },
+      { id: "m5", icon: "b2b", tag: "", t: "Partenariat indépendant de services techniques B2B", tagline: "Mode de coopération le plus léger", open: false,
+        depth: "Le modèle le plus léger : un prestataire externe livre contrats et support sans droits de gouvernance.",
+        dev: ["Livrer contrats DEX, composants front-end et support d'exploitation", "Pas de siège au conseil, pas de droits de signature", "Itérations après-vente et maintenance de sécurité"],
+        eaco: ["EACO possède entièrement l'exploitation et la gouvernance du protocole DEX", "Signer un contrat de services techniques hors chaîne"],
+        mech: [["Rémunération", "Frais de développement uniques + frais de service techniques récurrents liés au volume"]],
+        fits: "Pour les équipes préférant une relation commerciale légère sans engagement de gouvernance." }
+    ],
+    ru: [
+      { id: "m1", icon: "build", tag: "", t: "Совместная разработка контрактов", tagline: "Глубокая совместная разработка · кодовое партнёрство", open: false,
+        depth: "Совместное создание базовых контрактов с группами EACO из 6 регионов: код, казна и управление под общим контролем.",
+        dev: ["Базовые контракты AMM / книги ордеров на Solana Anchor/Rust", "SDK и тестовые наборы", "Постоянные аудиты безопасности и исправления уязвимостей"],
+        eaco: ["Слой DAO-управления 6 регионов и мультисиг-казна PDA", "Глобальная сеть нод, бренд-нарратив и трафик сообщества", "Операции и ликвидность групп 6 регионов"],
+        mech: [["Права на апгрейд", "Управление мультисигом из 6 групп; крупные апгрейды — за таймлоком"], ["Распределение дохода", "Комиссии DEX делятся автоматически через PDA: доля разработчиков + казначеи групп EACO"]],
+        fits: "Лучше всего для команд, желающих глубоко связать код и управление." },
+      { id: "m2", icon: "cpi", tag: "Рекомендуется", t: "Модульная интеграция CPI-плагинов", tagline: "Низкая связность · рекомендуемый первый шаг", open: true,
+        depth: "Разработчик DEX сохраняет права на протокол и открывает только CPI-интерфейсы межпрограммных вызовов.",
+        dev: ["Сохранить контроль над базовыми контрактами; без передачи полного исходного кода", "Открыть только CPI-интерфейсы"],
+        eaco: ["Использовать DEX как встроенный торговый модуль экосистемы EACO", "Создать плагины управления 6 групп, стейкинг-стимулы, голосование нод и модули Gauge"],
+        mech: [["Вызовы", "Контракты управления EACO через CPI вызывают swap, создание LP и параметры пулов"], ["Модель дохода", "Фиксированная плата за разработку + доля торговых комиссий на постоянной основе"]],
+        fits: "Для разработчиков, не желающих передавать контроль над базовыми контрактами." },
+      { id: "m3", icon: "rpc", tag: "", t: "Партнёрство по распределённой инфраструктуре нод", tagline: "Операционное партнёрство · глобальный масштаб", open: false,
+        depth: "Контракты DEX разрабатывает и разворачивает разработчик; 6 региональных групп управляют глобальной инфраструктурой.",
+        dev: ["Разработка on-chain-программ и исправления безопасности", "Фокус на качестве и итерациях контрактов DEX"],
+        eaco: ["Независимые RPC-кластеры, пре-роутинг сделок и защита от MEV", "Индексация on-chain-событий, дашборды, стейкинг-управление нодами", "Глобальное покрытие RPC, мониторинг в реальном времени, катастрофоустойчивость"],
+        mech: [["Стимулы", "Стейкеры нод получают награды из пула комиссий; техническая сторона — базовую долю дохода протокола"]],
+        fits: "Для команд с сильной инфраструктурой, строящих глобальный базовый слой." },
+      { id: "m4", icon: "dao", tag: "", t: "Партнёрство DAO-инкубатора (стюард)", tagline: "Вклад в экосистему · место в совете", open: false,
+        depth: "Трансграничная DAO-казна финансирует разработку; разработчик DEX становится ключевым стюардом совета EACO.",
+        dev: ["Стать ключевым стюардом глобального совета EACO", "Обладать правом предложений в трансграничной DAO-казне"],
+        eaco: ["Трансграничная DAO-казна для разработки контрактов и аудита безопасности"],
+        mech: [["Решения on-chain", "Комиссии DEX, стимулы LP и вайтлисты пулов — через DAO-предложения и голоса 6 групп нод"], ["Мультисиг-безопасность", "Апгрейды контрактов и крупные переводы — только после заданных мультисиг-порогов"]],
+        fits: "Для долгосрочных участников, интегрированных в нарратив самоисцеления EACO." },
+      { id: "m5", icon: "b2b", tag: "", t: "Независимое B2B-партнёрство технических услуг", tagline: "Самый лёгкий формат", open: false,
+        depth: "Самый лёгкий формат: внешний подрядчик поставляет контракты и поддержку без прав управления.",
+        dev: ["Поставка контрактов DEX, фронтенда и технической поддержки", "Без места в совете, без права подписи управления", "Постпродажные итерации и обслуживание безопасности"],
+        eaco: ["EACO полностью владеет эксплуатацией и управлением протокола DEX", "Подписать офчейн-контракт на технические услуги"],
+        mech: [["Вознаграждение", "Разовая плата за разработку + регулярные технические платежи от объёма торгов"]],
+        fits: "Для команд, предпочитающих лёгкие коммерческие отношения без управленческих обязательств." }
+    ],
+    es: [
+      { id: "m1", icon: "build", tag: "", t: "Asociación de co-construcción de contratos", tagline: "Co-construcción profunda · asociación de código", open: false,
+        depth: "Co-construye los contratos base con los grupos EACO de las 6 regiones: código, tesorería y gobernanza operados en conjunto.",
+        dev: ["Contratos base AMM / libro de órdenes en Anchor/Rust de Solana", "SDK y suites de pruebas", "Auditorías de seguridad continuas y corrección de vulnerabilidades"],
+        eaco: ["Capa de gobernanza DAO de 6 regiones y tesorería multi-firma PDA", "Red global de nodos, narrativa de marca y tráfico comunitario", "Operaciones y liquidez de los grupos de las 6 regiones"],
+        mech: [["Derechos de actualización", "Gestionados por multi-firma de los 6 grupos; actualizaciones mayores tras time lock"], ["Reparto de ingresos", "Comisiones DEX repartidas automáticamente vía PDA: parte del desarrollador + tesorerías EACO"]],
+        fits: "Ideal para equipos que quieren vincular código y gobernanza en profundidad." },
+      { id: "m2", icon: "cpi", tag: "Recomendado", t: "Integración de plugin CPI modular", tagline: "Bajo acoplamiento · primer paso recomendado", open: true,
+        depth: "El desarrollador DEX conserva la propiedad del protocolo base y solo expone interfaces de invocación CPI.",
+        dev: ["Conservar el control de los contratos base; sin cesión del código fuente completo", "Exponer solo interfaces de invocación entre programas CPI"],
+        eaco: ["Adoptar el DEX como módulo de trading integrado del ecosistema EACO", "Desarrollar plugins de gobernanza de 6 grupos, incentivos de staking, votación de nodos y módulos Gauge"],
+        mech: [["Invocación", "Los contratos de gobernanza EACO llaman swap, creación de LP y parámetros de pool vía CPI"], ["Modelo de retorno", "Tarifa fija de desarrollo + participación en comisiones de trading a largo plazo"]],
+        fits: "Para desarrolladores que no quieren ceder el control de los contratos base." },
+      { id: "m3", icon: "rpc", tag: "", t: "Asociación de infraestructura distribuida de nodos", tagline: "Asociación de operaciones · huella global", open: false,
+        depth: "El desarrollador despliega los contratos DEX; los 6 grupos regionales gestionan la infraestructura distribuida global.",
+        dev: ["Desarrollo de programas on-chain y correcciones de seguridad", "Enfoque en calidad e iteración de los contratos DEX"],
+        eaco: ["Clústeres RPC independientes, enrutamiento previo y protección MEV", "Indexación de eventos on-chain, dashboards, gobernanza de staking", "Cobertura RPC global, monitoreo en tiempo real y recuperación ante desastres"],
+        mech: [["Incentivo", "Los stakers de nodos ganan recompensas del pool de comisiones; la parte técnica recibe una participación base a largo plazo"]],
+        fits: "Para equipos con fuerte infraestructura que quieren construir la capa base global." },
+      { id: "m4", icon: "dao", tag: "", t: "Asociación de incubadora DAO (steward)", tagline: "Contribución al ecosistema · asiento en el consejo", open: false,
+        depth: "Una tesorería DAO transfronteriza financia el desarrollo; el desarrollador DEX entra como steward del consejo global EACO.",
+        dev: ["Convertirse en steward contribuyente clave del consejo global EACO", "Tener derechos de propuesta en la tesorería DAO"],
+        eaco: ["Tesorería DAO transfronteriza para desarrollo de contratos y auditorías de seguridad"],
+        mech: [["Decisiones on-chain", "Comisiones DEX, incentivos LP y whitelists vía propuestas DAO y votos on-chain de los 6 grupos"], ["Seguridad multi-firma", "Actualizaciones de contratos y grandes transferencias exigen umbrales multi-firma predefinidos"]],
+        fits: "Para co-constructores de largo plazo integrados en el relato de autocuración de EACO." },
+      { id: "m5", icon: "b2b", tag: "", t: "Asociación independiente de servicios técnicos B2B", tagline: "Modo de cooperación más ligero", open: false,
+        depth: "El modelo más ligero: un proveedor externo entrega contratos y soporte sin derechos de gobernanza.",
+        dev: ["Entregar contratos DEX, componentes frontend y soporte técnico", "Sin asiento en el consejo ni derechos de firma", "Iteraciones postventa y mantenimiento de seguridad"],
+        eaco: ["EACO posee plenamente la operación y gobernanza del protocolo DEX", "Firmar un contrato de servicios técnicos fuera de cadena"],
+        mech: [["Compensación", "Tarifa única de desarrollo + tarifa de servicio técnico recurrente según volumen de trading"]],
+        fits: "Para equipos que prefieren una relación comercial ligera sin compromisos de gobernanza." }
+    ],
+    ar: [
+      { id: "m1", icon: "build", tag: "", t: "شراكة التطوير المشترك للعقود", tagline: "تعميق مشترك · شراكة برمجية", open: false,
+        depth: "تطوير العقود الأساسية مع مجموعات EACO في المناطق الست: كود وخزينة وحوكمة تُدار بشكل مشترك.",
+        dev: ["عقود AMM / دفتر أوامر بـ Anchor/Rust على سولانا", "SDK ومجموعات اختبار", "تدقيقات أمنية مستمرة وإصلاح الثغرات"],
+        eaco: ["طبقة حوكمة DAO للمناطق الست وخزينة متعددة التوقيع PDA", "شبكة عقد عالمية وسردية علامة وتدفق مجتمعي", "عمليات وسيولة مجموعات المناطق الست"],
+        mech: [["صلاحيات الترقية", "إدارة مشتركة بتوقيع المجموعات الست؛ الترقيات الكبرى خلف قفل زمني"], ["توزيع الإيرادات", "رسوم التداول تُقسم تلقائيًا عبر PDA: حصة المطوّر + خزائن مجموعات EACO"]],
+        fits: "الأفضل للفرق التي تريد ربط الكود والحوكمة بعمق." },
+      { id: "m2", icon: "cpi", tag: "موصى به", t: "تكامل إضافات CPI وحدات", tagline: "اقتران منخفض · الخطوة الأولى الموصى بها", open: true,
+        depth: "يحتفظ مطوّر DEX بملكية البروتوكول الأساسي ويكشف فقط واجهات استدعاء بين البرامج عبر CPI.",
+        dev: ["الاحتفاظ بالسيطرة على العقود الأساسية؛ دون تسليم الكود الكامل", "كشف واجهات استدعاء CPI فقط"],
+        eaco: ["اعتماد DEX كوحدة تداول مدمجة في نظام EACO", "بناء إضافات حوكمة المجموعات الست وحوافز التخزين وتصويت العقد ووحدات Gauge"],
+        mech: [["الاستدعاء", "عقود حوكمة EACO تستدعي عبر CPI عمليات swap وإنشاء LP ومعاملات المجمعات"], ["نموذج العائد", "رسوم تطوير ثابتة + حصة من رسوم التداول طويلة الأمد"]],
+        fits: "للمطوّرين الذين لا يريدون التنازل عن السيطرة على العقود الأساسية." },
+      { id: "m3", icon: "rpc", tag: "", t: "شراكة البنية التحتية الموزعة للعقد", tagline: "شراكة تشغيلية · بصمة عالمية", open: false,
+        depth: "يطوّر وينشر المطوّر عقود DEX؛ وتدير المجموعات الإقليمية الست البنية التحتية العالمية الموزعة.",
+        dev: ["تطوير برامج على السلسلة وإصلاحات أمنية", "التركيز على جودة عقود DEX وتطويرها"],
+        eaco: ["عناقيد RPC مستقلة وتوجيه مسبق للصفقات وحماية من MEV", "فهرسة أحداث السلسلة ولوحات بيانات وحوكمة تخزين العقد", "تغطية RPC عالمية ومراقبة لحظية وتعافٍ من الكوارث"],
+        mech: [["الحوافز", "يحصل المخزّنون للعقد على مكافآت من مجمع الرسوم؛ والطرف التقني يحصل على حصة أساسية طويلة الأمد من دخل البروتوكول"]],
+        fits: "لفرق البنية التحتية القوية التي تريد بناء الطبقة الأساسية العالمية." },
+      { id: "m4", icon: "dao", tag: "", t: "شراكة حاضنة DAO (أمين)", tagline: "مساهمة بيئية · مقعد في المجلس", open: false,
+        depth: "خزينة DAO عابرة للحدود تمول التطوير؛ وينضم مطوّر DEX كأمين مساهم في المجلس العالمي EACO.",
+        dev: ["أن يصبح أمينًا مساهمًا أساسيًا في المجلس العالمي EACO", "امتلاك حقوق اقتراح في خزينة DAO"],
+        eaco: ["خزينة DAO عابرة للحدود لتطوير العقود وتدقيقات الأمان"],
+        mech: [["قرارات على السلسلة", "رسوم DEX وحوافز LP وقوائم المجمعات عبر مقترحات DAO وتصويت المجموعات الست"], ["أمان التوقيعات", "ترقيات العقود والتحويلات الكبرى تتطلب عتبات توقيع متعدد محددة مسبقًا"]],
+        fits: "للشركاء طويلي الأمد المندمجين في سردية الشفاء الذاتي لـEACO." },
+      { id: "m5", icon: "b2b", tag: "", t: "شراكة خدمات تقنية B2B مستقلة", tagline: "أخف نمط تعاون", open: false,
+        depth: "النمط الأخف: مزوّد خارجي يسلّم العقود والدعم دون حقوق حوكمة.",
+        dev: ["تسليم عقود DEX ومكونات الواجهة والدعم الفني", "لا مقعد في المجلس ولا حقوق توقيع", "تكرارات ما بعد البيع وصيانة أمنية"],
+        eaco: ["تملّك EACO الكامل لتشغيل البروتوكول وحوكمته", "توقيع عقد خدمات تقنية خارج السلسلة"],
+        mech: [["الأجر", "رسوم تطوير واحدة + رسوم خدمات تقنية متكررة حسب حجم التداول"]],
+        fits: "للفرق التي تفضل علاقة تجارية خفيفة دون التزامات حوكمة." }
+    ]
+  };
+
+  var APPLY_ROLES = {
+    en: ["Contract Co-build (M1)", "CPI Plugin Integration (M2)", "Node Infrastructure (M3)", "DAO Steward (M4)", "B2B Technical Services (M5)", "Node operator for a local EACO group"],
+    zh: ["合约共建（模式1）", "CPI 插件集成（模式2）", "节点基础设施（模式3）", "DAO 孵化理事（模式4）", "B2B 技术服务（模式5）", "本地 EACO 小组节点运营商"],
+    fr: ["Co-développement de contrats (M1)", "Intégration de plugin CPI (M2)", "Infrastructure de nœuds (M3)", "Steward DAO (M4)", "Services techniques B2B (M5)", "Opérateur de nœud groupe EACO local"],
+    ru: ["Совместная разработка (M1)", "CPI-плагин (M2)", "Инфраструктура нод (M3)", "Стюард DAO (M4)", "Техуслуги B2B (M5)", "Оператор ноды локальной группы EACO"],
+    es: ["Co-construcción (M1)", "Integración CPI (M2)", "Infraestructura de nodos (M3)", "Steward DAO (M4)", "Servicios técnicos B2B (M5)", "Operador de nodo de grupo EACO local"],
+    ar: ["تطوير مشترك (M1)", "تكامل CPI (M2)", "بنية العقد (M3)", "أمين DAO (M4)", "خدمات B2B (M5)", "مشغّل عقدة مجموعة EACO المحلية"]
+  };
+
+  function createMemoryStore(initial) {
+    var state = Object.assign({}, initial);
+    var listeners = [];
+    return {
+      get: function (key) { return key === undefined ? state : state[key]; },
+      set: function (patch) {
+        state = Object.assign({}, state, patch);
+        listeners.forEach(function (fn) { fn(state); });
+      },
+      subscribe: function (fn) { listeners.push(fn); return function () {}; }
+    };
+  }
+
+  var store = createMemoryStore({ lang: "en", theme: "cosmic" });
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function applyLang(lang) {
+    var dict = I18N[lang] || I18N.en;
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-i18n");
+      if (dict[key]) nodes[i].textContent = dict[key];
+    }
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+    document.body.lang = lang;
+    var langBtns = document.querySelectorAll("[data-lang]");
+    for (var b = 0; b < langBtns.length; b++) {
+      langBtns[b].classList.toggle("on", langBtns[b].getAttribute("data-lang") === lang);
+    }
+    renderMarkets(lang);
+    renderNodes(lang);
+    renderPartners(lang);
+    renderApplyRoles(lang);
+  }
+
+  function renderMarkets(lang) {
+    var data = META[lang] || META.en;
+    var wrap = document.getElementById("marketGrid");
+    if (!wrap) return;
+    var html = "";
+    for (var i = 0; i < data.length; i++) {
+      var m = data[i];
+      html += '<article class="mcard' + (m.t === 1 ? " t1" : "") + ' reveal">' +
+        '<div class="mtop"><span class="rank">' + m.r + '</span><div class="tagt"><span class="tag ' + (m.t === 1 ? "t1" : "t2") + '">' +
+        (m.t === 1 ? (I18N[lang] || I18N.en)["markets.t1"] : (I18N[lang] || I18N.en)["markets.t2"]) + '</span></div></div>' +
+        '<h3>' + esc(m.city) + '</h3><p class="cn">' + esc(m.country) + '</p><p>' + esc(m.point) + '</p></article>';
+    }
+    wrap.innerHTML = html;
+  }
+
+  function renderNodes(lang) {
+    var data = NODES[lang] || NODES.en;
+    var dict = I18N[lang] || I18N.en;
+    var wrap = document.getElementById("nodeGrid");
+    if (!wrap) return;
+    var html = "";
+    for (var i = 0; i < data.length; i++) {
+      var n = data[i];
+      var chips = "";
+      for (var d = 0; d < n.duty.length; d++) {
+        chips += '<span class="chip">' + esc(dict["duty." + n.duty[d]] || n.duty[d]) + '</span>';
+      }
+      html += '<article class="ncard"><div class="nhead"><span class="nid">' + esc(n.id) + '</span><h3>' + esc(n.city) + '</h3></div>' +
+        '<p class="rl">' + esc(n.role) + '</p><div class="chips">' + chips + '</div></article>';
+    }
+    wrap.innerHTML = html;
+
+    var dots = document.getElementById("dots");
+    var links = document.getElementById("links");
+    if (dots && links) {
+      var dotHtml = "";
+      var linkHtml = "";
+      var cx = 210, cy = 210, R = 150, count = data.length;
+      for (var j = 0; j < count; j++) {
+        var ang = (Math.PI * 2 * j) / count - Math.PI / 2;
+        var x = cx + R * Math.cos(ang);
+        var y = cy + R * Math.sin(ang);
+        linkHtml += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x + '" y2="' + y + '" stroke="var(--line2)" stroke-width="1.4" stroke-dasharray="3 5"/>';
+        dotHtml += '<circle cx="' + x + '" cy="' + y + '" r="11" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>' +
+          '<text x="' + x + '" y="' + (y + 4) + '" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--text)" font-family="Arial">' + (j + 1) + '</text>';
+      }
+      links.innerHTML = linkHtml;
+      dots.innerHTML = dotHtml;
+    }
+  }
+
+  var FTAG = { en: "Best for", zh: "适合", fr: "Idéal pour", ru: "Лучше всего для", es: "Ideal para", ar: "الأفضل لـ" };
+
+  function renderPartners(lang) {
+    var dict = I18N[lang] || I18N.en;
+    var wrap = document.getElementById("partnerGrid");
+    if (!wrap) return;
+    var data = PARTNERS[lang] || PARTNERS.en;
+    var html = "";
+    for (var i = 0; i < data.length; i++) {
+      var m = data[i];
+      var tag = m.tag ? '<span class="badge2">' + esc(m.tag) + '</span>' : "";
+      html += '<details class="dcard reveal"' + (m.open ? " open" : "") + '>' +
+        '<summary><span class="pico">' + PICO[m.icon] + '</span>' +
+        '<span class="phead"><b>' + esc(m.t) + '</b>' + tag + '<i>' + esc(m.tagline) + '</i></span>' +
+        '<span class="plus">+</span></summary>' +
+        '<div class="pbody"><p class="depth">' + esc(m.depth) + '</p>' +
+        '<div class="columns"><div class="col"><h4>' + esc(dict["partner.devlab"]) + '</h4><ul>' +
+        m.dev.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul></div>" +
+        '<div class="col"><h4>' + esc(dict["partner.eacolab"]) + '</h4><ul>' +
+        m.eaco.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul></div></div>" +
+        '<div class="mech">' + m.mech.map(function (r) {
+          return '<div><b>' + esc(r[0]) + '</b><p>' + esc(r[1]) + '</p></div>';
+        }).join("") + '</div>' +
+        '<p class="fits"><span class="ftag">' + (FTAG[lang] || FTAG.en) + '</span>' + esc(m.fits) + '</p>' +
+        '<a class="mini apply-mini" href="#apply">' + esc(dict["partner.join"]) + ' →</a>' +
+        '</div></details>';
+    }
+    wrap.innerHTML = html;
+  }
+
+  function renderApplyRoles(lang) {
+    var wrap = document.getElementById("fRole");
+    if (!wrap) return;
+    var dict = I18N[lang] || I18N.en;
+    var cur = wrap.value || "";
+    var roles = APPLY_ROLES[lang] || APPLY_ROLES.en;
+    var html = '<option value="">' + esc(dict["apply.ro.placeholder"]) + '</option>';
+    for (var i = 0; i < roles.length; i++) {
+      html += '<option value="' + roles[i] + '">' + esc(roles[i]) + '</option>';
+    }
+    wrap.innerHTML = html;
+    if (cur) wrap.value = cur;
+  }
+
+  function applyTheme(theme) {
+    document.body.setAttribute("data-theme", theme);
+    var btns = document.querySelectorAll("[data-theme-btn]");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle("on", btns[i].getAttribute("data-theme-btn") === theme);
+    }
+  }
+
+  var toastTimer = null;
+  function showToast(msg, isError) {
+    var el = document.getElementById("toast");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.toggle("err", !!isError);
+    el.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove("show"); }, 3400);
+  }
+
+  function initEvents() {
+    var langBtns = document.querySelectorAll("[data-lang]");
+    for (var i = 0; i < langBtns.length; i++) {
+      langBtns[i].addEventListener("click", function () {
+        store.set({ lang: this.getAttribute("data-lang") });
+        applyLang(store.get("lang"));
+      });
+    }
+    var themeBtns = document.querySelectorAll("[data-theme-btn]");
+    for (var t = 0; t < themeBtns.length; t++) {
+      themeBtns[t].addEventListener("click", function () {
+        store.set({ theme: this.getAttribute("data-theme-btn") });
+        applyTheme(store.get("theme"));
+      });
+    }
+    var form = document.getElementById("applyForm");
+    if (form) {
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var dict = I18N[store.get("lang")] || I18N.en;
+        var name = document.getElementById("fName");
+        var role = document.getElementById("fRole");
+        var email = document.getElementById("fEmail");
+        var city = document.getElementById("fCity");
+        var valid = name.value.trim() && role.value && email.value.trim() && city.value.trim();
+        if (!valid) {
+          showToast(dict["toast.err"], true);
+          return;
+        }
+        store.set({ applied: true });
+        form.reset();
+        showToast(dict["toast.ok"], false);
+      });
+    }
+    var copyBtn = document.getElementById("copyBtn");
+    var addr = document.getElementById("contractAddr");
+    if (copyBtn && addr) {
+      copyBtn.addEventListener("click", function () {
+        var range = document.createRange();
+        range.selectNodeContents(addr);
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        var dict = I18N[store.get("lang")] || I18N.en;
+        showToast(dict["toast.copied"], false);
+      });
+    }
+    var year = document.getElementById("yearNow");
+    if (year) year.textContent = new Date().getFullYear();
+  }
+
+  function initReveal() {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) {
+      var els = document.querySelectorAll(".reveal:not(.in)");
+      for (var i = 0; i < els.length; i++) els[i].classList.add("in");
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          entries[i].target.classList.add("in");
+          observer.unobserve(entries[i].target);
+        }
+      }
+    }, { threshold: 0.12 });
+    var targets = document.querySelectorAll(".reveal:not(.in)");
+    for (var j = 0; j < targets.length; j++) observer.observe(targets[j]);
+  }
+
+  applyLang(store.get("lang"));
+  applyTheme(store.get("theme"));
+  initEvents();
+  initReveal();
+
+  var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (prefersDark && store.get("theme") === "cosmic") { /* cosmic is already dark: no action needed */ }
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var errors = window.__DESIGN_SUITE_STATIC_ERRORS__;
+  if (!errors || !Array.isArray(errors)) {
+    errors = [];
+    window.__DESIGN_SUITE_STATIC_ERRORS__ = errors;
+  }
+  function report(ev) {
+    var m = (ev && (ev.message || ev.reason)) || "unknown error";
+    if (errors.length < 10) errors.push(String(m));
+    document.documentElement.setAttribute("data-design-suite-static-errors", String(errors.length));
+  }
+  window.addEventListener("error", report);
+  window.addEventListener("unhandledrejection", report);
+  window.addEventListener("load", function () {
+    var root = document.documentElement;
+    root.setAttribute("data-design-suite-static-state", "ready");
+    root.setAttribute("data-design-suite-static-main", "visible");
+    root.setAttribute("data-design-suite-static-errors", String(errors.length));
+    var overflowed = root.scrollWidth > root.clientWidth || document.body.scrollWidth > document.body.clientWidth;
+    root.setAttribute("data-design-suite-static-overflow", overflowed ? "true" : "false");
+  });
+})();
+</script>
+</body>
+</html>
