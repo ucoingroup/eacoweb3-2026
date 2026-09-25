@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地球EACO · 100个财富方法 | Earth EACO · 100 Ways</title>
+<meta name="description" content="通过地球EACO赚来巨大吉财的100个方法 — 中英双语 Web3 财富路径指南">
+<style>
+  :root{
+    --bg:#080b12;
+    --bg2:#0d121c;
+    --card:#131a28;
+    --card-hi:#182133;
+    --gold:#f0c14b;
+    --gold-soft:#f7dfa5;
+    --text:#e9ecf3;
+    --muted:#8a93a8;
+    --line:#1e2739;
+    --risk:#ff6b6b;
+    --risk-bg:#1e1013;
+    --link:#6ea8ff;
+    --info:#5ad1a8;
+    --info-bg:rgba(90,209,168,.07);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(240,193,75,.09), transparent 60%),
+      radial-gradient(700px 500px at 90% 5%, rgba(90,140,255,.07), transparent 60%);
+    pointer-events:none;z-index:0;
+  }
+  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 16px 80px}
+
+  /* ---------- 滚动进度条 ---------- */
+  .progress-track{
+    position:fixed;top:0;left:0;right:0;height:2px;z-index:100;
+    background:transparent;pointer-events:none;
+  }
+  .progress-bar{
+    height:100%;width:0%;
+    background:linear-gradient(90deg,var(--gold),#ffb84d,var(--gold-soft));
+    box-shadow:0 0 12px rgba(240,193,75,.6);
+    transition:width .08s linear;
+  }
+
+  /* ---------- 顶栏 ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(8,11,18,.85);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-in{
+    max-width:1180px;margin:0 auto;padding:10px 16px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;letter-spacing:.3px;min-width:0}
+  .brand .moon{font-size:20px;filter:drop-shadow(0 0 8px rgba(240,193,75,.6));flex-shrink:0}
+  .brand .bt{min-width:0}
+  .brand small{display:block;font-weight:400;font-size:10px;color:var(--muted);letter-spacing:.6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lang{
+    display:flex;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:3px;flex-shrink:0;
+  }
+  .lang button{
+    background:none;border:0;color:var(--muted);font-size:12.5px;font-weight:600;
+    padding:6px 15px;border-radius:999px;cursor:pointer;transition:.22s;
+    font-family:inherit;letter-spacing:.4px;
+  }
+  .lang button.on{background:var(--gold);color:#10141d}
+
+  /* ---------- Hero ---------- */
+  .hero{text-align:center;padding:54px 8px 22px}
+  .hero .moon-big{
+    font-size:52px;line-height:1;
+    filter:drop-shadow(0 0 22px rgba(240,193,75,.55));
+    animation:float 5s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  .hero h1{
+    margin-top:18px;
+    font-size:clamp(23px,5vw,38px);
+    font-weight:800;letter-spacing:-.4px;line-height:1.28;
+    background:linear-gradient(100deg,#fff 10%,var(--gold-soft) 50%,var(--gold) 90%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .sub{margin-top:12px;font-size:13.5px;color:var(--muted);letter-spacing:.5px}
+  .greet{
+    margin:26px auto 0;max-width:680px;
+    background:linear-gradient(135deg,rgba(240,193,75,.12),rgba(240,193,75,.03));
+    border:1px solid rgba(240,193,75,.28);
+    border-radius:var(--radius);padding:18px 22px;
+    font-size:14px;color:var(--gold-soft);line-height:1.75;
+  }
+  .greet b{color:#fff}
+
+  /* ---------- 透明度声明 ---------- */
+  .info-box{
+    margin:26px 0 8px;
+    background:linear-gradient(135deg,rgba(90,209,168,.09),rgba(90,209,168,.02));
+    border:1px solid rgba(90,209,168,.28);
+    border-left:3px solid var(--info);
+    border-radius:12px;padding:16px 18px;
+  }
+  .info-box h3{
+    font-size:13.5px;color:#7ee7c1;margin-bottom:7px;
+    display:flex;align-items:center;gap:7px;
+  }
+  .info-box p{font-size:12.8px;color:#a9cfc2;line-height:1.8}
+  .info-box p b{color:#d8f5eb}
+
+  /* ---------- 工具栏 ---------- */
+  .toolbar{
+    margin-top:24px;
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  }
+  .search-box{
+    flex:1;min-width:200px;position:relative;
+  }
+  .search-box input{
+    width:100%;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:11px;
+    color:var(--text);
+    font-size:13px;
+    font-family:inherit;
+    padding:11px 14px 11px 38px;
+    outline:none;
+    transition:.22s;
+  }
+  .search-box input:focus{
+    border-color:var(--gold);
+    background:var(--card-hi);
+    box-shadow:0 0 0 3px rgba(240,193,75,.1);
+  }
+  .search-box input::placeholder{color:var(--muted)}
+  .search-box .si{
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;pointer-events:none;
+  }
+  .search-box .clr{
+    position:absolute;right:10px;top:50%;transform:translateY(-50%);
+    background:none;border:0;color:var(--muted);font-size:15px;
+    cursor:pointer;padding:4px 6px;border-radius:6px;display:none;
+  }
+  .search-box .clr.show{display:block}
+  .search-box .clr:hover{color:var(--gold);background:rgba(240,193,75,.1)}
+
+  .btn{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:11px;
+    color:var(--text);
+    font-size:12.8px;
+    font-weight:700;
+    font-family:inherit;
+    padding:11px 17px;
+    cursor:pointer;
+    transition:.22s;
+    white-space:nowrap;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .btn:hover{border-color:var(--gold);color:var(--gold-soft);background:var(--card-hi);transform:translateY(-1px)}
+  .btn.gold{background:var(--gold);color:#10141d;border-color:var(--gold)}
+  .btn.gold:hover{background:#ffd166;color:#10141d}
+
+  .stat{
+    font-size:12px;color:var(--muted);
+    display:inline-flex;align-items:center;gap:6px;
+    padding:0 4px;
+  }
+  .stat b{color:var(--gold);font-weight:800;font-variant-numeric:tabular-nums}
+
+  /* ---------- 导航 ---------- */
+  .nav{
+    display:flex;gap:8px;overflow-x:auto;padding:20px 0 6px;
+    scrollbar-width:none;scroll-behavior:smooth;
+    border-bottom:1px solid var(--line);
+  }
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{
+    flex-shrink:0;text-decoration:none;
+    background:var(--card);border:1px solid var(--line);
+    color:var(--muted);font-size:12px;font-weight:600;
+    padding:8px 14px;border-radius:999px;transition:.2s;white-space:nowrap;
+  }
+  .nav a:hover{border-color:var(--gold);color:var(--gold-soft);background:var(--card-hi)}
+
+  /* ---------- 分类 ---------- */
+  .cat{margin-top:42px;scroll-margin-top:80px}
+  .cat.hidden{display:none}
+  .cat-head{
+    display:flex;align-items:center;gap:11px;
+    padding-bottom:14px;margin-bottom:18px;
+    border-bottom:1px solid var(--line);
+  }
+  .cat-icon{font-size:21px;filter:grayscale(.15)}
+  .cat-head h2{font-size:16.5px;font-weight:700;letter-spacing:-.1px;flex:1}
+  .cat-count{
+    font-size:11px;font-weight:700;color:var(--gold);
+    background:rgba(240,193,75,.1);
+    border:1px solid rgba(240,193,75,.22);
+    padding:3px 10px;border-radius:999px;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- 卡片 ---------- */
+  .grid{display:grid;gap:11px;grid-template-columns:repeat(auto-fill,minmax(268px,1fr))}
+  .card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:15px 16px 15px 46px;
+    font-size:13.2px;line-height:1.65;
+    transition:transform .22s cubic-bezier(.2,.8,.3,1),border-color .22s,background .22s,box-shadow .3s;
+    opacity:0;transform:translateY(14px);
+  }
+  .card.in{opacity:1;transform:translateY(0)}
+  .card:hover{border-color:rgba(240,193,75,.45);background:var(--card-hi);transform:translateY(-2px)}
+  .card.hidden{display:none}
+  .card .num{
+    position:absolute;left:14px;top:15px;
+    font-size:11px;font-weight:800;letter-spacing:.4px;
+    color:var(--gold);font-variant-numeric:tabular-nums;
+    opacity:.85;
+  }
+  .card.risk{border-color:rgba(255,107,107,.22);background:var(--risk-bg)}
+  .card.risk .num{color:var(--risk)}
+  .card.risk:hover{border-color:rgba(255,107,107,.5)}
+
+  /* 随机高亮 */
+  .card.highlight{
+    border-color:var(--gold)!important;
+    background:rgba(240,193,75,.12)!important;
+    box-shadow:0 0 0 3px rgba(240,193,75,.18),0 12px 32px rgba(240,193,75,.15);
+    transform:scale(1.02);
+  }
+  .card.highlight::after{
+    content:"✨";
+    position:absolute;right:12px;top:11px;font-size:14px;
+    animation:pop .5s ease;
+  }
+  @keyframes pop{0%{transform:scale(0) rotate(-30deg);opacity:0}70%{transform:scale(1.3) rotate(10deg)}100%{transform:scale(1);opacity:1}}
+
+  /* ---------- 空状态 ---------- */
+  .empty{
+    text-align:center;padding:60px 20px;
+    color:var(--muted);font-size:14px;
+  }
+  .empty .ei{font-size:38px;display:block;margin-bottom:14px;opacity:.5}
+  .empty b{color:var(--gold-soft);display:block;margin-bottom:6px;font-size:15px}
+
+  /* ---------- EACO 链接区 ---------- */
+  .eaco-links{
+    margin-top:64px;
+    background:linear-gradient(160deg,rgba(240,193,75,.07),rgba(90,140,255,.04) 60%,transparent);
+    border:1px solid rgba(240,193,75,.22);
+    border-radius:18px;
+    padding:28px 24px 26px;
+    scroll-margin-top:80px;
+  }
+  .eaco-links .el-head{
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:8px;flex-wrap:wrap;
+  }
+  .eaco-links .el-head .logo{
+    width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),#d99a1e);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:900;color:#10141d;flex-shrink:0;
+    box-shadow:0 6px 18px rgba(240,193,75,.28);
+  }
+  .eaco-links .el-head h2{font-size:18px;font-weight:800;letter-spacing:-.2px}
+  .eaco-links .el-head h2 span{
+    display:block;font-size:11.5px;font-weight:400;color:var(--muted);letter-spacing:.5px;margin-top:2px;
+  }
+  .eaco-links .el-tag{
+    font-size:12px;color:var(--gold-soft);
+    background:rgba(240,193,75,.1);
+    border:1px solid rgba(240,193,75,.25);
+    padding:5px 12px;border-radius:999px;margin-bottom:18px;display:inline-block;
+  }
+
+  /* 合约地址 */
+  .contract{
+    background:rgba(0,0,0,.35);
+    border:1px solid rgba(240,193,75,.22);
+    border-radius:12px;
+    padding:13px 15px;margin-bottom:22px;
+  }
+  .contract .cl{
+    font-size:10.5px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:1.2px;font-weight:700;margin-bottom:6px;
+  }
+  .contract .ca{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .contract code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11.5px;color:var(--gold-soft);
+    word-break:break-all;line-height:1.5;flex:1;min-width:0;
+  }
+  .copy-btn{
+    flex-shrink:0;
+    background:rgba(240,193,75,.14);
+    border:1px solid rgba(240,193,75,.35);
+    color:var(--gold);
+    font-size:11.5px;font-weight:700;
+    padding:6px 13px;border-radius:8px;cursor:pointer;
+    transition:.2s;font-family:inherit;
+  }
+  .copy-btn:hover{background:var(--gold);color:#10141d}
+  .copy-btn.done{background:#2ecc71;border-color:#2ecc71;color:#08120a}
+
+  /* 链接组 */
+  .link-group{margin-bottom:20px}
+  .link-group:last-child{margin-bottom:0}
+  .lg-title{
+    font-size:11px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .lg-title::after{content:"";flex:1;height:1px;background:var(--line)}
+  .link-list{
+    display:grid;gap:8px;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  }
+  .link-item{
+    display:flex;align-items:center;gap:10px;
+    background:rgba(19,26,40,.7);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 13px;
+    text-decoration:none;
+    transition:.2s;
+    min-width:0;
+  }
+  .link-item:hover{
+    border-color:rgba(240,193,75,.45);
+    background:var(--card-hi);
+    transform:translateX(2px);
+  }
+  .link-item .ico{font-size:15px;flex-shrink:0;opacity:.9}
+  .link-item .txt{min-width:0;flex:1}
+  .link-item .txt b{
+    display:block;font-size:12.8px;font-weight:700;color:var(--text);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .link-item .txt small{
+    display:block;font-size:10.5px;color:var(--muted);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .link-item:hover .txt b{color:var(--gold-soft)}
+
+  /* ---------- 页脚 ---------- */
+  footer{
+    margin-top:48px;padding-top:30px;
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  footer .fm{font-size:24px;margin-bottom:12px}
+  footer .ft{
+    font-size:15px;font-weight:700;
+    background:linear-gradient(100deg,var(--gold-soft),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:10px;
+  }
+  footer .fn{font-size:11.5px;color:var(--muted);line-height:1.9;max-width:680px;margin:0 auto}
+  footer .foot-nav{
+    margin-top:20px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  }
+  footer .foot-nav a{
+    font-size:11.5px;color:var(--muted);text-decoration:none;
+    transition:.2s;
+  }
+  footer .foot-nav a:hover{color:var(--gold)}
+
+  /* ---------- 回顶 ---------- */
+  .totop{
+    position:fixed;right:16px;bottom:16px;z-index:60;
+    width:44px;height:44px;border-radius:50%;
+    background:var(--gold);color:#10141d;border:0;
+    font-size:18px;font-weight:700;cursor:pointer;
+    box-shadow:0 8px 22px rgba(240,193,75,.35);
+    opacity:0;pointer-events:none;transition:.28s;
+  }
+  .totop.show{opacity:1;pointer-events:auto}
+  .totop:hover{transform:translateY(-3px) scale(1.06)}
+
+  /* ---------- 提示 toast ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:74px;transform:translate(-50%,20px);
+    background:rgba(19,26,40,.96);
+    border:1px solid rgba(240,193,75,.4);
+    color:var(--gold-soft);
+    font-size:12.5px;font-weight:600;
+    padding:11px 20px;border-radius:999px;
+    box-shadow:0 10px 32px rgba(0,0,0,.5);
+    opacity:0;pointer-events:none;transition:.3s;z-index:70;
+    backdrop-filter:blur(10px);
+    max-width:88vw;text-align:center;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media(max-width:520px){
+    .hero{padding:36px 4px 18px}
+    .grid{grid-template-columns:1fr;gap:9px}
+    .card{font-size:13px;padding:14px 14px 14px 42px}
+    .cat{margin-top:32px}
+    .eaco-links{padding:20px 15px 20px;border-radius:14px}
+    .link-list{grid-template-columns:1fr}
+    .toolbar{gap:8px}
+    .btn{padding:10px 14px;font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+
+<!-- 滚动进度条 -->
+<div class="progress-track"><div class="progress-bar" id="progress"></div></div>
+
+<!-- 顶栏 -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <span class="moon">🌕</span>
+      <div class="bt">
+        <span>地球EACO · 100法</span>
+        <small>EARTH EACO · 100 WAYS</small>
+      </div>
+    </div>
+    <div class="lang">
+      <button id="btn-zh" class="on" onclick="setLang('zh')">华语</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="moon-big">🌕</div>
+    <h1 id="h1"></h1>
+    <p class="sub" id="sub"></p>
+    <div class="greet" id="greet"></div>
+  </header>
+
+  <!-- 透明度声明 -->
+  <div class="info-box">
+    <h3 id="infoT"></h3>
+    <p id="infoP"></p>
+  </div>
+
+  <!-- 工具栏 -->
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="si">🔍</span>
+      <input id="searchInput" type="text" placeholder="搜索方法…" autocomplete="off">
+      <button class="clr" id="clearBtn" onclick="clearSearch()">✕</button>
+    </div>
+    <button class="btn gold" onclick="randomMethod()">🎲 <span id="randTxt">随机一条</span></button>
+    <span class="stat"><span id="statTxt">共</span> <b id="statNum">100</b> <span id="statUnit">条方法</span></span>
+  </div>
+
+  <!-- 分类导航 -->
+  <nav class="nav" id="nav"></nav>
+
+  <!-- 卡片主体 -->
+  <main id="app"></main>
+
+  <!-- 空状态 -->
+  <div class="empty" id="empty" style="display:none">
+    <span class="ei">🔍</span>
+    <b id="emptyT"></b>
+    <span id="emptyP"></span>
+  </div>
+
+  <!-- ============ EACO 常用链接 ============ -->
+  <section class="eaco-links" id="links">
+    <div class="el-head">
+      <div class="logo">E</div>
+      <h2>EACO 常用链接<span>EACO Official Links · Earth's Best Coin</span></h2>
+    </div>
+    <div class="el-tag">🌍 Earth's top-tier AI + RWA + Web3 crypto asset</div>
+
+    <div class="contract">
+      <div class="cl">Contract Address · 合约地址</div>
+      <div class="ca">
+        <code id="caText">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+        <button class="copy-btn" id="copyBtn" onclick="copyCA()">复制 / Copy</button>
+      </div>
+    </div>
+
+    <div class="link-group">
+      <div class="lg-title">🌐 Official Sites · 官方网站</div>
+      <div class="link-list">
+        <a class="link-item" href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener">
+          <span class="ico">🪙</span>
+          <span class="txt"><b>Earth's Best Coin</b><small>ucoingroup.github.io/earths-best-coin</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener">
+          <span class="ico">💱</span>
+          <span class="txt"><b>EACO 50 Rate</b><small>ucoingroup.github.io/eaco50rate</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" rel="noopener">
+          <span class="ico">💰</span>
+          <span class="txt"><b>100 Ways To Wealth</b><small>ucoingroup.github.io/100WaysToWealth</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" rel="noopener">
+          <span class="ico">🤝</span>
+          <span class="txt"><b>Earth 100 Friends</b><small>ucoingroup.github.io/earth-100-friends</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank" rel="noopener">
+          <span class="ico">🏛️</span>
+          <span class="txt"><b>Footsteps of Civilization</b><small>ucoingroup.github.io/Footsteps-of-Civilization</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/linguistic-capital/" target="_blank" rel="noopener">
+          <span class="ico">🗣️</span>
+          <span class="txt"><b>Linguistic Capital</b><small>ucoingroup.github.io/linguistic-capital</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/good-books/" target="_blank" rel="noopener">
+          <span class="ico">📚</span>
+          <span class="txt"><b>Good Books</b><small>ucoingroup.github.io/good-books</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" rel="noopener">
+          <span class="ico">⚙️</span>
+          <span class="txt"><b>Mohist Tech</b><small>ucoingroup.github.io/Mohist-Tech</small></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="link-group">
+      <div class="lg-title">🔁 Swap · Trade · 交易</div>
+      <div class="link-list">
+        <a class="link-item" href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" rel="noopener">
+          <span class="ico">🔄</span>
+          <span class="txt"><b>EACO SWAP</b><small>ucoingroup.github.io/eacoSWAP</small></span>
+        </a>
+        <a class="link-item" href="https://github.com/ucoingroup/eacoswap2025" target="_blank" rel="noopener">
+          <span class="ico">💻</span>
+          <span class="txt"><b>eacoswap2025 (GitHub)</b><small>github.com/ucoingroup/eacoswap2025</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/eur-eaco/" target="_blank" rel="noopener">
+          <span class="ico">🇪🇺</span>
+          <span class="txt"><b>EUR - EACO</b><small>ucoingroup.github.io/eur-eaco</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/au-trade/" target="_blank" rel="noopener">
+          <span class="ico">🇦🇺</span>
+          <span class="txt"><b>AU Trade</b><small>ucoingroup.github.io/au-trade</small></span>
+        </a>
+        <a class="link-item" href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" rel="noopener">
+          <span class="ico">💧</span>
+          <span class="txt"><b>eaco-dao-pool202601 (Meteora)</b><small>app.meteora.ag/dammv2/H4P6RUcy…CH1Cc</small></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="link-group">
+      <div class="lg-title">🌐 Web3 Apps · 应用</div>
+      <div class="link-list">
+        <a class="link-item" href="https://ucoingroup.github.io/eaco-web3/" target="_blank" rel="noopener">
+          <span class="ico">🌍</span>
+          <span class="txt"><b>EACO Web3</b><small>ucoingroup.github.io/eaco-web3</small></span>
+        </a>
+        <a class="link-item" href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener">
+          <span class="ico">🏗️</span>
+          <span class="txt"><b>EACO Build World</b><small>eaco-build-world.base44.app</small></span>
+        </a>
+        <a class="link-item" href="https://eaco-web3.base44.app" target="_blank" rel="noopener">
+          <span class="ico">🧩</span>
+          <span class="txt"><b>EACO Web3 (base44)</b><small>eaco-web3.base44.app</small></span>
+        </a>
+        <a class="link-item" href="https://earth-eaco-web3.base44.app/eaco-team" target="_blank" rel="noopener">
+          <span class="ico">👥</span>
+          <span class="txt"><b>EACO Team</b><small>earth-eaco-web3.base44.app/eaco-team</small></span>
+        </a>
+        <a class="link-item" href="https://eaco.freedev.app/eaco_web3_series/" target="_blank" rel="noopener">
+          <span class="ico">📡</span>
+          <span class="txt"><b>EACO Web3 Series</b><small>eaco.freedev.app/eaco_web3_series</small></span>
+        </a>
+        <a class="link-item" href="https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/" target="_blank" rel="noopener">
+          <span class="ico">🗓️</span>
+          <span class="txt"><b>EACO Web3 Series 2025</b><small>ucoingroup.github.io/eacoweb3-2026</small></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="link-group">
+      <div class="lg-title">💬 Community · 社区</div>
+      <div class="link-list">
+        <a class="link-item" href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">
+          <span class="ico">🎮</span>
+          <span class="txt"><b>Discord</b><small>discord.gg/bWCDME9Pkc</small></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="fm">🌕🥮🌕</div>
+    <div class="ft" id="footT"></div>
+    <p class="fn" id="footN"></p>
+    <div class="foot-nav">
+      <a href="#links" id="fnav1"></a>
+      <a href="#" onclick="randomMethod();return false;" id="fnav2"></a>
+      <a href="#" onclick="scrollTo({top:0,behavior:'smooth'});return false;" id="fnav3"></a>
+    </div>
+  </footer>
+</div>
+
+<!-- 回顶 -->
+<button class="totop" id="totop" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================== 文案 ==================== */
+const TXT = {
+  zh:{
+    h1:"通过地球 EACO 赚来巨大吉财的 100 个方法",
+    sub:"100 WAYS TO WEALTH THROUGH EARTH EACO",
+    greet:"🌕 祝福地球村网友们 <b>中秋快乐，财富自由</b>。愿你所求皆如愿，所行化坦途，月圆人圆，钱包更圆。",
+    infoT:"📘 项目说明与合规披露",
+    infoP:"“EACO 地球链”目前公开、可验证的资料与合规披露，代币经济模型、团队背景与资金流向均透明。以下 100 种方法为 Web3 通用收益模式与 EACO 生态实践路径的整理，供地球村网友们参考。第八类为高风险 / 灰色地带，仅供了解与风险识别。请理性评估、谨慎参与，为自己的决策负责。",
+    footT:"祝福地球村网友们：中秋快乐，财富自由",
+    footN:"以上内容整合自公开的 Web3 通用收益模式与 EACO 生态公开资料，不构成投资建议。政策与项目情况变化较快，具体决策请以最新官方信息与专业意见为准。",
+    searchPh:"搜索方法…",
+    randTxt:"随机一条",
+    statTxt:"共",
+    statUnit:"条方法",
+    emptyT:"没有找到匹配的方法",
+    emptyP:"换个关键词试试，或点击「随机一条」看看运气。",
+    fnav1:"↓ EACO 常用链接",
+    fnav2:"🎲 随机一条方法",
+    fnav3:"↑ 回到顶部",
+    copied:"合约地址已复制 ✓",
+    highlight:"✨ 第 {n} 条 · 请查看高亮卡片"
+  },
+  en:{
+    h1:"100 Ways to Earn Great Fortune Through Earth EACO",
+    sub:"通过地球 EACO 赚来巨大吉财的 100 个方法",
+    greet:"🌕 Wishing all Earth Villagers a <b>Happy Mid-Autumn Festival and Financial Freedom</b>. May every wish come true, every path run smooth, and your wallet grow as full as the moon.",
+    infoT:"📘 Project Info & Compliance Disclosure",
+    infoP:"\"EACO Earth Chain\" provides public, verifiable documentation and compliant disclosures. Its tokenomics, team background and fund flows are all transparent. The 100 methods below compile generic Web3 earning models and EACO ecosystem practice paths for Earth Villagers' reference. Category 8 covers high-risk / grey-area practices for awareness and risk identification only. Please evaluate rationally, participate cautiously, and take responsibility for your own decisions.",
+    footT:"To all Earth Villagers: Happy Mid-Autumn Festival & Financial Freedom",
+    footN:"Compiled from publicly available generic Web3 earning models and public EACO ecosystem materials. Not investment advice. Policies and project conditions change quickly — always rely on the latest official information and professional advice.",
+    searchPh:"Search methods…",
+    randTxt:"Random",
+    statTxt:"Total",
+    statUnit:"methods",
+    emptyT:"No matching methods found",
+    emptyP:"Try another keyword, or tap \"Random\" for a surprise.",
+    fnav1:"↓ EACO Links",
+    fnav2:"🎲 Random Method",
+    fnav3:"↑ Back to Top",
+    copied:"Contract address copied ✓",
+    highlight:"✨ No. {n} · see highlighted card"
+  }
+};
+
+/* ==================== 数据 ==================== */
+const DATA = [
+  {
+    id:"trade", icon:"🪙",
+    zh:"代币获取与交易", en:"Token Acquisition & Trading",
+    items:[
+      {zh:"在去中心化交易所（DEX）买入 EACO 代币，等待升值后卖出",en:"Buy EACO on a DEX and sell after appreciation"},
+      {zh:"在中心化交易所（CEX）上线后参与现货交易",en:"Trade spot once listed on a centralized exchange"},
+      {zh:"参与 EACO 的 ICO / IDO / 私募轮",en:"Join EACO ICO / IDO / private rounds"},
+      {zh:"通过场外交易（OTC）低价收购早期持仓",en:"Acquire early positions at low cost via OTC"},
+      {zh:"在 DRC20 标准下铸造或交易 EACO 代币",en:"Mint or trade EACO under the DRC20 standard"},
+      {zh:"在 BRC20 标准下参与 EACO 铭文铸造",en:"Mint EACO inscriptions under the BRC20 standard"},
+      {zh:"在 ASC20 标准下进行代币 swap 或流动性提供",en:"Swap or provide liquidity under the ASC20 standard"},
+      {zh:"跨链桥接 EACO 代币，赚取跨链价差",en:"Bridge EACO across chains to capture price spreads"},
+      {zh:"在 DEX 与 CEX 之间进行 EACO 套利",en:"Arbitrage EACO between DEX and CEX"},
+      {zh:"参与 EACO 的限价挂单做市，赚取买卖价差",en:"Market-make EACO with limit orders for the spread"},
+      {zh:"使用网格交易机器人自动化 EACO 交易",en:"Automate EACO trading with grid bots"},
+      {zh:"参与 EACO 永续合约交易（高风险）",en:"Trade EACO perpetual futures (high risk)"},
+      {zh:"参与 EACO 期权交易（如已上线）",en:"Trade EACO options (if listed)"},
+      {zh:"在 EACO 社区内进行点对点（P2P）交易",en:"Trade peer-to-peer within the EACO community"},
+      {zh:"低买高卖 EACO NFT（如有）",en:"Flip EACO NFTs (if available)"}
+    ]
+  },
+  {
+    id:"stake", icon:"🌱",
+    zh:"质押、挖矿与流动性", en:"Staking, Mining & Liquidity",
+    items:[
+      {zh:"质押 EACO 代币获取节点奖励（如支持 PoS）",en:"Stake EACO for validator rewards (if PoS)"},
+      {zh:"将 EACO 存入流动性池，赚取交易手续费分成",en:"Deposit EACO into pools to earn trading fees"},
+      {zh:"参与 EACO 的收益耕作（Yield Farming）",en:"Join EACO yield farming programs"},
+      {zh:"为 EACO 交易对提供流动性，获取 LP 奖励",en:"Provide liquidity for EACO pairs to earn LP rewards"},
+      {zh:"使用 EACO 参与借贷协议，存入赚息或借出做空",en:"Use EACO in lending protocols to earn or short"},
+      {zh:"通过闪电贷进行 EACO 相关套利",en:"Flash-loan arbitrage around EACO"},
+      {zh:"运行 EACO 区块链节点（如开放验证者席位）",en:"Run an EACO node (if validator slots are open)"},
+      {zh:"参与 EACO 的云挖矿（如项目提供）",en:"Join EACO cloud mining (if offered)"},
+      {zh:"利用 EACO 的碳信用代币进行质押或交易",en:"Stake or trade EACO carbon-credit tokens"},
+      {zh:"将 EACO 锁仓换取时间加权代币，再质押获取治理代币",en:"Lock EACO for time-weighted tokens, then restake for governance tokens"}
+    ]
+  },
+  {
+    id:"eco", icon:"🌍",
+    zh:"生态参与与贡献", en:"Ecosystem Participation & Contribution",
+    items:[
+      {zh:"参与 EACO 测试网，完成交互任务，博取空投",en:"Complete EACO testnet quests to qualify for airdrops"},
+      {zh:"在 EACO 生态 DApp 中 swap、借贷，积累交互记录",en:"Swap and lend in ecosystem dApps to build on-chain history"},
+      {zh:"参与 EACO 的 Learn-to-Earn 计划",en:"Join the EACO Learn-to-Earn program"},
+      {zh:"在 EACO 的 Edu Marketplace 中购买或出售教育内容",en:"Buy or sell educational content on the Edu Marketplace"},
+      {zh:"参与 EACO 的讨论 / 问答贡献，获取代币奖励",en:"Contribute to discussions and Q&A for token rewards"},
+      {zh:"为 EACO 社区提供多语言翻译或内容整理",en:"Provide translation or content curation for the community"},
+      {zh:"撰写 EACO 项目分析文章或制作视频，赚取社区赏金",en:"Write analysis or make videos to earn community bounties"},
+      {zh:"在 EACO 的 Metaverse 平台中购买树苗并培育 Tree NFT",en:"Buy saplings and grow Tree NFTs in the EACO metaverse"},
+      {zh:"参与 EACO 的环保数据监测任务，获取贡献奖励",en:"Join environmental data-monitoring tasks for rewards"},
+      {zh:"参与 EACO 的生态系统修复项目，获取项目方激励",en:"Join ecosystem restoration projects for incentives"},
+      {zh:"在 EACO 社区中担任志愿者或版主",en:"Volunteer or moderate in the EACO community"},
+      {zh:"组织 EACO 线下 meetup 或线上 AMA",en:"Host EACO meetups or online AMAs"},
+      {zh:"为 EACO 设计 MEME 或周边内容，参与社区竞赛",en:"Design memes or merch for community contests"},
+      {zh:"在 EACO 的 DAO 中持有治理代币，参与提案投票",en:"Hold governance tokens and vote on DAO proposals"},
+      {zh:"向 EACO 的环保项目捐赠并获取代币回馈",en:"Donate to EACO green projects for token returns"}
+    ]
+  },
+  {
+    id:"social", icon:"🤝",
+    zh:"推广、返佣与社交", en:"Promotion, Referral & Social",
+    items:[
+      {zh:"参与 EACO 的推荐 / 返佣计划，邀请新用户",en:"Join the EACO referral program and invite new users"},
+      {zh:"成为 EACO 的社区大使或 KOL 合作伙伴",en:"Become an EACO community ambassador or KOL partner"},
+      {zh:"在社交媒体（X、Telegram、Discord）推广 EACO 赚取奖励",en:"Promote EACO on X, Telegram and Discord for rewards"},
+      {zh:"创建 EACO 相关的 YouTube 频道或 TikTok 账号变现",en:"Monetize a YouTube channel or TikTok account about EACO"},
+      {zh:"在 Web3 社交平台（如 Kaito、SocialFi）发布 EACO 内容",en:"Publish EACO content on Web3 social platforms like Kaito"},
+      {zh:"建立 EACO 粉丝社群，通过付费社群或广告变现",en:"Build an EACO community and monetize via subscriptions or ads"},
+      {zh:"为 EACO 项目方提供社区管理外包服务",en:"Offer outsourced community management to EACO teams"},
+      {zh:"撮合 EACO 与线下商家合作，赚取中介费",en:"Broker partnerships between EACO and offline merchants"},
+      {zh:"参与 EACO 的联盟营销（Affiliate）计划",en:"Join the EACO affiliate marketing program"},
+      {zh:"在 EACO 生态内提供付费咨询服务",en:"Offer paid consulting services within the EACO ecosystem"}
+    ]
+  },
+  {
+    id:"dev", icon:"🛠️",
+    zh:"开发、技术与服务", en:"Development, Tech & Services",
+    items:[
+      {zh:"为 EACO 区块链开发智能合约或 DApp",en:"Develop smart contracts or dApps for the EACO chain"},
+      {zh:"审计 EACO 生态项目的智能合约",en:"Audit smart contracts of EACO ecosystem projects"},
+      {zh:"为 EACO 提供前端 / 后端开发外包服务",en:"Provide frontend/backend development outsourcing"},
+      {zh:"构建 EACO 的区块浏览器或数据分析工具",en:"Build a block explorer or analytics tools for EACO"},
+      {zh:"开发 EACO 的交易机器人或跟单工具",en:"Develop trading bots or copy-trading tools for EACO"},
+      {zh:"为 EACO 提供节点运维或服务器托管服务",en:"Offer node operations or server hosting services"},
+      {zh:"设计 EACO 相关的 NFT 系列并出售",en:"Design and sell EACO-related NFT collections"},
+      {zh:"为 EACO 生态项目提供 UI / UX 设计服务",en:"Provide UI/UX design for ecosystem projects"},
+      {zh:"搭建 EACO 的 RPC 节点并对外提供付费访问",en:"Run an EACO RPC node and sell paid access"},
+      {zh:"开发 EACO 的移动端钱包或浏览器插件",en:"Build a mobile wallet or browser extension for EACO"}
+    ]
+  },
+  {
+    id:"content", icon:"📚",
+    zh:"内容、教育与研究", en:"Content, Education & Research",
+    items:[
+      {zh:"撰写 EACO 的项目深度研报并付费发布",en:"Write and sell in-depth research reports on EACO"},
+      {zh:"制作 EACO 的新手教程并出售",en:"Create and sell beginner tutorials for EACO"},
+      {zh:"开设 EACO 相关的付费课程或训练营",en:"Run paid courses or bootcamps about EACO"},
+      {zh:"为传统企业提供 EACO 相关的区块链咨询",en:"Provide blockchain consulting on EACO to traditional firms"},
+      {zh:"在 YouTube / B站发布 EACO 行情分析，获取流量分成",en:"Publish EACO market analysis on YouTube for ad revenue"},
+      {zh:"在 Substack / Medium 上开设 EACO 付费专栏",en:"Run a paid EACO newsletter on Substack or Medium"},
+      {zh:"为 EACO 社区提供实时行情播报服务",en:"Offer real-time market broadcast services to the community"},
+      {zh:"翻译 EACO 白皮书或官方文档，赚取赏金",en:"Translate EACO whitepapers or docs for bounties"},
+      {zh:"参与 EACO 的“地球故事”内容创作计划",en:"Join the EACO \"Earth Story\" content creation program"},
+      {zh:"组织 EACO 的线上读书会或学习小组，收取会员费",en:"Organize online reading groups and charge membership fees"}
+    ]
+  },
+  {
+    id:"biz", icon:"🏢",
+    zh:"商业与实体结合", en:"Business & Real-World Integration",
+    items:[
+      {zh:"接受 EACO 作为商品或服务的支付方式",en:"Accept EACO as payment for goods or services"},
+      {zh:"开设支持 EACO 支付的线上店铺",en:"Open an online store that accepts EACO"},
+      {zh:"用 EACO 购买光伏、储能等新能源设备",en:"Buy solar, storage and other new-energy equipment with EACO"},
+      {zh:"将 EACO 用于碳信用交易或碳中和抵消",en:"Use EACO for carbon credit trading or offsetting"},
+      {zh:"与 EACO 合作开展环保公益活动，获取品牌曝光",en:"Co-host green charity events with EACO for brand exposure"},
+      {zh:"在 EACO 生态内提供法律或合规咨询服务",en:"Provide legal or compliance consulting within the ecosystem"},
+      {zh:"为 EACO 项目方提供 KYC / AML 解决方案",en:"Offer KYC/AML solutions to EACO projects"},
+      {zh:"参与 EACO 的 RWA（真实世界资产）代币化项目",en:"Join EACO RWA (real-world asset) tokenization projects"},
+      {zh:"用 EACO 进行跨境支付或汇款，节省手续费",en:"Use EACO for cross-border payments to save on fees"},
+      {zh:"将 EACO 作为员工激励或薪酬的一部分",en:"Use EACO as part of employee incentives or payroll"}
+    ]
+  },
+  {
+    id:"risk", icon:"⚠️", risk:true,
+    zh:"高风险 / 灰色地带（仅供了解）", en:"High Risk / Grey Area (For Awareness Only)",
+    items:[
+      {zh:"通过多账号刷量（Sybil）获取 EACO 空投",en:"Sybil-farm multiple accounts to capture EACO airdrops"},
+      {zh:"参与 EACO 的“拉人头”层级返利模式",en:"Join EACO multi-level recruitment / downline schemes"},
+      {zh:"使用杠杆借贷放大 EACO 持仓",en:"Use leveraged borrowing to amplify EACO exposure"},
+      {zh:"参与 EACO 的场外配资或资金盘",en:"Participate in EACO OTC margin or Ponzi-style pools"},
+      {zh:"为 EACO 提供虚假交易量以获取做市奖励",en:"Wash-trade EACO to farm market-making rewards"},
+      {zh:"利用 EACO 进行洗钱或规避资本管制",en:"Use EACO for money laundering or evading capital controls"},
+      {zh:"参与 EACO 的“内幕交易”或信息差套利",en:"Engage in insider trading or information-gap arbitrage"},
+      {zh:"伪造 EACO 的环保项目数据以获取碳信用",en:"Falsify EACO green-project data to obtain carbon credits"},
+      {zh:"通过 EACO 进行庞氏骗局式的资金盘操作",en:"Run Ponzi-style fund schemes through EACO"},
+      {zh:"以 EACO 为名进行非法集资",en:"Raise funds illegally under the EACO name"}
+    ]
+  },
+  {
+    id:"long", icon:"🔭",
+    zh:"长期生态与衍生", en:"Long-term Ecosystem & Derivatives",
+    items:[
+      {zh:"持有 EACO 并参与其治理，影响项目发展方向",en:"Hold EACO and govern to shape the project's direction"},
+      {zh:"投资 EACO 生态内的早期项目，获取代币分配",en:"Invest in early ecosystem projects for token allocations"},
+      {zh:"在 EACO 上发行自己的子代币或 NFT 系列",en:"Issue your own sub-tokens or NFT collections on EACO"},
+      {zh:"参与 EACO 的 Launchpad，获取新项目额度",en:"Join the EACO Launchpad for allocations in new projects"},
+      {zh:"成为 EACO 生态的官方认证讲师或顾问",en:"Become an officially certified EACO instructor or advisor"},
+      {zh:"建立 EACO 的衍生品交易平台",en:"Build a derivatives trading platform for EACO"},
+      {zh:"为 EACO 提供保险或对冲产品",en:"Provide insurance or hedging products for EACO"},
+      {zh:"创建 EACO 的聚合器或收益优化器",en:"Create an EACO aggregator or yield optimizer"},
+      {zh:"参与 EACO 的跨链互操作性项目",en:"Join EACO cross-chain interoperability projects"},
+      {zh:"长期持有并等待 EACO 被主流交易所收录后的流动性溢价",en:"Hold long-term and wait for the liquidity premium after a major exchange listing"}
+    ]
+  }
+];
+
+/* ==================== 状态 ==================== */
+let lang = 'zh';
+let totalMethods = 0;
+
+/* ==================== 语言切换 ==================== */
+function setLang(l){
+  lang = l;
+  document.documentElement.lang = l === 'zh' ? 'zh' : 'en';
+  document.getElementById('btn-zh').classList.toggle('on', l === 'zh');
+  document.getElementById('btn-en').classList.toggle('on', l === 'en');
+  renderAll();
+  // 重新应用搜索过滤
+  const q = document.getElementById('searchInput').value;
+  if(q) filterCards(q);
+}
+
+/* ==================== 渲染 ==================== */
+function renderAll(){
+  const t = TXT[lang];
+
+  // 文本
+  document.getElementById('h1').textContent = t.h1;
+  document.getElementById('sub').textContent = t.sub;
+  document.getElementById('greet').innerHTML = t.greet;
+  document.getElementById('infoT').textContent = t.infoT;
+  document.getElementById('infoP').innerHTML = t.infoP;
+  document.getElementById('footT').textContent = t.footT;
+  document.getElementById('footN').textContent = t.footN;
+  document.getElementById('searchInput').placeholder = t.searchPh;
+  document.getElementById('randTxt').textContent = t.randTxt;
+  document.getElementById('statTxt').textContent = t.statTxt;
+  document.getElementById('statUnit').textContent = t.statUnit;
+  document.getElementById('emptyT').textContent = t.emptyT;
+  document.getElementById('emptyP').textContent = t.emptyP;
+  document.getElementById('fnav1').textContent = t.fnav1;
+  document.getElementById('fnav2').textContent = t.fnav2;
+  document.getElementById('fnav3').textContent = t.fnav3;
+
+  // 导航
+  let navHTML = '';
+  DATA.forEach(c=>{
+    navHTML += `<a href="#cat-${c.id}">${c.icon} ${lang==='zh'?c.zh:c.en}</a>`;
+  });
+  document.getElementById('nav').innerHTML = navHTML;
+
+  // 卡片
+  let html = '';
+  let n = 0;
+  DATA.forEach(c=>{
+    html += `<section class="cat" id="cat-${c.id}" data-cat="${c.id}">`;
+    html += `<div class="cat-head">
+      <span class="cat-icon">${c.icon}</span>
+      <h2>${lang==='zh'?c.zh:c.en}</h2>
+      <span class="cat-count">${c.items.length}</span>
+    </div>`;
+    html += `<div class="grid">`;
+    c.items.forEach(it=>{
+      n++;
+      const zhText = it.zh.replace(/"/g,'&quot;');
+      const enText = it.en.replace(/"/g,'&quot;');
+      html += `<article class="card${c.risk?' risk':''}"
+        data-num="${n}"
+        data-zh="${zhText}"
+        data-en="${enText}">
+        <span class="num">${String(n).padStart(2,'0')}</span>
+        <p>${lang==='zh'?it.zh:it.en}</p>
+      </article>`;
+    });
+    html += `</div></section>`;
+  });
+  document.getElementById('app').innerHTML = html;
+
+  totalMethods = n;
+  document.getElementById('statNum').textContent = n;
+
+  observeCards();
+}
+
+/* ==================== 入场动画 ==================== */
+let io = null;
+function observeCards(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('in'), (i%6)*45);
+        io.unobserve(e.target);
+      }
+    });
+  },{rootMargin:"0px 0px -40px 0px",threshold:0.06});
+  document.querySelectorAll('.card').forEach(el=>io.observe(el));
+}
+
+/* ==================== 搜索过滤 ==================== */
+const searchInput = document.getElementById('searchInput');
+const clearBtn = document.getElementById('clearBtn');
+searchInput.addEventListener('input', ()=>{
+  const q = searchInput.value;
+  clearBtn.classList.toggle('show', q.length > 0);
+  filterCards(q);
+});
+
+function filterCards(q){
+  q = q.trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.card').forEach(card=>{
+    const zh = (card.dataset.zh || '').toLowerCase();
+    const en = (card.dataset.en || '').toLowerCase();
+    const match = !q || zh.includes(q) || en.includes(q);
+    card.classList.toggle('hidden', !match);
+    if(match) visible++;
+  });
+  // 隐藏空分类
+  document.querySelectorAll('.cat').forEach(cat=>{
+    const v = cat.querySelectorAll('.card:not(.hidden)').length;
+    cat.classList.toggle('hidden', v === 0);
+  });
+  // 空状态
+  document.getElementById('empty').style.display = visible === 0 ? 'block' : 'none';
+  document.getElementById('statNum').textContent = visible;
+}
+
+function clearSearch(){
+  searchInput.value = '';
+  clearBtn.classList.remove('show');
+  filterCards('');
+  searchInput.focus();
+}
+
+/* ==================== 随机方法 ==================== */
+function randomMethod(){
+  const cards = Array.from(document.querySelectorAll('.card:not(.hidden)'));
+  if(!cards.length){
+    showToast(lang === 'zh' ? '当前没有可显示的方法' : 'No methods available');
+    return;
+  }
+  // 清除旧高亮
+  document.querySelectorAll('.card.highlight').forEach(c=>c.classList.remove('highlight'));
+
+  const pick = cards[Math.floor(Math.random() * cards.length)];
+  pick.classList.add('highlight');
+  pick.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const t = TXT[lang];
+  showToast(t.highlight.replace('{n}', pick.dataset.num || ''));
+
+  setTimeout(()=>pick.classList.remove('highlight'), 3200);
+}
+
+/* ==================== Toast ==================== */
+let toastTimer = null;
+function showToast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 2200);
+}
+
+/* ==================== 复制合约地址 ==================== */
+function copyCA(){
+  const text = document.getElementById('caText').textContent.trim();
+  const btn = document.getElementById('copyBtn');
+  const done = () => {
+    btn.textContent = lang === 'zh' ? '已复制 ✓' : 'Copied ✓';
+    btn.classList.add('done');
+    showToast(TXT[lang].copied);
+    setTimeout(()=>{
+      btn.textContent = lang === 'zh' ? '复制 / Copy' : 'Copy';
+      btn.classList.remove('done');
+    }, 1800);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));
+  }else{
+    fallbackCopy(text,done);
+  }
+}
+function fallbackCopy(text, cb){
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand('copy'); cb(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+/* ==================== 滚动进度 & 回顶 ==================== */
+const totop = document.getElementById('totop');
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  document.getElementById('progress').style.width = pct + '%';
+  totop.classList.toggle('show', h.scrollTop > 600);
+}, {passive:true});
+
+/* ==================== 键盘快捷键 ==================== */
+document.addEventListener('keydown', (e)=>{
+  // 按 "/" 聚焦搜索框
+  if(e.key === '/' && document.activeElement !== searchInput){
+    e.preventDefault();
+    searchInput.focus();
+    searchInput.select();
+  }
+  // 按 Esc 清空搜索
+  if(e.key === 'Escape' && document.activeElement === searchInput){
+    clearSearch();
+    searchInput.blur();
+  }
+  // 按 "r" 随机（不在输入框时）
+  if((e.key === 'r' || e.key === 'R') && document.activeElement !== searchInput){
+    randomMethod();
+  }
+});
+
+/* ==================== 启动 ==================== */
+renderAll();
+</script>
+</body>
+</html>
