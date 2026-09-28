@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EACO Future Careers · 地球EACO未来职业方向</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #050816;
+      --card: #0f172a;
+      --accent: #38bdf8;
+      --accent-soft: #0ea5e9;
+      --text-main: #e5e7eb;
+      --text-sub: #9ca3af;
+      --border: #1f2937;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font);
+      background: radial-gradient(circle at top, #0f172a 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, #22c55e, #0ea5e9, #a855f7, #22c55e);
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-logo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .brand-text-main {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+    }
+    .brand-text-sub {
+      font-size: 0.75rem;
+      color: var(--text-sub);
+    }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .lang-label {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+    .lang-buttons {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: #020617;
+    }
+    .lang-btn {
+      padding: 0.35rem 0.8rem;
+      font-size: 0.8rem;
+      border: none;
+      background: transparent;
+      color: var(--text-sub);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .lang-btn.active {
+      background: var(--accent-soft);
+      color: #0b1120;
+      font-weight: 600;
+    }
+    main {
+      padding: 1.5rem;
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+    section {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.4rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.9rem;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .section-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+    .pill {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+    }
+    .hero-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .hero-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      margin-bottom: 0.9rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero-meta-item {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .btn {
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      cursor: pointer;
+      background: #020617;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      border-color: transparent;
+      color: #020617;
+      font-weight: 600;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.7);
+    }
+    .btn-icon {
+      font-size: 1rem;
+    }
+    .careers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 0.4rem;
+    }
+    .career-card {
+      border-radius: 0.8rem;
+      border: 1px solid var(--border);
+      padding: 0.7rem 0.8rem;
+      background: #020617;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr);
+      gap: 0.6rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .career-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+    .career-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .career-tagline {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-bottom: 0.4rem;
+    }
+    .career-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.4rem;
+    }
+    .career-meta-pill {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+    }
+    .career-body {
+      font-size: 0.8rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+    .career-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+    .career-score {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .career-eaco {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+    .career-eaco strong {
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+    .right-section-block {
+      margin-bottom: 1rem;
+    }
+    .right-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .right-text {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+    .token-box {
+      border-radius: 0.7rem;
+      border: 1px dashed var(--border);
+      padding: 0.6rem 0.7rem;
+      font-size: 0.78rem;
+      background: #020617;
+      word-break: break-all;
+      color: var(--accent);
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(22, 163, 74, 0.15);
+      color: var(--success);
+      margin-bottom: 0.4rem;
+    }
+    .status-pill.danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--danger);
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--success);
+    }
+    .status-pill.danger .status-dot {
+      background: var(--danger);
+    }
+    .form-group {
+      margin-bottom: 0.6rem;
+    }
+    .form-label {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.45rem 0.55rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: var(--text-main);
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--accent-soft);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+    }
+    .form-textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+    .form-helper {
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      margin-top: 0.2rem;
+    }
+    .result-box {
+      margin-top: 0.7rem;
+      border-radius: 0.7rem;
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.7rem;
+      background: #020617;
+      font-size: 0.8rem;
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 40px;
+    }
+    footer {
+      padding: 0.9rem 1.5rem 1.2rem;
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+    .footer-left span {
+      color: var(--accent-soft);
+      font-weight: 500;
+    }
+    .footer-right {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-logo">
+        <div class="brand-logo-inner">E</div>
+      </div>
+      <div>
+        <div class="brand-text-main" data-i18n="brandTitle">
+          EACO · Earth’s Best Coin
+        </div>
+        <div class="brand-text-sub" data-i18n="brandSubtitle">
+          Future careers & Web3 value system
+        </div>
+      </div>
+    </div>
+    <div class="lang-toggle">
+      <span class="lang-label" data-i18n="langLabel">Language / 语言</span>
+      <div class="lang-buttons">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Left: main content -->
+    <section>
+      <div class="section-header">
+        <div>
+          <div class="section-title" data-i18n="sectionMainTitle">
+            Future Careers · 未来职业方向
+          </div>
+          <div class="section-subtitle" data-i18n="sectionMainSubtitle">
+            Web3 · AI · RWA · DAO · Compliance
+          </div>
+        </div>
+        <div class="pill" data-i18n="sectionMainPill">
+          EACO Earth Value System
+        </div>
+      </div>
+
+      <div class="hero-title" data-i18n="heroTitle">
+        Design your path in future industries, connected to Earth EACO.
+      </div>
+      <div class="hero-subtitle" data-i18n="heroSubtitle">
+        Choose a direction, understand its value, and see how it links to EACO’s global community and real-world assets.
+      </div>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item" data-i18n="heroMeta1">
+          2026–2035 · Web3 & AI growth decade
+        </div>
+        <div class="hero-meta-item" data-i18n="heroMeta2">
+          Focus: RWA, compliance, DAO, green value
+        </div>
+        <div class="hero-meta-item" data-i18n="heroMeta3">
+          EACO: Earth’s Best Coin · 地球价值货币
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="btnSuggest" type="button">
+          <span class="btn-icon">✨</span>
+          <span data-i18n="btnSuggest">Suggest a career for me</span>
+        </button>
+        <button class="btn" id="btnReset" type="button">
+          <span class="btn-icon">🔄</span>
+          <span data-i18n="btnReset">Reset selection</span>
+        </button>
+      </div>
+
+      <div class="careers-list">
+        <!-- Career 1 -->
+        <article class="career-card" data-career="rwa">
+          <div>
+            <div class="career-title" data-i18n="career1Title">
+              RWA Tokenization Specialist · 真实世界资产代币化专家
+            </div>
+            <div class="career-tagline" data-i18n="career1Tagline">
+              Turn real-world assets into on-chain value: carbon credits, land, community services.
+            </div>
+            <div class="career-meta">
+              <span class="career-meta-pill" data-i18n="career1Meta1">
+                RWA · Real World Assets
+              </span>
+              <span class="career-meta-pill" data-i18n="career1Meta2">
+                Law & Compliance
+              </span>
+              <span class="career-meta-pill" data-i18n="career1Meta3">
+                Finance & Token Design
+              </span>
+            </div>
+            <div class="career-body" data-i18n="career1Body">
+              This role designs how real assets (carbon, land, education, community credits) become tokens on-chain.
+              It requires understanding regulation, valuation, and how communities actually use these assets.
+            </div>
+            <div class="career-actions">
+              <button class="btn" type="button" data-career-select="rwa">
+                <span class="btn-icon">✅</span>
+                <span data-i18n="careerSelect">Select this direction</span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="career-score" data-i18n="career1Score">
+              Future value: ★★★★★ · Core pillar of Web3 growth
+            </div>
+            <div class="career-eaco" data-i18n="career1Eaco">
+              With <strong>EACO</strong>, you can build an RWA launchpad where communities tokenize
+              their real assets and settle value using EACO. This makes EACO a bridge between
+              Earth’s real value and digital finance.
+            </div>
+          </div>
+        </article>
+
+        <!-- Career 2 -->
+        <article class="career-card" data-career="ai">
+          <div>
+            <div class="career-title" data-i18n="career2Title">
+              AI + Blockchain Engineer · AI区块链工程师
+            </div>
+            <div class="career-tagline" data-i18n="career2Tagline">
+              Build AI agents that understand on-chain data and automate DAO decisions.
+            </div>
+            <div class="career-meta">
+              <span class="career-meta-pill" data-i18n="career2Meta1">
+                AI Agents
+              </span>
+              <span class="career-meta-pill" data-i18n="career2Meta2">
+                Smart Contracts
+              </span>
+              <span class="career-meta-pill" data-i18n="career2Meta3">
+                Data & Automation
+              </span>
+            </div>
+            <div class="career-body" data-i18n="career2Body">
+              This role connects AI models with blockchain data, creating agents that can analyze
+              community behavior, propose governance changes, and automate value distribution.
+            </div>
+            <div class="career-actions">
+              <button class="btn" type="button" data-career-select="ai">
+                <span class="btn-icon">✅</span>
+                <span data-i18n="careerSelect">Select this direction</span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="career-score" data-i18n="career2Score">
+              Future value: ★★★★★ · AI + Web3 is a top growth frontier
+            </div>
+            <div class="career-eaco" data-i18n="career2Eaco">
+              With <strong>EACO</strong>, you can design AI agents that manage DAO proposals,
+              analyze EACO ecosystem health, and reward contributors automatically—turning
+              EACO into an intelligent Earth value system.
+            </div>
+          </div>
+        </article>
+
+        <!-- Career 3 -->
+        <article class="career-card" data-career="compliance">
+          <div>
+            <div class="career-title" data-i18n="career3Title">
+              Web3 Compliance & Regulation Expert · Web3合规与监管专家
+            </div>
+            <div class="career-tagline" data-i18n="career3Tagline">
+              Make innovation legal, safe, and sustainable in North America and globally.
+            </div>
+            <div class="career-meta">
+              <span class="career-meta-pill" data-i18n="career3Meta1">
+                SEC · FinCEN · MiCA
+              </span>
+              <span class="career-meta-pill" data-i18n="career3Meta2">
+                Policy & Risk
+              </span>
+              <span class="career-meta-pill" data-i18n="career3Meta3">
+                Legal Architecture
+              </span>
+            </div>
+            <div class="career-body" data-i18n="career3Body">
+              This role translates complex regulations into clear frameworks for Web3 projects.
+              It is essential for any token or DAO that wants to operate in North America and beyond.
+            </div>
+            <div class="career-actions">
+              <button class="btn" type="button" data-career-select="compliance">
+                <span class="btn-icon">✅</span>
+                <span data-i18n="careerSelect">Select this direction</span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="career-score" data-i18n="career3Score">
+              Future value: ★★★★★ · Compliance is no longer optional
+            </div>
+            <div class="career-eaco" data-i18n="career3Eaco">
+              With <strong>EACO</strong>, you can build a North American compliance center,
+              guiding community projects to launch legally, and positioning EACO as a
+              “most compliant community value coin”.
+            </div>
+          </div>
+        </article>
+
+        <!-- Career 4 -->
+        <article class="career-card" data-career="contract">
+          <div>
+            <div class="career-title" data-i18n="career4Title">
+              Smart Contract Developer · 智能合约开发者
+            </div>
+            <div class="career-tagline" data-i18n="career4Tagline">
+              Write the logic that runs DAOs, payments, and value flows.
+            </div>
+            <div class="career-meta">
+              <span class="career-meta-pill" data-i18n="career4Meta1">
+                Solidity · Rust · Move
+              </span>
+              <span class="career-meta-pill" data-i18n="career4Meta2">
+                Protocol Design
+              </span>
+              <span class="career-meta-pill" data-i18n="career4Meta3">
+                Security Mindset
+              </span>
+            </div>
+            <div class="career-body" data-i18n="career4Body">
+              This role builds the core infrastructure of Web3: DAOs, payment systems, bridges,
+              and governance contracts. It is highly technical and always in demand.
+            </div>
+            <div class="career-actions">
+              <button class="btn" type="button" data-career-select="contract">
+                <span class="btn-icon">✅</span>
+                <span data-i18n="careerSelect">Select this direction</span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="career-score" data-i18n="career4Score">
+              Future value: ★★★★☆ · Core technical backbone
+            </div>
+            <div class="career-eaco" data-i18n="career4Eaco">
+              With <strong>EACO</strong>, you can design DAO contracts, value payment rails,
+              and even EACO sidechains or Layer2—turning ideas into running code.
+            </div>
+          </div>
+        </article>
+
+        <!-- Career 5 -->
+        <article class="career-card" data-career="security">
+          <div>
+            <div class="career-title" data-i18n="career5Title">
+              Blockchain Security Auditor · 区块链安全审计员
+            </div>
+            <div class="career-tagline" data-i18n="career5Tagline">
+              Protect assets, DAOs, and bridges from exploits and failures.
+            </div>
+            <div class="career-meta">
+              <span class="career-meta-pill" data-i18n="career5Meta1">
+                Security Review
+              </span>
+              <span class="career-meta-pill" data-i18n="career5Meta2">
+                Threat Modeling
+              </span>
+              <span class="career-meta-pill" data-i18n="career5Meta3">
+                Formal Verification
+              </span>
+            </div>
+            <div class="career-body" data-i18n="career5Body">
+              This role audits smart contracts, protocols, and infrastructure to prevent hacks.
+              As value on-chain grows, security becomes a critical profession.
+            </div>
+            <div class="career-actions">
+              <button class="btn" type="button" data-career-select="security">
+                <span class="btn-icon">✅</span>
+                <span data-i18n="careerSelect">Select this direction</span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="career-score" data-i18n="career5Score">
+              Future value: ★★★★☆ · Essential for trust and stability
+            </div>
+            <div class="career-eaco" data-i18n="career5Eaco">
+              With <strong>EACO</strong>, you can build a security council that audits
+              all EACO-related contracts and bridges, making EACO one of the safest
+              community value systems.
+            </div>
+          </div>
+        </article>
+
+        <!-- Career 6 -->
+        <article class="career-card" data-career="dao">
+          <div>
+            <div class="career-title" data-i18n="career6Title">
+              DAO Governance Designer · DAO治理设计师
+            </div>
+            <div class="career-tagline" data-i18n="career6Tagline">
+              Shape how communities make decisions and share value.
+            </div>
+            <div class="career-meta">
+              <span class="career-meta-pill" data-i18n="career6Meta1">
+                Governance Models
+              </span>
+              <span class="career-meta-pill" data-i18n="career6Meta2">
+                Incentive Design
+              </span>
+              <span class="career-meta-pill" data-i18n="career6Meta3">
+                Community Psychology
+              </span>
+            </div>
+            <div class="career-body" data-i18n="career6Body">
+              This role designs voting systems, reward structures, and proposal flows
+              that keep DAOs fair, active, and sustainable over time.
+            </div>
+            <div class="career-actions">
+              <button class="btn" type="button" data-career-select="dao">
+                <span class="btn-icon">✅</span>
+                <span data-i18n="careerSelect">Select this direction</span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="career-score" data-i18n="career6Score">
+              Future value: ★★★★☆ · Key for long-term community health
+            </div>
+            <div class="career-eaco" data-i18n="career6Eaco">
+              With <strong>EACO</strong>, you can design a global governance academy,
+              teaching communities how to run DAOs and making EACO a reference model
+              for Earth-scale community coordination.
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Right: EACO & interaction -->
+    <section>
+      <div class="section-header">
+        <div>
+          <div class="section-title" data-i18n="sectionRightTitle">
+            EACO · Earth Value System
+          </div>
+          <div class="section-subtitle" data-i18n="sectionRightSubtitle">
+            Token · Payment · DAO · Career Matching
+          </div>
+        </div>
+        <div class="pill" data-i18n="sectionRightPill">
+          Closed-loop: idea → choice → plan
+        </div>
+      </div>
+
+      <div class="right-section-block">
+        <div class="right-title" data-i18n="tokenTitle">
+          EACO Token (CA)
+        </div>
+        <div class="right-text" data-i18n="tokenText">
+          This is the contract address you shared. It represents the EACO token in the
+          Web3 ecosystem and can be used as a unit of Earth value.
+        </div>
+        <div class="token-box">
+          DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+        </div>
+        <div class="form-helper" data-i18n="tokenLinkHelper">
+          Official link (as provided): orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+        </div>
+      </div>
+
+      <div class="right-section-block">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span data-i18n="statusReady">System ready · You can generate a personal plan now</span>
+        </div>
+        <div class="right-title" data-i18n="formTitle">
+          Build your EACO career plan
+        </div>
+        <div class="right-text" data-i18n="formText">
+          Fill in a few fields, select a career direction, and the app will generate
+          a simple, bilingual summary of your future path connected to EACO.
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inputName" data-i18n="labelName">
+            Your name / 你的名字
+          </label>
+          <input id="inputName" class="form-input" type="text" />
+          <div class="form-helper" data-i18n="helperName">
+            Optional, used only to personalize the summary.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="selectRegion" data-i18n="labelRegion">
+            Region / 所在地区
+          </label>
+          <select id="selectRegion" class="form-select">
+            <option value="" data-i18n="regionPlaceholder">Select region / 选择地区</option>
+            <option value="na" data-i18n="regionNA">North America · 北美</option>
+            <option value="eu" data-i18n="regionEU">Europe · 欧洲</option>
+            <option value="asia" data-i18n="regionAsia">Asia · 亚洲</option>
+            <option value="global" data-i18n="regionGlobal">Global · 全球</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inputBackground" data-i18n="labelBackground">
+            Your current background / 当前背景
+          </label>
+          <textarea id="inputBackground" class="form-textarea"></textarea>
+          <div class="form-helper" data-i18n="helperBackground">
+            Example: “Software developer”, “Student”, “Community organizer”, “Finance”.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inputFocus" data-i18n="labelFocus">
+            What do you care about most? / 你最在乎什么？
+          </label>
+          <textarea id="inputFocus" class="form-textarea"></textarea>
+          <div class="form-helper" data-i18n="helperFocus">
+            Example: “Environmental impact”, “Financial freedom”, “Community building”, “Innovation”.
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="btnGenerate" type="button">
+          <span class="btn-icon">🧩</span>
+          <span data-i18n="btnGenerate">Generate my EACO career summary</span>
+        </button>
+
+        <div class="result-box" id="resultBox"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-left" data-i18n="footerLeft">
+      Built for EACO · Earth’s Best Coin · 地球价值系统 · Designed to be bilingual and future-focused.
+    </div>
+    <div class="footer-right">
+      <span class="footer-link" id="footerScrollTop" data-i18n="footerTop">
+        Back to top / 回到顶部
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Simple i18n dictionary
+    const i18n = {
+      en: {
+        brandTitle: "EACO · Earth’s Best Coin",
+        brandSubtitle: "Future careers & Web3 value system",
+        langLabel: "Language / 语言",
+        sectionMainTitle: "Future Careers · 未来职业方向",
+        sectionMainSubtitle: "Web3 · AI · RWA · DAO · Compliance",
+        sectionMainPill: "EACO Earth Value System",
+        heroTitle: "Design your path in future industries, connected to Earth EACO.",
+        heroSubtitle:
+          "Choose a direction, understand its value, and see how it links to EACO’s global community and real-world assets.",
+        heroMeta1: "2026–2035 · Web3 & AI growth decade",
+        heroMeta2: "Focus: RWA, compliance, DAO, green value",
+        heroMeta3: "EACO: Earth’s Best Coin · 地球价值货币",
+        btnSuggest: "Suggest a career for me",
+        btnReset: "Reset selection",
+        career1Title: "RWA Tokenization Specialist · 真实世界资产代币化专家",
+        career1Tagline:
+          "Turn real-world assets into on-chain value: carbon credits, land, community services.",
+        career1Meta1: "RWA · Real World Assets",
+        career1Meta2: "Law & Compliance",
+        career1Meta3: "Finance & Token Design",
+        career1Body:
+          "This role designs how real assets (carbon, land, education, community credits) become tokens on-chain. It requires understanding regulation, valuation, and how communities actually use these assets.",
+        career1Score: "Future value: ★★★★★ · Core pillar of Web3 growth",
+        career1Eaco:
+          "With <strong>EACO</strong>, you can build an RWA launchpad where communities tokenize their real assets and settle value using EACO. This makes EACO a bridge between Earth’s real value and digital finance.",
+        career2Title: "AI + Blockchain Engineer · AI区块链工程师",
+        career2Tagline:
+          "Build AI agents that understand on-chain data and automate DAO decisions.",
+        career2Meta1: "AI Agents",
+        career2Meta2: "Smart Contracts",
+        career2Meta3: "Data & Automation",
+        career2Body:
+          "This role connects AI models with blockchain data, creating agents that can analyze community behavior, propose governance changes, and automate value distribution.",
+        career2Score: "Future value: ★★★★★ · AI + Web3 is a top growth frontier",
+        career2Eaco:
+          "With <strong>EACO</strong>, you can design AI agents that manage DAO proposals, analyze EACO ecosystem health, and reward contributors automatically—turning EACO into an intelligent Earth value system.",
+        career3Title: "Web3 Compliance & Regulation Expert · Web3合规与监管专家",
+        career3Tagline:
+          "Make innovation legal, safe, and sustainable in North America and globally.",
+        career3Meta1: "SEC · FinCEN · MiCA",
+        career3Meta2: "Policy & Risk",
+        career3Meta3: "Legal Architecture",
+        career3Body:
+          "This role translates complex regulations into clear frameworks for Web3 projects. It is essential for any token or DAO that wants to operate in North America and beyond.",
+        career3Score: "Future value: ★★★★★ · Compliance is no longer optional",
+        career3Eaco:
+          "With <strong>EACO</strong>, you can build a North American compliance center, guiding community projects to launch legally, and positioning EACO as a “most compliant community value coin”.",
+        career4Title: "Smart Contract Developer · 智能合约开发者",
+        career4Tagline:
+          "Write the logic that runs DAOs, payments, and value flows.",
+        career4Meta1: "Solidity · Rust · Move",
+        career4Meta2: "Protocol Design",
+        career4Meta3: "Security Mindset",
+        career4Body:
+          "This role builds the core infrastructure of Web3: DAOs, payment systems, bridges, and governance contracts. It is highly technical and always in demand.",
+        career4Score: "Future value: ★★★★☆ · Core technical backbone",
+        career4Eaco:
+          "With <strong>EACO</strong>, you can design DAO contracts, value payment rails, and even EACO sidechains or Layer2—turning ideas into running code.",
+        career5Title: "Blockchain Security Auditor · 区块链安全审计员",
+        career5Tagline:
+          "Protect assets, DAOs, and bridges from exploits and failures.",
+        career5Meta1: "Security Review",
+        career5Meta2: "Threat Modeling",
+        career5Meta3: "Formal Verification",
+        career5Body:
+          "This role audits smart contracts, protocols, and infrastructure to prevent hacks. As value on-chain grows, security becomes a critical profession.",
+        career5Score: "Future value: ★★★★☆ · Essential for trust and stability",
+        career5Eaco:
+          "With <strong>EACO</strong>, you can build a security council that audits all EACO-related contracts and bridges, making EACO one of the safest community value systems.",
+        career6Title: "DAO Governance Designer · DAO治理设计师",
+        career6Tagline:
+          "Shape how communities make decisions and share value.",
+        career6Meta1: "Governance Models",
+        career6Meta2: "Incentive Design",
+        career6Meta3: "Community Psychology",
+        career6Body:
+          "This role designs voting systems, reward structures, and proposal flows that keep DAOs fair, active, and sustainable over time.",
+        career6Score:
+          "Future value: ★★★★☆ · Key for long-term community health",
+        career6Eaco:
+          "With <strong>EACO</strong>, you can design a global governance academy, teaching communities how to run DAOs and making EACO a reference model for Earth-scale community coordination.",
+        careerSelect: "Select this direction",
+        sectionRightTitle: "EACO · Earth Value System",
+        sectionRightSubtitle: "Token · Payment · DAO · Career Matching",
+        sectionRightPill: "Closed-loop: idea → choice → plan",
+        tokenTitle: "EACO Token (CA)",
+        tokenText:
+          "This is the contract address you shared. It represents the EACO token in the Web3 ecosystem and can be used as a unit of Earth value.",
+        tokenLinkHelper:
+          "Official link (as provided): orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+        statusReady:
+          "System ready · You can generate a personal plan now",
+        formTitle: "Build your EACO career plan",
+        formText:
+          "Fill in a few fields, select a career direction, and the app will generate a simple, bilingual summary of your future path connected to EACO.",
+        labelName: "Your name / 你的名字",
+        helperName: "Optional, used only to personalize the summary.",
+        labelRegion: "Region / 所在地区",
+        regionPlaceholder: "Select region / 选择地区",
+        regionNA: "North America · 北美",
+        regionEU: "Europe · 欧洲",
+        regionAsia: "Asia · 亚洲",
+        regionGlobal: "Global · 全球",
+        labelBackground: "Your current background / 当前背景",
+        helperBackground:
+          "Example: “Software developer”, “Student”, “Community organizer”, “Finance”.",
+        labelFocus: "What do you care about most? / 你最在乎什么？",
+        helperFocus:
+          "Example: “Environmental impact”, “Financial freedom”, “Community building”, “Innovation”.",
+        btnGenerate: "Generate my EACO career summary",
+        footerLeft:
+          "Built for EACO · Earth’s Best Coin · 地球价值系统 · Designed to be bilingual and future-focused.",
+        footerTop: "Back to top / 回到顶部",
+      },
+      zh: {
+        brandTitle: "EACO · 地球价值货币",
+        brandSubtitle: "未来职业方向与 Web3 价值系统",
+        langLabel: "Language / 语言",
+        sectionMainTitle: "未来职业方向 · Future Careers",
+        sectionMainSubtitle: "Web3 · AI · RWA · DAO · 合规",
+        sectionMainPill: "EACO 地球价值系统",
+        heroTitle: "在未来行业中设计你的道路，并与地球 EACO 相连接。",
+        heroSubtitle:
+          "选择一个方向，理解它的价值，并看到它如何与 EACO 全球社区和真实世界资产相连。",
+        heroMeta1: "2026–2035 · Web3 与 AI 的增长十年",
+        heroMeta2: "重点：RWA、合规、DAO、绿色价值",
+        heroMeta3: "EACO：Earth’s Best Coin · 地球价值货币",
+        btnSuggest: "为我推荐一个职业方向",
+        btnReset: "重置选择",
+        career1Title: "真实世界资产代币化专家 · RWA Tokenization Specialist",
+        career1Tagline:
+          "把真实世界资产转化为链上价值：碳信用、土地、社区服务。",
+        career1Meta1: "RWA · 真实世界资产",
+        career1Meta2: "法律与合规",
+        career1Meta3: "金融与代币设计",
+        career1Body:
+          "这个角色负责设计真实资产（碳、土地、教育、社区积分）如何在链上变成代币，需要理解监管、估值以及社区如何真正使用这些资产。",
+        career1Score: "未来价值：★★★★★ · Web3 增长的核心支柱",
+        career1Eaco:
+          "通过 <strong>EACO</strong>，你可以搭建一个 RWA 启动平台，让社区把自己的真实资产代币化，并用 EACO 结算价值，使 EACO 成为连接地球真实价值与数字金融的桥梁。",
+        career2Title: "AI区块链工程师 · AI + Blockchain Engineer",
+        career2Tagline:
+          "构建能够理解链上数据并自动执行 DAO 决策的 AI Agent。",
+        career2Meta1: "AI Agent",
+        career2Meta2: "智能合约",
+        career2Meta3: "数据与自动化",
+        career2Body:
+          "这个角色把 AI 模型与区块链数据连接起来，创建可以分析社区行为、提出治理建议并自动分配价值的智能代理。",
+        career2Score: "未来价值：★★★★★ · AI + Web3 是顶级增长前沿",
+        career2Eaco:
+          "通过 <strong>EACO</strong>，你可以设计管理 DAO 提案、分析 EACO 生态健康并自动奖励贡献者的 AI Agent，让 EACO 成为智能的地球价值系统。",
+        career3Title: "Web3合规与监管专家 · Web3 Compliance & Regulation Expert",
+        career3Tagline:
+          "让创新在北美及全球范围内合法、安全、可持续。",
+        career3Meta1: "SEC · FinCEN · MiCA",
+        career3Meta2: "政策与风险",
+        career3Meta3: "法律架构",
+        career3Body:
+          "这个角色把复杂的监管规则转化为清晰的 Web3 项目框架，对任何想在北美及全球运营的代币或 DAO 都至关重要。",
+        career3Score: "未来价值：★★★★★ · 合规不再是可选项",
+        career3Eaco:
+          "通过 <strong>EACO</strong>，你可以建立一个北美合规中心，为社区项目提供合法发行路径，让 EACO 成为“最合规的社区价值币”。",
+        career4Title: "智能合约开发者 · Smart Contract Developer",
+        career4Tagline:
+          "编写运行 DAO、支付和价值流动的核心逻辑。",
+        career4Meta1: "Solidity · Rust · Move",
+        career4Meta2: "协议设计",
+        career4Meta3: "安全思维",
+        career4Body:
+          "这个角色构建 Web3 的核心基础设施：DAO、支付系统、跨链桥和治理合约，技术要求高且长期有需求。",
+        career4Score: "未来价值：★★★★☆ · 技术骨干",
+        career4Eaco:
+          "通过 <strong>EACO</strong>，你可以设计 DAO 合约、价值支付系统，甚至 EACO 侧链或 Layer2，把想法变成真正运行的代码。",
+        career5Title: "区块链安全审计员 · Blockchain Security Auditor",
+        career5Tagline:
+          "保护资产、DAO 和跨链桥免受攻击和故障影响。",
+        career5Meta1: "安全审计",
+        career5Meta2: "威胁建模",
+        career5Meta3: "形式化验证",
+        career5Body:
+          "这个角色审计智能合约、协议和基础设施以防止黑客攻击，随着链上价值增长，安全成为关键职业。",
+        career5Score: "未来价值：★★★★☆ · 信任与稳定的基础",
+        career5Eaco:
+          "通过 <strong>EACO</strong>，你可以建立一个安全委员会，审计所有与 EACO 相关的合约和跨链桥，让 EACO 成为最安全的社区价值系统之一。",
+        career6Title: "DAO治理设计师 · DAO Governance Designer",
+        career6Tagline:
+          "塑造社区如何做决策以及如何分享价值。",
+        career6Meta1: "治理模型",
+        career6Meta2: "激励设计",
+        career6Meta3: "社区心理",
+        career6Body:
+          "这个角色设计投票系统、奖励结构和提案流程，让 DAO 在长期保持公平、活跃和可持续。",
+        career6Score: "未来价值：★★★★☆ · 长期社区健康的关键",
+        career6Eaco:
+          "通过 <strong>EACO</strong>，你可以设计一个全球治理学院，教社区如何运行 DAO，让 EACO 成为地球尺度社区协作的参考模型。",
+        careerSelect: "选择这个方向",
+        sectionRightTitle: "EACO · 地球价值系统",
+        sectionRightSubtitle: "代币 · 支付 · DAO · 职业匹配",
+        sectionRightPill: "闭环：想法 → 选择 → 计划",
+        tokenTitle: "EACO 代币（合约地址）",
+        tokenText:
+          "这是你提供的合约地址，它代表 Web3 生态中的 EACO 代币，可以作为地球价值的计量单位。",
+        tokenLinkHelper:
+          "你提供的链接：orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH",
+        statusReady: "系统已就绪 · 现在可以生成你的个人计划",
+        formTitle: "构建你的 EACO 职业规划",
+        formText:
+          "填写几个字段，选择一个职业方向，应用会生成一个与你的 EACO 发展相关的中英双语职业路径摘要。",
+        labelName: "你的名字 / Your name",
+        helperName: "可选，仅用于个性化摘要。",
+        labelRegion: "所在地区 / Region",
+        regionPlaceholder: "选择地区 / Select region",
+        regionNA: "北美 · North America",
+        regionEU: "欧洲 · Europe",
+        regionAsia: "亚洲 · Asia",
+        regionGlobal: "全球 · Global",
+        labelBackground: "当前背景 / Your current background",
+        helperBackground:
+          "示例：“软件开发”、“学生”、“社区组织者”、“金融”等。",
+        labelFocus: "你最在乎什么？ / What do you care about most?",
+        helperFocus:
+          "示例：“环境影响”、“财务自由”、“社区建设”、“创新”等。",
+        btnGenerate: "生成我的 EACO 职业摘要",
+        footerLeft:
+          "为 EACO · Earth’s Best Coin 构建 · 地球价值系统 · 设计为中英双语并面向未来。",
+        footerTop: "回到顶部 / Back to top",
+      },
+    };
+
+    let currentLang = "en";
+    let selectedCareer = null;
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const dict = i18n[lang];
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (!dict[key]) return;
+        if (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT") {
+          // For placeholders we used options; here we keep value as user input
+          return;
+        }
+        el.innerHTML = dict[key];
+      });
+    }
+
+    function setActiveLangButton(lang) {
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+      });
+    }
+
+    function getCareerLabel(career) {
+      const map = {
+        rwa: {
+          en: "RWA Tokenization Specialist",
+          zh: "真实世界资产代币化专家",
+        },
+        ai: {
+          en: "AI + Blockchain Engineer",
+          zh: "AI区块链工程师",
+        },
+        compliance: {
+          en: "Web3 Compliance & Regulation Expert",
+          zh: "Web3合规与监管专家",
+        },
+        contract: {
+          en: "Smart Contract Developer",
+          zh: "智能合约开发者",
+        },
+        security: {
+          en: "Blockchain Security Auditor",
+          zh: "区块链安全审计员",
+        },
+        dao: {
+          en: "DAO Governance Designer",
+          zh: "DAO治理设计师",
+        },
+      };
+      return map[career] ? map[career][currentLang] : "";
+    }
+
+    function getRegionLabel(region) {
+      const dict = i18n[currentLang];
+      const keyMap = {
+        na: "regionNA",
+        eu: "regionEU",
+        asia: "regionAsia",
+        global: "regionGlobal",
+      };
+      return dict[keyMap[region]] || "";
+    }
+
+    function generateSummary() {
+      const name = document.getElementById("inputName").value.trim();
+      const region = document.getElementById("selectRegion").value;
+      const background = document.getElementById("inputBackground").value.trim();
+      const focus = document.getElementById("inputFocus").value.trim();
+      const resultBox = document.getElementById("resultBox");
+
+      if (!selectedCareer) {
+        resultBox.innerHTML =
+          currentLang === "en"
+            ? "Please select at least one career direction above. / 请先在上方选择一个职业方向。"
+            : "请先在上方选择一个职业方向。 / Please select at least one career direction above.";
+        return;
+      }
+
+      const careerLabel = getCareerLabel(selectedCareer);
+      const regionLabel = region ? getRegionLabel(region) : "";
+
+      if (currentLang === "en") {
+        resultBox.innerHTML = `
+<strong>English summary:</strong><br/>
+${
+  name
+    ? `• Name: ${name}<br/>`
+    : ""
+}• Region: ${regionLabel || "Not specified"}<br/>
+• Selected direction: ${careerLabel}<br/>
+${
+  background
+    ? `• Current background: ${background}<br/>`
+    : ""
+}${
+  focus
+    ? `• What you care about: ${focus}<br/>`
+    : ""
+}
+<br/>
+Based on your choice, you are aligning yourself with a future-facing role in the EACO ecosystem.
+This direction can be combined with EACO as an Earth value system, connecting real communities,
+assets, and governance to Web3 infrastructure.<br/><br/>
+
+<strong>中文摘要：</strong><br/>
+${
+  name
+    ? `• 名字：${name}<br/>`
+    : ""
+}• 所在地区：${regionLabel || "未填写"}<br/>
+• 选择的方向：${careerLabel}<br/>
+${
+  background
+    ? `• 当前背景：${background}<br/>`
+    : ""
+}${
+  focus
+    ? `• 你在乎的重点：${focus}<br/>`
+    : ""
+}
+<br/>
+根据你的选择，你正在把自己定位在 EACO 生态中的一个面向未来的角色。
+这个方向可以与 EACO 的地球价值系统结合，把真实社区、真实资产和治理
+连接到 Web3 基础设施之上。`;
+      } else {
+        resultBox.innerHTML = `
+<strong>中文摘要：</strong><br/>
+${
+  name
+    ? `• 名字：${name}<br/>`
+    : ""
+}• 所在地区：${regionLabel || "未填写"}<br/>
+• 选择的方向：${careerLabel}<br/>
+${
+  background
+    ? `• 当前背景：${background}<br/>`
+    : ""
+}${
+  focus
+    ? `• 你在乎的重点：${focus}<br/>`
+    : ""
+}
+<br/>
+根据你的选择，你正在把自己定位在 EACO 生态中的一个面向未来的角色。
+这个方向可以与 EACO 的地球价值系统结合，把真实社区、真实资产和治理
+连接到 Web3 基础设施之上。<br/><br/>
+
+<strong>English summary:</strong><br/>
+${
+  name
+    ? `• Name: ${name}<br/>`
+    : ""
+}• Region: ${regionLabel || "Not specified"}<br/>
+• Selected direction: ${careerLabel}<br/>
+${
+  background
+    ? `• Current background: ${background}<br/>`
+    : ""
+}${
+  focus
+    ? `• What you care about: ${focus}<br/>`
+    : ""
+}
+<br/>
+Based on your choice, you are aligning yourself with a future-facing role in the EACO ecosystem.
+This direction can be combined with EACO as an Earth value system, connecting real communities,
+assets, and governance to Web3 infrastructure.`;
+      }
+    }
+
+    // Language buttons
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const lang = btn.getAttribute("data-lang");
+        setActiveLangButton(lang);
+        applyLanguage(lang);
+      });
+    });
+
+    // Career selection buttons
+    document.querySelectorAll("[data-career-select]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedCareer = btn.getAttribute("data-career-select");
+        document.querySelectorAll(".career-card").forEach((card) => {
+          card.style.borderColor =
+            card.getAttribute("data-career") === selectedCareer
+              ? "#38bdf8"
+              : "#1f2937";
+        });
+      });
+    });
+
+    // Suggest button: pick one randomly
+    document.getElementById("btnSuggest").addEventListener("click", () => {
+      const careers = ["rwa", "ai", "compliance", "contract", "security", "dao"];
+      selectedCareer = careers[Math.floor(Math.random() * careers.length)];
+      document.querySelectorAll(".career-card").forEach((card) => {
+        card.style.borderColor =
+          card.getAttribute("data-career") === selectedCareer
+            ? "#38bdf8"
+            : "#1f2937";
+      });
+      const resultBox = document.getElementById("resultBox");
+      resultBox.innerHTML =
+        currentLang === "en"
+          ? "A direction has been suggested for you: " +
+            getCareerLabel(selectedCareer) +
+            " · You can now fill the form and generate a summary."
+          : "系统为你推荐了一个方向：" +
+            getCareerLabel(selectedCareer) +
+            " · 你可以填写右侧表单并生成职业摘要。";
+    });
+
+    // Reset button
+    document.getElementById("btnReset").addEventListener("click", () => {
+      selectedCareer = null;
+      document.querySelectorAll(".career-card").forEach((card) => {
+        card.style.borderColor = "#1f2937";
+      });
+      document.getElementById("resultBox").innerHTML = "";
+      document.getElementById("inputName").value = "";
+      document.getElementById("selectRegion").value = "";
+      document.getElementById("inputBackground").value = "";
+      document.getElementById("inputFocus").value = "";
+    });
+
+    // Generate summary
+    document.getElementById("btnGenerate").addEventListener("click", () => {
+      generateSummary();
+    });
+
+    // Footer scroll to top
+    document
+      .getElementById("footerScrollTop")
+      .addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+    // Initial language
+    applyLanguage(currentLang);
+  </script>
+</body>
+</html>
