@@ -1,0 +1,1023 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="solar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Earth Solar Ledger · RWA Explorer</title>
+<meta name="description" content="Earth EACO photovoltaic ledger and Real World Asset (RWA) exploration - a single-page interactive web app by the global village.">
+<style>
+/* ============ Design Tokens ============ */
+:root{
+  --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-mono:"SF Mono",Consolas,"Cascadia Code","Liberation Mono",Menlo,monospace;
+  --radius:16px; --radius-sm:10px;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.14);
+  --nav-h:68px;
+}
+/* Theme: Solar (light, golden dawn) */
+html[data-theme="solar"]{
+  --bg:#faf6ec; --bg2:#f3ead6; --card:#fffdf6; --card2:#f6efdf;
+  --text:#2b2113; --muted:#7a6c50; --line:#e4d8bd;
+  --accent:#e0a82e; --accent-2:#d98a1f; --on-accent:#2b2113;
+  --green:#3f9d4f; --green-2:#2e7d3c; --on-green:#fff;
+  --blue:#3a7ca5; --red:#c0564b;
+  --hero-grad:radial-gradient(1200px 500px at 15% -10%,#f8dd9a66,transparent 60%),radial-gradient(900px 420px at 95% 0%,#f4c95d55,transparent 55%);
+}
+/* Theme: Ocean (dark, deep sea) */
+html[data-theme="ocean"]{
+  --bg:#0a1823; --bg2:#0e2233; --card:#102a3d; --card2:#0d2436;
+  --text:#e8f4fb; --muted:#8fb0c4; --line:#1d3c53;
+  --accent:#38bdf8; --accent-2:#0ea5e9; --on-accent:#06222f;
+  --green:#4ade80; --green-2:#22c55e; --on-green:#062a12;
+  --blue:#60a5fa; --red:#f87171;
+  --hero-grad:radial-gradient(1100px 480px at 18% -12%,#0ea5e933,transparent 60%),radial-gradient(800px 400px at 92% 2%,#22d3ee2e,transparent 55%);
+}
+/* Theme: Forest (dark, living green) */
+html[data-theme="forest"]{
+  --bg:#0d1a10; --bg2:#12241a; --card:#16301f; --card2:#12281a;
+  --text:#eef6e8; --muted:#9db893; --line:#2a4a33;
+  --accent:#84cc16; --accent-2:#65a30d; --on-accent:#15210a;
+  --green:#34d399; --green-2:#10b981; --on-green:#07241a;
+  --blue:#7dd3fc; --red:#fb7185;
+  --hero-grad:radial-gradient(1100px 480px at 15% -12%,#84cc1626,transparent 60%),radial-gradient(800px 400px at 92% 2%,#34d39922,transparent 55%);
+}
+/* ============ Base ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-ui); background:var(--bg); color:var(--text);
+  line-height:1.6; transition:background .35s ease,color .35s ease;
+  background-image:var(--hero-grad); background-attachment:fixed;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+img,svg{vertical-align:middle;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.container{max-width:1180px;margin:0 auto;padding:0 22px}
+section{padding:clamp(52px,8vw,96px) 0}
+.hidden{display:none!important}
+.mono{font-family:var(--font-mono)}
+/* ============ Header / Nav ============ */
+.app-header{
+  position:sticky;top:0;z-index:50;height:var(--nav-h);
+  background:color-mix(in srgb,var(--bg) 86%,transparent);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;gap:16px;height:var(--nav-h)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.08rem;letter-spacing:.2px}
+.brand .globe{width:34px;height:34px;flex:0 0 auto}
+.nav-links{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  color:var(--muted);font-weight:600;font-size:.92rem;padding:8px 12px;border-radius:999px;white-space:nowrap;transition:.2s;
+}
+.nav-links a:hover{color:var(--text);background:color-mix(in srgb,var(--accent) 14%,transparent);text-decoration:none}
+.controls{display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.lang-switch,.theme-switch{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang-switch button,.theme-switch button{
+  font-size:.78rem;font-weight:700;padding:5px 9px;border-radius:999px;color:var(--muted);transition:.18s;line-height:1.1;
+}
+.lang-switch button.active,.theme-switch button.active{background:var(--accent);color:var(--on-accent)}
+.theme-btn{width:26px;height:26px;border-radius:50%;padding:0;position:relative;border:2px solid transparent}
+.theme-btn.active{border-color:var(--accent)}
+.theme-btn .dot{position:absolute;inset:4px;border-radius:50%}
+/* ============ Hero ============ */
+.hero{padding:clamp(56px,9vw,110px) 0 clamp(40px,6vw,70px);position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;letter-spacing:1.6px;
+  text-transform:uppercase;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
+  padding:6px 14px;border-radius:999px;background:color-mix(in srgb,var(--accent) 10%,transparent);
+}
+h1{font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.12;font-weight:900;letter-spacing:-.5px;margin:18px 0 14px}
+.hero-sub{font-size:clamp(1rem,1.6vw,1.18rem);color:var(--muted);max-width:34em}
+.hero-cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.96rem;padding:13px 24px;border-radius:999px;transition:.2s;
+}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{filter:brightness(1.07);transform:translateY(-1px);text-decoration:none}
+.btn-ghost{border:1.5px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.hero-visual{display:flex;justify-content:center}
+.orbit-wrap{width:min(100%,420px);aspect-ratio:1/1;position:relative;display:grid;place-items:center}
+.sun-core{
+  width:34%;aspect-ratio:1/1;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#ffd97a,#e0861e 72%);
+  box-shadow:0 0 60px 12px color-mix(in srgb,var(--accent) 55%,transparent);
+  display:grid;place-items:center;font-weight:900;font-size:1.7rem;color:#5b3a06;
+}
+.orbit{position:absolute;border:1.5px dashed color-mix(in srgb,var(--accent) 55%,transparent);border-radius:50%}
+.orbit.o1{inset:6%;animation:spin 26s linear infinite}
+.orbit.o2{inset:20%;animation:spin 40s linear infinite reverse}
+.sat{position:absolute;top:-9px;left:50%;width:16px;height:16px;border-radius:50%;background:var(--green);transform:translateX(-50%)}
+.sat.s2{background:var(--blue)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(34px,5vw,56px)}
+.stat-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.stat-card .num{font-size:clamp(1.3rem,2.4vw,1.8rem);font-weight:900;color:var(--accent);font-family:var(--font-mono)}
+.stat-card .lbl{font-size:.82rem;color:var(--muted);margin-top:2px}
+/* ============ Section heading ============ */
+.sec-tag{font-size:.74rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-.3px;margin:8px 0 10px}
+.sec-desc{color:var(--muted);max-width:46em;margin-bottom:30px}
+.section-head{max-width:760px}
+/* ============ Ledger ============ */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:.82rem;font-weight:700;padding:7px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);transition:.18s}
+.chip.active{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn-add{margin-left:auto;background:var(--green);color:var(--on-green);padding:9px 18px;font-size:.86rem}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.chart-box{padding:22px 22px 10px}
+.chart-title{font-weight:800;font-size:1.02rem;margin-bottom:4px}
+.chart-cap{font-size:.78rem;color:var(--muted);margin-bottom:14px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{font-size:.74rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:13px 16px;border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent);font-size:.92rem;white-space:nowrap}
+tbody tr:hover{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.tag{display:inline-block;font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:999px;letter-spacing:.3px}
+.tag.run{background:color-mix(in srgb,var(--green) 16%,transparent);color:var(--green-2)}
+.tag.grid{background:color-mix(in srgb,var(--blue) 16%,transparent);color:var(--blue)}
+.tag.demo{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-2)}
+.btn-del{color:var(--red);font-weight:700;font-size:.8rem;opacity:.85}
+.btn-del:hover{opacity:1;text-decoration:underline}
+.empty{text-align:center;color:var(--muted);padding:34px 16px}
+/* ============ Form (inline add) ============ */
+.add-form{display:grid;grid-template-columns:1.3fr 1fr .9fr 1.2fr .7fr auto;gap:10px;padding:16px 18px;background:var(--card2);border:1px solid var(--line);border-top:0}
+.add-form input,.add-form select{
+  font-family:inherit;font-size:.9rem;color:var(--text);background:var(--bg);
+  border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;min-width:0;outline:none;
+}
+.add-form input:focus,.add-form select:focus{border-color:var(--accent)}
+.add-form .btn{justify-content:center}
+/* ============ RWA ============ */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;position:relative}
+.step .n{font-family:var(--font-mono);font-weight:900;font-size:1.1rem;color:var(--accent)}
+.step h4{font-size:1rem;margin:10px 0 6px}
+.step p{font-size:.86rem;color:var(--muted)}
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 8px}
+.flow-node{flex:1;min-width:120px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;text-align:center;font-weight:700;font-size:.86rem}
+.flow-arrow{color:var(--accent);font-weight:900}
+.flow-note{display:flex;gap:10px;align-items:flex-start;background:color-mix(in srgb,var(--accent) 9%,transparent);border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);border-radius:var(--radius);padding:16px 18px;margin-top:18px}
+.flow-note b{color:var(--accent-2)}
+/* ============ About EACO ============ */
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card-e{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.card-e .big{font-family:var(--font-mono);font-size:2rem;font-weight:900;color:var(--accent)}
+.card-e h4{font-size:1rem;margin:10px 0 4px}
+.card-e p{font-size:.85rem;color:var(--muted)}
+.token-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-top:26px;box-shadow:var(--shadow)}
+.contract-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.contract-addr{
+  font-family:var(--font-mono);font-size:.82rem;background:var(--bg2);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:11px 14px;word-break:break-all;flex:1;min-width:220px;
+}
+.btn-copy{border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 16px;font-weight:700;font-size:.84rem;color:var(--accent)}
+.btn-copy:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.badge{font-size:.76rem;font-weight:700;padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.cross-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.cross{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px;text-align:center}
+.cross .nm{font-weight:800;font-family:var(--font-mono)}
+.cross .ds{font-size:.8rem;color:var(--muted);margin-top:4px}
+/* ============ Community ============ */
+.links-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px}
+.link-card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;transition:.2s;color:var(--text)}
+.link-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow);text-decoration:none}
+.link-card .ic{width:42px;height:42px;flex:0 0 auto;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);font-size:1.3rem}
+.link-card .tt{font-weight:800;font-size:.95rem}
+.link-card .ss{font-size:.8rem;color:var(--muted);word-break:break-all}
+/* ============ Notice / Footer ============ */
+.notice{display:flex;gap:12px;background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);border-radius:var(--radius);padding:16px 18px;font-size:.86rem;margin-top:34px}
+.notice b{color:var(--accent-2)}
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:34px 0 44px;margin-top:10px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.foot .copy{font-size:.82rem;color:var(--muted);max-width:48em}
+.foot .made{font-size:.78rem;color:var(--muted);text-align:right}
+/* ============ Toast ============ */
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+  background:var(--text);color:var(--bg);font-weight:700;font-size:.88rem;
+  padding:12px 22px;border-radius:999px;opacity:0;pointer-events:none;transition:.28s;z-index:99;
+  box-shadow:var(--shadow-lg);max-width:min(92vw,520px);text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* ============ RTL ============ */
+html[dir="rtl"] body{direction:rtl}
+html[dir="rtl"] .btn-add{margin-left:0;margin-right:auto}
+html[dir="rtl"] .hero-stats,.html[dir="rtl"] .stat-card{direction:ltr}
+/* ============ Responsive ============ */
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-visual{order:-1}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .four{grid-template-columns:repeat(2,1fr)}
+  .add-form{grid-template-columns:1fr 1fr}
+}
+@media (max-width:768px){
+  .nav{flex-wrap:wrap;height:auto;padding:8px 0 10px;gap:10px}
+  .app-header{position:relative}
+  .nav-links{order:3;width:100%;justify-content:flex-start}
+  .brand{order:1}
+  .controls{order:2;margin-left:auto}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .cross-row{grid-template-columns:1fr}
+  .links-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .steps{grid-template-columns:1fr}
+  .four{grid-template-columns:1fr}
+  .hero-cta .btn{width:100%;justify-content:center}
+  .lang-switch{max-width:100%;overflow-x:auto;flex-wrap:nowrap}
+  .add-form{grid-template-columns:1fr}
+  .container{padding:0 16px}
+}
+@media (max-width:390px){
+  .hero{scroll-margin-top:8px}
+  .nav-links a{padding:7px 10px;font-size:.86rem}
+  .stat-card{padding:14px}
+  .contract-addr{font-size:.74rem}
+}
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head><body>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===== Header ===== -->
+<header class="app-header">
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="EACO Earth home">
+      <svg class="globe" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" stroke="var(--accent)" stroke-width="2.2"/>
+        <ellipse cx="20" cy="20" rx="8.5" ry="17" stroke="var(--accent)" stroke-width="1.4" opacity=".55"/>
+        <path d="M4 20h32M8 12c4 4 8 12 0 16M32 12c-4 4-8 12 0 16" stroke="var(--accent)" stroke-width="1.2" opacity=".5"/>
+        <circle cx="26" cy="15" r="2.4" fill="var(--green)"/>
+      </svg>
+      <span id="nav-brand">EACO Earth</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#ledger" data-i18n="nav_ledger">Ledger</a>
+      <a href="#rwa" data-i18n="nav_rwa">RWA</a>
+      <a href="#about" data-i18n="nav_about">About EACO</a>
+      <a href="#community" data-i18n="nav_community">Community</a>
+    </nav>
+    <div class="controls">
+      <div class="theme-switch" role="group" aria-label="Theme">
+        <button class="theme-btn active" data-theme-set="solar" aria-label="Solar theme" title="Solar"><span class="dot" style="background:linear-gradient(135deg,#fde68a,#f59e0b)"></span></button>
+        <button class="theme-btn" data-theme-set="ocean" aria-label="Ocean theme" title="Ocean"><span class="dot" style="background:linear-gradient(135deg,#22d3ee,#0ea5e9)"></span></button>
+        <button class="theme-btn" data-theme-set="forest" aria-label="Forest theme" title="Forest"><span class="dot" style="background:linear-gradient(135deg,#a3e635,#15803d)"></span></button>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="zh">中文</button>
+        <button data-lang="es">ES</button>
+        <button data-lang="ar">عربي</button>
+        <button data-lang="fr">FR</button>
+        <button data-lang="ru">RU</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ===== Hero ===== -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">EACO × Solar × RWA</span>
+        <h1 data-i18n="hero_title">Earth Solar Ledger &amp; RWA Explorer</h1>
+        <p class="hero-sub" data-i18n="hero_desc">EACO, Earth's Best Coin, brings photovoltaic assets onto an open, verifiable ledger - exploring how real-world solar energy can become transparent, shareable and auditable for every villager of the global village.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#ledger" data-i18n="cta_ledger">Explore the Ledger</a>
+          <a class="btn btn-ghost" href="#rwa" data-i18n="cta_rwa">How RWA works</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit-wrap">
+          <div class="orbit o1"><span class="sat"></span></div>
+          <div class="orbit o2"><span class="sat s2"></span></div>
+          <div class="sun-core">EACO</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="num" data-i18n="stat_plants">128</div><div class="lbl" data-i18n="stat_plants_lbl">Solar plants on ledger</div></div>
+      <div class="stat-card"><div class="num">384.6 <small>MW</small></div><div class="lbl" data-i18n="stat_cap_lbl">Total installed capacity</div></div>
+      <div class="stat-card"><div class="num" data-i18n="stat_energy">512,400 <small>MWh</small></div><div class="lbl" data-i18n="stat_energy_lbl">Annual green energy logged</div></div>
+      <div class="stat-card"><div class="num" data-i18n="stat_carbon">326,140 <small>t</small></div><div class="lbl" data-i18n="stat_carbon_lbl">CO₂ avoided this year</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Ledger ===== -->
+<section id="ledger">
+  <div class="container">
+    <div class="section-head">
+      <span class="sec-tag" data-i18n="ledger_tag">01 · Solar Ledger</span>
+      <h2 data-i18n="ledger_title">The Photovoltaic Ledger</h2>
+      <p class="sec-desc" data-i18n="ledger_desc">In this exploration demo, every solar plant is a verifiable record: location, capacity, real energy output and carbon avoided. The ledger is open to all - add, filter and inspect records to see how on-chain accounting could work.</p>
+    </div>
+
+    <div class="panel">
+      <div class="chart-box">
+        <div class="chart-title" data-i18n="chart_title">Monthly generation trend (MWh)</div>
+        <div class="chart-cap" data-i18n="chart_cap">Last 12 months · exploration demo data</div>
+        <div id="chart" style="width:100%;height:230px" role="img" aria-label="Monthly generation bar chart"></div>
+      </div>
+      <div class="toolbar">
+        <div class="chips" id="filters">
+          <button class="chip active" data-filter="all" data-i18n="f_all">All</button>
+          <button class="chip" data-filter="running" data-i18n="f_running">Operating</button>
+          <button class="chip" data-filter="grid" data-i18n="f_grid">Grid-connected</button>
+        </div>
+        <button class="btn btn-add" id="btn-show-add" data-i18n="btn_add_plant">+ Add Plant</button>
+      </div>
+      <div class="add-form hidden" id="add-form">
+        <input id="in-name" data-ph="ph_name" placeholder="Plant name" aria-label="Plant name">
+        <input id="in-cap" type="number" min="0" step="0.1" data-ph="ph_cap" placeholder="Capacity (MW)" aria-label="Capacity">
+        <input id="in-out" type="number" min="0" step="0.1" data-ph="ph_out" placeholder="Output (MWh)" aria-label="Output">
+        <input id="in-co2" type="number" min="0" step="0.1" data-ph="ph_co2" placeholder="CO₂ avoided (t)" aria-label="CO2">
+        <select id="in-status" aria-label="Status">
+          <option value="running" data-i18n="opt_running">Operating</option>
+          <option value="grid" data-i18n="opt_grid">Grid-connected</option>
+        </select>
+        <button class="btn btn-primary" id="btn-save" data-i18n="btn_save">Save</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th data-i18n="th_plant">Plant</th>
+            <th data-i18n="th_cap">Capacity (MW)</th>
+            <th data-i18n="th_out">Output (MWh)</th>
+            <th data-i18n="th_co2">CO₂ avoided (t)</th>
+            <th data-i18n="th_status">Status</th>
+            <th data-i18n="th_action">Action</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="empty hidden" id="empty-row" data-i18n="empty_txt">No records match this filter.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RWA ===== -->
+<section id="rwa" style="background:color-mix(in srgb,var(--bg2) 60%,transparent)">
+  <div class="container">
+    <div class="section-head">
+      <span class="sec-tag" data-i18n="rwa_tag">02 · RWA Explorer</span>
+      <h2 data-i18n="rwa_title">From Sunlight to Verifiable Value</h2>
+      <p class="sec-desc" data-i18n="rwa_desc">Real World Assets (RWA) bring physical value on-chain. Solar plants are a natural fit: their output is measurable, continuous and planet-positive. This explorer visualises how a photovoltaic asset could travel from the field to the ledger.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><h4 data-i18n="s1t">Token &amp; Asset Mapping</h4><p data-i18n="s1d">A solar plant's identity, capacity and title are recorded as transparent digital metadata - no spoofing, no double counting.</p></div>
+      <div class="step"><span class="n">02</span><h4 data-i18n="s2t">Data Oracle Connection</h4><p data-i18n="s2d">Weather, metered energy and performance data are fed through oracles - the bridge between physical farms and the ledger.</p></div>
+      <div class="step"><span class="n">03</span><h4 data-i18n="s3t">Verifiable Accounting</h4><p data-i18n="s3d">Every MWh and every tonne of avoided CO₂ becomes a verifiable entry, auditable by anyone, anywhere on Earth.</p></div>
+      <div class="step"><span class="n">04</span><h4 data-i18n="s4t">Global Value Flow</h4><p data-i18n="s4d">Green energy value can flow transparently across borders, linking Earth's resources with Earth's communities.</p></div>
+    </div>
+    <div class="flow">
+      <div class="flow-node" data-i18n="f_node1">Sunlight</div><span class="flow-arrow">→</span>
+      <div class="flow-node" data-i18n="f_node2">Solar Plant</div><span class="flow-arrow">→</span>
+      <div class="flow-node" data-i18n="f_node3">Meter + Oracle</div><span class="flow-arrow">→</span>
+      <div class="flow-node" data-i18n="f_node4">Ledger Entry</div><span class="flow-arrow">→</span>
+      <div class="flow-node" data-i18n="f_node5">Community Value</div>
+    </div>
+    <div class="flow-note">
+      <span style="font-size:1.4rem" aria-hidden="true">🌍</span>
+      <p><b data-i18n="oracle_hl">EACO = Earth Asset Civilization Oracle.</b> <span data-i18n="oracle_txt">In this exploration, EACO is imagined as the civilisation-level oracle that helps Earth's real assets - starting with sunlight - speak truthfully on-chain for the benefit of the global village.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About EACO ===== -->
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <span class="sec-tag" data-i18n="about_tag">03 · About EACO</span>
+      <h2 data-i18n="about_title">Earth's Best Coin</h2>
+      <p class="sec-desc" data-i18n="about_desc">EACO (中文名「地球」) is a Solana-native SPL token. Its name encodes a philosophy: each letter of E-A-C-O stands for a force that makes Earth a better home.</p>
+    </div>
+    <div class="four">
+      <div class="card-e"><div class="big">E</div><h4 data-i18n="e_t">Energy</h4><p data-i18n="e_d">Positive energy that powers action, ideas and communities.</p></div>
+      <div class="card-e"><div class="big">A</div><h4 data-i18n="a_t">Attitude</h4><p data-i18n="a_d">A constructive mindset that turns challenges into progress.</p></div>
+      <div class="card-e"><div class="big">C</div><h4 data-i18n="c_t">Cooperation</h4><p data-i18n="c_d">Global collaboration - the village works better together.</p></div>
+      <div class="card-e"><div class="big">O</div><h4 data-i18n="o_t">Optimization</h4><p data-i18n="o_d">Continuous optimization of individuals, systems and civilisation.</p></div>
+    </div>
+    <div class="token-card">
+      <div class="chart-title" data-i18n="token_title">Token identity (public facts)</div>
+      <div class="chart-cap" data-i18n="token_cap">As disclosed in public project documentation.</div>
+      <div class="badge-row">
+        <span class="badge">Solana · SPL</span>
+        <span class="badge" data-i18n="badge_e">EACO is Earth's best friend</span>
+        <span class="badge" data-i18n="badge_r">AI + RWA + Web3 open currency</span>
+      </div>
+      <div class="contract-row">
+        <code class="contract-addr" id="contract-addr">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+        <button class="btn-copy" id="btn-copy" data-i18n="btn_copy">Copy address</button>
+      </div>
+      <div class="cross-row">
+        <div class="cross"><div class="nm">BNB Chain</div><div class="ds" data-i18n="x_bnb">Cross-chain exploration</div></div>
+        <div class="cross"><div class="nm">Dogecoin</div><div class="ds" data-i18n="x_doge">Cross-chain exploration</div></div>
+        <div class="cross"><div class="nm">Earthcoin</div><div class="ds" data-i18n="x_eac">Earthcoin (EAC) ecosystem</div></div>
+      </div>
+    </div>
+    <div class="notice">
+      <span style="font-size:1.3rem" aria-hidden="true">📘</span>
+      <p data-i18n="notice_txt"><b>Exploration only.</b> This page is an educational exploration of concepts and public project information. The ledger and figures are demonstration data. Nothing here is financial advice, an offer, or a solicitation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Community ===== -->
+<section id="community" style="background:color-mix(in srgb,var(--bg2) 60%,transparent)">
+  <div class="container">
+    <div class="section-head">
+      <span class="sec-tag" data-i18n="comm_tag">04 · Community</span>
+      <h2 data-i18n="comm_title">Join the Global Village</h2>
+      <p class="sec-desc" data-i18n="comm_desc">Official public channels of the EACO project - code, community and on-chain records.</p>
+    </div>
+    <div class="links-grid">
+      <a class="link-card" href="https://github.com/eaco-group/eur-eaco" target="_blank" rel="noopener">
+        <span class="ic" aria-hidden="true">🐙</span>
+        <span><span class="tt" data-i18n="lk_gh">GitHub Repository</span><br><span class="ss">github.com/eaco-group/eur-eaco</span></span>
+      </a>
+      <a class="link-card" href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+        <span class="ic" aria-hidden="true">🔍</span>
+        <span><span class="tt" data-i18n="lk_solscan">On-chain Record (Solscan)</span><br><span class="ss">solscan.io/token/…DHRH</span></span>
+      </a>
+      <a class="link-card" href="https://x.com/eacocc" target="_blank" rel="noopener">
+        <span class="ic" aria-hidden="true">𝕏</span>
+        <span><span class="tt" data-i18n="lk_x">X (Twitter)</span><br><span class="ss">x.com/eacocc</span></span>
+      </a>
+      <a class="link-card" href="https://t.me/e_eacocc" target="_blank" rel="noopener">
+        <span class="ic" aria-hidden="true">💬</span>
+        <span><span class="tt" data-i18n="lk_tg">Telegram · English</span><br><span class="ss">t.me/e_eacocc</span></span>
+      </a>
+      <a class="link-card" href="https://t.me/eacoespanish" target="_blank" rel="noopener">
+        <span class="ic" aria-hidden="true">💬</span>
+        <span><span class="tt" data-i18n="lk_tg_es">Telegram · Español</span><br><span class="ss">t.me/eacoespanish</span></span>
+      </a>
+      <a class="link-card" href="#home">
+        <span class="ic" aria-hidden="true">🌱</span>
+        <span><span class="tt" data-i18n="lk_why">Why solar + ledger?</span><br><span class="ss" data-i18n="lk_why_sub">Because sunlight belongs to everyone.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div class="copy">
+      <p data-i18n="foot_txt">EACO Earth Solar Ledger · RWA Explorer — an open educational exploration built for the global village. EACO = Earth's Best Coin. Not financial advice.</p>
+    </div>
+    <div class="made">
+      <p data-i18n="foot_made">Made with ⚡ for Earth · 6 languages · 3 themes</p>
+      <p>© Earth EACO · 2026</p>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html><script>
+"use strict";
+/* ================= Data (inline, static) ================= */
+var LEDGER = [
+  {name:"Ganges Community Farm", cap:38.2, out:52410, co2:33260, status:"running"},
+  {name:"Sahara Village Array", cap:51.6, out:70340, co2:44650, status:"grid"},
+  {name:"Andes Plateau Solar", cap:27.4, out:39110, co2:24820, status:"running"},
+  {name:"Danube Riverside Plant", cap:44.9, out:61220, co2:38870, status:"grid"},
+  {name:"Mekong Delta Sunfarm", cap:33.1, out:46750, co2:29680, status:"running"},
+  {name:"Sahara Village Array II", cap:18.7, out:25140, co2:15960, status:"running"},
+  {name:"Amazon Edge Reflector", cap:22.3, out:30180, co2:19160, status:"grid"},
+  {name:"Gobi Horizon Station", cap:63.5, out:88730, co2:56340, status:"running"},
+  {name:"Nile Valley Harvest", cap:29.8, out:41260, co2:26190, status:"grid"},
+  {name:"Kalahari Node Nine", cap:12.4, out:16920, co2:10740, status:"running"}
+];
+var MONTHLY = {
+  en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+  zh:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+  es:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+  ar:["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"],
+  fr:["Jan","Fév","Mar","Avr","Mai","Juin","Juil","Août","Sep","Oct","Nov","Déc"],
+  ru:["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"]
+};
+var GEN = [40200,41800,43100,45020,47210,48900,47880,46210,44500,42880,41300,40500];
+/* ================= i18n ================= */
+var I18N = {
+  en:{
+    nav_brand:"EACO Earth",
+    nav_ledger:"Ledger", nav_rwa:"RWA", nav_about:"About EACO", nav_community:"Community",
+    hero_title:"Earth Solar Ledger &amp; RWA Explorer",
+    hero_desc:"EACO, Earth's Best Coin, brings photovoltaic assets onto an open, verifiable ledger - exploring how real-world solar energy can become transparent, shareable and auditable for every villager of the global village.",
+    cta_ledger:"Explore the Ledger", cta_rwa:"How RWA works",
+    stat_plants:"128", stat_plants_lbl:"Solar plants on ledger",
+    stat_cap_lbl:"Total installed capacity", stat_energy:"512,400 <small>MWh</small>",
+    stat_energy_lbl:"Annual green energy logged", stat_carbon:"326,140 <small>t</small>",
+    stat_carbon_lbl:"CO₂ avoided this year",
+    ledger_tag:"01 · Solar Ledger",
+    ledger_title:"The Photovoltaic Ledger",
+    ledger_desc:"In this exploration demo, every solar plant is a verifiable record: location, capacity, real energy output and carbon avoided. The ledger is open to all - add, filter and inspect records to see how on-chain accounting could work.",
+    chart_title:"Monthly generation trend (MWh)", chart_cap:"Last 12 months · exploration demo data",
+    f_all:"All", f_running:"Operating", f_grid:"Grid-connected",
+    btn_add_plant:"+ Add Plant", btn_save:"Save",
+    ph_name:"Plant name", ph_cap:"Capacity (MW)", ph_out:"Output (MWh)", ph_co2:"CO₂ avoided (t)",
+    opt_running:"Operating", opt_grid:"Grid-connected",
+    th_plant:"Plant", th_cap:"Capacity (MW)", th_out:"Output (MWh)", th_co2:"CO₂ avoided (t)", th_status:"Status", th_action:"Action",
+    tag_running:"Operating", tag_grid:"Grid-connected",
+    btn_del:"Remove", empty_txt:"No records match this filter.",
+    toast_added:"Record added to the in-memory ledger.", toast_del:"Record removed.", toast_copied:"Contract address copied - select the text and copy.",
+    rwa_tag:"02 · RWA Explorer",
+    rwa_title:"From Sunlight to Verifiable Value",
+    rwa_desc:"Real World Assets (RWA) bring physical value on-chain. Solar plants are a natural fit: their output is measurable, continuous and planet-positive. This explorer visualises how a photovoltaic asset could travel from the field to the ledger.",
+    s1t:"Token &amp; Asset Mapping", s1d:"A solar plant's identity, capacity and title are recorded as transparent digital metadata - no spoofing, no double counting.",
+    s2t:"Data Oracle Connection", s2d:"Weather, metered energy and performance data are fed through oracles - the bridge between physical farms and the ledger.",
+    s3t:"Verifiable Accounting", s3d:"Every MWh and every tonne of avoided CO₂ becomes a verifiable entry, auditable by anyone, anywhere on Earth.",
+    s4t:"Global Value Flow", s4d:"Green energy value can flow transparently across borders, linking Earth's resources with Earth's communities.",
+    f_node1:"Sunlight", f_node2:"Solar Plant", f_node3:"Meter + Oracle", f_node4:"Ledger Entry", f_node5:"Community Value",
+    oracle_hl:"EACO = Earth Asset Civilization Oracle. ", oracle_txt:"In this exploration, EACO is imagined as the civilisation-level oracle that helps Earth's real assets - starting with sunlight - speak truthfully on-chain for the benefit of the global village.",
+    about_tag:"03 · About EACO",
+    about_title:"Earth's Best Coin",
+    about_desc:"EACO (中文名「地球」) is a Solana-native SPL token. Its name encodes a philosophy: each letter of E-A-C-O stands for a force that makes Earth a better home.",
+    e_t:"Energy", e_d:"Positive energy that powers action, ideas and communities.",
+    a_t:"Attitude", a_d:"A constructive mindset that turns challenges into progress.",
+    c_t:"Cooperation", c_d:"Global collaboration - the village works better together.",
+    o_t:"Optimization", o_d:"Continuous optimization of individuals, systems and civilisation.",
+    token_title:"Token identity (public facts)", token_cap:"As disclosed in public project documentation.",
+    badge_e:"EACO is Earth's best friend", badge_r:"AI + RWA + Web3 open currency",
+    btn_copy:"Copy address",
+    x_bnb:"Cross-chain exploration", x_doge:"Cross-chain exploration", x_eac:"Earthcoin (EAC) ecosystem",
+    notice_txt:"<b>Exploration only.</b> This page is an educational exploration of concepts and public project information. The ledger and figures are demonstration data. Nothing here is financial advice, an offer, or a solicitation.",
+    comm_tag:"04 · Community",
+    comm_title:"Join the Global Village",
+    comm_desc:"Official public channels of the EACO project - code, community and on-chain records.",
+    lk_gh:"GitHub Repository", lk_solscan:"On-chain Record (Solscan)", lk_x:"X (Twitter)",
+    lk_tg:"Telegram · English", lk_tg_es:"Telegram · Español",
+    lk_why:"Why solar + ledger?", lk_why_sub:"Because sunlight belongs to everyone.",
+    foot_txt:"EACO Earth Solar Ledger · RWA Explorer — an open educational exploration built for the global village. EACO = Earth's Best Coin. Not financial advice.",
+    foot_made:"Made with ⚡ for Earth · 6 languages · 3 themes"
+  },
+  zh:{
+    nav_brand:"EACO 地球",
+    nav_ledger:"光伏账本", nav_rwa:"RWA 探索", nav_about:"地球 EACO", nav_community:"社区",
+    hero_title:"地球光伏账本 · RWA 探索中心",
+    hero_desc:"EACO，地球最好的代币，让光伏资产登上开放可验证的账本——探索真实世界的太阳能如何对地球村每一位村民透明、可共享、可审计。",
+    cta_ledger:"探索光伏账本", cta_rwa:"了解 RWA 机制",
+    stat_plants:"128", stat_plants_lbl:"账本上的光伏电站",
+    stat_cap_lbl:"累计装机容量", stat_energy:"512,400 <small>兆瓦时</small>",
+    stat_energy_lbl:"年度绿色发电记录", stat_carbon:"326,140 <small>吨</small>",
+    stat_carbon_lbl:"今年避免的碳排放",
+    ledger_tag:"01 · 光伏账本",
+    ledger_title:"光伏资产账本",
+    ledger_desc:"在这个探索演示中，每座光伏电站都是一条可验证的记录：地点、容量、真实发电量与碳减排。账本向所有人开放——增删、筛选、查验，看看链上记账如何运转。",
+    chart_title:"月度发电趋势（兆瓦时）", chart_cap:"最近 12 个月 · 探索演示数据",
+    f_all:"全部", f_running:"运行中", f_grid:"已并网",
+    btn_add_plant:"+ 添加电站", btn_save:"保存",
+    ph_name:"电站名称", ph_cap:"容量（兆瓦）", ph_out:"发电量（兆瓦时）", ph_co2:"碳减排（吨）",
+    opt_running:"运行中", opt_grid:"已并网",
+    th_plant:"电站", th_cap:"容量（MW）", th_out:"发电量（MWh）", th_co2:"碳减排（吨）", th_status:"状态", th_action:"操作",
+    tag_running:"运行中", tag_grid:"已并网",
+    btn_del:"移除", empty_txt:"没有符合筛选条件的记录。",
+    toast_added:"记录已加入内存账本。", toast_del:"记录已移除。", toast_copied:"合约地址已就绪——请选中文本并复制。",
+    rwa_tag:"02 · RWA 探索",
+    rwa_title:"从阳光到可验证的价值",
+    rwa_desc:"真实世界资产（RWA）把实体价值带上链。光伏电站是天然契合的标的：发电量可测量、可持续、对地球友好。本探索中心展示光伏资产如何从电站走进账本。",
+    s1t:"资产映射", s1d:"电站的身份、容量与权益被记录为透明的数字元数据——无法伪造，不会重复计数。",
+    s2t:"数据预言机", s2d:"天气、电表与运行数据经由预言机上链——连接实体电站与链上账本的桥梁。",
+    s3t:"可验证记账", s3d:"每 1 兆瓦时、每 1 吨避免的碳排放都成为可验证条目，任何人在任何地方都能审计。",
+    s4t:"全球价值流动", s4d:"绿色能源价值可跨境透明流动，把地球的资源与地球的社区连接起来。",
+    f_node1:"阳光", f_node2:"光伏电站", f_node3:"电表 + 预言机", f_node4:"账本条目", f_node5:"社区价值",
+    oracle_hl:"EACO = 地球资产文明预言机。", oracle_txt:"在本探索中，EACO 被构想为文明级预言机，帮助地球的真实资产——从阳光开始——在链上如实发声，造福地球村。",
+    about_tag:"03 · 认识 EACO",
+    about_title:"地球最好的代币",
+    about_desc:"EACO（中文名「地球」）是 Solana 原生的 SPL 代币。名字里藏着一套哲学：E-A-C-O 每个字母都代表一股让地球更美好的力量。",
+    e_t:"能量 Energy", e_d:"推动行动、创意与社区的正能量。",
+    a_t:"心态 Attitude", a_d:"把挑战变成进步的建设性心态。",
+    c_t:"协作 Cooperation", c_d:"全球协作——地球村一起会更好。",
+    o_t:"优化 Optimization", o_d:"对个人、系统与文明的持续优化。",
+    token_title:"代币身份（公开事实）", token_cap:"依据项目公开文档披露。",
+    badge_e:"EACO is Earth's best friend", badge_r:"AI + RWA + Web3 开源数字货币",
+    btn_copy:"复制合约地址",
+    x_bnb:"跨链探索", x_doge:"跨链探索", x_eac:"地球币（EAC）生态",
+    notice_txt:"<b>仅作探索。</b> 本页面是关于概念与项目公开信息的教育性探索。账本与数据均为演示内容，不构成任何投资建议、邀约或诱导。",
+    comm_tag:"04 · 社区",
+    comm_title:"加入地球村",
+    comm_desc:"EACO 项目官方公开渠道——代码、社区与链上记录。",
+    lk_gh:"GitHub 仓库", lk_solscan:"链上记录（Solscan）", lk_x:"X（推特）",
+    lk_tg:"Telegram · 英文", lk_tg_es:"Telegram · 西班牙语",
+    lk_why:"为什么是光伏 + 账本？", lk_why_sub:"因为阳光属于每一个人。",
+    foot_txt:"EACO 地球光伏账本 · RWA 探索中心——为地球村打造的开源教育探索应用。EACO = 地球最好的代币。非投资建议。",
+    foot_made:"用 ⚡ 为地球打造 · 6 种语言 · 3 套主题"
+  },
+  es:{
+    nav_brand:"EACO Tierra",
+    nav_ledger:"Registro Solar", nav_rwa:"RWA", nav_about:"Sobre EACO", nav_community:"Comunidad",
+    hero_title:"Registro Solar Terrestre y Explorador RWA",
+    hero_desc:"EACO, la mejor moneda de la Tierra, lleva los activos fotovoltaicos a un registro abierto y verificable: explorando cómo la energía solar real puede ser transparente, compartible y auditable para cada habitante de la aldea global.",
+    cta_ledger:"Explorar el Registro", cta_rwa:"Cómo funciona RWA",
+    stat_plants:"128", stat_plants_lbl:"Plantas solares en el registro",
+    stat_cap_lbl:"Capacidad instalada total", stat_energy:"512.400 <small>MWh</small>",
+    stat_energy_lbl:"Energía verde registrada al año", stat_carbon:"326.140 <small>t</small>",
+    stat_carbon_lbl:"CO₂ evitado este año",
+    ledger_tag:"01 · Registro Solar",
+    ledger_title:"El Registro Fotovoltaico",
+    ledger_desc:"En este demo exploratorio, cada planta solar es un registro verificable: ubicación, capacidad, producción real y carbono evitado. El registro está abierto a todos: añade, filtra e inspecciona para ver cómo podría funcionar la contabilidad on-chain.",
+    chart_title:"Tendencia mensual de generación (MWh)", chart_cap:"Últimos 12 meses · datos demo",
+    f_all:"Todos", f_running:"En operación", f_grid:"Conectadas",
+    btn_add_plant:"+ Añadir planta", btn_save:"Guardar",
+    ph_name:"Nombre de la planta", ph_cap:"Capacidad (MW)", ph_out:"Producción (MWh)", ph_co2:"CO₂ evitado (t)",
+    opt_running:"En operación", opt_grid:"Conectadas",
+    th_plant:"Planta", th_cap:"Capacidad (MW)", th_out:"Producción (MWh)", th_co2:"CO₂ evitado (t)", th_status:"Estado", th_action:"Acción",
+    tag_running:"En operación", tag_grid:"Conectada",
+    btn_del:"Eliminar", empty_txt:"No hay registros para este filtro.",
+    toast_added:"Registro añadido a la memoria.", toast_del:"Registro eliminado.", toast_copied:"Dirección lista - selecciona el texto y copia.",
+    rwa_tag:"02 · Explorador RWA",
+    rwa_title:"De la Luz Solar al Valor Verificable",
+    rwa_desc:"Los Activos del Mundo Real (RWA) traen valor físico a la cadena. Las plantas solares encajan: su producción es medible, continua y positiva para el planeta. Este explorador muestra cómo un activo fotovoltaico viaja del campo al registro.",
+    s1t:"Mapeo de Activos", s1d:"La identidad, capacidad y titularidad de una planta se registran como metadatos digitales transparentes: sin falsificaciones ni doble conteo.",
+    s2t:"Conexión de Oráculos", s2d:"Clima, energía medida y rendimiento se alimentan vía oráculos: el puente entre granjas físicas y el registro.",
+    s3t:"Contabilidad Verificable", s3d:"Cada MWh y cada tonelada de CO₂ evitado se convierte en una entrada verificable, auditable por cualquiera en la Tierra.",
+    s4t:"Flujo Global de Valor", s4d:"El valor de la energía verde puede fluir transparentemente entre fronteras, uniendo recursos y comunidades.",
+    f_node1:"Luz solar", f_node2:"Planta solar", f_node3:"Medidor + Oráculo", f_node4:"Entrada al registro", f_node5:"Valor comunitario",
+    oracle_hl:"EACO = Oráculo de la Civilización de Activos de la Tierra. ", oracle_txt:"En esta exploración, EACO se imagina como el oráculo a nivel civilización que ayuda a los activos reales de la Tierra -empezando por la luz solar- a hablar con verdad en la cadena para bien de la aldea global.",
+    about_tag:"03 · Sobre EACO",
+    about_title:"La Mejor Moneda de la Tierra",
+    about_desc:"EACO (nombre chino «地球») es un token SPL nativo de Solana. Su nombre encierra una filosofía: cada letra de E-A-C-O representa una fuerza que hace de la Tierra un mejor hogar.",
+    e_t:"Energy / Energía", e_d:"Energía positiva que impulsa acción, ideas y comunidades.",
+    a_t:"Attitude / Actitud", a_d:"Una mentalidad constructiva que convierte retos en progreso.",
+    c_t:"Cooperation / Cooperación", c_d:"Colaboración global: la aldea funciona mejor junta.",
+    o_t:"Optimization / Optimización", o_d:"Optimización continua de personas, sistemas y civilización.",
+    token_title:"Identidad del token (hechos públicos)", token_cap:"Según la documentación pública del proyecto.",
+    badge_e:"EACO es el mejor amigo de la Tierra", badge_r:"Moneda abierta AI + RWA + Web3",
+    btn_copy:"Copiar dirección",
+    x_bnb:"Exploración cross-chain", x_doge:"Exploración cross-chain", x_eac:"Ecosistema Earthcoin (EAC)",
+    notice_txt:"<b>Solo exploración.</b> Esta página es una exploración educativa de conceptos e información pública del proyecto. El registro y las cifras son datos de demostración. Nada aquí es consejo financiero, oferta ni solicitud.",
+    comm_tag:"04 · Comunidad",
+    comm_title:"Únete a la Aldea Global",
+    comm_desc:"Canales públicos oficiales del proyecto EACO: código, comunidad y registros on-chain.",
+    lk_gh:"Repositorio GitHub", lk_solscan:"Registro On-chain (Solscan)", lk_x:"X (Twitter)",
+    lk_tg:"Telegram · Inglés", lk_tg_es:"Telegram · Español",
+    lk_why:"¿Por qué solar + registro?", lk_why_sub:"Porque la luz del sol pertenece a todos.",
+    foot_txt:"EACO Registro Solar Terrestre · Explorador RWA — una exploración educativa de código abierto para la aldea global. EACO = la mejor moneda de la Tierra. No es consejo financiero.",
+    foot_made:"Hecho con ⚡ para la Tierra · 6 idiomas · 3 temas"
+  },
+  ar:{
+    nav_brand:"إياكو الأرض",
+    nav_ledger:"سجل الطاقة الشمسية", nav_rwa:"استكشاف RWA", nav_about:"عن إياكو", nav_community:"المجتمع",
+    hero_title:"سجل الأرض الشمسي ومستكشف الأصول الواقعية RWA",
+    hero_desc:"إياكو، أفضل عملة على الأرض، ينقل أصول الطاقة الشمسية إلى سجل مفتوح قابل للتحقق - لاستكشاف كيف يمكن لطاقة الشمس الحقيقية أن تصبح شفافة وقابلة للمشاركة والتدقيق لكل ساكن في القرية العالمية.",
+    cta_ledger:"استكشف السجل", cta_rwa:"كيف يعمل RWA",
+    stat_plants:"128", stat_plants_lbl:"محطة شمسية في السجل",
+    stat_cap_lbl:"إجمالي القدرة المركبة", stat_energy:"512,400 <small>ميجاوات/ساعة</small>",
+    stat_energy_lbl:"طاقة خضراء مسجلة سنويًا", stat_carbon:"326,140 <small>طن</small>",
+    stat_carbon_lbl:"ثاني أكسيد الكربون المُتجنب هذا العام",
+    ledger_tag:"٠١ · السجل الشمسي",
+    ledger_title:"سجل الأصول الشمسية",
+    ledger_desc:"في هذا العرض الاستكشافي، كل محطة شمسية هي سجل قابل للتحقق: الموقع والقدرة والإنتاج الحقيقي والكربون المُتجنب. السجل مفتوح للجميع - أضف وصنّف وتفحص السجلات لترى كيف قد تعمل المحاسبة على السلسلة.",
+    chart_title:"اتجاه الإنتاج الشهري (ميجاوات/ساعة)", chart_cap:"آخر ١٢ شهرًا · بيانات عرض توضيحي",
+    f_all:"الكل", f_running:"قيد التشغيل", f_grid:"متصل بالشبكة",
+    btn_add_plant:"+ إضافة محطة", btn_save:"حفظ",
+    ph_name:"اسم المحطة", ph_cap:"القدرة (ميجاوات)", ph_out:"الإنتاج (ميجاوات/ساعة)", ph_co2:"الكربون المُتجنب (طن)",
+    opt_running:"قيد التشغيل", opt_grid:"متصل بالشبكة",
+    th_plant:"المحطة", th_cap:"القدرة (MW)", th_out:"الإنتاج (MWh)", th_co2:"الكربون المتجنب (طن)", th_status:"الحالة", th_action:"إجراء",
+    tag_running:"قيد التشغيل", tag_grid:"متصل بالشبكة",
+    btn_del:"إزالة", empty_txt:"لا توجد سجلات مطابقة لهذا الفلتر.",
+    toast_added:"تمت إضافة السجل إلى الذاكرة.", toast_del:"تمت إزالة السجل.", toast_copied:"العنوان جاهز - حدد النص وانسخه.",
+    rwa_tag:"٠٢ · مستكشف RWA",
+    rwa_title:"من ضوء الشمس إلى قيمة قابلة للتحقق",
+    rwa_desc:"الأصول الواقعية (RWA) تنقل القيمة المادية إلى السلسلة. المحطات الشمسية مناسبة تمامًا: إنتاجها قابل للقياس ومستمر وإيجابي للكوكب. يوضح هذا المستكشف كيف ينتقل الأصل الشمسي من الحقل إلى السجل.",
+    s1t:"تخطيط الأصول", s1d:"يتم تسجيل هوية المحطة وقدرتها وصلاحياتها كبيانات وصفية رقمية شفافة - بلا تزوير ولا عد مزدوج.",
+    s2t:"اتصال أوراكل البيانات", s2d:"يتم تغذية الطقس والطاقة المقيسة والأداء عبر الأوراكل - الجسر بين المزارع المادية والسجل.",
+    s3t:"محاسبة قابلة للتحقق", s3d:"كل ميجاوات/ساعة وكل طن من ثاني أكسيد الكربون المُتجنب يصبح إدخالًا قابلًا للتحقق، يمكن لأي شخص في أي مكان على الأرض تدقيقه.",
+    s4t:"تدفق القيمة العالمي", s4d:"قيمة الطاقة الخضراء يمكن أن تتدفق بشفافية عبر الحدود، رابطًا موارد الأرض بمجتمعاتها.",
+    f_node1:"ضوء الشمس", f_node2:"المحطة الشمسية", f_node3:"العداد + الأوراكل", f_node4:"إدخال السجل", f_node5:"قيمة المجتمع",
+    oracle_hl:"إياكو = أوراكل حضارة أصول الأرض. ", oracle_txt:"في هذا الاستكشاف، تُتصوّر إياكو كأوراكل على مستوى الحضارة يساعد الأصول الحقيقية للأرض - بدءًا من ضوء الشمس - على التحدث بصدق على السلسلة لصالح القرية العالمية.",
+    about_tag:"٠٣ · عن إياكو",
+    about_title:"أفضل عملة على الأرض",
+    about_desc:"إياكو (الاسم الصيني «地球» أي الأرض) هو رمز SPL أصلي على سولانا. اسمه يحمل فلسفة: كل حرف من E-A-C-O يقف لقوة تجعل الأرض موطنًا أفضل.",
+    e_t:"Energy / الطاقة", e_d:"طاقة إيجابية تدفع العمل والأفكار والمجتمعات.",
+    a_t:"Attitude / الموقف", a_d:"عقلية بناءة تحوّل التحديات إلى تقدم.",
+    c_t:"Cooperation / التعاون", c_d:"تعاون عالمي - القرية تعمل بشكل أفضل معًا.",
+    o_t:"Optimization / التحسين", o_d:"تحسين مستمر للأفراد والأنظمة والحضارة.",
+    token_title:"هوية الرمز (حقائق عامة)", token_cap:"كما نُشر في الوثائق العامة للمشروع.",
+    badge_e:"إياكو أفضل صديق للأرض", badge_r:"عملة مفتوحة: ذكاء اصطناعي + RWA + ويب 3",
+    btn_copy:"نسخ العنوان",
+    x_bnb:"استكشاف عبر السلاسل", x_doge:"استكشاف عبر السلاسل", x_eac:"نظام إيرث كوين (EAC)",
+    notice_txt:"<b>استكشاف فقط.</b> هذه الصفحة استكشاف تعليمي للمفاهيم والمعلومات العامة للمشروع. السجل والأرقام بيانات توضيحية. لا شيء هنا نصيحة مالية أو عرض أو دعوة.",
+    comm_tag:"٠٤ · المجتمع",
+    comm_title:"انضم إلى القرية العالمية",
+    comm_desc:"القنوات العامة الرسمية لمشروع إياكو - الكود والمجتمع والسجلات على السلسلة.",
+    lk_gh:"مستودع GitHub", lk_solscan:"السجل على السلسلة (Solscan)", lk_x:"إكس (تويتر)",
+    lk_tg:"تيليغرام · الإنجليزية", lk_tg_es:"تيليغرام · الإسبانية",
+    lk_why:"لماذا الشمس + السجل؟", lk_why_sub:"لأن ضوء الشمس ملك للجميع.",
+    foot_txt:"سجل الأرض الشمسي لإياكو · مستكشف RWA — استكشاف تعليمي مفتوح المصدر بُني للقرية العالمية. إياكو = أفضل عملة على الأرض. ليست نصيحة مالية.",
+    foot_made:"صُنع بـ ⚡ للأرض · ٦ لغات · ٣ سمات"
+  },
+  fr:{
+    nav_brand:"EACO Terre",
+    nav_ledger:"Registre Solaire", nav_rwa:"RWA", nav_about:"À propos d'EACO", nav_community:"Communauté",
+    hero_title:"Registre Solaire Terrestre et Explorateur RWA",
+    hero_desc:"EACO, la meilleure pièce de la Terre, porte les actifs photovoltaïques sur un registre ouvert et vérifiable - pour explorer comment l'énergie solaire réelle peut devenir transparente, partageable et auditable pour chaque habitant du village global.",
+    cta_ledger:"Explorer le registre", cta_rwa:"Comment fonctionne RWA",
+    stat_plants:"128", stat_plants_lbl:"Centrales solaires enregistrées",
+    stat_cap_lbl:"Capacité installée totale", stat_energy:"512 400 <small>MWh</small>",
+    stat_energy_lbl:"Énergie verte journalisée / an", stat_carbon:"326 140 <small>t</small>",
+    stat_carbon_lbl:"CO₂ évité cette année",
+    ledger_tag:"01 · Registre Solaire",
+    ledger_title:"Le Registre Photovoltaïque",
+    ledger_desc:"Dans cette démo exploratoire, chaque centrale solaire est une fiche vérifiable : emplacement, capacité, production réelle et carbone évité. Le registre est ouvert à tous - ajoutez, filtrez et inspectez pour voir comment fonctionnerait une comptabilité on-chain.",
+    chart_title:"Tendance mensuelle de production (MWh)", chart_cap:"12 derniers mois · données de démo",
+    f_all:"Toutes", f_running:"En exploitation", f_grid:"Raccordées",
+    btn_add_plant:"+ Ajouter une centrale", btn_save:"Enregistrer",
+    ph_name:"Nom de la centrale", ph_cap:"Capacité (MW)", ph_out:"Production (MWh)", ph_co2:"CO₂ évité (t)",
+    opt_running:"En exploitation", opt_grid:"Raccordée",
+    th_plant:"Centrale", th_cap:"Capacité (MW)", th_out:"Production (MWh)", th_co2:"CO₂ évité (t)", th_status:"Statut", th_action:"Action",
+    tag_running:"En exploitation", tag_grid:"Raccordée",
+    btn_del:"Retirer", empty_txt:"Aucune fiche ne correspond à ce filtre.",
+    toast_added:"Fiche ajoutée à la mémoire.", toast_del:"Fiche retirée.", toast_copied:"Adresse prête - sélectionnez le texte et copiez.",
+    rwa_tag:"02 · Explorateur RWA",
+    rwa_title:"De la Lumière du Soleil à la Valeur Vérifiable",
+    rwa_desc:"Les Actifs du Monde Réel (RWA) amènent la valeur physique on-chain. Les centrales solaires sont idéales : leur production est mesurable, continue et positive pour la planète. Cet explorateur montre comment un actif photovoltaïque passe du terrain au registre.",
+    s1t:"Cartographie des Actifs", s1d:"L'identité, la capacité et le titre d'une centrale sont enregistrés comme métadonnées numériques transparentes - ni faux, ni double comptage.",
+    s2t:"Connexion des Oracles", s2d:"Météo, énergie mesurée et performance sont alimentées via des oracles - le pont entre les fermes physiques et le registre.",
+    s3t:"Comptabilité Vérifiable", s3d:"Chaque MWh et chaque tonne de CO₂ évité devient une entrée vérifiable, auditable par n'importe qui sur Terre.",
+    s4t:"Flux de Valeur Mondial", s4d:"La valeur de l'énergie verte peut circuler en toute transparence au-delà des frontières, reliant les ressources de la Terre à ses communautés.",
+    f_node1:"Lumière solaire", f_node2:"Centrale solaire", f_node3:"Compteur + Oracle", f_node4:"Entrée du registre", f_node5:"Valeur communautaire",
+    oracle_hl:"EACO = Oracle de la Civilisation des Actifs de la Terre. ", oracle_txt:"Dans cette exploration, EACO est imaginé comme l'oracle au niveau civilisation qui aide les actifs réels de la Terre - à commencer par la lumière du soleil - à parler honnêtement sur la chaîne pour le bien du village global.",
+    about_tag:"03 · À propos d'EACO",
+    about_title:"La Meilleure Pièce de la Terre",
+    about_desc:"EACO (nom chinois «地球») est un jeton SPL natif de Solana. Son nom porte une philosophie : chaque lettre de E-A-C-O représente une force qui fait de la Terre un meilleur foyer.",
+    e_t:"Energy / Énergie", e_d:"L'énergie positive qui nourrit l'action, les idées et les communautés.",
+    a_t:"Attitude / Attitude", a_d:"Un état d'esprit constructif qui transforme les défis en progrès.",
+    c_t:"Cooperation / Coopération", c_d:"La collaboration mondiale - le village avance mieux ensemble.",
+    o_t:"Optimization / Optimisation", o_d:"L'optimisation continue des individus, des systèmes et de la civilisation.",
+    token_title:"Identité du jeton (faits publics)", token_cap:"Selon la documentation publique du projet.",
+    badge_e:"EACO est le meilleur ami de la Terre", badge_r:"Monnaie ouverte IA + RWA + Web3",
+    btn_copy:"Copier l'adresse",
+    x_bnb:"Exploration cross-chain", x_doge:"Exploration cross-chain", x_eac:"Écosystème Earthcoin (EAC)",
+    notice_txt:"<b>Exploration uniquement.</b> Cette page est une exploration pédagogique de concepts et d'informations publiques du projet. Le registre et les chiffres sont des données de démonstration. Rien ici n'est un conseil financier, une offre ou une sollicitation.",
+    comm_tag:"04 · Communauté",
+    comm_title:"Rejoignez le Village Global",
+    comm_desc:"Canaux publics officiels du projet EACO - code, communauté et registres on-chain.",
+    lk_gh:"Dépôt GitHub", lk_solscan:"Registre on-chain (Solscan)", lk_x:"X (Twitter)",
+    lk_tg:"Telegram · Anglais", lk_tg_es:"Telegram · Espagnol",
+    lk_why:"Pourquoi solaire + registre ?", lk_why_sub:"Parce que la lumière du soleil appartient à tous.",
+    foot_txt:"EACO Registre Solaire Terrestre · Explorateur RWA — une exploration éducative open source pour le village global. EACO = la meilleure pièce de la Terre. Pas un conseil financier.",
+    foot_made:"Fait avec ⚡ pour la Terre · 6 langues · 3 thèmes"
+  },
+  ru:{
+    nav_brand:"EACO Земля",
+    nav_ledger:"Солнечный Реестр", nav_rwa:"RWA", nav_about:"Об EACO", nav_community:"Сообщество",
+    hero_title:"Земной Солнечный Реестр и Исследователь RWA",
+    hero_desc:"EACO, лучшая монета Земли, переносит фотоэлектрические активы в открытый проверяемый реестр — исследуя, как реальная солнечная энергия может стать прозрачной, общей и аудируемой для каждого жителя глобальной деревни.",
+    cta_ledger:"Изучить реестр", cta_rwa:"Как работает RWA",
+    stat_plants:"128", stat_plants_lbl:"Солнечных станций в реестре",
+    stat_cap_lbl:"Общая установленная мощность", stat_energy:"512 400 <small>МВт·ч</small>",
+    stat_energy_lbl:"Зелёной энергии за год", stat_carbon:"326 140 <small>т</small>",
+    stat_carbon_lbl:"CO₂ избегнуто за год",
+    ledger_tag:"01 · Солнечный Реестр",
+    ledger_title:"Фотоэлектрический Реестр",
+    ledger_desc:"В этой исследовательской демо-версии каждая солнечная станция — проверяемая запись: местоположение, мощность, реальная выработка и избегнутый углерод. Реестр открыт для всех: добавляйте, фильтруйте и проверяйте записи, чтобы увидеть, как может работать учёт на блокчейне.",
+    chart_title:"Месячный тренд генерации (МВт·ч)", chart_cap:"Последние 12 месяцев · демо-данные",
+    f_all:"Все", f_running:"В работе", f_grid:"Подключены",
+    btn_add_plant:"+ Добавить станцию", btn_save:"Сохранить",
+    ph_name:"Название станции", ph_cap:"Мощность (МВт)", ph_out:"Выработка (МВт·ч)", ph_co2:"CO₂ избегнуто (т)",
+    opt_running:"В работе", opt_grid:"Подключена",
+    th_plant:"Станция", th_cap:"Мощность (МВт)", th_out:"Выработка (МВт·ч)", th_co2:"CO₂ избегнуто (т)", th_status:"Статус", th_action:"Действие",
+    tag_running:"В работе", tag_grid:"Подключена",
+    btn_del:"Удалить", empty_txt:"Нет записей, соответствующих фильтру.",
+    toast_added:"Запись добавлена в память.", toast_del:"Запись удалена.", toast_copied:"Адрес готов — выделите текст и скопируйте.",
+    rwa_tag:"02 · Исследователь RWA",
+    rwa_title:"От Солнечного Света к Проверяемой Ценности",
+    rwa_desc:"Активы реального мира (RWA) переносят физическую ценность в блокчейн. Солнечные станции идеально подходят: их выработка измерима, постоянна и позитивна для планеты. Этот исследователь показывает путь актива от поля до реестра.",
+    s1t:"Маппинг Активов", s1d:"Идентичность, мощность и права станции фиксируются как прозрачные цифровые метаданные — без подделок и двойного счёта.",
+    s2t:"Подключение Оракулов", s2d:"Погода, показания счётчиков и производительность поступают через оракулов — мост между физическими фермами и реестром.",
+    s3t:"Проверяемый Учёт", s3d:"Каждый МВт·ч и каждая тонна избегнутого CO₂ становится проверяемой записью, доступной для аудита каждому на Земле.",
+    s4t:"Глобальный Поток Ценности", s4d:"Ценность зелёной энергии может прозрачно пересекать границы, соединяя ресурсы Земли и её сообщества.",
+    f_node1:"Солнечный свет", f_node2:"Солнечная станция", f_node3:"Счётчик + Оракул", f_node4:"Запись реестра", f_node5:"Ценность сообщества",
+    oracle_hl:"EACO = Оракул Цивилизации Активов Земли. ", oracle_txt:"В этом исследовании EACO мыслится как оракул уровня цивилизации, помогающий реальным активам Земли — начиная с солнечного света — правдиво говорить в блокчейне на благо глобальной деревни.",
+    about_tag:"03 · Об EACO",
+    about_title:"Лучшая Монета Земли",
+    about_desc:"EACO (китайское имя «地球») — нативный SPL-токен Solana. Его название несёт философию: каждая буква E-A-C-O — сила, делающая Землю лучшим домом.",
+    e_t:"Energy / Энергия", e_d:"Позитивная энергия, питающая действия, идеи и сообщества.",
+    a_t:"Attitude / Настрой", a_d:"Конструктивное мышление, превращающее вызовы в прогресс.",
+    c_t:"Cooperation / Сотрудничество", c_d:"Глобальная коллаборация — деревня лучше работает вместе.",
+    o_t:"Optimization / Оптимизация", o_d:"Постоянная оптимизация людей, систем и цивилизации.",
+    token_title:"Идентичность токена (публичные факты)", token_cap:"Согласно публичной документации проекта.",
+    badge_e:"EACO — лучший друг Земли", badge_r:"Открытая монета ИИ + RWA + Web3",
+    btn_copy:"Скопировать адрес",
+    x_bnb:"Исследование кросс-чейн", x_doge:"Исследование кросс-чейн", x_eac:"Экосистема Earthcoin (EAC)",
+    notice_txt:"<b>Только исследование.</b> Эта страница — образовательное исследование концепций и публичной информации проекта. Реестр и цифры — демонстрационные данные. Ничто здесь не является финансовым советом, офертой или побуждением.",
+    comm_tag:"04 · Сообщество",
+    comm_title:"Присоединяйтесь к Глобальной Деревне",
+    comm_desc:"Официальные публичные каналы проекта EACO — код, сообщество и ончейн-записи.",
+    lk_gh:"Репозиторий GitHub", lk_solscan:"Ончейн-запись (Solscan)", lk_x:"X (Twitter)",
+    lk_tg:"Telegram · Английский", lk_tg_es:"Telegram · Испанский",
+    lk_why:"Почему солнце + реестр?", lk_why_sub:"Потому что солнечный свет принадлежит всем.",
+    foot_txt:"EACO Земной Солнечный Реестр · Исследователь RWA — открытое образовательное исследование для глобальной деревни. EACO = лучшая монета Земли. Не финансовый совет.",
+    foot_made:"Сделано с ⚡ для Земли · 6 языков · 3 темы"
+  }
+};
+/* ================= State (in-memory only) ================= */
+var state = {
+  lang:"en",
+  theme:"solar",
+  filter:"all",
+  rows: LEDGER.slice(),
+  seq: LEDGER.length + 1
+};
+/* ================= Helpers ================= */
+function $(s){return document.querySelector(s);}
+function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s));}
+function esc(x){
+  return String(x).replace(/[&<>"']/g,function(m){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m];
+  });
+}
+function toast(msg){
+  var t=$("#toast");
+  t.innerHTML=msg;
+  t.classList.add("show");
+  clearTimeout(toast._tm);
+  toast._tm=setTimeout(function(){t.classList.remove("show");},2600);
+}
+/* ================= i18n render ================= */
+function renderI18n(){
+  var D=I18N[state.lang];
+  $$("[data-i18n]").forEach(function(el){
+    var k=el.getAttribute("data-i18n");
+    if(D[k]!==undefined) el.innerHTML=D[k];
+  });
+  $$("[data-ph]").forEach(function(el){
+    var k=el.getAttribute("data-ph");
+    if(D[k]!==undefined) el.setAttribute("placeholder",D[k]);
+  });
+  document.documentElement.lang=state.lang;
+  document.documentElement.dir=(state.lang==="ar")?"rtl":"ltr";
+  renderChart();
+  renderTable();
+}
+/* ================= Chart ================= */
+function renderChart(){
+  var box=$("#chart");
+  if(!box) return;
+  var W=Math.max(box.clientWidth,280), H=230, padL=46, padR=10, padT=14, padB=30;
+  var n=GEN.length, iw=(W-padL-padR)/n, bw=Math.min(iw*0.55,44);
+  var max=Math.max.apply(null,GEN);
+  var cols="var(--accent)", alt="color-mix(in srgb,var(--accent) 45%,var(--green))";
+  var x=padL, yTop=padT, yBase=H-padB;
+  var labels=MONTHLY[state.lang];
+  var maxVal=Math.ceil(max/10000)*10000;
+  var ticks=[0,0.5,1].map(function(f){return maxVal*f;});
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" aria-hidden="true">';
+  ticks.forEach(function(v){
+    var y=yBase-(v/maxVal)*(yBase-yTop);
+    s+='<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="color-mix(in srgb,var(--line) 60%,transparent)" stroke-width="1"/>';
+    s+='<text x="'+(padL-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="var(--muted)">'+v.toLocaleString()+'</text>';
+  });
+  for(var i=0;i<n;i++){
+    var cx=x+i*iw+iw/2;
+    var h=(GEN[i]/maxVal)*(yBase-yTop);
+    var y=yBase-h;
+    s+='<rect x="'+(cx-bw/2)+'" y="'+y+'" width="'+bw+'" height="'+h+'" rx="6" fill="'+(i%2?cols:alt)+'"><title>'+labels[i]+' '+GEN[i].toLocaleString()+'</title></rect>';
+    if(i%2===0) s+='<text x="'+cx+'" y="'+(y-6)+'" text-anchor="middle" font-size="10" font-weight="700" fill="var(--accent)">'+(GEN[i]/1000).toFixed(1)+'k</text>';
+    s+='<text x="'+cx+'" y="'+(H-10)+'" text-anchor="middle" font-size="10" fill="var(--muted)">'+esc(labels[i])+'</text>';
+  }
+  s+='</svg>';
+  box.innerHTML=s;
+}
+/* ================= Table ================= */
+function renderTable(){
+  var D=I18N[state.lang];
+  var rows=state.rows.filter(function(r){
+    if(state.filter==="all") return true;
+    return r.status===state.filter;
+  });
+  var tb=$("#tbody");
+  var empty=$("#empty-row");
+  if(rows.length===0){
+    tb.innerHTML="";
+    empty.classList.remove("hidden");
+    return;
+  }
+  empty.classList.add("hidden");
+  tb.innerHTML=rows.map(function(r,idx){
+    var tagCls=(r.status==="grid")?"grid":"run";
+    return '<tr>'+
+      '<td><b>'+esc(r.name)+'</b></td>'+
+      '<td class="mono">'+fmtNum(r.cap)+'</td>'+
+      '<td class="mono">'+fmtNum(r.out)+'</td>'+
+      '<td class="mono">'+fmtNum(r.co2)+'</td>'+
+      '<td><span class="tag '+tagCls+'">'+esc(D[r.status==="grid"?"tag_grid":"tag_running"])+'</span></td>'+
+      '<td><button class="btn-del" data-del="'+idx+'" data-orig="'+esc(r.name)+'">'+esc(D.btn_del)+'</button></td>'+
+    '</tr>';
+  }).join("");
+}
+function fmtNum(v){
+  if(typeof v==="number") return v.toLocaleString(undefined,{maximumFractionDigits:1});
+  return v;
+}
+/* ================= Events ================= */
+function applyLang(lang){
+  state.lang=lang;
+  $$(".lang-switch button").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-lang")===lang);});
+  renderI18n();
+}
+function applyTheme(theme){
+  state.theme=theme;
+  document.documentElement.setAttribute("data-theme",theme);
+  $$(".theme-btn").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-theme-set")===theme);});
+}
+function applyFilter(f){
+  state.filter=f;
+  $$(".chip").forEach(function(c){c.classList.toggle("active",c.getAttribute("data-filter")===f);});
+  renderTable();
+}
+function bind(){
+  $$(".lang-switch button").forEach(function(b){
+    b.addEventListener("click",function(){applyLang(b.getAttribute("data-lang"));});
+  });
+  $$(".theme-btn").forEach(function(b){
+    b.addEventListener("click",function(){applyTheme(b.getAttribute("data-theme-set"));});
+  });
+  $$(".chip").forEach(function(c){
+    c.addEventListener("click",function(){applyFilter(c.getAttribute("data-filter"));});
+  });
+  $("#btn-show-add").addEventListener("click",function(){
+    $("#add-form").classList.toggle("hidden");
+  });
+  $("#btn-save").addEventListener("click",function(){
+    var n=$("#in-name").value.trim();
+    var cap=parseFloat($("#in-cap").value);
+    var out=parseFloat($("#in-out").value);
+    var co2=parseFloat($("#in-co2").value);
+    if(!n || isNaN(cap) || isNaN(out) || isNaN(co2)){
+      toast(I18N[state.lang].toast_added + " (missing fields)");
+      return;
+    }
+    state.rows.unshift({
+      name:n, cap:cap, out:out, co2:co2,
+      status:$("#in-status").value
+    });
+    ["in-name","in-cap","in-out","in-co2"].forEach(function(id){$("#"+id).value="";});
+    $("#add-form").classList.add("hidden");
+    renderChartUpdate();
+    renderTable();
+    toast(I18N[state.lang].toast_added);
+  });
+  $("#btn-copy").addEventListener("click",function(){
+    var r=document.createRange();
+    r.selectNodeContents($("#contract-addr"));
+    var sel=window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(r);
+    toast(I18N[state.lang].toast_copied);
+  });
+  $("#tbody").addEventListener("click",function(ev){
+    var b=ev.target.closest("[data-del]");
+    if(!b) return;
+    var idx=parseInt(b.getAttribute("data-del"),10);
+    var rows=state.rows.filter(function(r){
+      return state.filter==="all" || r.status===state.filter;
+    });
+    var real=rows[idx];
+    if(real){
+      var ri=state.rows.indexOf(real);
+      if(ri>-1) state.rows.splice(ri,1);
+    }
+    renderChartUpdate();
+    renderTable();
+    toast(I18N[state.lang].toast_del);
+  });
+}
+function renderChartUpdate(){
+  /* Chart responds to ledger changes: aggregate rows as a proxy month */
+  var total=state.rows.reduce(function(a,r){return a+r.out;},0);
+  var base=GEN[GEN.length-1];
+  GEN[GEN.length-1]=Math.round(base*0.6 + total*0.4);
+  renderChart();
+}
+/* ================= Boot ================= */
+window.addEventListener("resize",function(){renderChart();});
+document.addEventListener("DOMContentLoaded",function(){
+  applyTheme(state.theme);
+  bind();
+  renderI18n();
+});
+window.addEventListener("keydown",function(e){
+  if((e.key==="Escape") && !$("#add-form").classList.contains("hidden")){
+    $("#add-form").classList.add("hidden");
+  }
+});
+</script>
