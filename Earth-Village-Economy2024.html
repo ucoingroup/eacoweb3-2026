@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EACO 地球村经济 | Earth Village Economy</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme:{
+    extend:{
+      colors:{
+        cosmicBlue:{
+          50:'#eef6ff',100:'#dcebff',200:'#b8d6ff',300:'#84b8ff',400:'#4890ff',
+          500:'#1a6bff',600:'#0c4fd8',700:'#0a3fb0',800:'#072c78',900:'#051d4f'
+        },
+        appleGreen:{
+          50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',
+          500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'
+        },
+        classicBeige:{
+          50:'#faf6ed',100:'#f5efe0',200:'#e9ddc1',300:'#dcc89c',400:'#ccb076',
+          500:'#b89754',600:'#a37f3b',700:'#8c692e',800:'#6e5022',900:'#4d3618'
+        }
+      }
+    }
+  }
+}
+</script>
+<style>
+/* 全局主题变量 */
+:root{
+  --bg:#072c78;
+  --bg-soft:#0a3fb0;
+  --text:#ffffff;
+  --text-soft:#dcebff;
+  --card:#051d4f;
+  --accent:#4890ff;
+}
+.theme-cosmic{
+  --bg:#072c78;--bg-soft:#0a3fb0;--text:#fff;--text-soft:#dcebff;--card:#051d4f;--accent:#4890ff;
+}
+.theme-apple{
+  --bg:#14532d;--bg-soft:#166534;--text:#fff;--text-soft:#bbf7d0;--card:#166534;--accent:#4ade80;
+}
+.theme-classic{
+  --bg:#faf6ed;--bg-soft:#f5efe0;--text:#2c2214;--text-soft:#6e5022;--card:#fff8e8;--accent:#b89754;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition: all 0.4s ease;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--accent);
+  border-radius:1rem;
+}
+.text-soft{color:var(--text-soft);}
+.accent{color:var(--accent);}
+.btn{
+  background:var(--accent);
+  color:var(--bg);
+  padding:0.75rem 1.5rem;
+  border-radius:0.5rem;
+  font-weight:bold;
+}
+.btn:hover{opacity:0.9;}
+.lang-item{cursor:pointer;padding:0.3rem 0.6rem;border-radius:0.3rem;}
+.lang-item:hover{background:rgba(255,255,255,0.15);}
+.theme-switch{cursor:pointer;padding:0.4rem 0.8rem;border-radius:0.4rem;border:1px solid var(--accent);}
+/* 隐藏多语言文本，js控制显示 */
+.lang{display:none;}
+.lang.active{display:block;}
+</style>
+</head>
+<body class="min-h-screen">
+<div class="max-w-6xl mx-auto px-4 py-6">
+  <!-- Header -->
+  <header class="flex flex-wrap justify-between items-center mb-8 gap-4">
+    <div>
+      <h1 class="text-2xl md:text-3xl font-bold">EACO | Earth Village Economy</h1>
+      <p class="text-soft text-sm">Global Value Network • Carbon-Silicon Symbiosis</p>
+    </div>
+    <div class="flex flex-wrap gap-3 items-center">
+      <!-- 主题切换 -->
+      <div class="flex gap-2">
+        <button class="theme-switch" onclick="setTheme('cosmic')">🌌 宇宙蓝</button>
+        <button class="theme-switch" onclick="setTheme('apple')">🍏 苹果绿</button>
+        <button class="theme-switch" onclick="setTheme('classic')">📜 米色古典</button>
+      </div>
+      <!-- 语言选择 -->
+      <div class="flex flex-wrap gap-1 border border-[var(--accent)] rounded p-1">
+        <span class="lang-item" onclick="setLang('zh')">中文</span>
+        <span class="lang-item" onclick="setLang('en')">EN</span>
+        <span class="lang-item" onclick="setLang('fr')">FR</span>
+        <span class="lang-item" onclick="setLang('es')">ES</span>
+        <span class="lang-item" onclick="setLang('pt')">PT</span>
+        <span class="lang-item" onclick="setLang('my')">မြန်မာ</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主标题区块：全球M2 103.66万亿 -->
+  <section class="card p-6 mb-6">
+    <div class="lang zh active">
+      <h2 class="text-xl md:text-2xl font-bold mb-4">全球货币供应量达到历史新高 103.66 万亿美元</h2>
+      <p class="text-soft mb-4">现行主权法币体系，货币增量依托债务创造，与真实生产力脱钩，催生资产泡沫、贫富分化、汇率震荡。EACO 构建并行的价值网络，将价值凭证增量绑定实物资产、真实生产力、碳硅共生价值，服务地球村经济稳定发展。</p>
+      <p class="text-soft">参考链上地址：<code class="bg-black/20 px-2 py-1 rounded break-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></p>
+    </div>
+    <div class="lang en">
+      <h2 class="text-xl md:text-2xl font-bold mb-4">Global Money Supply Hits Record High: $103.66 Trillion</h2>
+      <p class="text-soft mb-4">Current fiat currency system creates money via debt, decoupled from real productivity, causing asset bubbles, wealth gap and currency volatility. EACO builds a parallel value network. New value tokens are anchored to physical assets, real productivity & carbon-silicon value, stabilizing Earth Village economy.</p>
+      <p class="text-soft">On-chain reference: <code class="bg-black/20 px-2 py-1 rounded break-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></p>
+    </div>
+    <div class="lang fr">
+      <h2 class="text-xl md:text-2xl font-bold mb-4">La masse monétaire mondiale atteint un sommet historique : 103,66 billions USD</h2>
+      <p class="text-soft mb-4">Le système fiduciaire actuel crée la monnaie par la dette, déconnectée de la productivité réelle, générant bulles, inégalités et volatilité. EACO construit un réseau de valeur parallèle. Les nouveaux jetons sont adossés aux actifs physiques, à la productivité réelle et à la valeur carbone-silicium pour stabiliser l’économie du village terrestre.</p>
+      <p class="text-soft">Référence chaîne : <code class="bg-black/20 px-2 py-1 rounded break-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></p>
+    </div>
+    <div class="lang es">
+      <h2 class="text-xl md:text-2xl font-bold mb-4">Oferta monetaria global alcanza máximo histórico: 103,66 billones USD</h2>
+      <p class="text-soft mb-4">El sistema fiat actual crea dinero mediante deuda, desvinculado de la productividad real, generando burbujas, desigualdad y volatilidad. EACO construye una red paralela de valor. Los nuevos tokens se anclan a activos físicos, productividad real y valor carbono-silicio para estabilizar la economía de la aldea terrestre.</p>
+      <p class="text-soft">Referencia on-chain: <code class="bg-black/20 px-2 py-1 rounded break-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></p>
+    </div>
+    <div class="lang pt">
+      <h2 class="text-xl md:text-2xl font-bold mb-4">Oferta monetária global atinge recorde: 103,66 trilhões USD</h2>
+      <p class="text-soft mb-4">O sistema fiduciário atual cria dinheiro por meio de dívida, desligado da produtividade real, causando bolhas, desigualdade e volatilidade cambial. EACO constrói uma rede paralela de valor. Novos tokens são lastreados em ativos físicos, produtividade real e valor carbono-silício para estabilizar a economia da aldeia global.</p>
+      <p class="text-soft">Referência on-chain: <code class="bg-black/20 px-2 py-1 rounded break-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></p>
+    </div>
+    <div class="lang my">
+      <h2 class="text-xl md:text-2xl font-bold mb-4">ကမ္ဘာ့ငွေပမာဏ သမိုင်းအမြင့်ဆုံး ၁၀၃.၆၆ ထရီလီယံဒေါ်လာ</h2>
+      <p class="text-soft mb-4">လက်ရှိအစိုးရငွေစနစ်သည် အကြွေးမှတစ်ဆင့်ငွေဖန်တီးသည်၊ အမှန်တကယ်ထုတ်လုပ်မှုနှင့်ခွဲခြားထားသည်။ ပိုင်ဆိုင်မှုပူဖောင်း၊ ကြွယ်ဝမှုကွာဟမှုနှင့် ငွေလဲနှုန်းမတည်ငြိမ်မှုဖြစ်ပေါ်စေသည်။ EACO သည် အပြိုင်တန်ဖိုးကွန်ရက်တစ်ခုတည်ဆောက်သည်။ တန်ဖိုးတိုကင်အသစ်များကို ရုပ်ပိုင်းဆိုင်ရာပိုင်ဆိုင်မှု၊ အမှန်တကယ်ထုတ်လုပ်မှုနှင့် ကာဗွန်-ဆီလီကွန်တန်ဖိုးနှင့်ချိတ်ဆက်ပြီး ကမ္ဘာ့ရွာစီးပွားရေးတည်ငြိမ်စေသည်။</p>
+      <p class="text-soft">ကွင်းဆက်လိပ်စာ- <code class="bg-black/20 px-2 py-1 rounded break-all">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code></p>
+    </div>
+  </section>
+
+  <!-- 核心模块：EACO 机制 -->
+  <section class="grid md:grid-cols-2 gap-6 mb-8">
+    <div class="card p-6">
+      <div class="lang zh active">
+        <h3 class="text-lg font-bold accent mb-3">✅ EACO 价值凭证绑定机制</h3>
+        <ul class="text-soft space-y-2">
+          <li>1. 实物资产池：钨金、贵金属、光伏、大宗商品、碳汇RWA托管审计</li>
+          <li>2. 真实生产力：已交割产出，物联网预言机采集净产出数据</li>
+          <li>3. 碳硅共生：碳基人力劳动 + 硅基算力AI生产力共同计量价值</li>
+          <li>4. 铸造规则：先核验资产增量，再铸凭证；资产减值自动销毁凭证</li>
+        </ul>
+      </div>
+      <div class="lang en">
+        <h3 class="text-lg font-bold accent mb-3">✅ EACO Value Anchoring Mechanism</h3>
+        <ul class="text-soft space-y-2">
+          <li>1. Physical asset pool: tungsten, precious metals, solar, commodities, carbon RWA audited custody</li>
+          <li>2. Real productivity: settled output, IoT oracles collect net production data</li>
+          <li>3. Carbon-silicon symbiosis: carbon human labor + silicon AI computing power co-valued</li>
+          <li>4. Mint rule: verify asset growth first, then mint; burn tokens automatically on asset impairment</li>
+        </ul>
+      </div>
+      <div class="lang fr">
+        <h3 class="text-lg font-bold accent mb-3">✅ Mécanisme d’ancrage EACO</h3>
+        <ul class="text-soft space-y-2">
+          <li>1. Pool actifs physiques : tungstène, métaux précieux, solaire, matières premières, RWA carbone audité</li>
+          <li>2. Productivité réelle : production réglée, oracles IoT collectent les données nettes</li>
+          <li>3. Symbiose carbone-silicium : travail humain carbone + puissance de calcul IA silicium</li>
+          <li>4. Règle frappe : vérifier croissance avant frappe ; destruction automatique si actifs baissent</li>
+        </ul>
+      </div>
+      <div class="lang es">
+        <h3 class="text-lg font-bold accent mb-3">✅ Mecanismo de anclaje EACO</h3>
+        <ul class="text-soft space-y-2">
+          <li>1. Pool activos físicos: tungsteno, metales preciosos, solar, materias primas, RWA carbono auditado</li>
+          <li>2. Productividad real: producción liquidada, oráculos IoT recogen datos netos</li>
+          <li>3. Simbiosis carbono-silicio: trabajo humano carbono + potencia de IA silicio</li>
+          <li>4. Regla emisión: verificar crecimiento antes de emitir; quema automática si activos caen</li>
+        </ul>
+      </div>
+      <div class="lang pt">
+        <h3 class="text-lg font-bold accent mb-3">✅ Mecanismo de ancoragem EACO</h3>
+        <ul class="text-soft space-y-2">
+          <li>1. Pool de ativos físicos: tungstênio, metais preciosos, solar, commodities, RWA carbono auditado</li>
+          <li>2. Produtividade real: produção liquidada, oráculos IoT coletam dados líquidos</li>
+          <li>3. Simbiose carbono-silício: trabalho humano carbono + poder computacional IA silício</li>
+          <li>4. Regra de cunhagem: valide crescimento antes de emitir; queima automática se ativos caírem</li>
+        </ul>
+      </div>
+      <div class="lang my">
+        <h3 class="text-lg font-bold accent mb-3">✅ EACO တန်ဖိုးချိတ်ဆက်မှုယန္တရား</h3>
+        <ul class="text-soft space-y-2">
+          <li>1. ရုပ်ပိုင်းဆိုင်ရာပိုင်ဆိုင်မှုစုစည်းမှု- တန်စတင်၊ အဖိုးတန်သတ္တု၊ ဆိုလာ၊ ကုန်ကြမ်း၊ ကာဗွန် RWA စစ်ဆေးထိန်းသိမ်း</li>
+          <li>2. အမှန်တကယ်ထုတ်လုပ်မှု- အပြီးသတ်ပို့ကုန်၊ IoT ဗျာဒိတ်စက်က အသားတင်ဒေတာစုဆောင်း</li>
+          <li>3. ကာဗွန်-ဆီလီကွန် အတူယှဉ်တည်တံ့မှု- လူ့အလုပ်သမား + AI တွက်ချက်စွမ်းအင် တန်ဖိုးတွဲတွက်</li>
+          <li>4. တိုကင်ဖန်တီးစည်းမျဉ်း- ပိုင်ဆိုင်မှုတိုးတက်မှုကိုအရင်စစ်ဆေး၊ ပိုင်ဆိုင်မှုကျလျှင် အလိုအလျောက်ဖျက်ဆီး</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card p-6">
+      <div class="lang zh active">
+        <h3 class="text-lg font-bold accent mb-3">💱 EACO 链上交易 & 手续费</h3>
+        <ul class="text-soft space-y-2">
+          <li>• P2P生态结算：0.05%–0.1%（鼓励实体贸易）</li>
+          <li>• DEX兑换：基础0.2%；高频投机附加税抑制短线炒作</li>
+          <li>• OTC大宗、DAR资产NFT：0.1%~0.25%</li>
+          <li>• 质押/分红：仅链Gas，无协议手续费</li>
+          <li>• 赎回：销毁凭证，无交易费，仅托管仓储物流费</li>
+          <li>• 手续费国库：审计、预言机运维、回购销毁，DAO治理投票</li>
+        </ul>
+      </div>
+      <div class="lang en">
+        <h3 class="text-lg font-bold accent mb-3">💱 EACO On-chain Trade & Fees</h3>
+        <ul class="text-soft space-y-2">
+          <li>• P2P settlement: 0.05%–0.1% for real supply chain</li>
+          <li>• DEX swap: base 0.2%; extra tax for high-frequency speculation</li>
+          <li>• OTC / DAR NFT: 0.1%~0.25%</li>
+          <li>• Stake / Dividend: only network gas, no protocol fee</li>
+          <li>• Redemption: burn token, no trade fee, custody & logistics cost only</li>
+          <li>• Fee treasury: audit, oracle, buyback & burn, governed by DAO vote</li>
+        </ul>
+      </div>
+      <div class="lang fr">
+        <h3 class="text-lg font-bold accent mb-3">💱 Échanges sur chaîne & frais EACO</h3>
+        <ul class="text-soft space-y-2">
+          <li>• Règlement P2P : 0,05–0,1% pour vraie chaîne logistique</li>
+          <li>• Swap DEX : base 0,2% ; taxe supplémentaire pour spéculation haute fréquence</li>
+          <li>• OTC / NFT DAR : 0,1%~0,25%</li>
+          <li>• Staking / dividendes : seulement gas réseau, pas frais protocole</li>
+          <li>• Remboursement : destruction jeton, pas frais échange, frais garde et logistique</li>
+          <li>• Trésorerie frais : audit, oracle, rachat & burn, gouvernance vote DAO</li>
+        </ul>
+      </div>
+      <div class="lang es">
+        <h3 class="text-lg font-bold accent mb-3">💱 Comercio on-chain y tarifas EACO</h3>
+        <ul class="text-soft space-y-2">
+          <li>• Liquidación P2P: 0,05–0,1% para cadenas reales</li>
+          <li>• Swap DEX: base 0,2%; impuesto extra para especulación frecuente</li>
+          <li>• OTC / NFT DAR: 0,1%~0,25%</li>
+          <li>• Staking / Dividendos: solo gas red, sin tarifa protocolo</li>
+          <li>• Canje: quema token, sin tarifa comercial, custodia y logística</li>
+          <li>• Tesorería tarifas: auditoría, oráculo, recompra y quema, votación DAO</li>
+        </ul>
+      </div>
+      <div class="lang pt">
+        <h3 class="text-lg font-bold accent mb-3">💱 Comércio on-chain e taxas EACO</h3>
+        <ul class="text-soft space-y-2">
+          <li>• Liquidação P2P: 0,05–0,1% para cadeias reais</li>
+          <li>• Swap DEX: base 0,2%; taxa extra para especulação frequente</li>
+          <li>• OTC / NFT DAR: 0,1%~0,25%</li>
+          <li>• Staking / Dividendos: apenas gás de rede, sem taxa de protocolo</li>
+          <li>• Resgate: queima token, sem taxa comercial, custódia e logística</li>
+          <li>• Tesouraria taxas: auditoria, oráculo, recompra e queima, votação DAO</li>
+        </ul>
+      </div>
+      <div class="lang my">
+        <h3 class="text-lg font-bold accent mb-3">💱 EACO ကွင်းဆက်ကုန်သွယ်မှုနှင့် အခကြေးငွေ</h3>
+        <ul class="text-soft space-y-2">
+          <li>• P2P အခြေချမှု- အစစ်အမှန်ထောက်ပံ့ကွင်းအတွက် 0.05%–0.1%</li>
+          <li>• DEX လဲလှယ်မှု- အခြေခံ 0.2%၊ မကြာခဏထင်းရှူးရောင်းဝယ်မှုအတွက် အပိုအခွန်</li>
+          <li>• OTC / DAR NFT: 0.1%~0.25%</li>
+          <li>• အစုရှယ်ယာထည့်ခြင်း / အမြတ်ဝေစု- ကွန်ရက်ဓာတ်ငွေ့သာ၊ ပရိုတိုကောအခကြေးမရှိ</li>
+          <li>• ပြန်လည်ရွေးယူခြင်း- တိုကင်ဖျက်ဆီး၊ ကုန်သွယ်ခကြေးမရှိ၊ ထိန်းသိမ်းနှင့် ပို့ဆောင်ခသာ</li>
+          <li>• အခကြေးငွေဘဏ္ဍာ- စစ်ဆေးမှု၊ ဗျာဒိတ်စက်၊ ပြန်ဝယ်ဖျက်ဆီး၊ DAO မဲပေးအုပ်ချုပ်</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 闭环流程 -->
+  <section class="card p-6 mb-8">
+    <div class="lang zh active">
+      <h3 class="text-xl font-bold accent mb-4">🔄 EACO 完整经济闭环</h3>
+      <ol class="text-soft space-y-2">
+        <li>1. 实体资产入池，第三方审计确权上链，生成DAR资产NFT</li>
+        <li>2. 预言机核验资产净值，按抵押系数铸造EACO价值凭证</li>
+        <li>3. 凭证流通：P2P供应链结算 / DEX兑换 / OTC大宗 / DAR资产转让</li>
+        <li>4. 实体产业产生现金流，自动分红给凭证持有者</li>
+        <li>5. 用户发起赎回 → EACO链上销毁 → 托管池兑付法币或实物资产</li>
+        <li>6. 资产出库/减值 → 合约自动销毁对应EACO，维持储备覆盖率</li>
+      </ol>
+    </div>
+    <div class="lang en">
+      <h3 class="text-xl font-bold accent mb-4">🔄 EACO Full Economic Loop</h3>
+      <ol class="text-soft space-y-2">
+        <li>1. Physical assets enter pool, third-party audit & mint DAR NFT</li>
+        <li>2. Oracle verifies net asset value, mint EACO by collateral ratio</li>
+        <li>3. Circulation: P2P supply settlement / DEX swap / OTC / DAR transfer</li>
+        <li>4. Real business cashflow generates auto dividends for holders</li>
+        <li>5. User redemption → EACO burn on-chain → custody pool pays fiat or physical asset</li>
+        <li>6. Asset exit / impairment → contract auto-burn EACO to keep reserve ratio</li>
+      </ol>
+    </div>
+    <div class="lang fr">
+      <h3 class="text-xl font-bold accent mb-4">🔄 Boucle économique complète EACO</h3>
+      <ol class="text-soft space-y-2">
+        <li>1. Actifs physiques entrent dans le pool, audit tiers, frappe NFT DAR</li>
+        <li>2. Oracle vérifie valeur nette, frappe EACO selon ratio collatéral</li>
+        <li>3. Circulation : règlement P2P / swap DEX / OTC / transfert DAR</li>
+        <li>4. Flux de trésorerie réel verse dividendes automatiques aux détenteurs</li>
+        <li>5. Remboursement utilisateur → destruction EACO sur chaîne → pool paie fiat ou actif physique</li>
+        <li>6. Sortie / dépréciation actif → contrat détruit EACO pour maintenir ratio réserve</li>
+      </ol>
+    </div>
+    <div class="lang es">
+      <h3 class="text-xl font-bold accent mb-4">🔄 Ciclo económico completo EACO</h3>
+      <ol class="text-soft space-y-2">
+        <li>1. Activos físicos entran al pool, auditoría externa, emisión NFT DAR</li>
+        <li>2. Oráculo verifica valor neto, emite EACO según ratio de garantía</li>
+        <li>3. Circulación: liquidación P2P / swap DEX / OTC / transferencia DAR</li>
+        <li>4. Flujo de caja real genera dividendos automáticos para titulares</li>
+        <li>5. Canje usuario → quema EACO on-chain → pool paga fiat o activo físico</li>
+        <li>6. Salida / deterioro activo → contrato quema EACO para mantener ratio reserva</li>
+      </ol>
+    </div>
+    <div class="lang pt">
+      <h3 class="text-xl font-bold accent mb-4">🔄 Ciclo econômico completo EACO</h3>
+      <ol class="text-soft space-y-2">
+        <li>1. Ativos físicos entram no pool, auditoria externa, cunhagem NFT DAR</li>
+        <li>2. Oráculo verifica valor líquido, emite EACO conforme taxa de garantia</li>
+        <li>3. Circulação: liquidação P2P / swap DEX / OTC / transferência DAR</li>
+        <li>4. Fluxo de caixa real gera dividendos automáticos para detentores</li>
+        <li>5. Resgate usuário → queima EACO on-chain → pool paga fiat ou ativo físico</li>
+        <li>6. Saída / depreciação ativo → contrato queima EACO para manter taxa reserva</li>
+      </ol>
+    </div>
+    <div class="lang my">
+      <h3 class="text-xl font-bold accent mb-4">🔄 EACO အပြည့်အဝစီးပွားရေးလည်ပတ်မှုကွင်း</h3>
+      <ol class="text-soft space-y-2">
+        <li>1. ရုပ်ပိုင်းဆိုင်ရာပိုင်ဆိုင်မှုစုစည်းမှုထဲသို့ဝင်၊ ပြင်ပစစ်ဆေး၊ DAR NFT ဖန်တီး</li>
+        <li>2. ဗျာဒိတ်စက်က အသားတင်တန်ဖိုးစစ်ဆေး၊ အပေါင်းအချိုးဖြင့် EACO ဖန်တီး</li>
+        <li>3. လည်ပတ်မှု- P2P ထောက်ပံ့အခြေချ / DEX လဲလှယ် / OTC / DAR လွှဲပြောင်း</li>
+        <li>4. အစစ်အမှန်စီးပွားရေးငွေစီးဆင်းမှုမှ ပိုင်ရှင်များထံ အလိုအလျောက်အမြတ်ဝေစုပေး</li>
+        <li>5. အသုံးပြုသူပြန်လည်ရွေးယူ → EACO ကွင်းဆက်ပေါ်ဖျက်ဆီး → ဘဏ္ဍာစုက fiat သို့မဟုတ် ရုပ်ပိုင်းဆိုင်ရာပိုင်ဆိုင်မှုပေး</li>
+        <li>6. ပိုင်ဆိုင်မှုထွက်ခြင်း / တန်ဖိုးကျခြင်း → စာချုပ်က အရံအချိုးထိန်းသိမ်းရန် EACO အလိုအလျောက်ဖျက်ဆီး</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 底部免责 -->
+  <footer class="card p-6">
+    <div class="lang zh active">
+      <p class="text-soft text-sm">⚠️ 免责声明：本页面仅为EACO地球村经济概念演示，不构成金融投资建议。EACO价值凭证不在中国大陆境内开展代币交易业务，仅面向海外合格参与者，遵守各地KYC/AML监管。</p>
+    </div>
+    <div class="lang en">
+      <p class="text-soft text-sm">⚠️ Disclaimer: This page is for EACO Earth Village concept demo only, not investment advice. EACO value tokens are NOT available for trading in mainland China, only for qualified overseas participants with KYC/AML compliance.</p>
+    </div>
+    <div class="lang fr">
+      <p class="text-soft text-sm">⚠️ Avertissement : cette page est une démonstration conceptuelle EACO, pas conseil d’investissement. Les jetons EACO ne sont pas négociables en Chine continentale, réservés aux participants qualifiés étrangers conformément KYC/AML.</p>
+    </div>
+    <div class="lang es">
+      <p class="text-soft text-sm">⚠️ Aviso: esta página es demostración conceptual EACO, no asesoría de inversión. Los tokens EACO no se negocian en China continental, solo participantes cualificados en el extranjero bajo KYC/AML.</p>
+    </div>
+    <div class="lang pt">
+      <p class="text-soft text-sm">⚠️ Aviso: esta página é demonstração conceitual EACO, não aconselhamento de investimento. Tokens EACO não negociados na China continental, apenas participantes qualificados no exterior com KYC/AML.</p>
+    </div>
+    <div class="lang my">
+      <p class="text-soft text-sm">⚠️ ငြင်းဆိုချက်- ဤစာမျက်နှာသည် EACO ကမ္ဘာ့ရွာစီးပွားရေးအယူအဆပြသမှုသာဖြစ်ပြီး ရင်းနှီးမြှုပ်နှံမှုအကြံပြုချက်မဟုတ်ပါ။ EACO တိုကင်များကို တရုတ်ပြည်မကြီးတွင် ရောင်းဝယ်ခွင့်မရှိ၊ KYC/AML စည်းမျဉ်းနှင့်အညီ အရည်အချင်းပြည့်မီသောနိုင်ငံခြားပါဝင်သူများသာ အသုံးပြုနိုင်သည်။</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+// 语言切换
+function setLang(langCode){
+  document.querySelectorAll('.lang').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll(`.lang.${langCode}`).forEach(el=>el.classList.add('active'));
+}
+// 主题切换
+function setTheme(themeName){
+  document.body.className = '';
+  document.body.classList.add(`theme-${themeName}`,'min-h-screen');
+}
+// 默认中文 + 宇宙蓝
+setLang('zh');
+setTheme('cosmic');
+</script>
+</body>
+</html>
