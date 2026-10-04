@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外华人全球发展指南 | Global Chinese Development Guide</title>
+<style>
+  :root{
+    --paper:#FAF8F5;
+    --paper2:#F2EEE6;
+    --ink:#233B4D;
+    --slate:#4A6B7A;
+    --cinnabar:#B35340;
+    --sage:#7A9B7E;
+    --line:#E3DCD0;
+    --muted:#7C8689;
+    --serif:Georgia,"Times New Roman","Songti SC","SimSun","Noto Serif SC",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:radial-gradient(rgba(35,59,77,.028) 1px,transparent 1px);
+    background-size:22px 22px;
+    line-height:1.75;
+    font-size:16px;
+  }
+  a{color:var(--slate);text-decoration:none}
+  a:hover{color:var(--cinnabar)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 28px}
+
+  /* 语言切换 */
+  .langbar{
+    position:fixed;top:16px;right:20px;z-index:50;
+    display:flex;gap:4px;background:rgba(250,248,245,.92);
+    border:1px solid var(--line);border-radius:999px;padding:3px;
+    box-shadow:0 2px 10px rgba(35,59,77,.08);
+    backdrop-filter:blur(4px);
+  }
+  .langbar button{
+    font-family:var(--sans);font-size:13px;letter-spacing:.5px;
+    border:0;background:transparent;color:var(--slate);
+    padding:5px 14px;border-radius:999px;cursor:pointer;transition:all .18s;
+  }
+  .langbar button.active{background:var(--ink);color:#fff}
+
+  /* 报头 */
+  .masthead{padding:84px 0 44px;text-align:center;position:relative}
+  .kicker{
+    font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--cinnabar);
+    margin-bottom:18px;font-weight:600;
+  }
+  .masthead h1{
+    font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,52px);
+    color:var(--ink);line-height:1.18;letter-spacing:.02em;
+  }
+  .masthead .sub{
+    font-family:var(--serif);font-style:italic;color:var(--slate);
+    font-size:clamp(15px,2vw,19px);margin-top:14px;
+  }
+  .masthead .intro{
+    max-width:720px;margin:26px auto 0;color:#465A68;font-size:15px;
+  }
+  .rule{
+    width:86px;height:3px;background:var(--cinnabar);margin:30px auto 0;
+    border-radius:2px;position:relative;
+  }
+  .rule::after{
+    content:"";position:absolute;left:50%;transform:translateX(-50%);top:8px;
+    width:160px;height:1px;background:var(--line);
+  }
+
+  /* 导航 */
+  .toc{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin:34px 0 0;padding:18px 0;
+  }
+  .toc ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 8px}
+  .toc a{
+    display:inline-block;font-size:13.5px;color:var(--slate);
+    border:1px solid var(--line);background:var(--paper2);
+    padding:4px 14px;border-radius:999px;transition:all .15s;
+  }
+  .toc a:hover{border-color:var(--sage);color:var(--ink);background:#fff}
+
+  /* 章节 */
+  section.block{padding:58px 0 8px;border-top:1px solid var(--line);margin-top:6px}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:8px}
+  .secnum{
+    font-family:var(--serif);font-size:52px;line-height:1;color:var(--cinnabar);
+    min-width:64px;text-align:right;user-select:none;
+  }
+  .sec-title{font-family:var(--serif);font-size:clamp(22px,3vw,30px);color:var(--ink);font-weight:700}
+  .sec-ensub{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14.5px;margin-bottom:22px;margin-left:82px}
+  .lead{
+    font-size:15.5px;color:#40525F;max-width:820px;margin:0 0 24px 82px;
+  }
+  h3{
+    font-family:var(--serif);font-size:19px;color:var(--slate);
+    margin:34px 0 12px;display:flex;align-items:center;gap:10px;
+  }
+  h3::before{content:"";width:22px;height:3px;background:var(--sage);border-radius:2px;flex:none}
+
+  blockquote{
+    margin:20px 0 24px 82px;padding:16px 20px 14px;background:var(--paper2);
+    border-left:4px solid var(--cinnabar);border-radius:0 6px 6px 0;
+    font-size:14.5px;color:#4A5B66;
+  }
+  blockquote p{margin:4px 0}
+  blockquote strong{color:var(--ink)}
+  .note-flag{color:var(--cinnabar);font-weight:600}
+
+  /* 表格 */
+  .tblwrap{overflow-x:auto;margin:6px 0 8px;border-radius:8px;box-shadow:0 1px 0 rgba(35,59,77,.04)}
+  table{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+  thead th{
+    background:var(--ink);color:#F6F1E8;text-align:left;
+    padding:11px 13px;font-weight:600;letter-spacing:.02em;font-size:13.5px;white-space:nowrap;
+  }
+  tbody td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;color:#3A4B58}
+  tbody tr:nth-child(even){background:var(--paper)}
+  tbody tr:hover{background:#F7F1E6}
+  td .tick{color:var(--sage);font-weight:700}
+  td .warn{color:var(--cinnabar);font-weight:700}
+  td code, code.addr{
+    font-family:Consolas,Menlo,monospace;font-size:12.5px;background:var(--paper2);
+    padding:2px 6px;border-radius:4px;border:1px solid var(--line);word-break:break-all;color:var(--ink);
+  }
+  .tbl-cap{font-size:13px;color:var(--muted);margin:2px 0 18px;font-style:italic}
+
+  /* 列表与卡片 */
+  ul.lst{margin:8px 0 18px 82px;list-style:none}
+  ul.lst li{position:relative;padding-left:22px;margin:9px 0;font-size:15px;color:#3A4B58}
+  ul.lst li::before{content:"";position:absolute;left:4px;top:10px;width:7px;height:7px;background:var(--sage);border-radius:2px;transform:rotate(45deg)}
+  ol.lst{margin:8px 0 18px 96px}
+  ol.lst li{margin:7px 0;font-size:15px;color:#3A4B58}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:14px 0 22px 82px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-top:3px solid var(--sage);
+    padding:16px 18px;border-radius:8px;
+  }
+  .card .ct{font-weight:700;color:var(--ink);margin-bottom:6px;font-size:15px}
+  .card .cd{font-size:13.5px;color:#4A5B66}
+  .card.ci{border-top-color:var(--cinnabar)}
+  .card.cs{border-top-color:var(--slate)}
+
+  .pill{
+    display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;
+    padding:2px 10px;border-radius:999px;margin:0 4px 4px 0;
+  }
+  .pill.sg{background:#EAF0E6;color:#4F6B4F}
+  .pill.sl{background:#E7EDF0;color:var(--slate)}
+  .pill.ci{background:#F5E6E0;color:var(--cinnabar)}
+
+  .notice{
+    margin:26px 0 6px 82px;padding:15px 18px;background:#FBF3EC;border:1px solid #EACFBE;
+    border-radius:8px;font-size:14px;color:#6B4A36;
+  }
+
+  /* 合同地址 */
+  .addr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:14px 0 10px 82px}
+  .addr-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .addr-card .an{font-weight:700;font-size:16px;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .addr-card .an .tickd{width:9px;height:9px;border-radius:50%;background:var(--sage);display:inline-block}
+  .addr-card .full{font-family:Consolas,Menlo,monospace;font-size:12.5px;margin-top:8px;color:var(--slate);word-break:break-all;line-height:1.6}
+
+  footer{
+    margin-top:70px;border-top:2px solid var(--ink);
+    background:var(--ink);color:#D8D2C6;padding:34px 0 44px;font-size:13.5px;
+  }
+  footer .wrap{display:flex;flex-direction:column;gap:8px}
+  footer .frow{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+  footer strong{color:#fff}
+  footer .disc{color:#AEB3AF;font-size:12.5px;line-height:1.7}
+  .totop{position:fixed;bottom:24px;right:24px;z-index:40}
+  .totop a{
+    display:block;width:42px;height:42px;line-height:40px;text-align:center;
+    background:var(--cinnabar);color:#fff;border-radius:50%;font-size:20px;
+    box-shadow:0 4px 14px rgba(179,83,64,.35);font-family:var(--serif);
+  }
+
+  @media (max-width:720px){
+    .masthead{padding:72px 0 30px}
+    .secnum{font-size:40px;min-width:44px}
+    .sec-ensub,.lead,blockquote,ul.lst,.grid3,.notice,.addr-grid{margin-left:0}
+    ol.lst{margin-left:28px}
+    .langbar{top:12px;right:12px}
+    body{font-size:15px}
+  }
+  @media print{
+    .langbar,.totop{display:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<div class="langbar" id="langbar" role="group" aria-label="Language / 语言">
+  <button data-lang="zh" type="button" class="active">华语</button>
+  <button data-lang="en" type="button">English</button>
+</div>
+
+<header class="masthead" id="masthead"></header>
+
+<nav class="toc" id="toc" aria-label="Contents / 目录"></nav>
+
+<main id="content" class="wrap"></main>
+
+<div class="totop"><a href="#top" id="toTop">&#8593;</a></div>
+
+<footer id="foot"></footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ========== 双语数据 (zh / en) ========== */
+  var DATA = {
+    zh: {
+      docTitle:"海外华人全球发展指南 | Global Chinese Development Guide",
+      kicker:"Global Chinese Development Guide \u00b7 地球村观察",
+      h1:"海外华人全球发展指南",
+      sub:"历史社区 \u00b7 未来城市 \u00b7 生活分层 \u00b7 文明稳定 \u00b7 网络经济",
+      intro:"本指南面向海外华夏同胞与全球华人社区：系统梳理华人海外建国的历史足迹、未来宜居城市、生活水平分层、动荡与星际流浪时代的文明存续框架，以及基于 EACO \u00b7 eCNH \u00b7 SOL \u00b7 DOGE \u00b7 BNB \u00b7 ETH \u00b7 BTC 的全球网络经济稳定方案——并以\u201c欧亚非 Web3 友善前 10 城市\u201d的地球村视角做节点观察。双语呈现，随文切换华语 / English。",
+      nav: [
+        ["#sec1","一、历史足迹"],
+        ["#sec2","二、未来城市"],
+        ["#sec3","三、生活分层"],
+        ["#sec4","四、文明稳定"],
+        ["#sec5","五、网络经济"],
+        ["#sec6","六、Web3 城市观测"],
+        ["#sec7","七、经济危机"],
+        ["#sec8","八、附录"]
+      ],
+      s1:{
+        num:"一",
+        en:"Histories",
+        title:"历史上全球海外华人建立的国家、社区与城市",
+        ensub:"Nations, communities and cities built by the Chinese diaspora",
+        lead:"从唐末宋代开始的\u201c下南洋\u201d迁徙，让海外华人形成了一条从自治聚落到现代华人国家的完整光谱。下列政权分\u201c可靠史实\u201d与\u201c传说/存疑\u201d两档，请区分对待。",
+        rTitle:"1.1 华人建立的政权（国家 / 自治政体）",
+        regimes:[
+          ["兰芳大统制共和国","1777\u20131886","印尼西加里曼丹（婆罗洲）","罗芳伯（广东梅县客家人）","史料最扎实的华人自治政权：矿业公司\u201c公司体制\u201d下的共和国雏形，总长选举、全民议事，存续约 110 年，后为荷兰殖民势力吞并"],
+          ["戴燕王国","18 世纪中期","婆罗洲（今印尼加里曼丹）","吴元盛（广东嘉应州人）","华人矿工首领建立的地方政权，与兰芳同期互动，见于地方史料与华侨史记载"],
+          ["纳土纳华人政权","约 17\u201318 世纪","印尼纳土纳群岛","张杰绪（传说）","传说色彩较浓、正史证据有限，作为华人海上聚落的历史记忆被广泛引用"],
+          ["飞龙国（张琏）","1560 年代","闽粤赣边区（部分传说延伸至苏门答腊）","张琏（广东饶平人）","史实部分为明朝境内民变；\u201c海外飞龙国\u201d版本缺乏可靠史料，须谨慎对待"],
+          ["顺塔国传说","约 13\u201315 世纪","爪哇","陆自立（传说）","《明史》载爪哇有华人\u201c新村\u201d聚落，但\u201c南宋遗民建国\u201d说法证据不足，属传说范畴"],
+          ["吞武里王朝（郑信）","1767\u20131782","暹罗（今泰国）","郑信（潮汕裔）","泰国历史上短暂王朝，郑信之父为潮州人，被视为华裔建立国家政权的范例"],
+          ["宋卡吴氏政权","18\u201319 世纪","泰国南部宋卡","吴让（漳州海澄人）","华人自治城主政权，长期管理宋卡港务与地方治理，延续数代"],
+          ["新加坡","1965 独立至今","马来半岛南端","\u2014","唯一以华人为主体民族的现代主权国家，华人约占常住人口 74%（2025），是华人海外建国的最高形态"]
+        ],
+        rNote:"\u26a0\ufe0f 史学提示：民间流传\u201c海外华人建立八国\u201d，其中顺塔国、纳土纳、海外飞龙国等属传说或证据不足，应作为历史记忆而非严格史实；兰芳、戴燕、吞武里、宋卡、新加坡则有较可靠史料支撑。",
+        cTitle:"1.2 华人建立的著名社区与城市（唐人街 / 华埠）",
+        chinatowns:[
+          ["美国旧金山唐人街","1848 年淘金热时期成形，北美历史最悠久的唐人街之一，华裔约占全市人口 21%"],
+          ["美国纽约曼哈顿唐人街","亚洲以外最早成型的华人商业区之一，列入美国国家史迹名录"],
+          ["泰国曼谷耀华力路","东南亚最繁华唐人街之一，近 200 年历史，潮州籍华人为主"],
+          ["日本横滨中华街","约 140 余年历史，日本乃至亚洲最大的中华街"],
+          ["新加坡牛车水","新加坡华人发祥地，会馆、庙宇、传统商铺与摩登商圈交融"],
+          ["马来西亚槟城乔治市 \u00b7 吉隆坡茨厂街","乔治市为世界文化遗产；茨厂街为吉隆坡华人核心区"],
+          ["法国巴黎十三区","欧洲规模最大的华人聚居区，以东南亚华裔移民为主，春节游行闻名"],
+          ["澳大利亚墨尔本唐人街","澳洲最早的唐人街，中式牌坊与多元华人文化活动丰富"],
+          ["加拿大温哥华列治文","北美华人比例最高的城市之一，中文普及度高，新老移民聚居首选"],
+          ["菲律宾马尼拉唐人街","华人移居菲岛可溯至 11 世纪，马尼拉华埠为亚洲历史最悠久者之一"],
+          ["南非约翰内斯堡唐人街","2005 年正式注册，非洲第一条唐人街"],
+          ["美国洛杉矶圣盖博谷 \u00b7 蒙特利公园","\u201c小台北\u201d时代起发展的大洛杉矶华人圈，横跨数城"]
+        ],
+        lTitle:"1.3 历史启示",
+        lessons:[
+          "组织力是生存力：华人政权与社区的存续，依靠\u201c会馆\u2014宗乡\u2014商会\u2014武装自保\u2014公共教育\u201d的自组织体系。",
+          "包容与扎根并重：泰国华人融入主流、马来西亚华人坚守华文教育，是两种成功的路径范式。",
+          "从聚落到国家：新加坡表明华人社群能在现代国家框架下实现治理现代化与多元融合，这是最高形态的\u201c稳健发展\u201d。"
+        ]
+      },
+      s2:{
+        num:"二",
+        en:"Future Cities",
+        title:"未来适合海外华夏网友工作生活发展的城市",
+        ensub:"Cities for overseas Chinese to live, work and grow",
+        lead:"选择城市建议从六维综合打分：华语环境、经济发展与机会、签证与身份政策、生活成本与收入比、安全与法治、数字金融与网络自由度。以下为三梯队画像（机会 > 宜居 > 游牧/持有）。",
+        dims:"评估维度：华语环境 \u00b7 经济机会 \u00b7 签证身份 \u00b7 成本收入比 \u00b7 安全法治 \u00b7 数字金融自由度",
+        tiers:[
+          {
+            t:"第一梯队：华人圈层成熟、机会密集（事业优先）",
+            head:["城市","优势","挑战"],
+            rows:[
+              ["新加坡","华人主体社会（约 74%）；全球金融与科技中心；法治与廉洁度极高；中资与 Web3 企业区域总部聚集","生活成本极高；PR 申请竞争激烈"],
+              ["香港","背靠大湾区，资本与人才枢纽；家族办公室快速增长（2025 底约 3,384 家）；离岸人民币（CNH）中心","高房价；地缘政治不确定性"],
+              ["迪拜（阿联酋）","约 30 万华人（龙城约 15 万）；免税政策；D33 经济议程；加密友好监管（VARA）","炎热气候；身份政策门槛"]
+            ]
+          },
+          {
+            t:"第二梯队：华人社区成熟、宜居平衡（家庭优先）",
+            head:["城市","优势","挑战"],
+            rows:[
+              ["马来西亚（吉隆坡 \u00b7 槟城 \u00b7 新山）","华语环境好；华文教育体系完整；生活成本低；第二家园（MM2H）政策","产业升级机会有限；外汇与网络环境一般"],
+              ["泰国（曼谷 \u00b7 清迈 \u00b7 普吉）","华人融入深；旅游与生意机会多；长期签证（DTV）便利；成本友好","教育体系分叉；部分行业外资受限"],
+              ["加拿大（温哥华 \u00b7 多伦多）","华人比例高、中文普及；教育医疗好；列治文近半人口为华人","房价高企；税务负担重；冬季漫长"],
+              ["澳大利亚（墨尔本 \u00b7 悉尼）","2025 全球宜居排名第 4 / 6；华人社区成熟；教育医疗满分","房价高；移民打分竞争激烈"],
+              ["新西兰（奥克兰）","宜居并列第 7；自然与都市平衡；华人社区规模可观","市场小；机会相对有限"]
+            ]
+          },
+          {
+            t:"第三梯队：数字游民与金融友好型（灵活优先）",
+            head:["城市","优势","挑战"],
+            rows:[
+              ["葡萄牙（里斯本 \u00b7 波尔图）","宜居靠前；数字游民签证与 D7 签证友好；欧洲生活成本相对低","薪资一般；语言门槛"],
+              ["瑞士（苏黎世 \u00b7 楚格）","全球最宜居与加密友好（Crypto Valley）双料代表；法治顶级","生活成本全球最高；工作许可严格"],
+              ["美国（湾区 \u00b7 洛杉矶 \u00b7 纽约）","科技与金融密度全球第一；华人社群与唐人街历史深厚","移民签证瓶颈；成本高；社会摩擦增多"],
+              ["日本（东京 \u00b7 大阪）","大阪进入 2025 全球宜居前十；安全与秩序顶级；距中国近","语言门槛高；职场文化保守"],
+              ["阿联酋（阿布扎比 \u00b7 沙迦）","中东增长极；产业链延伸空间大","产业以能源与贸易为主"]
+            ]
+          }
+        ],
+        aTitle:"分人群建议",
+        advice:[
+          ["技术 / 金融从业者","新加坡、香港、迪拜优先——机会密度与政策确定性最高"],
+          ["跨境电商 / 供应链商人","迪拜（龙城）、曼谷、吉隆坡、胡志明市"],
+          ["数字游民 / 创意从业者","里斯本、清迈、巴厘岛、波尔图"],
+          ["家庭移民 / 子女教育","温哥华、墨尔本、奥克兰、新加坡"],
+          ["退休 / 慢生活","槟城、清迈、普吉、波尔图"]
+        ]
+      },
+      s3:{
+        num:"三",
+        en:"Livelihood Tiers",
+        title:"生活水平分层：3 层 / 5 层 / 10 层划分与应对",
+        ensub:"Living standards in 3, 5 and 10 tiers \u2014 how to classify and respond",
+        lead:"分层用途：自我定位、城市选择、财务规划与风险缓冲。真实水平由\u201c收入 + 净资产 + 城市成本 + 被动收入占比\u201d四项共同决定，以下以\u201c家庭年可支配收入（等值 USD）\u201d为主标尺。",
+        method:["收入口径：家庭年可支配收入（税后、含被动收入）","净资产口径：总资产减负债","城市成本系数：以购买力平价（PPP）或生活成本指数校准，德里与苏黎世同收入不同水平","被动收入占比：占比越高，同收入下生活水平越稳固"],
+        threeTitle:"3 层（粗粒度：生存 \u2014 发展 \u2014 自由）",
+        three:[
+          ["上层 \u00b7 自由层","收入与净资产覆盖全部所需，金钱不再是主要约束；可全球配置资产、多中心城市生活","资产分散（跨币种、资产、区域）；家族传承与信托安排；留足流动性"],
+          ["中层 \u00b7 发展层","收入 > 支出且有结余，可储蓄、可投资、可发展；房贷教育压力可控","6\u201412 个月应急资金；定投指数与稳健资产；提升被动收入占比；防\u201c伪中产\u201d跌落"],
+          ["下层 \u00b7 生存层","收入约等于或低于支出，抗风险能力弱","控支与提升技能现金流；用足政策资源与社区互助；避免高息借贷；先攒第一桶金"]
+        ],
+        fiveTitle:"5 层（全国五等分 / 国际通用口径，家庭年可支配收入等值 USD 参考）",
+        five:[
+          ["低收入层","< 约 2 万","收入紧平衡，抗风险弱","技能跃迁 + 政策资源；社区互助；控制负债"],
+          ["中下收入层","约 2\u20145 万","温饱之上，改善空间有限","预算管理；3 个月应急金；低成本提升技能"],
+          ["中间收入层","约 5\u201412 万","典型中产，房贷教育压力并存","6 个月应急金；稳健投资组合；健康与教育投资"],
+          ["中上收入层","约 12\u201430 万","中产上层，资产积累加速","资产全球化配置；税务规划；家族传承设计"],
+          ["高收入层","> 约 30 万","财务自由趋向","多层次信托 / 保险 / 慈善架构；身份与税务优化"]
+        ],
+        tenTitle:"10 层（精粒度：资产与收入双维，家庭年收入 / 净资产，等值 USD）",
+        ten:[
+          ["D1 赤贫","< 0.3 万","< 0.3 万","生存临界","生存保障与社会救助"],
+          ["D2 贫困","0.3\u20140.8 万","< 1 万","温饱艰难","技能培训 + 转移支付"],
+          ["D3 温饱","0.8\u20142 万","1\u20143 万","基本生活可维持","攒应急金与第一桶金"],
+          ["D4 小康","2\u20144 万","3\u201410 万","生活宽裕","建立家庭保障与教育金"],
+          ["D5 中产入门","4\u20147 万","10\u201425 万","典型中产","稳健投资组合建立"],
+          ["D6 中产上阶","7\u201414 万","25\u201460 万","中产上层","全球资产配置起步"],
+          ["D7 高产","14\u201430 万","60\u2014150 万","财务从容","税务 / 信托 / 传承规划"],
+          ["D8 小富","30\u2014100 万","150\u2014500 万","半财务自由","家族办公室与多国身份"],
+          ["D9 中富","100\u2014300 万","500\u20142000 万","财务自由","多元资产 + 慈善架构"],
+          ["D10 巨富","> 300 万","> 2000 万","顶级财富","深度传承与文明性投入"]
+        ],
+        tenNote:"以上 USD 区间为全球可比粗划，具体城市需乘以生活成本系数调整；民间\u201c年收入 10\u201450 万人民币为中产\u201d等口径可作国内参考，出国后请按所在城市重新校准。",
+        fourTitle:"分层应对总则",
+        principles:[
+          "先保流动性，再谈收益：任何层级的底线是\u201c6 个月支出\u201d的安全垫。",
+          "收入 > 资产 > 旁支：早期靠人力资本，中期靠资产配置，后期靠被动收入与文化资本。",
+          "全球化是升层的最快杠杆：海外华人天然拥有多市场、多币种、多身份的比较优势。",
+          "防\u201c伪中产\u201d陷阱：高收入 + 高负债 = 脆弱的\u201c上层体验、下层弹性\u201d。"
+        ]
+      },
+      s4:{
+        num:"四",
+        en:"Civilization Stability",
+        title:"全球动荡与星际文明流浪中的文明稳定框架",
+        ensub:"A stability framework for global turbulence \u2014 even an interstellar diaspora",
+        lead:"文明稳定的核心理念：不把希望押在单一城市、单一国家、单一能源或单一信息源上。构建\u201c知识冗余 \u00b7 能量粮食自主 \u00b7 分布式社区 \u00b7 去中心化治理 \u00b7 身份教育传承\u201d五大支柱。",
+        threatsTitle:"4.1 威胁识别：我们面对什么",
+        threats:[
+          "地缘冲突与系统性战争：单点城市、单点国家风险上升",
+          "经济与金融动荡：债务、通胀、汇率与网络金融风险叠加",
+          "气候与环境危机：沿海城市、粮食与能源供应链受冲击",
+          "AI 与技术跃迁：就业结构、信息真实性与权力结构重构",
+          "（远期）星际文明流浪：小行星、太阳系边缘、太空城市与\u201c方舟\u201d设想——文明需要可迁移的韧性架构"
+        ],
+        pillarsTitle:"4.2 文明稳定的五大支柱",
+        pillars:[
+          ["1. 知识冗余","文明的核心资产是信息","多副本知识库（本地 + 云端 + 上链存证）、种子库、开源档案；数据文明不因单点灾难失忆"],
+          ["2. 能量与粮食自主","生命系统的地基","分布式能源（光伏 / 储能 / 小型核能）、垂直农业与种子备份、社区粮仓"],
+          ["3. 分布式社区网络 DCN","不把所有鸡蛋放一个篮子","华人社区在全球多城建立互为备份节点，形成\u201c多点自治、网络互联\u201d的全球网络"],
+          ["4. 去中心化治理","权力与资金不单点化","社区 DAO、链上治理、多签资金池、透明决策审计；治理可迁移、可继承"],
+          ["5. 身份与教育传承","文明的基因","双语教育、文化档案（方言、习俗、家谱）、跨代际知识传递；语言与价值观是压舱石"]
+        ],
+        mcanTitle:"4.3 \u201c方舟城市网\u201d（Multi-City Ark Network, MCAN）",
+        mcan:["单城无法保文明，也不该脆弱地活：把\u201c一城赌国家\u201d升级为\u201c多城互为备份\u201d。","主城（事业中心）+ 备份城（资产与身份）+ 精神城（文化与教育）三层结构。","个人方舟：护照 / 身份多元化、资产跨币种化、居住地与商业地分离、教育可选多种体系。"],
+        mcanPrinciple:"韧性四原则：分散（Multi-location）\u00b7 冗余（Multi-backup）\u00b7 互连（Multi-link）\u00b7 可迁移（Multi-mobility）",
+        spaceTitle:"4.4 星际文明流浪时代的文明连续性",
+        space:[
+          "数据即文明：语言、文化、科学、历史做\u201c冻存 + 多份备份 + 时空信封\u201d，包括上链存证。",
+          "文明基因库：生物多样性与人类文化多样性的双重冻存。",
+          "\u201c宇宙宪法\u201d：预先确立普适规则（禁止文明灭绝、保护文化多样性、资源公平分配），作为跨星球共同底层协议。",
+          "人类命运共同体 2.0：从\u201c国家间合作\u201d升级为\u201c文明间协同\u201d——网络经济与分布式基础设施正是技术底座。"
+        ]
+      },
+      s5:{
+        num:"五",
+        en:"Network Economy",
+        title:"利用 EACO \u00b7 eCNH \u00b7 SOL \u00b7 DOGE \u00b7 BNB \u00b7 ETH \u00b7 BTC 维护全球互联网网络经济稳定",
+        ensub:"Stabilising the global internet economy with a multi-anchored crypto system",
+        note:"本方案为基于用户提供资料的理论框架，不构成投资建议；合约地址、流通量与项目进展请以官方公告为准。",
+        assetsTitle:"5.1 资产角色分工（多资产弹性体系）",
+        assets:[
+          ["BTC","价值之锚：全球共识最强、最去中心化的价值存储，作为体系\u201c储备层\u201d"],
+          ["ETH","结算之核：智能合约与 DeFi 主战场，承载链上结算、抵押与治理逻辑"],
+          ["SOL","速度之脉：高吞吐、低费用，适合高频微支付、跨境小额清算与生态应用"],
+          ["BNB","流量之桥：交易所生态与 BSC 链上流动性，连接传统资金入口与去中心化世界"],
+          ["DOGE","普惠之手：社区共识强、单位价值低，适合小额定投、打赏与大众化支付触达"],
+          ["eCNH","稳定之尺：锚定离岸人民币（CNH）生态，作为跨境结算与记账单位的\u201c稳定标尺\u201d"],
+          ["EACO","生态之魂：社区激励、治理投票与生态权益，绑定使用场景，构建可持续循环经济"]
+        ],
+        malsTitle:"5.2 \u201c多锚分层稳定\u201d机制（Multi-Anchored Layered Stability, MALS）",
+        malsGoal:"目标：在全球货币与地缘波动中，为全球华人 / 互联网用户提供\u201c不依赖单一主权货币、不依赖单一公链\u201d的稳定网络经济底座。",
+        mals:[
+          ["第一层 \u00b7 储备层","以 BTC + 主流稳定资产构成\u201c战略储备池\u201d，负责价值之锚与系统性风险缓冲","储备多签托管、链上审计、储备率公开，铸币 / 赎回按储备率动态调节"],
+          ["第二层 \u00b7 结算层","eCNH 作为记账与结算单位锚定离岸人民币，以智能合约完成跨境结算、汇兑与清算","将\u201c离岸人民币 + 链上结算\u201d结合，为全球华商提供绕开单一清算体系的跨境支付通道"],
+          ["第三层 \u00b7 支付流通层","SOL 承担高频小额支付；DOGE / BNB 用于大众化触达（打赏、电商、公益）","钱包聚合多链资产，一个地址管全球"],
+          ["第四层 \u00b7 治理激励层","EACO 承担治理投票、质押激励、流动性补贴与社区建设激励","DeFi 流动性池（EACO/eCNH、EACO/USDT 等）+ 质押 + 治理提案，形成\u201c使用\u2014贡献\u2014回报\u201d闭环"]
+        ],
+        pathsTitle:"5.3 维护全球互联网网络经济稳定的六条行动路径",
+        paths:[
+          "跨境支付通道：基于 eCNH + SOL 建立华商清算通道，汇款 T+0、费率远低于电汇，抗冻结抗审查",
+          "稳健收益与流动性：在 DEX 为 EACO/eCNH 等核心交易对提供流动性，赚取费用并保障价格稳定",
+          "稳定币背书的社区信贷：以 eCNH 为记账单位、EACO 为抵押品之一，让\u201c无银行账户\u201d者获得信用",
+          "多币种风险对冲：个人商户以\u201cBTC=储备、eCNH=本位、SOL/BNB=流通\u201d组合对冲汇率与通胀风险",
+          "链上透明度与抗灾性：关键资金多签 + 链上审计；合约开源审计；重要数据同步上链备份",
+          "普惠教育与包容：以 DOGE 低门槛特性开展全民加密科普与小额实践，扩大参与面而非只服务大户"
+        ],
+        risksTitle:"5.4 风险与合规提示（必读）",
+        risks:[
+          "波动风险：除 eCNH 锚定类外，其余资产价格波动大，任何\u201c稳定\u201d都需持续审计",
+          "监管风险：各国对加密资产、离岸人民币与稳定币监管口径差异巨大，跨境使用须先合规评估",
+          "安全风险：私钥管理、合约漏洞、钓鱼与黑客是最大现实威胁；坚持\u201c冷热分离、多签托管、合约审计\u201d",
+          "非投资建议：本方案为社区治理与网络经济稳定框架探讨，不构成任何金融投资建议"
+        ]
+      },
+      s6:{
+        num:"六",
+        en:"Web3 Cities",
+        title:"欧亚非 Web3 友善前 10 地区/城市：地球村网友观测分析",
+        ensub:"Top-10 Web3-friendly regions & cities across Eurasia & Africa \u2014 a global-village observer view",
+        lead:"观测立场：Web3 是无国界网络，城市是它的节点；节点的友善度决定网络经济的承重能力。综合 Henley 加密采纳指数、Multipolitan 加密友好城市指数、VARA / MAS / SFC 牌照统计、Chainalysis 等 2025\u20132026 公开数据。排名为多家机构公开口径，非唯一答案，不构成投资建议。",
+        whyTitle:"6.1 为什么看\u201c城市\u201d而不是\u201c国家\u201d",
+        why:[
+          "Web3 是跨主权网络，落地单元是城市——牌照、孵化器、交易所、开发者社区、资本与政策试点都集中在少数城市。",
+          "选城市 = 选监管清晰度、税务效率、机构基础设施、实际采用率——正是 Multipolitan 评估加密友好城市的四维。",
+          "欧亚非代表三种路径：欧洲 = 合规与理想主义；亚洲 = 资本与产业落地；非洲 = 真实采用与普惠创新。"
+        ],
+        citiesTitle:"6.2 前 10 大 Web3 友善地区/城市（2026 观测版）",
+        cities:[
+          ["1","新加坡","亚洲","Henley 加密采纳指数连续第 4 年全球第 1；Multipolitan 2026 第 1；MAS 已批 37 家数字资产持牌机构"],
+          ["2","迪拜 \u00b7 阿布扎比（阿联酋）","亚洲（中东）","VARA 已发 50 家 VASP 牌照居全球之首（香港 13 / 新加坡 37）；Henley 升至第 2；免税 + 首个《数字资产法》"],
+          ["3","瑞士（楚格 \u2014 苏黎世）","欧洲","\u201c加密谷\u201d发源地，FINMA 稳定币与持牌监管成熟；苏黎世多年居 IMD 智能城市榜首"],
+          ["4","香港","亚洲","SFC 持牌虚拟资产平台 13 家；家族办公室约 3,384 家；稳定币立法推进；离岸人民币（CNH）枢纽"],
+          ["5","伦敦 / 英国","欧洲","全球传统金融中心（GFCI 前二）+ 数字资产立法推动者；FCA 加密资产制度已立法，牌照路线图明确"],
+          ["6","巴黎（法国）","欧洲","Station F 全球最大初创孵化器 + PSAN 注册制；2025 全球金融科技中心城市 TOP10 中唯一欧洲城市"],
+          ["7","柏林 / 德国","欧洲","区块链周（Berlin Blockchain Week）全球影响大；BTC/ETH 定义为私人货币、持有超 1 年免税"],
+          ["8","首尔 / 韩国","亚洲","Chainalysis 2026 全球加密采用指数第 5；代币化债券与统一账本路线图；散户与开发者生态活跃"],
+          ["9","东京 / 日本","亚洲","最早为加密交易立法（2017）且承认 BTC 合法支付；2026 采用指数第 4；数字证券列入国家金融战略"],
+          ["10","内罗毕 / 肯尼亚","非洲","非洲数字金融心脏：Yellow Card 总部月处理约 1,200 万笔交易；M-Pesa 深度渗透 + 稳定币试点；监管从\u201c禁区\u201d走向\u201c沙盒\u201d"]
+        ],
+        altList:"备选观察名单：爱沙尼亚（塔林，e-Residency 数字公民）\u00b7 美国（奥斯汀 / 迈阿密）\u00b7 葡萄牙（里斯本，数字游民签证 + 加密税优惠）\u00b7 泰国（曼谷 / 普吉，2024 取消加密交易 7% VAT）\u00b7 尼日利亚（拉各斯，非洲 P2P 交易量前列）",
+        diffTitle:"6.3 三大洲路径差：地球村网友视角的三句话",
+        diff:[
+          ["欧洲卖\u201c确定性\u201d","合规前置、牌照清晰，适合协议层、审计、合规与长期持有","苏黎世 \u00b7 楚格 \u00b7 伦敦 \u00b7 巴黎 \u00b7 柏林"],
+          ["亚洲卖\u201c资本与速度\u201d","资金、开发者与产业配套最密，适合流动性、增长与落地","新加坡 \u00b7 迪拜 \u00b7 香港 \u00b7 首尔 \u00b7 东京"],
+          ["非洲卖\u201c真实采用\u201d","没有历史包袱，移动支付直通链上经济，适合普惠金融与跨境结算","内罗毕领跑"]
+        ],
+        echoTitle:"6.4 对前文方案的呼应：城市节点 = 网络经济节点",
+        echo:[
+          "MALS 体系中的 eCNH（跨境结算）、EACO（生态治理）真实落地依赖节点城市：新加坡 / 香港 = 离岸人民币与机构入口；迪拜 = 持牌交易所与中东资本；内罗毕 = 微支付与普惠采用。",
+          "加密资产与传统华人城市圈高度重合（新加坡、香港、吉隆坡、温哥华 \u00d7 新加坡、迪拜、苏黎世、首尔）——这是方案的地理底座。",
+          "观测结论：全球网络经济稳定的本质不是\u201c选一个最好的城市\u201d，而是让多城节点互为备份、各自承重——与文明框架 MCAN 一致：城市是备份单元，网络才是文明本体。"
+        ]
+      },
+      s7:{
+        num:"七",
+        en:"Economic Crisis",
+        title:"经济危机观察与网络经济应对：从 1997 亚洲金融危机到“从下到上”的应对阶梯",
+        ensub:"Replay of 1997 & crypto-era resilience from the bottom up",
+        lead:"1997 年国际对冲基金做空泰铢引爆亚洲金融危机，完整演示了“开放环境下脆弱货币体系如何被外部冲击击穿”。本栏复盘危机链条，并给出危机期 EACO/eCNH/SOL/DOGE/BNB/ETH/BTC 的职能分工，以及全球网友“从下到上”六层应对阶梯与三阶段行动清单。",
+        timelineTitle:"7.1 危机时间线（1997—1998）",
+        timeline:[
+          ["1997-05 — 06","国际资本持续做空泰铢，泰国央行反复干预、外汇储备快速见底"],
+          ["1997-07-02","泰国央行宣布放弃固定汇率制，泰铢兑美元单日暴跌约 17%，亚洲金融危机正式爆发"],
+          ["1997-07 起","多米诺扩散：菲律宾比索、林吉特、印尼盾、新加坡元、新台币一一失守"],
+          ["1997-10 — 11","危机蔓延至东北亚：韩元约两个月贬 55%，韩国股市半年暴跌约 57%，财阀连锁破产"],
+          ["1997-11 — 12","韩国向 IMF 求援；韩元兑美元一度逼近 2,000:1"],
+          ["1998-01 — 02","印尼盾跌破 10,000:1，印尼陷入政治经济双重危机；马来西亚恢复外汇管制"],
+          ["1998-08","投机者多次攻击港元联系汇率，香港金管局背靠中国外汇储备成功击退"]
+        ],
+        devalTitle:"7.2 货币贬值实测（1997-07 至 1998-02）",
+        deval:["印尼卢比贬值约 74%","泰铢贬值约 43%（危机峰值口径约 93%）","马来西亚林吉特贬值约 33%","韩元一度贬去约 80%（峰值口径）"],
+        rootsTitle:"7.3 结构性根源（多重隐患叠加酿成灾难）",
+        roots:["外债高企：以短期外债支撑长期投资，韩国前 30 大财阀平均债股比一度超过 500%","固定 / 准固定汇率：汇率高估 + 央行兜底，为投机者提供“单边做空”赌场","金融监管漏洞：银行表外风险、房地产与股市信贷泡沫、资本项目过度开放","热钱进出自由：外资推高资产后恐慌撤离，留下“繁荣—崩溃”循环"],
+        cmpTitle:"7.4 历史对照：三次泡沫 / 危机的共同教训",
+        cmp:["危机","时间","触发点","共同教训"],
+        cmpRows:[
+          ["拉美债务危机","1980 年代","美元加息 + 外债违约潮","过度依赖外资外债，本币信用脆弱"],
+          ["亚洲金融危机","1997—1998","做空固定汇率 + 资本外逃","固定汇率 + 监管漏洞 + 短债长投 = 灾难配方"],
+          ["互联网泡沫","2000—2001","估值脱离基本面","短期繁荣不必然带来长期价值"]
+        ],
+        transTitle:"7.5 危机如何伤害普通人：传导链条",
+        trans:["本币暴跌 → 进口涨价 → 通胀飙升 → 购买力大幅缩水","央行被迫加息 → 企业融资成本飙升 → 债务违约 → 企业倒闭、失业潮","股市 / 房地产崩盘 → 家庭资产大幅缩水 → 资产负债表衰退","传统护城河失效：银行挤兑、资本管制冻结资金、单一法币存款全面缩水"],
+        assetsTitle:"7.6 危机期七资产职能分工",
+        assets:[
+          ["BTC","数字黄金 / 价值锚：总量恒定、网络最去中心化，危机期最成熟的替代性储值工具"],
+          ["ETH","结算与 DeFi 主战场：链上借贷、抵押清算与稳定资产协议，为资产重组提供可编程基础设施"],
+          ["SOL","危机中的流动性动脉：低费率、高吞吐，适合高频周转、跨境小额清算与紧急支付"],
+          ["BNB","桥接层：连接传统资金入口与链上世界，危机期承担兑换、出入金与价格发现"],
+          ["DOGE","普惠之手：单位价值低、社区共识强，适合小额互助、救援打赏与平民化参与"],
+          ["eCNH","稳定标尺：锚定离岸人民币，智能合约跨境记账与结算——更快、更抗冻结"],
+          ["EACO","社区治理与互助：生态代币绑定使用场景；可设“EACO 紧急互助池”，治理投票决定救助对象与额度"]
+        ],
+        anchorTitle:"7.7 现实锚点（BIS 与 Chainalysis 数据）",
+        anchor:["国际清算银行（BIS）对 130 个经济体的调查（2026）：货币承压与危机期间稳定币流动上升、受资本管制影响更小","Chainalysis（2024-07 至 2025-06）：土耳其加密交易约 2,000 亿美元、阿根廷约 939 亿、尼日利亚约 921 亿、委内瑞拉约 446 亿美元（通胀超 170%）","Bitso：阿根廷约 60% 加密购买为美元稳定币；比索 2018 年以来累计贬值约 95%"],
+        ladderTitle:"7.8 全球网友应对方法：从下到上六层阶梯",
+        ladderNote:"“从下到上”= 从最脆弱、最基础的层面开始加固，逐级上升到系统层：个人 → 家庭 → 社区 → 商户 → 城市/平台 → 全球网络。",
+        ladder:[
+          ["第一层 · 个人（生存底线）","现金 + eCNH 稳定币双保险（3–6 个月支出）；小额定投 BTC 5–10% 不借贷不加杠杆；技能即现金；私钥冷存储 + 证件双备份"],
+          ["第二层 · 家庭（资产配置）","6 个月家庭应急金本外币分仓；“哑铃配置”低波动稳定资产 + 高潜力资产；去杠杆锁死利率风险；保险与信托传承"],
+          ["第三层 · 社区（互助网络）","EACO 紧急互助池（多签托管 + 治理投票 + 账目上链）；宗乡会馆与行业群组线上互援；官方与多方交叉验证防谣言"],
+          ["第四层 · 商户与企业（业务对冲）","用 eCNH 结算跨境应收账款对冲汇损；供应链多源化；应收账款代币化 / 抵押融资，绕开危机期收紧的传统信贷"],
+          ["第五层 · 城市与平台（基础设施）","推动监管沙盒与稳定币互操作；交易所准备金证明 + 开源审计；业务、资金与团队多城市备份（呼应 MCAN）"],
+          ["第六层 · 全球网络层（规则与韧性）","多链锚定储备池（BTC/ETH/SOL），单链故障不击沉全局；MALS 持续运转；欧亚非拉 24 小时交易接力"]
+        ],
+        drillTitle:"7.9 危机行动清单：危机前 / 危机中 / 危机后",
+        drill:[
+          ["危机前（平时）",["降杠杆：总债务 ≤ 月收入 3–5 倍安全区","攒应急金：家庭 6 个月支出，本外币分仓（含 eCNH）","配置对冲：BTC 5–10% + 黄金 + 多币种现金","备份一切：私钥（冷 + 多签）、身份文件、数据三地备份","加入 2–3 个可信任的互助网络"]],
+          ["危机中（进行时）",["不恐慌抛售：暴跌 48 小时内不做重大决定，按既定纪律再平衡","用 eCNH 结算保购买力，减少本币敞口","用 SOL / BNB 保持流动，避免单链拥堵被困","启用社区紧急互助池，共享信息阻止恐慌谣传"]],
+          ["危机后（复苏期）",["复盘与再平衡：修正配置比例、记录教训","危机留下的便宜资产是下一轮繁荣的种子"]]
+        ],
+        risksTitle:"7.10 风险与合规提示（必读）",
+        risks:["加密资产危机期同样可能暴跌（流动性挤兑、交易所风险），“避险”不等于“无风险”，按比例配置而非全仓押注","稳定币锚定依赖储备资产质量与审计透明度，只选公开审计、储备充足的发行方","各国监管口径差异巨大，跨境行动前先合规评估","本方案为社区治理与科普框架，不构成投资建议；合约地址见 8.1"]
+      },
+      s8:{
+        num:"八",
+        en:"Appendix",
+        title:"附录：合约地址、术语与参考资料",
+        ensub:"Contract addresses, glossary & references",
+        caTitle:"8.1 合约地址（用户提供，请以官方渠道再次核对）",
+        caNote:"\u26a0\ufe0f 合约地址请务必通过项目官方渠道（官网、官方 X/电报、区块浏览器验证）二次确认后再交互，谨防仿冒合约与钓鱼链接。",
+        contracts:[
+          ["EACO","生态原生代币（Solana）","DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"],
+          ["eCNH","离岸人民币生态代币（Solana）","7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5"]
+        ],
+        glTitle:"8.2 双语术语速查（Mini Glossary）",
+        glossary:[
+          ["兰芳共和国","Lanfang Republic"],
+          ["唐人街 / 华埠","Chinatown"],
+          ["海外华人","Overseas Chinese / Chinese Diaspora"],
+          ["生活水平分层","Livelihood / Living Standard Tiers"],
+          ["方舟城市网","Multi-City Ark Network (MCAN)"],
+          ["多锚分层稳定","Multi-Anchored Layered Stability (MALS)"],
+          ["全球网络经济","Global Network Economy"],
+          ["加密采纳指数","Crypto Adoption Index"],
+          ["虚拟资产服务提供者","Virtual Asset Service Provider (VASP)"],
+          ["加密谷","Crypto Valley"],
+          ["地球村网友观测","Global Village Observer Perspective"]
+        ],
+        refTitle:"7.3 参考资料",
+        refs:[
+          "新加坡统计局《2025 年人口趋势报告》：华人约占常住人口 73.9%",
+          "EIU《2025 全球宜居城市指数》：哥本哈根 / 维也纳 / 苏黎世 / 墨尔本 / 日内瓦 / 悉尼 / 大阪\u00b7奥克兰 / 阿德莱德 / 温哥华入前十",
+          "中国驻迪拜总领馆及侨团公开口径：阿联酋中国公民约 30 万，迪拜龙城约 15 万",
+          "《明史》\u201c顺塔\u201d条、《清史稿》及华侨史研究：兰芳、戴燕等华人政权史料",
+          "联合国与世界银行收入分组、中国国家统计局居民收入五等分口径",
+          "香港\u201c新资本投资者入境计划\u201d官方数据、德勤《香港家族办公室报告》（2025）",
+          "Henley & Partners《加密财富与采用指数 2026》：新加坡连续第 4 年居首、阿联酋第 2（36 司法管辖区、900+ 数据点）",
+          "Multipolitan《2026 全球加密最友善城市指数》（《联合早报》2026-06-22）：新加坡第 1，亚太占前十 6 席",
+          "VARA / MAS / SFC 公开牌照统计（2026）：迪拜 50 家 VASP、新加坡 37 家、香港 13 家",
+          "Chainalysis《2026 全球加密采用指数》：日本第 4、韩国第 5、印度第 6",
+          "IMD《2026 智能城市指数》：苏黎世连续第 7 年第一，迪拜 / 阿布扎比 / 新加坡入前十",
+          "非洲数字金融公开报道（Yellow Card / 肯尼亚监管动态 2026）：内罗毕总部月处理约 1,200 万笔交易"
+        ]
+      },
+      foot:{
+        ver:"v1.2 \u00b7 2026-10-03",
+        made:"双语单页网站应用 \u00b7 与《海外华人全球发展指南》Markdown 文档配套",
+        disc:"免责声明：本页面为研究与科普用途。历史政权涉及传说与存疑史料，请以学术文献为准；Web3 城市排名为多家机构公开口径，非唯一答案；加密资产价格波动剧烈，任何内容均不构成投资建议；合约地址请务必通过官方渠道二次核对。",
+        top:"返回顶部"
+      }
+    },
+
+    en: {
+      docTitle:"Global Chinese Development Guide | \u6d77\u5916\u534e\u4eba\u5168\u7403\u53d1\u5c55\u6307\u5357",
+      kicker:"A Global-Village Observer View",
+      h1:"Global Chinese Development Guide",
+      sub:"Communities \u00b7 Cities \u00b7 Livelihood \u00b7 Civilization \u00b7 Network Economy",
+      intro:"A practical companion for the global Chinese community: roots of overseas Chinese nation-building, future-ready cities, living-standard tiers, a civilization-stability framework for turbulent times (even an interstellar diaspora), and a multi-anchored plan to stabilise the global internet economy with EACO \u00b7 eCNH \u00b7 SOL \u00b7 DOGE \u00b7 BNB \u00b7 ETH \u00b7 BTC \u2014 completed by a top-10 Web3-friendly cities observer across Eurasia and Africa. Switch languages anytime.",
+      nav: [
+        ["#sec1","I. History"],
+        ["#sec2","II. Cities"],
+        ["#sec3","III. Tiers"],
+        ["#sec4","IV. Stability"],
+        ["#sec5","V. Economy"],
+        ["#sec6","VI. Web3"],
+        ["#sec7","VII. Crisis"],
+        ["#sec8","VIII. Appendix"]
+      ],
+      s1:{
+        num:"I",
+        en:"Histories",
+        title:"Nations, communities and cities built by the overseas Chinese",
+        ensub:"From autonomous settlements to a modern nation-state",
+        lead:"Since the late Tang and Song dynasties, overseas migration created a complete spectrum \u2014 from self-governing settlements to a modern Chinese nation-state. Distinguish reliable historical records from legends below.",
+        rTitle:"1.1 Polities & self-governing bodies founded by the Chinese",
+        regimes:[
+          ["Lanfang Republic","1777\u20131886","West Kalimantan, Borneo (Indonesia)","Luo Fangbo (Hakka, Meixian, Guangdong)","Best documented Chinese self-governing polity: a \u201ccompany system\u201d republic with elected presidents and council governance, lasting ~110 years until annexed by the Dutch"],
+          ["Daiyan Kingdom","Mid-18th century","Borneo (Kalimantan)","Wu Yuansheng (Jiaying, Guangdong)","A local polity founded by a Chinese miner leader, contemporary with Lanfang, recorded in local chronicles and overseas-Chinese historiography"],
+          ["Natuna Chinese polity","c. 17\u201318th c.","Natuna Islands, Indonesia","Zhang Jiexu (legendary)","Largely legendary with limited historical evidence; widely cited as a memory of Chinese maritime settlements"],
+          ["Feilong Kingdom (Zhang Lian)","1560s","Fujian-Guangdong-Jiangxi border (some tales extend to Sumatra)","Zhang Lian (Raoping, Guangdong)","The historical core was an uprising inside Ming China; the \u201coverseas Feilong Kingdom\u201d version lacks reliable sources"],
+          ["Shunta Kingdom (legend)","c. 13\u201315th c.","Java","Lu Zili (legendary)","Ming History records Chinese \u201cnew villages\u201d on Java, but the \u201cSouthern Song exile founding a state\u201d claim is insufficiently evidenced"],
+          ["Thonburi Kingdom (Taksin)","1767\u20131782","Siam (today Thailand)","Taksin the Great (Chaozhou descent)","A brief Thai dynasty; Taksin's father was from Chaozhou \u2014 a classic example of a state led by a person of Chinese descent"],
+          ["Songkhla Wu Administration","18th\u201319th c.","Songkhla, southern Thailand","Wu Rang (Zhangzhou, Fujian)","An autonomous Chinese governor-ruled city, managing Songkhla port affairs and local governance for generations"],
+          ["Singapore","1965\u2013present","Southern tip of the Malay Peninsula","\u2014","The only modern sovereign nation with a Chinese-majority population (~74% of residents, 2025) \u2014 the highest form of overseas Chinese state-building"]
+        ],
+        rNote:"\u26a0\ufe0f Historical note: the popular claim of \u201ceight overseas Chinese states\u201d mixes history with legend \u2014 Shunta, Natuna and the overseas Feilong Kingdom should be treated as historical memory, not strict fact; Lanfang, Daiyan, Thonburi, Songkhla and Singapore rest on firmer sources.",
+        cTitle:"1.2 Famous Chinese communities and cities (Chinatowns)",
+        chinatowns:[
+          ["San Francisco Chinatown, USA","Formed during the 1848 Gold Rush; among North America's oldest Chinatowns; Chinese Americans ~21% of the city"],
+          ["Manhattan Chinatown, New York, USA","One of the earliest Chinese business districts outside Asia; listed on the National Register of Historic Places"],
+          ["Yaowarat, Bangkok, Thailand","One of Southeast Asia's busiest Chinatowns, nearly 200 years old, dominated by Teochew descendants"],
+          ["Yokohama Chinatown, Japan","~140 years of history; the largest Chinatown in Japan and Asia"],
+          ["Chinatown (Kreta Ayer), Singapore","The birthplace of Singapore's Chinese community \u2014 associations, temples, shophouses meet modern retail"],
+          ["George Town, Penang & Petaling Street, Kuala Lumpur, Malaysia","George Town is a UNESCO World Heritage site; Petaling Street is KL's Chinese core"],
+          ["Paris 13th arrondissement, France","Europe's largest Chinese quarter, mostly Southeast Asian Chinese; famous for Lunar New Year parades"],
+          ["Melbourne Chinatown, Australia","Australia's oldest Chinatown, rich in ceremonial arches and Chinese cultural events"],
+          ["Richmond, Vancouver, Canada","One of North America's highest Chinese-proportion cities; Mandarin widely spoken"],
+          ["Manila Chinatown (Binondo), Philippines","Chinese migration to the Philippines dates to the 11th century; Binondo is among Asia's oldest Chinatowns"],
+          ["Johannesburg Chinatown, South Africa","Officially registered in 2005 \u2014 Africa's first Chinatown"],
+          ["San Gabriel Valley & Monterey Park, LA, USA","The Greater LA Chinese belt grown since the \u201cLittle Taipei\u201d era, spanning several cities"]
+        ],
+        lTitle:"1.3 Historical lessons",
+        lessons:[
+          "Organising power is survival power: a self-organising system of guilds, clan associations, chambers of commerce, self-defence and public education sustained Chinese polities and communities.",
+          "Integrate or take root: Thais of Chinese descent integrate into mainstream society, while Malaysia's Chinese preserve Chinese-language education \u2014 two successful models.",
+          "From settlement to nation: Singapore shows a Chinese community can modernise governance and achieve pluralism within a nation-state framework \u2014 the highest form of stable development."
+        ]
+      },
+      s2:{
+        num:"II",
+        en:"Future Cities",
+        title:"Cities for overseas Chinese to live, work and grow",
+        ensub:"Three tiers of city profiles",
+        lead:"Score cities across six dimensions: Chinese-speaking environment, economic opportunity, visa & residency policy, cost-to-income ratio, safety & rule of law, and digital-finance / internet freedom. Below: three tiers, from opportunity hubs to lifestyle havens.",
+        dims:"Dimensions: Chinese environment \u00b7 economic opportunity \u00b7 visa & residency \u00b7 cost-to-income \u00b7 safety \u00b7 digital finance freedom",
+        tiers:[
+          {
+            t:"Tier 1 \u2014 mature Chinese ecosystems, densest opportunity (career first)",
+            head:["City","Strengths","Challenges"],
+            rows:[
+              ["Singapore","Chinese-majority society (~74%); global finance & tech hub; top-tier rule of law; regional HQ for Chinese capital and Web3 firms","Very high cost of living; fierce PR competition"],
+              ["Hong Kong","Backed by the Greater Bay Area, capital & talent hub; family offices fast-growing (~3,384 by end-2025); offshore CNH centre","High property prices; geopolitical uncertainty"],
+              ["Dubai (UAE)","~300k Chinese residents (~150k in Dragon Mart area); tax-free; D33 economic agenda; crypto-friendly regulator (VARA)","Hot climate; residency gateway requirements"]
+            ]
+          },
+          {
+            t:"Tier 2 \u2014 mature communities, balanced liveability (family first)",
+            head:["City","Strengths","Challenges"],
+            rows:[
+              ["Malaysia (KL \u00b7 Penang \u00b7 JB)","Strong Chinese environment; complete Chinese-language school system; low living costs; MM2H long-stay visa","Limited industrial upgrading; average FX & internet environment"],
+              ["Thailand (Bangkok \u00b7 Chiang Mai \u00b7 Phuket)","Deep Chinese integration; tourism & trade opportunities; DTV long-stay visa; affordable","Divided school system; foreign-investment limits in some sectors"],
+              ["Canada (Vancouver \u00b7 Toronto)","High Chinese share, Mandarin widely spoken; strong education & healthcare; Richmond is ~half Chinese","High housing costs; heavy taxation; long winters"],
+              ["Australia (Melbourne \u00b7 Sydney)","EIU 2025 liveability ranks #4 / #6; mature communities; perfect education & healthcare scores","Expensive housing; tougher immigration points race"],
+              ["New Zealand (Auckland)","Tied at #7 liveable; nature-meets-city; sizable Chinese community","Small market; limited opportunities"]
+            ]
+          },
+          {
+            t:"Tier 3 \u2014 digital-nomad & finance-friendly (flexibility first)",
+            head:["City","Strengths","Challenges"],
+            rows:[
+              ["Portugal (Lisbon \u00b7 Porto)","High liveability; digital-nomad & D7 visas; relatively low European living costs","Modest salaries; language barrier"],
+              ["Switzerland (Zurich \u00b7 Zug)","Top of liveability AND crypto-friendliness (Crypto Valley); ultimate rule of law","Highest living costs worldwide; strict work permits"],
+              ["USA (Bay Area \u00b7 LA \u00b7 New York)","World's densest tech & finance; deep Chinese community and Chinatown history","Visa bottlenecks; high costs; more social friction"],
+              ["Japan (Tokyo \u00b7 Osaka)","Osaka in 2025 global liveability top-10; top-tier safety & order; close to China","Language barrier; conservative workplace culture"],
+              ["UAE (Abu Dhabi \u00b7 Sharjah)","Middle-East growth pole; expanding industrial chain","Economy driven by energy & trade"]
+            ]
+          }
+        ],
+        aTitle:"Recommendations by profile",
+        advice:[
+          ["Tech / finance professionals","Singapore, Hong Kong, Dubai first \u2014 highest opportunity density and regulatory certainty"],
+          ["Cross-border e-commerce & supply chain","Dubai (Dragon Mart), Bangkok, Kuala Lumpur, Ho Chi Minh City"],
+          ["Digital nomads / creatives","Lisbon, Chiang Mai, Bali, Porto"],
+          ["Family migration & children's education","Vancouver, Melbourne, Auckland, Singapore"],
+          ["Retirement / slow living","Penang, Chiang Mai, Phuket, Porto"]
+        ]
+      },
+      s3:{
+        num:"III",
+        en:"Livelihood Tiers",
+        title:"Living standards: how to classify and respond in 3 / 5 / 10 tiers",
+        ensub:"Self-positioning, city choice, financial planning, risk buffering",
+        lead:"True living standards are jointly determined by income + net assets + local cost of living + pass-through income share. The tiers below use household disposable income (USD-equivalent) as the main ruler.",
+        method:["Income basis: household annual disposable income (after tax, incl. passive income)","Net-asset basis: total assets minus liabilities","City cost factor: calibrate via PPP or cost-of-living indices \u2014 USD 50k in Delhi vs Zurich are different worlds","Passive income share: the higher it is, the more stable the same income feels"],
+        threeTitle:"3 tiers (coarse: survival \u2014 growth \u2014 freedom)",
+        three:[
+          ["Upper \u00b7 Freedom","Income and assets cover all needs; money ceases to be the main constraint; global asset allocation and multi-city living","Diversify across currencies, assets, regions; trusts & succession plans; keep ample liquidity"],
+          ["Middle \u00b7 Growth","Income > spending with surplus; saving, investing and growth possible; mortgage & education pressures are manageable","Build a 6\u201312 month emergency fund; dollar-cost-average into indices; raise passive income share; avoid the \u201cfake middle class\u201d trap"],
+          ["Lower \u00b7 Survival","Income roughly equals or falls below spending; weak shock absorption","Control costs and upgrade skills for cash flow; use policy & community support fully; avoid high-interest debt; build the first bucket before investing"]
+        ],
+        fiveTitle:"5 tiers (quintile / World Bank-style groups; household disposable income, USD-ref)",
+        five:[
+          ["Low income","< ~20k USD","Tight budget, weak resilience","Skills upgrade + policy resources; community mutual aid; control debt"],
+          ["Lower-middle","~20\u201350k","Above subsistence, limited headroom","Budgeting; 3-month emergency fund; low-cost upskilling"],
+          ["Middle","~50\u2013120k","Typical middle class with mortgage & education pressure","6-month emergency fund; steady investment portfolio; health & education spending"],
+          ["Upper-middle","~120\u2013300k","Upper middle class, accelerating wealth accumulation","Global asset allocation; tax planning; succession design"],
+          ["High income","> ~300k","Tending toward financial freedom","Multi-layer trusts / insurance / philanthropy; residency & tax optimisation"]
+        ],
+        tenTitle:"10 tiers (fine-grained: income \u00d7 net assets, USD-ref)",
+        ten:[
+          ["D1 Destitution","< 3k","< 3k","Survival at the margin","Livelihood support & social aid"],
+          ["D2 Poverty","3\u20138k","< 10k","Hard to make ends meet","Skills training + transfers"],
+          ["D3 Subsistence","8\u201320k","10\u201330k","Basic life sustainable","Build emergency fund & first capital"],
+          ["D4 Comfortable","20\u201340k","30\u2013100k","Moderately comfortable","Family protection & education fund"],
+          ["D5 Middle entry","40\u201370k","100\u2013250k","Typical middle class","Start a steady investment portfolio"],
+          ["D6 Upper middle","70\u2013140k","250\u2013600k","Upper middle class","Begin global asset allocation"],
+          ["D7 Affluent","140\u2013300k","600k\u20131.5m","Financially at ease","Tax / trust / succession planning"],
+          ["D8 Wealthy","300k\u20131m","1.5\u20135m","Semi-financially free","Family office & multi-national residency"],
+          ["D9 Rich","1\u20133m","5\u201320m","Financially free","Diversified assets + philanthropy"],
+          ["D10 Ultra rich","> 3m","> 20m","Top-tier wealth","Deep succession & civilisational investment"]
+        ],
+        tenNote:"USD bands are rough global comparables; multiply by a local cost-of-living factor per city. Domestic references like \u201cRMB 100k\u2013500k household income = middle class\u201d are for China; recalibrate after moving abroad.",
+        fourTitle:"General coping principles",
+        principles:[
+          "Liquidity before returns: every tier's floor is a 6-month spending safety cushion.",
+          "Income > assets > side lines: rely on human capital early, asset allocation mid-career, passive income and cultural capital later.",
+          "Globalisation is the fastest lever upward: overseas Chinese already hold multi-market, multi-currency, multi-status advantages.",
+          "Avoid the \u201cfake middle class\u201d trap: high income + high debt = fragile \u201cupper-class experience, lower-class resilience\u201d."
+        ]
+      },
+      s4:{
+        num:"IV",
+        en:"Civilization Stability",
+        title:"A civilization-stability framework for global turbulence \u2014 and an interstellar diaspora",
+        ensub:"Five pillars, an Ark-City Network, and continuity in space",
+        lead:"Core belief: never bet the future on a single city, state, energy source or information source. Build five pillars: knowledge redundancy, energy & food autonomy, distributed community networks, decentralised governance, and identity & education continuity.",
+        threatsTitle:"4.1 Threat radar: what we face",
+        threats:[
+          "Geopolitical conflict and systemic war: single-point risk in cities and states rises",
+          "Economic & financial turmoil: debt, inflation, FX and digital-financial risks compound",
+          "Climate & environmental crisis: coastal cities, food and energy supply chains under stress",
+          "AI & technological leap: jobs, information integrity and power structures are being rewritten",
+          "(Long term) Interstellar diaspora: asteroids, the outer solar system, space cities and \u201carks\u201d \u2014 civilization needs a portable, resilient architecture"
+        ],
+        pillarsTitle:"4.2 The five pillars of stability",
+        pillars:[
+          ["1. Knowledge redundancy","Information is civilization's core asset","Multi-copy knowledge bases (local + cloud + on-chain), seed banks, open archives \u2014 data civilization never forgets itself in a single-point disaster"],
+          ["2. Energy & food autonomy","The foundation of life support","Distributed energy (PV / storage / small-scale nuclear), vertical farming & seed backups, community granaries"],
+          ["3. Distributed community networks (DCN)","Never all eggs in one basket","Chinese community nodes across many cities backing each other up \u2014 a \u201cmulti-point autonomy, network interconnection\u201d global web"],
+          ["4. Decentralised governance","Power and money must not be single-pointed","Community DAOs, on-chain governance, multi-sig treasuries, transparent decision & audit \u2014 governance that is portable and inheritable"],
+          ["5. Identity & education continuity","Civilization's genes","Bilingual education, cultural archives (dialects, customs, genealogy), intergenerational knowledge transfer \u2014 language and values are the ballast of an interstellar era"]
+        ],
+        mcanTitle:"4.3 The Multi-City Ark Network (MCAN)",
+        mcan:["No single city can preserve civilization \u2014 nor should it be fragile. Upgrade from \u201cbet everything on one country\u201d to \u201cmultiple cities backing each other up\u201d.","Three-layer structure: Main City (career) + Backup City (assets & identity) + Spiritual City (culture & education).","Personal ark: diversified passports / statuses, cross-currency assets, separating residence from business base, multiple education tracks."],
+        mcanPrinciple:"Resilience quad: Multi-location \u00b7 Multi-backup \u00b7 Multi-link \u00b7 Multi-mobility",
+        spaceTitle:"4.4 Civilizational continuity in an interstellar-diaspora era",
+        space:[
+          "Data is civilization: freeze language, culture, science and history with \u201cmulti-copy backups + time envelopes\u201d, including on-chain attestation.",
+          "The civilizational gene bank: double preservation of biodiversity and cultural diversity.",
+          "A \u201cspace constitution\u201d: universal pre-agreed rules (no civilizational extinction, protect cultural diversity, fair resource distribution) as a common cross-planet baseline protocol.",
+          "A Community with a Shared Future for Humanity 2.0: from inter-state cooperation to inter-civilization coordination \u2014 the network economy and distributed infrastructure are its technical bedrock."
+        ]
+      },
+      s5:{
+        num:"V",
+        en:"Network Economy",
+        title:"Stabilising the global internet economy with EACO \u00b7 eCNH \u00b7 SOL \u00b7 DOGE \u00b7 BNB \u00b7 ETH \u00b7 BTC",
+        ensub:"A multi-anchored crypto system for cross-border, censorship-resistant value flows",
+        note:"This is a theoretical framework based on user-provided materials; not investment advice. Verify contract addresses, supply and project progress with official announcements.",
+        assetsTitle:"5.1 Role division of assets (multi-asset elastic system)",
+        assets:[
+          ["BTC","Anchor of value: strongest consensus, most decentralised store of value \u2014 the system's reserve layer"],
+          ["ETH","Core of settlement: the smart-contract & DeFi battleground, carrying on-chain settlement, collateral and governance"],
+          ["SOL","Pulse of speed: high throughput, low fees \u2014 for high-frequency micro-payments, cross-border clearing and ecosystem apps"],
+          ["BNB","Bridge of flow: exchange ecosystem & BSC liquidity, linking traditional capital on-ramps to the decentralised world"],
+          ["DOGE","Hand of inclusion: strong community consensus, low unit value \u2014 for micro-saving, tipping and mass-market payments"],
+          ["eCNH","Ruler of stability: pegged to the offshore RMB (CNH) ecosystem \u2014 a stable unit of account for cross-border settlement"],
+          ["EACO","Soul of the ecosystem: community incentives, governance voting and ecosystem rights, binding use cases into a sustainable circular economy"]
+        ],
+        malsTitle:"5.2 Multi-Anchored Layered Stability (MALS)",
+        malsGoal:"Goal: amid global monetary and geopolitical volatility, provide global Chinese / internet users with a stable network-economy base that depends on neither a single sovereign currency nor a single blockchain.",
+        mals:[
+          ["Layer 1 \u00b7 Reserve","BTC + mainstream stable assets form a \u201cstrategic reserve pool\u201d for the value anchor and systemic risk buffer","Multi-sig custody, on-chain audits, public reserve ratio; minting / redemption adjusts dynamically with the ratio"],
+          ["Layer 2 \u00b7 Settlement","eCNH serves as the accounting & settlement unit pegged to offshore RMB; smart contracts handle cross-border clearing, FX and netting","Combining \u201coffshore RMB + on-chain settlement\u201d gives global Chinese merchants a corridor bypassing single clearing systems"],
+          ["Layer 3 \u00b7 Payment & circulation","SOL carries high-frequency micro-payments; DOGE / BNB serve mass-market touchpoints (tips, e-commerce, giveaways)","Aggregated multi-chain wallet \u2014 one address manages your global money"],
+          ["Layer 4 \u00b7 Governance & incentives","EACO carries governance voting, staking incentives, liquidity subsidies and community-building rewards","DeFi pools (EACO/eCNH, EACO/USDT) + staking + proposals form a \u201cuse \u2192 contribute \u2192 earn\u201d loop"]
+        ],
+        pathsTitle:"5.3 Six action paths to stabilise the global internet economy",
+        paths:[
+          "Cross-border payment corridor: an eCNH + SOL merchant clearing lane with T+0 settlement and far lower fees than SWIFT \u2014 freeze-resistant and censorship-resistant",
+          "Yield & liquidity: provide liquidity for core pairs (EACO/eCNH etc.) on DEXs to earn fees and stabilise prices",
+          "Community credit backed by stablecoins: bookkeeping in eCNH with EACO as one collateral leg, giving credit access to \u201cunbanked\u201d Chinese",
+          "Multi-currency hedging: households and merchants hedge FX & inflation with \u201cBTC = reserve, eCNH = base currency, SOL/BNB = circulation\u201d",
+          "On-chain transparency & resilience: multi-sig + on-chain audits for key funds; open-source audited contracts; key data backed up on-chain \u2014 echoing Pillar 1's redundancy",
+          "Inclusive education: leverage DOGE's low barrier for mass crypto literacy and small-scale practice \u2014 broaden participation beyond whales"
+        ],
+        risksTitle:"5.4 Risks & compliance (must read)",
+        risks:[
+          "Volatility: apart from CNH-pegged assets, prices swing widely; any \u201cstability\u201d rests on reserves & algorithms and needs continuous auditing",
+          "Regulation: jurisdictions differ sharply on crypto, offshore RMB and stablecoins \u2014 run compliance checks before cross-border use",
+          "Security: private-key management, contract bugs, phishing and hacks are the real threats \u2014 keep cold/hot separation, multi-sig custody, contract audits",
+          "Not investment advice: this is a governance and network-economy framework discussion, not financial advice"
+        ]
+      },
+      s6:{
+        num:"VI",
+        en:"Web3 Cities",
+        title:"Top-10 Web3-friendly regions & cities across Eurasia & Africa \u2014 a global-village observer view",
+        ensub:"Cities are the nodes; node-friendliness decides the resilience of the network economy",
+        lead:"Observer stance: Web3 is a borderless network; cities are its nodes. Based on 2025\u20132026 public data (Henley crypto adoption index, Multipolitan city index, VARA / MAS / SFC licence counts, Chainalysis). Rankings are one public reading among several \u2014 not the only answer, and not investment advice.",
+        whyTitle:"6.1 Why cities, not countries",
+        why:[
+          "Web3 is a cross-sovereign network whose physical landing units are cities \u2014 licences, incubators, exchanges, developer hubs, capital and regulatory sandboxes concentrate in a few cities.",
+          "Choosing a city = choosing regulatory clarity, tax efficiency, institutional infrastructure and real adoption \u2014 exactly the four dimensions Multipolitan scores.",
+          "Eurasia & Africa embody three paths: Europe = compliance & idealism; Asia = capital & industrial landing; Africa = real adoption & inclusive innovation."
+        ],
+        citiesTitle:"6.2 Top-10 Web3-friendly regions/cities (2026 observation)",
+        cities:[
+          ["1","Singapore","Asia","Henley crypto adoption index #1 globally for the 4th consecutive year; Multipolitan 2026 #1; MAS has licensed 37 digital-asset firms"],
+          ["2","Dubai \u00b7 Abu Dhabi (UAE)","Asia (Middle East)","VARA issued 50 VASP licences, most of any city (HK 13 / SG 37); Henley up to #2; tax-free + the first Digital Assets Law"],
+          ["3","Switzerland (Zug \u2014 Zurich)","Europe","Birthplace of \u201cCrypto Valley\u201d with mature FINMA stablecoin & licensing frameworks; Zurich atop IMD smart-city rankings for years"],
+          ["4","Hong Kong","Asia","13 SFC-licensed virtual-asset platforms; ~3,384 family offices; stablecoin legislation advancing; offshore CNH hub"],
+          ["5","London / UK","Europe","Top-2 global financial centre (GFCI) + digital-assets legislator; FCA crypto regime enacted with a clear licensing roadmap"],
+          ["6","Paris (France)","Europe","Station F, the world's largest startup campus, + PSAN registration regime; 2025's only European city in the global fintech top-10"],
+          ["7","Berlin / Germany","Europe","Berlin Blockchain Week carries global influence; BTC/ETH defined as private money, tax-free after 1+ year of holding"],
+          ["8","Seoul / South Korea","Asia","#5 in Chainalysis 2026 adoption index; tokenised bonds & unified-ledger roadmap; vibrant retail and developer scenes"],
+          ["9","Tokyo / Japan","Asia","First mover to legislate crypto trading (2017) and recognise BTC as legal payment; #4 in 2026 adoption; digital securities on the national finance agenda"],
+          ["10","Nairobi / Kenya","Africa","Africa's digital-finance heart: Yellow Card HQ moves ~12m transactions monthly; M-Pesa depth + stablecoin pilots; regulation moving from \u201cforbidden\u201d to \u201csandbox\u201d"]
+        ],
+        altList:"Watchlist: Estonia (Tallinn, e-Residency) \u00b7 USA (Austin / Miami) \u00b7 Portugal (Lisbon, nomad visa + crypto tax relief) \u00b7 Thailand (Bangkok / Phuket, 7% VAT on crypto trading removed in 2024) \u00b7 Nigeria (Lagos, top African P2P volumes)",
+        diffTitle:"6.3 Three continental paths \u2014 three sentences from a global-village observer",
+        diff:[
+          ["Europe sells \u201ccertainty\u201d","Compliance-first, clear licences \u2014 right for protocol layers, auditing, compliance and long-term holding","Zurich \u00b7 Zug \u00b7 London \u00b7 Paris \u00b7 Berlin"],
+          ["Asia sells \u201ccapital & speed\u201d","Densest capital, developers and industrial support \u2014 right for liquidity, growth and landing","Singapore \u00b7 Dubai \u00b7 Hong Kong \u00b7 Seoul \u00b7 Tokyo"],
+          ["Africa sells \u201creal adoption\u201d","No legacy baggage; mobile money connects directly to on-chain \u2014 right for inclusive finance and cross-border settlement","Nairobi leads"]
+        ],
+        echoTitle:"6.4 Echoing earlier sections: city nodes = network-economy nodes",
+        echo:[
+          "MALS's eCNH (cross-border settlement) and EACO (governance) land on real city nodes: Singapore / Hong Kong = offshore RMB & institutional entry; Dubai = licensed exchanges & Gulf capital; Nairobi = micro-payment & inclusive adoption.",
+          "Crypto-friendly cities overlap heavily with classic overseas-Chinese hubs (Singapore, Hong Kong, KL, Vancouver \u00d7 Singapore, Dubai, Zurich, Seoul) \u2014 the geographic base of this plan.",
+          "Observation: stabilising the global network economy is not about choosing one best city; it is many city nodes backing each other up \u2014 consistent with MCAN: cities are backup units; the network itself is the civilization."
+        ]
+      },
+      s7:{
+        num:"VII",
+        en:"Economic Crisis",
+        title:"Economic crisis watch & the network-economy response: from the 1997 Asian financial crisis to bottom-up resilience",
+        ensub:"A replay of 1997 and a crypto-era ladder from individual to global layers",
+        lead:"In 1997, hedge funds shorted the Thai baht and triggered the Asian financial crisis \u2014 a textbook case of a fragile currency regime being broken by external shocks. This section replays the chain, maps the crisis-time roles of EACO/eCNH/SOL/DOGE/BNB/ETH/BTC, and lays out a six-layer bottom-up ladder plus a three-phase action list for global netizens.",
+        timelineTitle:"7.1 Crisis timeline (1997\u20131998)",
+        timeline:[
+          ["1997-05 \u2014 06","Speculators short the baht; the Bank of Thailand intervenes repeatedly, reserves drain fast"],
+          ["1997-07-02","Thailand abandons the fixed peg; the baht plunges ~17% in one day \u2014 the Asian crisis begins"],
+          ["1997-07 onward","Domino effect: Philippine peso, ringgit, rupiah, Singapore dollar, Taiwan dollar all fall"],
+          ["1997-10 \u2014 11","Crisis hits Northeast Asia: won down ~55% in ~2 months; Korean stocks crash ~57% in half a year; chaebols collapse"],
+          ["1997-11 \u2014 12","South Korea asks the IMF for help; the won nears 2,000 per USD"],
+          ["1998-01 \u2014 02","Rupiah breaks 10,000/USD; Indonesia sinks into twin political-economic crisis; Malaysia reinstates capital controls"],
+          ["1998-08","Speculators attack the HKD peg repeatedly; HKMA repels them backed by China's reserves"]
+        ],
+        devalTitle:"7.2 Measured currency losses (Jul 1997 \u2014 Feb 1998)",
+        deval:["Indonesian rupiah down ~74%","Thai baht down ~43% (~93% at peak readings)","Malaysian ringgit down ~33%","Korean won down ~80% at peak readings"],
+        rootsTitle:"7.3 Structural roots (multiple hazards piled into a disaster)",
+        roots:["Heavy external debt: short-term debt funding long-term investment; Korea's top-30 chaebols averaged debt-to-equity above 500%","Fixed / quasi-fixed pegs: overvalued rates + central-bank guarantees become a one-sided shorting casino","Regulatory gaps: off-balance-sheet risks, property & equity credit bubbles, over-open capital accounts","Free hot-money flows: foreign capital inflates assets then flees, leaving a boom-bust loop"],
+        cmpTitle:"7.4 Historical comparison: the shared lesson of three bubbles/crises",
+        cmp:["Crisis","Period","Trigger","Shared lesson"],
+        cmpRows:[
+          ["Latin American debt crisis","1980s","US rate hikes + sovereign defaults","Over-reliance on foreign capital & debt; fragile local currency"],
+          ["Asian financial crisis","1997\u20131998","Shorting fixed pegs + capital flight","Fixed peg + weak regulation + short-term debt = disaster recipe"],
+          ["Dot-com bubble","2000\u20132001","Valuations detached from fundamentals","Short-term booms are not lasting value; prices need real cash flows"]
+        ],
+        transTitle:"7.5 How a crisis hurts ordinary people: the transmission chain",
+        trans:["Currency collapse \u2192 import inflation \u2192 purchasing power erodes","Forced rate hikes \u2192 corporate funding costs soar \u2192 defaults \u2192 unemployment","Equity & property crashes \u2192 household wealth shrinks \u2192 balance-sheet recession","Legacy moats fail: bank runs, frozen capital controls, single-fiat savings wiped out"],
+        assetsTitle:"7.6 Crisis-time roles of the seven assets",
+        assets:[
+          ["BTC","Digital gold / anchor of value: fixed supply, most decentralised network \u2014 the most mature crisis-time store of value"],
+          ["ETH","Settlement & DeFi core: on-chain lending, collateral liquidation and stable-asset protocols as programmable infrastructure for reorganisation"],
+          ["SOL","Liquidity artery in crisis: low fees, high throughput \u2014 high-frequency turnover, cross-border micro-clearing, emergency payments"],
+          ["BNB","Bridge layer: links traditional on-ramps to the on-chain world; handles swaps, in/out flows and price discovery in crises"],
+          ["DOGE","Hand of inclusion: low unit value, strong community \u2014 small mutual aid, rescue tips, mass participation"],
+          ["eCNH","Ruler of stability: pegged to offshore RMB, smart-contract cross-border bookkeeping & settlement \u2014 faster, more freeze-resistant"],
+          ["EACO","Community governance & mutual aid: ecosystem token bound to real use; an \u201cEACO emergency pool\u201d with governance votes deciding who & how much to help"]
+        ],
+        anchorTitle:"7.7 Real-world anchors (BIS & Chainalysis data)",
+        anchor:["BIS survey of 130 economies (2026): stablecoin flows tend to rise during currency stress and bank/sovereign crises, and are less affected by capital controls","Chainalysis (Jul 2024 \u2014 Jun 2025): Turkey ~USD 200B, Argentina ~USD 93.9B, Nigeria ~USD 92.1B, Venezuela ~USD 44.6B (inflation >170%) in crypto volumes","Bitso: ~60% of Argentine crypto purchases are USD stablecoins; the peso has lost ~95% since 2018"],
+        ladderTitle:"7.8 Six layers of bottom-up response for global netizens",
+        ladderNote:"Bottom-up = harden the most fragile, most basic layer first, then climb: individual \u2192 family \u2192 community \u2192 business \u2192 city/platform \u2192 global network.",
+        ladder:[
+          ["Layer 1 \u00b7 Individual (survival floor)","Cash + eCNH stablecoins as dual insurance (3\u20136 months); small DCA into BTC (5\u201310%), no borrowing, no leverage; skills are cash; cold-storage keys + dual backups of documents"],
+          ["Layer 2 \u00b7 Family (asset allocation)","6-month emergency fund split across currencies; \u201cbarbell\u201d of low-volatility stable assets + high-potential assets; deleverage to lock interest-rate risk; insurance & trusts"],
+          ["Layer 3 \u00b7 Community (mutual-aid network)","EACO emergency pool (multi-sig, governance votes, on-chain ledgers); clan/alumni groups go digital; verify facts from official + multiple sources to stop panic"],
+          ["Layer 4 \u00b7 Merchants & firms (business hedging)","Settle cross-border receivables in eCNH to hedge FX losses; diversify supply chains; tokenise receivables to bypass tightened credit"],
+          ["Layer 5 \u00b7 Cities & platforms (infrastructure)","Regulatory sandboxes & stablecoin interoperability; exchanges with proof-of-reserves + open-source audits; multi-city backups for business, funds and teams (echoing MCAN)"],
+          ["Layer 6 \u00b7 Global network (rules & resilience)","Multi-chain reserve pools (BTC/ETH/SOL) so one chain failure cannot sink the whole; MALS running; 24-hour trading relay across Eurasia, Africa and the Americas"]
+        ],
+        drillTitle:"7.9 Crisis action list: before / during / after",
+        drill:[
+          ["Before (peacetime)",["Deleverage: total debt \u2264 3\u20135\u00d7 monthly income","Emergency fund: 6 months of expenses, split currencies (incl. eCNH)","Hedge allocation: BTC 5\u201310% + gold + multi-currency cash","Backup everything: keys (cold + multi-sig), ID docs, data in 3 places","Join 2\u20133 trusted mutual-aid networks"]],
+          ["During (live crisis)",["No panic selling: a 48-hour cool-off, rebalance only per plan","Book in eCNH to protect purchasing power, cut local-currency exposure","Stay liquid via SOL / BNB, avoid single-chain congestion","Activate the community emergency pool; share facts, stop panics"]],
+          ["After (recovery)",["Review & rebalance: fix ratios, record lessons","Assets bought cheap in crises are seeds of the next boom"]]
+        ],
+        risksTitle:"7.10 Risks & compliance (must read)",
+        risks:["Crypto can crash in crises too (liquidity squeezes, exchange risk): \u201chedging\u201d is not \u201crisk-free\u201d \u2014 allocate by ratio, not all-in","Pegs depend on reserve quality and audit transparency \u2014 only choose issuers with public audits and ample reserves","Regulatory stances differ wildly by jurisdiction \u2014 run compliance checks before cross-border moves","This is a community-governance & education framework, not investment advice; verify contract addresses (see 8.1)"]
+      },
+      s8:{
+        num:"VIII",
+        en:"Appendix",
+        title:"Appendix: contract addresses, glossary & references",
+        ensub:"Verify addresses via official channels before interacting",
+        caTitle:"8.1 Contract addresses (user-provided \u2014 verify via official channels)",
+        caNote:"\u26a0\ufe0f Always re-verify contract addresses via the project's official channels (website, official X/Telegram, block explorers) before any interaction \u2014 guard against fake tokens and phishing.",
+        contracts:[
+          ["EACO","Ecosystem-native token (Solana)","DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"],
+          ["eCNH","Offshore-RMB ecosystem token (Solana)","7GQnqthWKa5v2GqXYWhmgWZY5mCRrniwK3Xuinm9GKw5"]
+        ],
+        glTitle:"8.2 Mini glossary (bilingual)",
+        glossary:[
+          ["\u5170\u82b3\u5171\u548c\u56fd","Lanfang Republic"],
+          ["\u5510\u4eba\u8857 / \u534e\u57e0","Chinatown"],
+          ["\u6d77\u5916\u534e\u4eba","Overseas Chinese / Chinese Diaspora"],
+          ["\u751f\u6d3b\u6c34\u5e73\u5206\u5c42","Livelihood / Living Standard Tiers"],
+          ["\u65b9\u821f\u57ce\u5e02\u7f51","Multi-City Ark Network (MCAN)"],
+          ["\u591a\u951a\u5206\u5c42\u7a33\u5b9a","Multi-Anchored Layered Stability (MALS)"],
+          ["\u5168\u7403\u7f51\u7edc\u7ecf\u6d4e","Global Network Economy"],
+          ["\u52a0\u5bc6\u91c7\u7eb3\u6307\u6570","Crypto Adoption Index"],
+          ["\u865a\u62df\u8d44\u4ea7\u670d\u52a1\u63d0\u4f9b\u8005","Virtual Asset Service Provider (VASP)"],
+          ["\u52a0\u5bc6\u8c37","Crypto Valley"],
+          ["\u5730\u7403\u6751\u7f51\u53cb\u89c2\u6d4b","Global Village Observer Perspective"]
+        ],
+        refTitle:"7.3 References",
+        refs:[
+          "Singapore Dept. of Statistics, Population Trends 2025: Chinese ~73.9% of residents",
+          "EIU Global Liveability Index 2025: Copenhagen / Vienna / Zurich / Melbourne / Geneva / Sydney / Osaka-Auckland / Adelaide / Vancouver in top-10",
+          "Chinese Consulate-General in Dubai & community sources: ~300k Chinese in the UAE, ~150k in Dubai's Dragon Mart area",
+          "Ming History (\u201cShunta\u201d entries), Qing History Draft & overseas-Chinese historiography on Lanfang, Daiyan and others",
+          "UN & World Bank income groupings; China NBS five-quintile household income methodology",
+          "Hong Kong New Capital Investment Entrant Scheme official data; Deloitte Hong Kong Family Office Report 2025",
+          "Henley & Partners Crypto Wealth & Adoption Index 2026: Singapore #1 for the 4th straight year, UAE #2 (36 jurisdictions, 900+ data points)",
+          "Multipolitan Global Crypto-Friendly City Index 2026 (Lianhe Zaobao, 2026-06-22): Singapore #1, APAC takes 6 of top-10",
+          "VARA / MAS / SFC licence statistics 2026: Dubai 50 VASP licences, Singapore 37, Hong Kong 13",
+          "Chainalysis Global Crypto Adoption Index 2026: Japan #4, South Korea #5, India #6",
+          "IMD Smart City Index 2026: Zurich #1 for the 7th consecutive year; Dubai / Abu Dhabi / Singapore in top-10",
+          "African digital-finance reporting (Yellow Card / Kenya updates 2026): Nairobi HQ processes ~12m transactions monthly"
+        ]
+      },
+      foot:{
+        ver:"v1.2 \u00b7 2026-10-03",
+        made:"Bilingual single-page web app \u00b7 companion to the Markdown guide",
+        disc:"Disclaimer: research & education only. Some historical polities rest on legends \u2014 defer to academic literature; Web3 city rankings are one public reading among several; crypto prices are volatile and nothing here is investment advice; always verify contract addresses via official channels.",
+        top:"Back to top"
+      }
+    }
+  };
+
+  var S = { lang:"zh" };
+
+  /* ========== small helpers ========== */
+  function esc(s){return String(s);}
+  function secHead(d){
+    return '<div class="sec-head"><span class="secnum">'+d.num+'</span><div><h2 class="sec-title">'+esc(d.title)+'</h2></div></div>'+
+           '<p class="sec-ensub">'+esc(d.ensub)+'</p>';
+  }
+  function lead(d, hasLead){
+    return hasLead ? '<p class="lead">'+esc(d.lead)+'</p>' : '';
+  }
+  function table(heads, rows){
+    var h = '<thead><tr>'+rows.length?'' :'';
+    h = '<thead><tr>';
+    for(var i=0;i<heads.length;i++){ h += '<th>'+esc(heads[i])+'</th>'; }
+    h += '</tr></thead><tbody>';
+    for(var r=0;r<rows.length;r++){
+      h += '<tr>';
+      for(var c=0;c<rows[r].length;c++){ h += '<td>'+rows[r][c]+'</td>'; }
+      h += '</tr>';
+    }
+    h += '</tbody>';
+    return '<div class="tblwrap"><table>'+h+'</table></div>';
+  }
+  function ul(items){ var s='<ul class="lst">'; for(var i=0;i<items.length;i++){s+='<li>'+esc(items[i])+'</li>';} return s+'</ul>'; }
+  function ol(items){ var s='<ol class="lst">'; for(var i=0;i<items.length;i++){s+='<li>'+esc(items[i])+'</li>';} return s+'</ol>'; }
+
+  /* ========== section renderers ========== */
+  function renderS1(d){
+    var s = d.s1;
+    var html = '<section class="block" id="sec1">';
+    html += secHead(s) + lead(s, true);
+    html += '<h3>'+esc(s.rTitle)+'</h3>';
+    html += table(["政权 / 政体（Polity）","时间（Period）","地点（Location）","建立者（Founder）","性质与说明（Nature & Notes）"], s.regimes);
+    html += '<blockquote><p class="note-flag">'+s.rNote+'</p></blockquote>';
+    html += '<h3>'+esc(s.cTitle)+'</h3>';
+    html += table(["城市 / 地区（City / Area）","历史与地位（History & Status）"], s.chinatowns);
+    html += '<h3>'+esc(s.lTitle)+'</h3>';
+    html += ul(s.lessons);
+    html += '</section>';
+    return html;
+  }
+
+  function renderS2(d){
+    var s = d.s2;
+    var html = '<section class="block" id="sec2">';
+    html += secHead(s) + lead(s, true);
+    html += '<blockquote><p>'+esc(s.dims)+'</p></blockquote>';
+    for(var i=0;i<s.tiers.length;i++){
+      html += '<h3>'+esc(s.tiers[i].t)+'</h3>';
+      html += table(s.tiers[i].head, s.tiers[i].rows);
+    }
+    html += '<h3>'+esc(s.aTitle)+'</h3>';
+    html += table(["人群（Profile）","推荐（Recommended）"], s.advice);
+    html += '</section>';
+    return html;
+  }
+
+  function renderS3(d){
+    var s = d.s3;
+    var html = '<section class="block" id="sec3">';
+    html += secHead(s) + lead(s, true);
+    html += '<h3>'+esc(s.method ? '3.1 Methodology \u00b7 \u5148\u6821\u51c6\u518d\u5bf9\u53f7' : '')+'</h3>';
+    if(s.method) html += ol(s.method);
+    html += '<h3>'+esc(s.threeTitle)+'</h3>';
+    html += '<div class="tblwrap"><table><thead><tr><th>\u5c42\u7ea7</th><th>\u753b\u50cf</th><th>\u5e94\u5bf9\u7b56\u7565</th></tr></thead><tbody>';
+    for(var i=0;i<s.three.length;i++){
+      html += '<tr>';
+      html += '<td><span class="pill '+(i===0?'ci':(i===1?'sl':'sg'))+'">'+esc(s.three[i][0])+'</span></td>';
+      html += '<td>'+esc(s.three[i][1])+'</td><td>'+esc(s.three[i][2])+'</td>';
+      html += '</tr>';
+    }
+    html += '</tbody></table></div>';
+    html += '<h3>'+esc(s.fiveTitle)+'</h3>';
+    html += table(["\u5c42\u7ea7","\u5bb6\u5ead\u5e74\u53ef\u652f\u914d\u6536\u5165\uff08\u7b49\u503cUSD\uff09","\u753b\u50cf","\u5e94\u5bf9"], s.five);
+    html += '<h3>'+esc(s.tenTitle)+'</h3>';
+    html += table(["\u6321\u4f4d","\u5e74\u6536\u5165\uff08USD\uff09","\u51c0\u8d44\u4ea7\u53c2\u8003","\u5b9a\u4e49","\u5e94\u5bf9\u91cd\u70b9"], s.ten);
+    html += '<blockquote><p>'+esc(s.tenNote)+'</p></blockquote>';
+    html += '<h3>'+esc(s.fourTitle)+'</h3>';
+    html += ol(s.principles);
+    html += '</section>';
+    return html;
+  }
+
+  function renderS4(d){
+    var s = d.s4;
+    var html = '<section class="block" id="sec4">';
+    html += secHead(s) + lead(s, true);
+    html += '<h3>'+esc(s.threatsTitle)+'</h3>';
+    html += ul(s.threats);
+    html += '<h3>'+esc(s.pillarsTitle)+'</h3>';
+    html += table(["\u652f\u67f1","\u5185\u5bb9","\u843d\u5730\u65b9\u5f0f"], s.pillars);
+    html += '<h3>'+esc(s.mcanTitle)+'</h3>';
+    html += ul(s.mcan);
+    html += '<blockquote><p><strong>'+esc(s.mcanPrinciple)+'</strong></p></blockquote>';
+    html += '<h3>'+esc(s.spaceTitle)+'</h3>';
+    html += ul(s.space);
+    html += '</section>';
+    return html;
+  }
+
+  function renderS5(d){
+    var s = d.s5;
+    var html = '<section class="block" id="sec5">';
+    html += secHead(s) + lead(s, false);
+    html += '<div class="notice">'+esc(s.note)+'</div>';
+    html += '<h3>'+esc(s.assetsTitle)+'</h3>';
+    html += '<div class="tblwrap"><table><thead><tr><th>\u8d44\u4ea7</th><th>\u5728\u5168\u7403\u7f51\u7edc\u7ecf\u6d4e\u7a33\u5b9a\u4e2d\u7684\u89d2\u8272</th></tr></thead><tbody>';
+    for(var i=0;i<s.assets.length;i++){
+      html += '<tr><td><strong>'+esc(s.assets[i][0])+'</strong></td><td>'+esc(s.assets[i][1])+'</td></tr>';
+    }
+    html += '</tbody></table></div>';
+    html += '<h3>'+esc(s.malsTitle)+'</h3>';
+    html += '<blockquote><p>'+esc(s.malsGoal)+'</p></blockquote>';
+    html += '<div class="tblwrap"><table><thead><tr><th>\u5c42\uff08Layer\uff09</th><th>\u6838\u5fc3\u80fd\u529b</th><th>\u673a\u5236</th></tr></thead><tbody>';
+    for(var j=0;j<s.mals.length;j++){
+      html += '<tr><td><strong>'+esc(s.mals[j][0])+'</strong></td><td>'+esc(s.mals[j][1])+'</td><td>'+esc(s.mals[j][2])+'</td></tr>';
+    }
+    html += '</tbody></table></div>';
+    html += '<h3>'+esc(s.pathsTitle)+'</h3>';
+    html += ol(s.paths);
+    html += '<h3>'+esc(s.risksTitle)+'</h3>';
+    html += ul(s.risks);
+    html += '</section>';
+    return html;
+  }
+
+  function renderS6(d){
+    var s = d.s6;
+    var html = '<section class="block" id="sec6">';
+    html += secHead(s) + lead(s, true);
+    html += '<h3>'+esc(s.whyTitle)+'</h3>';
+    html += ul(s.why);
+    html += '<h3>'+esc(s.citiesTitle)+'</h3>';
+    html += table(["\u6392\u540d","\u57ce\u5e02 / \u5730\u533a","\u6240\u5728\u6d32","\u6838\u5fc3\u4fe1\u53f7\uff08\u89c2\u6d4b\u4f9d\u636e\uff09"], s.cities);
+    html += '<blockquote><p><span class="pill sg">Watchlist / \u5907\u9009</span> '+esc(s.altList)+'</p></blockquote>';
+    html += '<h3>'+esc(s.diffTitle)+'</h3>';
+    var cards = '<div class="grid3">';
+    for(var i=0;i<s.diff.length;i++){
+      cards += '<div class="card '+(i===0?'ci':(i===1?'cs':'sg'))+'"><div class="ct">'+esc(s.diff[i][0])+'</div><div class="cd">'+esc(s.diff[i][1])+'<br><br><strong>'+esc(s.diff[i][2])+'</strong></div></div>';
+    }
+    cards += '</div>';
+    html += cards;
+    html += '<h3>'+esc(s.echoTitle)+'</h3>';
+    html += ul(s.echo);
+    html += '</section>';
+    return html;
+  }
+
+  function renderS7(d){
+    var s = d.s7;
+    var html = '<section class="block" id="sec7">';
+    html += secHead(s) + lead(s, true);
+    html += '<h3>'+esc(s.timelineTitle)+'</h3>';
+    html += table(["\u65f6\u95f4","\u4e8b\u4ef6"], s.timeline);
+    html += '<h3>'+esc(s.devalTitle)+'</h3>';
+    html += ul(s.deval);
+    html += '<h3>'+esc(s.rootsTitle)+'</h3>';
+    html += ol(s.roots);
+    html += '<blockquote><p><strong>'+esc(s.cmpTitle)+'</strong></p></blockquote>';
+    html += table(s.cmp, s.cmpRows);
+    html += '<h3>'+esc(s.transTitle)+'</h3>';
+    html += ol(s.trans);
+    html += '<h3>'+esc(s.assetsTitle)+'</h3>';
+    html += '<div class="tblwrap"><table><thead><tr><th>\u8d44\u4ea7</th><th>\u5371\u673a\u671f\u804c\u80fd</th></tr></thead><tbody>';
+    for(var a=0;a<s.assets.length;a++){
+      html += '<tr><td><strong>'+esc(s.assets[a][0])+'</strong></td><td>'+esc(s.assets[a][1])+'</td></tr>';
+    }
+    html += '</tbody></table></div>';
+    html += '<h3>'+esc(s.anchorTitle)+'</h3>';
+    html += ul(s.anchor);
+    html += '<h3>'+esc(s.ladderTitle)+'</h3>';
+    html += '<blockquote><p>'+esc(s.ladderNote)+'</p></blockquote>';
+    for(var L=0;L<s.ladder.length;L++){
+      html += '<h4 style="font-family:var(--serif);font-size:16px;color:var(--ink);margin:16px 0 4px;">'+esc(s.ladder[L][0])+'</h4>';
+      html += '<p style="font-size:14.5px;color:#3A4B58;margin:0 0 14px;">'+esc(s.ladder[L][1])+'</p>';
+    }
+    html += '<h3>'+esc(s.drillTitle)+'</h3>';
+    for(var D=0;D<s.drill.length;D++){
+      html += '<h4 style="font-family:var(--serif);font-size:16px;color:var(--slate);margin:18px 0 4px;">'+esc(s.drill[D][0])+'</h4>';
+      html += ul(s.drill[D][1]);
+    }
+    html += '<h3>'+esc(s.risksTitle)+'</h3>';
+    html += ol(s.risks);
+    html += '</section>';
+    return html;
+  }
+
+  function renderS8(d){
+    var s = d.s8;
+    var html = '<section class="block" id="sec8">';
+    html += secHead(s) + lead(s, false);
+    html += '<h3>'+esc(s.caTitle)+'</h3>';
+    html += '<div class="addr-grid">';
+    for(var i=0;i<s.contracts.length;i++){
+      html += '<div class="addr-card">';
+      html += '<div class="an"><span class="tickd"></span>'+esc(s.contracts[i][0])+' <span style="font-size:12px;color:var(--muted)">'+esc(s.contracts[i][1])+'</span></div>';
+      html += '<div class="full" style="margin-top:10px;font-weight:700;color:var(--ink)">'+esc(s.contracts[i][2])+'</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '<blockquote><p>'+esc(s.caNote)+'</p></blockquote>';
+    html += '<h3>'+esc(s.glTitle)+'</h3>';
+    html += '<div class="tblwrap"><table><thead><tr><th>\u534e\u8bed</th><th>English</th></tr></thead><tbody>';
+    for(var g=0;g<s.glossary.length;g++){ html += '<tr><td>'+s.glossary[g][0]+'</td><td>'+s.glossary[g][1]+'</td></tr>'; }
+    html += '</tbody></table></div>';
+    html += '<h3>'+esc(s.refTitle)+'</h3>';
+    html += ol(s.refs);
+    html += '</section>';
+    return html;
+  }
+
+  /* ========== master render ========== */
+  function render(){
+    var d = DATA[S.lang];
+    document.documentElement.lang = (S.lang==='zh') ? 'zh-CN' : 'en';
+    document.title = d.docTitle;
+
+    var mh = document.getElementById("masthead");
+    mh.innerHTML = '<div class="kicker">'+esc(d.kicker)+'</div>'+
+      '<h1>'+esc(d.h1)+'</h1>'+
+      '<p class="sub">'+esc(d.sub)+'</p>'+
+      '<p class="intro">'+esc(d.intro)+'</p>'+
+      '<div class="rule"></div>';
+
+    var nav = document.getElementById("toc");
+    var ul = '<ul>';
+    for(var i=0;i<d.nav.length;i++){ ul += '<li><a href="'+d.nav[i][0]+'">'+esc(d.nav[i][1])+'</a></li>'; }
+    nav.innerHTML = ul + '</ul>';
+
+    var c = document.getElementById("content");
+    c.innerHTML = renderS1(d) + renderS2(d) + renderS3(d) + renderS4(d) + renderS5(d) + renderS6(d) + renderS7(d) + renderS8(d);
+
+    var f = document.getElementById("foot");
+    f.innerHTML = '<div class="wrap">'+
+      '<div class="frow"><strong>'+esc(d.h1)+'</strong><span>'+esc(d.foot.ver)+'</span></div>'+
+      '<div class="frow"><span>'+esc(d.foot.made)+'</span></div>'+
+      '<p class="disc">'+esc(d.foot.disc)+'</p>'+
+      '</div>';
+
+    var btns = document.querySelectorAll("#langbar button");
+    for(var b=0;b<btns.length;b++){
+      btns[b].className = (btns[b].getAttribute("data-lang")===S.lang) ? "active" : "";
+    }
+  }
+
+  /* ========== language switch (in-memory state) ========== */
+  var bar = document.getElementById("langbar");
+  bar.addEventListener("click", function(ev){
+    var btn = ev.target;
+    if(!btn || btn.tagName !== "BUTTON") return;
+    var l = btn.getAttribute("data-lang");
+    if(l && l !== S.lang){ S.lang = l; render(); }
+  });
+
+  S.lang = "zh";
+  render();
+})();
+</script>
+</body>
+</html>
