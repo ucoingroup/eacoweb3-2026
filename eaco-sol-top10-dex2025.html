@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOL 链 Top 10 Swap DEX · EACO</title>
+<style>
+  :root{
+    --bg:#050a1e; --bg2:#0b1f4b; --panel:rgba(255,255,255,.055); --panel2:rgba(255,255,255,.09);
+    --text:#e8eefc; --muted:#9fb2d8; --accent:#38bdf8; --accent2:#22d3ee; --ring:rgba(56,189,248,.45);
+    --badge-bg:rgba(56,189,248,.14); --rank:#22d3ee; --shadow:0 18px 50px rgba(0,0,0,.45);
+    --link:#67e8f9; --ca:#a5b4fc; --btntxt:#04121f;
+  }
+  body[data-theme="apple"]{
+    --bg:#eefaf2; --bg2:#d8f2e3; --panel:#ffffff; --panel2:#eefbe9;
+    --text:#12301f; --muted:#5c7a68; --accent:#22c55e; --accent2:#16a34a; --ring:rgba(34,197,94,.4);
+    --badge-bg:rgba(34,197,94,.13); --rank:#16a34a; --shadow:0 14px 34px rgba(22,101,52,.16);
+    --link:#15803d; --ca:#0d9488; --btntxt:#ffffff;
+  }
+  body[data-theme="beige"]{
+    --bg:#f7efdd; --bg2:#efe0c4; --panel:#fffdf4; --panel2:#f5e8cf;
+    --text:#3b2a16; --muted:#7a6848; --accent:#a16207; --accent2:#8b5a2b; --ring:rgba(161,98,7,.42);
+    --badge-bg:rgba(161,98,7,.13); --rank:#8b5a2b; --shadow:0 14px 34px rgba(90,60,20,.18);
+    --link:#92400e; --ca:#7c2d12; --btntxt:#fffaf0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans SC","Noto Sans Arabic",Roboto,sans-serif;
+    background:linear-gradient(160deg,var(--bg),var(--bg2) 60%,var(--bg));
+    color:var(--text); min-height:100vh; transition:background .5s,color .3s;
+  }
+  body[data-theme="beige"]{font-family:Georgia,"Songti SC","SimSun","Noto Serif SC",serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:26px 20px 70px}
+  /* 星点背景（仅宇宙蓝） */
+  body[data-theme="cosmic"]{background-image:radial-gradient(1px 1px at 12% 18%,rgba(255,255,255,.5) 50%,transparent 50%),radial-gradient(1px 1px at 78% 8%,rgba(255,255,255,.4) 50%,transparent 50%),radial-gradient(1.5px 1.5px at 34% 64%,rgba(147,197,253,.6) 50%,transparent 50%),radial-gradient(1px 1px at 88% 52%,rgba(255,255,255,.35) 50%,transparent 50%),radial-gradient(1px 1px at 55% 82%,rgba(147,197,253,.5) 50%,transparent 50%),linear-gradient(160deg,var(--bg),var(--bg2) 60%,var(--bg));background-color:var(--bg)}
+  header{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:34px}
+  .brand{font-weight:800;font-size:15px;letter-spacing:.12em}
+  .brand .dot{color:var(--accent2)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px}
+  .seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--panel);border:1px solid var(--ring);border-radius:999px;padding:4px}
+  .seg button{border:0;background:transparent;color:var(--muted);padding:6px 12px;border-radius:999px;font-size:13px;cursor:pointer;transition:.2s}
+  .seg button:hover{color:var(--text)}
+  .seg button.on{background:var(--accent);color:var(--btntxt);font-weight:700}
+  .hero{text-align:center;margin:8px 0 34px}
+  h1{font-size:clamp(28px,5vw,46px);line-height:1.2;font-weight:900;letter-spacing:.01em}
+  h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  body[data-theme="beige"] h1 .grad{-webkit-text-fill-color:var(--accent2)}
+  .sub{margin-top:12px;font-size:clamp(15px,2vw,19px);color:var(--muted);font-weight:500}
+  .lead{margin:16px auto 0;max-width:760px;font-size:14px;line-height:1.75;color:var(--muted)}
+  h2.sec{display:flex;align-items:center;gap:12px;font-size:clamp(20px,3vw,27px);margin:10px 0 20px;font-weight:800}
+  h2.sec::before{content:"";width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 14px var(--accent)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(325px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--ring);border-radius:18px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);backdrop-filter:blur(6px);transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .card .top{display:flex;align-items:center;gap:12px}
+  .rank{font-size:26px;font-weight:900;color:var(--rank);min-width:44px;text-align:center;font-family:inherit}
+  .dname{font-size:19px;font-weight:800;letter-spacing:.01em}
+  .type{display:inline-block;align-self:flex-start;font-size:11.5px;font-weight:700;background:var(--badge-bg);color:var(--accent2);border:1px solid var(--ring);padding:2px 10px;border-radius:999px;margin-left:auto}
+  .ddesc{font-size:13.5px;line-height:1.65;color:var(--muted);flex:1}
+  .site{align-self:flex-start;font-size:13px;text-decoration:none;color:var(--link);font-weight:700;border-bottom:1px dashed var(--ring);padding-bottom:1px}
+  .site:hover{color:var(--accent)}
+  .note{background:var(--panel2);border:1px dashed var(--ring);border-radius:14px;padding:14px 16px;font-size:12.5px;line-height:1.7;color:var(--muted);margin-top:22px}
+  /* EACO 区块 */
+  .eaco{margin-top:46px;background:linear-gradient(135deg,var(--panel),var(--panel2));border:1px solid var(--ring);border-radius:22px;padding:28px 24px;box-shadow:var(--shadow)}
+  .eaco h2{font-size:clamp(21px,3vw,28px);font-weight:900;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .tag{font-size:11.5px;font-weight:700;background:var(--badge-bg);color:var(--accent2);border:1px solid var(--ring);padding:3px 10px;border-radius:999px}
+  .eaco p.desc{margin-top:12px;font-size:14px;line-height:1.8;color:var(--muted)}
+  .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:18px}
+  .kv .item{background:rgba(255,255,255,.04);border:1px solid var(--ring);border-radius:12px;padding:10px 12px;font-size:13px}
+  body[data-theme="apple"] .kv .item,body[data-theme="beige"] .kv .item{background:var(--panel)}
+  .kv .k{color:var(--muted);font-size:12px}
+  .kv .v{font-weight:700;margin-top:3px;word-break:break-all}
+  .kv .v.small{font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--ca)}
+  .ca-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ca-row button{border:1px solid var(--ring);background:var(--badge-bg);color:var(--accent2);border-radius:8px;padding:3px 10px;font-size:12px;cursor:pointer}
+  .ca-row button:hover{filter:brightness(1.15)}
+  .links{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+  .links a{text-decoration:none;font-size:13px;font-weight:700;border:1px solid var(--ring);background:var(--badge-bg);color:var(--accent2);padding:7px 14px;border-radius:999px;transition:.2s}
+  .links a:hover{background:var(--accent);color:var(--btntxt);transform:translateY(-1px)}
+  .disc{margin-top:18px;font-size:12px;color:var(--muted);line-height:1.7;border-top:1px dashed var(--ring);padding-top:14px}
+  footer{margin-top:34px;text-align:center;font-size:13px;color:var(--muted);line-height:1.9}
+  footer b{color:var(--accent2)}
+  [dir="rtl"] .type{margin-left:0;margin-right:auto}
+  [dir="rtl"] .kv .v{text-align:right}
+  .swapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .swapcard{background:var(--panel);border:1px solid var(--ring);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+  .swapcard:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .swapcard .dname{font-size:17px;font-weight:800}
+  .swapcard .addr{font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--ca);background:rgba(255,255,255,.04);border:1px dashed var(--ring);border-radius:10px;padding:10px 12px;line-height:1.55;word-break:break-all}
+  body[data-theme="apple"] .swapcard .addr,body[data-theme="beige"] .swapcard .addr{background:var(--panel)}
+  .swapcard .go{align-self:flex-start;font-size:12.5px;text-decoration:none;color:var(--btntxt);font-weight:700;background:var(--accent);padding:5px 14px;border-radius:999px;transition:.2s}
+  .swapcard .go:hover{background:var(--accent2)}
+  .swapcard .ref{font-size:11.5px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+  .swapcard .ref a{color:var(--link);text-decoration:none;border-bottom:1px dashed var(--ring)}
+  .swapcard .ref a:hover{color:var(--accent)}
+  @media(max-width:640px){.wrap{padding:18px 14px 50px}.toolbar{width:100%;justify-content:center}}
+</style>
+</head>
+<body data-theme="cosmic">
+<div class="wrap">
+
+  <header>
+    <div class="brand">SOL SWAP <span class="dot">◆</span> DEX TOP10</div>
+    <div class="toolbar">
+      <div class="seg" id="langBar" role="group" aria-label="Language"></div>
+      <div class="seg" id="themeBar" role="group" aria-label="Theme"></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 id="hTitle"></h1>
+    <p class="sub" id="hSub"></p>
+    <p class="lead" id="hLead"></p>
+  </section>
+
+  <h2 class="sec" id="secTitle"></h2>
+  <div class="grid" id="dexGrid"></div>
+  <div class="note" id="note"></div>
+
+  <section class="eaco" id="eacoBox">
+    <h2 id="eacoTitle"></h2>
+    <p class="desc" id="eacoDesc"></p>
+    <div class="kv" id="eacoKv"></div>
+    <div class="links" id="eacoLinks"></div>
+    <div class="disc" id="eacoDisc"></div>
+  </section>
+
+  <section class="eaco" id="swapBox">
+    <h2 id="swapTitle"></h2>
+    <p class="desc" id="swapDesc"></p>
+    <div class="grid swapgrid" id="swapGrid"></div>
+    <div class="disc" id="swapDisc"></div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var L = {
+  zh: {
+    lang:"中文", themeTitle:"主题",
+    h1a:"SOL 链", h1b:"Top 10 Swap DEX",
+    sub:"面向地球村的 Solana 生态交易指引",
+    lead:"以下榜单综合 2026 年现货 swap 交易量与生态地位，来源：Analytics Insight、OpenLiquid 与 CoinMarketCap Solana 专区。名单随市场变化，仅供信息参考。",
+    sec:"Top 10 · Swap DEX 榜单",
+    note:"榜单口径：按 2026 年现货 swap 交易量及生态地位作品牌级综合排序（未拆分协议子版本）；来源：Analytics Insight（2026-05 日交易量榜）、OpenLiquid（2026 生态综合榜）、CoinMarketCap（Solana 专区）。其中 Jupiter 为聚合器，承载 Solana 绝大部分 swap 路由流量；交易量数据随时间变动，请以各协议官方页面为准。",
+    eacoTitle:"EACO · 地球最好的币",
+    eacoDesc:"EACO（Earth's Best Coin，简称 eaco / e.）是 Solana 链上的 AI + RWA + Web3 主题代币，由地球村社区共同推动。口号：eaco for earth, the global villagers' own MEME. 全称 Earth's Best Coin，定位 Earth's Best AI + RWA + Web3 Coin。",
+    kv:[["全称","Earth's Best Coin (EACO / e.)"],["定位","Earth's Best AI + RWA + Web3 Coin"],["总供应量","1,350,000,000"],["公链","Solana (SOL)"],["合约地址 CA (可点击复制)", "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"]],
+    official:"官方渠道与链接",
+    copy:"复制", copied:"已复制 ✓",
+    disc:"本页面仅供信息展示与娱乐参考，不构成任何投资建议。加密货币具有高风险，请自行研究（DYOR）。",
+    footer:"eaco for earth, the global villagers' own MEME — 页面数据综合公开资料整理，交易请以官方页面为准。",
+    swapTitle:"EACO 兑换直达 · Top 10 DEX Swap 入口",
+    swapDesc:"在以下 Solana 链上 DEX 中使用 EACO 合约地址直接兑换。所有地址均可复制，请粘贴至对应 DEX Swap 页面进行验证。",
+    swapOrb:"orbmarkets 链上验证",
+    swapScan:"Solscan 链上验证",
+    swapDisc:"提示：点击「前往 Swap」将跳转至各 DEX 官方兑换页面。请在跳转后粘贴 EACO 合约地址（CA）进行搜索或兑换。链上验证链接供核对代币信息。"
+  },
+  en: {
+    lang:"English", themeTitle:"Theme",
+    h1a:"Solana", h1b:"Top 10 Swap DEXs",
+    sub:"A trading guide to the Solana ecosystem for global villagers",
+    lead:"Ranked by 2026 spot swap volume and ecosystem standing. Sources: Analytics Insight, OpenLiquid and the CoinMarketCap Solana section. Rankings change with the market and are for reference only.",
+    sec:"Top 10 · Swap DEX Ranking",
+    note:"Methodology: brand-level ranking by 2026 spot swap volume and ecosystem standing (protocol sub-variants not split). Sources: Analytics Insight (May 2026 volume ranking), OpenLiquid (2026 ecosystem ranking) and CoinMarketCap (Solana). Jupiter is an aggregator carrying the majority of Solana swap-routing traffic. Volumes change over time; always refer to each protocol's official pages.",
+    eacoTitle:"EACO — Earth's Best Coin",
+    eacoDesc:"EACO (Earth's Best Coin, ticker: eaco / e.) is an AI + RWA + Web3 themed token on Solana, championed by the global-villager community. Slogan: eaco for earth, the global villagers' own MEME.",
+    kv:[["Full name","Earth's Best Coin (EACO / e.)"],["Positioning","Earth's Best AI + RWA + Web3 Coin"],["Total supply","1,350,000,000"],["Chain","Solana (SOL)"],["Contract address (click to copy)","DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"]],
+    official:"Official channels & links",
+    copy:"Copy", copied:"Copied ✓",
+    disc:"This page is for information and entertainment only and does not constitute investment advice. Crypto is high-risk; always do your own research (DYOR).",
+    footer:"eaco for earth, the global villagers' own MEME — data compiled from public sources; always trade via official pages.",
+    swapTitle:"EACO Swap Direct · Top 10 DEX Swap Entry",
+    swapDesc:"Use the EACO contract address on these Solana DEXs to swap directly. All addresses are copyable — paste into the corresponding DEX swap page to verify.",
+    swapOrb:"orbmarkets on-chain verify",
+    swapScan:"Solscan on-chain verify",
+    swapDisc:"Tip: Clicking Go to Swap will jump to each DEX official swap page. Paste the EACO contract address (CA) to search or swap after landing. On-chain verify links are provided for token info verification."
+  },
+  fr: {
+    lang:"Français", themeTitle:"Thème",
+    h1a:"Solana", h1b:"Top 10 des DEX de swap",
+    sub:"Un guide de trading de l'écosystème Solana pour les villageois du monde",
+    lead:"Classement basé sur le volume de swap au comptant et le poids dans l'écosystème en 2026. Sources : Analytics Insight, OpenLiquid et la section Solana de CoinMarketCap. Le classement évolue avec le marché et est fourni à titre indicatif.",
+    sec:"Top 10 · Classement des DEX de swap",
+    note:"Méthodologie : classement par marque selon le volume de swap au comptant 2026 et le poids dans l'écosystème (variantes non distinguées). Sources : Analytics Insight (classement des volumes de mai 2026), OpenLiquid (classement écosystème 2026) et CoinMarketCap (Solana). Jupiter est un agrégateur qui capte l'essentiel du routage de swap sur Solana. Les volumes évoluent ; consultez les pages officielles.",
+    eacoTitle:"EACO — Earth's Best Coin",
+    eacoDesc:"EACO (Earth's Best Coin, symbole : eaco / e.) est un jeton Solana aux thèmes AI + RWA + Web3, porté par la communauté du village global. Slogan : eaco for earth, the global villagers' own MEME.",
+    kv:[["Nom complet","Earth's Best Coin (EACO / e.)"],["Positionnement","Earth's Best AI + RWA + Web3 Coin"],["Offre totale","1 350 000 000"],["Réseau","Solana (SOL)"],["Adresse du contrat (clic pour copier)","DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"]],
+    official:"Canaux officiels & liens",
+    copy:"Copier", copied:"Copié ✓",
+    disc:"Cette page est fournie à titre informatif et de divertissement uniquement ; elle ne constitue pas un conseil en investissement. La crypto comporte des risques élevés — faites vos propres recherches (DYOR).",
+    footer:"eaco for earth, the global villagers' own MEME — données compilées à partir de sources publiques ; échangez via les pages officielles."
+  },
+  es: {
+    lang:"Español", themeTitle:"Tema",
+    h1a:"Solana", h1b:"Top 10 DEX de swap",
+    sub:"Una guía de trading del ecosistema Solana para los aldeanos globales",
+    lead:"Clasificación según el volumen de swap al contado y la relevancia en el ecosistema en 2026. Fuentes: Analytics Insight, OpenLiquid y la sección Solana de CoinMarketCap. El ranking cambia con el mercado y es solo informativo.",
+    sec:"Top 10 · Ranking de DEX de swap",
+    note:"Metodología: clasificación a nivel de marca por volumen de swap al contado 2026 y peso en el ecosistema (sin dividir por variantes). Fuentes: Analytics Insight (ranking de volumen de mayo de 2026), OpenLiquid (ranking de ecosistema 2026) y CoinMarketCap (Solana). Jupiter es un agregador que canaliza la mayor parte del tráfico de swap de Solana. Los volúmenes cambian; consulte las páginas oficiales.",
+    eacoTitle:"EACO — Earth's Best Coin",
+    eacoDesc:"EACO (Earth's Best Coin, ticker: eaco / e.) es un token de Solana con temática AI + RWA + Web3, impulsado por la comunidad de la aldea global. Lema: eaco for earth, the global villagers' own MEME.",
+    kv:[["Nombre completo","Earth's Best Coin (EACO / e.)"],["Posicionamiento","Earth's Best AI + RWA + Web3 Coin"],["Suministro total","1 350 000 000"],["Cadena","Solana (SOL)"],["Dirección del contrato (clic para copiar)","DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"]],
+    official:"Canales oficiales y enlaces",
+    copy:"Copiar", copied:"Copiado ✓",
+    disc:"Esta página es solo informativa y de entretenimiento; no constituye asesoramiento de inversión. Las criptomonedas son de alto riesgo: haga su propia investigación (DYOR).",
+    footer:"eaco for earth, the global villagers' own MEME — datos compilados de fuentes públicas; opere siempre en páginas oficiales."
+  },
+  ru: {
+    lang:"Русский", themeTitle:"Тема",
+    h1a:"Solana", h1b:"Топ-10 своп-DEX",
+    sub:"Руководство по торговле в экосистеме Solana для жителей земной деревни",
+    lead:"Рейтинг составлен по объёму спотовых свопов и значимости в экосистеме за 2026 год. Источники: Analytics Insight, OpenLiquid и раздел Solana на CoinMarketCap. Рейтинг меняется вместе с рынком и носит справочный характер.",
+    sec:"Топ-10 · Рейтинг своп-DEX",
+    note:"Методология: рейтинг на уровне брендов по объёму спотовых свопов 2026 года и значимости в экосистеме (варианты не разделяются). Источники: Analytics Insight (рейтинг объёма за май 2026), OpenLiquid (экосистемный рейтинг 2026) и CoinMarketCap (Solana). Jupiter — агрегатор, проводящий основную часть своп-трафика Solana. Объёмы меняются — сверяйтесь с официальными страницами.",
+    eacoTitle:"EACO — Earth's Best Coin",
+    eacoDesc:"EACO (Earth's Best Coin, тикер: eaco / e.) — токен Solana в тематике AI + RWA + Web3, продвигаемый сообществом земной деревни. Слоган: eaco for earth, the global villagers' own MEME.",
+    kv:[["Полное название","Earth's Best Coin (EACO / e.)"],["Позиционирование","Earth's Best AI + RWA + Web3 Coin"],["Общий объём","1 350 000 000"],["Сеть","Solana (SOL)"],["Адрес контракта (нажмите, чтобы скопировать)","DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"]],
+    official:"Официальные каналы и ссылки",
+    copy:"Копировать", copied:"Скопировано ✓",
+    disc:"Эта страница носит информационно-развлекательный характер и не является инвестиционной рекомендацией. Криптовалюты — высокий риск; проводите собственное исследование (DYOR).",
+    footer:"eaco for earth, the global villagers' own MEME — данные собраны из открытых источников; торгуйте через официальные страницы."
+  },
+  ar: {
+    lang:"العربية", themeTitle:"المظهر",
+    h1a:"سولانا", h1b:"أفضل 10 بورصات مبادلة",
+    sub:"دليل تداول في نظام سولانا البيئي لأبناء القرية العالمية",
+    lead:"يعتمد الترتيب على حجم المبادلات الفورية والوزن في النظام البيئي لعام 2026. المصادر: Analytics Insight وOpenLiquid وقسم سولانا في CoinMarketCap. يتغير الترتيب مع السوق وهو لأغراض إعلامية فقط.",
+    sec:"أفضل 10 · ترتيب بورصات المبادلة",
+    note:"المنهجية: تصنيف على مستوى العلامة حسب حجم المبادلات الفورية لعام 2026 والوزن في النظام البيئي (دون تقسيم إصدارات البروتوكول). المصادر: Analytics Insight (تصنيف حجم مايو 2026)، OpenLiquid (تصنيف النظام البيئي 2026) وCoinMarketCap (سولانا). Jupiter مجمّع يمر عبره معظم حركة المبادلات على سولانا. تتغير الأحجام بمرور الوقت؛ راجع الصفحات الرسمية.",
+    eacoTitle:"EACO — أفضل عملة على الأرض",
+    eacoDesc:"EACO (Earth's Best Coin، الرمز: eaco / e.) هو رمز على سولانا بموضوع AI + RWA + Web3، تتبناه مجتمع القرية العالمية. الشعار: eaco for earth, the global villagers' own MEME.",
+    kv:[["الاسم الكامل","Earth's Best Coin (EACO / e.)"],["التحديد","Earth's Best AI + RWA + Web3 Coin"],["إجمالي العرض","1,350,000,000"],["الشبكة","Solana (SOL)"],["عنوان العقد (انقر للنسخ)","DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"]],
+    official:"القنوات والروابط الرسمية",
+    copy:"نسخ", copied:"تم النسخ ✓",
+    disc:"هذه الصفحة لأغراض إعلامية وترفيهية فقط ولا تشكل نصيحة استثمارية. العملات المشفرة عالية المخاطر؛ قم ببحثك الخاص (DYOR).",
+    footer:"eaco for earth, the global villagers' own MEME — البيانات مجمّعة من مصادر عامة؛ تعامل عبر الصفحات الرسمية."
+  }
+};
+
+/* DEX 数据：类型与简介按语言字段 */
+var DEXS = [
+  {name:"Jupiter", site:"https://jup.ag",
+   t:{zh:"聚合器",en:"Aggregator",fr:"Agrégateur",es:"Agregador",ru:"Агрегатор",ar:"مجمّع"},
+   d:{zh:"Solana 生态最大的 swap 入口与路由聚合器，承载链上绝大部分 swap 流量，路由 80% 以上交易。",
+      en:"The largest swap entry and routing aggregator on Solana, carrying most on-chain swap flow and routing over 80% of trades.",
+      fr:"Le plus grand agrégateur de swap de Solana, qui achemine l'essentiel du flux de swap et route plus de 80 % des transactions.",
+      es:"El mayor agregador y punto de entrada de swap en Solana, que canaliza la mayor parte del flujo y enruta más del 80 % de las operaciones.",
+      ru:"Крупнейший агрегатор и точка входа для свопов на Solana, проводящий основную часть своп-потока — более 80 % сделок.",
+      ar:"أكبر مجمّع ونقطة دخول للمبادلات على سولانا، يمر عبره معظم حركة المبادلات — أكثر من 80% من الصفقات."}},
+  {name:"Raydium", site:"https://raydium.io",
+   t:{zh:"AMM · CLMM",en:"AMM · CLMM",fr:"AMM · CLMM",es:"AMM · CLMM",ru:"AMM · CLMM",ar:"AMM · CLMM"},
+   d:{zh:"Solana 最大流动性生态之一，AMM 与集中流动性池并存，新项目首发与深度交易的首选地。",
+      en:"One of the largest liquidity ecosystems on Solana, with AMM and concentrated-liquidity pools; the go-to venue for new launches and deep trading.",
+      fr:"Un des plus grands écosystèmes de liquidité de Solana (AMM et pools à liquidité concentrée), référence pour les nouveaux listings et le trading profond.",
+      es:"Uno de los mayores ecosistemas de liquidez de Solana, con AMM y pools de liquidez concentrada; la opción preferida para nuevos listados y trading profundo.",
+      ru:"Одна из крупнейших экосистем ликвидности Solana: AMM и пулы с концентрированной ликвидностью; основная площадка для новых листингов и глубокой торговли.",
+      ar:"أحد أكبر أنظمة السيولة على سولانا، يجمع AMM ومجمّعات السيولة المركّزة؛ الخيار الأول للإدراجات الجديدة والتداول العميق."}},
+  {name:"Orca", site:"https://www.orca.so",
+   t:{zh:"CLMM",en:"CLMM",fr:"CLMM",es:"CLMM",ru:"CLMM",ar:"CLMM"},
+   d:{zh:"集中流动性（CLMM）的先行者，界面友好、费率灵活；2026 年 5 月现货日交易量位居榜首。",
+      en:"Pioneer of concentrated-liquidity (CLMM) with a friendly interface and flexible fees; topped daily spot volume in May 2026.",
+      fr:"Pionnier de la liquidité concentrée (CLMM), interface conviviale et frais flexibles ; premier en volume quotidien en mai 2026.",
+      es:"Pionero de la liquidez concentrada (CLMM) con interfaz amigable y comisiones flexibles; líder en volumen diario en mayo de 2026.",
+      ru:"Пионер концентрированной ликвидности (CLMM): удобный интерфейс и гибкие комиссии; лидер суточного объёма в мае 2026.",
+      ar:"رائد السيولة المركّزة (CLMM) بواجهة سهلة ورسوم مرنة؛ تصدّر الحجم اليومي في مايو 2026."}},
+  {name:"Meteora", site:"https://app.meteora.ag",
+   t:{zh:"DLMM",en:"DLMM",fr:"DLMM",es:"DLMM",ru:"DLMM",ar:"DLMM"},
+   d:{zh:"动态流动性做市（DLMM）协议，支持更高效的资本利用与聚合流动性，生态中增长最快的协议之一。",
+      en:"Dynamic-liquidity market maker (DLMM) enabling efficient capital use and aggregated liquidity; one of the fastest-growing protocols in the ecosystem.",
+      fr:"Teneur de marché à liquidité dynamique (DLMM) avec une utilisation efficace du capital ; l'un des protocoles à la croissance la plus rapide.",
+      es:"Creador de mercado de liquidez dinámica (DLMM) con uso eficiente del capital; uno de los protocolos de mayor crecimiento.",
+      ru:"Маркет-мейкер с динамической ликвидностью (DLMM), эффективное использование капитала; один из самых быстрорастущих протоколов.",
+      ar:"صانع سوق بسيولة ديناميكية (DLMM) بكفاءة عالية في استخدام رأس المال؛ من أسرع البروتوكولات نموًا."}},
+  {name:"PumpSwap", site:"https://pump.fun",
+   t:{zh:"AMM · Meme",en:"AMM · Meme",fr:"AMM · Meme",es:"AMM · Meme",ru:"AMM · Meme",ar:"AMM · Meme"},
+   d:{zh:"pump.fun 官方推出的交易池，meme 币交易对数量最多，承接热门的链上 Meme 流量。",
+      en:"The official trading pool launched by pump.fun with the most meme-coin pairs, capturing the hottest on-chain Meme flow.",
+      fr:"Pool de trading officiel de pump.fun, avec le plus grand nombre de paires meme, captant le flux Meme le plus actif.",
+      es:"El pool de trading oficial de pump.fun, con la mayor cantidad de pares meme, que capta el flujo Meme más activo.",
+      ru:"Официальный торговый пул от pump.fun с наибольшим числом пар мем-монет, привлекающий самый горячий мем-трафик.",
+      ar:"مجمّع التداول الرسمي من pump.fun مع أكبر عدد من أزواج عملات الميم، ويجذب أكثر حركة الميم نشاطًا."}},
+  {name:"Lifinity", site:"https://lifinity.io",
+   t:{zh:"PMM",en:"PMM",fr:"PMM",es:"PMM",ru:"PMM",ar:"PMM"},
+   d:{zh:"预言机驱动的主动做市协议，抗 MEV 与滑点优化，为交易者提供更稳定的报价。",
+      en:"Oracle-driven proactive market maker with MEV resistance and slippage optimization, providing traders with more stable quotes.",
+      fr:"Market maker proactif piloté par oracle, résistant au MEV et optimisé contre le slippage, pour des prix plus stables.",
+      es:"Market maker proactivo impulsado por oráculos, resistente a MEV y con deslizamiento optimizado, para cotizaciones más estables.",
+      ru:"Проактивный маркет-мейкер на основе оракулов: устойчив к MEV, оптимизирует проскальзывание и даёт стабильные котировки.",
+      ar:"صانع سوق استباقي مدفوع بالأوراكل، مقاوم لـMEV ومحسّن من الانزلاق، يقدم أسعارًا أكثر استقرارًا."}},
+  {name:"Phoenix", site:"https://www.phoenix.trade",
+   t:{zh:"订单簿",en:"Order book",fr:"Carnet d'ordres",es:"Libro de órdenes",ru:"Книга ордеров",ar:"دفتر أوامر"},
+   d:{zh:"链上中央限价订单簿（CLOB），做市商深度第一梯队，适合大额与机构级交易。",
+      en:"On-chain central limit order book (CLOB) with top-tier market-maker depth, suited to large and institutional trades.",
+      fr:"Carnet d'ordres à cours limité on-chain (CLOB) avec une profondeur de premier plan, adapté aux gros ordres et aux institutionnels.",
+      es:"Libro de órdenes límite en cadena (CLOB) con profundidad de primer nivel, apto para grandes órdenes e institucionales.",
+      ru:"Внутричековая книга лимитных ордеров (CLOB) с глубиной высшего уровня для крупных и институциональных сделок.",
+      ar:"دفتر أوامر محدودة على السلسلة (CLOB) بعمق من الطراز الأول، مناسب للمعاملات الكبيرة والمؤسسية."}},
+  {name:"Drift", site:"https://www.drift.trade",
+   t:{zh:"衍生品 + 现货",en:"Perps + Spot",fr:"Perpétuels + Spot",es:"Perpetuos + Spot",ru:"Фьючерсы + Спот",ar:"عقود دائمة + فوري"},
+   d:{zh:"永续合约与现货一体化的多资产协议，集交易、质押与治理于一体，Solana 头部衍生品平台。",
+      en:"Multi-asset protocol combining perpetuals and spot with trading, staking and governance; a leading derivatives platform on Solana.",
+      fr:"Protocole multi-actifs combinant perpétuels et comptant (trading, staking, gouvernance) ; plateforme de dérivés leader sur Solana.",
+      es:"Protocolo multi-activos que combina perpetuos y contado, con trading, staking y gobernanza; plataforma líder de derivados en Solana.",
+      ru:"Мультиактивный протокол, объединяющий бессрочные контракты и спот с трейдингом, стейкингом и управлением; ведущая деривативная площадка Solana.",
+      ar:"بروتوكول متعدد الأصول يجمع بين العقود الدائمة والفوري مع التداول والستيكينغ والحوكمة؛ منصة مشتقات رائدة على سولانا."}},
+  {name:"Manifest", site:"https://manifest.trade",
+   t:{zh:"订单簿",en:"Order book",fr:"Carnet d'ordres",es:"Libro de órdenes",ru:"Книга ордеров",ar:"دفتر أوامر"},
+   d:{zh:"面向高频交易的高效链上撮合引擎，2026 年交易量快速蹿升的新锐订单簿 DEX。",
+      en:"High-efficiency on-chain matching engine built for high-frequency trading; a rising order-book DEX with surging 2026 volume.",
+      fr:"Moteur de matching on-chain haute efficacité pour le trading à haute fréquence ; DEX à carnet d'ordres en forte croissance en 2026.",
+      es:"Motor de coincidencia en cadena de alta eficiencia para trading de alta frecuencia; DEX de libro de órdenes en rápido ascenso en 2026.",
+      ru:"Высокоэффективный внутричековой движок для высокочастотной торговли; растущий ордер-бук DEX 2026 года.",
+      ar:"محرك مطابقة على السلسلة عالي الكفاءة للتداول عالي التردد؛ بورصة دفتر أوامر صاعدة بقوة في 2026."}},
+  {name:"Humidifi", site:"https://humidifi.com",
+   t:{zh:"AMM · 深流动性",en:"AMM · Deep",fr:"AMM · Profond",es:"AMM · Profundo",ru:"AMM · Глубокий",ar:"AMM · عميق"},
+   d:{zh:"专注精选资产对与深度流动性的 AMM，以低滑点与大单容量见长。",
+      en:"AMM focused on curated asset pairs and deep liquidity, known for low slippage and large-order capacity.",
+      fr:"AMM axé sur des paires d'actifs sélectionnées et une liquidité profonde, réputé pour son faible slippage et ses gros ordres.",
+      es:"AMM centrado en pares seleccionados y liquidez profunda, conocido por bajo deslizamiento y capacidad de grandes órdenes.",
+      ru:"AMM, сфокусированный на отобранных парах и глубокой ликвидности, известен низким проскальзыванием и крупными ордерами.",
+      ar:"بورصة AMM تركز على أزواج مختارة وسيولة عميقة، معروفة بانخفاض الانزلاق واستيعاب الطلبات الكبيرة."}}
+];
+
+var THEMES = [
+  {id:"cosmic", label:{zh:"宇宙蓝",en:"Cosmic Blue",fr:"Bleu Cosmique",es:"Azul Cósmico",ru:"Космический Синий",ar:"أزرق كوني"}},
+  {id:"apple",  label:{zh:"苹果绿",en:"Apple Green",fr:"Vert Pomme",es:"Verde Manzana",ru:"Яблочный Зелёный",ar:"أخضر تفاحي"}},
+  {id:"beige",  label:{zh:"米黄古典",en:"Classic Beige",fr:"Beige Classique",es:"Beige Clásico",ru:"Классический Бежевый",ar:"بيج كلاسيكي"}}
+];
+
+var LINKS = [
+  {key:"community", url:"https://ucoingroup.github.io/earths-best-coin/", label:{zh:"社区页 Community",en:"Community page",fr:"Page communauté",es:"Página comunidad",ru:"Страница сообщества",ar:"صفحة المجتمع"}},
+  {key:"linktree", url:"https://linktr.ee/eacoearth", label:{zh:"官方聚合 Linktree",en:"Official Linktree",fr:"Linktree officiel",es:"Linktree oficial",ru:"Официальный Linktree",ar:"لينك تري الرسمي"}},
+  {key:"x", url:"https://x.com/eacocc", label:{zh:"X / Twitter",en:"X / Twitter",fr:"X / Twitter",es:"X / Twitter",ru:"X / Twitter",ar:"إكس / تويتر"}},
+  {key:"tg-en", url:"https://t.me/e_eacocc", label:{zh:"Telegram 英文",en:"Telegram EN",fr:"Telegram EN",es:"Telegram EN",ru:"Telegram EN",ar:"تيليغرام إنجليزي"}},
+  {key:"tg-es", url:"https://t.me/eacoespanish", label:{zh:"Telegram 西语",en:"Telegram ES",fr:"Telegram ES",es:"Telegram ES",ru:"Telegram ES",ar:"تيليغرام إسباني"}},
+  {key:"github", url:"https://github.com/eaco-group/eur-eaco", label:{zh:"官方 GitHub",en:"Official GitHub",fr:"GitHub officiel",es:"GitHub oficial",ru:"Официальный GitHub",ar:"جيت هاب الرسمي"}},
+  {key:"dapp", url:"https://github.com/eacocc/EACO_Exchange_DApp", label:{zh:"E swap DApp",en:"E swap DApp",fr:"DApp E swap",es:"DApp E swap",ru:"DApp E swap",ar:"تطبيق إي سواب"}},
+  {key:"solscan", url:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", label:{zh:"Solscan 链上",en:"Solscan on-chain",fr:"Solscan on-chain",es:"Solscan on-chain",ru:"Solscan on-chain",ar:"سول سكان"}},
+  {key:"dexscreener", url:"https://dexscreener.com/solana/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", label:{zh:"DexScreener 行情",en:"DexScreener chart",fr:"DexScreener graphique",es:"DexScreener gráfico",ru:"DexScreener график",ar:"ديكس سكرينر"}}
+];
+
+var CA = "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH";
+
+var SWAPS = [
+  {name:"Jupiter", swap:"https://jup.ag/swap/USDC-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Raydium", swap:"https://raydium.io/swap/?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Orca", swap:"https://www.orca.so/?tokens=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Meteora", swap:"https://app.meteora.ag/pools?search=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"PumpSwap", swap:"https://pump.fun/trade/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Lifinity", swap:"https://lifinity.io/pool/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Phoenix", swap:"https://www.phoenix.trade/market/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Drift", swap:"https://www.drift.trade/spot/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Manifest", swap:"https://manifest.trade/market/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"},
+  {name:"Humidifi", swap:"https://humidifi.com/swap/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", orb:"https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH", scan:"https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"}
+];
+
+var SWAP_TEXT = {
+  zh:{swapTitle:"EACO 兑换直达 · Top 10 DEX Swap 入口", swapDesc:"在以下 Solana 链上 DEX 中使用 EACO 合约地址直接兑换。所有地址均可复制，请粘贴至对应 DEX Swap 页面进行验证。", swapOrb:"orbmarkets 链上验证", swapScan:"Solscan 链上验证", swapDisc:"提示：点击「前往 Swap」将跳转至各 DEX 官方兑换页面。请在跳转后粘贴 EACO 合约地址（CA）进行搜索或兑换。链上验证链接供核对代币信息。"},
+  en:{swapTitle:"EACO Swap Direct · Top 10 DEX Swap Entry", swapDesc:"Use the EACO contract address on these Solana DEXs to swap directly. All addresses are copyable — paste into the corresponding DEX swap page to verify.", swapOrb:"orbmarkets on-chain verify", swapScan:"Solscan on-chain verify", swapDisc:"Tip: Clicking Go to Swap will jump to each DEX official swap page. Paste the EACO contract address (CA) to search or swap after landing. On-chain verify links are provided for token info verification."},
+  fr:{swapTitle:"Échange EACO Direct · Top 10 entrées Swap DEX", swapDesc:"Utilisez l'adresse du contrat EACO sur ces DEX Solana pour échanger directement. Toutes les adresses sont copiables — collez-les dans la page swap correspondante pour vérifier.", swapOrb:"Vérification on-chain orbmarkets", swapScan:"Vérification on-chain Solscan", swapDisc:"Conseil : cliquer sur Aller swap ouvrira la page officielle de chaque DEX. Collez l'adresse du contrat EACO (CA) pour rechercher ou échanger après l'atterrissage. Les liens de vérification on-chain servent à vérifier les infos du token."},
+  es:{swapTitle:"Intercambio EACO Directo · Top 10 entradas Swap DEX", swapDesc:"Use la dirección del contrato EACO en estos DEX de Solana para intercambiar directamente. Todas las direcciones son copiables — péguelas en la página swap correspondiente para verificar.", swapOrb:"Verificación on-chain orbmarkets", swapScan:"Verificación on-chain Solscan", swapDisc:"Consejo: hacer clic en Ir a swap abrirá la página oficial de cada DEX. Pegue la dirección del contrato EACO (CA) para buscar o intercambiar después de aterrizar. Los enlaces de verificación on-chain sirven para verificar la info del token."},
+  ru:{swapTitle:"Прямой обмен EACO · Топ-10 входов Swap DEX", swapDesc:"Используйте адрес контракта EACO на этих DEX Solana для прямого обмена. Все адреса можно скопировать — вставьте на соответствующую страницу swap для проверки.", swapOrb:"Проверка on-chain orbmarkets", swapScan:"Проверка on-chain Solscan", swapDisc:"Совет: нажатие Перейти к swap откроет официальную страницу каждого DEX. Вставьте адрес контракта EACO (CA) для поиска или обмена после перехода. Ссылки on-chain-проверки служат для сверки информации о токене."},
+  ar:{swapTitle:"تبادل EACO المباشر · أفضل 10 مداخل Swap DEX", swapDesc:"استخدم عنوان عقد EACO على بورصات Solana هذه للتبادل المباشر. جميع العناوين قابلة للنسخ — الصقها في صفحة swap المقابلة للتحقق.", swapOrb:"التحقق على السلسلة orbmarkets", swapScan:"التحقق على السلسلة Solscan", swapDisc:"تلميح: النقر على الذهاب إلى swap سينقلك إلى الصفحة الرسمية لكل DEX. الصق عنوان عقد EACO (CA) للبحث أو التبادل بعد الوصول. روابط التحقق على السلسلة مخصصة للتحقق من معلومات الرمز."}
+};
+
+/* ---- 渲染 ---- */
+var state = {lang:"zh", theme:"cosmic"};
+(function(){
+  var m = location.hash.match(/lang=([a-z]{2})/) || [];
+  if(L[m[1]]) state.lang = m[1];
+  var t = location.hash.match(/theme=(cosmic|apple|beige)/) || [];
+  if(t[1]) state.theme = t[1];
+  document.body.setAttribute("data-theme", state.theme);
+})();
+var $ = function(id){ return document.getElementById(id); };
+
+function applyLang(){
+  var t = L[state.lang];
+  document.documentElement.lang = state.lang;
+  document.documentElement.dir = (state.lang === "ar") ? "rtl" : "ltr";
+  $("hTitle").innerHTML = '<span class="grad">' + t.h1a + '</span> ' + t.h1b;
+  $("hSub").textContent = t.sub;
+  $("hLead").textContent = t.lead;
+  $("secTitle").textContent = t.sec;
+  $("note").textContent = t.note;
+  $("eacoTitle").innerHTML = t.eacoTitle + ' <span class="tag">$eaco · EACO</span>';
+  $("eacoDesc").textContent = t.eacoDesc;
+  $("eacoDisc").textContent = t.disc;
+  $("footer").innerHTML = t.footer + '<br><b>eaco for earth</b> · <a class="site" href="https://linktr.ee/eacoearth" target="_blank" rel="noopener">linktr.ee/eacoearth</a>';
+
+  /* KV */
+  var kvHtml = "";
+  t.kv.forEach(function(r){
+    var v = r[1];
+    if(r[0].indexOf("合约地址") > -1 || r[0].indexOf("Contract address") > -1 || r[0].indexOf("Adresse du contrat") > -1 || r[0].indexOf("Dirección del contrato") > -1 || r[0].indexOf("Адрес контракта") > -1 || r[0].indexOf("عنوان العقد") > -1){
+      v = '<div class="ca-row"><span class="v small">' + CA + '</span><button id="copyBtn" type="button">' + t.copy + '</button></div>';
+    }
+    kvHtml += '<div class="item"><div class="k">' + r[0] + '</div><div class="v">' + v + '</div></div>';
+  });
+  $("eacoKv").innerHTML = kvHtml;
+  var cb = $("copyBtn");
+  if(cb){
+    cb.onclick = function(){
+      var ta = document.createElement("textarea");
+      ta.value = CA; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); }catch(e){}
+      document.body.removeChild(ta);
+      cb.textContent = t.copied;
+      setTimeout(function(){ cb.textContent = t.copy; }, 1600);
+    };
+  }
+
+  /* 官方链接 */
+  var linkHtml = "";
+  LINKS.forEach(function(l){
+    linkHtml += '<a href="' + l.url + '" target="_blank" rel="noopener">' + l.label[state.lang] + '</a>';
+  });
+  $("eacoLinks").innerHTML = '<div class="links"></div>';
+  var box = $("eacoLinks").querySelector(".links");
+  /* 官方渠道标题 */
+  var h = document.createElement("div");
+  h.style.cssText = "font-size:13px;color:var(--muted);font-weight:700;margin-top:2px";
+  h.textContent = t.official;
+  box.parentNode.insertBefore(h, box);
+  LINKS.forEach(function(l){
+    var a = document.createElement("a");
+    a.href = l.url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = l.label[state.lang];
+    box.appendChild(a);
+  });
+
+  /* DEX 卡片 */
+  var gridHtml = "";
+  DEXS.forEach(function(d, i){
+    gridHtml += '<div class="card"><div class="top"><span class="rank">' + (i+1) + '</span><span class="dname">' + d.name + '</span><span class="type">' + d.t[state.lang] + '</span></div><div class="ddesc">' + d.d[state.lang] + '</div><a class="site" href="' + d.site + '" target="_blank" rel="noopener">' + d.site.replace(/^https?:\/\/(www\.)?/, "") + '</a></div>';
+  });
+  $("dexGrid").innerHTML = gridHtml;
+
+  /* Swap 直达区块 */
+  var sT = SWAP_TEXT[state.lang];
+  $("swapTitle").innerHTML = sT.swapTitle;
+  $("swapDesc").textContent = sT.swapDesc;
+  var swapHtml = "";
+  SWAPS.forEach(function(d){
+    swapHtml += '<div class="swapcard"><div class="dname">' + d.name + '</div><div class="addr">' + d.swap + '</div><a class="go" href="' + d.swap + '" target="_blank" rel="noopener">Go to Swap</a><div class="ref"><a href="' + d.orb + '" target="_blank" rel="noopener">' + sT.swapOrb + '</a><a href="' + d.scan + '" target="_blank" rel="noopener">' + sT.swapScan + '</a></div></div>';
+  });
+  $("swapGrid").innerHTML = swapHtml;
+  $("swapDisc").textContent = sT.swapDisc;
+
+  /* 语言按钮 */
+  var langHtml = "";
+  Object.keys(L).forEach(function(k){
+    langHtml += '<button type="button" data-lang="' + k + '" class="' + (k === state.lang ? "on" : "") + '">' + L[k].lang + '</button>';
+  });
+  $("langBar").innerHTML = langHtml;
+
+  /* 主题按钮 */
+  var thHtml = "";
+  THEMES.forEach(function(th){
+    thHtml += '<button type="button" data-theme-btn="' + th.id + '" class="' + (th.id === state.theme ? "on" : "") + '">' + th.label[state.lang] + '</button>';
+  });
+  $("themeBar").innerHTML = thHtml;
+  document.title = t.h1a + " " + t.h1b + " · EACO";
+}
+
+$("langBar").addEventListener("click", function(e){
+  var b = e.target.closest("button[data-lang]");
+  if(!b) return;
+  state.lang = b.getAttribute("data-lang");
+  applyLang();
+});
+$("themeBar").addEventListener("click", function(e){
+  var b = e.target.closest("button[data-theme-btn]");
+  if(!b) return;
+  state.theme = b.getAttribute("data-theme-btn");
+  document.body.setAttribute("data-theme", state.theme);
+  applyLang();
+});
+window.addEventListener("hashchange", function(){
+  var m = location.hash.match(/lang=([a-z]{2})/) || [];
+  if(L[m[1]]) state.lang = m[1];
+  var t = location.hash.match(/theme=(cosmic|apple|beige)/) || [];
+  if(t[1]) state.theme = t[1];
+  document.body.setAttribute("data-theme", state.theme);
+  applyLang();
+});
+applyLang();
+})();
+</script>
+</body>
+</html>
