@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EACO 地球村 · 分布式算电协同市场</title>
+<style>
+/* ============ 基础 ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --r:18px;
+  --font-sans:system-ui,-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --font-serif:Georgia,"Songti SC","Noto Serif SC","Times New Roman",serif;
+}
+body{
+  margin:0;
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  transition:background .45s ease,color .45s ease;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -12%, var(--halo1), transparent 62%),
+    radial-gradient(820px 620px at 92% -4%, var(--halo2), transparent 58%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+  transition:background .45s ease;
+}
+h1,h2,h3,h4{font-family:var(--heading-font);line-height:1.28;margin:0}
+p{margin:0}
+a{color:inherit}
+.container{width:min(1180px,92vw);margin-inline:auto}
+
+/* ============ 三套主题 ============ */
+body[data-theme="cosmic-blue"]{
+  --bg:#050b1a; --bg2:#071227;
+  --card:rgba(17,30,58,.82); --card-solid:#0e1b35;
+  --text:#e9f3ff; --muted:#8ea6cb;
+  --accent:#38bdf8; --accent2:#22d3ee; --accent3:#8b5cf6;
+  --border:rgba(56,189,248,.22);
+  --chip:rgba(56,189,248,.12);
+  --nav-bg:rgba(5,11,26,.72);
+  --halo1:rgba(56,189,248,.20); --halo2:rgba(139,92,246,.18);
+  --heading-font:var(--font-sans);
+  --shadow:0 18px 46px rgba(0,0,0,.45);
+}
+body[data-theme="apple-green"]{
+  --bg:#f2fbf4; --bg2:#e6f6ea;
+  --card:rgba(255,255,255,.86); --card-solid:#ffffff;
+  --text:#0d2b1a; --muted:#5d7d6a;
+  --accent:#22a14a; --accent2:#34c759; --accent3:#0ea5e9;
+  --border:rgba(34,161,74,.20);
+  --chip:rgba(34,161,74,.10);
+  --nav-bg:rgba(242,251,244,.80);
+  --halo1:rgba(52,199,89,.20); --halo2:rgba(14,165,233,.14);
+  --heading-font:var(--font-sans);
+  --shadow:0 14px 34px rgba(20,90,50,.10);
+}
+body[data-theme="classical-cream"]{
+  --bg:#f7efdb; --bg2:#efe2c6;
+  --card:rgba(255,252,244,.92); --card-solid:#fffdf7;
+  --text:#3b2f1e; --muted:#7d6c50;
+  --accent:#a3762a; --accent2:#c19a4b; --accent3:#7a5230;
+  --border:rgba(163,118,42,.28);
+  --chip:rgba(163,118,42,.10);
+  --nav-bg:rgba(247,239,219,.82);
+  --halo1:rgba(196,160,90,.28); --halo2:rgba(163,118,42,.16);
+  --heading-font:var(--font-serif);
+  --shadow:0 12px 30px rgba(120,90,40,.12);
+}
+
+/* ============ 导航 ============ */
+.nav{position:sticky;top:0;z-index:80;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;gap:14px;padding:11px 0;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:1.02rem;text-decoration:none;letter-spacing:.01em;white-space:nowrap}
+.logo-mark{color:var(--accent);font-size:1.35rem;line-height:1;filter:drop-shadow(0 0 10px var(--accent))}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap;margin-inline-start:auto}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;padding:6px 13px;border-radius:999px;transition:.25s;white-space:nowrap}
+.nav-links a:hover{color:var(--accent);background:var(--chip)}
+.nav-tools{display:flex;align-items:center;gap:10px}
+.lang-sel{
+  background:var(--card-solid);color:var(--text);border:1px solid var(--border);
+  border-radius:10px;padding:6px 9px;font-size:.82rem;cursor:pointer;outline:none;
+  font-family:inherit;transition:.25s;
+}
+.lang-sel:hover{border-color:var(--accent)}
+.theme-dots{display:flex;gap:6px}
+.theme-dots button{
+  width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;
+  transition:.25s;
+}
+.theme-dots button[data-theme-set="cosmic-blue"]{background:linear-gradient(135deg,#0b1f3a,#38bdf8)}
+.theme-dots button[data-theme-set="apple-green"]{background:linear-gradient(135deg,#e8f8ec,#34c759)}
+.theme-dots button[data-theme-set="classical-cream"]{background:linear-gradient(135deg,#f7efdb,#b8860b)}
+.theme-dots button.active{border-color:var(--accent);transform:scale(1.14);box-shadow:0 0 0 3px var(--chip)}
+
+/* ============ 通用 ============ */
+section{padding:84px 0}
+.sec-head{max-width:760px;margin-bottom:40px}
+.sec-head h2{font-size:clamp(1.5rem,3.1vw,2.15rem);margin-bottom:12px}
+.sec-head p{color:var(--muted);font-size:.98rem}
+.eyebrow{
+  display:inline-block;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);background:var(--chip);border:1px solid var(--border);
+  padding:4px 12px;border-radius:999px;margin-bottom:14px;font-weight:700;
+}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;backdrop-filter:blur(12px);box-shadow:var(--shadow);
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 26px;border-radius:999px;font-size:.94rem;font-weight:700;
+  text-decoration:none;cursor:pointer;border:1px solid transparent;font-family:inherit;
+  transition:.28s;
+}
+.btn.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#04121f;box-shadow:0 10px 26px -8px var(--accent)}
+body[data-theme="classical-cream"] .btn.primary{color:#fffaf0}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px var(--accent)}
+.btn.ghost{background:transparent;border-color:var(--border);color:var(--text)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--chip)}
+
+/* ============ Hero ============ */
+.hero{padding:104px 0 72px;text-align:center;position:relative}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3.25rem);margin:0 auto 20px;max-width:880px;letter-spacing:-.01em}
+.hero h1 span{background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{max-width:720px;margin:0 auto 34px;color:var(--muted);font-size:1.02rem}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+.hero .note{font-size:.8rem;color:var(--muted);opacity:.85;letter-spacing:.02em}
+.orb{
+  width:74px;height:74px;margin:0 auto 26px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,var(--accent2),var(--accent) 45%,var(--accent3));
+  box-shadow:0 0 60px -6px var(--accent);animation:float 5.5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* ============ 数据 ============ */
+.stats{padding:0 0 20px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.stat{text-align:center;padding:26px 16px}
+.stat .num{font-size:clamp(1.5rem,3.3vw,2.15rem);font-weight:800;color:var(--accent);font-family:var(--heading-font);letter-spacing:-.02em}
+.stat .lbl{font-size:.83rem;color:var(--muted);margin-top:6px}
+
+/* ============ 趋势 ============ */
+.trend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px}
+.trend h3{font-size:1.02rem;margin-bottom:9px;display:flex;gap:9px;align-items:flex-start}
+.trend h3 .ico{font-size:1.15rem;line-height:1.4;flex:0 0 auto}
+.trend p{font-size:.88rem;color:var(--muted)}
+
+/* ============ EACO ============ */
+.eaco-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:stretch}
+@media(max-width:860px){.eaco-wrap{grid-template-columns:1fr}}
+.kv{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px dashed var(--border);font-size:.9rem;flex-wrap:wrap}
+.kv:last-child{border-bottom:none}
+.kv .k{color:var(--muted);flex:0 0 auto}
+.kv .v{font-weight:600;text-align:end;word-break:break-all}
+.addr{
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;
+  background:var(--chip);padding:6px 10px;border-radius:8px;border:1px solid var(--border);
+  display:inline-flex;align-items:center;gap:8px;max-width:100%;
+}
+.addr code{overflow-wrap:anywhere}
+.copy-btn{
+  border:none;background:var(--accent);color:#04121f;border-radius:6px;
+  padding:2px 9px;font-size:.72rem;cursor:pointer;font-family:inherit;font-weight:700;flex:0 0 auto;
+}
+body[data-theme="classical-cream"] .copy-btn{color:#fffaf0}
+
+/* ============ 市场 ============ */
+.market-table{width:100%;border-collapse:collapse;font-size:.88rem;overflow:hidden;border-radius:var(--r)}
+.market-table th{
+  text-align:start;padding:13px 16px;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border-bottom:1px solid var(--border);font-weight:700;
+}
+.market-table td{padding:15px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.market-table tr:last-child td{border-bottom:none}
+.market-table tbody tr{transition:background .25s}
+.market-table tbody tr:hover{background:var(--chip)}
+.tag{display:inline-block;padding:3px 11px;border-radius:999px;font-size:.74rem;font-weight:700;white-space:nowrap}
+.tag.sell{background:rgba(239,68,68,.14);color:#ef4444;border:1px solid rgba(239,68,68,.28)}
+.tag.buy{background:rgba(34,197,94,.14);color:#22a14a;border:1px solid rgba(34,197,94,.3)}
+body[data-theme="cosmic-blue"] .tag.buy{color:#4ade80}
+.tag.open{background:var(--chip);color:var(--accent);border:1px solid var(--border)}
+.tag.match{background:rgba(245,158,11,.15);color:#d97706;border:1px solid rgba(245,158,11,.3)}
+.table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--card);backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+
+/* ============ 计算器 ============ */
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:900px){.calc-wrap{grid-template-columns:1fr}}
+.field{margin-bottom:22px}
+.field label{display:flex;justify-content:space-between;font-size:.86rem;margin-bottom:9px;color:var(--muted);font-weight:600}
+.field label b{color:var(--accent);font-family:var(--heading-font)}
+input[type=range]{
+  -webkit-appearance:none;width:100%;height:6px;border-radius:99px;background:var(--chip);
+  outline:none;border:1px solid var(--border);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 0 0 4px var(--chip),0 3px 10px rgba(0,0,0,.28);transition:.2s;
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12)}
+input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;cursor:pointer;border:none;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+.result{
+  background:var(--chip);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;
+}
+.result .rv{font-size:1.32rem;font-weight:800;color:var(--accent);font-family:var(--heading-font);word-break:break-all}
+.result .rl{font-size:.76rem;color:var(--muted);margin-top:4px}
+.calc-note{font-size:.74rem;color:var(--muted);margin-top:18px;line-height:1.7;opacity:.9}
+
+/* ============ 加入 ============ */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:34px}
+.step{position:relative;padding-top:30px}
+.step .idx{
+  position:absolute;top:-14px;inset-inline-start:22px;width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04121f;
+  display:grid;place-items:center;font-weight:800;font-size:.9rem;box-shadow:0 8px 20px -6px var(--accent);
+}
+body[data-theme="classical-cream"] .step .idx{color:#fffaf0}
+.step h4{font-size:.98rem;margin-bottom:7px}
+.step p{font-size:.85rem;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr}}
+.form-grid .full{grid-column:1/-1}
+.form-grid label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:7px;font-weight:600}
+.form-grid input,.form-grid select{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);
+  background:var(--card-solid);color:var(--text);font-size:.9rem;font-family:inherit;outline:none;
+  transition:.25s;
+}
+.form-grid input:focus,.form-grid select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--chip)}
+.form-ok{
+  display:none;margin-top:20px;padding:16px 20px;border-radius:14px;
+  background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);
+  color:var(--text);font-size:.9rem;font-weight:600;
+}
+.form-ok.show{display:block;animation:pop .4s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ============ 路线图 ============ */
+.timeline{position:relative;padding-inline-start:30px}
+.timeline::before{
+  content:"";position:absolute;inset-inline-start:8px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent3),transparent);border-radius:2px;
+}
+.rm{position:relative;margin-bottom:26px}
+.rm::before{
+  content:"";position:absolute;inset-inline-start:-30px;top:9px;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 4px var(--chip);border:2px solid var(--bg);
+}
+.rm h4{font-size:1rem;margin-bottom:6px}
+.rm p{font-size:.87rem;color:var(--muted)}
+
+/* ============ 页脚 ============ */
+footer{border-top:1px solid var(--border);padding:44px 0 56px;background:var(--nav-bg);backdrop-filter:blur(10px)}
+.foot-inner{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+.foot-inner .fbrand{font-weight:800;font-size:1rem;display:flex;align-items:center;gap:8px}
+.foot-inner .fdisc{font-size:.76rem;color:var(--muted);max-width:720px;line-height:1.75}
+
+/* ============ 动效 ============ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ 响应式 ============ */
+@media(max-width:720px){
+  section{padding:60px 0}
+  .hero{padding:70px 0 50px}
+  .nav-links{order:3;width:100%;justify-content:flex-start;margin-inline-start:0;padding-top:8px;gap:2px}
+  .nav-tools{margin-inline-start:auto}
+  .market-table th,.market-table td{padding:11px 12px;font-size:.82rem}
+}
+</style>
+</head>
+
+<body data-theme="cosmic-blue" data-lang="zh">
+
+<!-- ================= 导航 ================= -->
+<header class="nav">
+  <div class="nav-inner container">
+    <a class="logo" href="#home">
+      <span class="logo-mark">◉</span>
+      <span data-i18n="brand">EACO 地球村</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#trend" data-i18n="nav_trend"></a>
+      <a href="#market" data-i18n="nav_market"></a>
+      <a href="#calc" data-i18n="nav_calc"></a>
+      <a href="#join" data-i18n="nav_join"></a>
+      <a href="#roadmap" data-i18n="nav_roadmap"></a>
+    </nav>
+    <div class="nav-tools">
+      <select id="langSel" class="lang-sel" aria-label="Language">
+        <option value="zh">华语</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+        <option value="ru">Русский</option>
+      </select>
+      <div class="theme-dots">
+        <button data-theme-set="cosmic-blue" class="active" title="宇宙蓝 Cosmic Blue"></button>
+        <button data-theme-set="apple-green" title="苹果绿 Apple Green"></button>
+        <button data-theme-set="classical-cream" title="米黄古典 Classical Cream"></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= Hero ================= -->
+<section id="home" class="hero">
+  <div class="container">
+    <div class="orb"></div>
+    <span class="eyebrow" data-i18n="hero_tag"></span>
+    <h1 data-i18n="hero_title"></h1>
+    <p class="lead" data-i18n="hero_desc"></p>
+    <div class="cta">
+      <a href="#join" class="btn primary" data-i18n="hero_cta1"></a>
+      <a href="#market" class="btn ghost" data-i18n="hero_cta2"></a>
+    </div>
+    <p class="note" data-i18n="hero_note"></p>
+  </div>
+</section>
+
+<!-- ================= 数据 ================= -->
+<section class="stats">
+  <div class="container">
+    <div class="stat-grid">
+      <div class="card stat reveal"><div class="num" data-count="128460">0</div><div class="lbl" data-i18n="stat1_l"></div></div>
+      <div class="card stat reveal"><div class="num" data-count="386" data-suffix=" MW">0</div><div class="lbl" data-i18n="stat2_l"></div></div>
+      <div class="card stat reveal"><div class="num" data-count="24" data-suffix=" PFLOPS">0</div><div class="lbl" data-i18n="stat3_l"></div></div>
+      <div class="card stat reveal"><div class="num" data-count="37" data-suffix="%">0</div><div class="lbl" data-i18n="stat4_l"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 趋势 ================= -->
+<section id="trend">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">TRENDS</span>
+      <h2 data-i18n="trend_title"></h2>
+      <p data-i18n="trend_desc"></p>
+    </div>
+    <div class="trend-grid">
+      <div class="card trend reveal"><h3><span class="ico">📈</span><span data-i18n="t1_t"></span></h3><p data-i18n="t1_d"></p></div>
+      <div class="card trend reveal"><h3><span class="ico">⚡</span><span data-i18n="t2_t"></span></h3><p data-i18n="t2_d"></p></div>
+      <div class="card trend reveal"><h3><span class="ico">🔋</span><span data-i18n="t3_t"></span></h3><p data-i18n="t3_d"></p></div>
+      <div class="card trend reveal"><h3><span class="ico">🏭</span><span data-i18n="t4_t"></span></h3><p data-i18n="t4_d"></p></div>
+      <div class="card trend reveal"><h3><span class="ico">🔌</span><span data-i18n="t5_t"></span></h3><p data-i18n="t5_d"></p></div>
+      <div class="card trend reveal"><h3><span class="ico">💡</span><span data-i18n="t6_t"></span></h3><p data-i18n="t6_d"></p></div>
+      <div class="card trend reveal"><h3><span class="ico">🗺️</span><span data-i18n="t7_t"></span></h3><p data-i18n="t7_d"></p></div>
+      <div class="card trend reveal"><h3><span class="ico">🌍</span><span data-i18n="t8_t"></span></h3><p data-i18n="t8_d"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EACO ================= -->
+<section id="eaco">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">EACO</span>
+      <h2 data-i18n="eaco_title"></h2>
+      <p data-i18n="eaco_desc"></p>
+    </div>
+    <div class="eaco-wrap">
+      <div class="card reveal">
+        <div class="kv"><span class="k" data-i18n="eaco_k1"></span><span class="v">Solana</span></div>
+        <div class="kv">
+          <span class="k" data-i18n="eaco_k2"></span>
+          <span class="v">
+            <span class="addr">
+              <code id="tokenAddr">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+              <button class="copy-btn" id="copyBtn" data-i18n="copy"></button>
+            </span>
+          </span>
+        </div>
+        <div class="kv"><span class="k" data-i18n="eaco_k3"></span><span class="v" data-i18n="eaco_v3"></span></div>
+        <div class="kv"><span class="k" data-i18n="eaco_k4"></span><span class="v" data-i18n="eaco_v4"></span></div>
+      </div>
+      <div class="card reveal" style="display:flex;flex-direction:column;justify-content:center;gap:14px">
+        <div style="font-size:2.6rem;text-align:center;line-height:1">🌏</div>
+        <p style="font-size:.9rem;color:var(--muted);text-align:center" data-i18n="eaco_desc"></p>
+        <a href="#join" class="btn primary" style="align-self:center" data-i18n="hero_cta1"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 市场 ================= -->
+<section id="market">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">MARKET</span>
+      <h2 data-i18n="market_title"></h2>
+      <p data-i18n="market_desc"></p>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="market-table">
+        <thead>
+          <tr>
+            <th data-i18n="m_type"></th>
+            <th data-i18n="m_res"></th>
+            <th data-i18n="m_region"></th>
+            <th data-i18n="m_price"></th>
+            <th data-i18n="m_status"></th>
+          </tr>
+        </thead>
+        <tbody id="marketBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 计算器 ================= -->
+<section id="calc">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">CALCULATOR</span>
+      <h2 data-i18n="calc_title"></h2>
+      <p data-i18n="calc_desc"></p>
+    </div>
+    <div class="calc-wrap">
+      <div class="card reveal">
+        <div class="field">
+          <label><span data-i18n="calc_nodes"></span><b id="vNodes">50</b></label>
+          <input type="range" id="rNodes" min="1" max="500" value="50" step="1">
+        </div>
+        <div class="field">
+          <label><span data-i18n="calc_power"></span><b id="vPower">3</b></label>
+          <input type="range" id="rPower" min="1" max="20" value="3" step="0.5">
+        </div>
+        <div class="field">
+          <label><span data-i18n="calc_price"></span><b id="vPrice">0.60</b></label>
+          <input type="range" id="rPrice" min="0.20" max="1.50" value="0.60" step="0.01">
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label><span data-i18n="calc_green"></span><b id="vGreen">60</b></label>
+          <input type="range" id="rGreen" min="0" max="100" value="60" step="1">
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="result-grid">
+          <div class="result"><div class="rv" id="outKwh">0</div><div class="rl" data-i18n="calc_r1"></div></div>
+          <div class="result"><div class="rv" id="outSave">0</div><div class="rl" data-i18n="calc_r2"></div></div>
+          <div class="result"><div class="rv" id="outEarn">0</div><div class="rl" data-i18n="calc_r3"></div></div>
+          <div class="result"><div class="rv" id="outEaco">0</div><div class="rl" data-i18n="calc_r4"></div></div>
+        </div>
+        <p class="calc-note" data-i18n="calc_note"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 加入 ================= -->
+<section id="join">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">JOIN</span>
+      <h2 data-i18n="join_title"></h2>
+      <p data-i18n="join_desc"></p>
+    </div>
+
+    <div class="steps">
+      <div class="card step reveal"><div class="idx">1</div><h4 data-i18n="join_s1_t"></h4><p data-i18n="join_s1_d"></p></div>
+      <div class="card step reveal"><div class="idx">2</div><h4 data-i18n="join_s2_t"></h4><p data-i18n="join_s2_d"></p></div>
+      <div class="card step reveal"><div class="idx">3</div><h4 data-i18n="join_s3_t"></h4><p data-i18n="join_s3_d"></p></div>
+      <div class="card step reveal"><div class="idx">4</div><h4 data-i18n="join_s4_t"></h4><p data-i18n="join_s4_d"></p></div>
+    </div>
+
+    <form class="card reveal" id="joinForm" novalidate>
+      <div class="form-grid">
+        <div>
+          <label for="fName" data-i18n="form_name"></label>
+          <input type="text" id="fName" required>
+        </div>
+        <div>
+          <label for="fEmail" data-i18n="form_email"></label>
+          <input type="email" id="fEmail" required>
+        </div>
+        <div>
+          <label for="fRegion" data-i18n="form_region"></label>
+          <input type="text" id="fRegion">
+        </div>
+        <div>
+          <label for="fRes" data-i18n="form_res"></label>
+          <select id="fRes">
+            <option value="1" data-i18n="form_res_opt1"></option>
+            <option value="2" data-i18n="form_res_opt2"></option>
+            <option value="3" data-i18n="form_res_opt3"></option>
+            <option value="4" data-i18n="form_res_opt4"></option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="fScale" data-i18n="form_scale"></label>
+          <input type="number" id="fScale" min="0" step="0.1" value="5">
+        </div>
+        <div class="full">
+          <button type="submit" class="btn primary" style="width:100%" data-i18n="form_submit"></button>
+        </div>
+      </div>
+      <div class="form-ok" id="formOk" data-i18n="form_ok"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= 路线图 ================= -->
+<section id="roadmap">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">ROADMAP</span>
+      <h2 data-i18n="roadmap_title"></h2>
+    </div>
+    <div class="timeline">
+      <div class="rm reveal"><h4 data-i18n="rm1_t"></h4><p data-i18n="rm1_d"></p></div>
+      <div class="rm reveal"><h4 data-i18n="rm2_t"></h4><p data-i18n="rm2_d"></p></div>
+      <div class="rm reveal"><h4 data-i18n="rm3_t"></h4><p data-i18n="rm3_d"></p></div>
+      <div class="rm reveal"><h4 data-i18n="rm4_t"></h4><p data-i18n="rm4_d"></p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= 页脚 ================= -->
+<footer>
+  <div class="container foot-inner">
+    <div class="fbrand"><span class="logo-mark">◉</span><span data-i18n="footer_text"></span></div>
+    <p class="fdisc" data-i18n="footer_disclaimer"></p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   1. 多语言词库（华语为默认）
+   ========================================================= */
+const I18N = {
+zh:{
+  brand:"EACO 地球村",
+  nav_trend:"趋势",nav_market:"算电市场",nav_calc:"电费优化",nav_join:"加入共建",nav_roadmap:"路线图",
+  hero_tag:"全球分布式小用户算力 · 算电协同市场",
+  hero_title:"让每一度绿电，都变成可结算的算力",
+  hero_desc:"EACO 地球村聚合全球海外分布式小用户的闲置电力与边缘算力，用虚拟电厂 + 边缘智算 + 链上结算，把算力从「耗电资产」变成参与电网调节的「弹性能源资产」。",
+  hero_cta1:"立即加入共建",hero_cta2:"查看算电市场",
+  hero_note:"华语为默认语言 · 支持六种语言 · 三种界面风格",
+  stat1_l:"已聚合分布式节点",stat2_l:"可调度绿电容量",stat3_l:"边缘算力规模",stat4_l:"社区平均电费降幅",
+  trend_title:"分布式算电协同八大趋势",
+  trend_desc:"在算力获取受限、地缘管制加剧的背景下，分布式算电协同正从技术验证走向规模化落地。",
+  t1_t:"云边端分布式协同",t1_d:"算力从区域级大型集群下沉至省、市与边缘节点，中心云负责大模型训练，边缘节点承载实时推理。",
+  t2_t:"算随电走 · 电随算调",t2_d:"绿电富余、电价低谷时多算，用电高峰时压降非核心负荷，算力成为可调节的柔性负荷。",
+  t3_t:"虚拟电厂与绿电融合",t3_d:"通过绿电直购、跨区域调度、负荷柔性调节，为分布式算力节点解决用电贵、用电难、绿电缺。",
+  t4_t:"储算一体化落地",t4_d:"储能与分布式智算中心耦合共建，以储能替代柴油备用，降低建设成本并稳定供应绿电。",
+  t5_t:"800V 直流全链路升级",t5_d:"全直流耦合架构端到端效率超 97.5%，支持毫秒级功率调度，AI 加速器密度提升 35% 以上。",
+  t6_t:"从卖算力到卖词元",t6_d:"算力服务从资源交付转向可计量、可定价的词元服务，绿电就地转化为算力资源。",
+  t7_t:"一体化算力网与智能调度",t7_d:"算力、网络、模型、数据一体化编排，分钟级跨省迁移，让算力追着绿电跑。",
+  t8_t:"地缘合规与区域枢纽",t8_d:"在数据主权与地缘博弈下，以东南亚等区域合规枢纽突破封锁，构建自主可控算力链。",
+  eaco_title:"EACO · 地球村的结算层",
+  eaco_desc:"EACO 是全球海外分布式小用户参与算电协同的激励与结算媒介。贡献电力、算力、带宽的社区成员，以 EACO 记录贡献并分享收益。",
+  eaco_k1:"网络",eaco_k2:"合约地址",eaco_k3:"代币用途",eaco_k4:"社区叙事",
+  eaco_v3:"结算媒介 · 激励凭证 · 收益分红",
+  eaco_v4:"地球村人民使用的区块链，持有者即股东",
+  copy:"复制",copied:"已复制",
+  market_title:"算电协同市场",
+  market_desc:"分布式小用户把闲置电力与边缘算力挂单，买家按需撮合，EACO 链上结算。",
+  m_type:"类型",m_res:"资源",m_region:"区域",m_price:"价格",m_status:"状态",
+  m_sell:"出售",m_buy:"求购",m_open:"可撮合",m_match:"撮合中",
+  m1:"边缘推理算力 · 50 TFLOPS",m2:"可调度绿电 · 200 MWh/月",m3:"家庭储能容量 · 12 kWh",m4:"边缘节点托管 · 30 节点",
+  r_sea:"东南亚",r_eu:"欧洲",r_na:"北美",r_me:"中东",
+  calc_title:"电费优化计算器",
+  calc_desc:"拖动滑块，估算你的家庭光储与边缘算力节点在 EACO 网络中的年度收益。",
+  calc_nodes:"参与节点数（户）",calc_power:"单节点闲置电力（kW）",calc_price:"当地电价（元/kWh）",calc_green:"绿电占比（%）",
+  calc_r1:"年可调度绿电（kWh）",calc_r2:"年电费优化收益（元）",calc_r3:"年边缘算力收益（元）",calc_r4:"年 EACO 激励（枚）",
+  calc_note:"估算基于年可调度 4000 小时、峰谷套利系数 0.35、边缘推理收益 0.35 元/kWh、每 kWh 激励 0.5 EACO。实际以当地电力市场与节点运行为准。",
+  join_title:"加入共建",
+  join_desc:"无论你是一个家庭、一个社区，还是一个区域运营商，都可以成为 EACO 地球村的算电协同节点。",
+  join_s1_t:"提交资源",join_s1_d:"填写你的光伏、储能、闲置电力或算力设备信息。",
+  join_s2_t:"接入聚合",join_s2_d:"接入本地虚拟电厂与边缘智算网络，完成设备与链上身份绑定。",
+  join_s3_t:"调度运行",join_s3_d:"系统按电价与绿电出力自动调度算力任务，削峰填谷。",
+  join_s4_t:"链上结算",join_s4_d:"电费节省、算力收益与 EACO 激励按周期自动结算。",
+  form_name:"姓名 / 社区名称",form_email:"邮箱",form_region:"所在地区",form_res:"资源类型",
+  form_res_opt1:"家庭光储 + 边缘算力",form_res_opt2:"社区微电网",form_res_opt3:"区域算力运营商",form_res_opt4:"仅电力 / 储能资源",
+  form_scale:"资源规模（kW）",form_submit:"提交并加入",
+  form_ok:"提交成功！EACO 地球村将与你联系，完成节点接入。",
+  roadmap_title:"发展路线图",
+  rm1_t:"第一阶段 · 聚合",rm1_d:"以东南亚、欧美华人社区为起点，跑通「光储 + 边缘算力 + 社区虚拟电厂」最小闭环。",
+  rm2_t:"第二阶段 · 结算",rm2_d:"EACO 代币接入节点收益结算，建立贡献计量与分红机制。",
+  rm3_t:"第三阶段 · 市场",rm3_d:"开放算电协同市场，支持电力与算力的挂单、撮合与跨区调度。",
+  rm4_t:"第四阶段 · 地球村",rm4_d:"形成覆盖全球的分布式算力与绿电网络，算力追着绿电跑。",
+  footer_text:"EACO 地球村 · 分布式算电协同市场",
+  footer_disclaimer:"本页面内容为社区研究与技术探讨，不构成任何投资建议。代币价格波动风险极高，请自行判断。"
+},
+
+en:{
+  brand:"EACO Earth Village",
+  nav_trend:"Trends",nav_market:"Market",nav_calc:"Savings",nav_join:"Join",nav_roadmap:"Roadmap",
+  hero_tag:"Global Distributed Small-User Compute · Compute-Power Synergy Market",
+  hero_title:"Turn every kilowatt-hour of green power into settleable compute",
+  hero_desc:"EACO Earth Village aggregates idle power and edge compute from distributed small users worldwide, using virtual power plants + edge AI + on-chain settlement to turn compute from a power-consuming asset into a flexible energy asset.",
+  hero_cta1:"Join the build",hero_cta2:"View the market",
+  hero_note:"Chinese as default · 6 languages · 3 interface styles",
+  stat1_l:"Distributed nodes aggregated",stat2_l:"Dispatchable green capacity",stat3_l:"Edge compute scale",stat4_l:"Average bill reduction",
+  trend_title:"Eight trends in distributed compute-power synergy",
+  trend_desc:"With compute access restricted and geopolitical controls tightening, distributed compute-power synergy is moving from technical validation to scale.",
+  t1_t:"Cloud-edge-device collaboration",t1_d:"Compute sinks from regional mega-clusters to provincial, city and edge nodes: central clouds train, edge nodes run real-time inference.",
+  t2_t:"Compute follows power, power follows compute",t2_d:"More compute when green power is abundant and prices are low; shed non-critical load at peak. Compute becomes a flexible load.",
+  t3_t:"Virtual power plants meet green power",t3_d:"Direct green purchase, cross-region dispatch and flexible load solve costly, scarce and dirty electricity for distributed nodes.",
+  t4_t:"Storage-compute integration",t4_d:"Storage coupled with distributed AI centers replaces diesel backup, cutting build cost while stabilising green supply.",
+  t5_t:"800V DC full-link upgrade",t5_d:"Full DC-coupled architecture exceeds 97.5% end-to-end efficiency with millisecond power dispatch and 35%+ higher accelerator density.",
+  t6_t:"From selling compute to selling tokens",t6_d:"Compute shifts from raw resources to metered, priced token services; green power converts locally into compute.",
+  t7_t:"Integrated compute network & smart scheduling",t7_d:"Compute, network, models and data orchestrated as one, with minute-level cross-province migration — compute chases green power.",
+  t8_t:"Geopolitical compliance & regional hubs",t8_d:"Under data sovereignty and geopolitical rivalry, regional compliance hubs in Southeast Asia break blockades and build a self-reliant chain.",
+  eaco_title:"EACO · The settlement layer of Earth Village",
+  eaco_desc:"EACO is the incentive and settlement medium for distributed small users worldwide. Members who contribute power, compute and bandwidth are recorded and rewarded on-chain.",
+  eaco_k1:"Network",eaco_k2:"Contract",eaco_k3:"Utility",eaco_k4:"Narrative",
+  eaco_v3:"Settlement medium · Incentive proof · Revenue sharing",
+  eaco_v4:"A blockchain for the people of Earth Village — holders are shareholders",
+  copy:"Copy",copied:"Copied",
+  market_title:"Compute-Power Synergy Market",
+  market_desc:"Small users list idle power and edge compute; buyers match on demand; EACO settles on-chain.",
+  m_type:"Type",m_res:"Resource",m_region:"Region",m_price:"Price",m_status:"Status",
+  m_sell:"Sell",m_buy:"Buy",m_open:"Matchable",m_match:"Matching",
+  m1:"Edge inference · 50 TFLOPS",m2:"Dispatchable green power · 200 MWh/mo",m3:"Home storage capacity · 12 kWh",m4:"Edge node hosting · 30 nodes",
+  r_sea:"SE Asia",r_eu:"Europe",r_na:"North America",r_me:"Middle East",
+  calc_title:"Electricity Savings Calculator",
+  calc_desc:"Drag the sliders to estimate the annual yield of your home solar-storage and edge compute node in the EACO network.",
+  calc_nodes:"Nodes (households)",calc_power:"Idle power per node (kW)",calc_price:"Local tariff (CNY/kWh)",calc_green:"Green share (%)",
+  calc_r1:"Annual dispatchable green (kWh)",calc_r2:"Annual bill savings (CNY)",calc_r3:"Annual compute revenue (CNY)",calc_r4:"Annual EACO incentive",
+  calc_note:"Estimates assume 4,000 dispatchable hours/year, 0.35 peak-valley arbitrage factor, 0.35 CNY/kWh edge inference revenue and 0.5 EACO per kWh. Actual results depend on local markets and node operation.",
+  join_title:"Join the Build",
+  join_desc:"Whether you are a household, a community or a regional operator, you can become a compute-power synergy node of EACO Earth Village.",
+  join_s1_t:"Submit resources",join_s1_d:"Tell us about your solar, storage, idle power or compute equipment.",
+  join_s2_t:"Connect & aggregate",join_s2_d:"Plug into the local VPP and edge AI network; bind devices to your on-chain identity.",
+  join_s3_t:"Dispatch & run",join_s3_d:"The system schedules compute tasks by tariff and green output, shaving peaks and filling valleys.",
+  join_s4_t:"On-chain settlement",join_s4_d:"Savings, compute revenue and EACO incentives settle automatically each cycle.",
+  form_name:"Name / Community",form_email:"Email",form_region:"Region",form_res:"Resource type",
+  form_res_opt1:"Home solar-storage + edge compute",form_res_opt2:"Community microgrid",form_res_opt3:"Regional compute operator",form_res_opt4:"Power / storage only",
+  form_scale:"Resource scale (kW)",form_submit:"Submit & Join",
+  form_ok:"Submitted! EACO Earth Village will contact you to complete node onboarding.",
+  roadmap_title:"Roadmap",
+  rm1_t:"Phase 1 · Aggregate",rm1_d:"Start in Southeast Asia and Chinese communities in Europe/US; prove the minimal loop of solar-storage + edge compute + community VPP.",
+  rm2_t:"Phase 2 · Settle",rm2_d:"Bring EACO into node revenue settlement; build contribution metering and dividend mechanisms.",
+  rm3_t:"Phase 3 · Market",rm3_d:"Open the synergy market for listing, matching and cross-region dispatch of power and compute.",
+  rm4_t:"Phase 4 · Earth Village",rm4_d:"A global distributed compute and green power network where compute chases green power.",
+  footer_text:"EACO Earth Village · Distributed Compute-Power Synergy Market",
+  footer_disclaimer:"This page is community research and technical discussion, not investment advice. Token prices are highly volatile — judge for yourself."
+},
+
+es:{
+  brand:"EACO Aldea Global",
+  nav_trend:"Tendencias",nav_market:"Mercado",nav_calc:"Ahorro",nav_join:"Unirse",nav_roadmap:"Ruta",
+  hero_tag:"Cómputo distribuido de pequeños usuarios · Mercado de sinergia cómputo-energía",
+  hero_title:"Convierte cada kWh de energía verde en cómputo liquidable",
+  hero_desc:"EACO Aldea Global agrega la energía ociosa y el cómputo de borde de pequeños usuarios distribuidos de todo el mundo, con plantas de energía virtuales + IA de borde + liquidación en cadena.",
+  hero_cta1:"Únete a construir",hero_cta2:"Ver el mercado",
+  hero_note:"Chino por defecto · 6 idiomas · 3 estilos de interfaz",
+  stat1_l:"Nodos distribuidos agregados",stat2_l:"Capacidad verde despachable",stat3_l:"Escala de cómputo de borde",stat4_l:"Reducción media de factura",
+  trend_title:"Ocho tendencias de la sinergia cómputo-energía distribuida",
+  trend_desc:"Con el acceso al cómputo restringido y los controles geopolíticos en aumento, la sinergia distribuida pasa de la validación técnica a la escala.",
+  t1_t:"Colaboración nube-borde-dispositivo",t1_d:"El cómputo baja de los grandes clústeres a provincias, ciudades y nodos de borde: la nube entrena, el borde infiere en tiempo real.",
+  t2_t:"El cómputo sigue a la energía",t2_d:"Más cómputo cuando hay excedente verde y precios bajos; se reduce la carga no crítica en horas punta.",
+  t3_t:"Plantas virtuales y energía verde",t3_d:"Compra directa verde, despacho interregional y carga flexible resuelven la electricidad cara, escasa y sucia.",
+  t4_t:"Integración almacenamiento-cómputo",t4_d:"El almacenamiento junto a centros de IA distribuidos sustituye el diésel de respaldo y estabiliza el suministro verde.",
+  t5_t:"Salto a CC 800V",t5_d:"Arquitectura totalmente acoplada en CC con eficiencia superior al 97,5% y despacho en milisegundos.",
+  t6_t:"De vender cómputo a vender tokens",t6_d:"El cómputo pasa de recurso bruto a servicio de tokens medible y tarifable; la energía verde se convierte localmente.",
+  t7_t:"Red integrada y despacho inteligente",t7_d:"Cómputo, red, modelos y datos orquestados como uno, con migración interprovincial en minutos.",
+  t8_t:"Cumplimiento geopolítico y hubs",t8_d:"Ante la soberanía de datos, hubs regionales en el Sudeste Asiático rompen el bloqueo y crean una cadena autónoma.",
+  eaco_title:"EACO · La capa de liquidación de la Aldea Global",
+  eaco_desc:"EACO es el medio de incentivo y liquidación para los pequeños usuarios distribuidos. Quien aporta energía, cómputo y ancho de banda queda registrado y recompensado en cadena.",
+  eaco_k1:"Red",eaco_k2:"Contrato",eaco_k3:"Utilidad",eaco_k4:"Narrativa",
+  eaco_v3:"Medio de liquidación · Prueba de incentivo · Reparto de ingresos",
+  eaco_v4:"Una blockchain para la gente de la Aldea Global: los tenedores son accionistas",
+  copy:"Copiar",copied:"Copiado",
+  market_title:"Mercado de Sinergia Cómputo-Energía",
+  market_desc:"Los pequeños usuarios publican energía ociosa y cómputo de borde; los compradores casan su demanda; EACO liquida en cadena.",
+  m_type:"Tipo",m_res:"Recurso",m_region:"Región",m_price:"Precio",m_status:"Estado",
+  m_sell:"Venta",m_buy:"Compra",m_open:"Casable",m_match:"Casando",
+  m1:"Inferencia de borde · 50 TFLOPS",m2:"Energía verde despachable · 200 MWh/mes",m3:"Almacenamiento doméstico · 12 kWh",m4:"Alojamiento de nodos · 30 nodos",
+  r_sea:"Sudeste Asiático",r_eu:"Europa",r_na:"Norteamérica",r_me:"Oriente Medio",
+  calc_title:"Calculadora de Ahorro Eléctrico",
+  calc_desc:"Mueve los controles para estimar el rendimiento anual de tu solar-almacenamiento y nodo de cómputo de borde en la red EACO.",
+  calc_nodes:"Nodos (hogares)",calc_power:"Energía ociosa por nodo (kW)",calc_price:"Tarifa local (CNY/kWh)",calc_green:"Cuota verde (%)",
+  calc_r1:"Verde despachable anual (kWh)",calc_r2:"Ahorro anual en factura (CNY)",calc_r3:"Ingreso anual por cómputo (CNY)",calc_r4:"Incentivo EACO anual",
+  calc_note:"Estimaciones basadas en 4.000 horas despachables/año, factor de arbitraje 0,35, ingreso de inferencia 0,35 CNY/kWh y 0,5 EACO por kWh. Los resultados reales dependen del mercado local.",
+  join_title:"Únete a Construir",
+  join_desc:"Ya seas un hogar, una comunidad o un operador regional, puedes ser un nodo de sinergia cómputo-energía de EACO Aldea Global.",
+  join_s1_t:"Envía recursos",join_s1_d:"Cuéntanos sobre tu solar, almacenamiento, energía ociosa o equipos de cómputo.",
+  join_s2_t:"Conecta y agrega",join_s2_d:"Conéctate a la planta virtual local y a la red de IA de borde; vincula dispositivos a tu identidad en cadena.",
+  join_s3_t:"Despacho y operación",join_s3_d:"El sistema programa tareas según tarifa y generación verde, aplanando picos y valles.",
+  join_s4_t:"Liquidación en cadena",join_s4_d:"Ahorros, ingresos por cómputo e incentivos EACO se liquidan automáticamente cada ciclo.",
+  form_name:"Nombre / Comunidad",form_email:"Correo",form_region:"Región",form_res:"Tipo de recurso",
+  form_res_opt1:"Solar-almacenamiento + cómputo de borde",form_res_opt2:"Microrred comunitaria",form_res_opt3:"Operador regional de cómputo",form_res_opt4:"Solo energía / almacenamiento",
+  form_scale:"Escala del recurso (kW)",form_submit:"Enviar y unirse",
+  form_ok:"¡Enviado! EACO Aldea Global se pondrá en contacto para completar la conexión del nodo.",
+  roadmap_title:"Hoja de Ruta",
+  rm1_t:"Fase 1 · Agregar",rm1_d:"Comenzar en el Sudeste Asiático y comunidades chinas en Europa/EE.UU.; probar el bucle mínimo solar-almacenamiento + cómputo de borde + planta virtual.",
+  rm2_t:"Fase 2 · Liquidar",rm2_d:"Integrar EACO en la liquidación de ingresos de nodos; crear medición de contribución y reparto.",
+  rm3_t:"Fase 3 · Mercado",rm3_d:"Abrir el mercado de sinergia para publicar, casar y despachar energía y cómputo entre regiones.",
+  rm4_t:"Fase 4 · Aldea Global",rm4_d:"Una red global distribuida de cómputo y energía verde donde el cómputo persigue la energía verde.",
+  footer_text:"EACO Aldea Global · Mercado de Sinergia Cómputo-Energía",
+  footer_disclaimer:"Esta página es investigación comunitaria y debate técnico, no constituye asesoramiento de inversión. La volatilidad de los tokens es muy alta."
+},
+
+fr:{
+  brand:"EACO Village Terre",
+  nav_trend:"Tendances",nav_market:"Marché",nav_calc:"Économies",nav_join:"Rejoindre",nav_roadmap:"Feuille de route",
+  hero_tag:"Calcul distribué des petits utilisateurs · Marché de synergie calcul-énergie",
+  hero_title:"Transformez chaque kWh vert en calcul réglable",
+  hero_desc:"EACO Village Terre agrège l'énergie oisive et le calcul en périphérie des petits utilisateurs distribués du monde entier, via centrales virtuelles + IA en périphérie + règlement on-chain.",
+  hero_cta1:"Rejoindre la construction",hero_cta2:"Voir le marché",
+  hero_note:"Chinois par défaut · 6 langues · 3 styles d'interface",
+  stat1_l:"Nœuds distribués agrégés",stat2_l:"Capacité verte pilotable",stat3_l:"Puissance de calcul en périphérie",stat4_l:"Baisse moyenne de facture",
+  trend_title:"Huit tendances de la synergie calcul-énergie distribuée",
+  trend_desc:"Face à l'accès restreint au calcul et au durcissement géopolitique, la synergie distribuée passe de la validation technique à l'échelle.",
+  t1_t:"Collaboration cloud-périphérie-appareil",t1_d:"Le calcul descend des méga-clusters vers les provinces, villes et nœuds périphériques : le cloud entraîne, la périphérie infère en temps réel.",
+  t2_t:"Le calcul suit l'énergie",t2_d:"Plus de calcul quand le vert abonde et que les prix sont bas ; on réduit la charge non critique en pointe.",
+  t3_t:"Centrales virtuelles et énergie verte",t3_d:"Achat vert direct, dispatch interrégional et charge flexible résolvent une électricité chère, rare et carbonée.",
+  t4_t:"Intégration stockage-calcul",t4_d:"Le stockage couplé aux centres d'IA distribués remplace le diesel de secours et stabilise l'approvisionnement vert.",
+  t5_t:"Montée en 800V CC",t5_d:"Architecture entièrement couplée en CC, rendement supérieur à 97,5 % et dispatch en millisecondes.",
+  t6_t:"Du calcul aux jetons",t6_d:"Le calcul passe de la ressource brute au service de jetons mesurable et tarifé ; le vert se convertit localement.",
+  t7_t:"Réseau intégré et ordonnancement intelligent",t7_d:"Calcul, réseau, modèles et données orchestrés ensemble, migration interprovinciale en minutes.",
+  t8_t:"Conformité géopolitique et hubs",t8_d:"Face à la souveraineté des données, des hubs régionaux en Asie du Sud-Est contournent le blocus et bâtissent une chaîne autonome.",
+  eaco_title:"EACO · La couche de règlement du Village Terre",
+  eaco_desc:"EACO est le média d'incitation et de règlement des petits utilisateurs distribués. Ceux qui apportent énergie, calcul et bande passante sont enregistrés et récompensés on-chain.",
+  eaco_k1:"Réseau",eaco_k2:"Contrat",eaco_k3:"Utilité",eaco_k4:"Récit",
+  eaco_v3:"Média de règlement · Preuve d'incitation · Partage des revenus",
+  eaco_v4:"Une blockchain pour le peuple du Village Terre — les détenteurs sont actionnaires",
+  copy:"Copier",copied:"Copié",
+  market_title:"Marché de Synergie Calcul-Énergie",
+  market_desc:"Les petits utilisateurs publient énergie oisive et calcul en périphérie ; les acheteurs s'apparient à la demande ; EACO règle on-chain.",
+  m_type:"Type",m_res:"Ressource",m_region:"Région",m_price:"Prix",m_status:"Statut",
+  m_sell:"Vente",m_buy:"Achat",m_open:"Appariable",m_match:"Appariement",
+  m1:"Inférence en périphérie · 50 TFLOPS",m2:"Énergie verte pilotable · 200 MWh/mois",m3:"Stockage domestique · 12 kWh",m4:"Hébergement de nœuds · 30 nœuds",
+  r_sea:"Asie du Sud-Est",r_eu:"Europe",r_na:"Amérique du Nord",r_me:"Moyen-Orient",
+  calc_title:"Calculateur d'Économies d'Électricité",
+  calc_desc:"Déplacez les curseurs pour estimer le rendement annuel de votre solaire-stockage et de votre nœud de calcul en périphérie sur le réseau EACO.",
+  calc_nodes:"Nœuds (ménages)",calc_power:"Énergie oisive par nœud (kW)",calc_price:"Tarif local (CNY/kWh)",calc_green:"Part verte (%)",
+  calc_r1:"Vert pilotable annuel (kWh)",calc_r2:"Économies annuelles (CNY)",calc_r3:"Revenu annuel de calcul (CNY)",calc_r4:"Incitation EACO annuelle",
+  calc_note:"Estimations basées sur 4 000 heures pilotables/an, facteur d'arbitrage 0,35, revenu d'inférence 0,35 CNY/kWh et 0,5 EACO par kWh. Les résultats réels dépendent du marché local.",
+  join_title:"Rejoindre la Construction",
+  join_desc:"Que vous soyez un foyer, une communauté ou un opérateur régional, vous pouvez devenir un nœud de synergie calcul-énergie d'EACO Village Terre.",
+  join_s1_t:"Soumettre vos ressources",join_s1_d:"Parlez-nous de votre solaire, stockage, énergie oisive ou équipement de calcul.",
+  join_s2_t:"Connexion et agrégation",join_s2_d:"Connectez-vous à la centrale virtuelle locale et au réseau d'IA en périphérie ; liez vos appareils à votre identité on-chain.",
+  join_s3_t:"Dispatch et exploitation",join_s3_d:"Le système programme les tâches selon le tarif et la production verte, lissant pointes et creux.",
+  join_s4_t:"Règlement on-chain",join_s4_d:"Économies, revenus de calcul et incitations EACO se règlent automatiquement à chaque cycle.",
+  form_name:"Nom / Communauté",form_email:"E-mail",form_region:"Région",form_res:"Type de ressource",
+  form_res_opt1:"Solaire-stockage + calcul en périphérie",form_res_opt2:"Micro-réseau communautaire",form_res_opt3:"Opérateur régional de calcul",form_res_opt4:"Énergie / stockage uniquement",
+  form_scale:"Échelle de la ressource (kW)",form_submit:"Envoyer et rejoindre",
+  form_ok:"Envoyé ! EACO Village Terre vous contactera pour finaliser la connexion du nœud.",
+  roadmap_title:"Feuille de Route",
+  rm1_t:"Phase 1 · Agréger",rm1_d:"Démarrer en Asie du Sud-Est et dans les communautés chinoises d'Europe/États-Unis ; prouver la boucle minimale solaire-stockage + calcul en périphérie + centrale virtuelle.",
+  rm2_t:"Phase 2 · Régler",rm2_d:"Intégrer EACO au règlement des revenus des nœuds ; créer la mesure des contributions et le partage.",
+  rm3_t:"Phase 3 · Marché",rm3_d:"Ouvrir le marché de synergie pour publier, apparier et dispatcher énergie et calcul entre régions.",
+  rm4_t:"Phase 4 · Village Terre",rm4_d:"Un réseau mondial distribué de calcul et d'énergie verte où le calcul poursuit le vert.",
+  footer_text:"EACO Village Terre · Marché de Synergie Calcul-Énergie",
+  footer_disclaimer:"Cette page relève de la recherche communautaire et du débat technique, et ne constitue pas un conseil en investissement. La volatilité des jetons est très élevée."
+},
+
+ar:{
+  brand:"EACO قرية الأرض",
+  nav_trend:"الاتجاهات",nav_market:"السوق",nav_calc:"توفير الفاتورة",nav_join:"انضم",nav_roadmap:"خارطة الطريق",
+  hero_tag:"حوسبة موزّعة للمستخدمين الصغار · سوق التكامل بين الحوسبة والطاقة",
+  hero_title:"حوّل كل كيلوواط-ساعة من الطاقة الخضراء إلى حوسبة قابلة للتسوية",
+  hero_desc:"تجمّع EACO قرية الأرض الطاقة الخاملة والحوسبة الطرفية من المستخدمين الصغار الموزّعين حول العالم، عبر محطات طاقة افتراضية + ذكاء اصطناعي طرفي + تسوية على السلسلة.",
+  hero_cta1:"انضم إلى البناء",hero_cta2:"اطّلع على السوق",
+  hero_note:"الصينية هي الافتراضية · ٦ لغات · ٣ أنماط للواجهة",
+  stat1_l:"العقد الموزّعة المجمّعة",stat2_l:"قدرة خضراء قابلة للإرسال",stat3_l:"حجم الحوسبة الطرفية",stat4_l:"متوسط خفض الفاتورة",
+  trend_title:"ثماني اتجاهات في التكامل الموزّع بين الحوسبة والطاقة",
+  trend_desc:"مع تقييد الوصول إلى الحوسبة وتصاعد الضوابط الجيوسياسية، ينتقل التكامل الموزّع من التحقق التقني إلى التوسّع الفعلي.",
+  t1_t:"تعاون السحابة والحافة والأجهزة",t1_d:"تنزل الحوسبة من العناقيد الكبرى إلى المحافظات والمدن والعقد الطرفية: السحابة تدرّب، والحافة تستنتج فورياً.",
+  t2_t:"الحوسبة تتبع الطاقة",t2_d:"حوسبة أكثر عند وفرة الطاقة الخضراء وانخفاض السعر، وتخفيف الأحمال غير الحرجة عند الذروة.",
+  t3_t:"المحطات الافتراضية والطاقة الخضراء",t3_d:"شراء أخضر مباشر وإرسال عبر المناطق وحمل مرن يحلّ مشكلة الكهرباء الغالية والشحيحة.",
+  t4_t:"دمج التخزين مع الحوسبة",t4_d:"التخزين المقترن بمراكز الذكاء الاصطناعي الموزّعة يحلّ محلّ الديزل الاحتياطي ويثبّت الإمداد الأخضر.",
+  t5_t:"ترقية ٨٠٠ فولت تيار مستمر",t5_d:"معمارية مقترنة بالكامل بالتيار المستمر بكفاءة تتجاوز ٩٧٫٥٪ وإرسال بالمللي ثانية.",
+  t6_t:"من بيع الحوسبة إلى بيع الرموز",t6_d:"تتحول الحوسبة من مورد خام إلى خدمة رموز قابلة للقياس والتسعير؛ الطاقة الخضراء تتحول محلياً.",
+  t7_t:"شبكة حوسبة متكاملة وجدولة ذكية",t7_d:"الحوسبة والشبكة والنماذج والبيانات في تنظيم واحد، مع ترحيل بين المحافظات في دقائق.",
+  t8_t:"الامتثال الجيوسياسي والمراكز الإقليمية",t8_d:"في ظل سيادة البيانات، مراكز إقليمية في جنوب شرق آسيا تكسر الحصار وتبني سلسلة مستقلة.",
+  eaco_title:"EACO · طبقة التسوية في قرية الأرض",
+  eaco_desc:"EACO هو وسيط التحفيز والتسوية للمستخدمين الصغار الموزّعين. من يساهم بالطاقة والحوسبة والنطاق يُسجَّل ويُكافأ على السلسلة.",
+  eaco_k1:"الشبكة",eaco_k2:"العقد",eaco_k3:"الاستخدام",eaco_k4:"السرد",
+  eaco_v3:"وسيط تسوية · إثبات تحفيز · مشاركة الأرباح",
+  eaco_v4:"سلسلة كتل لشعب قرية الأرض — الحائزون هم المساهمون",
+  copy:"نسخ",copied:"تم النسخ",
+  market_title:"سوق التكامل بين الحوسبة والطاقة",
+  market_desc:"يعرض المستخدمون الصغار الطاقة الخاملة والحوسبة الطرفية، ويطابق المشترون حسب الحاجة، وتُسوّى EACO على السلسلة.",
+  m_type:"النوع",m_res:"المورد",m_region:"المنطقة",m_price:"السعر",m_status:"الحالة",
+  m_sell:"بيع",m_buy:"شراء",m_open:"قابل للمطابقة",m_match:"قيد المطابقة",
+  m1:"استنتاج طرفي · ٥٠ TFLOPS",m2:"طاقة خضراء قابلة للإرسال · ٢٠٠ ميغاواط/شهر",m3:"سعة تخزين منزلية · ١٢ كيلوواط-ساعة",m4:"استضافة عقد طرفية · ٣٠ عقدة",
+  r_sea:"جنوب شرق آسيا",r_eu:"أوروبا",r_na:"أمريكا الشمالية",r_me:"الشرق الأوسط",
+  calc_title:"حاسبة توفير الكهرباء",
+  calc_desc:"اسحب المؤشرات لتقدير العائد السنوي لمنظومتك الشمسية والتخزينية وعقدة الحوسبة الطرفية في شبكة EACO.",
+  calc_nodes:"عدد العقد (أسر)",calc_power:"الطاقة الخاملة لكل عقدة (kW)",calc_price:"التعرفة المحلية (يوان/kWh)",calc_green:"نسبة الطاقة الخضراء (%)",
+  calc_r1:"الطاقة الخضراء السنوية (kWh)",calc_r2:"توفير الفاتورة السنوي (يوان)",calc_r3:"عائد الحوسبة السنوي (يوان)",calc_r4:"تحفيز EACO السنوي",
+  calc_note:"التقديرات مبنية على ٤٠٠٠ ساعة قابلة للإرسال سنوياً، ومعامل مراجحة ٠٫٣٥، وعائد استنتاج ٠٫٣٥ يوان/kWh، و٠٫٥ EACO لكل kWh. النتائج الفعلية تعتمد على السوق المحلي.",
+  join_title:"انضم إلى البناء",
+  join_desc:"سواء كنت أسرة أو مجتمعاً أو مشغّلاً إقليمياً، يمكنك أن تصبح عقدة تكامل حوسبة-طاقة في EACO قرية الأرض.",
+  join_s1_t:"قدّم مواردك",join_s1_d:"أخبرنا عن الطاقة الشمسية والتخزين والطاقة الخاملة أو معدات الحوسبة.",
+  join_s2_t:"الاتصال والتجميع",join_s2_d:"اتصل بالمحطة الافتراضية المحلية وشبكة الذكاء الطرفي، واربط أجهزتك بهويتك على السلسلة.",
+  join_s3_t:"الإرسال والتشغيل",join_s3_d:"يجدول النظام مهام الحوسبة حسب التعرفة والإنتاج الأخضر، لموازنة الذروة والوادي.",
+  join_s4_t:"التسوية على السلسلة",join_s4_d:"تُسوّى التوفيرات وعوائد الحوسبة وتحفيزات EACO تلقائياً كل دورة.",
+  form_name:"الاسم / المجتمع",form_email:"البريد الإلكتروني",form_region:"المنطقة",form_res:"نوع المورد",
+  form_res_opt1:"طاقة شمسية + حوسبة طرفية",form_res_opt2:"شبكة مصغّرة مجتمعية",form_res_opt3:"مشغّل حوسبة إقليمي",form_res_opt4:"طاقة / تخزين فقط",
+  form_scale:"حجم المورد (kW)",form_submit:"إرسال والانضمام",
+  form_ok:"تم الإرسال! سيتواصل معك فريق EACO قرية الأرض لإكمال ربط العقدة.",
+  roadmap_title:"خارطة الطريق",
+  rm1_t:"المرحلة ١ · التجميع",rm1_d:"البدء في جنوب شرق آسيا والمجتمعات الصينية في أوروبا وأمريكا؛ إثبات الحلقة الدنيا: شمسي + تخزين + حوسبة طرفية + محطة افتراضية.",
+  rm2_t:"المرحلة ٢ · التسوية",rm2_d:"إدخال EACO في تسوية عوائد العقد؛ بناء قياس المساهمات وآلية الأرباح.",
+  rm3_t:"المرحلة ٣ · السوق",rm3_d:"فتح سوق التكامل للإدراج والمطابقة والإرسال بين المناطق للطاقة والحوسبة.",
+  rm4_t:"المرحلة ٤ · قرية الأرض",rm4_d:"شبكة عالمية موزّعة للحوسبة والطاقة الخضراء، حيث تلاحق الحوسبة الطاقة الخضراء.",
+  footer_text:"EACO قرية الأرض · سوق التكامل بين الحوسبة والطاقة",
+  footer_disclaimer:"هذه الصفحة بحث مجتمعي ونقاش تقني، وليست نصيحة استثمارية. تقلّبات أسعار الرموز عالية جداً."
+},
+
+ru:{
+  brand:"EACO Земная Деревня",
+  nav_trend:"Тренды",nav_market:"Рынок",nav_calc:"Экономия",nav_join:"Присоединиться",nav_roadmap:"Дорожная карта",
+  hero_tag:"Распределённые вычисления малых пользователей · Рынок синергии вычислений и энергии",
+  hero_title:"Превратите каждый кВт·ч зелёной энергии в расчётные вычисления",
+  hero_desc:"EACO Земная Деревня объединяет простаивающую энергию и периферийные вычисления малых пользователей по всему миру: виртуальные электростанции + периферийный ИИ + расчёты в сети.",
+  hero_cta1:"Присоединиться",hero_cta2:"Смотреть рынок",
+  hero_note:"Китайский по умолчанию · 6 языков · 3 стиля интерфейса",
+  stat1_l:"Объединённых узлов",stat2_l:"Управляемая зелёная мощность",stat3_l:"Периферийные вычисления",stat4_l:"Среднее снижение счёта",
+  trend_title:"Восемь трендов распределённой синергии вычислений и энергии",
+  trend_desc:"При ограниченном доступе к вычислениям и усилении геополитического контроля синергия переходит от проверки к масштабированию.",
+  t1_t:"Связка облако-периферия-устройство",t1_d:"Вычисления спускаются из мегакластеров в регионы, города и периферийные узлы: облако обучает, периферия выводит в реальном времени.",
+  t2_t:"Вычисления следуют за энергией",t2_d:"Больше вычислений при избытке зелёной энергии и низких ценах; сброс некритичной нагрузки в пик.",
+  t3_t:"Виртуальные электростанции и зелёная энергия",t3_d:"Прямая зелёная закупка, межрегиональная диспетчеризация и гибкая нагрузка решают проблему дорогой и дефицитной энергии.",
+  t4_t:"Интеграция накопления и вычислений",t4_d:"Накопители вместе с распределёнными ИИ-центрами заменяют дизельный резерв и стабилизируют зелёную поставку.",
+  t5_t:"Переход на 800 В постоянного тока",t5_d:"Полностью связанная архитектура DC с КПД выше 97,5% и диспетчеризацией за миллисекунды.",
+  t6_t:"От продажи вычислений к продаже токенов",t6_d:"Вычисления превращаются из сырого ресурса в измеримую токен-услугу; зелёная энергия конвертируется на месте.",
+  t7_t:"Единая сеть вычислений и умная диспетчеризация",t7_d:"Вычисления, сеть, модели и данные управляются как единое целое с миграцией за минуты.",
+  t8_t:"Геополитический комплаенс и хабы",t8_d:"В условиях суверенитета данных региональные хабы в Юго-Восточной Азии обходят блокаду и создают автономную цепочку.",
+  eaco_title:"EACO · Расчётный слой Земной Деревни",
+  eaco_desc:"EACO — средство стимулирования и расчётов для распределённых малых пользователей. Вклад энергии, вычислений и трафика фиксируется и вознаграждается в сети.",
+  eaco_k1:"Сеть",eaco_k2:"Контракт",eaco_k3:"Применение",eaco_k4:"Идея",
+  eaco_v3:"Средство расчётов · Подтверждение вклада · Распределение дохода",
+  eaco_v4:"Блокчейн для людей Земной Деревни — держатели становятся акционерами",
+  copy:"Копировать",copied:"Скопировано",
+  market_title:"Рынок синергии вычислений и энергии",
+  market_desc:"Малые пользователи выставляют простаивающую энергию и периферийные вычисления, покупатели подбирают по потребности, EACO рассчитывает в сети.",
+  m_type:"Тип",m_res:"Ресурс",m_region:"Регион",m_price:"Цена",m_status:"Статус",
+  m_sell:"Продажа",m_buy:"Покупка",m_open:"Доступно",m_match:"Подбор",
+  m1:"Периферийный вывод · 50 TFLOPS",m2:"Управляемая зелёная энергия · 200 МВт·ч/мес",m3:"Домашнее накопление · 12 кВт·ч",m4:"Хостинг узлов · 30 узлов",
+  r_sea:"Юго-Восточная Азия",r_eu:"Европа",r_na:"Северная Америка",r_me:"Ближний Восток",
+  calc_title:"Калькулятор экономии на электричестве",
+  calc_desc:"Двигайте ползунки, чтобы оценить годовую доходность вашей солнечно-накопительной системы и периферийного узла вычислений в сети EACO.",
+  calc_nodes:"Узлов (домохозяйств)",calc_power:"Простаивающая мощность узла (кВт)",calc_price:"Местный тариф (CNY/кВт·ч)",calc_green:"Доля зелёной (%)",
+  calc_r1:"Годовая управляемая зелёная (кВт·ч)",calc_r2:"Годовая экономия (CNY)",calc_r3:"Годовой доход от вычислений (CNY)",calc_r4:"Годовое вознаграждение EACO",
+  calc_note:"Оценка исходит из 4000 управляемых часов в год, коэффициента арбитража 0,35, дохода вывода 0,35 CNY/кВт·ч и 0,5 EACO за кВт·ч. Реальные результаты зависят от местного рынка.",
+  join_title:"Присоединиться к созданию",
+  join_desc:"Домохозяйство, сообщество или региональный оператор — вы можете стать узлом синергии вычислений и энергии EACO Земной Деревни.",
+  join_s1_t:"Отправьте данные",join_s1_d:"Расскажите о своей солнечной станции, накопителе, простаивающей мощности или оборудовании.",
+  join_s2_t:"Подключение и агрегация",join_s2_d:"Подключитесь к местной виртуальной электростанции и периферийной ИИ-сети, привяжите устройства к идентичности в сети.",
+  join_s3_t:"Диспетчеризация",join_s3_d:"Система планирует задачи по тарифу и зелёной генерации, сглаживая пики и провалы.",
+  join_s4_t:"Расчёты в сети",join_s4_d:"Экономия, доход от вычислений и вознаграждение EACO рассчитываются автоматически каждый цикл.",
+  form_name:"Имя / Сообщество",form_email:"Эл. почта",form_region:"Регион",form_res:"Тип ресурса",
+  form_res_opt1:"Домашняя солнечная система + периферийные вычисления",form_res_opt2:"Микросеть сообщества",form_res_opt3:"Региональный оператор вычислений",form_res_opt4:"Только энергия / накопление",
+  form_scale:"Масштаб ресурса (кВт)",form_submit:"Отправить и присоединиться",
+  form_ok:"Отправлено! EACO Земная Деревня свяжется с вами для подключения узла.",
+  roadmap_title:"Дорожная карта",
+  rm1_t:"Этап 1 · Агрегация",rm1_d:"Старт в Юго-Восточной Азии и китайских сообществах Европы и США; отработка минимального цикла «солнце + накопление + периферийные вычисления + виртуальная электростанция».",
+  rm2_t:"Этап 2 · Расчёты",rm2_d:"Подключение EACO к расчётам дохода узлов; создание учёта вклада и механизма распределения.",
+  rm3_t:"Этап 3 · Рынок",rm3_d:"Открытие рынка синергии для выставления, подбора и межрегиональной диспетчеризации энергии и вычислений.",
+  rm4_t:"Этап 4 · Земная Деревня",rm4_d:"Глобальная распределённая сеть вычислений и зелёной энергии, где вычисления следуют за зелёной энергией.",
+  footer_text:"EACO Земная Деревня · Рынок синергии вычислений и энергии",
+  footer_disclaimer:"Эта страница — исследование сообщества и техническая дискуссия, не инвестиционная рекомендация. Волатильность токенов крайне высока."
+}
+};
+
+/* =========================================================
+   2. 市场数据
+   ========================================================= */
+const MARKET_ROWS = [
+  {type:'sell', resKey:'m1', regionKey:'r_sea', price:'0.28 ¥/kWh', status:'open'},
+  {type:'buy',  resKey:'m2', regionKey:'r_eu',  price:'0.52 ¥/kWh', status:'match'},
+  {type:'sell', resKey:'m3', regionKey:'r_na',  price:'0.35 ¥/kWh', status:'open'},
+  {type:'buy',  resKey:'m4', regionKey:'r_me',  price:'—',          status:'open'}
+];
+
+/* =========================================================
+   3. 语言切换
+   ========================================================= */
+function applyLang(lang){
+  const dict = I18N[lang] || I18N.zh;
+  document.documentElement.lang = lang;
+  document.body.dataset.lang = lang;
+  document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    if(dict[key] !== undefined) el.textContent = dict[key];
+  });
+
+  // 表单下拉选项
+  document.querySelectorAll('#fRes option').forEach(op=>{
+    const key = op.dataset.i18n;
+    if(dict[key]) op.textContent = dict[key];
+  });
+
+  renderMarket(lang);
+  updateCalc();
+  try{ localStorage.setItem('eaco_lang', lang); }catch(e){}
+}
+
+/* =========================================================
+   4. 市场表格渲染
+   ========================================================= */
+function renderMarket(lang){
+  const dict = I18N[lang] || I18N.zh;
+  const tbody = document.getElementById('marketBody');
+  const typeMap = {sell:dict.m_sell, buy:dict.m_buy};
+  const statusMap = {open:dict.m_open, match:dict.m_match};
+  tbody.innerHTML = MARKET_ROWS.map(r=>`
+    <tr>
+      <td><span class="tag ${r.type}">${typeMap[r.type]}</span></td>
+      <td>${dict[r.resKey] || ''}</td>
+      <td>${dict[r.regionKey] || ''}</td>
+      <td><b>${r.price}</b></td>
+      <td><span class="tag ${r.status === 'open' ? 'open' : 'match'}">${statusMap[r.status]}</span></td>
+    </tr>
+  `).join('');
+}
+
+/* =========================================================
+   5. 主题切换
+   ========================================================= */
+function setTheme(theme){
+  document.body.dataset.theme = theme;
+  document.querySelectorAll('.theme-dots button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.themeSet === theme);
+  });
+  try{ localStorage.setItem('eaco_theme', theme); }catch(e){}
+}
+
+/* =========================================================
+   6. 计算器
+   ========================================================= */
+const el = id => document.getElementById(id);
+const fmt = n => Math.round(n).toLocaleString('en-US');
+
+function updateCalc(){
+  const n     = +el('rNodes').value;
+  const p     = +el('rPower').value;
+  const price = +el('rPrice').value;
+  const green = +el('rGreen').value;
+
+  el('vNodes').textContent = n;
+  el('vPower').textContent = p;
+  el('vPrice').textContent = price.toFixed(2);
+  el('vGreen').textContent = green;
+
+  // 年可调度电量（kWh）
+  const kwh = n * p * 4000;
+  // 峰谷套利 + 需求响应节省
+  const save = kwh * price * 0.35;
+  // 边缘推理算力收益
+  const earn = kwh * 0.35;
+  // EACO 激励
+  const eaco = kwh * 0.5;
+
+  el('outKwh').textContent  = fmt(kwh);
+  el('outSave').textContent = '¥' + fmt(save);
+  el('outEarn').textContent = '¥' + fmt(earn);
+  el('outEaco').textContent = fmt(eaco);
+}
+
+/* =========================================================
+   7. 数字滚动动画
+   ========================================================= */
+function animateCount(node){
+  const target = +node.dataset.count;
+  const suffix = node.dataset.suffix || '';
+  const dur = 1500;
+  const start = performance.now();
+  function tick(t){
+    const prog = Math.min(1, (t - start) / dur);
+    const eased = 1 - Math.pow(1 - prog, 3);
+    node.textContent = fmt(target * eased) + suffix;
+    if(prog < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* =========================================================
+   8. 滚动显现
+   ========================================================= */
+function initReveal(){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('in');
+        const counter = en.target.querySelector('[data-count]');
+        if(counter && !counter.dataset.done){
+          counter.dataset.done = '1';
+          animateCount(counter);
+        }
+        io.unobserve(en.target);
+      }
+    });
+  }, {threshold:0.15});
+
+  document.querySelectorAll('.reveal').forEach((node, i)=>{
+    node.style.transitionDelay = (i % 4) * 70 + 'ms';
+    io.observe(node);
+  });
+}
+
+/* =========================================================
+   9. 初始化
+   ========================================================= */
+(function init(){
+  // 主题
+  let savedTheme = 'cosmic-blue';
+  let savedLang = 'zh';
+  try{
+    savedTheme = localStorage.getItem('eaco_theme') || 'cosmic-blue';
+    savedLang  = localStorage.getItem('eaco_lang')  || 'zh';
+  }catch(e){}
+  setTheme(savedTheme);
+
+  // 语言
+  el('langSel').value = savedLang;
+  applyLang(savedLang);
+
+  // 主题按钮
+  document.querySelectorAll('.theme-dots button').forEach(btn=>{
+    btn.addEventListener('click', ()=> setTheme(btn.dataset.themeSet));
+  });
+
+  // 语言下拉
+  el('langSel').addEventListener('change', e => applyLang(e.target.value));
+
+  // 计算器
+  ['rNodes','rPower','rPrice','rGreen'].forEach(id=>{
+    el(id).addEventListener('input', updateCalc);
+  });
+  updateCalc();
+
+  // 复制合约地址
+  el('copyBtn').addEventListener('click', async ()=>{
+    const text = el('tokenAddr').textContent.trim();
+    const dict = I18N[document.body.dataset.lang] || I18N.zh;
+    try{
+      await navigator.clipboard.writeText(text);
+    }catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(_){}
+      document.body.removeChild(ta);
+    }
+    const btn = el('copyBtn');
+    btn.textContent = dict.copied;
+    setTimeout(()=>{ btn.textContent = dict.copy; }, 1600);
+  });
+
+  // 表单提交（闭环）
+  el('joinForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const name  = el('fName').value.trim();
+    const email = el('fEmail').value.trim();
+    if(!name || !email){
+      el('fName').focus();
+      return;
+    }
+    el('formOk').classList.add('show');
+    el('joinForm').reset();
+    setTimeout(()=> el('formOk').classList.remove('show'), 6000);
+  });
+
+  // 滚动显现
+  initReveal();
+})();
+</script>
+</body>
+</html>
