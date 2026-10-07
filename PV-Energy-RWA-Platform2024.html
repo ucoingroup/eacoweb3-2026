@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO SOL | PV Energy RWA Platform</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+:root.theme-blue {
+  --primary: #0072F5; --secondary: #0F172A; --accent: #22D3EE;
+  --bg: #0B1120; --card: #111827; --text: #F8FAFC; --text-muted:#94A3B8;
+}
+:root.theme-green {
+  --primary: #22C55E; --secondary: #14532D; --accent: #A3E635;
+  --bg: #052E16; --card: #166534; --text: #F0FDF4; --text-muted:#BBF7D0;
+}
+:root.theme-beige {
+  --primary: #92400E; --secondary: #422006; --accent: #D97706;
+  --bg: #FFFBEB; --card: #FEF3C7; --text: #1C1917; --text-muted:#78716C;
+}
+:root { /* default blue */
+  --primary: #0072F5; --secondary: #0F172A; --accent: #22D3EE;
+  --bg: #0B1120; --card: #111827; --text: #F8FAFC; --text-muted:#94A3B8;
+}
+*{transition: all 0.3s ease;}
+body{background:var(--bg);color:var(--text);font-family: system-ui, sans-serif;}
+.text-muted{color:var(--text-muted);}
+.bg-card{background:var(--card);}
+.btn-primary{background:var(--primary);color:white;padding:0.6rem 1.2rem;border-radius:0.5rem;}
+.btn-accent{background:var(--accent);color:var(--secondary);padding:0.6rem 1.2rem;border-radius:0.5rem;}
+.border-theme{border:1px solid var(--primary);}
+/* page router hide */
+.page{display:none;}
+.page.active{display:block;}
+/* font for my/th */
+.font-th{font-family:Noto Sans Thai, sans-serif;}
+.font-my{font-family:Noto Sans Myanmar, sans-serif;}
+</style>
+</head>
+<body class="min-h-screen">
+<!-- Header Navbar -->
+<header class="sticky top-0 z-50 bg-[var(--secondary)] shadow-lg">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <i class="fa fa-bolt text-2xl text-[var(--accent)]"></i>
+      <span class="font-bold text-xl">EACO SOL</span>
+    </div>
+    <nav class="hidden md:flex gap-6">
+      <a onclick="switchPage('home')" class="nav-link" data-i18n="nav.home">Home</a>
+      <a onclick="switchPage('assetPool')" class="nav-link" data-i18n="nav.assetPool">Asset Pool</a>
+      <a onclick="switchPage('tech')" class="nav-link" data-i18n="nav.tech">Tech</a>
+      <a onclick="switchPage('docs')" class="nav-link" data-i18n="nav.docs">Docs</a>
+      <a onclick="switchPage('dashboard')" class="nav-link" data-i18n="nav.dashboard">Dashboard</a>
+    </nav>
+    <div class="flex gap-3 items-center">
+      <!-- Language Select -->
+      <select id="langSelect" class="bg-[var(--card)] px-2 py-1 rounded text-sm">
+        <option value="zh">华语</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="my">မြန်မာ</option>
+        <option value="th">ไทย</option>
+      </select>
+      <!-- Theme Select -->
+      <select id="themeSelect" class="bg-[var(--card)] px-2 py-1 rounded text-sm">
+        <option value="blue">科技蓝</option>
+        <option value="green">苹果绿</option>
+        <option value="beige">米黄古典</option>
+      </select>
+      <button class="md:hidden text-xl"><i class="fa fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main class="container mx-auto px-4 py-8">
+<!-- HOME PAGE -->
+<section id="page-home" class="page active">
+  <div class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h1 class="text-4xl font-bold mb-4" data-i18n="home.title">光伏储能RWA可信资产平台</h1>
+      <p class="text-muted text-lg mb-6" data-i18n="home.desc">依托全球逆变器API+SOL光伏资产观测引擎+EACO区块链，为东盟、中亚光储电站构建可信RWA投资体系，实现发电数据实时核验、资产确权、自动分润。</p>
+      <div class="flex flex-wrap gap-4">
+        <button onclick="switchPage('assetPool')" class="btn-primary" data-i18n="home.btnAsset">浏览资产池</button>
+        <button onclick="switchPage('tech')" class="btn-accent" data-i18n="home.btnTech">技术架构</button>
+      </div>
+    </div>
+    <div class="bg-card p-6 rounded-xl border-theme">
+      <h3 class="font-bold mb-2" data-i18n="home.archTitle">EACO+SOL 五层架构</h3>
+      <ul class="space-y-2 text-muted">
+        <li>1. 逆变器API/边缘网关数据采集</li>
+        <li>2. 多品牌统一数据适配层</li>
+        <li>3. SOL资产AI风控估值引擎</li>
+        <li>4. EACO RWA区块链存证与智能合约</li>
+        <li>5. 全球投资人Web/App应用层</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-12">
+    <h2 class="text-2xl font-bold mb-6" data-i18n="home.region">东盟 & 中亚市场</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-card p-6 rounded-xl">
+        <h3 class="font-bold text-[var(--accent)]">东盟 试点市场</h3>
+        <p class="text-muted mt-2" data-i18n="home.asean">工商业屋顶、微网离网储能，碎片化光储资产打包RWA，叠加绿证REC收益。</p>
+      </div>
+      <div class="bg-card p-6 rounded-xl">
+        <h3 class="font-bold text-[var(--accent)]">中亚 存量大型电站</h3>
+        <p class="text-muted mt-2" data-i18n="home.casia">成熟地面光伏储能，长期PPA，严格尽调，优质大额RWA资产包。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Asset Pool Page -->
+<section id="page-assetPool" class="page">
+  <h2 class="text-3xl font-bold mb-6" data-i18n="asset.title">RWA 光储资产池</h2>
+  <div class="grid md:grid-cols-3 gap-6">
+    <!-- Asset Card 1 -->
+    <div class="bg-card p-5 rounded-xl border-theme">
+      <h3 class="font-bold">泰国工商业光储项目 5MW</h3>
+      <div class="my-3 text-muted">
+        <p>预估年化: 8.7%</p>
+        <p>电站类型: 并网储能</p>
+        <p>风险评级: A</p>
+        <p>逆变器品牌: GoodWe</p>
+      </div>
+      <button onclick="switchPage('assetDetail')" class="btn-primary w-full" data-i18n="asset.viewDetail">查看详情</button>
+    </div>
+    <!-- Asset Card 2 -->
+    <div class="bg-card p-5 rounded-xl border-theme">
+      <h3 class="font-bold">乌兹别克斯坦地面光伏 20MW</h3>
+      <div class="my-3 text-muted">
+        <p>预估年化:7.2%</p>
+        <p>电站类型:大型地面储能</p>
+        <p>风险评级: A-</p>
+        <p>逆变器品牌: Sungrow</p>
+      </div>
+      <button onclick="switchPage('assetDetail')" class="btn-primary w-full" data-i18n="asset.viewDetail">查看详情</button>
+    </div>
+    <!-- Asset Card3 -->
+    <div class="bg-card p-5 rounded-xl border-theme">
+      <h3 class="font-bold">缅甸园区微网光储 1.2MW</h3>
+      <div class="my-3 text-muted">
+        <p>预估年化:9.3%</p>
+        <p>电站类型:离并网混合储能</p>
+        <p>风险评级: B+</p>
+        <p>逆变器品牌: Deye</p>
+      </div>
+      <button onclick="switchPage('assetDetail')" class="btn-primary w-full" data-i18n="asset.viewDetail">查看详情</button>
+    </div>
+  </div>
+</section>
+
+<!-- Asset Detail Page -->
+<section id="page-assetDetail" class="page">
+  <h2 class="text-3xl font-bold mb-4" data-i18n="assetDetail.title">电站详情 & SOL可信数据</h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-card p-6 rounded-xl">
+      <h3 class="font-bold mb-3" data-i18n="assetDetail.realTime">逆变器实时采集数据</h3>
+      <div class="text-muted space-y-2">
+        <p>累计发电量: 12,874 MWh</p>
+        <p>储能SOC: 68%</p>
+        <p>当前交流功率: 427kW</p>
+        <p>运行状态: 并网正常</p>
+        <p>链上存证哈希: <span class="text-[var(--accent)] break-all">0x23ab...78ef</span></p>
+      </div>
+    </div>
+    <div class="bg-card p-6 rounded-xl">
+      <h3 class="font-bold mb-3" data-i18n="assetDetail.solIndex">SOL风控指标</h3>
+      <div class="text-muted space-y-2">
+        <p>PR性能比: 0.82</p>
+        <p>SOL资产评分: 86/100</p>
+        <p>卫星辐照交叉核验: 通过</p>
+        <p>PPA剩余年限: 17年</p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 bg-card p-6 rounded-xl">
+    <h3 class="font-bold mb-3" data-i18n="assetDetail.chart">发电量时序曲线</h3>
+    <canvas id="generationChart" height="220"></canvas>
+  </div>
+</section>
+
+<!-- Tech Page -->
+<section id="page-tech" class="page">
+  <h2 class="text-3xl font-bold mb-6" data-i18n="tech.title">技术架构 & 逆变器API接入</h2>
+  <div class="bg-card p-6 rounded-xl">
+    <p class="text-muted mb-4" data-i18n="tech.desc">对接全球20大光伏逆变器厂商云API、MQTT、本地Modbus，统一接入SOL观测引擎，硬件签名防篡改，数据哈希上链EACO。</p>
+    <ul class="space-y-2 text-muted">
+      <li>✅ 华为 FusionSolar API</li>
+      <li>✅ 阳光电源 iSolarCloud</li>
+      <li>✅ GoodWe / Deye / SolaX 离并网混合逆变器</li>
+      <li>✅ SMA, SolarEdge, Fronius, 锦浪, 科士达, 特变电工等20家</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Docs Page -->
+<section id="page-docs" class="page">
+  <h2 class="text-3xl font-bold mb-6" data-i18n="docs.title">文档中心</h2>
+  <div class="bg-card p-6 rounded-xl space-y-4">
+    <div class="flex justify-between items-center">
+      <span>EACO+SOL 光储RWA白皮书</span>
+      <button class="btn-accent text-sm" data-i18n="docs.download">下载</button>
+    </div>
+    <div class="flex justify-between items-center">
+      <span>逆变器API接入规范文档</span>
+      <button class="btn-accent text-sm" data-i18n="docs.download">下载</button>
+    </div>
+    <div class="flex justify-between items-center">
+      <span>SPV资产与RWA合规说明</span>
+      <button class="btn-accent text-sm" data-i18n="docs.download">下载</button>
+    </div>
+  </div>
+</section>
+
+<!-- Dashboard Page -->
+<section id="page-dashboard" class="page">
+  <h2 class="text-3xl font-bold mb-6" data-i18n="dashboard.title">投资人后台</h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-card p-6 rounded-xl">
+      <h3 class="font-bold mb-3" data-i18n="dashboard.asset">我的RWA资产持仓</h3>
+      <p class="text-muted">泰国5MW光储资产包：份额 1.2%</p>
+      <p class="text-muted">乌兹别克20MW资产包：份额 0.4%</p>
+    </div>
+    <div class="bg-card p-6 rounded-xl">
+      <h3 class="font-bold mb-3" data-i18n="dashboard.income">收益流水</h3>
+      <p class="text-muted">月度自动分润：由SOL可信发电量数据驱动智能合约发放</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="mt-12 py-6 bg-[var(--secondary)]">
+  <div class="container mx-auto px-4 text-center text-muted text-sm">
+    <p data-i18n="footer.copyright">©2024 EACO SOL | PV RWA Platform. All rights reserved.</p>
+  </footer>
+
+<script>
+// ========== I18N 6语言包 ==========
+const i18nTexts = {
+zh:{
+"nav.home":"首页","nav.assetPool":"资产池","nav.tech":"技术","nav.docs":"文档","nav.dashboard":"投资人后台",
+"home.title":"光伏储能RWA可信资产平台",
+"home.desc":"依托全球逆变器API+SOL光伏资产观测引擎+EACO区块链，为东盟、中亚光储电站构建可信RWA投资体系，实现发电数据实时核验、资产确权、自动分润。",
+"home.btnAsset":"浏览资产池","home.btnTech":"技术架构","home.archTitle":"EACO+SOL 五层架构","home.region":"东盟 & 中亚市场",
+"home.asean":"工商业屋顶、微网离网储能，碎片化光储资产打包RWA，叠加绿证REC收益。",
+"home.casia":"成熟地面光伏储能，长期PPA，严格尽调，优质大额RWA资产包。",
+"asset.title":"RWA 光储资产池","asset.viewDetail":"查看详情",
+"assetDetail.title":"电站详情 & SOL可信数据","assetDetail.realTime":"逆变器实时采集数据","assetDetail.solIndex":"SOL风控指标","assetDetail.chart":"发电量时序曲线",
+"tech.title":"技术架构 & 逆变器API接入","tech.desc":"对接全球20大光伏逆变器厂商云API、MQTT、本地Modbus，统一接入SOL观测引擎，硬件签名防篡改，数据哈希上链EACO。",
+"docs.title":"文档中心","docs.download":"下载",
+"dashboard.title":"投资人后台","dashboard.asset":"我的RWA资产持仓","dashboard.income":"收益流水",
+"footer.copyright":"©2024 EACO SOL | PV RWA平台 版权所有"
+},
+en:{
+"nav.home":"Home","nav.assetPool":"Asset Pool","nav.tech":"Tech","nav.docs":"Docs","nav.dashboard":"Dashboard",
+"home.title":"PV Energy Storage RWA Trusted Asset Platform",
+"home.desc":"Based on global inverter API + SOL Solar Asset Observatory Engine + EACO Blockchain, build trusted RWA investment system for ASEAN & Central Asia PV plants, real-time generation verification, asset tokenization & auto revenue distribution.",
+"home.btnAsset":"Browse Assets","home.btnTech":"Tech Architecture","home.archTitle":"EACO+SOL 5-Layer Architecture","home.region":"ASEAN & Central Asia Market",
+"home.asean":"Commercial rooftop, off-grid microgrid storage. Package fragmented PV assets into RWA with REC green certificate revenue.",
+"home.casia":"Mature utility-scale PV storage with long-term PPA, strict due diligence, high-value large RWA asset pools.",
+"asset.title":"RWA PV Asset Pool","asset.viewDetail":"View Detail",
+"assetDetail.title":"Plant Detail & SOL Trusted Data","assetDetail.realTime":"Inverter Real-time Data","assetDetail.solIndex":"SOL Risk Index","assetDetail.chart":"Power Generation Chart",
+"tech.title":"Tech Architecture & Inverter API Integration","tech.desc":"Integrate 20 top global inverter cloud API, MQTT, local Modbus. Feed into SOL engine, hardware signature anti-tamper, hash to EACO blockchain.",
+"docs.title":"Document Center","docs.download":"Download",
+"dashboard.title":"Investor Dashboard","dashboard.asset":"My RWA Holdings","dashboard.income":"Revenue History",
+"footer.copyright":"©2026 EACO SOL | PV RWA Platform. All rights reserved."
+},
+fr:{
+"nav.home":"Accueil","nav.assetPool":"Pool d'actifs","nav.tech":"Tech","nav.docs":"Docs","nav.dashboard":"Tableau de bord",
+"home.title":"Plateforme RWA Stockage Solaire",
+"home.desc":"API des onduleurs mondiaux + SOL + Blockchain EACO, système RWA pour centrales solaires ASEAN et Asie centrale, vérification des données et distribution automatique des revenus.",
+"home.btnAsset":"Voir les actifs","home.btnTech":"Architecture","home.archTitle":"Architecture 5 couches EACO+SOL","home.region":"Marché ASEAN & Asie Centrale",
+"home.asean":"Toits commerciaux, micro-réseaux hors réseau, actifs solaires fragmentés packagés en RWA avec certificats verts REC.",
+"home.casia":"Centrales solaires matures avec PPA long terme, audit rigoureux, grands portefeuilles RWA de haute qualité.",
+"asset.title":"Pool d'actifs RWA Solaire","asset.viewDetail":"Détails",
+"assetDetail.title":"Détails centrale & données SOL","assetDetail.realTime":"Données temps réel onduleur","assetDetail.solIndex":"Indice risque SOL","assetDetail.chart":"Courbe de production",
+"tech.title":"Architecture & API onduleurs","tech.desc":"Connexion API cloud, MQTT, Modbus de 20 fabricants d'onduleurs, moteur SOL, signature matérielle, hash sur blockchain EACO.",
+"docs.title":"Centre de documents","docs.download":"Télécharger",
+"dashboard.title":"Tableau investisseur","dashboard.asset":"Mes avoirs RWA","dashboard.income":"Historique revenus",
+"footer.copyright":"©2026 EACO SOL | Plateforme RWA Solaire. Tous droits réservés."
+},
+es:{
+"nav.home":"Inicio","nav.assetPool":"Activos","nav.tech":"Tecnología","nav.docs":"Docs","nav.dashboard":"Panel",
+"home.title":"Plataforma RWA Almacenamiento Solar",
+"home.desc":"API de inversores globales + motor SOL + blockchain EACO, sistema RWA para plantas solares ASEAN y Asia Central, verificación de datos y reparto automático de ingresos.",
+"home.btnAsset":"Ver activos","home.btnTech":"Arquitectura","home.archTitle":"Arquitectura 5 capas EACO+SOL","home.region":"Mercado ASEAN y Asia Central",
+"home.asean":"Techos comerciales, microrredes fuera de red, activos solares fragmentados empaquetados en RWA con certificados verdes REC.",
+"home.casia":"Plantas solares maduras con PPA a largo plazo, auditoría rigurosa, grandes paquetes RWA de alta calidad.",
+"asset.title":"Pool de activos RWA Solares","asset.viewDetail":"Detalles",
+"assetDetail.title":"Detalle planta y datos SOL","assetDetail.realTime":"Datos en tiempo real inversor","assetDetail.solIndex":"Indice riesgo SOL","assetDetail.chart":"Curva de generación",
+"tech.title":"Arquitectura & API inversores","tech.desc":"Integración API cloud, MQTT, Modbus de 20 fabricantes de inversores, motor SOL, firma hardware, hash en blockchain EACO.",
+"docs.title":"Centro de documentos","docs.download":"Descargar",
+"dashboard.title":"Panel inversor","dashboard.asset":"Mis activos RWA","dashboard.income":"Historial ingresos",
+"footer.copyright":"©2026 EACO SOL | Plataforma RWA Solar. Todos los derechos reservados."
+},
+my:{
+"nav.home":"ပင်မစာမျက်နှာ","nav.assetPool":"ပိုင်ဆိုင်မှုအစုအဝေး","nav.tech":"နည်းပညာ","nav.docs":"စာရွက်စာတမ်း","nav.dashboard":"ရင်းနှီးမြှုပ်နှံသူဒက်ရှ်ဘုတ်",
+"home.title":"နေစွမ်းအင်သိုလှောင်မှု RWA ယုံကြည်စိတ်ချရသောပလပ်ဖောင်း",
+"home.desc":"ကမ္ဘာလုံးဆိုင်ရာ အင်ဗာတာ API + SOL နေစွမ်းအင်အကဲဖြတ်အင်ဂျင် + EACO blockchain၊ အရှေ့တောင်အာရှနှင့် အလယ်ပိုင်းအာရှ နေစက်ရုံများအတွက် RWA ရင်းနှီးမြှုပ်နှံမှုစနစ်",
+"home.btnAsset":"ပိုင်ဆိုင်မှုများကြည့်ရန်","home.btnTech":"နည်းပညာဖွဲ့စည်းပုံ","home.archTitle":"EACO+SOL အလွှာ၅လွှာဖွဲ့စည်းပုံ","home.region":"အာဆီယံနှင့် အလယ်ပိုင်းအာရှစျေးကွက်",
+"home.asean":"စီးပွားရေးအဆောက်အဦမိုးမျက်နှာ၊ ဂရစ်မဟုတ်သော မိုက်ခရိုဂရစ်သိုလှောင်မှု၊ အပိုင်းအစနေစွမ်းအင်ပိုင်ဆိုင်မှုများကို RWA အဖြစ်ထုပ်ပိုး",
+"home.casia":"ရေရှည် PPA ပါရှိသော ရင့်ကျက်နေစက်ရုံများ၊ တင်းကျပ်သောစစ်ဆေးမှု၊ တန်ဖိုးကြီး RWA အစုအဝေးများ",
+"asset.title":"RWA နေစွမ်းအင်ပိုင်ဆိုင်မှုအစုအဝေး","asset.viewDetail":"အသေးစိတ်",
+"assetDetail.title":"စက်ရုံအသေးစိတ်နှင့် SOL ယုံကြည်စိတ်ချရဒေတာ","assetDetail.realTime":"အင်ဗာတာအချိန်နှင့်တပြေးညီဒေတာ","assetDetail.solIndex":"SOL အန္တရာယ်ညွှန်းကိန်း","assetDetail.chart":"ထုတ်လုပ်မှုဂရပ်",
+"tech.title":"နည်းပညာဖွဲ့စည်းပုံနှင့် အင်ဗာတာ API ချိတ်ဆက်မှု","tech.desc":"ထိပ်တန်းအင်ဗာတာထုတ်လုပ်သူ 20 ၏ cloud API, MQTT, Modbus ချိတ်ဆက်၊ SOL အင်ဂျင်၊ ဟာ့ဒ်ဝဲလက်မှတ်၊ EACO blockchain သို့ hash သိမ်းဆည်း",
+"docs.title":"စာရွက်စာတမ်းစင်တာ","docs.download":"ဒေါင်းလုဒ်",
+"dashboard.title":"ရင်းနှီးမြှုပ်နှံသူဒက်ရှ်ဘုတ်","dashboard.asset":"ကျွန်ုပ်၏ RWA ပိုင်ဆိုင်မှုများ","dashboard.income":"ဝင်ငွေမှတ်တမ်း",
+"footer.copyright":"©2026 EACO SOL | နေစွမ်းအင် RWA ပလပ်ဖောင်း။ မူပိုင်ခွင့်အားလုံးထိန်းသိမ်းထားသည်။"
+},
+th:{
+"nav.home":"หน้าแรก","nav.assetPool":"กลุ่มสินทรัพย์","nav.tech":"เทคโนโลยี","nav.docs":"เอกสาร","nav.dashboard":"แดชบอร์ดนักลงทุน",
+"home.title":"แพลตฟอร์มสินทรัพย์ RWA พลังงานแสงอาทิตย์",
+"home.desc":"API อินเวอร์เตอร์ระดับโลก + SOL เครื่องมือวิเคราะห์สินทรัพย์ + บล็อกเชน EACO สร้างระบบลงทุน RWA สำหรับโรงไฟฟ้าโซลาร์อาเซียนและเอเชียกลาง ตรวจสอบข้อมูลการผลิตไฟฟ้าแบบเรียลไทม์",
+"home.btnAsset":"ดูสินทรัพย์","home.btnTech":"สถาปัตยกรรม","home.archTitle":"สถาปัตยกรรม 5 ชั้น EACO+SOL","home.region":"ตลาดอาเซียนและเอเชียกลาง",
+"home.asean":"หลังคาอาคารพาณิชย์ ไมโครกริดนอกระบบ สินทรัพย์โซลาร์ชิ้นเล็กบรรจุเป็น RWA พร้อมรายได้ใบรับรองสีเขียว REC",
+"home.casia":"โรงไฟฟ้าโซลาร์ขนาดใหญ่พร้อม PPA ระยะยาว การตรวจสอบอย่างเข้มงวด กลุ่มสินทรัพย์ RWA ขนาดใหญ่คุณภาพสูง",
+"asset.title":"กลุ่มสินทรัพย์ RWA โซลาร์","asset.viewDetail":"รายละเอียด",
+"assetDetail.title":"รายละเอียดโรงไฟฟ้าและข้อมูล SOL","assetDetail.realTime":"ข้อมูลเรียลไทม์อินเวอร์เตอร์","assetDetail.solIndex":"ดัชนีความเสี่ยง SOL","assetDetail.chart":"กราฟการผลิตไฟฟ้า",
+"tech.title":"สถาปัตยกรรมและการเชื่อมต่อ API อินเวอร์เตอร์","tech.desc":"เชื่อมต่อ API cloud, MQTT, Modbus จากผู้ผลิตอินเวอร์เตอร์ 20 ราย เครื่องมือ SOL ลายเซ็นฮาร์ดแวร์ ป้องกันการแก้ไขข้อมูล ส่ง hash ไปบล็อกเชน EACO",
+"docs.title":"ศูนย์เอกสาร","docs.download":"ดาวน์โหลด",
+"dashboard.title":"แดชบอร์ดนักลงทุน","dashboard.asset":"สินทรัพย์ RWA ของฉัน","dashboard.income":"ประวัติรายได้",
+"footer.copyright":"©2026 EACO SOL | แพลตฟอร์ม RWA โซลาร์ สงวนลิขสิทธิ์ทั้งหมด"
+}
+};
+
+// Switch language
+function setLang(langKey){
+  const texts = i18nTexts[langKey];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(texts[k]) el.innerText = texts[k];
+  })
+}
+document.getElementById("langSelect").onchange = function(){
+  setLang(this.value);
+}
+
+// Switch theme
+document.getElementById("themeSelect").onchange = function(){
+  document.documentElement.className = "theme-" + this.value;
+}
+
+// SPA page switch
+function switchPage(pageId){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page-"+pageId).classList.add("active");
+  // init chart on asset detail page
+  if(pageId === "assetDetail") initChart();
+}
+
+// Chart init
+function initChart(){
+  const ctx = document.getElementById('generationChart');
+  new Chart(ctx, {
+    type:'line',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets:[{label:'Generation MWh',data:[210,235,248,262,255,271],borderColor:'var(--accent)',fill:false}]
+    },
+    options:{responsive:true,plugins:{legend:{labels:{color:'var(--text)'}}},scales:{x:{ticks:{color:'var(--text-muted)'}},y:{ticks:{color:'var(--text-muted)'}}}}
+  })
+}
+
+// default init
+setLang("zh");
+switchPage("home");
+</script>
+</body>
+</html>
