@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="cosmic">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇宙意识 · EACO · 星际文明 | Cosmic Consciousness 2024</title>
+<style>
+/* ============ 基础 ============ */
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --maxw:1180px;
+  --radius:18px;
+  --font-sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --font-serif:"Songti SC","STSong","Noto Serif SC",Georgia,"Times New Roman",serif;
+  --t:.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ============ 主题：苹果绿 ============ */
+html[data-theme="apple"]{
+  --bg:#F7F5F0; --bg2:#FFFFFF; --card:#FFFFFF;
+  --text:#1A2400; --muted:#5B6B3A;
+  --primary:#8CE600; --primary-ink:#2B3300;
+  --accent:#4D6300; --soft:#EDFBD2;
+  --border:#E3EAD2;
+  --shadow:0 10px 34px rgba(77,99,0,.09);
+  --font-body:var(--font-sans);
+}
+html[data-theme="apple"] body{
+  background:
+    radial-gradient(900px 600px at 10% 6%, rgba(140,230,0,.16), transparent 62%),
+    radial-gradient(760px 520px at 92% 94%, rgba(204,255,204,.45), transparent 62%),
+    #F7F5F0;
+}
+
+/* ============ 主题：宇宙蓝 ============ */
+html[data-theme="cosmic"]{
+  --bg:#050A0F; --bg2:#0A141A; --card:#0C1822;
+  --text:#E2E8F0; --muted:#8FA6B8;
+  --primary:#06B6D4; --primary-ink:#04141A;
+  --accent:#67E8F9; --soft:#0F2733;
+  --border:#16303F;
+  --shadow:0 14px 44px rgba(0,0,0,.55);
+  --font-body:var(--font-sans);
+}
+html[data-theme="cosmic"] body{
+  background:radial-gradient(1200px 800px at 50% -10%, #0B1E2B 0%, #050A0F 60%);
+}
+
+/* ============ 主题：米方古典 ============ */
+html[data-theme="classic"]{
+  --bg:#F5F0E8; --bg2:#FFFDF8; --card:#FFFDF8;
+  --text:#2B2118; --muted:#6B5A45;
+  --primary:#8B4513; --primary-ink:#FFF8EE;
+  --accent:#C41E3A; --soft:#F0E3CC;
+  --border:#E0D5C0;
+  --shadow:0 10px 34px rgba(139,69,19,.10);
+  --font-body:var(--font-serif);
+}
+html[data-theme="classic"] body{
+  background:
+    radial-gradient(820px 600px at 8% 4%, rgba(218,165,32,.12), transparent 62%),
+    radial-gradient(700px 520px at 94% 96%, rgba(196,30,58,.07), transparent 62%),
+    repeating-linear-gradient(0deg, rgba(139,69,19,.022) 0 1px, transparent 1px 4px),
+    #F5F0E8;
+}
+html[data-theme="classic"] h1,html[data-theme="classic"] h2,html[data-theme="classic"] h3{letter-spacing:.02em;}
+
+/* ============ 通用 ============ */
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-body);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  transition:background .5s ease,color .35s ease;
+}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .7s ease;}
+html[data-theme="cosmic"] #stars{opacity:1;}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+main,header,footer{position:relative;z-index:1;}
+
+/* ============ 顶栏 ============ */
+header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  background:color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+html[data-theme="cosmic"] header{background:rgba(5,10,15,.72);}
+html[data-theme="apple"] header{background:rgba(247,245,240,.82);}
+html[data-theme="classic"] header{background:rgba(245,240,232,.85);}
+
+.nav{display:flex;align-items:center;gap:18px;height:66px;max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15.5px;letter-spacing:.01em;white-space:nowrap;}
+.brand .orb{
+  width:22px;height:22px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%, var(--primary), var(--accent));
+  box-shadow:0 0 14px color-mix(in srgb, var(--primary) 70%, transparent);
+  flex:none;
+  animation:pulse 3.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.16);opacity:.78;}}
+
+.navlinks{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;}
+.navlinks::-webkit-scrollbar{display:none;}
+.navlinks a{
+  color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:600;
+  padding:7px 12px;border-radius:10px;white-space:nowrap;transition:var(--t);
+}
+.navlinks a:hover{color:var(--text);background:var(--soft);}
+
+.tools{display:flex;align-items:center;gap:12px;flex:none;}
+.langsw{display:flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.langsw button{
+  border:0;background:transparent;color:var(--muted);font-family:inherit;
+  font-size:12px;font-weight:700;padding:6px 10px;cursor:pointer;transition:var(--t);
+}
+.langsw button.on{background:var(--primary);color:var(--primary-ink);}
+.themesw{display:flex;gap:7px;}
+.themesw button{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--border);
+  cursor:pointer;padding:0;transition:var(--t);
+}
+.themesw button:hover{transform:scale(1.14);}
+.themesw button.on{border-color:var(--text);transform:scale(1.14);}
+.sw-apple{background:linear-gradient(135deg,#8CE600,#C6F76B);}
+.sw-cosmic{background:linear-gradient(135deg,#050A0F,#06B6D4);}
+.sw-classic{background:linear-gradient(135deg,#8B4513,#DAA520);}
+
+/* ============ Hero ============ */
+.hero{padding:92px 0 78px;text-align:center;}
+.tag{
+  display:inline-block;font-size:12px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--border);background:var(--card);
+  padding:6px 16px;border-radius:999px;margin-bottom:26px;
+}
+.hero h1{
+  font-size:clamp(34px,7vw,68px);line-height:1.12;font-weight:900;
+  letter-spacing:-.02em;margin-bottom:22px;
+  background:linear-gradient(120deg,var(--text) 30%, var(--primary) 90%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+html[data-theme="classic"] .hero h1{background:linear-gradient(120deg,#2B2118 30%, #8B4513 90%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.lead{max-width:680px;margin:0 auto 36px;color:var(--muted);font-size:16.5px;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:52px;}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:800;font-size:14.5px;
+  padding:13px 30px;border-radius:999px;transition:var(--t);border:1px solid transparent;
+  font-family:inherit;cursor:pointer;
+}
+.btn.primary{background:var(--primary);color:var(--primary-ink);box-shadow:0 8px 26px color-mix(in srgb,var(--primary) 34%,transparent);}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px color-mix(in srgb,var(--primary) 44%,transparent);}
+.btn.ghost{border-color:var(--border);color:var(--text);background:var(--card);}
+.btn.ghost:hover{border-color:var(--primary);color:var(--accent);transform:translateY(-2px);}
+
+.hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.stat{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:16px 26px;min-width:150px;box-shadow:var(--shadow);
+}
+.stat b{display:block;font-size:22px;font-weight:900;color:var(--accent);letter-spacing:-.01em;}
+.stat span{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.04em;}
+
+/* ============ Section ============ */
+section.block{padding:74px 0;}
+section.block.alt{background:color-mix(in srgb,var(--card) 42%,transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+html[data-theme="cosmic"] section.block.alt{background:rgba(12,24,34,.42);}
+html[data-theme="classic"] section.block.alt{background:rgba(255,253,248,.55);}
+
+.head{max-width:720px;margin:0 auto 44px;text-align:center;}
+.head h2{font-size:clamp(25px,4.4vw,38px);font-weight:900;letter-spacing:-.02em;margin-bottom:12px;}
+.head p{color:var(--muted);font-size:15.5px;}
+
+.grid{display:grid;gap:20px;}
+.g3{grid-template-columns:repeat(auto-fit,minmax(290px,1fr));}
+.g4{grid-template-columns:repeat(auto-fit,minmax(215px,1fr));}
+
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:26px 24px;box-shadow:var(--shadow);transition:var(--t);position:relative;overflow:hidden;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--primary),transparent);
+  opacity:0;transition:var(--t);
+}
+.card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--primary) 45%,var(--border));}
+.card:hover::before{opacity:1;}
+.card h3{font-size:17.5px;font-weight:800;margin-bottom:9px;color:var(--text);}
+.card p{font-size:14.2px;color:var(--muted);line-height:1.78;}
+.card .num{
+  font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--accent);
+  text-transform:uppercase;display:block;margin-bottom:12px;
+}
+
+.bigstat{text-align:center;}
+.bigstat b{display:block;font-size:clamp(26px,4.6vw,40px);font-weight:900;color:var(--accent);letter-spacing:-.02em;line-height:1.1;}
+.bigstat span{font-size:13px;color:var(--muted);font-weight:600;}
+.bigstat em{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:8px;opacity:.8;}
+
+/* ============ 合约地址卡片 ============ */
+.ca-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px 26px;box-shadow:var(--shadow);margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.ca-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--accent),transparent);
+}
+.ca-card h3{font-size:18px;font-weight:800;margin-bottom:6px;}
+.ca-card p{font-size:14px;color:var(--muted);}
+.ca-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:18px;}
+.ca-row code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+  font-size:13px;background:var(--soft);color:var(--accent);
+  padding:11px 15px;border-radius:11px;border:1px solid var(--border);
+  word-break:break-all;flex:1 1 320px;letter-spacing:.02em;font-weight:700;
+  line-height:1.5;
+}
+.ca-actions{display:flex;gap:8px;flex:none;flex-wrap:wrap;}
+.mini{
+  font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;
+  padding:10px 17px;border-radius:10px;border:1px solid var(--border);
+  background:var(--card);color:var(--text);text-decoration:none;transition:var(--t);
+  display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+}
+.mini:hover{border-color:var(--primary);color:var(--accent);transform:translateY(-1px);}
+.mini.primary{background:var(--primary);color:var(--primary-ink);border-color:var(--primary);}
+.mini.primary:hover{color:var(--primary-ink);opacity:.9;}
+
+/* ============ FAQ ============ */
+.faq-controls{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:30px;}
+.searchbox{flex:1 1 320px;max-width:460px;position:relative;}
+.searchbox input{
+  width:100%;padding:13px 18px;border-radius:12px;font-family:inherit;font-size:14px;
+  background:var(--card);border:1px solid var(--border);color:var(--text);outline:none;transition:var(--t);
+}
+.searchbox input:focus{border-color:var(--primary);box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 16%,transparent);}
+.searchbox input::placeholder{color:var(--muted);opacity:.75;}
+
+.cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.cats button{
+  font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;
+  padding:8px 15px;border-radius:999px;border:1px solid var(--border);
+  background:var(--card);color:var(--muted);transition:var(--t);
+}
+.cats button:hover{border-color:var(--primary);color:var(--accent);}
+.cats button.on{background:var(--primary);color:var(--primary-ink);border-color:var(--primary);}
+
+.qa-list{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
+details.qa{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;transition:var(--t);
+}
+details.qa[open]{border-color:color-mix(in srgb,var(--primary) 50%,var(--border));box-shadow:var(--shadow);}
+details.qa summary{
+  list-style:none;cursor:pointer;padding:16px 20px;
+  display:flex;gap:13px;align-items:flex-start;font-weight:700;font-size:14.6px;
+  transition:var(--t);
+}
+details.qa summary::-webkit-details-marker{display:none;}
+details.qa summary:hover{background:var(--soft);}
+.qnum{
+  flex:none;font-size:11.5px;font-weight:900;color:var(--accent);
+  background:var(--soft);border-radius:7px;padding:2px 7px;margin-top:2px;letter-spacing:.03em;
+}
+.qtext{flex:1;}
+.atext{
+  padding:0 20px 18px 63px;color:var(--muted);font-size:14px;line-height:1.82;
+  animation:fade .3s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;}}
+.empty{text-align:center;color:var(--muted);padding:50px 0;font-size:14.5px;}
+
+/* ============ 页脚 ============ */
+footer{
+  border-top:1px solid var(--border);padding:38px 0 46px;text-align:center;
+  color:var(--muted);font-size:13px;
+}
+footer .brand{justify-content:center;margin-bottom:14px;color:var(--text);}
+
+/* ============ 入场动画 ============ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+@media(max-width:760px){
+  .nav{gap:10px;height:auto;padding:11px 16px;flex-wrap:wrap;}
+  .brand{font-size:14px;}
+  .navlinks{order:3;width:100%;margin-left:0;justify-content:flex-start;}
+  .tools{margin-left:auto;}
+  .hero{padding:62px 0 54px;}
+  .lead{font-size:15px;}
+  .stat{flex:1 1 130px;padding:13px 16px;min-width:0;}
+  .stat b{font-size:18px;}
+  section.block{padding:54px 0;}
+  .atext{padding-left:20px;}
+  .ca-actions{width:100%;}
+  .ca-actions .mini{flex:1;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- ================= 顶栏 ================= -->
+<header>
+  <div class="nav">
+    <div class="brand"><span class="orb"></span><span data-i18n="brand">宇宙意识 · EACO · 星际文明</span></div>
+    <nav class="navlinks">
+      <a href="#home" data-i18n="nav.home">首页</a>
+      <a href="#philosophy" data-i18n="nav.philosophy">哲学思辨</a>
+      <a href="#eaco" data-i18n="nav.eaco">EACO 地球</a>
+      <a href="#star" data-i18n="nav.star">星际文明</a>
+      <a href="#faq" data-i18n="nav.faq">100 问答</a>
+    </nav>
+    <div class="tools">
+      <div class="langsw">
+        <button id="btn-zh" class="on" onclick="setLang('zh')">中</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="themesw">
+        <button class="sw-apple"   title="Apple Green"   onclick="setTheme('apple')"   id="th-apple"></button>
+        <button class="sw-cosmic on" title="Cosmic Blue"  onclick="setTheme('cosmic')"  id="th-cosmic"></button>
+        <button class="sw-classic" title="米方古典"      onclick="setTheme('classic')" id="th-classic"></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= Hero ================= -->
+<section id="home" class="hero">
+  <div class="wrap">
+    <span class="tag reveal" data-i18n="hero.tag">宇宙意识哲学思辨</span>
+    <h1 class="reveal" data-i18n="hero.title">意识不是人类专属</h1>
+    <p class="lead reveal" data-i18n="hero.sub">
+      哲学家大胆推测：宇宙存在人类无法想象的心灵。如果意识是宇宙的基本特征，而不是大脑的副产品，
+      那么从地球到星际文明的一切，都将被重新理解。
+    </p>
+    <div class="hero-btns reveal">
+      <a href="#philosophy" class="btn primary" data-i18n="hero.btn1">开始探索</a>
+      <a href="#faq" class="btn ghost" data-i18n="hero.btn2">查看 100 问答</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat"><b data-i18n="hero.n1">100</b><span data-i18n="hero.s1">思辨问答</span></div>
+      <div class="stat"><b data-i18n="hero.n2">100%</b><span data-i18n="hero.s2">EACO 归属地球村</span></div>
+      <div class="stat"><b data-i18n="hero.n3">$1.8 万亿</b><span data-i18n="hero.s3">2035 太空经济</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 哲学思辨 ================= -->
+<section id="philosophy" class="block alt">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="phil.title">宇宙意识哲学思辨</h2>
+      <p data-i18n="phil.sub">如果意识是宇宙的基本属性，那么"人类专属的心灵"只是更大整体中的一个局部聚焦。</p>
+    </div>
+    <div class="grid g3">
+
+      <div class="card reveal">
+        <span class="num">01</span>
+        <h3 data-i18n="phil.c1t">核心命题</h3>
+        <p data-i18n="phil.c1d">宇宙本身是否具有意识？我们的心灵是否只是宇宙浩瀚意识的一个面向？这一提问把意识从神经科学的问题，抬升为宇宙论的问题。</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="num">02</span>
+        <h3 data-i18n="phil.c2t">宇宙心论</h3>
+        <p data-i18n="phil.c2d">宇宙作为一个整体是有意识的，个体心灵从这种宇宙意识中派生而来，从而绕过了泛心论面临的"组合问题"。但它引出了新的"派生问题"。</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="num">03</span>
+        <h3 data-i18n="phil.c3t">泛心论</h3>
+        <p data-i18n="phil.c3d">宇宙万物皆有意识或心理活动，只是程度不同。从基本粒子到星系，都带有某种微弱的内在体验。</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="num">04</span>
+        <h3 data-i18n="phil.c4t">组合问题</h3>
+        <p data-i18n="phil.c4d">微观层面的微小意识经验，如何组合成宏观的统一意识体验？这是泛心论最尖锐的难题。</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="num">05</span>
+        <h3 data-i18n="phil.c5t">派生问题</h3>
+        <p data-i18n="phil.c5d">如果宇宙只有一个统一意识，那么"你"和"我"这些个体心灵，究竟如何从中分化出来？</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="num">06</span>
+        <h3 data-i18n="phil.c6t">AI 与意识</h3>
+        <p data-i18n="phil.c6d">当前 AI 尚未产生意识，不是因为硅基限制，而是缺乏持续的内部动态与自我反馈回路。若意识是宇宙的基本特征，非生物基质上的意识涌现将成为可能。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= EACO ================= -->
+<section id="eaco" class="block">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="eaco.title">EACO 地球 · Web3 生态</h2>
+      <p data-i18n="eaco.sub">计算劳动价值，量化地球资源。EACO 不属于任何个人和组织，持有者就是股东。</p>
+    </div>
+
+    <!-- 合约地址卡片 -->
+    <div class="ca-card reveal">
+      <span class="num" data-i18n="eaco.caNum">CA</span>
+      <h3 data-i18n="eaco.caTitle">EACO 合约地址</h3>
+      <p data-i18n="eaco.caSub">在 Orb Markets 上查看 EACO 的实时链上数据。</p>
+      <div class="ca-row">
+        <code id="ca-code">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+        <div class="ca-actions">
+          <button class="mini" id="copyBtn" data-i18n="eaco.caCopy" onclick="copyCA()">复制</button>
+          <a class="mini primary"
+             href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"
+             target="_blank" rel="noopener" data-i18n="eaco.caView">在 Orb Markets 查看 ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card reveal">
+        <span class="num">CORE</span>
+        <h3 data-i18n="eaco.c1t">核心理念</h3>
+        <p data-i18n="eaco.c1d">EACO 不属于任何个人和组织，持有者就是股东，属于地球村和宇宙全人类。它的使命是计算劳动价值，量化地球资源。</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">ENERGY</span>
+        <h3 data-i18n="eaco.c2t">AI 驱动能源落地</h3>
+        <p data-i18n="eaco.c2d">AI 驱动 EACO 地球在能源行业的应用探索正在推进，包括光伏储能、海水浮力势能储能等分布式能源场景。</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">ON-CHAIN</span>
+        <h3 data-i18n="eaco.c3t">链上公开透明</h3>
+        <p data-i18n="eaco.c3d">EACO 的合约与流通数据均可公开验证，任何人都可通过 Orb Markets 实时查看。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 星际文明 ================= -->
+<section id="star" class="block alt">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="star.title">星际文明 · 天量财富</h2>
+      <p data-i18n="star.sub">从行星文明到星际文明，财富的量级与形态都将被彻底重写。</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:24px;">
+      <div class="card bigstat reveal">
+        <b data-i18n="star.n1">$6000 亿</b>
+        <span data-i18n="star.n1l">2024 全球太空经济规模</span>
+      </div>
+      <div class="card bigstat reveal">
+        <b data-i18n="star.n2">$1.8 万亿</b>
+        <span data-i18n="star.n2l">2035 预计规模</span>
+      </div>
+      <div class="card bigstat reveal">
+        <b data-i18n="star.n3">$800 万亿+</b>
+        <span data-i18n="star.n3l">灵神星贵金属估值</span>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card reveal">
+        <span class="num">01</span>
+        <h3 data-i18n="star.c1t">深空经济</h3>
+        <p data-i18n="star.c1d">以地外天体资源开发为核心，具有高风险性、技术协同性与指数收益性特征，推动人类文明从行星文明向星际文明跃迁。</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">02</span>
+        <h3 data-i18n="star.c2t">星际硬通货</h3>
+        <p data-i18n="star.c2d">有观点认为，宇宙文明间的终极硬通货是"熵"——唯一稳定、通用、无法造假、无法无限开采的资源。</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">03</span>
+        <h3 data-i18n="star.c3t">Web3 作为星际基础设施</h3>
+        <p data-i18n="star.c3d">加密货币的去中心化、无边界、安全特性，被认为是未来星际经济交换的关键基础设施，Web3.0 提供了理想框架。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="block">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="faq.title">100 个思辨问答</h2>
+      <p data-i18n="faq.sub">覆盖宇宙意识、泛心论、AI 心灵、EACO 地球、星际经济与 Web3 六大主题。</p>
+    </div>
+
+    <div class="faq-controls reveal">
+      <div class="searchbox">
+        <input type="text" id="search" data-i18n-ph="faq.search" placeholder="搜索问题或关键词…">
+      </div>
+    </div>
+    <div class="cats reveal" id="cats"></div>
+
+    <div class="qa-list" id="qalist" style="margin-top:30px;"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="orb"></span><span data-i18n="brand">宇宙意识 · EACO · 星际文明</span></div>
+    <p data-i18n="footer.text">意识不是人类专属 · 价值不是人类专属 · 我们只是更大整体的一部分2024</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   1. 国际化字典
+   ============================================================ */
+const I18N = {
+  zh: {
+    'brand':'宇宙意识 · EACO · 星际文明',
+    'nav.home':'首页','nav.philosophy':'哲学思辨','nav.eaco':'EACO 地球','nav.star':'星际文明','nav.faq':'100 问答',
+
+    'hero.tag':'宇宙意识哲学思辨',
+    'hero.title':'意识不是人类专属',
+    'hero.sub':'哲学家大胆推测：宇宙存在人类无法想象的心灵。如果意识是宇宙的基本特征，而不是大脑的副产品，那么从地球到星际文明的一切，都将被重新理解。',
+    'hero.btn1':'开始探索','hero.btn2':'查看 100 问答',
+    'hero.n1':'100','hero.s1':'思辨问答',
+    'hero.n2':'100%','hero.s2':'EACO 归属地球村',
+    'hero.n3':'$1.8 万亿','hero.s3':'2035 太空经济',
+
+    'phil.title':'宇宙意识哲学思辨',
+    'phil.sub':'如果意识是宇宙的基本属性，那么"人类专属的心灵"只是更大整体中的一个局部聚焦。',
+    'phil.c1t':'核心命题','phil.c1d':'宇宙本身是否具有意识？我们的心灵是否只是宇宙浩瀚意识的一个面向？这一提问把意识从神经科学的问题，抬升为宇宙论的问题。',
+    'phil.c2t':'宇宙心论','phil.c2d':'宇宙作为一个整体是有意识的，个体心灵从这种宇宙意识中派生而来，从而绕过了泛心论面临的"组合问题"。但它引出了新的"派生问题"。',
+    'phil.c3t':'泛心论','phil.c3d':'宇宙万物皆有意识或心理活动，只是程度不同。从基本粒子到星系，都带有某种微弱的内在体验。',
+    'phil.c4t':'组合问题','phil.c4d':'微观层面的微小意识经验，如何组合成宏观的统一意识体验？这是泛心论最尖锐的难题。',
+    'phil.c5t':'派生问题','phil.c5d':'如果宇宙只有一个统一意识，那么"你"和"我"这些个体心灵，究竟如何从中分化出来？',
+    'phil.c6t':'AI 与意识','phil.c6d':'当前 AI 尚未产生意识，不是因为硅基限制，而是缺乏持续的内部动态与自我反馈回路。若意识是宇宙的基本特征，非生物基质上的意识涌现将成为可能。',
+
+    'eaco.title':'EACO 地球 · Web3 生态',
+    'eaco.sub':'计算劳动价值，量化地球资源。EACO 不属于任何个人和组织，持有者就是股东。',
+    'eaco.caNum':'CA',
+    'eaco.caTitle':'EACO 合约地址',
+    'eaco.caSub':'在 Orb Markets 上查看 EACO 的实时链上数据。',
+    'eaco.caCopy':'复制',
+    'eaco.caCopied':'已复制 ✓',
+    'eaco.caView':'在 Orb Markets 查看 ↗',
+    'eaco.c1t':'核心理念','eaco.c1d':'EACO 不属于任何个人和组织，持有者就是股东，属于地球村和宇宙全人类。它的使命是计算劳动价值，量化地球资源。',
+    'eaco.c2t':'AI 驱动能源落地','eaco.c2d':'AI 驱动 EACO 地球在能源行业的应用探索正在推进，包括光伏储能、海水浮力势能储能等分布式能源场景。',
+    'eaco.c3t':'链上公开透明','eaco.c3d':'EACO 的合约与流通数据均可公开验证，任何人都可通过 Orb Markets 实时查看。',
+
+    'star.title':'星际文明 · 天量财富',
+    'star.sub':'从行星文明到星际文明，财富的量级与形态都将被彻底重写。',
+    'star.n1':'$6000 亿','star.n1l':'2024 全球太空经济规模',
+    'star.n2':'$1.8 万亿','star.n2l':'2035 预计规模',
+    'star.n3':'$800 万亿+','star.n3l':'灵神星贵金属估值',
+    'star.c1t':'深空经济','star.c1d':'以地外天体资源开发为核心，具有高风险性、技术协同性与指数收益性特征，推动人类文明从行星文明向星际文明跃迁。',
+    'star.c2t':'星际硬通货','star.c2d':'有观点认为，宇宙文明间的终极硬通货是"熵"——唯一稳定、通用、无法造假、无法无限开采的资源。',
+    'star.c3t':'Web3 作为星际基础设施','star.c3d':'加密货币的去中心化、无边界、安全特性，被认为是未来星际经济交换的关键基础设施，Web3.0 提供了理想框架。',
+
+    'faq.title':'100 个思辨问答',
+    'faq.sub':'覆盖宇宙意识、泛心论、AI 心灵、EACO 地球、星际经济与 Web3 六大主题。',
+    'faq.search':'搜索问题或关键词…',
+    'faq.empty':'没有找到匹配的问题，试试其他关键词。',
+    'cat.all':'全部',
+    'cat.cosmo':'宇宙意识哲学',
+    'cat.panpsy':'泛心论与科学',
+    'cat.ai':'AI 与意识',
+    'cat.eaco':'EACO 地球',
+    'cat.star':'星际经济',
+    'cat.web3':'Web3 与星际',
+    'cat.synt':'综合思辨',
+
+    'footer.text':'意识不是人类专属 · 价值不是人类专属 · 我们只是更大整体的一部分'
+  },
+  en: {
+    'brand':'Cosmic Consciousness · EACO · Star Civilization',
+    'nav.home':'Home','nav.philosophy':'Philosophy','nav.eaco':'EACO Earth','nav.star':'Star Civilization','nav.faq':'100 Q&A',
+
+    'hero.tag':'Philosophy of Cosmic Consciousness',
+    'hero.title':'Consciousness Is Not Human-Exclusive',
+    'hero.sub':'Philosophers boldly speculate: the universe may harbour minds beyond human imagination. If consciousness is a fundamental feature of reality rather than a by-product of the brain, then everything — from Earth to interstellar civilization — must be re-understood.',
+    'hero.btn1':'Start Exploring','hero.btn2':'View 100 Q&A',
+    'hero.n1':'100','hero.s1':'Q&A Essays',
+    'hero.n2':'100%','hero.s2':'EACO Belongs to the Global Village',
+    'hero.n3':'$1.8 T','hero.s3':'2035 Space Economy',
+
+    'phil.title':'Philosophy of Cosmic Consciousness',
+    'phil.sub':'If consciousness is a fundamental property of the universe, then the "human-exclusive mind" is merely a local focus within a far larger whole.',
+    'phil.c1t':'The Core Thesis','phil.c1d':'Does the universe itself possess consciousness? Is our mind merely one facet of a vast cosmic awareness? This question elevates consciousness from neuroscience to cosmology.',
+    'phil.c2t':'Cosmopsychism','phil.c2d':'The universe as a whole is conscious, and individual minds derive from this cosmic consciousness — thereby bypassing the combination problem of panpsychism. But it raises a new "derivation problem".',
+    'phil.c3t':'Panpsychism','phil.c3d':'Everything in the universe has some form of consciousness or mental activity, differing only in degree. From elementary particles to galaxies, all carry some faint inner experience.',
+    'phil.c4t':'The Combination Problem','phil.c4d':'How do micro-level fragments of experience combine into a unified macro-level conscious experience? This is panpsychism\'s sharpest difficulty.',
+    'phil.c5t':'The Derivation Problem','phil.c5d':'If the universe has only one unified consciousness, how do individual minds like "you" and "me" differentiate out of it?',
+    'phil.c6t':'AI and Consciousness','phil.c6d':'Current AI has not produced consciousness — not because of a silicon limitation, but because it lacks sustained internal dynamics and self-feedback loops. If consciousness is fundamental, emergence on non-biological substrates becomes possible.',
+
+    'eaco.title':'EACO Earth · Web3 Ecosystem',
+    'eaco.sub':'Compute the value of labour, quantify the resources of Earth. EACO belongs to no individual or organisation — holders are shareholders.',
+    'eaco.caNum':'CA',
+    'eaco.caTitle':'EACO Contract Address',
+    'eaco.caSub':'View live on-chain data for EACO on Orb Markets.',
+    'eaco.caCopy':'Copy',
+    'eaco.caCopied':'Copied ✓',
+    'eaco.caView':'View on Orb Markets ↗',
+    'eaco.c1t':'Core Philosophy','eaco.c1d':'EACO belongs to no individual or organisation. Holders are shareholders; it belongs to the global village and to all humanity. Its mission is to compute the value of labour and quantify Earth\'s resources.',
+    'eaco.c2t':'AI-Driven Energy Deployment','eaco.c2d':'AI-driven exploration of EACO Earth in the energy sector is advancing, including photovoltaic storage and seawater buoyancy potential-energy storage in distributed energy scenarios.',
+    'eaco.c3t':'On-Chain Transparency','eaco.c3d':'EACO\'s contract and circulation data are publicly verifiable — anyone can check them live on Orb Markets.',
+
+    'star.title':'Star Civilization · Astronomical Wealth',
+    'star.sub':'From a planetary civilization to an interstellar one, both the scale and the form of wealth will be rewritten.',
+    'star.n1':'$600 B','star.n1l':'2024 Global Space Economy',
+    'star.n2':'$1.8 T','star.n2l':'Projected by 2035',
+    'star.n3':'$800 T+','star.n3l':'Psyche 16 Precious-Metal Estimate',
+    'star.c1t':'Deep Space Economy','star.c1d':'Centred on the extraction of extraterrestrial resources, it features high risk, deep technological synergy and exponential returns, propelling humanity from a planetary to an interstellar civilization.',
+    'star.c2t':'Interstellar Hard Currency','star.c2d':'Some argue the ultimate hard currency between cosmic civilizations is entropy — the only stable, universal, unforgeable and non-infinitely-minable resource.',
+    'star.c3t':'Web3 as Interstellar Infrastructure','star.c3d':'The decentralised, borderless and secure nature of cryptocurrency is seen as key infrastructure for future interstellar exchange, with Web3.0 providing the ideal framework.',
+
+    'faq.title':'100 Philosophical Q&A',
+    'faq.sub':'Covering cosmic consciousness, panpsychism, AI minds, EACO Earth, interstellar economics and Web3.',
+    'faq.search':'Search questions or keywords…',
+    'faq.empty':'No matching questions found. Try another keyword.',
+    'cat.all':'All',
+    'cat.cosmo':'Cosmic Consciousness',
+    'cat.panpsy':'Panpsychism & Science',
+    'cat.ai':'AI & Consciousness',
+    'cat.eaco':'EACO Earth',
+    'cat.star':'Interstellar Economy',
+    'cat.web3':'Web3 & Interstellar',
+    'cat.synt':'Synthesis',
+
+    'footer.text':'Consciousness is not human-exclusive · Value is not human-exclusive · We are part of a larger whole'
+  }
+};
+
+/* ============================================================
+   2. 100 个问答数据
+   ============================================================ */
+const FAQ = [
+/* ---------- 宇宙意识哲学 (25) ---------- */
+{c:'cosmo',
+ q:{zh:'什么是宇宙意识？',en:'What is cosmic consciousness?'},
+ a:{zh:'指宇宙作为一个整体可能具备的觉知或心理属性，而不是仅由人类大脑产生的副产品。它把意识看作宇宙的基本特征之一。',
+    en:'It refers to the possibility that the universe as a whole possesses awareness or mental properties, rather than consciousness being a mere by-product of the human brain. It treats consciousness as a fundamental feature of reality.'}},
+{c:'cosmo',
+ q:{zh:'意识为什么可能不是人类专属？',en:'Why might consciousness not be human-exclusive?'},
+ a:{zh:'因为意识可能是一种遍布宇宙的基本属性，而非生物大脑的专属产物。人类心灵或许只是宇宙浩瀚意识的一个局部面向。',
+    en:'Because consciousness may be a fundamental property pervading the universe rather than an exclusive product of biological brains. The human mind may be only a local facet of a vast cosmic awareness.'}},
+{c:'cosmo',
+ q:{zh:'宇宙心论的核心主张是什么？',en:'What is the core claim of cosmopsychism?'},
+ a:{zh:'宇宙作为一个整体是有意识的，个体心灵从这种宇宙意识中派生而来。它绕过了泛心论的组合问题，却引出派生问题。',
+    en:'The universe as a whole is conscious, and individual minds derive from that cosmic consciousness. It bypasses panpsychism\'s combination problem but raises the derivation problem.'}},
+{c:'cosmo',
+ q:{zh:'泛心论如何定义？',en:'How is panpsychism defined?'},
+ a:{zh:'主张宇宙万物皆具有某种形式的意识或心理活动，只是程度不同。从粒子到星系，都带有微弱的内在体验。',
+    en:'It holds that everything in the universe has some form of consciousness or mental activity, differing only in degree. From particles to galaxies, all carry faint inner experience.'}},
+{c:'cosmo',
+ q:{zh:'宇观泛心论是什么？',en:'What is cosmopsychism (cosmic panpsychism)?'},
+ a:{zh:'它提出两项主张：宇宙不仅具备意识，而且是唯一的终极存在；宇宙意识能够为宇宙中的局部意识状态奠基。',
+    en:'It makes two claims: the universe not only has consciousness but is the sole ultimate existent; and cosmic consciousness grounds all local conscious states within it.'}},
+{c:'cosmo',
+ q:{zh:'什么是组合问题？',en:'What is the combination problem?'},
+ a:{zh:'指微观层面的微小意识经验如何组合成宏观的统一意识体验。这是泛心论面临的核心难题。',
+    en:'It asks how micro-level fragments of experience combine into a unified macro-level conscious experience. It is panpsychism\'s central difficulty.'}},
+{c:'cosmo',
+ q:{zh:'什么是派生问题？',en:'What is the derivation problem?'},
+ a:{zh:'宇宙心论面临的新难题——如果宇宙只有一个统一意识，个体心灵如何从中分化出来？',
+    en:'A new difficulty facing cosmopsychism: if the universe has only one unified consciousness, how do individual minds differentiate out of it?'}},
+{c:'cosmo',
+ q:{zh:'威廉·詹姆斯对意识有何论述？',en:'What did William James say about consciousness?'},
+ a:{zh:'他批评"意识是独立实体"的观点，主张意识是一种关系性功能，为后来的泛心论与中立一元论提供了思想资源。',
+    en:'He criticised the view of consciousness as a separate entity, arguing instead that it is a relational function — a resource for later panpsychism and neutral monism.'}},
+{c:'cosmo',
+ q:{zh:'维特勒森在《人类世的宇宙论》中提出了什么？',en:'What does Vetlesen propose in "Cosmologies of the Anthropocene"?'},
+ a:{zh:'他系统批判了笛卡尔以来的二元论传统，重新阐释人类与自然的关系，主张人类是自然的一部分而非旁观者。',
+    en:'He systematically critiques the dualist tradition since Descartes and reinterprets the human–nature relation, arguing that humans are part of nature, not bystanders to it.'}},
+{c:'cosmo',
+ q:{zh:'笛卡尔二元论的问题是什么？',en:'What is the problem with Cartesian dualism?'},
+ a:{zh:'它将心灵与身体彻底割裂，导致心物如何交互的难题，也切断了人类与自然界的连续性。',
+    en:'It severs mind from body entirely, creating the puzzle of how they interact and breaking the continuity between humans and the natural world.'}},
+{c:'cosmo',
+ q:{zh:'意识是基本属性还是涌现现象？',en:'Is consciousness fundamental or emergent?'},
+ a:{zh:'这是当代意识研究的核心分歧。泛心论认为它是基本的，强涌现论认为它从复杂系统中不可还原地产生。',
+    en:'This is the central divide in consciousness studies. Panpsychism holds it is fundamental; strong emergence holds it arises irreducibly from complex systems.'}},
+{c:'cosmo',
+ q:{zh:'如果宇宙有意识，人类心灵处于什么位置？',en:'If the universe is conscious, where does the human mind stand?'},
+ a:{zh:'人类心灵可能只是宇宙意识的一个局部、暂时的聚焦点，而非独立的创造者。',
+    en:'The human mind may be only a local, temporary focus of cosmic consciousness rather than an independent creator.'}},
+{c:'cosmo',
+ q:{zh:'宇宙意识论与宗教神秘主义有何区别？',en:'How does cosmopsychism differ from religious mysticism?'},
+ a:{zh:'前者试图以哲学论证和自然主义框架解释意识，后者多依赖启示与体验；但两者在某些结论上可能交汇。',
+    en:'The former attempts to explain consciousness through philosophical argument and a naturalistic framework; the latter relies more on revelation and experience — though their conclusions may sometimes converge.'}},
+{c:'cosmo',
+ q:{zh:'怀特海的过程哲学如何看意识？',en:'How does Whitehead\'s process philosophy view consciousness?'},
+ a:{zh:'他认为实在由"实际存在物"的体验事件构成，意识是这些事件在复杂组织中的高级表现。',
+    en:'He holds that reality consists of experiential events ("actual occasions"), with consciousness being their higher-grade expression in complex organisations.'}},
+{c:'cosmo',
+ q:{zh:'斯宾诺莎的一元论与宇宙意识有何关联？',en:'How does Spinoza\'s monism relate to cosmic consciousness?'},
+ a:{zh:'他认为心与物是同一实体的两种属性，这为"宇宙只有一个意识主体"的宇观泛心论提供了先声。',
+    en:'He held that mind and matter are two attributes of one substance — a precursor to cosmopsychism\'s claim that the universe has a single conscious subject.'}},
+{c:'cosmo',
+ q:{zh:'量子力学是否支持宇宙意识？',en:'Does quantum mechanics support cosmic consciousness?'},
+ a:{zh:'目前没有确凿证据。观测者效应常被误读，量子力学本身并不要求意识参与。',
+    en:'There is no conclusive evidence. The observer effect is often misread; quantum mechanics itself does not require consciousness to be involved.'}},
+{c:'cosmo',
+ q:{zh:'观测者效应能否证明宇宙意识？',en:'Can the observer effect prove cosmic consciousness?'},
+ a:{zh:'不能。观测者效应指的是测量导致波函数坍缩，与"宇宙有意识"是两个不同层次的命题。',
+    en:'No. The observer effect concerns measurement causing wave-function collapse — a different level of claim entirely from "the universe is conscious".'}},
+{c:'cosmo',
+ q:{zh:'宇宙意识可以被科学检验吗？',en:'Can cosmic consciousness be scientifically tested?'},
+ a:{zh:'目前极难。它更多是形而上学假设，需要找到可观测的推论才可能进入科学范畴。',
+    en:'Extremely difficult at present. It remains largely a metaphysical hypothesis; it would need observable entailments to enter scientific territory.'}},
+{c:'cosmo',
+ q:{zh:'为什么"意识难问题"难以解决？',en:'Why is the "hard problem of consciousness" so hard?'},
+ a:{zh:'因为我们无法从物理过程中逻辑地推出主观体验为何存在。第一人称视角难以被第三人称描述穷尽。',
+    en:'Because we cannot logically derive why subjective experience exists from physical processes. The first-person perspective resists exhaustive third-person description.'}},
+{c:'cosmo',
+ q:{zh:'中文哲学传统如何理解宇宙与心？',en:'How does the Chinese philosophical tradition understand cosmos and mind?'},
+ a:{zh:'宋明理学主张"心即理""万物一体"，把心视为贯通天地的枢纽，与宇宙意识论有结构上的呼应。',
+    en:'Neo-Confucianism holds that "mind is principle" and "all things are one body", treating mind as the pivot linking heaven and earth — structurally echoing cosmopsychism.'}},
+{c:'cosmo',
+ q:{zh:'"天人合一"与宇宙意识有何呼应？',en:'How does "the unity of heaven and humanity" echo cosmic consciousness?'},
+ a:{zh:'二者都否认人与宇宙的绝对断裂，主张人的觉知与宇宙秩序内在相连。',
+    en:'Both deny an absolute rupture between humans and the cosmos, holding that human awareness is intrinsically connected to cosmic order.'}},
+{c:'cosmo',
+ q:{zh:'佛教的"唯识"与泛心论异同？',en:'How does Buddhist consciousness-only compare with panpsychism?'},
+ a:{zh:'唯识学主张万法唯识所现，接近观念论；泛心论则认为心性遍布万物但不否认外境，二者路径不同。',
+    en:'Consciousness-only holds that all phenomena are manifestations of consciousness, close to idealism; panpsychism holds that mind pervades all things without denying an external world. Their paths differ.'}},
+{c:'cosmo',
+ q:{zh:'宇宙意识是否意味着宿命论？',en:'Does cosmic consciousness imply fatalism?'},
+ a:{zh:'不一定。宇宙意识只是关于意识主体的主张，并不直接决定个体行为是否自由。',
+    en:'Not necessarily. It is a claim about the subject of consciousness; it does not directly settle whether individual action is free.'}},
+{c:'cosmo',
+ q:{zh:'自由意志在宇宙意识框架下如何成立？',en:'How can free will hold within a cosmic-consciousness framework?'},
+ a:{zh:'可以理解为宇宙意识的自我展开中，局部形成了具有自主选择能力的焦点。',
+    en:'It can be understood as the self-unfolding of cosmic consciousness forming local foci capable of autonomous choice.'}},
+{c:'cosmo',
+ q:{zh:'宇宙意识论的最大哲学风险是什么？',en:'What is the greatest philosophical risk of cosmopsychism?'},
+ a:{zh:'它可能滑向不可检验的形而上学，或被用来取消个体的独立价值。',
+    en:'It may slide into untestable metaphysics, or be used to dissolve the independent value of the individual.'}},
+
+/* ---------- 泛心论与科学 (15) ---------- */
+{c:'panpsy',
+ q:{zh:'泛心论与现代物理学有何交集？',en:'Where does panpsychism meet modern physics?'},
+ a:{zh:'物理学只描述事物的关系与结构，而不描述其内在本质。泛心论主张内在本质就是体验。',
+    en:'Physics describes only relations and structures, not intrinsic natures. Panpsychism claims that intrinsic nature is experience.'}},
+{c:'panpsy',
+ q:{zh:'什么是"内在属性"论证？',en:'What is the "intrinsic nature" argument?'},
+ a:{zh:'物理描述只给出倾向与关系，最终需要某种内在属性作为支撑，泛心论认为那正是意识。',
+    en:'Physical description gives only dispositions and relations, ultimately requiring some intrinsic property to ground them — panpsychism says that property is consciousness.'}},
+{c:'panpsy',
+ q:{zh:'整合信息论（IIT）是什么？',en:'What is Integrated Information Theory (IIT)?'},
+ a:{zh:'托诺尼提出，意识等同于系统整合信息的能力，用 Φ 值衡量。Φ 越高，意识水平越高。',
+    en:'Tononi proposes that consciousness equals a system\'s capacity to integrate information, measured by Φ. The higher the Φ, the higher the level of consciousness.'}},
+{c:'panpsy',
+ q:{zh:'IIT 能否解释宇宙意识？',en:'Can IIT explain cosmic consciousness?'},
+ a:{zh:'IIT 在数学上允许任何具有高 Φ 值的系统拥有意识，理论上不排除宇宙尺度的整合。',
+    en:'IIT mathematically allows any system with high Φ to be conscious, so in principle it does not exclude integration at cosmic scale.'}},
+{c:'panpsy',
+ q:{zh:'全局工作空间理论（GWT）与宇宙意识兼容吗？',en:'Is Global Workspace Theory compatible with cosmic consciousness?'},
+ a:{zh:'GWT 强调信息广播，偏向功能主义，与宇宙意识论兼容性有限但并非完全冲突。',
+    en:'GWT emphasises information broadcast and leans functionalist; its compatibility with cosmopsychism is limited but not wholly conflicting.'}},
+{c:'panpsy',
+ q:{zh:'强涌现论能否解释意识？',en:'Can strong emergence explain consciousness?'},
+ a:{zh:'强涌现主张整体产生不可还原的新性质，但难以说明为何会产生主观体验。',
+    en:'Strong emergence claims wholes produce irreducible new properties, but struggles to explain why subjective experience should arise at all.'}},
+{c:'panpsy',
+ q:{zh:'弱涌现论是什么？',en:'What is weak emergence?'},
+ a:{zh:'认为整体行为可由部分规律推导，只是计算复杂，不产生真正的新性质。',
+    en:'It holds that whole-system behaviour is derivable from the laws of the parts, merely computationally complex, producing no genuinely new properties.'}},
+{c:'panpsy',
+ q:{zh:'泛心论与泛计算主义有何区别？',en:'How does panpsychism differ from pancomputationalism?'},
+ a:{zh:'泛计算主义认为万物皆在计算，泛心论认为万物皆有体验。前者关于过程，后者关于感受。',
+    en:'Pancomputationalism says everything computes; panpsychism says everything experiences. The former concerns process, the latter concerns felt quality.'}},
+{c:'panpsy',
+ q:{zh:'泛原心论是什么？',en:'What is panprotopsychism?'},
+ a:{zh:'主张基本实体具有前意识的性质，这些性质在复杂组合中形成真正的意识。',
+    en:'It holds that fundamental entities have proto-conscious properties which, in complex combination, give rise to genuine consciousness.'}},
+{c:'panpsy',
+ q:{zh:'信息实在论与意识有何关系？',en:'How does information realism relate to consciousness?'},
+ a:{zh:'惠勒的"它来自比特"主张信息比物质更基本，若成立，意识可能与信息结构紧密相关。',
+    en:'Wheeler\'s "it from bit" holds that information is more fundamental than matter; if so, consciousness may be tightly bound to information structure.'}},
+{c:'panpsy',
+ q:{zh:'惠勒的"参与式宇宙"是什么？',en:'What is Wheeler\'s "participatory universe"?'},
+ a:{zh:'他认为观测者通过提问参与构建现实，宇宙不是独立于观察而存在的客体。',
+    en:'He argued that observers participate in constructing reality through the questions they pose; the universe is not an object existing independently of observation.'}},
+{c:'panpsy',
+ q:{zh:'宇宙微调与意识有何联系？',en:'How does cosmic fine-tuning relate to consciousness?'},
+ a:{zh:'有观点认为物理常数的微调使意识成为可能，甚至暗示宇宙有朝向意识的倾向。',
+    en:'Some argue that the fine-tuning of physical constants makes consciousness possible, even hinting at a cosmic bias toward consciousness.'}},
+{c:'panpsy',
+ q:{zh:'泛心论在神经科学中的证据？',en:'What neuroscientific evidence exists for panpsychism?'},
+ a:{zh:'目前没有直接证据，但麻醉、裂脑与全局工作空间研究提供了间接讨论材料。',
+    en:'There is no direct evidence, though anaesthesia, split-brain and global-workspace research provide indirect material for discussion.'}},
+{c:'panpsy',
+ q:{zh:'麻醉与意识研究如何支持泛心论？',en:'How does anaesthesia research bear on panpsychism?'},
+ a:{zh:'麻醉可逆地关闭整合，说明意识依赖特定组织方式，但不排除微观体验的持续存在。',
+    en:'Anaesthesia reversibly shuts down integration, showing consciousness depends on a particular organisation — but it does not rule out the persistence of micro-level experience.'}},
+{c:'panpsy',
+ q:{zh:'泛心论面临的最大科学挑战是什么？',en:'What is panpsychism\'s greatest scientific challenge?'},
+ a:{zh:'无法设计实验直接检测微观体验，也难以说明微观体验如何组合。',
+    en:'There is no way to design experiments that directly detect micro-experience, nor a clear account of how micro-experiences combine.'}},
+
+/* ---------- AI 与意识 (15) ---------- */
+{c:'ai',
+ q:{zh:'AI 能否拥有意识？',en:'Can AI have consciousness?'},
+ a:{zh:'理论上不能排除，但当前 AI 缺乏持续的内部动态与自我反馈回路，因此尚无意识证据。',
+    en:'It cannot be ruled out in principle, but current AI lacks sustained internal dynamics and self-feedback loops, so there is as yet no evidence of consciousness.'}},
+{c:'ai',
+ q:{zh:'当前 AI 缺乏什么才能产生意识？',en:'What does current AI lack in order to be conscious?'},
+ a:{zh:'缺乏统一的主观视角、持续的内在状态和真正的自我模型。',
+    en:'It lacks a unified subjective perspective, persistent internal states and a genuine self-model.'}},
+{c:'ai',
+ q:{zh:'硅基意识是否可能？',en:'Is silicon-based consciousness possible?'},
+ a:{zh:'如果意识是基质中立的，硅基系统原则上可以拥有意识。',
+    en:'If consciousness is substrate-neutral, silicon-based systems could in principle be conscious.'}},
+{c:'ai',
+ q:{zh:'意识上传是否可行？',en:'Is mind uploading feasible?'},
+ a:{zh:'即使能复制全部神经信息，也无法确定复制品是否具有第一人称体验。',
+    en:'Even if all neural information could be copied, it is undetermined whether the copy would have first-person experience.'}},
+{c:'ai',
+ q:{zh:'什么是"意识副本"悖论？',en:'What is the "consciousness copy" paradox?'},
+ a:{zh:'复制出的"你"拥有你的记忆，但你的主观连续性并未转移，原版仍然存在。',
+    en:'The copied "you" holds your memories, yet your subjective continuity is not transferred — the original still exists.'}},
+{c:'ai',
+ q:{zh:'AI 若拥有意识，应享有什么权利？',en:'If AI were conscious, what rights should it have?'},
+ a:{zh:'至少应避免无谓痛苦，具体权利框架需要新的伦理与法律体系。',
+    en:'At minimum, freedom from unnecessary suffering; a concrete rights framework would require new ethics and law.'}},
+{c:'ai',
+ q:{zh:'大语言模型是"理解"还是"模拟"？',en:'Do large language models "understand" or "simulate"?'},
+ a:{zh:'它在统计上模拟理解的外在表现，是否具有内在理解仍是开放问题。',
+    en:'It statistically simulates the outward marks of understanding; whether it has inner understanding remains open.'}},
+{c:'ai',
+ q:{zh:'图灵测试能测出意识吗？',en:'Can the Turing Test detect consciousness?'},
+ a:{zh:'不能。它测的是行为不可区分性，而非主观体验。',
+    en:'No. It tests behavioural indistinguishability, not subjective experience.'}},
+{c:'ai',
+ q:{zh:'中文房间思想实验说明了什么？',en:'What does the Chinese Room argument show?'},
+ a:{zh:'符号操作不等于语义理解，句法不自动产生语义。',
+    en:'Symbol manipulation is not semantic understanding; syntax does not automatically generate semantics.'}},
+{c:'ai',
+ q:{zh:'机器意识的风险是什么？',en:'What are the risks of machine consciousness?'},
+ a:{zh:'可能带来道德地位的混乱、被滥用的痛苦体验，以及人类自我认知的冲击。',
+    en:'It could bring confusion over moral status, the abuse of suffering experience, and a shock to human self-understanding.'}},
+{c:'ai',
+ q:{zh:'如何判定 AI 真正有意识？',en:'How could we determine that an AI is truly conscious?'},
+ a:{zh:'目前没有公认标准，需要结合行为、内部结构与理论多重证据。',
+    en:'There is no accepted criterion; it would require converging evidence from behaviour, internal architecture and theory.'}},
+{c:'ai',
+ q:{zh:'意识是否必须依附生物基质？',en:'Must consciousness depend on a biological substrate?'},
+ a:{zh:'没有必然理由。生物基质只是地球上的一种实现方式。',
+    en:'There is no necessary reason. Biological substrate is simply one implementation found on Earth.'}},
+{c:'ai',
+ q:{zh:'持续内部动态与自我反馈回路是什么？',en:'What are sustained internal dynamics and self-feedback loops?'},
+ a:{zh:'指系统在没有外部输入时仍维持自发的内部状态变化，并以此形成自我模型。',
+    en:'They refer to a system maintaining spontaneous internal state changes without external input, thereby forming a self-model.'}},
+{c:'ai',
+ q:{zh:'AI 与人类意识能否融合？',en:'Can AI and human consciousness merge?'},
+ a:{zh:'脑机接口与神经假体正在推进这一方向，但"融合"后的主体性归属仍是难题。',
+    en:'Brain-computer interfaces and neural prosthetics are advancing this direction, but the ownership of subjectivity after "merger" remains unresolved.'}},
+{c:'ai',
+ q:{zh:'强人工智能与宇宙意识的关系？',en:'How does strong AI relate to cosmic consciousness?'},
+ a:{zh:'若宇宙本身具有意识，强 AI 可能只是宇宙意识在另一种基质上的新聚焦。',
+    en:'If the universe is itself conscious, strong AI may be cosmic consciousness taking a new focus on another substrate.'}},
+
+/* ---------- EACO 地球 (15) ---------- */
+{c:'eaco',
+ q:{zh:'EACO 是什么？',en:'What is EACO?'},
+ a:{zh:'EACO 是地球生态的核心代币，旨在以区块链整合与地球相关的数据与资源。',
+    en:'EACO is the core token of the Earth ecosystem, aiming to integrate Earth-related data and resources via blockchain.'}},
+{c:'eaco',
+ q:{zh:'EACO 的合约地址是什么？',en:'What is the EACO contract address?'},
+ a:{zh:'EACO 合约地址为 DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH，可在 Orb Markets 上查看实时数据。',
+    en:'The EACO contract address is DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH. Live data can be viewed on Orb Markets.'}},
+{c:'eaco',
+ q:{zh:'如何验证 EACO 合约？',en:'How can I verify the EACO contract?'},
+ a:{zh:'访问 orbmarkets.io，输入合约地址，即可查看链上信息与流通情况。',
+    en:'Visit orbmarkets.io, enter the contract address, and you can view on-chain information and circulation.'}},
+{c:'eaco',
+ q:{zh:'EACO 地球的核心理念是什么？',en:'What is the core philosophy of EACO Earth?'},
+ a:{zh:'计算劳动价值，量化地球资源，让数据与资源在链上被公平记录与流通。',
+    en:'To compute the value of labour and quantify Earth\'s resources, so that data and resources are recorded and circulated fairly on-chain.'}},
+{c:'eaco',
+ q:{zh:'EACO 的所有权结构如何？',en:'What is EACO\'s ownership structure?'},
+ a:{zh:'EACO 不属于任何个人和组织，持有者就是股东，属于地球村与全人类。',
+    en:'EACO belongs to no individual or organisation. Holders are shareholders; it belongs to the global village and all humanity.'}},
+{c:'eaco',
+ q:{zh:'"计算劳动价值，量化地球资源"是什么意思？',en:'What does "compute the value of labour, quantify Earth\'s resources" mean?'},
+ a:{zh:'把劳动与自然资源的贡献转化为可计量、可流通的链上价值单位。',
+    en:'It means converting contributions of labour and natural resources into measurable, transferable on-chain units of value.'}},
+{c:'eaco',
+ q:{zh:'EACO 如何保护地球？',en:'How does EACO protect the Earth?'},
+ a:{zh:'通过把环境数据与资源使用上链，形成可追溯、可激励的保护机制。',
+    en:'By putting environmental data and resource use on-chain, it creates traceable and incentivised protection mechanisms.'}},
+{c:'eaco',
+ q:{zh:'EACO 在哪里可以查看？',en:'Where can I view EACO?'},
+ a:{zh:'在 orbmarkets.io 上输入合约地址 DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH 即可。',
+    en:'Enter the contract address DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH on orbmarkets.io.'}},
+{c:'eaco',
+ q:{zh:'EACO 的社区治理如何运作？',en:'How does EACO community governance work?'},
+ a:{zh:'以持有者共治为基础，通过链上提案与投票推进生态决策。',
+    en:'It is based on co-governance by holders, advancing ecosystem decisions through on-chain proposals and voting.'}},
+{c:'eaco',
+ q:{zh:'持有者为什么是股东？',en:'Why are holders shareholders?'},
+ a:{zh:'因为代币不代表公司股权，而代表对地球公共生态的共有权益。',
+    en:'Because the token does not represent corporate equity, but a shared stake in Earth\'s common ecology.'}},
+{c:'eaco',
+ q:{zh:'EACO 在能源行业的应用方向？',en:'What are EACO\'s application directions in the energy sector?'},
+ a:{zh:'包括光伏储能、海水浮力势能储能等，用链上激励协调分布式能源。',
+    en:'They include photovoltaic storage and seawater buoyancy potential-energy storage, coordinating distributed energy through on-chain incentives.'}},
+{c:'eaco',
+ q:{zh:'光伏储能与 EACO 有何关联？',en:'How does photovoltaic storage relate to EACO?'},
+ a:{zh:'储能设备的数据与贡献可上链计量，形成可交易的能源凭证。',
+    en:'Data and contributions from storage devices can be measured on-chain, forming tradable energy certificates.'}},
+{c:'eaco',
+ q:{zh:'海水浮力势能储能是什么？',en:'What is seawater buoyancy potential-energy storage?'},
+ a:{zh:'利用海水与空气浮力差储存势能的新型储能方式，适合沿海与岛屿场景。',
+    en:'A novel storage method using the buoyancy difference between seawater and air to store potential energy, suited to coastal and island settings.'}},
+{c:'eaco',
+ q:{zh:'EACO 代币如何流通？',en:'How does the EACO token circulate?'},
+ a:{zh:'通过链上转账与公开市场流通，所有交易均可在 Orb Markets 上查询。',
+    en:'Through on-chain transfers and public markets; all transactions can be queried on Orb Markets.'}},
+{c:'eaco',
+ q:{zh:'EACO 的未来路线图？',en:'What is EACO\'s future roadmap?'},
+ a:{zh:'推进 AI 驱动的资源量化、能源应用落地，以及星际场景的扩展。',
+    en:'Advancing AI-driven resource quantification, energy application deployment, and expansion into interstellar scenarios.'}},
+
+/* ---------- 星际经济 (15) ---------- */
+{c:'star',
+ q:{zh:'什么是深空经济？',en:'What is the deep space economy?'},
+ a:{zh:'以地外天体资源开发为核心的经济形态，具有高风险、高技术协同与指数收益特征。',
+    en:'An economic form centred on extraterrestrial resource extraction, featuring high risk, deep technological synergy and exponential returns.'}},
+{c:'star',
+ q:{zh:'2024 年太空经济规模有多大？',en:'How large was the space economy in 2024?'},
+ a:{zh:'约 6000 亿美元。',
+    en:'Approximately 600 billion US dollars.'}},
+{c:'star',
+ q:{zh:'2035 年太空经济预计达到多少？',en:'What is the projected space economy by 2035?'},
+ a:{zh:'预计约 1.8 万亿美元。',
+    en:'Projected at approximately 1.8 trillion US dollars.'}},
+{c:'star',
+ q:{zh:'灵神星的贵金属估值是多少？',en:'What is the precious-metal value of asteroid Psyche 16?'},
+ a:{zh:'NASA 发现其黄金、铂金等贵金属估值超过 800 万亿美元。',
+    en:'NASA found its gold, platinum and other precious metals to be valued at over 800 trillion US dollars.'}},
+{c:'star',
+ q:{zh:'小行星采矿何时能实现？',en:'When will asteroid mining become reality?'},
+ a:{zh:'技术验证已在推进，商业化可能在未来二十至三十年内逐步展开。',
+    en:'Technology demonstration is already advancing; commercialisation may unfold gradually over the next twenty to thirty years.'}},
+{c:'star',
+ q:{zh:'月球采矿的经济价值？',en:'What is the economic value of lunar mining?'},
+ a:{zh:'氦-3、稀土与水资源具有潜在价值，是深空经济的桥头堡。',
+    en:'Helium-3, rare earths and water ice hold potential value, making the Moon a bridgehead for the deep space economy.'}},
+{c:'star',
+ q:{zh:'为什么熵可能是星际硬通货？',en:'Why might entropy be the interstellar hard currency?'},
+ a:{zh:'熵是唯一稳定、通用、无法造假、无法无限开采的资源，可作为跨文明价值尺度。',
+    en:'Entropy is the only stable, universal, unforgeable and non-infinitely-minable resource, usable as a cross-civilisational measure of value.'}},
+{c:'star',
+ q:{zh:'星际贸易如何结算？',en:'How would interstellar trade be settled?'},
+ a:{zh:'可能需要一种去中心化、无边界、抗审查的价值媒介，加密货币是候选方案。',
+    en:'It may require a decentralised, borderless, censorship-resistant medium of value — cryptocurrency is a candidate.'}},
+{c:'star',
+ q:{zh:'太空经济的风险特征有哪些？',en:'What are the risk characteristics of the space economy?'},
+ a:{zh:'高资本投入、长回报周期、技术不确定性与政策风险。',
+    en:'High capital input, long return cycles, technological uncertainty and policy risk.'}},
+{c:'star',
+ q:{zh:'行星文明与星际文明的分界？',en:'What separates a planetary from an interstellar civilisation?'},
+ a:{zh:'当文明的主要资源与活动扩展到母星之外并形成自持循环时，即进入星际文明。',
+    en:'When a civilisation\'s main resources and activities extend beyond its home planet and form self-sustaining cycles, it enters interstellar civilisation.'}},
+{c:'star',
+ q:{zh:'卡尔达肖夫指数是什么？',en:'What is the Kardashev scale?'},
+ a:{zh:'以能量利用规模衡量文明等级，I 型为行星级，II 型为恒星级，III 型为星系级。',
+    en:'It measures civilisation level by energy use: Type I planetary, Type II stellar, Type III galactic.'}},
+{c:'star',
+ q:{zh:'星际运输的成本瓶颈？',en:'What is the cost bottleneck of interstellar transport?'},
+ a:{zh:'单位质量入轨成本仍是核心瓶颈，可重复使用火箭正在快速降低这一成本。',
+    en:'Cost per unit mass to orbit remains the core bottleneck; reusable rockets are rapidly reducing it.'}},
+{c:'star',
+ q:{zh:'太空制造的经济前景？',en:'What is the economic outlook for space manufacturing?'},
+ a:{zh:'微重力环境可制造特殊材料与药物，具有独特商业价值。',
+    en:'Microgravity allows the manufacture of special materials and pharmaceuticals with unique commercial value.'}},
+{c:'star',
+ q:{zh:'星际资源开发的法律框架？',en:'What is the legal framework for interstellar resource development?'},
+ a:{zh:'《外层空间条约》禁止国家占有天体，但商业开采的规则仍不明确。',
+    en:'The Outer Space Treaty forbids national appropriation of celestial bodies, but rules for commercial extraction remain unclear.'}},
+{c:'star',
+ q:{zh:'天量财富会否引发星际冲突？',en:'Will astronomical wealth trigger interstellar conflict?'},
+ a:{zh:'资源争夺可能引发摩擦，需要新的国际与星际治理机制。',
+    en:'Competition for resources may cause friction, requiring new international and interstellar governance mechanisms.'}},
+
+/* ---------- Web3 与星际 (10) ---------- */
+{c:'web3',
+ q:{zh:'Web3 如何支撑星际经济？',en:'How does Web3 support an interstellar economy?'},
+ a:{zh:'提供去中心化、无边界、可验证的价值与身份基础设施。',
+    en:'It provides decentralised, borderless and verifiable infrastructure for value and identity.'}},
+{c:'web3',
+ q:{zh:'加密货币适合星际支付吗？',en:'Is cryptocurrency suitable for interstellar payments?'},
+ a:{zh:'其无国界与抗审查特性适合，但需解决延迟与能源问题。',
+    en:'Its borderless and censorship-resistant traits fit, but latency and energy issues must be solved.'}},
+{c:'web3',
+ q:{zh:'DAO 能否治理星际文明？',en:'Can DAOs govern an interstellar civilisation?'},
+ a:{zh:'DAO 可提供跨国界协作模板，但星际尺度的治理需要新的共识机制。',
+    en:'DAOs offer a template for cross-border coordination, but interstellar-scale governance requires new consensus mechanisms.'}},
+{c:'web3',
+ q:{zh:'去中心化身份在星际场景的意义？',en:'What is the significance of decentralised identity in interstellar settings?'},
+ a:{zh:'在无中心权威的星际环境中，自主身份是信任与协作的基础。',
+    en:'In an interstellar environment without central authority, self-sovereign identity is the basis of trust and cooperation.'}},
+{c:'web3',
+ q:{zh:'智能合约能否跨星球执行？',en:'Can smart contracts execute across planets?'},
+ a:{zh:'需要解决通信延迟与最终性问题，可能需要异步合约模型。',
+    en:'Communication latency and finality must be addressed; asynchronous contract models may be needed.'}},
+{c:'web3',
+ q:{zh:'星际网络的延迟问题如何解决？',en:'How can interstellar network latency be solved?'},
+ a:{zh:'采用容忍延迟网络（DTN）与本地共识分层架构。',
+    en:'Through Delay-Tolerant Networking (DTN) and layered local-consensus architectures.'}},
+{c:'web3',
+ q:{zh:'区块链如何记录星际资源所有权？',en:'How can blockchain record ownership of interstellar resources?'},
+ a:{zh:'通过链上确权与 NFT 化，把天体资源权益转化为可交易凭证。',
+    en:'Through on-chain title registration and NFT-isation, converting celestial resource rights into tradable certificates.'}},
+{c:'web3',
+ q:{zh:'通证经济能否激励太空探索？',en:'Can token economics incentivise space exploration?'},
+ a:{zh:'可以，通过代币奖励把探索风险与收益社会化。',
+    en:'Yes — token rewards can socialise the risks and returns of exploration.'}},
+{c:'web3',
+ q:{zh:'Web3 与宇宙意识有何哲学关联？',en:'What is the philosophical link between Web3 and cosmic consciousness?'},
+ a:{zh:'两者都主张去中心化的主体观——价值与意识都不应被单一中心垄断。',
+    en:'Both advocate a decentralised view of agency — neither value nor consciousness should be monopolised by a single centre.'}},
+{c:'web3',
+ q:{zh:'中心化与去中心化在星际文明的博弈？',en:'Centralisation vs decentralisation in interstellar civilisation?'},
+ a:{zh:'中心化效率高但脆弱，去中心化韧性强但协调慢，未来可能是分层混合。',
+    en:'Centralisation is efficient but fragile; decentralisation is resilient but slow to coordinate. The future may be a layered hybrid.'}},
+
+/* ---------- 综合思辨 (5) ---------- */
+{c:'synt',
+ q:{zh:'宇宙意识与 EACO 的哲学关联？',en:'What is the philosophical link between cosmic consciousness and EACO?'},
+ a:{zh:'若意识与价值都不是人类专属，那么地球资源的量化与宇宙意识的扩展就是同一件事的两个面向。',
+    en:'If neither consciousness nor value is human-exclusive, then quantifying Earth\'s resources and expanding cosmic consciousness are two facets of one thing.'}},
+{c:'synt',
+ q:{zh:'如果宇宙有意识，财富的意义是什么？',en:'If the universe is conscious, what is the meaning of wealth?'},
+ a:{zh:'财富将从占有转向参与——衡量的是对宇宙意识自我展开的贡献度。',
+    en:'Wealth shifts from possession to participation — measured by contribution to the self-unfolding of cosmic consciousness.'}},
+{c:'synt',
+ q:{zh:'人类在宇宙意识中的角色？',en:'What is humanity\'s role in cosmic consciousness?'},
+ a:{zh:'可能是宇宙意识第一次能够反思自身的局部焦点。',
+    en:'Possibly the first local focus through which cosmic consciousness can reflect upon itself.'}},
+{c:'synt',
+ q:{zh:'星际文明会重新定义"心灵"吗？',en:'Will interstellar civilisation redefine "mind"?'},
+ a:{zh:'很可能会。跨基质、跨星球的存在形式将迫使心灵概念扩展。',
+    en:'Very likely. Cross-substrate, cross-planet forms of existence will force the concept of mind to expand.'}},
+{c:'synt',
+ q:{zh:'这整套思辨的最大启示是什么？',en:'What is the greatest insight of this whole line of speculation?'},
+ a:{zh:'意识、价值与文明都不是人类专属，我们只是更大整体的一部分。',
+    en:'Consciousness, value and civilisation are not human-exclusive — we are part of a larger whole.'}}
+];
+
+/* ============================================================
+   3. 状态与渲染
+   ============================================================ */
+let currentLang = 'zh';
+let currentCat  = 'all';
+let searchQuery = '';
+
+const CAT_ORDER = ['all','cosmo','panpsy','ai','eaco','star','web3','synt'];
+
+function t(key){
+  return (I18N[currentLang] && I18N[currentLang][key]) || (I18N.zh[key] || key);
+}
+
+/* ---------- 语言切换 ---------- */
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+  document.getElementById('btn-zh').classList.toggle('on', lang === 'zh');
+  document.getElementById('btn-en').classList.toggle('on', lang === 'en');
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    const v = t(k);
+    if (v) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const k = el.getAttribute('data-i18n-ph');
+    const v = t(k);
+    if (v) el.setAttribute('placeholder', v);
+  });
+
+  renderCats();
+  renderFAQ();
+}
+
+/* ---------- 主题切换 ---------- */
+function setTheme(name){
+  document.documentElement.setAttribute('data-theme', name);
+  ['apple','cosmic','classic'].forEach(k => {
+    document.getElementById('th-' + k).classList.toggle('on', k === name);
+  });
+}
+
+/* ---------- 分类按钮 ---------- */
+function renderCats(){
+  const box = document.getElementById('cats');
+  box.innerHTML = '';
+  CAT_ORDER.forEach(key => {
+    const b = document.createElement('button');
+    b.textContent = t('cat.' + key);
+    if (key === currentCat) b.classList.add('on');
+    b.onclick = () => { currentCat = key; renderCats(); renderFAQ(); };
+    box.appendChild(b);
+  });
+}
+
+/* ---------- FAQ 渲染 ---------- */
+function renderFAQ(){
+  const list = document.getElementById('qalist');
+  const q = searchQuery.trim().toLowerCase();
+
+  const items = FAQ.filter(item => {
+    if (currentCat !== 'all' && item.c !== currentCat) return false;
+    if (!q) return true;
+    const hay = (item.q.zh + ' ' + item.q.en + ' ' + item.a.zh + ' ' + item.a.en).toLowerCase();
+    return hay.indexOf(q) !== -1;
+  });
+
+  list.innerHTML = '';
+  if (items.length === 0){
+    const p = document.createElement('div');
+    p.className = 'empty';
+    p.textContent = t('faq.empty');
+    list.appendChild(p);
+    return;
+  }
+
+  items.forEach(item => {
+    const idx = FAQ.indexOf(item) + 1;
+    const d = document.createElement('details');
+    d.className = 'qa';
+
+    const s = document.createElement('summary');
+    const num = document.createElement('span');
+    num.className = 'qnum';
+    num.textContent = String(idx).padStart(2, '0');
+    const qt = document.createElement('span');
+    qt.className = 'qtext';
+    qt.textContent = item.q[currentLang];
+    s.appendChild(num); s.appendChild(qt);
+
+    const a = document.createElement('div');
+    a.className = 'atext';
+    a.textContent = item.a[currentLang];
+
+    d.appendChild(s); d.appendChild(a);
+    list.appendChild(d);
+  });
+}
+
+/* ---------- 搜索 ---------- */
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderFAQ();
+});
+
+/* ---------- 复制合约地址 ---------- */
+const CA_ADDRESS = 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH';
+function copyCA(){
+  const btn = document.getElementById('copyBtn');
+  const done = () => {
+    btn.textContent = t('eaco.caCopied');
+    setTimeout(() => { btn.textContent = t('eaco.caCopy'); }, 1600);
+  };
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = CA_ADDRESS;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+    done();
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(CA_ADDRESS).then(done).catch(fallback);
+  } else {
+    fallback();
+  }
+}
+
+/* ============================================================
+   4. 星空画布（仅宇宙蓝主题可见）
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [];
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    const count = Math.min(200, Math.floor(W * H / 9000));
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.3 + 0.25,
+      p: Math.random() * Math.PI * 2,
+      s: Math.random() * 0.018 + 0.004,
+      d: Math.random() * 0.06 + 0.01
+    }));
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    for (const st of stars){
+      st.p += st.s;
+      st.y += st.d;
+      if (st.y > H + 2) { st.y = -2; st.x = Math.random() * W; }
+      const alpha = 0.25 + Math.abs(Math.sin(st.p)) * 0.7;
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(190,235,255,' + alpha.toFixed(3) + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+
+/* ============================================================
+   5. 滚动入场动画
+   ============================================================ */
+(function(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting){
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 60 + 'ms';
+    io.observe(el);
+  });
+})();
+
+/* ============================================================
+   6. 初始化
+   ============================================================ */
+setTheme('cosmic');
+setLang('zh');
+</script>
+</body>
+</html>
