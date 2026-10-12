@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO‑Linux2024 | EACO地球村区块链内核组件开发者文档</title>
+<style>
+:root{
+  /* 默认主题：苹果绿 */
+  --bg:#f0f8f0;
+  --card:#ffffff;
+  --text:#1a2e1a;
+  --primary:#2e7d32;
+  --accent:#66bb6a;
+  --border:#b2d8b2;
+  --codebg:#e8f5e8;
+}
+/* 宇宙蓝主题 */
+.theme-cosmic{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#e2e8f0;
+  --primary:#3b82f6;
+  --accent:#60a5fa;
+  --border:#334155;
+  --codebg:#1e293b;
+}
+/* 米黄古典主题 */
+.theme-classic{
+  --bg:#fff8e6;
+  --card:#fffdf4;
+  --text:#4b3621;
+  --primary:#a67c52;
+  --accent:#d4af83;
+  --border:#ddc9b4;
+  --codebg:#fff3e0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans SC,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  padding:16px;
+  transition:background 0.4s,color 0.4s;
+}
+.container{max-width:1100px;margin:0 auto;}
+header{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:24px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--border);
+}
+h1{font-size:1.8rem;color:var(--primary);}
+h2{font-size:1.4rem;margin:28px 0 12px;color:var(--primary);}
+h3{font-size:1.15rem;margin:20px 0 8px;}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px;
+  margin-bottom:18px;
+}
+pre{
+  background:var(--codebg);
+  padding:14px;
+  border-radius:6px;
+  overflow-x:auto;
+  font-family:Consolas,Monaco,monospace;
+  font-size:0.9rem;
+  margin:12px 0;
+}
+code{font-family:Consolas,Monaco,monospace;}
+.ctrl-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+button{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:0.9rem;
+  transition:opacity 0.2s;
+}
+button:hover{opacity:0.85;}
+a{color:var(--accent);}
+.ca-box{
+  background:var(--codebg);
+  padding:10px;
+  border-radius:6px;
+  word-break:break-all;
+  font-family:monospace;
+}
+ul{padding-left:22px;margin:10px 0;}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:14px 0;
+}
+th,td{
+  border:1px solid var(--border);
+  padding:10px;
+  text-align:left;
+}
+th{background:var(--codebg);}
+.footer{
+  margin-top:40px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+  font-size:0.88rem;
+  opacity:0.8;
+}
+.lang-en [data-zh]{display:none;}
+.lang-zh [data-en]{display:none;}
+</style>
+</head>
+<body class="lang-zh">
+<div class="container">
+<header>
+  <div>
+    <h1 data-zh>EACO‑Linux2024｜EACO地球村内核组件开发者文档</h1>
+    <h1 data-en>EACO‑Linux2024 | EACO Earth‑Village Kernel Components Developer Docs</h1>
+  </div>
+  <div class="ctrl-bar">
+    <!-- 语言切换 -->
+    <button id="btnLangZh">中文</button>
+    <button id="btnLangEn">English</button>
+    <!-- 主题切换 -->
+    <button data-theme="">🍏 苹果绿</button>
+    <button data-theme="theme-cosmic">🌌 宇宙蓝</button>
+    <button data-theme="theme-classic">📜 米黄古典</button>
+  </div>
+</header>
+
+<div class="card">
+  <h2 data-zh>概述</h2>
+  <h2 data-en>Overview</h2>
+  <p data-zh>
+EACO‑Linux：类比Linux操作系统内核的<strong>行星级可信凭证基础设施</strong>。
+EACO内核不直接提供上层业务应用，对外暴露一套标准化API，供区域子网、机构、开发者构建供应链、碳凭证、实体资产存证、跨域契约系统。
+遵循宪章原则：原始数据属地存储，链上仅存凭证哈希；组件精简可组合；支持可选权限白名单模式。
+  </p>
+  <p data-en>
+EACO‑Linux: A planetary‑scale trusted credential infrastructure analogous to the Linux kernel.
+The EACO kernel does not implement end‑user business logic. It exposes standardized APIs for regional sub‑networks, institutions and developers to build supply‑chain, carbon‑credit, real‑asset attestation and cross‑domain contract systems.
+Charter rules: raw data stays local; only credential hashes are anchored on‑chain. Minimal composable components, optional whitelist permission model.
+  </p>
+
+  <h3 data-zh>合约地址 CA</h3>
+  <h3 data-en>Contract Address CA</h3>
+  <div class="ca-box">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</div>
+  <ul>
+    <li><a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank">orbmarkets.io token page</a></li>
+  </ul>
+
+  <h3 data-zh>相关开源仓库（世界观标记）</h3>
+  <h3 data-en>Related Repositories (fiction marker)</h3>
+  <ul>
+    <li>eacoweb3‑2026：EACO内核主仓库（Kernel）</li>
+    <li>EACO‑SOL‑DOGE‑EAC：外部凭证适配器（Adapter/Driver）</li>
+    <li>eacoSWAP：凭证网关组件库（Gateway SDK）</li>
+    <li>earths‑best‑coin：实体资产凭证模板库（RWA Template Lib）</li>
+  </ul>
+</div>
+
+<div class="card">
+<h2 data-zh>EACO 六大内核组件 API 简介</h2>
+<h2 data-en>EACO Six Kernel Components API Brief</h2>
+<p data-zh>全部接口属于REST+合约调用风格；所有跨子网操作返回凭证哈希，原始业务数据不上链。</p>
+<p data-en>Interfaces follow REST + smart‑call style. All cross‑subnet operations return credential hash; raw business data never uploaded.</p>
+
+<table>
+  <thead>
+  <tr>
+    <th data-zh>组件名称</th>
+    <th data-en>Component</th>
+    <th data-zh>主要API接口</th>
+    <th data-en>Main API Endpoints</th>
+    <th data-zh>功能说明</th>
+    <th data-en>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td data-zh>DID可信身份组件</td>
+    <td data-en>DID Identity</td>
+    <td>/v1/did/register<br>/v1/did/delegate<br>/v1/did/revoke</td>
+    <td>/v1/did/register<br>/v1/did/delegate<br>/v1/did/revoke</td>
+    <td data-zh>注册DID身份、权限委派、授权撤回；支持白名单准入控制。</td>
+    <td data-en>Register DID, delegate permission, revoke grant; support whitelist access‑control.</td>
+  </tr>
+  <tr>
+    <td data-zh>凭证存证哈希锚定</td>
+    <td data-en>Credential Hash Anchor</td>
+    <td>/v1/credential/anchor<br>/v1/credential/verify</td>
+    <td>/v1/credential/anchor<br>/v1/credential/verify</td>
+    <td data-zh>提交业务数据哈希上链存证；链上核验哈希真实性。原始数据保留本地。</td>
+    <td data-en>Anchor business‑data hash on‑chain; verify hash proof. Raw data remains off‑chain local.</td>
+  </tr>
+  <tr>
+    <td data-zh>跨子网中继路由</td>
+    <td data-en>Cross‑Subnet Relay</td>
+    <td>/v1/relay/submit<br>/v1/relay/status</td>
+    <td>/v1/relay/submit<br>/v1/relay/status</td>
+    <td data-zh>凭证哈希跨子网转发；网关熔断开关；查询中继同步状态。</td>
+    <td data-en>Forward credential‑hash cross‑subnet; gateway circuit‑breaker; query relay sync status.</td>
+  </tr>
+  <tr>
+    <td data-zh>时间锁契约组件</td>
+    <td data-en>Time‑Locked Contract</td>
+    <td>/v1/timelock/deploy<br>/v1/timelock/get</td>
+    <td>/v1/timelock/deploy<br>/v1/timelock/get</td>
+    <td data-zh>部署时序契约，设置触发条件、到期自动状态变更；用于跨境履约、里程碑确认。</td>
+    <td data-en>Deploy time‑bound contract, set trigger condition, auto state‑transition. For cross‑border fulfillment & milestone attest.</td>
+  </tr>
+  <tr>
+    <td data-zh>实体资产凭证模板库</td>
+    <td data-en>RWA Template Lib</td>
+    <td>/v1/rwa/template/list<br>/v1/rwa/mint_cred</td>
+    <td>/v1/rwa/template/list<br>/v1/rwa/mint_cred</td>
+    <td data-zh>仓单、碳汇、知识产权等模板；生成实体锚定凭证，禁止无锚定空气凭证。</td>
+    <td data-en>Templates for warehouse‑receipt, carbon‑credit, IP. Generate real‑world anchored credential; forbid unbacked token‑credential.</td>
+  </tr>
+  <tr>
+    <td data-zh>审计与信用记录组件</td>
+    <td data-en>Audit & Reputation</td>
+    <td>/v1/audit/log_query<br>/v1/reputation/get</td>
+    <td>/v1/audit/log_query<br>/v1/reputation/get</td>
+    <td data-zh>查询跨子网访问审计日志；获取主体信用档案，信用影响中继准入权限。</td>
+    <td data-en>Query cross‑subnet audit log; fetch subject reputation profile; reputation controls relay access permission.</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="card">
+<h2 data-zh>API调用示例（伪代码）</h2>
+<h2 data-en>API Call Example (Pseudocode)</h2>
+<pre>
+// 1. 对本地业务数据做哈希，原始数据不发送
+payload = {
+  "biz_type":"carbon_footprint",
+  "data_hash":"0x......",
+  "issuer_did":"did:eaco:asia:xxx",
+  "expire_at":1788888888
+}
+
+// 2. 调用凭证锚定接口
+POST /v1/credential/anchor
+body = payload
+
+// 返回结果
+{
+  "eaco_cred_id":"ec‑xxxx‑xxxx",
+  "onchain_tx_hash":"0x......",
+  "status":"anchored_ok"
+}
+
+// 3. 跨子网中继转发凭证ID（仅ID+哈希，不含原始业务内容）
+POST /v1/relay/submit
+body={"cred_id":"ec‑xxxx‑xxxx","target_subnet":"eaco‑global‑main"}
+</pre>
+<p data-zh>说明：仅凭证ID与哈希参与跨网传输，业务原始文件始终保存在业务方本地主权子链。</p>
+<p data-en>Note: Only cred‑id and hash travel across networks. Original business files stay on local sovereign‑subnet.</p>
+</div>
+
+<div class="card">
+<h2 data-zh>开发约束（EACO宪章强制）</h2>
+<h2 data-en>Development Constraints (Mandated by EACO Charter)</h2>
+<ul data-zh>
+<li>禁止通过API上传原始敏感业务数据；只允许提交摘要哈希。</li>
+<li>实体资产凭证必须绑定现实实体，不允许生成无锚定投机凭证。</li>
+<li>跨子网调用可被网关熔断；开发者必须处理 relay 失败、退回状态。</li>
+<li>上层应用可自主开启/关闭DID白名单；内核不强制无许可模式。</li>
+<li>接入全球中继主网必须兼容宪章公理；分叉修改底层公理将失去全球互操作性。</li>
+</ul>
+<ul data-en>
+<li>Never upload raw sensitive business data via API; submit only digest‑hash.</li>
+<li>RWA credentials must anchor real‑world assets; unbacked speculative credentials are forbidden.</li>
+<li>Cross‑subnet calls may be circuit‑broken; app must handle relay‑fail roll‑back status.</li>
+<li>Upper‑layer apps may toggle DID whitelist; kernel does not force permission‑less mode.</li>
+<li>To join global relay main‑net, implementations must respect charter axioms. Forks breaking axioms lose global interoperability.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2 data-zh>网页与项目外部链接（世界观素材）</h2>
+<h2 data-en>External Project Links (fiction reference)</h2>
+<ul>
+<li>orbmarkets token: <a target="_blank" href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</a></li>
+<li>GitHub: eacoweb3‑2026 / EACO‑SOL‑DOGE‑EAC / eacoSWAP / earths‑best‑coin</li>
+<li data-zh>文档站点：eaco‑linux2024.html（本页面）</li>
+<li data-en>Doc site: eaco‑linux2024.html (this page)</li>
+</ul>
+</div>
+
+<div class="footer">
+<p data-zh>免责声明：本页面为《EACO：文明自愈纪元》世界观虚构演示页面，不是生产级SDK，不构成任何投资建议，不提供真实链上交互。</p>
+<p data-en>Disclaimer: This page is fictional demo for "EACO: Civilization Self‑Healing Era". Not production‑grade SDK, no investment advice, no real on‑chain interaction.</p>
+</div>
+
+</div>
+
+<script>
+// 语言切换
+const htmlEl = document.documentElement;
+const bodyEl = document.body;
+document.getElementById('btnLangZh').onclick = ()=>{
+  bodyEl.classList.remove('lang-en');
+  bodyEl.classList.add('lang-zh');
+};
+document.getElementById('btnLangEn').onclick = ()=>{
+  bodyEl.classList.remove('lang-zh');
+  bodyEl.classList.add('lang-en');
+};
+// 主题切换
+document.querySelectorAll('[data-theme]').forEach(btn=>{
+  btn.onclick = ()=>{
+    const t = btn.getAttribute('data-theme');
+    bodyEl.classList.remove('theme-cosmic','theme-classic');
+    if(t) bodyEl.classList.add(t);
+  }
+});
+</script>
+</body>
+</html>
