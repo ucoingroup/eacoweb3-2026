@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="cosmic">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地球村 EACO 网络 | Earth Village EACO Network 2024</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --maxw:1180px;--radius:18px;
+  --font-sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --font-serif:"Songti SC","STSong","Noto Serif SC",Georgia,serif;
+  --t:.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ===== 苹果绿 ===== */
+html[data-theme="apple"]{
+  --bg:#F7F5F0;--card:#FFFFFF;--text:#1A2400;--muted:#5B6B3A;
+  --primary:#8CE600;--primary-ink:#2B3300;--accent:#4D6300;--soft:#EDFBD2;
+  --border:#E3EAD2;--shadow:0 10px 34px rgba(77,99,0,.09);
+  --font-body:var(--font-sans);
+}
+html[data-theme="apple"] body{
+  background:
+    radial-gradient(900px 600px at 10% 6%, rgba(140,230,0,.16), transparent 62%),
+    radial-gradient(760px 520px at 92% 94%, rgba(204,255,204,.45), transparent 62%),
+    #F7F5F0;
+}
+
+/* ===== 宇宙蓝 ===== */
+html[data-theme="cosmic"]{
+  --bg:#050A0F;--card:#0C1822;--text:#E2E8F0;--muted:#8FA6B8;
+  --primary:#06B6D4;--primary-ink:#04141A;--accent:#67E8F9;--soft:#0F2733;
+  --border:#16303F;--shadow:0 14px 44px rgba(0,0,0,.55);
+  --font-body:var(--font-sans);
+}
+html[data-theme="cosmic"] body{
+  background:radial-gradient(1200px 800px at 50% -10%, #0B1E2B 0%, #050A0F 60%);
+}
+
+/* ===== 米黄古典 ===== */
+html[data-theme="classic"]{
+  --bg:#F5F0E8;--card:#FFFDF8;--text:#2B2118;--muted:#6B5A45;
+  --primary:#8B4513;--primary-ink:#FFF8EE;--accent:#C41E3A;--soft:#F0E3CC;
+  --border:#E0D5C0;--shadow:0 10px 34px rgba(139,69,19,.10);
+  --font-body:var(--font-serif);
+}
+html[data-theme="classic"] body{
+  background:
+    radial-gradient(820px 600px at 8% 4%, rgba(218,165,32,.12), transparent 62%),
+    radial-gradient(700px 520px at 94% 96%, rgba(196,30,58,.07), transparent 62%),
+    repeating-linear-gradient(0deg, rgba(139,69,19,.022) 0 1px, transparent 1px 4px),
+    #F5F0E8;
+}
+
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-body);color:var(--text);min-height:100vh;line-height:1.75;
+  -webkit-font-smoothing:antialiased;transition:background .5s ease,color .35s ease;
+}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .7s;}
+html[data-theme="cosmic"] #stars{opacity:1;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+main,header,footer{position:relative;z-index:1;}
+
+/* ===== 顶栏 ===== */
+header{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid var(--border);
+}
+html[data-theme="cosmic"] header{background:rgba(5,10,15,.72);}
+html[data-theme="apple"]  header{background:rgba(247,245,240,.82);}
+html[data-theme="classic"] header{background:rgba(245,240,232,.85);}
+.nav{display:flex;align-items:center;gap:18px;height:66px;max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15.5px;white-space:nowrap;}
+.brand .orb{
+  width:22px;height:22px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 32% 30%, var(--primary), var(--accent));
+  box-shadow:0 0 14px color-mix(in srgb, var(--primary) 70%, transparent);
+  animation:pulse 3.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.16);opacity:.78;}}
+.navlinks{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;}
+.navlinks::-webkit-scrollbar{display:none;}
+.navlinks a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:600;padding:7px 12px;border-radius:10px;white-space:nowrap;transition:var(--t);}
+.navlinks a:hover{color:var(--text);background:var(--soft);}
+.tools{display:flex;align-items:center;gap:12px;flex:none;}
+.langsw{display:flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.langsw button{border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:12px;font-weight:700;padding:6px 10px;cursor:pointer;transition:var(--t);}
+.langsw button.on{background:var(--primary);color:var(--primary-ink);}
+.themesw{display:flex;gap:7px;}
+.themesw button{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);cursor:pointer;padding:0;transition:var(--t);}
+.themesw button:hover{transform:scale(1.14);}
+.themesw button.on{border-color:var(--text);transform:scale(1.14);}
+.sw-apple{background:linear-gradient(135deg,#8CE600,#C6F76B);}
+.sw-cosmic{background:linear-gradient(135deg,#050A0F,#06B6D4);}
+.sw-classic{background:linear-gradient(135deg,#8B4513,#DAA520);}
+
+/* ===== Hero ===== */
+.hero{padding:88px 0 70px;text-align:center;}
+.tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--border);background:var(--card);padding:6px 16px;border-radius:999px;margin-bottom:26px;}
+.hero h1{font-size:clamp(32px,6.5vw,62px);line-height:1.14;font-weight:900;letter-spacing:-.02em;margin-bottom:20px;
+  background:linear-gradient(120deg,var(--text) 30%, var(--primary) 90%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+html[data-theme="classic"] .hero h1{background:linear-gradient(120deg,#2B2118 30%, #8B4513 90%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.lead{max-width:700px;margin:0 auto 34px;color:var(--muted);font-size:16.5px;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+.btn{display:inline-block;text-decoration:none;font-weight:800;font-size:14.5px;padding:13px 30px;border-radius:999px;transition:var(--t);border:1px solid transparent;font-family:inherit;cursor:pointer;}
+.btn.primary{background:var(--primary);color:var(--primary-ink);box-shadow:0 8px 26px color-mix(in srgb,var(--primary) 34%,transparent);}
+.btn.primary:hover{transform:translateY(-2px);}
+.btn.ghost{border-color:var(--border);color:var(--text);background:var(--card);}
+.btn.ghost:hover{border-color:var(--primary);color:var(--accent);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 26px;min-width:150px;box-shadow:var(--shadow);}
+.stat b{display:block;font-size:22px;font-weight:900;color:var(--accent);}
+.stat span{font-size:11.5px;color:var(--muted);font-weight:600;}
+
+/* ===== Section ===== */
+section.block{padding:72px 0;}
+section.block.alt{border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+html[data-theme="cosmic"] section.block.alt{background:rgba(12,24,34,.42);}
+html[data-theme="apple"]  section.block.alt{background:rgba(255,255,255,.45);}
+html[data-theme="classic"] section.block.alt{background:rgba(255,253,248,.55);}
+.head{max-width:760px;margin:0 auto 42px;text-align:center;}
+.head h2{font-size:clamp(24px,4.2vw,36px);font-weight:900;letter-spacing:-.02em;margin-bottom:12px;}
+.head p{color:var(--muted);font-size:15.5px;}
+.grid{display:grid;gap:18px;}
+.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr));}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 22px;box-shadow:var(--shadow);transition:var(--t);position:relative;overflow:hidden;}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),transparent);opacity:0;transition:var(--t);}
+.card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--primary) 45%,var(--border));}
+.card:hover::before{opacity:1;}
+.card h3{font-size:17px;font-weight:800;margin-bottom:8px;}
+.card p{font-size:14px;color:var(--muted);line-height:1.78;}
+.card .num{font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;display:block;margin-bottom:10px;}
+
+/* 地理卡片 */
+.geo-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:var(--t);}
+.geo-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--primary) 45%,var(--border));}
+.geo-icon{font-size:26px;margin-bottom:10px;display:block;}
+.geo-card h3{font-size:16.5px;font-weight:800;margin-bottom:10px;}
+.geo-meta{display:flex;flex-direction:column;gap:5px;}
+.geo-meta div{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed var(--border);}
+.geo-meta div:last-child{border-bottom:none;}
+.geo-meta span:first-child{color:var(--muted);}
+.geo-meta span:last-child{font-weight:700;color:var(--accent);}
+
+/* 三层网络 */
+.layer{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden;margin-bottom:20px;}
+.layer::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--primary),var(--accent));}
+.layer-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+.layer-badge{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--primary-ink);background:var(--primary);padding:4px 12px;border-radius:999px;white-space:nowrap;}
+.layer-head h3{font-size:20px;font-weight:900;letter-spacing:-.01em;}
+.layer-head p{color:var(--muted);font-size:14px;flex:1 1 100%;}
+.layer-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+.node{background:var(--soft);border:1px solid var(--border);border-radius:13px;padding:16px 15px;transition:var(--t);}
+.node:hover{border-color:var(--primary);transform:translateY(-2px);}
+.node b{display:block;font-size:14.5px;font-weight:800;margin-bottom:6px;}
+.node span{font-size:12.8px;color:var(--muted);line-height:1.7;display:block;}
+
+/* 汇总表 */
+.tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px;}
+th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--border);}
+th{font-weight:800;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--soft);}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:var(--soft);}
+td:first-child{font-weight:700;}
+
+/* 代码地址 */
+code.ca{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;
+  background:var(--soft);color:var(--accent);padding:10px 14px;border-radius:10px;
+  border:1px solid var(--border);word-break:break-all;font-weight:700;line-height:1.5;display:block;
+}
+
+/* 页脚 */
+footer{border-top:1px solid var(--border);padding:36px 0 44px;text-align:center;color:var(--muted);font-size:13px;}
+footer .brand{justify-content:center;margin-bottom:14px;color:var(--text);}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+@media(max-width:760px){
+  .nav{gap:10px;height:auto;padding:11px 16px;flex-wrap:wrap;}
+  .brand{font-size:14px;}
+  .navlinks{order:3;width:100%;margin-left:0;}
+  .tools{margin-left:auto;}
+  .hero{padding:58px 0 48px;}
+  .stat{flex:1 1 130px;padding:13px 16px;min-width:0;}
+  section.block{padding:52px 0;}
+}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="orb"></span><span data-i18n="brand">地球村 EACO 网络</span></div>
+    <nav class="navlinks">
+      <a href="#geo"   data-i18n="nav.geo">洲与洋</a>
+      <a href="#land"  data-i18n="nav.land">陆地网络</a>
+      <a href="#ocean" data-i18n="nav.ocean">海洋网络</a>
+      <a href="#space" data-i18n="nav.space">星际网络</a>
+      <a href="#eaco"  data-i18n="nav.eaco">EACO 结算</a>
+    </nav>
+    <div class="tools">
+      <div class="langsw">
+        <button id="btn-zh" class="on" onclick="setLang('zh')">中</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="themesw">
+        <button class="sw-apple"   id="th-apple"   onclick="setTheme('apple')"   title="Apple Green"></button>
+        <button class="sw-cosmic on" id="th-cosmic" onclick="setTheme('cosmic')"  title="Cosmic Blue"></button>
+        <button class="sw-classic" id="th-classic" onclick="setTheme('classic')" title="米黄古典"></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ========== Hero ========== -->
+<section class="hero">
+  <div class="wrap">
+    <span class="tag reveal" data-i18n="hero.tag">地球村 · 三层网络</span>
+    <h1 class="reveal" data-i18n="hero.title">七大洲 · 五大洋 · 一张 EACO 网</h1>
+    <p class="lead reveal" data-i18n="hero.sub">
+      从陆地到海洋，从地球轨道到深空——用一套去中心化的价值协议，
+      把地球村连接成一张可计量、可验证、可结算的公共网络。
+    </p>
+    <div class="hero-btns reveal">
+      <a href="#geo" class="btn primary" data-i18n="hero.btn1">查看洲与洋</a>
+      <a href="#eaco" class="btn ghost" data-i18n="hero.btn2">EACO 结算层</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat"><b>7</b><span data-i18n="hero.s1">大洲</span></div>
+      <div class="stat"><b>5</b><span data-i18n="hero.s2">大洋</span></div>
+      <div class="stat"><b>71%</b><span data-i18n="hero.s3">海洋覆盖率</span></div>
+      <div class="stat"><b>3</b><span data-i18n="hero.s4">网络层级</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 洲与洋 ========== -->
+<section id="geo" class="block alt">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="geo.title">地球上有几个洲和洋？</h2>
+      <p data-i18n="geo.sub">七大洲、五大洋。总面积约 5.1 亿平方公里，其中海洋约占 71%，陆地约占 29%。</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;" data-i18n="geo.continents">七大洲 · 7 Continents</h3>
+    <div class="grid g3" id="continents" style="margin-bottom:38px;"></div>
+
+    <h3 style="font-size:16px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;" data-i18n="geo.oceans">五大洋 · 5 Oceans</h3>
+    <div class="grid g3" id="oceans"></div>
+  </div>
+</section>
+
+<!-- ========== 陆地网络 ========== -->
+<section id="land" class="block">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="land.title">陆地网络 · Land Network</h2>
+      <p data-i18n="land.sub">以大陆为骨干、城市为枢纽、社区为细胞，把劳动与资源在链上量化。</p>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Layer 1</span>
+        <h3 data-i18n="land.l1t">大陆骨干节点</h3>
+        <p data-i18n="land.l1d">七大洲各设一个骨干节点，负责本洲资源数据聚合与跨洲路由。亚洲、非洲、欧洲、南北美洲、大洋洲、南极洲（科考站）各一个主节点。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="land.n1t">亚洲枢纽</b><span data-i18n="land.n1d">人口最多，制造业与光伏产能集中，承担全球算力与能源数据的核心聚合。</span></div>
+        <div class="node"><b data-i18n="land.n2t">非洲枢纽</b><span data-i18n="land.n2d">草根社区最活跃，以承诺池机制聚合劳动贡献，形成可计量社区价值池。</span></div>
+        <div class="node"><b data-i18n="land.n3t">欧洲枢纽</b><span data-i18n="land.n3d">监管框架成熟，承担合规研究与标准输出，连接学术与政策资源。</span></div>
+        <div class="node"><b data-i18n="land.n4t">美洲枢纽</b><span data-i18n="land.n4d">北美技术与资本密集，南美农业与矿产丰富，形成资源与技术互补。</span></div>
+        <div class="node"><b data-i18n="land.n5t">大洋洲枢纽</b><span data-i18n="land.n5d">连接亚太与南太岛国，是跨洋光缆与海上能源的重要陆上锚点。</span></div>
+        <div class="node"><b data-i18n="land.n6t">南极洲节点</b><span data-i18n="land.n6d">以科考站为单位，记录极地气候数据，作为地球环境的公共观测节点。</span></div>
+      </div>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Layer 2</span>
+        <h3 data-i18n="land.l2t">城市与区域子节点</h3>
+        <p data-i18n="land.l2d">在城市与区域层面建立子 DAO，负责本地教育、线下活动与资源量化的具体执行。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="land.n7t">城市枢纽</b><span data-i18n="land.n7d">每个城市一个子节点，负责本地社区运营、工作坊与教育课程落地。</span></div>
+        <div class="node"><b data-i18n="land.n8t">教育节点</b><span data-i18n="land.n8d">与大学、社区学院合作，把地球村经济与资源量化作为课程内容。</span></div>
+        <div class="node"><b data-i18n="land.n9t">能源节点</b><span data-i18n="land.n9d">光伏、储能设备上链计量，形成可追溯、可交易的能源凭证。</span></div>
+        <div class="node"><b data-i18n="land.n10t">劳动节点</b><span data-i18n="land.n10d">把劳动时间与技能贡献转化为链上凭证，实现劳动价值的可计量化。</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 海洋网络 ========== -->
+<section id="ocean" class="block alt">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="ocean.title">海洋网络 · Ocean Network</h2>
+      <p data-i18n="ocean.sub">海洋覆盖地球 71% 的表面。把海底光缆、浮动能源与港口航运接入同一张链上网络。</p>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Layer 1</span>
+        <h3 data-i18n="ocean.l1t">海底光缆与通信骨干</h3>
+        <p data-i18n="ocean.l1d">全球约 99% 的洲际数据通过海底光缆传输。把光缆登陆站作为海洋网络的陆上入口节点。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="ocean.n1t">太平洋链路</b><span data-i18n="ocean.n1d">连接亚洲与美洲，是全球数据流量最密集的海洋通道。</span></div>
+        <div class="node"><b data-i18n="ocean.n2t">大西洋链路</b><span data-i18n="ocean.n2d">连接欧洲、非洲与美洲，历史最悠久的海底通信走廊。</span></div>
+        <div class="node"><b data-i18n="ocean.n3t">印度洋链路</b><span data-i18n="ocean.n3d">连接东南亚、中东与东非，是能源与贸易的关键通道。</span></div>
+        <div class="node"><b data-i18n="ocean.n4t">极地链路</b><span data-i18n="ocean.n4d">北极航线与南极科考通信，是未来海洋网络的新前沿。</span></div>
+      </div>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Layer 2</span>
+        <h3 data-i18n="ocean.l2t">浮动能源与算力节点</h3>
+        <p data-i18n="ocean.l2d">利用海水浮力势能、海上风电与波浪能，在海面建立可移动的能源与算力节点。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="ocean.n5t">海水浮力储能</b><span data-i18n="ocean.n5d">利用海水与空气浮力差储存势能，适合沿海与岛屿场景。</span></div>
+        <div class="node"><b data-i18n="ocean.n6t">海上风电节点</b><span data-i18n="ocean.n6d">海上风电场数据上链，形成可交易的绿色能源凭证。</span></div>
+        <div class="node"><b data-i18n="ocean.n7t">浮动算力平台</b><span data-i18n="ocean.n7d">利用海水冷却降低算力成本，能源节点同时成为算力节点。</span></div>
+        <div class="node"><b data-i18n="ocean.n8t">海洋碳汇记录</b><span data-i18n="ocean.n8d">红树林、海草床、珊瑚礁的碳汇数据上链，形成可验证碳信用。</span></div>
+      </div>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Layer 3</span>
+        <h3 data-i18n="ocean.l3t">港口与航运结算</h3>
+        <p data-i18n="ocean.l3d">全球贸易约 90% 通过海运完成。把港口与航运的结算接入链上，降低跨境摩擦。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="ocean.n9t">港口节点</b><span data-i18n="ocean.n9d">主要港口设立结算节点，处理货物、能源与碳信用的链上转移。</span></div>
+        <div class="node"><b data-i18n="ocean.n10t">航运通证</b><span data-i18n="ocean.n10d">把航次、运力与运费通证化，提升航运资产的流动性。</span></div>
+        <div class="node"><b data-i18n="ocean.n11t">海洋资源确权</b><span data-i18n="ocean.n11d">渔业、矿产与深海资源的开发权益，通过链上确权实现透明分配。</span></div>
+        <div class="node"><b data-i18n="ocean.n12t">跨洋结算层</b><span data-i18n="ocean.n12d">用去中心化价值媒介完成跨洋即时结算，绕开传统代理行链条。</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 星际网络 ========== -->
+<section id="space" class="block">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="space.title">星际 / 宇宙文明网络</h2>
+      <p data-i18n="space.sub">从近地轨道到月球，从火星到深空——把地球村的结算逻辑延伸到宇宙尺度。</p>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Orbit</span>
+        <h3 data-i18n="space.l1t">近地轨道星座</h3>
+        <p data-i18n="space.l1d">以低轨卫星星座为星际网络的接入层，为地面与海洋节点提供全球覆盖。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="space.n1t">卫星互联网</b><span data-i18n="space.n1d">为沙漠、海洋、极地等无地面网络区域提供链上接入能力。</span></div>
+        <div class="node"><b data-i18n="space.n2t">遥感数据上链</b><span data-i18n="space.n2d">地表、海洋、大气观测数据上链，形成可验证的地球状态记录。</span></div>
+        <div class="node"><b data-i18n="space.n3t">轨道算力节点</b><span data-i18n="space.n3d">在轨计算与边缘推理，减少地面与太空之间的数据传输压力。</span></div>
+        <div class="node"><b data-i18n="space.n4t">导航与授时</b><span data-i18n="space.n4d">为全球节点提供统一时间基准，是跨节点共识的物理基础。</span></div>
+      </div>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Cislunar</span>
+        <h3 data-i18n="space.l2t">地月空间中继</h3>
+        <p data-i18n="space.l2d">月球是中转站。在地月之间建立中继节点，为深空网络提供延迟容忍的通信与结算。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="space.n5t">月球中继站</b><span data-i18n="space.n5d">作为地月通信的枢纽，缓存并转发深空数据包。</span></div>
+        <div class="node"><b data-i18n="space.n6t">氦-3 与稀土</b><span data-i18n="space.n6d">月球资源开采权益的链上确权与交易。</span></div>
+        <div class="node"><b data-i18n="space.n7t">水冰与燃料</b><span data-i18n="space.n7d">月球极地水冰可转化为推进剂，是深空经济的能源基础。</span></div>
+        <div class="node"><b data-i18n="space.n8t">延迟容忍网络</b><span data-i18n="space.n8d">DTN 协议容忍分钟级延迟，是星际通信的核心架构。</span></div>
+      </div>
+    </div>
+
+    <div class="layer reveal">
+      <div class="layer-head">
+        <span class="layer-badge">Deep Space</span>
+        <h3 data-i18n="space.l3t">深空与小行星带</h3>
+        <p data-i18n="space.l3d">灵神星等小行星的贵金属估值超过 800 万亿美元。把资源权益与星际结算接入同一网络。</p>
+      </div>
+      <div class="layer-grid">
+        <div class="node"><b data-i18n="space.n9t">小行星采矿权益</b><span data-i18n="space.n9d">把采矿权益通证化，让全球持有者共同参与深空资源开发。</span></div>
+        <div class="node"><b data-i18n="space.n10t">星际价值结算</b><span data-i18n="space.n10d">去中心化、无边界、抗审查的价值媒介，适应星际环境。</span></div>
+        <div class="node"><b data-i18n="space.n11t">熵作为价值锚</b><span data-i18n="space.n11d">有观点认为熵是唯一无法造假、无法无限开采的终极资源。</span></div>
+        <div class="node"><b data-i18n="space.n12t">跨星球治理</b><span data-i18n="space.n12d">DAO 提供跨国界协作模板，星际尺度需要新的共识机制。</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EACO 结算层 ========== -->
+<section id="eaco" class="block alt">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 data-i18n="eaco.title">EACO 结算层 · 一张网连接三层</h2>
+      <p data-i18n="eaco.sub">陆地、海洋、星际三层网络产生的资源数据与劳动贡献，最终通过 EACO 在 Solana 链上完成结算。</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:22px;">
+      <div class="card reveal">
+        <span class="num">CA</span>
+        <h3 data-i18n="eaco.caTitle">EACO 合约地址</h3>
+        <p style="margin-bottom:14px;" data-i18n="eaco.caSub">可在 Orb Markets 上查看实时链上数据。</p>
+        <code class="ca">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+        <div style="margin-top:14px;">
+          <a class="btn primary" style="font-size:13px;padding:10px 22px;"
+             href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"
+             target="_blank" rel="noopener" data-i18n="eaco.caView">在 Orb Markets 查看 ↗</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <span class="num">Core</span>
+        <h3 data-i18n="eaco.coreT">核心理念</h3>
+        <p data-i18n="eaco.coreD">EACO 不属于任何个人和组织，持有者就是股东，属于地球村和宇宙全人类。它的使命是计算劳动价值，量化地球资源。</p>
+      </div>
+    </div>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="eaco.th1">网络层级</th>
+            <th data-i18n="eaco.th2">资源类型</th>
+            <th data-i18n="eaco.th3">链上表达</th>
+            <th data-i18n="eaco.th4">结算方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-i18n="eaco.r1c1">陆地网络</td>
+            <td data-i18n="eaco.r1c2">劳动、光伏、储能</td>
+            <td data-i18n="eaco.r1c3">劳动凭证、能源通证</td>
+            <td data-i18n="eaco.r1c4">EACO 链上结算</td>
+          </tr>
+          <tr>
+            <td data-i18n="eaco.r2c1">海洋网络</td>
+            <td data-i18n="eaco.r2c2">浮力储能、碳汇、航运</td>
+            <td data-i18n="eaco.r2c3">碳信用、运力通证</td>
+            <td data-i18n="eaco.r2c4">跨洋即时结算</td>
+          </tr>
+          <tr>
+            <td data-i18n="eaco.r3c1">星际网络</td>
+            <td data-i18n="eaco.r3c2">小行星矿产、氦-3、水冰</td>
+            <td data-i18n="eaco.r3c3">采矿权益通证</td>
+            <td data-i18n="eaco.r3c4">延迟容忍结算</td>
+          </tr>
+          <tr>
+            <td data-i18n="eaco.r4c1">跨链互通</td>
+            <td data-i18n="eaco.r4c2">DOGE、SOL、USDT 等</td>
+            <td data-i18n="eaco.r4c3">Wormhole NTT 映射</td>
+            <td data-i18n="eaco.r4c4">多链价值互换</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="orb"></span><span data-i18n="brand">地球村 EACO 网络</span></div>
+    <p data-i18n="footer.text">七大洲 · 五大洋 · 一张网 · 一个地球村</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   1. 洲与洋数据
+   ============================================================ */
+const CONTINENTS = [
+  {icon:'🌏', zh:'亚洲', en:'Asia',
+   rows:[['area','4458 万 km²','44.58 M km²'],['pop','47 亿','4.7 B'],['node','制造业 · 光伏 · 算力','Manufacturing · Solar · Compute']]},
+  {icon:'🌍', zh:'非洲', en:'Africa',
+   rows:[['area','3020 万 km²','30.2 M km²'],['pop','14 亿','1.4 B'],['node','承诺池 · 草根社区','Commitment Pools · Grassroots']]},
+  {icon:'🌎', zh:'北美洲', en:'North America',
+   rows:[['area','2470 万 km²','24.7 M km²'],['pop','6 亿','600 M'],['node','技术 · 资本 · 合规','Tech · Capital · Compliance']]},
+  {icon:'🌎', zh:'南美洲', en:'South America',
+   rows:[['area','1780 万 km²','17.8 M km²'],['pop','4.3 亿','430 M'],['node','农业 · 矿产 · 雨林碳汇','Agriculture · Mining · Carbon']]},
+  {icon:'❄️', zh:'南极洲', en:'Antarctica',
+   rows:[['area','1400 万 km²','14 M km²'],['pop','科考人员','Researchers'],['node','极地观测 · 气候数据','Polar Data · Climate']]},
+  {icon:'🌍', zh:'欧洲', en:'Europe',
+   rows:[['area','1018 万 km²','10.18 M km²'],['pop','7.5 亿','750 M'],['node','监管 · 学术 · 标准','Regulation · Academia']]},
+  {icon:'🌏', zh:'大洋洲', en:'Oceania',
+   rows:[['area','852 万 km²','8.52 M km²'],['pop','4300 万','43 M'],['node','跨洋光缆 · 南太岛国','Subsea Cables · Pacific']]}
+];
+
+const OCEANS = [
+  {icon:'🌊', zh:'太平洋', en:'Pacific Ocean',
+   rows:[['area','1.65 亿 km²','165 M km²'],['depth','平均 4280 m','Avg 4,280 m'],['node','亚美数据主通道','Asia–America Backbone']]},
+  {icon:'🌊', zh:'大西洋', en:'Atlantic Ocean',
+   rows:[['area','1.06 亿 km²','106 M km²'],['depth','平均 3646 m','Avg 3,646 m'],['node','欧美非通信走廊','Europe–Africa–America']]},
+  {icon:'🌊', zh:'印度洋', en:'Indian Ocean',
+   rows:[['area','7056 万 km²','70.56 M km²'],['depth','平均 3741 m','Avg 3,741 m'],['node','能源与贸易通道','Energy & Trade Route']]},
+  {icon:'🌊', zh:'南大洋', en:'Southern Ocean',
+   rows:[['area','2196 万 km²','21.96 M km²'],['depth','平均 3270 m','Avg 3,270 m'],['node','碳汇与极地环流','Carbon Sink & Circulation']]},
+  {icon:'🌊', zh:'北冰洋', en:'Arctic Ocean',
+   rows:[['area','1406 万 km²','14.06 M km²'],['depth','平均 1205 m','Avg 1,205 m'],['node','北极航线 · 新前沿','Arctic Route · Frontier']]}
+];
+
+/* ============================================================
+   2. 国际化
+   ============================================================ */
+const I18N = {
+  zh:{
+    'brand':'地球村 EACO 网络',
+    'nav.geo':'洲与洋','nav.land':'陆地网络','nav.ocean':'海洋网络','nav.space':'星际网络','nav.eaco':'EACO 结算',
+    'hero.tag':'地球村 · 三层网络',
+    'hero.title':'七大洲 · 五大洋 · 一张 EACO 网',
+    'hero.sub':'从陆地到海洋，从地球轨道到深空——用一套去中心化的价值协议，把地球村连接成一张可计量、可验证、可结算的公共网络。',
+    'hero.btn1':'查看洲与洋','hero.btn2':'EACO 结算层',
+    'hero.s1':'大洲','hero.s2':'大洋','hero.s3':'海洋覆盖率','hero.s4':'网络层级',
+
+    'geo.title':'地球上有几个洲和洋？',
+    'geo.sub':'七大洲、五大洋。总面积约 5.1 亿平方公里，其中海洋约占 71%，陆地约占 29%。',
+    'geo.continents':'七大洲 · 7 Continents',
+    'geo.oceans':'五大洋 · 5 Oceans',
+    'lbl.area':'面积','lbl.pop':'人口','lbl.depth':'深度','lbl.node':'EACO 节点',
+
+    'land.title':'陆地网络 · Land Network',
+    'land.sub':'以大陆为骨干、城市为枢纽、社区为细胞，把劳动与资源在链上量化。',
+    'land.l1t':'大陆骨干节点','land.l1d':'七大洲各设一个骨干节点，负责本洲资源数据聚合与跨洲路由。亚洲、非洲、欧洲、南北美洲、大洋洲、南极洲各一个主节点。',
+    'land.n1t':'亚洲枢纽','land.n1d':'人口最多，制造业与光伏产能集中，承担全球算力与能源数据的核心聚合。',
+    'land.n2t':'非洲枢纽','land.n2d':'草根社区最活跃，以承诺池机制聚合劳动贡献，形成可计量社区价值池。',
+    'land.n3t':'欧洲枢纽','land.n3d':'监管框架成熟，承担合规研究与标准输出，连接学术与政策资源。',
+    'land.n4t':'美洲枢纽','land.n4d':'北美技术与资本密集，南美农业与矿产丰富，形成资源与技术互补。',
+    'land.n5t':'大洋洲枢纽','land.n5d':'连接亚太与南太岛国，是跨洋光缆与海上能源的重要陆上锚点。',
+    'land.n6t':'南极洲节点','land.n6d':'以科考站为单位，记录极地气候数据，作为地球环境的公共观测节点。',
+    'land.l2t':'城市与区域子节点','land.l2d':'在城市与区域层面建立子 DAO，负责本地教育、线下活动与资源量化的具体执行。',
+    'land.n7t':'城市枢纽','land.n7d':'每个城市一个子节点，负责本地社区运营、工作坊与教育课程落地。',
+    'land.n8t':'教育节点','land.n8d':'与大学、社区学院合作，把地球村经济与资源量化作为课程内容。',
+    'land.n9t':'能源节点','land.n9d':'光伏、储能设备上链计量，形成可追溯、可交易的能源凭证。',
+    'land.n10t':'劳动节点','land.n10d':'把劳动时间与技能贡献转化为链上凭证，实现劳动价值的可计量化。',
+
+    'ocean.title':'海洋网络 · Ocean Network',
+    'ocean.sub':'海洋覆盖地球 71% 的表面。把海底光缆、浮动能源与港口航运接入同一张链上网络。',
+    'ocean.l1t':'海底光缆与通信骨干','ocean.l1d':'全球约 99% 的洲际数据通过海底光缆传输。把光缆登陆站作为海洋网络的陆上入口节点。',
+    'ocean.n1t':'太平洋链路','ocean.n1d':'连接亚洲与美洲，是全球数据流量最密集的海洋通道。',
+    'ocean.n2t':'大西洋链路','ocean.n2d':'连接欧洲、非洲与美洲，历史最悠久的海底通信走廊。',
+    'ocean.n3t':'印度洋链路','ocean.n3d':'连接东南亚、中东与东非，是能源与贸易的关键通道。',
+    'ocean.n4t':'极地链路','ocean.n4d':'北极航线与南极科考通信，是未来海洋网络的新前沿。',
+    'ocean.l2t':'浮动能源与算力节点','ocean.l2d':'利用海水浮力势能、海上风电与波浪能，在海面建立可移动的能源与算力节点。',
+    'ocean.n5t':'海水浮力储能','ocean.n5d':'利用海水与空气浮力差储存势能，适合沿海与岛屿场景。',
+    'ocean.n6t':'海上风电节点','ocean.n6d':'海上风电场数据上链，形成可交易的绿色能源凭证。',
+    'ocean.n7t':'浮动算力平台','ocean.n7d':'利用海水冷却降低算力成本，能源节点同时成为算力节点。',
+    'ocean.n8t':'海洋碳汇记录','ocean.n8d':'红树林、海草床、珊瑚礁的碳汇数据上链，形成可验证碳信用。',
+    'ocean.l3t':'港口与航运结算','ocean.l3d':'全球贸易约 90% 通过海运完成。把港口与航运的结算接入链上，降低跨境摩擦。',
+    'ocean.n9t':'港口节点','ocean.n9d':'主要港口设立结算节点，处理货物、能源与碳信用的链上转移。',
+    'ocean.n10t':'航运通证','ocean.n10d':'把航次、运力与运费通证化，提升航运资产的流动性。',
+    'ocean.n11t':'海洋资源确权','ocean.n11d':'渔业、矿产与深海资源的开发权益，通过链上确权实现透明分配。',
+    'ocean.n12t':'跨洋结算层','ocean.n12d':'用去中心化价值媒介完成跨洋即时结算，绕开传统代理行链条。',
+
+    'space.title':'星际 / 宇宙文明网络',
+    'space.sub':'从近地轨道到月球，从火星到深空——把地球村的结算逻辑延伸到宇宙尺度。',
+    'space.l1t':'近地轨道星座','space.l1d':'以低轨卫星星座为星际网络的接入层，为地面与海洋节点提供全球覆盖。',
+    'space.n1t':'卫星互联网','space.n1d':'为沙漠、海洋、极地等无地面网络区域提供链上接入能力。',
+    'space.n2t':'遥感数据上链','space.n2d':'地表、海洋、大气观测数据上链，形成可验证的地球状态记录。',
+    'space.n3t':'轨道算力节点','space.n3d':'在轨计算与边缘推理，减少地面与太空之间的数据传输压力。',
+    'space.n4t':'导航与授时','space.n4d':'为全球节点提供统一时间基准，是跨节点共识的物理基础。',
+    'space.l2t':'地月空间中继','space.l2d':'月球是中转站。在地月之间建立中继节点，为深空网络提供延迟容忍的通信与结算。',
+    'space.n5t':'月球中继站','space.n5d':'作为地月通信的枢纽，缓存并转发深空数据包。',
+    'space.n6t':'氦-3 与稀土','space.n6d':'月球资源开采权益的链上确权与交易。',
+    'space.n7t':'水冰与燃料','space.n7d':'月球极地水冰可转化为推进剂，是深空经济的能源基础。',
+    'space.n8t':'延迟容忍网络','space.n8d':'DTN 协议容忍分钟级延迟，是星际通信的核心架构。',
+    'space.l3t':'深空与小行星带','space.l3d':'灵神星等小行星的贵金属估值超过 800 万亿美元。把资源权益与星际结算接入同一网络。',
+    'space.n9t':'小行星采矿权益','space.n9d':'把采矿权益通证化，让全球持有者共同参与深空资源开发。',
+    'space.n10t':'星际价值结算','space.n10d':'去中心化、无边界、抗审查的价值媒介，适应星际环境。',
+    'space.n11t':'熵作为价值锚','space.n11d':'有观点认为熵是唯一无法造假、无法无限开采的终极资源。',
+    'space.n12t':'跨星球治理','space.n12d':'DAO 提供跨国界协作模板，星际尺度需要新的共识机制。',
+
+    'eaco.title':'EACO 结算层 · 一张网连接三层',
+    'eaco.sub':'陆地、海洋、星际三层网络产生的资源数据与劳动贡献，最终通过 EACO 在 Solana 链上完成结算。',
+    'eaco.caTitle':'EACO 合约地址',
+    'eaco.caSub':'可在 Orb Markets 上查看实时链上数据。',
+    'eaco.caView':'在 Orb Markets 查看 ↗',
+    'eaco.coreT':'核心理念',
+    'eaco.coreD':'EACO 不属于任何个人和组织，持有者就是股东，属于地球村和宇宙全人类。它的使命是计算劳动价值，量化地球资源。',
+    'eaco.th1':'网络层级','eaco.th2':'资源类型','eaco.th3':'链上表达','eaco.th4':'结算方式',
+    'eaco.r1c1':'陆地网络','eaco.r1c2':'劳动、光伏、储能','eaco.r1c3':'劳动凭证、能源通证','eaco.r1c4':'EACO 链上结算',
+    'eaco.r2c1':'海洋网络','eaco.r2c2':'浮力储能、碳汇、航运','eaco.r2c3':'碳信用、运力通证','eaco.r2c4':'跨洋即时结算',
+    'eaco.r3c1':'星际网络','eaco.r3c2':'小行星矿产、氦-3、水冰','eaco.r3c3':'采矿权益通证','eaco.r3c4':'延迟容忍结算',
+    'eaco.r4c1':'跨链互通','eaco.r4c2':'DOGE、SOL、USDT 等','eaco.r4c3':'Wormhole NTT 映射','eaco.r4c4':'多链价值互换',
+
+    'footer.text':'七大洲 · 五大洋 · 一张网 · 一个地球村'
+  },
+  en:{
+    'brand':'Earth Village EACO Network',
+    'nav.geo':'Continents & Oceans','nav.land':'Land Network','nav.ocean':'Ocean Network','nav.space':'Interstellar Network','nav.eaco':'EACO Settlement',
+    'hero.tag':'Earth Village · Three-Layer Network',
+    'hero.title':'7 Continents · 5 Oceans · One EACO Network',
+    'hero.sub':'From land to ocean, from Earth orbit to deep space — using a decentralised value protocol to connect the Earth Village into one measurable, verifiable and settleable public network.',
+    'hero.btn1':'Explore Continents','hero.btn2':'EACO Settlement',
+    'hero.s1':'Continents','hero.s2':'Oceans','hero.s3':'Ocean Coverage','hero.s4':'Network Layers',
+
+    'geo.title':'How many continents and oceans are there on Earth?',
+    'geo.sub':'Seven continents and five oceans. Total surface area is about 510 million km², of which oceans cover roughly 71% and land about 29%.',
+    'geo.continents':'7 Continents',
+    'geo.oceans':'5 Oceans',
+    'lbl.area':'Area','lbl.pop':'Population','lbl.depth':'Depth','lbl.node':'EACO Node',
+
+    'land.title':'Land Network',
+    'land.sub':'Continents as backbone, cities as hubs, communities as cells — quantifying labour and resources on-chain.',
+    'land.l1t':'Continental Backbone Nodes','land.l1d':'Each of the seven continents hosts a backbone node aggregating regional resource data and routing cross-continental traffic.',
+    'land.n1t':'Asia Hub','land.n1d':'Largest population, concentrated manufacturing and solar capacity — the core aggregator of global compute and energy data.',
+    'land.n2t':'Africa Hub','land.n2d':'Most active grassroots communities, aggregating labour contributions through commitment pools into measurable community value.',
+    'land.n3t':'Europe Hub','land.n3d':'Mature regulatory frameworks, contributing compliance research and standards, connecting academia and policy.',
+    'land.n4t':'Americas Hub','land.n4d':'North America brings tech and capital; South America brings agriculture and minerals — complementary resources and technology.',
+    'land.n5t':'Oceania Hub','land.n5d':'Connecting Asia-Pacific and Pacific island nations — a key landfall anchor for subsea cables and offshore energy.',
+    'land.n6t':'Antarctica Node','land.n6d':'Research stations record polar climate data as public observation nodes of the Earth environment.',
+    'land.l2t':'City & Regional Sub-Nodes','land.l2d':'Sub-DAOs at city and regional level handle local education, offline events and hands-on resource quantification.',
+    'land.n7t':'City Hubs','land.n7d':'One sub-node per city, running local community operations, workshops and education programmes.',
+    'land.n8t':'Education Nodes','land.n8d':'Partnering with universities and community colleges to teach Earth Village economics and resource quantification.',
+    'land.n9t':'Energy Nodes','land.n9d':'Solar and storage devices metered on-chain, forming traceable and tradable energy certificates.',
+    'land.n10t':'Labour Nodes','land.n10d':'Converting labour time and skill contributions into on-chain certificates — labour value made measurable.',
+
+    'ocean.title':'Ocean Network',
+    'ocean.sub':'Oceans cover 71% of Earth\'s surface. Connecting subsea cables, floating energy and port shipping into one on-chain network.',
+    'ocean.l1t':'Subsea Cables & Communication Backbone','ocean.l1d':'About 99% of intercontinental data travels through subsea cables. Cable landing stations serve as the ocean network\'s onshore entry nodes.',
+    'ocean.n1t':'Pacific Link','ocean.n1d':'Connecting Asia and the Americas — the world\'s densest data corridor.',
+    'ocean.n2t':'Atlantic Link','ocean.n2d':'Connecting Europe, Africa and the Americas — the oldest subsea communication corridor.',
+    'ocean.n3t':'Indian Ocean Link','ocean.n3d':'Connecting Southeast Asia, the Middle East and East Africa — a key energy and trade route.',
+    'ocean.n4t':'Polar Link','ocean.n4d':'Arctic routes and Antarctic research communications — the new frontier of ocean networking.',
+    'ocean.l2t':'Floating Energy & Compute Nodes','ocean.l2d':'Using seawater buoyancy potential, offshore wind and wave energy to build movable energy and compute nodes at sea.',
+    'ocean.n5t':'Buoyancy Storage','ocean.n5d':'Storing potential energy via seawater–air buoyancy difference, suited to coastal and island settings.',
+    'ocean.n6t':'Offshore Wind Nodes','ocean.n6d':'Offshore wind farm data on-chain, forming tradable green energy certificates.',
+    'ocean.n7t':'Floating Compute','ocean.n7d':'Seawater cooling lowers compute cost — energy nodes become compute nodes simultaneously.',
+    'ocean.n8t':'Ocean Carbon Sinks','ocean.n8d':'Mangrove, seagrass and coral reef carbon data on-chain, forming verifiable carbon credits.',
+    'ocean.l3t':'Port & Shipping Settlement','ocean.l3d':'About 90% of global trade moves by sea. Bringing port and shipping settlement on-chain reduces cross-border friction.',
+    'ocean.n9t':'Port Nodes','ocean.n9d':'Major ports host settlement nodes handling goods, energy and carbon credit transfers on-chain.',
+    'ocean.n10t':'Shipping Tokens','ocean.n10d':'Tokenising voyages, capacity and freight rates to improve liquidity of shipping assets.',
+    'ocean.n11t':'Marine Resource Rights','ocean.n11d':'Fishery, mineral and deep-sea development rights registered on-chain for transparent allocation.',
+    'ocean.n12t':'Trans-Oceanic Settlement','ocean.n12d':'Decentralised value media enabling instant trans-oceanic settlement, bypassing correspondent banking chains.',
+
+    'space.title':'Interstellar / Cosmic Civilisation Network',
+    'space.sub':'From low Earth orbit to the Moon, from Mars to deep space — extending the Earth Village settlement logic to cosmic scale.',
+    'space.l1t':'LEO Satellite Constellation','space.l1d':'Low-orbit constellations serve as the access layer, providing global coverage for ground and ocean nodes.',
+    'space.n1t':'Satellite Internet','space.n1d':'On-chain access for deserts, oceans and polar regions without terrestrial networks.',
+    'space.n2t':'Remote Sensing On-Chain','space.n2d':'Surface, ocean and atmospheric observation data on-chain as verifiable Earth state records.',
+    'space.n3t':'Orbital Compute Nodes','space.n3d':'On-orbit computation and edge inference, reducing data transmission pressure between ground and space.',
+    'space.n4t':'Navigation & Timing','space.n4d':'A unified time base for global nodes — the physical foundation of cross-node consensus.',
+    'space.l2t':'Cislunar Relay','space.l2d':'The Moon as a relay. Establishing nodes between Earth and Moon for delay-tolerant deep space communication and settlement.',
+    'space.n5t':'Lunar Relay Station','space.n5d':'A cislunar communication hub caching and forwarding deep space data packets.',
+    'space.n6t':'Helium-3 & Rare Earths','space.n6d':'On-chain registration and trading of lunar resource extraction rights.',
+    'space.n7t':'Water Ice & Fuel','space.n7d':'Lunar polar water ice can be converted to propellant — the energy basis of the deep space economy.',
+    'space.n8t':'Delay-Tolerant Networking','space.n8d':'DTN protocols tolerate minute-level delays — the core architecture of interstellar communication.',
+    'space.l3t':'Deep Space & Asteroid Belt','space.l3d':'Asteroids like Psyche 16 hold precious metals valued over $800 trillion. Bringing resource rights and interstellar settlement into one network.',
+    'space.n9t':'Asteroid Mining Rights','space.n9d':'Tokenising mining rights so global holders can participate in deep space resource development.',
+    'space.n10t':'Interstellar Settlement','space.n10d':'A decentralised, borderless, censorship-resistant value medium suited to interstellar conditions.',
+    'space.n11t':'Entropy as Value Anchor','space.n11d':'Some argue entropy is the only ultimate resource that cannot be forged or infinitely mined.',
+    'space.n12t':'Cross-Planet Governance','space.n12d':'DAOs offer a cross-border coordination template; interstellar scale requires new consensus mechanisms.',
+
+    'eaco.title':'EACO Settlement · One Network, Three Layers',
+    'eaco.sub':'Resource data and labour contributions from land, ocean and interstellar layers are ultimately settled through EACO on Solana.',
+    'eaco.caTitle':'EACO Contract Address',
+    'eaco.caSub':'Live on-chain data available on Orb Markets.',
+    'eaco.caView':'View on Orb Markets ↗',
+    'eaco.coreT':'Core Philosophy',
+    'eaco.coreD':'EACO belongs to no individual or organisation. Holders are shareholders; it belongs to the Earth Village and all humanity. Its mission is to compute the value of labour and quantify Earth\'s resources.',
+    'eaco.th1':'Layer','eaco.th2':'Resource Type','eaco.th3':'On-Chain Form','eaco.th4':'Settlement',
+    'eaco.r1c1':'Land Network','eaco.r1c2':'Labour, solar, storage','eaco.r1c3':'Labour & energy certificates','eaco.r1c4':'EACO on-chain settlement',
+    'eaco.r2c1':'Ocean Network','eaco.r2c2':'Buoyancy storage, carbon, shipping','eaco.r2c3':'Carbon credits, shipping tokens','eaco.r2c4':'Trans-oceanic instant settlement',
+    'eaco.r3c1':'Interstellar Network','eaco.r3c2':'Asteroid minerals, He-3, water ice','eaco.r3c3':'Mining rights tokens','eaco.r3c4':'Delay-tolerant settlement',
+    'eaco.r4c1':'Cross-Chain','eaco.r4c2':'DOGE, SOL, USDT, etc.','eaco.r4c3':'Wormhole NTT mapping','eaco.r4c4':'Multi-chain value swap',
+
+    'footer.text':'7 Continents · 5 Oceans · One Network · One Earth Village'
+  }
+};
+
+/* ============================================================
+   3. 状态与渲染
+   ============================================================ */
+let currentLang = 'zh';
+
+function t(k){ return (I18N[currentLang] && I18N[currentLang][k]) || I18N.zh[k] || k; }
+
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+  document.getElementById('btn-zh').classList.toggle('on', lang === 'zh');
+  document.getElementById('btn-en').classList.toggle('on', lang === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t(el.getAttribute('data-i18n'));
+    if (v) el.textContent = v;
+  });
+  renderGeo();
+}
+
+function setTheme(name){
+  document.documentElement.setAttribute('data-theme', name);
+  ['apple','cosmic','classic'].forEach(k => {
+    document.getElementById('th-' + k).classList.toggle('on', k === name);
+  });
+}
+
+/* ---------- 洲与洋渲染 ---------- */
+function renderGeo(){
+  const rowLabel = k => t('lbl.' + k);
+
+  const build = (arr, mount) => {
+    const box = document.getElementById(mount);
+    box.innerHTML = '';
+    arr.forEach(item => {
+      const c = document.createElement('div');
+      c.className = 'geo-card reveal';
+
+      const icon = document.createElement('span');
+      icon.className = 'geo-icon';
+      icon.textContent = item.icon;
+
+      const h = document.createElement('h3');
+      h.textContent = item[currentLang];
+
+      const meta = document.createElement('div');
+      meta.className = 'geo-meta';
+      item.rows.forEach(r => {
+        const d = document.createElement('div');
+        const s1 = document.createElement('span');
+        s1.textContent = rowLabel(r[0]);
+        const s2 = document.createElement('span');
+        s2.textContent = (currentLang === 'zh') ? r[1] : r[2];
+        d.appendChild(s1); d.appendChild(s2);
+        meta.appendChild(d);
+      });
+
+      c.appendChild(icon); c.appendChild(h); c.appendChild(meta);
+      box.appendChild(c);
+    });
+  };
+
+  build(CONTINENTS, 'continents');
+  build(OCEANS, 'oceans');
+  bindReveal();
+}
+
+/* ---------- 滚动入场 ---------- */
+let io = null;
+function bindReveal(){
+  if (!io){
+    io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }
+  document.querySelectorAll('.reveal:not(.in)').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 55 + 'ms';
+    io.observe(el);
+  });
+}
+
+/* ============================================================
+   4. 星空画布
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [];
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    const count = Math.min(200, Math.floor(W * H / 9000));
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.3 + 0.25,
+      p: Math.random() * Math.PI * 2,
+      s: Math.random() * 0.018 + 0.004,
+      d: Math.random() * 0.06 + 0.01
+    }));
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    for (const st of stars){
+      st.p += st.s; st.y += st.d;
+      if (st.y > H + 2){ st.y = -2; st.x = Math.random() * W; }
+      const a = 0.25 + Math.abs(Math.sin(st.p)) * 0.7;
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(190,235,255,' + a.toFixed(3) + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize(); draw();
+})();
+
+/* ============================================================
+   5. 初始化
+   ============================================================ */
+setTheme('cosmic');
+setLang('zh');
+</script>
+</body>
+</html>
