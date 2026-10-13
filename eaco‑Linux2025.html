@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr" data-theme="apple-green" class="no-js">
+<head><meta name="design-suite-artifact-kind" content="website"><meta name="design-suite-delivery-adapter" content="static-export"><meta name="design-suite-delivery-format" content="single-html"><meta name="design-suite-asset-policy" content="inline-base64"><meta name="design-suite-export-mode" content="single-file"><meta name="design-suite-contract-sha256" content="a177b2a1fed6a5a039e5829c5d789e06524e4b7afe5bcb34bcca1fab995e969c"><script>(function(){var errors=[];window.__DESIGN_SUITE_STATIC_ERRORS__=errors;window.addEventListener("error",function(event){errors.push(event.message||event.type||"error")},true);window.addEventListener("unhandledrejection",function(event){errors.push(String(event.reason||"unhandledrejection"))})})();</script><script data-design-suite-sandbox-shim>(function(){var used=[];window.__DESIGN_SUITE_SANDBOX_VIOLATIONS__=used;function note(api){if(used.indexOf(api)<0)used.push(api)}function memoryStorage(){var map=Object.create(null);function keys(){return Object.keys(map)}return{get length(){return keys().length},key:function(index){var list=keys();return index>=0&&index<list.length?list[index]:null},getItem:function(key){key=String(key);return key in map?map[key]:null},setItem:function(key,value){map[String(key)]=String(value)},removeItem:function(key){delete map[String(key)]},clear:function(){map=Object.create(null)}}}["localStorage","sessionStorage"].forEach(function(name){var store=memoryStorage();try{Object.defineProperty(window,name,{configurable:true,get:function(){note(name);return store}})}catch(error){note(name+":shim-failed")}});var cookie="";try{Object.defineProperty(document,"cookie",{configurable:true,get:function(){note("document.cookie");return cookie},set:function(value){note("document.cookie");var pair=String(value).split(";")[0];if(pair)cookie=cookie?cookie+"; "+pair:pair}})}catch(error){note("document.cookie:shim-failed")}try{Object.defineProperty(window,"indexedDB",{configurable:true,get:function(){note("indexedDB");return null}})}catch(error){note("indexedDB:shim-failed")}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Earth's Best Coin (EACO) - a community-driven project on Solana with a Linux-like public-infrastructure vision. Neutral information page with 8 languages and 3 themes. 地球村公共网络开源项目 EACO 中文信息页。">
+<meta name="keywords" content="EACO, Earth's Best Coin, Solana, Linux, 地球村, Earth Village, Web3, RWA, 公共基础设施, 开源">
+<meta name="author" content="eaco community">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMyRTdEMzIiLz48dGV4dCB4PSIzMiIgeT0iNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FPC90ZXh0Pjwvc3ZnPg==">
+<title>EACO · Earth's Best Coin — Linux-like Earth Village Network 2025</title>
+<style>
+:root{
+  --radius:16px;
+  --radius-s:10px;
+  --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans",sans-serif;
+  --font-mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+  --page-gap:clamp(56px,10vh,120px);
+}
+[data-theme="apple-green"]{
+  --bg:#EEF7EC;--bg-soft:#E3F1DF;--surface:#FFFFFF;--surface-2:#F6FBF4;
+  --fg:#16291A;--fg-soft:#2F4A35;--muted:#48644E;
+  --primary:#2E7D32;--primary-strong:#1B5E20;--on-primary:#FFFFFF;
+  --accent:#0E7C2F;--ring:#0E7C2F;--border:#C9E3C3;--chip:#E0EFDA;
+  --shadow:0 10px 30px rgba(30,80,40,.10);--shadow-lg:0 22px 60px rgba(30,80,40,.14);
+  --header-bg:rgba(238,247,236,.92);--hero-glow:rgba(46,125,50,.10);
+  --code-bg:#F1F8EE;--dis-bg:#FDF6E8;--dis-border:#E8D9A8;
+}
+[data-theme="cosmic-blue"]{
+  --bg:#070D20;--bg-soft:#0B1530;--surface:#0F1B3A;--surface-2:#12204A;
+  --fg:#E9F0FF;--fg-soft:#BCCBF0;--muted:#93A6D8;
+  --primary:#6EA8FF;--primary-strong:#B4D0FF;--on-primary:#071331;
+  --accent:#4DD8E8;--ring:#6EE7F5;--border:#26365F;--chip:#14234E;
+  --shadow:0 12px 34px rgba(0,0,0,.38);--shadow-lg:0 26px 70px rgba(0,0,0,.5);
+  --header-bg:rgba(7,13,32,.92);--hero-glow:rgba(110,168,255,.12);
+  --code-bg:#0C1733;--dis-bg:#141E31;--dis-border:#3A4456;
+}
+[data-theme="classic-beige"]{
+  --bg:#F6EEDC;--bg-soft:#EFE3C9;--surface:#FFFBF2;--surface-2:#FAF3E3;
+  --fg:#35291A;--fg-soft:#54432C;--muted:#6E5B3E;
+  --primary:#8A5A2B;--primary-strong:#6E451F;--on-primary:#FFFDF7;
+  --accent:#9C6B1F;--ring:#8A5A2B;--border:#DFD0AE;--chip:#F1E5C9;
+  --shadow:0 10px 28px rgba(120,90,40,.12);--shadow-lg:0 22px 56px rgba(120,90,40,.18);
+  --header-bg:rgba(246,238,220,.92);--hero-glow:rgba(138,90,43,.10);
+  --code-bg:#FBF5E6;--dis-bg:#FBF2DF;--dis-border:#E4D2A6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{color-scheme:light;scroll-behavior:smooth;scroll-padding-top:150px;webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font-ui);
+  background:var(--bg);color:var(--fg);
+  line-height:1.65;min-height:100vh;
+  transition:background-color .35s ease,color .35s ease;
+  overflow-wrap:break-word;
+}
+[data-theme="cosmic-blue"]{color-scheme:dark;}
+img,svg{display:block;max-width:100%;}
+a{color:var(--accent);text-decoration:none;font-weight:600;}
+a:hover{text-decoration:underline;}
+:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:6px;}
+.skip-link{
+  position:fixed;top:-60px;inset-inline-start:14px;z-index:100;
+  background:var(--primary);color:var(--on-primary);padding:10px 16px;border-radius:0 0 var(--radius-s) var(--radius-s);
+  font-weight:700;transition:top .2s ease;
+}
+.skip-link:focus{top:0;text-decoration:none;}
+.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px);}
+main{display:block;}
+section{padding-block:clamp(20px,4vh,44px);}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);background:var(--chip);border:1px solid var(--border);
+  padding:6px 14px;border-radius:999px;margin-bottom:18px;white-space:nowrap;
+}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;}
+h1,h2,h3,h4{line-height:1.2;letter-spacing:-.01em;color:var(--fg);}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:14px;}
+.lead{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--fg-soft);max-width:62ch;}
+/* Header */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:var(--header-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.utility-bar{padding-block:10px;}
+.utility-inner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;justify-content:space-between;}
+.seg{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.seg-label{font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.04em;}
+.chip{
+  appearance:none;border:1px solid var(--border);background:var(--chip);color:var(--fg-soft);
+  font:inherit;font-size:.82rem;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;line-height:1.2;
+  transition:background .2s ease,color .2s ease,transform .15s ease,border-color .2s ease;
+}
+.chip:hover{border-color:var(--ring);transform:translateY(-1px);}
+.chip[aria-pressed="true"]{background:var(--primary);color:var(--on-primary);border-color:var(--primary);}
+.chip:active{transform:scale(.97);}
+.theme-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(127,127,127,.35);flex:none;}
+.theme-dot.apple{background:#4CAF50;}
+.theme-dot.cosmic{background:#2F6FE4;}
+.theme-dot.beige{background:#C89B4A;}
+.theme-text-mobile{display:none;}
+.nav-inner{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-block:12px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.06rem;color:var(--fg);}
+.brand-mark{width:34px;height:34px;flex:none;}
+.brand-name{letter-spacing:.02em;}
+.brand-sub{font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.nav-links{display:flex;flex-wrap:wrap;gap:4px 2px;margin-inline-start:auto;}
+.nav-links a{
+  color:var(--fg-soft);font-size:.88rem;font-weight:600;padding:7px 12px;border-radius:999px;
+}
+.nav-links a:hover{background:var(--chip);text-decoration:none;color:var(--fg);}
+/* Hero */
+.hero{position:relative;overflow:clip;padding-block:clamp(56px,11vh,120px);}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(1200px 520px at 50% -10%,var(--hero-glow),transparent 70%);
+}
+.hero-orbit{position:absolute;width:min(46vw,460px);height:auto;inset-inline-end:-60px;top:8%;opacity:.5;pointer-events:none;}
+@media(max-width:760px){.hero-orbit{width:min(70vw,320px);inset-inline-end:-90px;top:-20px;opacity:.32;}}
+.hero-orbit .orbit{fill:none;stroke:var(--primary);stroke-dasharray:2 6;opacity:.55;}
+.hero-orbit .planet{fill:var(--primary);}
+.hero-orbit .moon{fill:var(--accent);opacity:.9;}
+.hero-orbit .cross-a{stroke:var(--accent);stroke-width:3;stroke-linecap:round;opacity:.8;}
+.hero-inner{position:relative;max-width:880px;}
+.hero h1{font-size:clamp(2.6rem,7.2vw,5rem);margin-bottom:18px;letter-spacing:-.02em;}
+.hero .grad{
+  background:linear-gradient(120deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  display:block;padding-bottom:.08em;
+}
+.hero-desc{font-size:clamp(1.02rem,1.8vw,1.24rem);color:var(--fg-soft);max-width:66ch;margin-bottom:26px;}
+.ca-box{
+  display:flex;flex-direction:column;gap:8px;
+  background:var(--code-bg);border:1px dashed var(--border);border-radius:var(--radius);
+  padding:14px 16px;margin:22px 0 8px;max-width:760px;min-width:0;
+}
+.ca-label{font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.06em;}
+.ca-row{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;min-width:0;}
+.ca-code{
+  font-family:var(--font-mono);font-size:.86rem;color:var(--fg);
+  word-break:break-all;overflow-wrap:anywhere;min-width:0;flex:1 1 280px;user-select:all;
+}
+.ca-copy{
+  appearance:none;border:1px solid var(--border);background:var(--chip);color:var(--fg-soft);
+  font:inherit;font-size:.8rem;font-weight:700;padding:7px 14px;border-radius:999px;cursor:pointer;flex:none;
+}
+.ca-copy:hover{border-color:var(--ring);color:var(--fg);}
+.ca-hint{font-size:.76rem;color:var(--muted);max-width:60ch;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+.btn{
+  appearance:none;font:inherit;font-weight:700;font-size:.98rem;
+  padding:13px 24px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  transition:background .2s ease,transform .15s ease,box-shadow .2s ease,border-color .2s ease;
+  text-decoration:none;
+}
+.btn:active{transform:scale(.98);}
+.btn-primary{background:var(--primary);color:var(--on-primary);border:1px solid transparent;box-shadow:var(--shadow);}
+.btn-primary:hover{background:var(--primary-strong);transform:translateY(-2px);box-shadow:var(--shadow-lg);text-decoration:none;}
+.btn-ghost{background:transparent;color:var(--fg-soft);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--ring);color:var(--fg);transform:translateY(-2px);text-decoration:none;}
+.hero-next{
+  display:inline-flex;align-items:center;gap:8px;margin-top:38px;
+  color:var(--muted);font-size:.86rem;font-weight:600;
+}
+.hero-next .scroll-line{
+  width:28px;height:2px;background:var(--accent);position:relative;border-radius:2px;overflow:clip;
+}
+.hero-next .scroll-line::after{content:"";position:absolute;inset:0;background:var(--primary);animation:pulse 2.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.2;transform:translateX(-70%);}50%{opacity:1;transform:translateX(70%);}}
+/* Cards & grids */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(18px,3vw,26px);box-shadow:var(--shadow);}
+.grid{display:grid;gap:16px;}
+.card h3{font-size:1.12rem;margin-bottom:8px;}
+.card p{color:var(--fg-soft);font-size:.97rem;}
+.grid-2{grid-template-columns:1fr 1fr;}
+.grid-3{grid-template-columns:1fr 1fr 1fr;}
+.grid-4{grid-template-columns:1fr 1fr 1fr 1fr;}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr 1fr;}.grid-4{grid-template-columns:1fr 1fr;}}
+@media(max-width:620px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.tag{font-size:.74rem;font-weight:700;color:var(--accent);background:var(--chip);border:1px solid var(--border);padding:4px 10px;border-radius:999px;letter-spacing:.02em;}
+/* Definition */
+.def-head{display:grid;gap:28px;grid-template-columns:1.6fr 1fr;align-items:center;}
+@media(max-width:860px){.def-head{grid-template-columns:1fr;}}
+.mission-card{border-inline-start:4px solid var(--primary);}
+.mission-label{font-size:.78rem;font-weight:800;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.mission-text{font-size:clamp(1.05rem,1.7vw,1.3rem);color:var(--fg);font-weight:600;line-height:1.5;}
+.slogan{margin-top:14px;font-size:.92rem;color:var(--muted);font-style:italic;}
+.equation-wrap{margin-top:26px;text-align:center;}
+.eq-svg{width:100%;max-width:660px;height:auto;margin-inline:auto;}
+.eq-block{fill:var(--primary);rx:18;}
+.eq-letter{font-family:var(--font-mono);font-size:56px;font-weight:800;fill:var(--on-primary);text-anchor:middle;}
+.eq-op{font-size:46px;font-weight:800;fill:var(--accent);text-anchor:middle;}
+.eq-note{margin-top:10px;font-size:.9rem;color:var(--muted);letter-spacing:.05em;}
+.facts-grid{display:grid;gap:12px;grid-template-columns:repeat(6,1fr);margin-top:34px;}
+.fact{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-s);padding:12px 14px;}
+.fact dt{font-size:.74rem;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;}
+.fact dd{font-size:.94rem;font-weight:700;color:var(--fg);}
+@media(max-width:960px){.facts-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:560px){.facts-grid{grid-template-columns:repeat(2,1fr);}}
+.def-matrix{margin-top:34px;}
+/* Linux */
+.linux-head{max-width:820px;margin-bottom:34px;}
+.quote-card{background:var(--surface);border:1px solid var(--border);border-left:5px solid var(--accent);border-radius:var(--radius);padding:clamp(18px,3vw,30px);margin-bottom:24px;box-shadow:var(--shadow);}
+.quote-text{font-size:clamp(1.08rem,2vw,1.42rem);font-weight:600;color:var(--fg);line-height:1.55;}
+.quote-source{margin-top:12px;font-size:.84rem;color:var(--muted);}
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-block:26px;}
+.block{
+  background:var(--chip);border:1px solid var(--border);border-radius:var(--radius-s);
+  padding:12px 18px;font-weight:800;color:var(--fg-soft);font-size:.96rem;text-align:center;flex:1 1 150px;
+}
+.flow .dot{color:var(--accent);font-size:1.5rem;font-weight:800;flex:none;}
+.flow-note{text-align:center;color:var(--muted);font-size:.86rem;margin-top:4px;}
+.blocks-grid{display:grid;gap:16px;grid-template-columns:repeat(4,1fr);margin-top:30px;}
+@media(max-width:960px){.blocks-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.blocks-grid{grid-template-columns:1fr;}}
+.blocks-grid .card .b-title{display:flex;align-items:center;gap:8px;font-size:1.02rem;font-weight:800;color:var(--fg);margin-bottom:6px;}
+.b-chip{font-family:var(--font-mono);font-size:.68rem;font-weight:700;color:var(--on-primary);background:var(--primary);border-radius:6px;padding:2px 7px;flex:none;letter-spacing:.03em;}
+.eaco-connect{margin-top:20px;background:linear-gradient(120deg,var(--surface),var(--surface-2));border:1px solid var(--border);border-radius:var(--radius);padding:clamp(18px,3vw,30px);}
+.eaco-connect h3{font-size:1.16rem;margin-bottom:10px;}
+.source-block{margin-top:26px;background:var(--surface-2);border:1px dashed var(--border);border-radius:var(--radius);padding:16px 20px;font-size:.88rem;color:var(--muted);}
+.source-block p+p{margin-top:8px;}
+/* Network */
+.net-wrap{display:grid;gap:34px;grid-template-columns:1fr 1.1fr;align-items:center;}
+@media(max-width:900px){.net-wrap{grid-template-columns:1fr;}}
+.net-visual{position:relative;display:flex;align-items:center;justify-content:center;}
+.net-svg{width:min(360px,84vw);height:auto;}
+.net-svg .ring{fill:none;stroke:var(--primary);stroke-width:1.4;}
+.net-svg .ring-outer{stroke-dasharray:3 8;opacity:.5;}
+.net-svg .ring-mid{stroke-dasharray:6 10;opacity:.65;}
+.net-svg .ring-inner{stroke:var(--accent);stroke-dasharray:2 6;opacity:.8;}
+.net-svg .core{fill:var(--primary);}
+.net-svg .sat{fill:var(--accent);}
+.net-svg .relay{stroke:var(--accent);stroke-width:1.6;stroke-dasharray:4 6;opacity:.8;}
+.net-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center;}
+.legend-chip{background:var(--chip);border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-size:.82rem;font-weight:700;color:var(--fg-soft);}
+.layer-grid{display:grid;gap:14px;}
+.layer{display:grid;gap:6px;}
+.layer .l-title{font-size:1.06rem;font-weight:800;color:var(--fg);}
+.layer .l-desc{color:var(--fg-soft);font-size:.96rem;}
+.region-note{margin-top:22px;font-size:.88rem;color:var(--muted);}
+/* Ecosystem */
+.eco-groups{display:grid;gap:22px;margin-top:8px;}
+.eco-group .group-title{display:flex;align-items:center;gap:10px;font-size:1.04rem;font-weight:800;margin-bottom:12px;color:var(--fg);}
+.group-count{font-family:var(--font-mono);font-size:.74rem;font-weight:700;color:var(--on-primary);background:var(--primary);border-radius:999px;padding:2px 9px;}
+.ecolist{display:grid;gap:10px;}
+.ecolink{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-s);
+  padding:12px 16px;transition:border-color .2s ease,transform .15s ease,hover .2s;
+}
+.ecolink:hover{border-color:var(--ring);transform:translateY(-2px);text-decoration:none;}
+.ecolink .e-title{font-weight:700;color:var(--fg);font-size:.95rem;word-break:break-word;}
+.ecolink .e-desc{color:var(--muted);font-size:.82rem;margin-top:2px;}
+.ecolink .e-url{font-family:var(--font-mono);font-size:.74rem;color:var(--accent);word-break:break-all;margin-top:6px;}
+.ecolink .e-arrow{color:var(--muted);flex:none;font-size:1.15rem;align-self:center;}
+.e-databox{margin-top:24px;}
+.note-line{margin-top:14px;font-size:.84rem;color:var(--muted);border-inline-start:3px solid var(--border);padding-inline-start:12px;}
+/* Disclaimer */
+.disclaimer{margin-top:var(--page-gap);padding-block:clamp(20px,4vh,40px);background:var(--dis-bg);border-top:1px solid var(--dis-border);}
+.dis-card{max-width:860px;}
+.dis-card h2{font-size:clamp(1.4rem,3vw,2rem);}
+.dis-card p{color:var(--fg-soft);font-size:.95rem;margin-top:10px;}
+/* Footer */
+.site-footer{border-top:1px solid var(--border);padding-block:26px;background:var(--bg-soft);}
+.footer-inner{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;}
+.footer-brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--fg);font-size:.95rem;}
+.footer-note{font-size:.82rem;color:var(--muted);}
+/* Common links panel */
+.links-panel{padding-block:44px 10px;}
+.links-title{font-size:1.05rem;margin-bottom:10px;}
+.links-desc{font-size:.88rem;color:var(--muted);margin-bottom:18px;max-width:64ch;}
+.links-list{display:grid;gap:10px;list-style:none;padding:0;margin:0;}
+.links-list li::before{content:"\2192";color:var(--primary);font-weight:800;margin-inline-end:8px;}
+.links-list a{font-size:.95rem;color:var(--fg-soft);text-decoration:none;border-bottom:1px dashed var(--border);padding-block:1px;}
+.links-list a:hover{color:var(--primary);border-bottom-color:var(--primary);}
+/* Boot overlay */
+.boot{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;gap:12px;background:var(--bg);color:var(--fg-soft);font-weight:700;letter-spacing:.06em;}
+.boot::after{content:"";width:16px;height:16px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+html.no-js .boot{display:none;}
+noscript .noscript-note{display:block;}
+.noscript-note{display:none;background:var(--dis-bg);border:1px solid var(--dis-border);color:var(--fg-soft);border-radius:var(--radius-s);padding:12px 16px;margin-top:22px;font-size:.9rem;font-weight:600;}
+/* Announcer */
+.announcer{position:fixed;inset-inline:16px;bottom:16px;z-index:300;pointer-events:none;display:flex;justify-content:center;}
+.announcer-content{
+  background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-lg);
+  border-radius:999px;padding:10px 20px;font-size:.86rem;font-weight:700;color:var(--fg);
+  opacity:0;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;
+}
+.announcer-content[aria-hidden="false"]{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+}
+</style>
+</head>
+<body>
+<div class="announcer" id="announcer" role="status" aria-live="polite">
+  <span class="announcer-content" id="announcer-content" aria-hidden="true"></span>
+</div>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">跳到主要内容</a>
+
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="wrap utility-inner">
+      <div class="seg" role="group" aria-label="主题风格">
+        <span class="seg-label" data-i18n="ctrl.themeLabel">主题</span>
+        <button type="button" class="chip" data-theme-pick="apple-green" aria-pressed="true"><span class="theme-dot apple" aria-hidden="true"></span><span class="theme-text">苹果绿</span></button>
+        <button type="button" class="chip" data-theme-pick="cosmic-blue" aria-pressed="false"><span class="theme-dot cosmic" aria-hidden="true"></span><span class="theme-text">宇宙蓝</span></button>
+        <button type="button" class="chip" data-theme-pick="classic-beige" aria-pressed="false"><span class="theme-dot beige" aria-hidden="true"></span><span class="theme-text">米黄古典</span></button>
+      </div>
+      <div class="seg" role="group" aria-label="语言">
+        <span class="seg-label" data-i18n="ctrl.langLabel">语言</span>
+        <button type="button" class="chip" data-lang-pick="zh" aria-pressed="true" aria-label="中文">中文</button>
+        <button type="button" class="chip" data-lang-pick="en" aria-pressed="false" aria-label="English">EN</button>
+        <button type="button" class="chip" data-lang-pick="fr" aria-pressed="false" aria-label="Français">FR</button>
+        <button type="button" class="chip" data-lang-pick="es" aria-pressed="false" aria-label="Español">ES</button>
+        <button type="button" class="chip" data-lang-pick="ru" aria-pressed="false" aria-label="Русский">RU</button>
+        <button type="button" class="chip" data-lang-pick="ar" aria-pressed="false" aria-label="العربية">AR</button>
+        <button type="button" class="chip" data-lang-pick="hi" aria-pressed="false" aria-label="हिन्दी">HI</button>
+        <button type="button" class="chip" data-lang-pick="ja" aria-pressed="false" aria-label="日本語">JA</button>
+        <button type="button" class="chip" data-reset aria-pressed="false" data-i18n="ctrl.reset">重置</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="EACO">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="var(--primary)" stroke-width="3"/>
+        <circle cx="24" cy="24" r="12" fill="var(--primary)"/>
+        <path d="M24 12 v24 M12 24 h24" stroke="var(--on-primary)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand-name">EACO</span>
+        <span class="brand-sub">Earth&rsquo;s Best Coin</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#definition" data-i18n="nav.definition">定义</a>
+      <a href="#linux" data-i18n="nav.linux">Linux 类比</a>
+      <a href="#network" data-i18n="nav.network">三层网络</a>
+      <a href="#ecosystem" data-i18n="nav.ecosystem">生态资源</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <noscript>
+    <div class="noscript-note" role="alert">此页面需要启用 JavaScript 才能使用 8 种语言与 3 套主题切换功能；当前显示默认中文内容。</div>
+  </noscript>
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-label="EACO">
+    <svg class="hero-orbit" viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+      <circle cx="110" cy="110" r="96" class="orbit"/>
+      <circle cx="110" cy="110" r="70" class="orbit"/>
+      <circle cx="110" cy="110" r="44" class="orbit"/>
+      <circle cx="110" cy="110" r="17" class="planet"/>
+      <circle cx="198" cy="78" r="6" class="moon"/>
+      <circle cx="30" cy="148" r="4" class="moon"/>
+      <path class="cross-a" d="M110 92 v36 M92 110 h36"/>
+    </svg>
+    <div class="wrap hero-inner">
+      <span class="eyebrow" data-i18n="hero.eyebrow">社区驱动 · 地球村公共网络项目</span>
+      <h1 id="title"><span>Earth&rsquo;s Best</span><span class="grad">AI + RWA + Web3 Coin</span></h1>
+      <p class="hero-desc" data-i18n="hero.desc">EACO 是构建于 Solana 上的社区驱动项目，愿景是成为像 Linux 一样的公共基础设施：它不属于任何个人或组织——持有者即股东。</p>
+      <div class="ca-box">
+        <span class="ca-label" data-i18n="hero.caLabel">合约地址（Solana）</span>
+        <div class="ca-row">
+          <code class="ca-code" id="ca-code">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+          <button type="button" class="ca-copy" data-copy-ca data-i18n="hero.copyBtn">选中地址</button>
+        </div>
+        <span class="ca-hint" data-i18n="hero.caCopyHint">点击按钮选中合约地址，再手动复制</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#definition" data-i18n="hero.primaryAction">了解项目</a>
+        <a class="btn btn-ghost" href="#ecosystem" data-i18n="hero.secondaryAction">查看公开资源</a>
+      </div>
+      <span class="hero-next"><span class="scroll-line" aria-hidden="true"></span><span data-i18n="hero.nextHint">向下滚动 · Linux 公共基础设施类比</span></span>
+    </div>
+  </section>
+
+  <!-- DEFINITION -->
+  <section class="wrap" id="definition" aria-labelledby="def-title">
+    <span class="eyebrow" data-i18n="def.eyebrow">定义</span>
+    <h2 id="def-title" data-i18n="def.title">什么是 EACO？</h2>
+    <div class="def-head">
+      <div class="card mission-card">
+        <div class="mission-label" data-i18n="def.missionLabel">使命</div>
+        <p class="mission-text" data-i18n="def.mission">衡量劳动的价值，量化地球的资源。它不属于任何个人或组织——持有者即股东。</p>
+        <p class="slogan" data-i18n="def.slogan">eaco for earth —— 为地球村而生</p>
+      </div>
+      <div class="card">
+        <p data-i18n="def.attitude">EACO 的四大价值维度：能源、态度、合作、优化。它们共同构成一个可组合、可验证的公共价值协议。</p>
+        <div class="tag-row">
+          <span class="tag">EACO</span>
+          <span class="tag">Solana SPL</span>
+          <span class="tag">MIT</span>
+        </div>
+      </div>
+    </div>
+    <div class="equation-wrap">
+      <svg class="eq-svg" viewBox="0 0 660 150" aria-hidden="true" focusable="false">
+        <rect x="8" y="30" width="130" height="90" class="eq-block"/>
+        <text x="73" y="97" class="eq-letter">E</text>
+        <text x="152" y="86" class="eq-op">×</text>
+        <rect x="172" y="30" width="130" height="90" class="eq-block"/>
+        <text x="237" y="97" class="eq-letter">A</text>
+        <text x="316" y="86" class="eq-op">×</text>
+        <rect x="336" y="30" width="130" height="90" class="eq-block"/>
+        <text x="401" y="97" class="eq-letter">C</text>
+        <text x="480" y="86" class="eq-op">×</text>
+        <rect x="500" y="30" width="130" height="90" class="eq-block"/>
+        <text x="565" y="97" class="eq-letter">O</text>
+      </svg>
+      <p class="eq-note" data-i18n="def.equationNote">能量 × 态度 × 合作 × 优化</p>
+    </div>
+    <dl class="facts-grid">
+      <div class="fact"><dt data-i18n="fact.chain">链</dt><dd data-i18n="fact.chainV">Solana SPL</dd></div>
+      <div class="fact"><dt data-i18n="fact.decimals">精度</dt><dd data-i18n="fact.decimalsV">9</dd></div>
+      <div class="fact"><dt data-i18n="fact.supply">总量</dt><dd data-i18n="fact.supplyV">1,350,000,000 EACO</dd></div>
+      <div class="fact"><dt data-i18n="fact.update">元数据更新</dt><dd data-i18n="fact.updateV">每周四 15:00（GMT+8）</dd></div>
+      <div class="fact"><dt data-i18n="fact.version">版本</dt><dd data-i18n="fact.versionV">0.0.1</dd></div>
+      <div class="fact"><dt data-i18n="fact.license">许可</dt><dd data-i18n="fact.licenseV">MIT</dd></div>
+    </dl>
+    <div class="grid grid-4 def-matrix">
+      <div class="card">
+        <h3 data-i18n="def.energy">能量</h3>
+        <p data-i18n="def.energyDesc">量化与流通清洁能源和地球资源，让能量可计量、可验证。</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="def.attitude">态度</h3>
+        <p data-i18n="def.attitudeDesc">合作共建的社区态度：开源、透明、共同建设——而非封闭与投机。</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="def.cooperation">合作</h3>
+        <p data-i18n="def.cooperationDesc">跨大洲、跨语言的协作，用共识连接地球村的每一个角落。</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="def.optimization">优化</h3>
+        <p data-i18n="def.optimizationDesc">持续优化的公共网络——性能、激励与治理不断演进。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINUX -->
+  <section class="wrap" id="linux" aria-labelledby="linux-title">
+    <div class="linux-head">
+      <span class="eyebrow" data-i18n="linux.eyebrow">公共基础设施</span>
+      <h2 id="linux-title" data-i18n="linux.title">为什么要像 Linux 一样？</h2>
+      <p class="lead" data-i18n="linux.lede">社区将 EACO 的愿景与 Linux 类比：不是某一家公司或交易所，而是中立、开源、人人可用的公共基础设施。</p>
+    </div>
+    <figure class="quote-card">
+      <blockquote class="quote-text" data-i18n="linux.quote">“它真正指向的，更像是互联网、Linux 这样的公共基础设施——你不需要十套重复做同一件事的系统，而是需要一套中立的系统。”</blockquote>
+      <figcaption class="quote-source" data-i18n="linux.quoteSource">Jeff Yan（Hyperliquid Labs 联合创始人），Blockworks DAS Asia，2026-10-07，新加坡</figcaption>
+    </figure>
+    <p class="lead" data-i18n="linux.p1">2026 年 10 月 7 日在新加坡 Blockworks DAS Asia 的对谈中，Jeff Yan 解释了为什么这样的系统应该像 Linux：基础组件的数量应该精简，但每个组件都必须精准、用途广泛、并能与其他组件相互组合。</p>
+    <p class="lead" style="margin-top:14px" data-i18n="linux.p2">“每个组件都应该设计得精准、用途广泛，并能与其他组件很好地组合。”——组件不必很多，但必须协同工作。</p>
+    <div class="flow" aria-hidden="true">
+      <span class="block">基础协议</span>
+      <span class="dot">→</span>
+      <span class="block">可组合组件</span>
+      <span class="dot">→</span>
+      <span class="block">开发者产品</span>
+      <span class="dot">→</span>
+      <span class="block">终端用户价值</span>
+    </div>
+    <p class="flow-note" data-i18n="linux.componentsTitle">可组合的基础组件</p>
+    <div class="blocks-grid">
+      <div class="card">
+        <div class="b-title"><span class="b-chip">01</span><span data-i18n="linux.c1">永续 · 现货 · 期权</span></div>
+        <p data-i18n="linux.c1Desc">资产本身、带杠杆的线性工具与凸性收益工具，构成完整的“三件套”。</p>
+      </div>
+      <div class="card">
+        <div class="b-title"><span class="b-chip">02</span><span data-i18n="linux.c2">组合保证金 · 原生借贷</span></div>
+        <p data-i18n="linux.c2Desc">借贷组件与交易组件结合，让开发者在一个生态中构建更多产品。</p>
+      </div>
+      <div class="card">
+        <div class="b-title"><span class="b-chip">03</span><span data-i18n="linux.c3">优先费 · 公开订单簿</span></div>
+        <p data-i18n="linux.c3Desc">把延迟军备竞赛的负外部性纳入系统内部，让更多人能够参与；订单簿在链上公开透明。</p>
+      </div>
+      <div class="card">
+        <div class="b-title"><span class="b-chip">04</span><span data-i18n="linux.c4">HIP-3 · HIP-3* · HIP-4</span></div>
+        <p data-i18n="linux.c4Desc">无需许可的市场部署、可选权限控制、结果合约——组件清单永不应被限定。</p>
+      </div>
+    </div>
+    <div class="eaco-connect">
+      <h3 data-i18n="linux.eacoConnectTitle">这对 EACO 意味着什么</h3>
+      <p class="lead" data-i18n="linux.eacoConnect">EACO 社区把同一种公共基础设施哲学带到地球村结算网络：开源代码、中立组织、不属于任何个人；由全球节点共同维护，持有者即股东。EACO 的目标是在七大洲、五大洋之上，提供一套可计量、可验证、可结算的中立网络。</p>
+    </div>
+    <div class="source-block">
+      <p><strong>来源：</strong><span data-i18n="linux.sourceNote">本节引用 Jeff Yan 的公开访谈（吴说区块链编译；音频转录与翻译由 GPT 完成，可能存在错误；文中数据与功能状态均以访谈时为背景）。嘉宾发言不代表本页观点，不构成任何投资建议。</span></p>
+      <p><a href="https://www.youtube.com/watch?v=e0xi_NeVk4w" target="_blank" rel="noopener" data-i18n="linux.youtube">原视频：Blockworks DAS Asia 访谈（YouTube）</a></p>
+      <p><a href="https://mp.weixin.qq.com/s?__biz=MzI0ODgzMDE5MA==&amp;mid=2247513985&amp;idx=1&amp;sn=cd95a7cedee3068fa42836a3d0c4e794&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">吴说区块链编译全文（微信公众号）</a></p>
+    </div>
+  </section>
+
+  <!-- NETWORK -->
+  <section class="wrap" id="network" aria-labelledby="net-title">
+    <span class="eyebrow" data-i18n="net.eyebrow">愿景</span>
+    <h2 id="net-title" data-i18n="net.title">地球村 · 三层网络</h2>
+    <p class="lead" data-i18n="net.tagline">七大洲 · 五大洋 · 一张 EACO 网</p>
+    <p class="lead" style="margin-top:14px" data-i18n="net.lede">从陆地到海洋，从地球轨道到深空——用一套去中心化的价值协议，把地球村连接成一张可计量、可验证、可结算的公共网络。EACO 作为结算层，通过跨链互通把网络连接起来。</p>
+    <div class="net-wrap">
+      <div class="net-visual">
+        <svg class="net-svg" viewBox="0 0 340 340" aria-hidden="true" focusable="false">
+          <circle cx="170" cy="170" r="148" class="ring ring-outer"/>
+          <circle cx="170" cy="170" r="104" class="ring ring-mid"/>
+          <circle cx="170" cy="170" r="60" class="ring ring-inner"/>
+          <circle cx="170" cy="170" r="26" class="core"/>
+          <circle class="sat" cx="318" cy="92" r="7"/>
+          <circle class="sat" cx="30" cy="214" r="5"/>
+          <circle class="sat" cx="296" cy="252" r="6"/>
+          <path class="relay" d="M170 170 L318 92 M170 170 L30 214 M170 170 L296 252"/>
+        </svg>
+      </div>
+      <div>
+        <div class="layer-grid">
+          <div class="card layer">
+            <div class="l-title" data-i18n="net.land">陆地网络</div>
+            <div class="l-desc" data-i18n="net.landDesc">第一层大陆骨干网；第二层覆盖城市、教育、能源与劳动。</div>
+          </div>
+          <div class="card layer">
+            <div class="l-title" data-i18n="net.ocean">海洋网络</div>
+            <div class="l-desc" data-i18n="net.oceanDesc">海底光缆；漂浮能源与计算；港口与航运的跨洋结算。</div>
+          </div>
+          <div class="card layer">
+            <div class="l-title" data-i18n="net.space">太空网络</div>
+            <div class="l-desc" data-i18n="net.spaceDesc">近地轨道；地月空间；深空小行星带。</div>
+          </div>
+        </div>
+        <div class="net-legend">
+          <span class="legend-chip" data-i18n="net.settle">EACO 结算层</span>
+          <span class="legend-chip" data-i18n="net.cross">跨链互通（如 Solana → BNB）</span>
+        </div>
+        <p class="region-note" data-i18n="net.ref">延伸阅读：三层网络专题页 · 宇宙意识专题页（见下方公开资源）</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOSYSTEM -->
+  <section class="wrap" id="ecosystem" aria-labelledby="eco-title">
+    <span class="eyebrow" data-i18n="eco.eyebrow">生态</span>
+    <h2 id="eco-title" data-i18n="eco.title">生态与公开资源</h2>
+    <p class="lead" data-i18n="eco.lede">以下是 EACO 的公开、中立资源：项目页面、源代码、链上浏览器与社区频道。链接由各自团队维护。</p>
+    <div class="eco-groups">
+
+      <div class="eco-group">
+        <div class="group-title"><span data-i18n="eco.pages">项目与愿景页面</span><span class="group-count">4</span></div>
+        <div class="ecolist">
+          <a class="ecolink" href="https://linktr.ee/eacoearth" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">EACO · 官方链接合集（linktr.ee）</span>
+              <span class="e-desc" data-i18n="link.linktree">官方聚合入口：官网、社交、社区、交易入口</span>
+              <span class="e-url">linktr.ee/eacoearth</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">EACO 官网 · EACO-SOL-DOGE-EAC</span>
+              <span class="e-desc" data-i18n="link.homeDesc">社区主页与项目信息</span>
+              <span class="e-url">ucoingroup.github.io/earths-best-coin/</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://ucoingroup.github.io/earths-best-coin/eaco-sol-top10-dex2025.html" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">EACO Solana Top10 DEX</span>
+              <span class="e-desc" data-i18n="link.top10Desc">链上交易入口索引</span>
+              <span class="e-url">ucoingroup.github.io/earths-best-coin/eaco-sol-top10-dex2025.html</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://ucoingroup.github.io/eacoweb3-2026/Earth-Village-EACO-Network2024.html" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">地球村 · EACO 网络</span>
+              <span class="e-desc" data-i18n="link.networkDesc">三层网络愿景专题页</span>
+              <span class="e-url">ucoingroup.github.io/eacoweb3-2026/Earth-Village-EACO-Network2024.html</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://ucoingroup.github.io/eacoweb3-2026/Cosmic-Consciousness2024.html" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">宇宙意识 · Cosmic Consciousness</span>
+              <span class="e-desc" data-i18n="link.cosmicDesc">宇宙意识愿景专题页</span>
+              <span class="e-url">ucoingroup.github.io/eacoweb3-2026/Cosmic-Consciousness2024.html</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="eco-group">
+        <div class="group-title"><span data-i18n="eco.repos">源代码仓库</span><span class="group-count">4</span></div>
+        <div class="ecolist">
+          <a class="ecolink" href="https://github.com/ucoingroup/earths-best-coin" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">github.com/ucoingroup/earths-best-coin</span>
+              <span class="e-desc" data-i18n="link.repo1Desc">项目主页与元数据（eaco.json）</span>
+              <span class="e-url">github.com/ucoingroup/earths-best-coin</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">github.com/ucoingroup/eacoweb3-2026</span>
+              <span class="e-desc" data-i18n="link.repo2Desc">Web3 2026 站点源</span>
+              <span class="e-url">github.com/ucoingroup/eacoweb3-2026</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://github.com/ucoingroup/eacoSWAP" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">github.com/ucoingroup/eacoSWAP</span>
+              <span class="e-desc" data-i18n="link.repo3Desc">前端与兑换界面（TypeScript）</span>
+              <span class="e-url">github.com/ucoingroup/eacoSWAP</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://github.com/ucoingroup/EACO-SOL-DOGE-EAC" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">github.com/ucoingroup/EACO-SOL-DOGE-EAC</span>
+              <span class="e-desc" data-i18n="link.repo4Desc">跨链：DOGE → Solana → BNB</span>
+              <span class="e-url">github.com/ucoingroup/EACO-SOL-DOGE-EAC</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="eco-group">
+        <div class="group-title"><span data-i18n="eco.explorers">链上浏览器</span><span class="group-count">3</span></div>
+        <div class="ecolist">
+          <a class="ecolink" href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">OrbMarkets · EACO 代币页</span>
+              <span class="e-desc" data-i18n="link.orb">报价与代币信息</span>
+              <span class="e-url">orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">Solscan · EACO</span>
+              <span class="e-desc" data-i18n="link.solscan">Solana 链上浏览器</span>
+              <span class="e-url">solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://explorer.solana.com/address/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">Solana Explorer · EACO</span>
+              <span class="e-desc" data-i18n="link.solana">Solana 官方浏览器</span>
+              <span class="e-url">explorer.solana.com/address/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="eco-group">
+        <div class="group-title"><span data-i18n="eco.community">社区频道</span><span class="group-count">4</span></div>
+        <div class="ecolist">
+          <a class="ecolink" href="https://x.com/eacocc" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">X (Twitter) · @eacocc</span>
+              <span class="e-desc" data-i18n="link.x">官方 X 频道</span>
+              <span class="e-url">x.com/eacocc</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://t.me/e_eacocc" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">Telegram · EACO</span>
+              <span class="e-desc" data-i18n="link.telegram">官方电报群</span>
+              <span class="e-url">t.me/e_eacocc</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://t.me/eacoespanish" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">Telegram · EACO 西班牙语</span>
+              <span class="e-desc" data-i18n="link.telegramEs">西语社区群</span>
+              <span class="e-url">t.me/eacoespanish</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">
+            <span>
+              <span class="e-title">Discord · EACO</span>
+              <span class="e-desc" data-i18n="link.discord">官方 Discord</span>
+              <span class="e-url">discord.gg/bWCDME9Pkc</span>
+            </span>
+            <span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="eco-group">
+        <div class="group-title"><span data-i18n="eco.dex">链上公开 DEX 页面</span><span class="group-count">10</span></div>
+        <p class="note-line" data-i18n="eco.dexNote">以下为社区整理收录、由各 DEX 团队独立运营的公开链上兑换页面。本页为中立信息，不鼓励任何交易，也不提供投资建议。</p>
+        <div class="ecolist" style="margin-top:12px">
+          <a class="ecolink" href="https://jup.ag/swap/USDC-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Jupiter</span><span class="e-url">jup.ag</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://raydium.io/swap/?inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amp;outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Raydium</span><span class="e-url">raydium.io</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://www.orca.so/?tokens=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Orca</span><span class="e-url">orca.so</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://app.meteora.ag/pools?search=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Meteora</span><span class="e-url">app.meteora.ag</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://pump.fun/trade/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">PumpSwap</span><span class="e-url">pump.fun</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://lifinity.io/pool/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Lifinity</span><span class="e-url">lifinity.io</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://www.phoenix.trade/market/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Phoenix</span><span class="e-url">phoenix.trade</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://www.drift.trade/spot/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Drift</span><span class="e-url">drift.trade</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://manifest.trade/market/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Manifest</span><span class="e-url">manifest.trade</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="ecolink" href="https://humidifi.com/swap/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">
+            <span><span class="e-title">Humidifi</span><span class="e-url">humidifi.com</span></span><span class="e-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="e-databox">
+        <div class="ca-box">
+          <span class="ca-label" data-i18n="eco.caLabel">合约地址（Solana）</span>
+          <div class="ca-row">
+            <code class="ca-code">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+            <button type="button" class="ca-copy" data-copy-ca data-i18n="eco.copyBtn">选中地址</button>
+          </div>
+          <span class="ca-hint" data-i18n="eco.copyHint">点击按钮选中地址，再手动复制</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="wrap">
+      <div class="dis-card">
+        <span class="eyebrow" data-i18n="disc.eyebrow">中立声明</span>
+        <h2 data-i18n="disc.title">请注意</h2>
+        <p data-i18n="disc.p1">本页是 EACO 社区项目的中立信息页，并非投资页面。本页任何内容均不构成投资建议、收益承诺或交易引导。加密资产价格波动剧烈，参与前请自行研究并遵守所在地法律法规。</p>
+        <p data-i18n="disc.p2">本页引用的第三方链接（OrbMarkets、各 DEX、GitHub、社交频道等）由各自团队维护，与本页无关。链上事实以官方仓库 eaco.json 元数据为准，每周四 15:00（GMT+8）更新；当前版本 0.0.1（MIT 许可）。</p>
+        <p data-i18n="disc.p3">未经核实的能力、指标、价格与收益数据，本页一律不予展示。</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="wrap links-panel" aria-labelledby="links-title">
+    <h2 class="links-title" id="links-title" data-i18n="links.title">eaco 常用链接</h2>
+    <p class="links-desc" data-i18n="links.desc">以下为社区维护的官方托管页面与公开技术系列，仅供查阅。</p>
+    <ul class="links-list">
+      <li><a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener" data-i18n="links.l1">Earth's Best Coin · 官网托管页</a></li>
+      <li><a href="https://ucoingroup.github.io/earths-best-coin/eaco-sol-top10-dex2025.html" target="_blank" rel="noopener" data-i18n="links.l2">EACO · SOL 生态顶级 DEX 2025</a></li>
+      <li><a href="https://ucoingroup.github.io/eacoweb3-2026/Earth-Village-EACO-Network2024.html" target="_blank" rel="noopener" data-i18n="links.l3">Earth Village · EACO 网络 2024</a></li>
+      <li><a href="https://eaco.freedev.app/eaco_web3_series" target="_blank" rel="noopener" data-i18n="links.l4">EACO Web3 技术系列</a></li>
+    </ul>
+  </section>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="var(--primary)" stroke-width="3"/>
+        <circle cx="24" cy="24" r="12" fill="var(--primary)"/>
+        <path d="M24 12 v24 M12 24 h24" stroke="var(--on-primary)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>EACO</span>
+    </div>
+    <div class="footer-note" data-i18n="foot.note">eaco for earth · 社区驱动 · 中立信息页</div>
+    <div class="footer-note" data-i18n="foot.reserved">© 2026 eaco community · 依据公开信息整理</div>
+  </div>
+</footer>
+
+<script>var I18N = {
+zh: {
+  "a11y.skip": "跳到主要内容",
+  "ctrl.themeLabel": "主题",
+  "ctrl.langLabel": "语言",
+  "ctrl.reset": "重置",
+  "nav.definition": "定义",
+  "nav.linux": "Linux 类比",
+  "nav.network": "三层网络",
+  "nav.ecosystem": "生态资源",
+  "hero.eyebrow": "社区驱动 · 地球村公共网络项目",
+  "hero.desc": "EACO 是构建于 Solana 上的社区驱动项目，愿景是成为像 Linux 一样的公共基础设施：它不属于任何个人或组织——持有者即股东。",
+  "hero.caLabel": "合约地址（Solana）",
+  "hero.caCopyHint": "点击按钮选中合约地址，再手动复制",
+  "hero.copyBtn": "选中地址",
+  "hero.primaryAction": "了解项目",
+  "hero.secondaryAction": "查看公开资源",
+  "hero.nextHint": "向下滚动 · Linux 公共基础设施类比",
+  "def.eyebrow": "定义",
+  "def.title": "什么是 EACO？",
+  "def.missionLabel": "使命",
+  "def.mission": "衡量劳动的价值，量化地球的资源。它不属于任何个人或组织——持有者即股东。",
+  "def.slogan": "eaco for earth —— 为地球村而生",
+  "def.attitude": "EACO 的四大价值维度：能量、态度、合作、优化。它们共同构成一个可组合、可验证的公共价值协议。",
+  "def.equationNote": "能量 × 态度 × 合作 × 优化",
+  "fact.chain": "链",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "精度",
+  "fact.decimalsV": "9",
+  "fact.supply": "总量",
+  "fact.supplyV": "1,350,000,000 EACO",
+  "fact.update": "元数据更新",
+  "fact.updateV": "每周四 15:00（GMT+8）",
+  "fact.version": "版本",
+  "fact.versionV": "0.0.1",
+  "fact.license": "许可",
+  "fact.licenseV": "MIT",
+  "def.energy": "能量",
+  "def.energyDesc": "量化与流通清洁能源和地球资源，让能量可计量、可验证。",
+  "def.attitudeTitle": "态度",
+  "def.attitudeDesc": "合作共建的社区态度：开源、透明、共同建设——而非封闭与投机。",
+  "def.cooperation": "合作",
+  "def.cooperationDesc": "跨大洲、跨语言的协作，用共识连接地球村的每一个角落。",
+  "def.optimization": "优化",
+  "def.optimizationDesc": "持续优化的公共网络——性能、激励与治理不断演进。",
+  "linux.eyebrow": "公共基础设施",
+  "linux.title": "为什么要像 Linux 一样？",
+  "linux.lede": "社区将 EACO 的愿景与 Linux 类比：不是某一家公司或交易所，而是中立、开源、人人可用的公共基础设施。",
+  "linux.quote": "“它真正指向的，更像是互联网、Linux 这样的公共基础设施——你不需要十套重复做同一件事的系统，而是需要一套中立的系统。”",
+  "linux.quoteSource": "Jeff Yan（Hyperliquid Labs 联合创始人），Blockworks DAS Asia，2026-10-07，新加坡",
+  "linux.p1": "2026 年 10 月 7 日在新加坡 Blockworks DAS Asia 的对谈中，Jeff Yan 解释了为什么这样的系统应该像 Linux：基础组件的数量应该精简，但每个组件都必须精准、用途广泛、并能与其他组件相互组合。",
+  "linux.p2": "“每个组件都应该设计得精准、用途广泛，并能与其他组件很好地组合。”——组件不必很多，但必须协同工作。",
+  "linux.componentsTitle": "可组合的基础组件",
+  "linux.c1": "永续 · 现货 · 期权",
+  "linux.c1Desc": "资产本身、带杠杆的线性工具与凸性收益工具，构成完整的“三件套”。",
+  "linux.c2": "组合保证金 · 原生借贷",
+  "linux.c2Desc": "借贷组件与交易组件结合，让开发者在一个生态中构建更多产品。",
+  "linux.c3": "优先费 · 公开订单簿",
+  "linux.c3Desc": "把延迟军备竞赛的负外部性纳入系统内部，让更多人能够参与；订单簿在链上公开透明。",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "无需许可的市场部署、可选权限控制、结果合约——组件清单永不应被限定。",
+  "linux.eacoConnectTitle": "这对 EACO 意味着什么",
+  "linux.eacoConnect": "EACO 社区把同一种公共基础设施哲学带到地球村结算网络：开源代码、中立组织、不属于任何个人；由全球节点共同维护，持有者即股东。EACO 的目标是在七大洲、五大洋之上，提供一套可计量、可验证、可结算的中立网络。",
+  "linux.sourceNote": "本节引用 Jeff Yan 的公开访谈（吴说区块链编译；音频转录与翻译由 GPT 完成，可能存在错误；文中数据与功能状态均以访谈时为背景）。嘉宾发言不代表本页观点，不构成任何投资建议。",
+  "linux.youtube": "原视频：Blockworks DAS Asia 访谈（YouTube）",
+  "net.eyebrow": "愿景",
+  "net.title": "地球村 · 三层网络",
+  "net.tagline": "七大洲 · 五大洋 · 一张 EACO 网",
+  "net.lede": "从陆地到海洋，从地球轨道到深空——用一套去中心化的价值协议，把地球村连接成一张可计量、可验证、可结算的公共网络。EACO 作为结算层，通过跨链互通把网络连接起来。",
+  "net.land": "陆地网络",
+  "net.landDesc": "第一层大陆骨干网；第二层覆盖城市、教育、能源与劳动。",
+  "net.ocean": "海洋网络",
+  "net.oceanDesc": "海底光缆；漂浮能源与计算；港口与航运的跨洋结算。",
+  "net.space": "太空网络",
+  "net.spaceDesc": "近地轨道；地月空间；深空小行星带。",
+  "net.settle": "EACO 结算层",
+  "net.cross": "跨链互通（如 Solana → BNB）",
+  "net.ref": "延伸阅读：三层网络专题页 · 宇宙意识专题页（见下方公开资源）",
+  "eco.eyebrow": "生态",
+  "eco.title": "生态与公开资源",
+  "eco.lede": "以下是 EACO 的公开、中立资源：项目页面、源代码、链上浏览器与社区频道。链接由各自团队维护。",
+  "eco.pages": "项目与愿景页面",
+  "eco.repos": "源代码仓库",
+  "eco.explorers": "链上浏览器",
+  "eco.community": "社区频道",
+  "eco.dex": "链上公开 DEX 页面",
+  "eco.dexNote": "以下为社区整理收录、由各 DEX 团队独立运营的公开链上兑换页面。本页为中立信息，不鼓励任何交易，也不提供投资建议。",
+  "eco.caLabel": "合约地址（Solana）",
+  "eco.copyBtn": "选中地址",
+  "eco.copyHint": "点击按钮选中地址，再手动复制",
+  "link.linktree": "官方聚合入口：官网、社交、社区、交易入口",
+  "link.homeDesc": "社区主页与项目信息",
+  "link.top10Desc": "链上交易入口索引",
+  "link.networkDesc": "三层网络愿景专题页",
+  "link.cosmicDesc": "宇宙意识愿景专题页",
+  "link.repo1Desc": "项目主页与元数据（eaco.json）",
+  "link.repo2Desc": "Web3 2026 站点源",
+  "link.repo3Desc": "前端与兑换界面（TypeScript）",
+  "link.repo4Desc": "跨链：DOGE → Solana → BNB",
+  "link.orb": "报价与代币信息",
+  "link.solscan": "Solana 链上浏览器",
+  "link.solana": "Solana 官方浏览器",
+  "link.x": "官方 X 频道",
+  "link.telegram": "官方电报群",
+  "link.telegramEs": "西语社区群",
+  "link.discord": "官方 Discord",
+  "disc.eyebrow": "中立声明",
+  "disc.title": "请注意",
+  "disc.p1": "本页是 EACO 社区项目的中立信息页，并非投资页面。本页任何内容均不构成投资建议、收益承诺或交易引导。加密资产价格波动剧烈，参与前请自行研究并遵守所在地法律法规。",
+  "disc.p2": "本页引用的第三方链接（OrbMarkets、各 DEX、GitHub、社交频道等）由各自团队维护，与本页无关。链上事实以官方仓库 eaco.json 元数据为准，每周四 15:00（GMT+8）更新；当前版本 0.0.1（MIT 许可）。",
+  "disc.p3": "未经核实的能力、指标、价格与收益数据，本页一律不予展示。",
+  "foot.note": "eaco for earth · 社区驱动 · 中立信息页",
+  "foot.reserved": "© 2026 eaco community · 依据公开信息整理",
+  "links.title": "eaco 常用链接",
+  "links.desc": "以下为社区维护的官方托管页面与公开技术系列，仅供查阅。",
+  "links.l1": "Earth's Best Coin · 官网托管页",
+  "links.l2": "EACO · SOL 生态顶级 DEX 2025",
+  "links.l3": "Earth Village · EACO 网络 2024",
+  "links.l4": "EACO Web3 技术系列",
+  "ann.theme": "已切换主题：%s",
+  "ann.lang": "已切换语言：%s",
+  "ann.reset": "已恢复默认：中文 · 苹果绿",
+  "ann.copy": "合约地址已选中，请按 Ctrl+C 复制",
+  "ann.missing": "部分翻译条目暂缺，已显示默认内容",
+  "theme.apple": "苹果绿",
+  "theme.cosmic": "宇宙蓝",
+  "theme.beige": "米黄古典",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+},
+en: {
+  "a11y.skip": "Skip to main content",
+  "ctrl.themeLabel": "Theme",
+  "ctrl.langLabel": "Language",
+  "ctrl.reset": "Reset",
+  "nav.definition": "Definition",
+  "nav.linux": "Linux analogy",
+  "nav.network": "Three-layer network",
+  "nav.ecosystem": "Resources",
+  "hero.eyebrow": "Community-driven · Earth Village public network project",
+  "hero.desc": "EACO is a community-driven project on Solana with a vision to become public infrastructure like Linux: it belongs to no individual or organization — holders are the shareholders.",
+  "hero.caLabel": "Contract address (Solana)",
+  "hero.caCopyHint": "Click the button to select the contract address, then copy it manually",
+  "hero.copyBtn": "Select address",
+  "hero.primaryAction": "Learn about the project",
+  "hero.secondaryAction": "Explore public resources",
+  "hero.nextHint": "Scroll down · the Linux public-infrastructure analogy",
+  "def.eyebrow": "Definition",
+  "def.title": "What is EACO?",
+  "def.missionLabel": "Mission",
+  "def.mission": "Measure the value of labor and quantify the resources of Earth. It belongs to no individual or organization — holders are the shareholders.",
+  "def.slogan": "eaco for earth — built for the Earth Village",
+  "def.attitude": "EACO rests on four value dimensions: energy, attitude, cooperation and optimization. Together they form a composable, verifiable public value protocol.",
+  "def.equationNote": "Energy × Attitude × Cooperation × Optimization",
+  "fact.chain": "Chain",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "Decimals",
+  "fact.decimalsV": "9",
+  "fact.supply": "Total supply",
+  "fact.supplyV": "1,350,000,000 EACO",
+  "fact.update": "Metadata update",
+  "fact.updateV": "Every Thursday 15:00 (GMT+8)",
+  "fact.version": "Version",
+  "fact.versionV": "0.0.1",
+  "fact.license": "License",
+  "fact.licenseV": "MIT",
+  "def.energy": "Energy",
+  "def.energyDesc": "Quantify and circulate clean energy and Earth's resources, so that energy can be measured and verified.",
+  "def.attitudeTitle": "Attitude",
+  "def.attitudeDesc": "A cooperative community attitude: open source, transparent, building together — not closed or speculative.",
+  "def.cooperation": "Cooperation",
+  "def.cooperationDesc": "Cross-continental, cross-language collaboration that connects every corner of the Earth Village through consensus.",
+  "def.optimization": "Optimization",
+  "def.optimizationDesc": "A continuously optimized public network — performance, incentives and governance keep evolving.",
+  "linux.eyebrow": "Public infrastructure",
+  "linux.title": "Why a Linux-like approach?",
+  "linux.lede": "The community compares the EACO vision to Linux: not a single company or exchange, but neutral, open-source public infrastructure available to everyone.",
+  "linux.quote": "“What it really points to is public infrastructure, more like the internet or Linux — you don't need ten systems that repeat the same task, you need one neutral system.”",
+  "linux.quoteSource": "Jeff Yan (co-founder, Hyperliquid Labs), Blockworks DAS Asia, 2026-10-07, Singapore",
+  "linux.p1": "In a conversation at Blockworks DAS Asia in Singapore on 7 October 2026, Jeff Yan explained why such a system should be like Linux: the number of building blocks should stay small, but every block must be precise, broadly useful, and able to combine with the others.",
+  "linux.p2": "“Each component should be designed with precision, have broad use, and combine well with other components.” — Few components, but they must work together.",
+  "linux.componentsTitle": "Composable building blocks",
+  "linux.c1": "Perpetuals · Spot · Options",
+  "linux.c1Desc": "The asset itself, levered linear instruments, and convex-payoff instruments form a complete “trio”.",
+  "linux.c2": "Portfolio margin · Native lending",
+  "linux.c2Desc": "Lending components combine with trading components, letting developers build more products in one ecosystem.",
+  "linux.c3": "Priority fees · Public order books",
+  "linux.c3Desc": "Internalize the negative externalities of the latency arms race and let more people participate; the order book is transparent on-chain.",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "Permissionless market deployment, optional permission controls, and outcome contracts — the component list should never be finalized.",
+  "linux.eacoConnectTitle": "What this means for EACO",
+  "linux.eacoConnect": "The EACO community brings the same public-infrastructure philosophy to the Earth Village settlement network: open-source code, neutral organization, owned by no individual; maintained together by global nodes, where holders are shareholders. EACO aims to provide a neutral network across seven continents and five oceans that can be measured, verified and settled.",
+  "linux.sourceNote": "This section quotes a public interview with Jeff Yan (compiled by Wu Blockchain; audio transcription by GPT, which may contain errors; data and feature status reflect the time of the interview). The guest's views do not represent this page and are not investment advice.",
+  "linux.youtube": "Original video: Blockworks DAS Asia interview (YouTube)",
+  "net.eyebrow": "Vision",
+  "net.title": "Earth Village · Three-layer network",
+  "net.tagline": "Seven continents · five oceans · one EACO network",
+  "net.lede": "From land to ocean, from Earth orbit to deep space — one decentralized value protocol connects the Earth Village into a public network that can be measured, verified and settled. EACO acts as the settlement layer, linking the network through cross-chain interop.",
+  "net.land": "Land network",
+  "net.landDesc": "Layer 1 continental backbone; Layer 2 covering cities, education, energy and labor.",
+  "net.ocean": "Ocean network",
+  "net.oceanDesc": "Submarine cables; floating energy and compute; cross-ocean settlement for ports and shipping.",
+  "net.space": "Space network",
+  "net.spaceDesc": "Low Earth orbit; cis-lunar space; deep-space asteroid belt.",
+  "net.settle": "EACO settlement layer",
+  "net.cross": "Cross-chain interop (e.g. Solana → BNB)",
+  "net.ref": "Further reading: three-layer network page · cosmic consciousness page (see public resources below)",
+  "eco.eyebrow": "Ecosystem",
+  "eco.title": "Ecosystem and public resources",
+  "eco.lede": "Below are EACO's public, neutral resources: project pages, source code, on-chain explorers and community channels. Links are maintained by their respective teams.",
+  "eco.pages": "Project and vision pages",
+  "eco.repos": "Source code",
+  "eco.explorers": "On-chain explorers",
+  "eco.community": "Community channels",
+  "eco.dex": "Public on-chain DEX pages",
+  "eco.dexNote": "The DEX pages above are curated public on-chain swap pages operated independently by each DEX team. This page is neutral information and does not encourage any trading or provide investment advice.",
+  "eco.caLabel": "Contract address (Solana)",
+  "eco.copyBtn": "Select address",
+  "eco.copyHint": "Click the button to select the address, then copy manually",
+  "link.linktree": "Official aggregation hub: website, social, community, trading entry",
+  "link.homeDesc": "Community homepage and project information",
+  "link.top10Desc": "On-chain trading entry index",
+  "link.networkDesc": "Three-layer network vision page",
+  "link.cosmicDesc": "Cosmic consciousness vision page",
+  "link.repo1Desc": "Project homepage and metadata (eaco.json)",
+  "link.repo2Desc": "Web3 2026 site source",
+  "link.repo3Desc": "Frontend and swap interface (TypeScript)",
+  "link.repo4Desc": "Cross-chain: DOGE → Solana → BNB",
+  "link.orb": "Quotes and token information",
+  "link.solscan": "Solana on-chain explorer",
+  "link.solana": "Solana official explorer",
+  "link.x": "Official X channel",
+  "link.telegram": "Official Telegram group",
+  "link.telegramEs": "Spanish community group",
+  "link.discord": "Official Discord",
+  "disc.eyebrow": "Neutrality statement",
+  "disc.title": "Please note",
+  "disc.p1": "This page is a neutral information page for the EACO community project, not an investment page. Nothing on this page constitutes investment advice, earnings promises or trading guidance. Crypto assets are highly volatile; do your own research and follow local laws before participating.",
+  "disc.p2": "Third-party links cited here (OrbMarkets, DEXs, GitHub, social channels, etc.) are maintained by their own teams and are unrelated to this page. On-chain facts follow the official repository's eaco.json metadata, updated every Thursday 15:00 (GMT+8); current version 0.0.1 (MIT license).",
+  "disc.p3": "Unverified capabilities, metrics, prices and earnings data are not shown on this page.",
+  "foot.note": "eaco for earth · community-driven · neutral information page",
+  "foot.reserved": "© 2026 eaco community · Compiled from public information",
+  "links.title": "EACO Common Links",
+  "links.desc": "Official hosted pages and public technical series maintained by the community, for reference.",
+  "links.l1": "Earth's Best Coin · Official hosted page",
+  "links.l2": "EACO · Top SOL DEX 2025",
+  "links.l3": "Earth Village · EACO Network 2024",
+  "links.l4": "EACO Web3 Technical Series",
+  "ann.theme": "Theme switched: %s",
+  "ann.lang": "Language switched: %s",
+  "ann.reset": "Reset to default: 中文 · apple green",
+  "ann.copy": "Contract address selected. Press Ctrl+C to copy",
+  "ann.missing": "Some translation entries are missing; showing default content",
+  "theme.apple": "Apple green",
+  "theme.cosmic": "Cosmic blue",
+  "theme.beige": "Classic beige",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+},
+fr: {
+  "a11y.skip": "Aller au contenu",
+  "ctrl.themeLabel": "Thème",
+  "ctrl.langLabel": "Langue",
+  "ctrl.reset": "Réinitialiser",
+  "nav.definition": "Définition",
+  "nav.linux": "Analogie Linux",
+  "nav.network": "Réseau à trois couches",
+  "nav.ecosystem": "Ressources",
+  "hero.eyebrow": "Porté par la communauté · Réseau public du Village Terre",
+  "hero.desc": "EACO est un projet communautaire sur Solana dont la vision est de devenir une infrastructure publique comme Linux : il n'appartient à aucune personne ni organisation — les détenteurs sont les actionnaires.",
+  "hero.caLabel": "Adresse du contrat (Solana)",
+  "hero.caCopyHint": "Sélectionnez l'adresse avec le bouton, puis copiez-la manuellement",
+  "hero.copyBtn": "Sélectionner l'adresse",
+  "hero.primaryAction": "Découvrir le projet",
+  "hero.secondaryAction": "Voir les ressources",
+  "hero.nextHint": "Faites défiler · l'analogie avec l'infrastructure publique Linux",
+  "def.eyebrow": "Définition",
+  "def.title": "Qu'est-ce qu'EACO ?",
+  "def.missionLabel": "Mission",
+  "def.mission": "Mesurer la valeur du travail et quantifier les ressources de la Terre. Il n'appartient à aucune personne ni organisation — les détenteurs sont les actionnaires.",
+  "def.slogan": "eaco for earth — né pour le Village Terre",
+  "def.attitude": "EACO repose sur quatre dimensions de valeur : énergie, attitude, coopération et optimisation. Ensemble, elles forment un protocole de valeur publique composable et vérifiable.",
+  "def.equationNote": "Énergie × Attitude × Coopération × Optimisation",
+  "fact.chain": "Chaîne",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "Décimales",
+  "fact.decimalsV": "9",
+  "fact.supply": "Offre totale",
+  "fact.supplyV": "1 350 000 000 EACO",
+  "fact.update": "Mise à jour des métadonnées",
+  "fact.updateV": "Chaque jeudi 15:00 (GMT+8)",
+  "fact.version": "Version",
+  "fact.versionV": "0.0.1",
+  "fact.license": "Licence",
+  "fact.licenseV": "MIT",
+  "def.energy": "Énergie",
+  "def.energyDesc": "Quantifier et faire circuler l'énergie propre et les ressources de la Terre, pour que l'énergie soit mesurable et vérifiable.",
+  "def.attitudeTitle": "Attitude",
+  "def.attitudeDesc": "Une attitude communautaire ouverte : open source, transparence, construction collective — ni fermeture ni spéculation.",
+  "def.cooperation": "Coopération",
+  "def.cooperationDesc": "Une collaboration transcontinentale et multilingue qui relie chaque coin du Village Terre par le consensus.",
+  "def.optimization": "Optimisation",
+  "def.optimizationDesc": "Un réseau public en amélioration continue — performance, incitations et gouvernance évoluent sans cesse.",
+  "linux.eyebrow": "Infrastructure publique",
+  "linux.title": "Pourquoi une approche à la Linux ?",
+  "linux.lede": "La communauté compare la vision d'EACO à Linux : non pas une entreprise ou un échange, mais une infrastructure publique neutre et open source accessible à tous.",
+  "linux.quote": "« Ce à quoi cela renvoie vraiment, c'est une infrastructure publique, davantage comme Internet ou Linux — on n'a pas besoin de dix systèmes qui répètent la même tâche, mais d'un système neutre. »",
+  "linux.quoteSource": "Jeff Yan (cofondateur, Hyperliquid Labs), Blockworks DAS Asia, 07/10/2026, Singapour",
+  "linux.p1": "Lors d'un entretien au Blockworks DAS Asia à Singapour le 7 octobre 2026, Jeff Yan a expliqué pourquoi un tel système devrait ressembler à Linux : le nombre de composants doit rester réduit, mais chacun doit être précis, largement utile et compatible avec les autres.",
+  "linux.p2": "« Chaque composant devrait être conçu avec précision, avoir un large usage et bien se combiner avec les autres. » — Peu de composants, mais qui fonctionnent ensemble.",
+  "linux.componentsTitle": "Composants composables",
+  "linux.c1": "Perpétuels · Spot · Options",
+  "linux.c1Desc": "L'actif lui-même, les instruments linéaires à effet de levier et les instruments à rendement convexe forment un « trio » complet.",
+  "linux.c2": "Marge de portefeuille · Prêt natif",
+  "linux.c2Desc": "Les composants de prêt se combinent aux composants de trading, pour que les développeurs construisent plus de produits dans un même écosystème.",
+  "linux.c3": "Frais de priorité · Carnets publics",
+  "linux.c3Desc": "Internaliser les externalités négatives de la course à la latence et laisser plus de gens participer ; carnet d'ordres transparent on-chain.",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "Déploiement de marchés sans permission, contrôles optionnels et contrats de résultat — la liste des composants ne doit jamais être figée.",
+  "linux.eacoConnectTitle": "Ce que cela signifie pour EACO",
+  "linux.eacoConnect": "La communauté EACO applique la même philosophie d'infrastructure publique au réseau de règlement du Village Terre : code open source, organisation neutre, n'appartenant à personne ; maintenu ensemble par des nœuds mondiaux, où les détenteurs sont actionnaires. EACO ambitionne de fournir un réseau neutre, mesurable, vérifiable et réglable à travers sept continents et cinq océans.",
+  "linux.sourceNote": "Cette section cite un entretien public avec Jeff Yan (compilé par Wu Blockchain ; transcription audio par GPT, pouvant contenir des erreurs ; les données et l'état des fonctions reflètent la date de l'entretien). Les propos de l'invité ne représentent pas cette page et ne constituent pas un conseil en investissement.",
+  "linux.youtube": "Vidéo originale : entretien Blockworks DAS Asia (YouTube)",
+  "net.eyebrow": "Vision",
+  "net.title": "Village Terre · Réseau à trois couches",
+  "net.tagline": "Sept continents · cinq océans · un réseau EACO",
+  "net.lede": "De la terre à l'océan, de l'orbite terrestre à l'espace lointain — un protocole de valeur décentralisé relie le Village Terre en un réseau public mesurable, vérifiable et réglable. EACO agit comme couche de règlement et relie le réseau par l'interopérabilité inter-chaînes.",
+  "net.land": "Réseau terrestre",
+  "net.landDesc": "Couche 1 : dorsale continentale ; couche 2 couvrant villes, éducation, énergie et travail.",
+  "net.ocean": "Réseau océanique",
+  "net.oceanDesc": "Câbles sous-marins ; énergie et calcul flottants ; règlement transocéanique pour ports et transport maritime.",
+  "net.space": "Réseau spatial",
+  "net.spaceDesc": "Orbite terrestre basse ; espace cislunaire ; ceinture d'astéroïdes en espace lointain.",
+  "net.settle": "Couche de règlement EACO",
+  "net.cross": "Interopérabilité inter-chaînes (ex. Solana → BNB)",
+  "net.ref": "Pour aller plus loin : page du réseau à trois couches · page de la conscience cosmique (voir ressources publiques ci-dessous)",
+  "eco.eyebrow": "Écosystème",
+  "eco.title": "Écosystème et ressources publiques",
+  "eco.lede": "Voici les ressources publiques et neutres d'EACO : pages projet, code source, explorateurs on-chain et canaux communautaires. Les liens sont maintenus par leurs équipes respectives.",
+  "eco.pages": "Pages projet et vision",
+  "eco.repos": "Code source",
+  "eco.explorers": "Explorateurs on-chain",
+  "eco.community": "Canaux communautaires",
+  "eco.dex": "Pages DEX on-chain publiques",
+  "eco.dexNote": "Les pages DEX ci-dessus sont des pages d'échange on-chain publiques, sélectionnées et exploitées indépendamment par chaque équipe DEX. Cette page est une information neutre, n'encourage aucune transaction et ne fournit aucun conseil en investissement.",
+  "eco.caLabel": "Adresse du contrat (Solana)",
+  "eco.copyBtn": "Sélectionner l'adresse",
+  "eco.copyHint": "Sélectionnez l'adresse avec le bouton, puis copiez manuellement",
+  "link.linktree": "Portail d'agrégation officiel : site, réseaux sociaux, communauté, entrée de trading",
+  "link.homeDesc": "Page d'accueil communautaire et informations projet",
+  "link.top10Desc": "Index des entrées de trading on-chain",
+  "link.networkDesc": "Page de vision du réseau à trois couches",
+  "link.cosmicDesc": "Page de vision de la conscience cosmique",
+  "link.repo1Desc": "Page d'accueil du projet et métadonnées (eaco.json)",
+  "link.repo2Desc": "Source du site Web3 2026",
+  "link.repo3Desc": "Interface frontend et échange (TypeScript)",
+  "link.repo4Desc": "Inter-chaînes : DOGE → Solana → BNB",
+  "link.orb": "Cotations et informations sur le jeton",
+  "link.solscan": "Explorateur on-chain Solana",
+  "link.solana": "Explorateur officiel Solana",
+  "link.x": "Chaîne X officielle",
+  "link.telegram": "Groupe Telegram officiel",
+  "link.telegramEs": "Groupe communautaire espagnol",
+  "link.discord": "Discord officiel",
+  "disc.eyebrow": "Déclaration de neutralité",
+  "disc.title": "À noter",
+  "disc.p1": "Cette page est une page d'information neutre pour le projet communautaire EACO, et non une page d'investissement. Rien sur cette page ne constitue un conseil en investissement, une promesse de gains ou une incitation à trader. Les crypto-actifs sont très volatils ; renseignez-vous par vous-même et respectez les lois locales avant toute participation.",
+  "disc.p2": "Les liens tiers cités ici (OrbMarkets, DEX, GitHub, canaux sociaux, etc.) sont maintenus par leurs propres équipes et sont sans rapport avec cette page. Les faits on-chain suivent les métadonnées eaco.json du dépôt officiel, mises à jour chaque jeudi 15:00 (GMT+8) ; version actuelle 0.0.1 (licence MIT).",
+  "disc.p3": "Les capacités, indicateurs, prix et données de gains non vérifiés ne sont pas affichés sur cette page.",
+  "foot.note": "eaco for earth · porté par la communauté · page d'information neutre",
+  "foot.reserved": "© 2026 eaco community · Compilé à partir d'informations publiques",
+  "links.title": "Liens utiles EACO",
+  "links.desc": "Pages hébergées officielles et séries techniques publiques maintenues par la communauté, pour consultation.",
+  "links.l1": "Earth's Best Coin · Page hébergée officielle",
+  "links.l2": "EACO · Meilleurs DEX SOL 2025",
+  "links.l3": "Earth Village · Réseau EACO 2024",
+  "links.l4": "Série technique EACO Web3",
+  "ann.theme": "Thème changé : %s",
+  "ann.lang": "Langue changée : %s",
+  "ann.reset": "Réinitialisé par défaut : 中文 · vert pomme",
+  "ann.copy": "Adresse du contrat sélectionnée. Appuyez sur Ctrl+C pour copier",
+  "ann.missing": "Certaines entrées de traduction manquent ; contenu par défaut affiché",
+  "theme.apple": "Vert pomme",
+  "theme.cosmic": "Bleu cosmique",
+  "theme.beige": "Beige classique",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+},
+es: {
+  "a11y.skip": "Ir al contenido",
+  "ctrl.themeLabel": "Tema",
+  "ctrl.langLabel": "Idioma",
+  "ctrl.reset": "Restablecer",
+  "nav.definition": "Definición",
+  "nav.linux": "Analogía Linux",
+  "nav.network": "Red de tres capas",
+  "nav.ecosystem": "Recursos",
+  "hero.eyebrow": "Impulsado por la comunidad · Proyecto de red pública de la Aldea Tierra",
+  "hero.desc": "EACO es un proyecto comunitario en Solana con la visión de convertirse en infraestructura pública como Linux: no pertenece a ninguna persona ni organización — los tenedores son los accionistas.",
+  "hero.caLabel": "Dirección del contrato (Solana)",
+  "hero.caCopyHint": "Seleccione la dirección con el botón y cópiela manualmente",
+  "hero.copyBtn": "Seleccionar dirección",
+  "hero.primaryAction": "Conocer el proyecto",
+  "hero.secondaryAction": "Ver recursos públicos",
+  "hero.nextHint": "Desplácese · la analogía de la infraestructura pública Linux",
+  "def.eyebrow": "Definición",
+  "def.title": "¿Qué es EACO?",
+  "def.missionLabel": "Misión",
+  "def.mission": "Medir el valor del trabajo y cuantificar los recursos de la Tierra. No pertenece a ninguna persona ni organización — los tenedores son los accionistas.",
+  "def.slogan": "eaco for earth — hecho para la Aldea Tierra",
+  "def.attitude": "EACO se basa en cuatro dimensiones de valor: energía, actitud, cooperación y optimización. Juntas forman un protocolo de valor público componible y verificable.",
+  "def.equationNote": "Energía × Actitud × Cooperación × Optimización",
+  "fact.chain": "Cadena",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "Decimales",
+  "fact.decimalsV": "9",
+  "fact.supply": "Oferta total",
+  "fact.supplyV": "1.350.000.000 EACO",
+  "fact.update": "Actualización de metadatos",
+  "fact.updateV": "Cada jueves 15:00 (GMT+8)",
+  "fact.version": "Versión",
+  "fact.versionV": "0.0.1",
+  "fact.license": "Licencia",
+  "fact.licenseV": "MIT",
+  "def.energy": "Energía",
+  "def.energyDesc": "Cuantificar y hacer circular la energía limpia y los recursos de la Tierra, para que la energía sea medible y verificable.",
+  "def.attitudeTitle": "Actitud",
+  "def.attitudeDesc": "Una actitud comunitaria abierta: código abierto, transparencia, construcción colectiva — ni cierre ni especulación.",
+  "def.cooperation": "Cooperación",
+  "def.cooperationDesc": "Colaboración transcontinental y multilingüe que conecta cada rincón de la Aldea Tierra mediante consenso.",
+  "def.optimization": "Optimización",
+  "def.optimizationDesc": "Una red pública en mejora continua: rendimiento, incentivos y gobernanza evolucionan sin cesar.",
+  "linux.eyebrow": "Infraestructura pública",
+  "linux.title": "¿Por qué un enfoque tipo Linux?",
+  "linux.lede": "La comunidad compara la visión de EACO con Linux: no una empresa ni un exchange, sino infraestructura pública neutral y de código abierto disponible para todos.",
+  "linux.quote": "“A lo que realmente apunta es a infraestructura pública, más parecida a Internet o Linux: no necesitas diez sistemas que repiten la misma tarea, necesitas un sistema neutral.”",
+  "linux.quoteSource": "Jeff Yan (cofundador, Hyperliquid Labs), Blockworks DAS Asia, 07-10-2026, Singapur",
+  "linux.p1": "En una conversación en Blockworks DAS Asia en Singapur el 7 de octubre de 2026, Jeff Yan explicó por qué un sistema así debería ser como Linux: el número de componentes debe ser reducido, pero cada uno debe ser preciso, de amplio uso y capaz de combinarse con los demás.",
+  "linux.p2": "“Cada componente debería diseñarse con precisión, tener un amplio uso y combinarse bien con los demás.” — Pocos componentes, pero que trabajen juntos.",
+  "linux.componentsTitle": "Componentes componibles",
+  "linux.c1": "Perpetuos · Spot · Opciones",
+  "linux.c1Desc": "El activo en sí, los instrumentos lineales apalancados y los instrumentos de pago convexo forman un “trío” completo.",
+  "linux.c2": "Margen de cartera · Préstamo nativo",
+  "linux.c2Desc": "Los componentes de préstamo se combinan con los de trading, permitiendo a los desarrolladores construir más productos en un mismo ecosistema.",
+  "linux.c3": "Tarifas de prioridad · Libros públicos",
+  "linux.c3Desc": "Internalizar las externalidades negativas de la carrera de latencia y permitir que más personas participen; libro de órdenes transparente on-chain.",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "Despliegue de mercados sin permiso, controles opcionales y contratos de resultado: la lista de componentes nunca debería fijarse.",
+  "linux.eacoConnectTitle": "Qué significa esto para EACO",
+  "linux.eacoConnect": "La comunidad EACO lleva la misma filosofía de infraestructura pública a la red de liquidación de la Aldea Tierra: código abierto, organización neutral, no pertenece a nadie; mantenida por nodos globales, donde los tenedores son accionistas. EACO aspira a ofrecer una red neutral, medible, verificable y liquidable en los siete continentes y los cinco océanos.",
+  "linux.sourceNote": "Esta sección cita una entrevista pública con Jeff Yan (compilada por Wu Blockchain; transcripción de audio por GPT, que puede contener errores; los datos y el estado de las funciones reflejan el momento de la entrevista). Las opiniones del invitado no representan a esta página y no constituyen consejo de inversión.",
+  "linux.youtube": "Vídeo original: entrevista Blockworks DAS Asia (YouTube)",
+  "net.eyebrow": "Visión",
+  "net.title": "Aldea Tierra · Red de tres capas",
+  "net.tagline": "Siete continentes · cinco océanos · una red EACO",
+  "net.lede": "De la tierra al océano, de la órbita terrestre al espacio profundo — un protocolo de valor descentralizado conecta la Aldea Tierra en una red pública medible, verificable y liquidable. EACO actúa como capa de liquidación, uniendo la red mediante interoperabilidad entre cadenas.",
+  "net.land": "Red terrestre",
+  "net.landDesc": "Capa 1: red troncal continental; capa 2 que cubre ciudades, educación, energía y trabajo.",
+  "net.ocean": "Red oceánica",
+  "net.oceanDesc": "Cables submarinos; energía y computación flotantes; liquidación transoceánica para puertos y transporte marítimo.",
+  "net.space": "Red espacial",
+  "net.spaceDesc": "Órbita terrestre baja; espacio cislunar; cinturón de asteroides en el espacio profundo.",
+  "net.settle": "Capa de liquidación EACO",
+  "net.cross": "Interoperabilidad entre cadenas (p. ej. Solana → BNB)",
+  "net.ref": "Lectura adicional: página de la red de tres capas · página de la conciencia cósmica (ver recursos públicos abajo)",
+  "eco.eyebrow": "Ecosistema",
+  "eco.title": "Ecosistema y recursos públicos",
+  "eco.lede": "A continuación se muestran los recursos públicos y neutrales de EACO: páginas del proyecto, código fuente, exploradores on-chain y canales comunitarios. Los enlaces son mantenidos por sus respectivos equipos.",
+  "eco.pages": "Páginas del proyecto y visión",
+  "eco.repos": "Código fuente",
+  "eco.explorers": "Exploradores on-chain",
+  "eco.community": "Canales comunitarios",
+  "eco.dex": "Páginas DEX on-chain públicas",
+  "eco.dexNote": "Las páginas DEX anteriores son páginas de intercambio on-chain públicas, seleccionadas y operadas de forma independiente por cada equipo DEX. Esta página es información neutral, no fomenta ninguna transacción ni proporciona consejo de inversión.",
+  "eco.caLabel": "Dirección del contrato (Solana)",
+  "eco.copyBtn": "Seleccionar dirección",
+  "eco.copyHint": "Seleccione la dirección con el botón y cópiela manualmente",
+  "link.linktree": "Centro oficial de enlaces: web, redes sociales, comunidad, entrada de trading",
+  "link.homeDesc": "Página de inicio comunitaria e información del proyecto",
+  "link.top10Desc": "Índice de entradas de trading on-chain",
+  "link.networkDesc": "Página de visión de la red de tres capas",
+  "link.cosmicDesc": "Página de visión de la conciencia cósmica",
+  "link.repo1Desc": "Página de inicio del proyecto y metadatos (eaco.json)",
+  "link.repo2Desc": "Fuente del sitio Web3 2026",
+  "link.repo3Desc": "Interfaz frontend e intercambio (TypeScript)",
+  "link.repo4Desc": "Entre cadenas: DOGE → Solana → BNB",
+  "link.orb": "Cotizaciones e información del token",
+  "link.solscan": "Explorador on-chain de Solana",
+  "link.solana": "Explorador oficial de Solana",
+  "link.x": "Canal X oficial",
+  "link.telegram": "Grupo oficial de Telegram",
+  "link.telegramEs": "Grupo comunitario en español",
+  "link.discord": "Discord oficial",
+  "disc.eyebrow": "Declaración de neutralidad",
+  "disc.title": "Tenga en cuenta",
+  "disc.p1": "Esta página es una página de información neutral para el proyecto comunitario EACO, no una página de inversión. Nada en esta página constituye consejo de inversión, promesa de ganancias o guía de trading. Los criptoactivos son muy volátiles; investigue por su cuenta y cumpla las leyes locales antes de participar.",
+  "disc.p2": "Los enlaces de terceros citados aquí (OrbMarkets, DEX, GitHub, canales sociales, etc.) son mantenidos por sus propios equipos y no están relacionados con esta página. Los hechos on-chain siguen los metadatos eaco.json del repositorio oficial, actualizados cada jueves 15:00 (GMT+8); versión actual 0.0.1 (licencia MIT).",
+  "disc.p3": "Las capacidades, métricas, precios y datos de ganancias no verificados no se muestran en esta página.",
+  "foot.note": "eaco for earth · impulsado por la comunidad · página de información neutral",
+  "foot.reserved": "© 2026 eaco community · Compilado a partir de información pública",
+  "links.title": "Enlaces útiles de EACO",
+  "links.desc": "Páginas alojadas oficiales y series técnicas públicas mantenidas por la comunidad, solo para consulta.",
+  "links.l1": "Earth's Best Coin · Página alojada oficial",
+  "links.l2": "EACO · Principales DEX de SOL 2025",
+  "links.l3": "Earth Village · Red EACO 2024",
+  "links.l4": "Serie técnica de EACO Web3",
+  "ann.theme": "Tema cambiado: %s",
+  "ann.lang": "Idioma cambiado: %s",
+  "ann.reset": "Restablecido por defecto: 中文 · verde manzana",
+  "ann.copy": "Dirección del contrato seleccionada. Pulse Ctrl+C para copiar",
+  "ann.missing": "Faltan algunas traducciones; se muestra el contenido por defecto",
+  "theme.apple": "Verde manzana",
+  "theme.cosmic": "Azul cósmico",
+  "theme.beige": "Beige clásico",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+},
+ru: {
+  "a11y.skip": "К содержанию",
+  "ctrl.themeLabel": "Тема",
+  "ctrl.langLabel": "Язык",
+  "ctrl.reset": "Сбросить",
+  "nav.definition": "Определение",
+  "nav.linux": "Аналогия с Linux",
+  "nav.network": "Трёхуровневая сеть",
+  "nav.ecosystem": "Ресурсы",
+  "hero.eyebrow": "Сообщество · Проект публичной сети «Земной деревни»",
+  "hero.desc": "EACO — это проект, создаваемый сообществом на Solana, с видением стать публичной инфраструктурой, как Linux: он не принадлежит ни одному человеку или организации — держатели являются акционерами.",
+  "hero.caLabel": "Адрес контракта (Solana)",
+  "hero.caCopyHint": "Выберите адрес кнопкой, затем скопируйте вручную",
+  "hero.copyBtn": "Выбрать адрес",
+  "hero.primaryAction": "Узнать о проекте",
+  "hero.secondaryAction": "Открыть публичные ресурсы",
+  "hero.nextHint": "Листайте вниз · аналогия с публичной инфраструктурой Linux",
+  "def.eyebrow": "Определение",
+  "def.title": "Что такое EACO?",
+  "def.missionLabel": "Миссия",
+  "def.mission": "Измерять ценность труда и количественно оценивать ресурсы Земли. Он не принадлежит ни одному человеку или организации — держатели являются акционерами.",
+  "def.slogan": "eaco for earth — создан для Земной деревни",
+  "def.attitude": "EACO опирается на четыре ценностных измерения: энергия, отношение, сотрудничество и оптимизация. Вместе они образуют компонуемый, проверяемый публичный протокол ценности.",
+  "def.equationNote": "Энергия × Отношение × Сотрудничество × Оптимизация",
+  "fact.chain": "Сеть",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "Десятичные",
+  "fact.decimalsV": "9",
+  "fact.supply": "Общее предложение",
+  "fact.supplyV": "1 350 000 000 EACO",
+  "fact.update": "Обновление метаданных",
+  "fact.updateV": "Каждый четверг 15:00 (GMT+8)",
+  "fact.version": "Версия",
+  "fact.versionV": "0.0.1",
+  "fact.license": "Лицензия",
+  "fact.licenseV": "MIT",
+  "def.energy": "Энергия",
+  "def.energyDesc": "Количественно оценивать и обеспечивать обращение чистой энергии и ресурсов Земли, чтобы энергия была измеримой и проверяемой.",
+  "def.attitudeTitle": "Отношение",
+  "def.attitudeDesc": "Открытое сообщество: открытый исходный код, прозрачность, совместное строительство — не закрытость и не спекуляция.",
+  "def.cooperation": "Сотрудничество",
+  "def.cooperationDesc": "Трансконтинентальное и многоязычное сотрудничество, соединяющее каждый уголок Земной деревни через консенсус.",
+  "def.optimization": "Оптимизация",
+  "def.optimizationDesc": "Постоянно развивающаяся публичная сеть — производительность, стимулы и управление непрерывно эволюционируют.",
+  "linux.eyebrow": "Публичная инфраструктура",
+  "linux.title": "Почему подход, подобный Linux?",
+  "linux.lede": "Сообщество сравнивает видение EACO с Linux: не одна компания или биржа, а нейтральная публичная инфраструктура с открытым исходным кодом, доступная каждому.",
+  "linux.quote": "«На самом деле это направлено к публичной инфраструктуре, больше похожей на Интернет или Linux — не нужны десять систем, повторяющих одну и ту же задачу, нужна одна нейтральная система».",
+  "linux.quoteSource": "Джефф Ян (сооснователь Hyperliquid Labs), Blockworks DAS Asia, 07.10.2026, Сингапур",
+  "linux.p1": "В беседе на Blockworks DAS Asia в Сингапуре 7 октября 2026 года Джефф Ян объяснил, почему такая система должна быть похожа на Linux: количество базовых компонентов должно быть небольшим, но каждый должен быть точным, широко применимым и совместимым с другими.",
+  "linux.p2": "«Каждый компонент должен быть спроектирован точно, иметь широкое применение и хорошо сочетаться с другими». — Компонентов немного, но они должны работать вместе.",
+  "linux.componentsTitle": "Компонуемые базовые компоненты",
+  "linux.c1": "Перпетуалы · Спот · Опционы",
+  "linux.c1Desc": "Сам актив, линейные инструменты с плечом и инструменты с выпуклой доходностью образуют полное «трио».",
+  "linux.c2": "Портфельная маржа · Нативное кредитование",
+  "linux.c2Desc": "Кредитные компоненты сочетаются с торговыми, позволяя разработчикам создавать больше продуктов в одной экосистеме.",
+  "linux.c3": "Приоритетные комиссии · Публичные книги",
+  "linux.c3Desc": "Интернализировать негативные внешние эффекты гонки за задержкой и позволить большему числу людей участвовать; книга заявок прозрачна on-chain.",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "Развёртывание рынков без разрешений, опциональные контроли и контракты на исход — список компонентов никогда не должен быть фиксированным.",
+  "linux.eacoConnectTitle": "Что это значит для EACO",
+  "linux.eacoConnect": "Сообщество EACO приносит ту же философию публичной инфраструктуры в расчётную сеть Земной деревни: открытый код, нейтральная организация, не принадлежащая никому; совместно поддерживаемая глобальными узлами, где держатели — акционеры. EACO стремится предоставить нейтральную сеть через семь континентов и пять океанов, которую можно измерять, проверять и использовать для расчётов.",
+  "linux.sourceNote": "Этот раздел цитирует публичное интервью с Джеффом Яном (перевод Wu Blockchain; аудиотранскрипция GPT может содержать ошибки; данные и состояние функций отражают момент интервью). Мнения гостя не представляют эту страницу и не являются инвестиционным советом.",
+  "linux.youtube": "Оригинальное видео: интервью Blockworks DAS Asia (YouTube)",
+  "net.eyebrow": "Видение",
+  "net.title": "Земная деревня · Трёхуровневая сеть",
+  "net.tagline": "Семь континентов · пять океанов · одна сеть EACO",
+  "net.lede": "От суши к океану, от орбиты Земли к дальнему космосу — один децентрализованный протокол ценности соединяет Земную деревню в публичную сеть, которую можно измерять, проверять и использовать для расчётов. EACO выступает расчётным уровнем, связывая сеть через межсетевое взаимодействие.",
+  "net.land": "Наземная сеть",
+  "net.landDesc": "Уровень 1 — континентальная магистраль; уровень 2 охватывает города, образование, энергию и труд.",
+  "net.ocean": "Океанская сеть",
+  "net.oceanDesc": "Подводные кабели; плавучая энергия и вычисления; трансокеанские расчёты для портов и судоходства.",
+  "net.space": "Космическая сеть",
+  "net.spaceDesc": "Низкая околоземная орбита; окололунное пространство; пояс астероидов в дальнем космосе.",
+  "net.settle": "Расчётный уровень EACO",
+  "net.cross": "Межсетевое взаимодействие (напр., Solana → BNB)",
+  "net.ref": "Дальнейшее чтение: страница трёхуровневой сети · страница космического сознания (см. публичные ресурсы ниже)",
+  "eco.eyebrow": "Экосистема",
+  "eco.title": "Экосистема и публичные ресурсы",
+  "eco.lede": "Ниже — публичные, нейтральные ресурсы EACO: страницы проекта, исходный код, on-chain обозреватели и каналы сообщества. Ссылки поддерживаются соответствующими командами.",
+  "eco.pages": "Страницы проекта и видения",
+  "eco.repos": "Исходный код",
+  "eco.explorers": "On-chain обозреватели",
+  "eco.community": "Каналы сообщества",
+  "eco.dex": "Публичные on-chain страницы DEX",
+  "eco.dexNote": "Страницы DEX выше — это подобранные публичные on-chain страницы обмена, независимо управляемые каждой командой DEX. Эта страница — нейтральная информация, она не поощряет торговлю и не даёт инвестиционных советов.",
+  "eco.caLabel": "Адрес контракта (Solana)",
+  "eco.copyBtn": "Выбрать адрес",
+  "eco.copyHint": "Выберите адрес кнопкой, затем скопируйте вручную",
+  "link.linktree": "Официальный центр ссылок: сайт, соцсети, сообщество, торговый вход",
+  "link.homeDesc": "Домашняя страница сообщества и информация о проекте",
+  "link.top10Desc": "Индекс on-chain торговых входов",
+  "link.networkDesc": "Страница видения трёхуровневой сети",
+  "link.cosmicDesc": "Страница видения космического сознания",
+  "link.repo1Desc": "Домашняя страница проекта и метаданные (eaco.json)",
+  "link.repo2Desc": "Исходники сайта Web3 2026",
+  "link.repo3Desc": "Фронтенд и интерфейс обмена (TypeScript)",
+  "link.repo4Desc": "Межсеть: DOGE → Solana → BNB",
+  "link.orb": "Котировки и информация о токене",
+  "link.solscan": "On-chain обозреватель Solana",
+  "link.solana": "Официальный обозреватель Solana",
+  "link.x": "Официальный канал X",
+  "link.telegram": "Официальная группа Telegram",
+  "link.telegramEs": "Испаноязычная группа сообщества",
+  "link.discord": "Официальный Discord",
+  "disc.eyebrow": "Заявление о нейтральности",
+  "disc.title": "Обратите внимание",
+  "disc.p1": "Эта страница — нейтральная информационная страница проекта сообщества EACO, а не инвестиционная страница. Ничто на этой странице не является инвестиционным советом, обещанием дохода или руководством к торговле. Криптоактивы крайне волатильны; перед участием проведите собственное исследование и соблюдайте местные законы.",
+  "disc.p2": "Сторонние ссылки, приведённые здесь (OrbMarkets, DEX, GitHub, соцканалы и т. д.), поддерживаются их собственными командами и не связаны с этой страницей. On-chain факты следуют метаданным eaco.json официального репозитория, обновляемым каждый четверг 15:00 (GMT+8); текущая версия 0.0.1 (лицензия MIT).",
+  "disc.p3": "Непроверенные возможности, показатели, цены и данные о доходах на этой странице не показываются.",
+  "foot.note": "eaco for earth · сообщество · нейтральная информационная страница",
+  "foot.reserved": "© 2026 eaco community · Составлено по публичной информации",
+  "links.title": "Часто используемые ссылки EACO",
+  "links.desc": "Официальные размещённые страницы и публичные технические серии, поддерживаемые сообществом, только для справки.",
+  "links.l1": "Earth's Best Coin · Официальная размещённая страница",
+  "links.l2": "EACO · Лучшие DEX SOL 2025",
+  "links.l3": "Earth Village · Сеть EACO 2024",
+  "links.l4": "Техническая серия EACO Web3",
+  "ann.theme": "Тема изменена: %s",
+  "ann.lang": "Язык изменён: %s",
+  "ann.reset": "Сброшено по умолчанию: 中文 · зелёное яблоко",
+  "ann.copy": "Адрес контракта выбран. Нажмите Ctrl+C для копирования",
+  "ann.missing": "Некоторые переводы отсутствуют; показан контент по умолчанию",
+  "theme.apple": "Зелёное яблоко",
+  "theme.cosmic": "Космический синий",
+  "theme.beige": "Классический бежевый",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+},
+ar: {
+  "a11y.skip": "تخطَّ إلى المحتوى",
+  "ctrl.themeLabel": "المظهر",
+  "ctrl.langLabel": "اللغة",
+  "ctrl.reset": "إعادة تعيين",
+  "nav.definition": "التعريف",
+  "nav.linux": "تشبيه لينكس",
+  "nav.network": "الشبكة ثلاثية الطبقات",
+  "nav.ecosystem": "الموارد",
+  "hero.eyebrow": "بقيادة المجتمع · مشروع الشبكة العامة لقرية الأرض",
+  "hero.desc": "EACO مشروع يقوده المجتمع على سولانا، برؤية أن يصبح بنية تحتية عامة مثل لينكس: لا يملكه أي فرد أو منظمة — الحاملون هم المساهمون.",
+  "hero.caLabel": "عنوان العقد (سولانا)",
+  "hero.caCopyHint": "حدّد العنوان بالزر، ثم انسخه يدوياً",
+  "hero.copyBtn": "تحديد العنوان",
+  "hero.primaryAction": "التعرف على المشروع",
+  "hero.secondaryAction": "استعراض الموارد العامة",
+  "hero.nextHint": "مرِّر لأسفل · تشبيه البنية التحتية العامة للينكس",
+  "def.eyebrow": "التعريف",
+  "def.title": "ما هو EACO؟",
+  "def.missionLabel": "الرسالة",
+  "def.mission": "قياس قيمة العمل وتحديد موارد الأرض كمياً. لا يملكه أي فرد أو منظمة — الحاملون هم المساهمون.",
+  "def.slogan": "eaco for earth — مصمم لقرية الأرض",
+  "def.attitude": "يقوم EACO على أربعة أبعاد للقيمة: الطاقة، الموقف، التعاون، والتحسين. معاً تشكل بروتوكول قيمة عاماً قابلاً للتركيب والتحقق.",
+  "def.equationNote": "الطاقة × الموقف × التعاون × التحسين",
+  "fact.chain": "السلسلة",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "المنازل العشرية",
+  "fact.decimalsV": "9",
+  "fact.supply": "إجمالي العرض",
+  "fact.supplyV": "1,350,000,000 EACO",
+  "fact.update": "تحديث البيانات الوصفية",
+  "fact.updateV": "كل يوم خميس 15:00 (GMT+8)",
+  "fact.version": "الإصدار",
+  "fact.versionV": "0.0.1",
+  "fact.license": "الترخيص",
+  "fact.licenseV": "MIT",
+  "def.energy": "الطاقة",
+  "def.energyDesc": "تحديد الطاقة النظيفة وموارد الأرض كمياً وتداولها، لتكون الطاقة قابلة للقياس والتحقق.",
+  "def.attitudeTitle": "الموقف",
+  "def.attitudeDesc": "موقف مجتمعي منفتح: مفتوح المصدر، شفاف، بناء مشترك — لا انغلاق ولا مضاربة.",
+  "def.cooperation": "التعاون",
+  "def.cooperationDesc": "تعاون عابر للقارات واللغات يربط كل ركن من قرية الأرض عبر الإجماع.",
+  "def.optimization": "التحسين",
+  "def.optimizationDesc": "شبكة عامة في تحسين مستمر — الأداء والحوافز والحوكمة تتطور باستمرار.",
+  "linux.eyebrow": "بنية تحتية عامة",
+  "linux.title": "لماذا نهج على غرار لينكس؟",
+  "linux.lede": "يقارن المجتمع رؤية EACO بلينكس: ليست شركة أو بورصة واحدة، بل بنية تحتية عامة محايدة ومفتوحة المصدر متاحة للجميع.",
+  "linux.quote": "«ما تشير إليه حقاً هو البنية التحتية العامة، أشبه بالإنترنت أو لينكس — لا تحتاج إلى عشرة أنظمة تكرر المهمة نفسها، بل إلى نظام واحد محايد».",
+  "linux.quoteSource": "جيف يان (المؤسس المشارك، Hyperliquid Labs)، Blockworks DAS Asia، 2026/10/07، سنغافورة",
+  "linux.p1": "في محادثة في Blockworks DAS Asia في سنغافورة في 7 أكتوبر 2026، شرح جيف يان لماذا يجب أن يكون مثل هذا النظام مثل لينكس: يجب أن يبقى عدد المكونات الأساسية صغيراً، لكن كل مكون يجب أن يكون دقيقاً، واسع الفائدة، وقابلاً للدمج مع الآخرين.",
+  "linux.p2": "«يجب تصميم كل مكون بدقة، وأن يكون واسع الاستخدام، ويجمع جيداً مع المكونات الأخرى». — مكونات قليلة، لكنها تعمل معاً.",
+  "linux.componentsTitle": "مكونات أساسية قابلة للتركيب",
+  "linux.c1": "العقود الدائمة · الفوري · الخيارات",
+  "linux.c1Desc": "الأصل نفسه، الأدوات الخطية ذات الرافعة، وأدوات العائد المحدب تشكل «ثلاثياً» متكاملاً.",
+  "linux.c2": "هامش المحفظة · الإقراض الأصلي",
+  "linux.c2Desc": "تتحد مكونات الإقراض مع مكونات التداول، ليتيح للمطورين بناء المزيد من المنتجات في نظام بيئي واحد.",
+  "linux.c3": "رسوم الأولوية · دفاتر عامة",
+  "linux.c3Desc": "استيعاب العوامل الخارجية السلبية لسباق زمن الوصول والسماح لمزيد من المشاركة؛ دفتر الطلبات شفاف على السلسلة.",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "نشر الأسواق بدون إذن، وضوابط اختيارية، وعقود النتائج — قائمة المكونات لا ينبغي أن تُثبَّت أبداً.",
+  "linux.eacoConnectTitle": "ماذا يعني هذا بالنسبة لـ EACO",
+  "linux.eacoConnect": "تجلب مجتمع EACO نفس فلسفة البنية التحتية العامة إلى شبكة تسوية قرية الأرض: كود مفتوح المصدر، منظمة محايدة، لا يملكها أحد؛ تُصان معاً بواسطة عقد عالمية، حيث الحاملون هم المساهمون. تهدف EACO إلى توفير شبكة محايدة عبر سبع قارات وخمسة محيطات، قابلة للقياس والتحقق والتسوية.",
+  "linux.sourceNote": "يقتبس هذا القسم مقابلة عامة مع جيف يان (ترجمة Wu Blockchain؛ النسخ الصوتي بواسطة GPT قد يحتوي على أخطاء؛ تعكس البيانات وحالة الوظائف وقت المقابلة). لا تمثل آراء الضيف هذه الصفحة ولا تشكل نصيحة استثمارية.",
+  "linux.youtube": "الفيديو الأصلي: مقابلة Blockworks DAS Asia (يوتيوب)",
+  "net.eyebrow": "الرؤية",
+  "net.title": "قرية الأرض · الشبكة ثلاثية الطبقات",
+  "net.tagline": "سبع قارات · خمسة محيطات · شبكة EACO واحدة",
+  "net.lede": "من الأرض إلى المحيط، ومن مدار الأرض إلى الفضاء السحيق — بروتوكول قيمة لامركزي واحد يربط قرية الأرض في شبكة عامة قابلة للقياس والتحقق والتسوية. تعمل EACO كطبقة تسوية، وتربط الشبكة عبر التشغيل البيني بين السلاسل.",
+  "net.land": "الشبكة الأرضية",
+  "net.landDesc": "الطبقة الأولى: العمود الفقري القاري؛ الطبقة الثانية تغطي المدن والتعليم والطاقة والعمل.",
+  "net.ocean": "الشبكة المحيطية",
+  "net.oceanDesc": "كابلات بحرية؛ طاقة وحوسبة عائمة؛ تسوية عابرة للمحيطات للموانئ والشحن.",
+  "net.space": "الشبكة الفضائية",
+  "net.spaceDesc": "المدار الأرضي المنخفض؛ الفضاء القمري؛ حزام الكويكبات في الفضاء السحيق.",
+  "net.settle": "طبقة تسوية EACO",
+  "net.cross": "التشغيل البيني عبر السلاسل (مثل Solana ← BNB)",
+  "net.ref": "قراءة إضافية: صفحة الشبكة ثلاثية الطبقات · صفحة الوعي الكوني (انظر الموارد العامة أدناه)",
+  "eco.eyebrow": "النظام البيئي",
+  "eco.title": "النظام البيئي والموارد العامة",
+  "eco.lede": "أدناه موارد EACO العامة والمحايدة: صفحات المشروع، الكود المصدري، مستكشفات السلسلة، وقنوات المجتمع. الصفحات تُدار من قبل فرقها المعنية.",
+  "eco.pages": "صفحات المشروع والرؤية",
+  "eco.repos": "الكود المصدري",
+  "eco.explorers": "مستكشفو السلسلة",
+  "eco.community": "قنوات المجتمع",
+  "eco.dex": "صفحات DEX العامة على السلسلة",
+  "eco.dexNote": "صفحات DEX أعلاه هي صفحات تبادل عامة على السلسلة، منتقاة وتُدار بشكل مستقل من قبل كل فريق DEX. هذه الصفحة معلومات محايدة، لا تشجع أي تداول ولا تقدم نصيحة استثمارية.",
+  "eco.caLabel": "عنوان العقد (سولانا)",
+  "eco.copyBtn": "تحديد العنوان",
+  "eco.copyHint": "حدّد العنوان بالزر، ثم انسخه يدوياً",
+  "link.linktree": "المركز الرسمي للروابط: الموقع، الشبكات الاجتماعية، المجتمع، مدخل التداول",
+  "link.homeDesc": "الصفحة الرئيسية للمجتمع ومعلومات المشروع",
+  "link.top10Desc": "فهرس مداخل التداول على السلسلة",
+  "link.networkDesc": "صفحة رؤية الشبكة ثلاثية الطبقات",
+  "link.cosmicDesc": "صفحة رؤية الوعي الكوني",
+  "link.repo1Desc": "الصفحة الرئيسية للمشروع والبيانات الوصفية (eaco.json)",
+  "link.repo2Desc": "مصدر موقع Web3 2026",
+  "link.repo3Desc": "الواجهة الأمامية وواجهة التبادل (TypeScript)",
+  "link.repo4Desc": "عبر السلاسل: DOGE → Solana → BNB",
+  "link.orb": "الأسعار ومعلومات الرمز",
+  "link.solscan": "مستكشف سولانا على السلسلة",
+  "link.solana": "مستكشف سولانا الرسمي",
+  "link.x": "قناة X الرسمية",
+  "link.telegram": "مجموعة تيليجرام الرسمية",
+  "link.telegramEs": "مجموعة المجتمع الإسبانية",
+  "link.discord": "ديسكورد الرسمي",
+  "disc.eyebrow": "بيان الحياد",
+  "disc.title": "يرجى الانتباه",
+  "disc.p1": "هذه الصفحة صفحة معلومات محايدة لمشروع مجتمع EACO، وليست صفحة استثمار. لا يشكل أي محتوى في هذه الصفحة نصيحة استثمارية أو وعداً بالأرباح أو توجيهاً للتداول. الأصول الرقمية شديدة التقلب؛ ابحث بنفسك وامتثل للقوانين المحلية قبل المشاركة.",
+  "disc.p2": "الروابط الخارجية المذكورة هنا (OrbMarkets، DEX، GitHub، القنوات الاجتماعية، إلخ) تُدار من قبل فرقها الخاصة ولا علاقة لها بهذه الصفحة. تتبع الحقائق على السلسلة البيانات الوصفية eaco.json في المستودع الرسمي، وتُحدَّث كل يوم خميس 15:00 (GMT+8)؛ الإصدار الحالي 0.0.1 (ترخيص MIT).",
+  "disc.p3": "لا تعرض هذه الصفحة قدرات أو مؤشرات أو أسعاراً أو بيانات أرباح غير موثقة.",
+  "foot.note": "eaco for earth · بقيادة المجتمع · صفحة معلومات محايدة",
+  "foot.reserved": "© 2026 eaco community · جمعت من المعلومات العامة",
+  "links.title": "روابط EACO الشائعة",
+  "links.desc": "صفحات مستضافة رسمية وسلسلة تقنية عامة يديرها المجتمع، للاطلاع فقط.",
+  "links.l1": "Earth's Best Coin · الصفحة الرسمية المستضافة",
+  "links.l2": "EACO · أفضل بورصات SOL DEX 2025",
+  "links.l3": "Earth Village · شبكة EACO 2024",
+  "links.l4": "السلسلة التقنية EACO Web3",
+  "ann.theme": "تم تغيير المظهر: %s",
+  "ann.lang": "تم تغيير اللغة: %s",
+  "ann.reset": "إعادة تعيين الافتراضي: 中文 · أخضر التفاح",
+  "ann.copy": "تم تحديد عنوان العقد. اضغط Ctrl+C للنسخ",
+  "ann.missing": "بعض الترجمات مفقودة؛ يتم عرض المحتوى الافتراضي",
+  "theme.apple": "أخضر التفاح",
+  "theme.cosmic": "أزرق كوني",
+  "theme.beige": "بيج كلاسيكي",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+},
+hi: {
+  "a11y.skip": "मुख्य सामग्री पर जाएँ",
+  "ctrl.themeLabel": "थीम",
+  "ctrl.langLabel": "भाषा",
+  "ctrl.reset": "रीसेट",
+  "nav.definition": "परिभाषा",
+  "nav.linux": "Linux सादृश्य",
+  "nav.network": "तीन-स्तरीय नेटवर्क",
+  "nav.ecosystem": "संसाधन",
+  "hero.eyebrow": "समुदाय-संचालित · अर्थ विलेज सार्वजनिक नेटवर्क परियोजना",
+  "hero.desc": "EACO सोलाना पर एक समुदाय-संचालित परियोजना है, जिसकी दृष्टि Linux जैसी सार्वजनिक अवसंरचना बनने की है: यह किसी व्यक्ति या संगठन की नहीं है — धारक ही शेयरधारक हैं।",
+  "hero.caLabel": "अनुबंध पता (सोलाना)",
+  "hero.caCopyHint": "बटन से पता चुनें, फिर मैन्युअल रूप से कॉपी करें",
+  "hero.copyBtn": "पता चुनें",
+  "hero.primaryAction": "परियोजना जानें",
+  "hero.secondaryAction": "सार्वजनिक संसाधन देखें",
+  "hero.nextHint": "नीचे स्क्रॉल करें · Linux सार्वजनिक अवसंरचना सादृश्य",
+  "def.eyebrow": "परिभाषा",
+  "def.title": "EACO क्या है?",
+  "def.missionLabel": "मिशन",
+  "def.mission": "श्रम के मूल्य को मापना और पृथ्वी के संसाधनों को मात्रात्मक रूप देना। यह किसी व्यक्ति या संगठन की नहीं है — धारक ही शेयरधारक हैं।",
+  "def.slogan": "eaco for earth — अर्थ विलेज के लिए निर्मित",
+  "def.attitude": "EACO चार मूल्य आयामों पर आधारित है: ऊर्जा, दृष्टिकोण, सहयोग और अनुकूलन। ये मिलकर एक रचना-योग्य, सत्यापन-योग्य सार्वजनिक मूल्य प्रोटोकॉल बनाते हैं।",
+  "def.equationNote": "ऊर्जा × दृष्टिकोण × सहयोग × अनुकूलन",
+  "fact.chain": "चेन",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "दशमलव",
+  "fact.decimalsV": "9",
+  "fact.supply": "कुल आपूर्ति",
+  "fact.supplyV": "1,350,000,000 EACO",
+  "fact.update": "मेटाडेटा अद्यतन",
+  "fact.updateV": "प्रत्येक गुरुवार 15:00 (GMT+8)",
+  "fact.version": "संस्करण",
+  "fact.versionV": "0.0.1",
+  "fact.license": "लाइसेंस",
+  "fact.licenseV": "MIT",
+  "def.energy": "ऊर्जा",
+  "def.energyDesc": "स्वच्छ ऊर्जा और पृथ्वी के संसाधनों को मात्रात्मक रूप देकर प्रचलित करना, ताकि ऊर्जा मापने और सत्यापित करने योग्य हो।",
+  "def.attitudeTitle": "दृष्टिकोण",
+  "def.attitudeDesc": "सहयोगी सामुदायिक दृष्टिकोण: ओपन सोर्स, पारदर्शिता, सामूहिक निर्माण — न बंदपन, न सट्टेबाज़ी।",
+  "def.cooperation": "सहयोग",
+  "def.cooperationDesc": "अंतर-महाद्वीपीय और बहुभाषी सहयोग जो आम सहमति के माध्यम से अर्थ विलेज के हर कोने को जोड़ता है।",
+  "def.optimization": "अनुकूलन",
+  "def.optimizationDesc": "निरंतर बेहतर होता सार्वजनिक नेटवर्क — प्रदर्शन, प्रोत्साहन और शासन लगातार विकसित होते रहते हैं।",
+  "linux.eyebrow": "सार्वजनिक अवसंरचना",
+  "linux.title": "Linux-जैसा दृष्टिकोण क्यों?",
+  "linux.lede": "समुदाय EACO की दृष्टि की तुलना Linux से करता है: एक कंपनी या एक्सचेंज नहीं, बल्कि तटस्थ, ओपन-सोर्स सार्वजनिक अवसंरचना जो सभी के लिए उपलब्ध हो।",
+  "linux.quote": "“यह वास्तव में सार्वजनिक अवसंरचना की ओर इशारा करता है, इंटरनेट या Linux जैसा — आपको दस प्रणालियों की ज़रूरत नहीं जो एक ही काम दोहराएँ, आपको एक तटस्थ प्रणाली चाहिए।”",
+  "linux.quoteSource": "जेफ यान (सह-संस्थापक, Hyperliquid Labs), Blockworks DAS Asia, 2026-10-07, सिंगापुर",
+  "linux.p1": "7 अक्टूबर 2026 को सिंगापुर में Blockworks DAS Asia की बातचीत में जेफ यान ने समझाया कि ऐसी प्रणाली Linux जैसी क्यों होनी चाहिए: मूल घटकों की संख्या छोटी रहनी चाहिए, लेकिन हर घटक सटीक, व्यापक रूप से उपयोगी और दूसरों के साथ संयोजन योग्य होना चाहिए।",
+  "linux.p2": "“हर घटक को सटीकता से डिज़ाइन किया जाना चाहिए, व्यापक उपयोग होना चाहिए, और दूसरे घटकों के साथ अच्छी तरह जुड़ना चाहिए।” — घटक कम हों, लेकिन वे मिलकर काम करें।",
+  "linux.componentsTitle": "रचना-योग्य मूल घटक",
+  "linux.c1": "परपेचुअल · स्पॉट · ऑप्शन",
+  "linux.c1Desc": "स्वयं परिसंपत्ति, लीवरेज रैखिक उपकरण और उत्तल-लाभ उपकरण मिलकर एक पूर्ण “तिकड़ी” बनाते हैं।",
+  "linux.c2": "पोर्टफोलियो मार्जिन · मूल ऋण",
+  "linux.c2Desc": "ऋण घटक व्यापार घटकों के साथ जुड़ते हैं, जिससे डेवलपर्स एक पारिस्थितिकी तंत्र में अधिक उत्पाद बना सकते हैं।",
+  "linux.c3": "प्राथमिकता शुल्क · सार्वजनिक ऑर्डर बुक",
+  "linux.c3Desc": "लेटेंसी हथियारों की दौड़ के नकारात्मक बाह्य प्रभावों को आंतरिक करें और अधिक लोगों को भाग लेने दें; ऑर्डर बुक चेन पर पारदर्शी होती है।",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "बिना अनुमति बाज़ार तैनाती, वैकल्पिक अनुमति नियंत्रण और परिणाम अनुबंध — घटकों की सूची कभी स्थिर नहीं होनी चाहिए।",
+  "linux.eacoConnectTitle": "EACO के लिए इसका क्या अर्थ है",
+  "linux.eacoConnect": "EACO समुदाय उसी सार्वजनिक अवसंरचना दर्शन को अर्थ विलेज निपटान नेटवर्क तक लाता है: ओपन-सोर्स कोड, तटस्थ संगठन, किसी की निजी नहीं; वैश्विक नोड्स द्वारा सामूहिक रूप से बनाए रखा जाता है, जहाँ धारक शेयरधारक हैं। EACO का लक्ष्य सात महाद्वीपों और पाँच महासागरों में एक तटस्थ नेटवर्क प्रदान करना है जिसे मापा, सत्यापित और निपटाया जा सके।",
+  "linux.sourceNote": "यह अनुभाग जेफ यान के एक सार्वजनिक साक्षात्कार का उद्धरण देता है (Wu Blockchain द्वारा संकलित; GPT द्वारा ऑडियो ट्रांसक्रिप्शन, जिसमें त्रुटियाँ हो सकती हैं; डेटा और फीचर स्थिति साक्षात्कार के समय को दर्शाते हैं)। अतिथि के विचार इस पृष्ठ का प्रतिनिधित्व नहीं करते और निवेश सलाह नहीं हैं।",
+  "linux.youtube": "मूल वीडियो: Blockworks DAS Asia साक्षात्कार (YouTube)",
+  "net.eyebrow": "दृष्टि",
+  "net.title": "अर्थ विलेज · तीन-स्तरीय नेटवर्क",
+  "net.tagline": "सात महाद्वीप · पाँच महासागर · एक EACO नेटवर्क",
+  "net.lede": "भूमि से महासागर तक, पृथ्वी की कक्षा से गहरे अंतरिक्ष तक — एक विकेंद्रीकृत मूल्य प्रोटोकॉल अर्थ विलेज को एक सार्वजनिक नेटवर्क में जोड़ता है जिसे मापा, सत्यापित और निपटाया जा सके। EACO निपटान परत के रूप में कार्य करता है, क्रॉस-चेन इंटरऑप के माध्यम से नेटवर्क को जोड़ता है।",
+  "net.land": "भूमि नेटवर्क",
+  "net.landDesc": "परत 1: महाद्वीपीय रीढ़; परत 2 शहरों, शिक्षा, ऊर्जा और श्रम को कवर करती है।",
+  "net.ocean": "महासागर नेटवर्क",
+  "net.oceanDesc": "पनडुब्बी केबल; तैरती ऊर्जा और कंप्यूटिंग; बंदरगाहों और शिपिंग के लिए अंतर-महासागरीय निपटान।",
+  "net.space": "अंतरिक्ष नेटवर्क",
+  "net.spaceDesc": "निम्न पृथ्वी कक्षा; चंद्र मध्यवर्ती अंतरिक्ष; गहरे अंतरिक्ष क्षुद्रग्रह बेल्ट।",
+  "net.settle": "EACO निपटान परत",
+  "net.cross": "क्रॉस-चेन इंटरऑप (जैसे Solana → BNB)",
+  "net.ref": "अधिक पढ़ें: तीन-स्तरीय नेटवर्क पृष्ठ · ब्रह्मांडीय चेतना पृष्ठ (नीचे सार्वजनिक संसाधन देखें)",
+  "eco.eyebrow": "पारिस्थितिकी तंत्र",
+  "eco.title": "पारिस्थितिकी तंत्र और सार्वजनिक संसाधन",
+  "eco.lede": "नीचे EACO के सार्वजनिक, तटस्थ संसाधन हैं: परियोजना पृष्ठ, स्रोत कोड, चेन एक्सप्लोरर और सामुदायिक चैनल। लिंक संबंधित टीमों द्वारा बनाए रखे जाते हैं।",
+  "eco.pages": "परियोजना और दृष्टि पृष्ठ",
+  "eco.repos": "स्रोत कोड",
+  "eco.explorers": "चेन एक्सप्लोरर",
+  "eco.community": "सामुदायिक चैनल",
+  "eco.dex": "सार्वजनिक चेन DEX पृष्ठ",
+  "eco.dexNote": "उपरोक्त DEX पृष्ठ चयनित सार्वजनिक चेन स्वैप पृष्ठ हैं, जो प्रत्येक DEX टीम द्वारा स्वतंत्र रूप से संचालित हैं। यह पृष्ठ तटस्थ जानकारी है, किसी व्यापार को प्रोत्साहित नहीं करता और निवेश सलाह नहीं देता।",
+  "eco.caLabel": "अनुबंध पता (सोलाना)",
+  "eco.copyBtn": "पता चुनें",
+  "eco.copyHint": "बटन से पता चुनें, फिर मैन्युअल रूप से कॉपी करें",
+  "link.linktree": "आधिकारिक लिंक केंद्र: वेबसाइट, सोशल, समुदाय, ट्रेडिंग प्रवेश",
+  "link.homeDesc": "सामुदायिक होमपेज और परियोजना जानकारी",
+  "link.top10Desc": "चेन ट्रेडिंग प्रवेश सूचकांक",
+  "link.networkDesc": "तीन-स्तरीय नेटवर्क दृष्टि पृष्ठ",
+  "link.cosmicDesc": "ब्रह्मांडीय चेतना दृष्टि पृष्ठ",
+  "link.repo1Desc": "परियोजना होमपेज और मेटाडेटा (eaco.json)",
+  "link.repo2Desc": "Web3 2026 साइट स्रोत",
+  "link.repo3Desc": "फ्रंटएंड और स्वैप इंटरफ़ेस (TypeScript)",
+  "link.repo4Desc": "क्रॉस-चेन: DOGE → Solana → BNB",
+  "link.orb": "कोट्स और टोकन जानकारी",
+  "link.solscan": "Solana चेन एक्सप्लोरर",
+  "link.solana": "Solana आधिकारिक एक्सप्लोरर",
+  "link.x": "आधिकारिक X चैनल",
+  "link.telegram": "आधिकारिक Telegram समूह",
+  "link.telegramEs": "स्पेनिश सामुदायिक समूह",
+  "link.discord": "आधिकारिक Discord",
+  "disc.eyebrow": "तटस्थता वक्तव्य",
+  "disc.title": "कृपया ध्यान दें",
+  "disc.p1": "यह पृष्ठ EACO सामुदायिक परियोजना के लिए एक तटस्थ सूचना पृष्ठ है, निवेश पृष्ठ नहीं। इस पृष्ठ पर कुछ भी निवेश सलाह, कमाई का वादा या ट्रेडिंग मार्गदर्शन नहीं है। क्रिप्टो परिसंपत्तियाँ अत्यधिक अस्थिर हैं; भाग लेने से पहले स्वयं शोध करें और स्थानीय कानूनों का पालन करें।",
+  "disc.p2": "यहाँ उद्धृत तृतीय-पक्ष लिंक (OrbMarkets, DEX, GitHub, सोशल चैनल आदि) उनकी अपनी टीमों द्वारा बनाए रखे जाते हैं और इस पृष्ठ से असंबंधित हैं। चेन तथ्य आधिकारिक रिपॉजिटरी की eaco.json मेटाडेटा का पालन करते हैं, जो प्रत्येक गुरुवार 15:00 (GMT+8) को अद्यतन होती है; वर्तमान संस्करण 0.0.1 (MIT लाइसेंस)।",
+  "disc.p3": "असत्यापित क्षमताएँ, मीट्रिक्स, मूल्य और कमाई डेटा इस पृष्ठ पर नहीं दिखाए जाते।",
+  "foot.note": "eaco for earth · समुदाय-संचालित · तटस्थ सूचना पृष्ठ",
+  "foot.reserved": "© 2026 eaco community · सार्वजनिक जानकारी से संकलित",
+  "links.title": "EACO सामान्य लिंक",
+  "links.desc": "समुदाय द्वारा अनुरक्षित आधिकारिक होस्टेड पृष्ठ और सार्वजनिक तकनीकी श्रृंखला, केवल संदर्भ हेतु।",
+  "links.l1": "Earth's Best Coin · आधिकारिक होस्टेड पृष्ठ",
+  "links.l2": "EACO · SOL टॉप DEX 2025",
+  "links.l3": "Earth Village · EACO नेटवर्क 2024",
+  "links.l4": "EACO Web3 तकनीकी श्रृंखला",
+  "ann.theme": "थीम बदली गई: %s",
+  "ann.lang": "भाषा बदली गई: %s",
+  "ann.reset": "डिफ़ॉल्ट पर रीसेट: 中文 · सेब हरा",
+  "ann.copy": "अनुबंध पता चुना गया। कॉपी करने के लिए Ctrl+C दबाएँ",
+  "ann.missing": "कुछ अनुवाद अनुपलब्ध हैं; डिफ़ॉल्ट सामग्री दिखाई जा रही है",
+  "theme.apple": "सेब हरा",
+  "theme.cosmic": "ब्रह्मांडीय नीला",
+  "theme.beige": "क्लासिक बेज",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+},
+ja: {
+  "a11y.skip": "本文へスキップ",
+  "ctrl.themeLabel": "テーマ",
+  "ctrl.langLabel": "言語",
+  "ctrl.reset": "リセット",
+  "nav.definition": "定義",
+  "nav.linux": "Linux の類比",
+  "nav.network": "三層ネットワーク",
+  "nav.ecosystem": "リソース",
+  "hero.eyebrow": "コミュニティ運営 · 地球村公共ネットワークプロジェクト",
+  "hero.desc": "EACO は Solana 上でコミュニティが運営するプロジェクトで、Linux のような公共インフラになることを目指しています。それは個人や組織に属さず——保有者こそが株主です。",
+  "hero.caLabel": "コントラクトアドレス（Solana）",
+  "hero.caCopyHint": "ボタンでアドレスを選択し、手動でコピーしてください",
+  "hero.copyBtn": "アドレスを選択",
+  "hero.primaryAction": "プロジェクトを知る",
+  "hero.secondaryAction": "公開リソースを見る",
+  "hero.nextHint": "下へスクロール · Linux 公共インフラの類比",
+  "def.eyebrow": "定義",
+  "def.title": "EACO とは？",
+  "def.missionLabel": "使命",
+  "def.mission": "労働の価値を測定し、地球の資源を定量化すること。それは個人や組織に属さず——保有者こそが株主です。",
+  "def.slogan": "eaco for earth —— 地球村のために",
+  "def.attitude": "EACO はエネルギー・態度・協力・最適化という4つの価値次元に基づきます。これらが組み合わさり、構成可能で検証可能な公共価値プロトコルを形成します。",
+  "def.equationNote": "エネルギー × 態度 × 協力 × 最適化",
+  "fact.chain": "チェーン",
+  "fact.chainV": "Solana SPL",
+  "fact.decimals": "小数桁",
+  "fact.decimalsV": "9",
+  "fact.supply": "総供給量",
+  "fact.supplyV": "1,350,000,000 EACO",
+  "fact.update": "メタデータ更新",
+  "fact.updateV": "毎週木曜 15:00（GMT+8）",
+  "fact.version": "バージョン",
+  "fact.versionV": "0.0.1",
+  "fact.license": "ライセンス",
+  "fact.licenseV": "MIT",
+  "def.energy": "エネルギー",
+  "def.energyDesc": "クリーンエネルギーと地球の資源を定量化して流通させ、エネルギーを測定・検証可能にすること。",
+  "def.attitudeTitle": "態度",
+  "def.attitudeDesc": "協力的なコミュニティ態度：オープンソース、透明性、共創——閉鎖でも投機でもなく。",
+  "def.cooperation": "協力",
+  "def.cooperationDesc": "大陸を越えた多言語の協働が、コンセンサスを通じて地球村の隅々をつなぎます。",
+  "def.optimization": "最適化",
+  "def.optimizationDesc": "継続的に進化する公共ネットワーク——性能・インセンティブ・ガバナンスが絶えず発展します。",
+  "linux.eyebrow": "公共インフラ",
+  "linux.title": "なぜ Linux のようなアプローチか？",
+  "linux.lede": "コミュニティは EACO のビジョンを Linux になぞらえます。単一の会社や取引所ではなく、中立でオープンソースな、誰でも使える公共インフラです。",
+  "linux.quote": "「それが本当に指すのは公共インフラであり、インターネットや Linux に近い——同じ仕事を繰り返す10のシステムは必要なく、中立な1つのシステムが必要なのです。」",
+  "linux.quoteSource": "Jeff Yan（Hyperliquid Labs 共同創業者）、Blockworks DAS Asia、2026年10月7日、シンガポール",
+  "linux.p1": "2026年10月7日にシンガポールで開かれた Blockworks DAS Asia の対談で、Jeff Yan はなぜそのようなシステムが Linux のようであるべきかを説明しました。基本コンポーネントの数は少なく保つべきだが、それぞれが正確で汎用性があり、他のコンポーネントと組み合わせられる必要がある、と。",
+  "linux.p2": "「各コンポーネントは正確に設計され、広く使われ、他のコンポーネントとうまく組み合わされるべきです。」——数は少なくても、互いに連携しなければなりません。",
+  "linux.componentsTitle": "構成可能な基本コンポーネント",
+  "linux.c1": "先物 · 現物 · オプション",
+  "linux.c1Desc": "資産そのもの、レバレッジ付き線形商品、凸型ペイオフ商品が完全な「三本セット」を構成します。",
+  "linux.c2": "ポートフォリオ証拠金 · ネイティブ貸付",
+  "linux.c2Desc": "貸付コンポーネントが取引コンポーネントと組み合わさり、開発者が一つのエコシステムでより多くの製品を構築できます。",
+  "linux.c3": "優先手数料 · 公開オーダーブック",
+  "linux.c3Desc": "レイテンシー競争の負の外部性をシステム内部に取り込み、より多くの人が参加できるようにします。オーダーブックはオンチェーンで透明です。",
+  "linux.c4": "HIP-3 · HIP-3* · HIP-4",
+  "linux.c4Desc": "パーミッションレスな市場展開、任意の権限制御、結果契約——コンポーネントのリストは決して固定すべきではありません。",
+  "linux.eacoConnectTitle": "EACO にとっての意味",
+  "linux.eacoConnect": "EACO コミュニティは、同じ公共インフラの哲学を地球村の決済ネットワークに持ち込みます。オープンソースのコード、中立な組織、誰の所有でもなく、世界のノードが共同で維持し、保有者が株主です。EACO は七大陸・五大洋にわたり、測定・検証・決済可能な中立ネットワークの提供を目指します。",
+  "linux.sourceNote": "このセクションは Jeff Yan の公開インタビューを引用しています（Wu Blockchain 編訳、音声文字起こしは GPT によるため誤りを含む可能性があります。データと機能状態はインタビュー時点のものです）。ゲストの発言は本ページの見解を代表するものではなく、投資助言でもありません。",
+  "linux.youtube": "元動画：Blockworks DAS Asia インタビュー（YouTube）",
+  "net.eyebrow": "ビジョン",
+  "net.title": "地球村 · 三層ネットワーク",
+  "net.tagline": "七大洲 · 五大洋 · 一つの EACO ネットワーク",
+  "net.lede": "陸地から海洋、地球軌道から深宇宙まで——一つの分散型価値プロトコルが地球村を、測定・検証・決済可能な公共ネットワークとして結びます。EACO は決済層として機能し、クロスチェーン相互運用でネットワークをつなぎます。",
+  "net.land": "陸上ネットワーク",
+  "net.landDesc": "第1層：大陸幹線網。第2層は都市・教育・エネルギー・労働をカバー。",
+  "net.ocean": "海洋ネットワーク",
+  "net.oceanDesc": "海底ケーブル、浮体式エネルギーと計算、港湾と海運の越洋決済。",
+  "net.space": "宇宙ネットワーク",
+  "net.spaceDesc": "低軌道、シスルナ空間、深宇宙の小惑星帯。",
+  "net.settle": "EACO 決済層",
+  "net.cross": "クロスチェーン相互運用（例：Solana → BNB）",
+  "net.ref": "関連ページ：三層ネットワーク特集 · 宇宙意識特集（下記の公開リソース参照）",
+  "eco.eyebrow": "エコシステム",
+  "eco.title": "エコシステムと公開リソース",
+  "eco.lede": "以下は EACO の公開・中立リソースです：プロジェクトページ、ソースコード、オンチェーンブラウザ、コミュニティチャンネル。リンクは各チームが管理しています。",
+  "eco.pages": "プロジェクトとビジョンページ",
+  "eco.repos": "ソースコード",
+  "eco.explorers": "オンチェーンエクスプローラー",
+  "eco.community": "コミュニティチャンネル",
+  "eco.dex": "公開オンチェーン DEX ページ",
+  "eco.dexNote": "上記の DEX ページは、各 DEX チームが独立して運営する公開オンチェーンスワップページを厳選したものです。本ページは中立な情報であり、取引を推奨せず、投資助言も提供しません。",
+  "eco.caLabel": "コントラクトアドレス（Solana）",
+  "eco.copyBtn": "アドレスを選択",
+  "eco.copyHint": "ボタンでアドレスを選択し、手動でコピー",
+  "link.linktree": "公式リンク集：ウェブサイト、SNS、コミュニティ、取引入口",
+  "link.homeDesc": "コミュニティホームページとプロジェクト情報",
+  "link.top10Desc": "オンチェーン取引入口インデックス",
+  "link.networkDesc": "三層ネットワークビジョンページ",
+  "link.cosmicDesc": "宇宙意識ビジョンページ",
+  "link.repo1Desc": "プロジェクトホームページとメタデータ（eaco.json）",
+  "link.repo2Desc": "Web3 2026 サイトソース",
+  "link.repo3Desc": "フロントエンドとスワップインターフェース（TypeScript）",
+  "link.repo4Desc": "クロスチェーン：DOGE → Solana → BNB",
+  "link.orb": "相場とトークン情報",
+  "link.solscan": "Solana オンチェーンエクスプローラー",
+  "link.solana": "Solana 公式エクスプローラー",
+  "link.x": "公式 X チャンネル",
+  "link.telegram": "公式 Telegram グループ",
+  "link.telegramEs": "スペイン語コミュニティグループ",
+  "link.discord": "公式 Discord",
+  "disc.eyebrow": "中立性の表明",
+  "disc.title": "ご注意",
+  "disc.p1": "本ページは EACO コミュニティプロジェクトの中立な情報ページであり、投資ページではありません。本ページの内容はいかなる投資助言・収益の約束・取引の誘導も構成しません。暗号資産は価格変動が激しいため、参加前にはご自身で調査し、所在地の法令を遵守してください。",
+  "disc.p2": "ここで引用した第三者リンク（OrbMarkets、各 DEX、GitHub、SNS など）は各チームが管理しており、本ページとは無関係です。オンチェーン事実は公式リポジトリの eaco.json メタデータに従い、毎週木曜 15:00（GMT+8）に更新されます。現行バージョン 0.0.1（MIT ライセンス）。",
+  "disc.p3": "未検証の能力・指標・価格・収益データは本ページに表示しません。",
+  "foot.note": "eaco for earth · コミュニティ運営 · 中立な情報ページ",
+  "foot.reserved": "© 2026 eaco community · 公開情報をもとに編集",
+  "links.title": "EACO よく使うリンク",
+  "links.desc": "コミュニティが管理する公式ホストページと公開技術シリーズです。参考用にご覧ください。",
+  "links.l1": "Earth's Best Coin · 公式ホストページ",
+  "links.l2": "EACO · SOL 主要 DEX 2025",
+  "links.l3": "Earth Village · EACO ネットワーク 2024",
+  "links.l4": "EACO Web3 技術シリーズ",
+  "ann.theme": "テーマ切替：%s",
+  "ann.lang": "言語切替：%s",
+  "ann.reset": "既定に戻しました：中文 · アップルグリーン",
+  "ann.copy": "コントラクトアドレスを選択しました。Ctrl+C でコピー",
+  "ann.missing": "一部の翻訳がありません。既定の内容を表示しています",
+  "theme.apple": "アップルグリーン",
+  "theme.cosmic": "コズミックブルー",
+  "theme.beige": "クラシックベージュ",
+  "lang.zh": "中文",
+  "lang.en": "English",
+  "lang.fr": "Français",
+  "lang.es": "Español",
+  "lang.ru": "Русский",
+  "lang.ar": "العربية",
+  "lang.hi": "हिन्दी",
+  "lang.ja": "日本語"
+}
+};</script>
+<script>(function () {
+  "use strict";
+
+  var CA = "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH";
+  var THEMES = ["apple-green", "cosmic-blue", "classic-beige"];
+  var LANGS = ["zh", "en", "fr", "es", "ru", "ar", "hi", "ja"];
+  var DEFAULT_THEME = "apple-green";
+  var DEFAULT_LANG = "zh";
+
+  document.documentElement.classList.remove("no-js");
+  document.documentElement.classList.add("js");
+
+  /* In-memory UI state: the delivered page may run inside a sandboxed
+     iframe without same-origin access, so browser storage must not be
+     touched. Persistence is intentionally limited to the current view. */
+  var memoryState = Object.create(null);
+  function stateGet(key) {
+    return Object.prototype.hasOwnProperty.call(memoryState, key) ? memoryState[key] : null;
+  }
+  function stateSet(key, val) {
+    memoryState[key] = val;
+  }
+
+  function t(lang, key) {
+    var dict = I18N[lang] || I18N[DEFAULT_LANG];
+    var val = (dict && dict[key]) || I18N[DEFAULT_LANG][key];
+    return typeof val === "string" ? val : key;
+  }
+  function fmt(str, rep) {
+    return String(str).replace("%s", rep);
+  }
+
+  var annContent = document.getElementById("announcer-content");
+  var announceTimer = null;
+  function announce(text) {
+    if (!annContent) { return; }
+    annContent.textContent = text;
+    annContent.setAttribute("aria-hidden", "false");
+    if (announceTimer) { clearTimeout(announceTimer); }
+    announceTimer = setTimeout(function () {
+      annContent.setAttribute("aria-hidden", "true");
+    }, 3200);
+  }
+
+  function applyLanguage(lang) {
+    if (LANGS.indexOf(lang) === -1) { lang = DEFAULT_LANG; }
+    stateSet("lang", lang);
+    var root = document.documentElement;
+    root.setAttribute("lang", lang === "zh" ? "zh-CN" : lang);
+    root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+    var nodes = document.querySelectorAll("[data-i18n]");
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-i18n");
+      if (key) { nodes[i].textContent = t(lang, key); }
+    }
+    var attrs = document.querySelectorAll("[data-i18n-attr]");
+    for (i = 0; i < attrs.length; i++) {
+      var spec = attrs[i].getAttribute("data-i18n-attr");
+      if (spec) {
+        var parts = spec.split("|");
+        if (parts.length === 2) {
+          attrs[i].setAttribute(parts[1], t(lang, parts[0]));
+        }
+      }
+    }
+    var langBtns = document.querySelectorAll("[data-lang-pick]");
+    for (i = 0; i < langBtns.length; i++) {
+      var pressed = langBtns[i].getAttribute("data-lang-pick") === lang;
+      langBtns[i].setAttribute("aria-pressed", pressed ? "true" : "false");
+      langBtns[i].setAttribute("aria-label", t(lang, "lang." + langBtns[i].getAttribute("data-lang-pick")));
+    }
+    var themeBtns = document.querySelectorAll("[data-theme-pick]");
+    for (i = 0; i < themeBtns.length; i++) {
+      themeBtns[i].setAttribute("aria-label", t(lang, "theme." + themeBtns[i].getAttribute("data-theme-pick")));
+    }
+    document.title = t(lang, "nav.ecosystem") + " · EACO";
+  }
+
+  function applyTheme(theme) {
+    if (THEMES.indexOf(theme) === -1) { theme = DEFAULT_THEME; }
+    stateSet("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    var btns = document.querySelectorAll("[data-theme-pick]");
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      btns[i].setAttribute("aria-pressed", btns[i].getAttribute("data-theme-pick") === theme ? "true" : "false");
+    }
+  }
+
+  function selectText(el) {
+    if (!el) { return; }
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection ? window.getSelection() : null;
+    if (sel) {
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+  }
+
+  function wireCopyButtons() {
+    var btns = document.querySelectorAll("[data-copy-ca]");
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function (ev) {
+        var btn = ev.currentTarget;
+        var box = btn.closest(".ca-box");
+        var codeEl = box ? box.querySelector("code.ca-code") : document.getElementById("ca-code");
+        selectText(codeEl);
+        var lang = document.documentElement.getAttribute("lang") === "zh-CN" ? "zh" : document.documentElement.getAttribute("lang");
+        announce(t(lang, "ann.copy"));
+      });
+    }
+  }
+
+  function wireControls(lang) {
+    var i;
+    var themeBtns = document.querySelectorAll("[data-theme-pick]");
+    for (i = 0; i < themeBtns.length; i++) {
+      themeBtns[i].addEventListener("click", function (ev) {
+        var theme = ev.currentTarget.getAttribute("data-theme-pick");
+        applyTheme(theme);
+        var curLang = document.documentElement.getAttribute("lang") === "zh-CN" ? "zh" : document.documentElement.getAttribute("lang");
+        announce(fmt(t(curLang, "ann.theme"), t(curLang, "theme." + theme)));
+      });
+    }
+    var langBtns = document.querySelectorAll("[data-lang-pick]");
+    for (i = 0; i < langBtns.length; i++) {
+      langBtns[i].addEventListener("click", function (ev) {
+        var lang = ev.currentTarget.getAttribute("data-lang-pick");
+        applyLanguage(lang);
+        announce(fmt(t(lang, "ann.lang"), t(lang, "lang." + lang)));
+      });
+    }
+    var resetBtn = document.querySelector("[data-reset]");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function () {
+        applyTheme(DEFAULT_THEME);
+        applyLanguage(DEFAULT_LANG);
+        announce(t(DEFAULT_LANG, "ann.reset"));
+      });
+    }
+  }
+
+  function boot() {
+    var savedTheme = stateGet("theme") || DEFAULT_THEME;
+    var savedLang = stateGet("lang") || DEFAULT_LANG;
+    applyTheme(savedTheme);
+    applyLanguage(savedLang);
+    document.documentElement.classList.add("booted");
+
+    var bootEl = document.getElementById("boot");
+    if (bootEl) {
+      bootEl.style.opacity = "0";
+      setTimeout(function () {
+        if (bootEl.parentNode) { bootEl.parentNode.removeChild(bootEl); }
+      }, 220);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      wireCopyButtons();
+      wireControls();
+      boot();
+    });
+  } else {
+    wireCopyButtons();
+    wireControls();
+    boot();
+  }
+})();</script>
+<script>(function(){function settle(){requestAnimationFrame(function(){setTimeout(function(){var root=document.documentElement;var main=document.querySelector("main");var rect=main&&main.getBoundingClientRect();var visible=!!(rect&&rect.width>0&&rect.height>0&&getComputedStyle(main).display!=="none"&&getComputedStyle(main).visibility!=="hidden");var shell=false?document.querySelector(null):null;var shellReady=!false||!!shell;var errors=window.__DESIGN_SUITE_STATIC_ERRORS__||[];var overflow=Math.max(document.documentElement.scrollWidth,document.body?document.body.scrollWidth:0)>document.documentElement.clientWidth+1;root.dataset.designSuiteStaticState=visible&&shellReady&&errors.length===0?"ready":"blocked";root.dataset.designSuiteStaticProvider=shellReady?"none":"missing";root.dataset.designSuiteStaticMain=visible?"visible":"missing";root.dataset.designSuiteStaticErrors=String(errors.length);root.dataset.designSuiteStaticOverflow=String(overflow)},50)})}if(document.readyState==="complete")settle();else window.addEventListener("load",settle,{once:true})})();</script></body>
+</html>
