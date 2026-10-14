@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr" data-theme="apple-green" class="no-js">
+<head><meta name="design-suite-artifact-kind" content="website"><meta name="design-suite-delivery-adapter" content="static-export"><meta name="design-suite-delivery-format" content="single-html"><meta name="design-suite-asset-policy" content="inline-base64"><meta name="design-suite-export-mode" content="single-file"><meta name="design-suite-contract-sha256" content="b636ccff305db5f579188b1b7ee68378e30b3ee56f91a5a9065732830cf80188"><script>(function(){var errors=[];window.__DESIGN_SUITE_STATIC_ERRORS__=errors;window.addEventListener("error",function(event){errors.push(event.message||event.type||"error")},true);window.addEventListener("unhandledrejection",function(event){errors.push(String(event.reason||"unhandledrejection"))})})();</script><script data-design-suite-sandbox-shim>(function(){var used=[];window.__DESIGN_SUITE_SANDBOX_VIOLATIONS__=used;function note(api){if(used.indexOf(api)<0)used.push(api)}function memoryStorage(){var map=Object.create(null);function keys(){return Object.keys(map)}return{get length(){return keys().length},key:function(index){var list=keys();return index>=0&&index<list.length?list[index]:null},getItem:function(key){key=String(key);return key in map?map[key]:null},setItem:function(key,value){map[String(key)]=String(value)},removeItem:function(key){delete map[String(key)]},clear:function(){map=Object.create(null)}}}["localStorage","sessionStorage"].forEach(function(name){var store=memoryStorage();try{Object.defineProperty(window,name,{configurable:true,get:function(){note(name);return store}})}catch(error){note(name+":shim-failed")}});var cookie="";try{Object.defineProperty(document,"cookie",{configurable:true,get:function(){note("document.cookie");return cookie},set:function(value){note("document.cookie");var pair=String(value).split(";")[0];if(pair)cookie=cookie?cookie+"; "+pair:pair}})}catch(error){note("document.cookie:shim-failed")}try{Object.defineProperty(window,"indexedDB",{configurable:true,get:function(){note("indexedDB");return null}})}catch(error){note("indexedDB:shim-failed")}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="EACO x Linux Use-Case Guide 2026 - what Linux is used for, what EACO is used for, and what they can do together. Neutral information page with 8 languages and 3 themes. EACO 与 Linux 用途指南中立信息页。">
+<meta name="keywords" content="EACO, Earth's Best Coin, Solana, Linux, use cases, 用途, 地球村, Earth Village, Web3, 开源, self-hosting">
+<meta name="author" content="eaco community">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMyRTdEMzIiLz48dGV4dCB4PSIzMiIgeT0iNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FPC90ZXh0Pjwvc3ZnPg==">
+<title>EACO × Linux — Use-Case Guide 2026</title>
+<style>
+:root{
+  --radius:16px;
+  --radius-s:10px;
+  --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans",sans-serif;
+  --font-mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+  --page-gap:clamp(56px,10vh,120px);
+}
+[data-theme="apple-green"]{
+  --bg:#EEF7EC;--bg-soft:#E3F1DF;--surface:#FFFFFF;--surface-2:#F6FBF4;
+  --fg:#16291A;--fg-soft:#2F4A35;--muted:#48644E;
+  --primary:#2E7D32;--primary-strong:#1B5E20;--on-primary:#FFFFFF;
+  --accent:#0E7C2F;--ring:#0E7C2F;--border:#C9E3C3;--chip:#E0EFDA;
+  --shadow:0 10px 30px rgba(30,80,40,.10);--shadow-lg:0 22px 60px rgba(30,80,40,.14);
+  --header-bg:rgba(238,247,236,.92);--hero-glow:rgba(46,125,50,.10);
+  --code-bg:#F1F8EE;--dis-bg:#FDF6E8;--dis-border:#E8D9A8;
+}
+[data-theme="cosmic-blue"]{
+  --bg:#070D20;--bg-soft:#0B1530;--surface:#0F1B3A;--surface-2:#12204A;
+  --fg:#E9F0FF;--fg-soft:#BCCBF0;--muted:#93A6D8;
+  --primary:#6EA8FF;--primary-strong:#B4D0FF;--on-primary:#071331;
+  --accent:#4DD8E8;--ring:#6EE7F5;--border:#26365F;--chip:#14234E;
+  --shadow:0 12px 34px rgba(0,0,0,.38);--shadow-lg:0 26px 70px rgba(0,0,0,.5);
+  --header-bg:rgba(7,13,32,.92);--hero-glow:rgba(110,168,255,.12);
+  --code-bg:#0C1733;--dis-bg:#141E31;--dis-border:#3A4456;
+}
+[data-theme="classic-beige"]{
+  --bg:#F6EEDC;--bg-soft:#EFE3C9;--surface:#FFFBF2;--surface-2:#FAF3E3;
+  --fg:#35291A;--fg-soft:#54432C;--muted:#6E5B3E;
+  --primary:#8A5A2B;--primary-strong:#6E451F;--on-primary:#FFFDF7;
+  --accent:#9C6B1F;--ring:#8A5A2B;--border:#DFD0AE;--chip:#F1E5C9;
+  --shadow:0 10px 28px rgba(120,90,40,.12);--shadow-lg:0 22px 56px rgba(120,90,40,.18);
+  --header-bg:rgba(246,238,220,.92);--hero-glow:rgba(138,90,43,.10);
+  --code-bg:#FBF5E6;--dis-bg:#FBF2DF;--dis-border:#E4D2A6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{color-scheme:light;scroll-behavior:smooth;scroll-padding-top:150px;webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font-ui);
+  background:var(--bg);color:var(--fg);
+  line-height:1.65;min-height:100vh;
+  transition:background-color .35s ease,color .35s ease;
+  overflow-wrap:break-word;
+}
+[data-theme="cosmic-blue"]{color-scheme:dark;}
+img,svg{display:block;max-width:100%;}
+a{color:var(--accent);text-decoration:none;font-weight:600;}
+a:hover{text-decoration:underline;}
+:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:6px;}
+.skip-link{
+  position:fixed;top:-60px;inset-inline-start:14px;z-index:100;
+  background:var(--primary);color:var(--on-primary);padding:10px 16px;border-radius:0 0 var(--radius-s) var(--radius-s);
+  font-weight:700;transition:top .2s ease;
+}
+.skip-link:focus{top:0;text-decoration:none;}
+.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px);}
+main{display:block;}
+section{padding-block:clamp(20px,4vh,44px);}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);background:var(--chip);border:1px solid var(--border);
+  padding:6px 14px;border-radius:999px;margin-bottom:18px;white-space:nowrap;
+}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;}
+h1,h2,h3,h4{line-height:1.2;letter-spacing:-.01em;color:var(--fg);}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:14px;}
+.lead{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--fg-soft);max-width:62ch;}
+/* Header */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:var(--header-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.utility-bar{padding-block:10px;}
+.utility-inner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;justify-content:space-between;}
+.seg{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.seg-label{font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.04em;}
+.chip{
+  appearance:none;border:1px solid var(--border);background:var(--chip);color:var(--fg-soft);
+  font:inherit;font-size:.82rem;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;line-height:1.2;
+  transition:background .2s ease,color .2s ease,transform .15s ease,border-color .2s ease;
+}
+.chip:hover{border-color:var(--ring);transform:translateY(-1px);}
+.chip[aria-pressed="true"]{background:var(--primary);color:var(--on-primary);border-color:var(--primary);}
+.chip:active{transform:scale(.97);}
+.theme-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(127,127,127,.35);flex:none;}
+.theme-dot.apple{background:#4CAF50;}
+.theme-dot.cosmic{background:#2F6FE4;}
+.theme-dot.beige{background:#C89B4A;}
+.nav-inner{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-block:12px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.06rem;color:var(--fg);}
+.brand-mark{width:34px;height:34px;flex:none;}
+.brand-name{letter-spacing:.02em;}
+.brand-sub{font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.nav-links{display:flex;flex-wrap:wrap;gap:4px 2px;margin-inline-start:auto;}
+.nav-links a{
+  color:var(--fg-soft);font-size:.88rem;font-weight:600;padding:7px 12px;border-radius:999px;
+}
+.nav-links a:hover{background:var(--chip);text-decoration:none;color:var(--fg);}
+/* Hero */
+.hero{position:relative;overflow:clip;padding-block:clamp(56px,11vh,120px);}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(1200px 520px at 50% -10%,var(--hero-glow),transparent 70%);
+}
+.hero-orbit{position:absolute;width:min(46vw,460px);height:auto;inset-inline-end:-60px;top:8%;opacity:.5;pointer-events:none;}
+@media(max-width:760px){.hero-orbit{width:min(70vw,320px);inset-inline-end:-90px;top:-20px;opacity:.32;}}
+.hero-orbit .orbit{fill:none;stroke:var(--primary);stroke-dasharray:2 6;opacity:.55;}
+.hero-orbit .planet{fill:var(--primary);}
+.hero-orbit .moon{fill:var(--accent);opacity:.9;}
+.hero-orbit .cross-a{stroke:var(--accent);stroke-width:3;stroke-linecap:round;opacity:.8;}
+.hero-orbit .term{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;opacity:.9;}
+.hero-inner{position:relative;max-width:880px;}
+.hero h1{font-size:clamp(2.2rem,6.4vw,4.4rem);margin-bottom:18px;letter-spacing:-.02em;}
+.hero .grad{
+  background:linear-gradient(120deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  display:block;padding-bottom:.08em;
+}
+.hero-desc{font-size:clamp(1.02rem,1.8vw,1.24rem);color:var(--fg-soft);max-width:66ch;margin-bottom:26px;}
+.ca-box{
+  display:flex;flex-direction:column;gap:8px;
+  background:var(--code-bg);border:1px dashed var(--border);border-radius:var(--radius);
+  padding:14px 16px;margin:22px 0 8px;max-width:760px;min-width:0;
+}
+.ca-label{font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.06em;}
+.ca-row{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;min-width:0;}
+.ca-code{
+  font-family:var(--font-mono);font-size:.86rem;color:var(--fg);
+  word-break:break-all;overflow-wrap:anywhere;min-width:0;flex:1 1 280px;user-select:all;
+}
+.ca-copy{
+  appearance:none;border:1px solid var(--border);background:var(--chip);color:var(--fg-soft);
+  font:inherit;font-size:.8rem;font-weight:700;padding:7px 14px;border-radius:999px;cursor:pointer;flex:none;
+}
+.ca-copy:hover{border-color:var(--ring);color:var(--fg);}
+.ca-hint{font-size:.76rem;color:var(--muted);max-width:60ch;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+.btn{
+  appearance:none;font:inherit;font-weight:700;font-size:.98rem;
+  padding:13px 24px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  transition:background .2s ease,transform .15s ease,box-shadow .2s ease,border-color .2s ease;
+  text-decoration:none;
+}
+.btn:active{transform:scale(.98);}
+.btn-primary{background:var(--primary);color:var(--on-primary);border:1px solid transparent;box-shadow:var(--shadow);}
+.btn-primary:hover{background:var(--primary-strong);transform:translateY(-2px);box-shadow:var(--shadow-lg);text-decoration:none;}
+.btn-ghost{background:transparent;color:var(--fg-soft);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--ring);color:var(--fg);transform:translateY(-2px);text-decoration:none;}
+.hero-next{
+  display:inline-flex;align-items:center;gap:8px;margin-top:38px;
+  color:var(--muted);font-size:.86rem;font-weight:600;
+}
+.hero-next .scroll-line{
+  width:28px;height:2px;background:var(--accent);position:relative;border-radius:2px;overflow:clip;
+}
+.hero-next .scroll-line::after{content:"";position:absolute;inset:0;background:var(--primary);animation:pulse 2.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.2;transform:translateX(-70%);}50%{opacity:1;transform:translateX(70%);}}
+/* Use-case sections */
+.uc-section{padding-block:clamp(20px,4vh,44px);}
+.uc-band{padding-block:clamp(28px,5vh,56px);border-block:1px solid var(--border);background:var(--bg-soft);}
+.uc-head{max-width:820px;margin-bottom:30px;}
+.uc-grid{display:grid;gap:16px;grid-template-columns:1fr 1fr;}
+@media(max-width:760px){.uc-grid{grid-template-columns:1fr;}}
+.uc-card{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:clamp(16px,2.6vw,22px);box-shadow:var(--shadow);
+  transition:border-color .2s ease,transform .15s ease;
+}
+.uc-card:hover{border-color:var(--ring);transform:translateY(-2px);}
+.uc-no{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:11px;
+  background:var(--primary);color:var(--on-primary);
+  font-family:var(--font-mono);font-weight:800;font-size:.98rem;
+  box-shadow:var(--shadow);
+}
+.uc-body{min-width:0;}
+.uc-title{font-size:1.05rem;font-weight:800;margin-bottom:6px;color:var(--fg);}
+.uc-desc{font-size:.93rem;color:var(--fg-soft);}
+/* Disclaimer */
+.disclaimer{margin-top:var(--page-gap);padding-block:clamp(20px,4vh,40px);background:var(--dis-bg);border-top:1px solid var(--dis-border);}
+.dis-card{max-width:860px;}
+.dis-card h2{font-size:clamp(1.4rem,3vw,2rem);}
+.dis-card p{color:var(--fg-soft);font-size:.95rem;margin-top:10px;}
+/* Footer */
+.site-footer{border-top:1px solid var(--border);padding-block:26px;background:var(--bg-soft);}
+.footer-inner{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;}
+.footer-brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--fg);font-size:.95rem;}
+.footer-note{font-size:.82rem;color:var(--muted);}
+/* Common links panel */
+.links-panel{padding-block:44px 10px;}
+.links-title{font-size:1.05rem;margin-bottom:10px;}
+.links-desc{font-size:.88rem;color:var(--muted);margin-bottom:18px;max-width:64ch;}
+.links-list{display:grid;gap:10px;list-style:none;padding:0;margin:0;}
+.links-list li::before{content:"\2192";color:var(--primary);font-weight:800;margin-inline-end:8px;}
+.links-list a{font-size:.95rem;color:var(--fg-soft);text-decoration:none;border-bottom:1px dashed var(--border);padding-block:1px;}
+.links-list a:hover{color:var(--primary);border-bottom-color:var(--primary);}
+/* Boot overlay */
+.boot{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;gap:12px;background:var(--bg);color:var(--fg-soft);font-weight:700;letter-spacing:.06em;}
+.boot::after{content:"";width:16px;height:16px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+html.no-js .boot{display:none;}
+noscript .noscript-note{display:block;}
+.noscript-note{display:none;background:var(--dis-bg);border:1px solid var(--dis-border);color:var(--fg-soft);border-radius:var(--radius-s);padding:12px 16px;margin-top:22px;font-size:.9rem;font-weight:600;}
+/* Announcer */
+.announcer{position:fixed;inset-inline:16px;bottom:16px;z-index:300;pointer-events:none;display:flex;justify-content:center;}
+.announcer-content{
+  background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-lg);
+  border-radius:999px;padding:10px 20px;font-size:.86rem;font-weight:700;color:var(--fg);
+  opacity:0;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;
+}
+.announcer-content[aria-hidden="false"]{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+}
+</style>
+</head>
+<body>
+<div class="announcer" id="announcer" role="status" aria-live="polite">
+  <span class="announcer-content" id="announcer-content" aria-hidden="true"></span>
+</div>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">跳到主要内容</a>
+
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="wrap utility-inner">
+      <div class="seg" role="group" aria-label="主题风格">
+        <span class="seg-label" data-i18n="ctrl.themeLabel">主题</span>
+        <button type="button" class="chip" data-theme-pick="apple-green" aria-pressed="true"><span class="theme-dot apple" aria-hidden="true"></span><span class="theme-text">苹果绿</span></button>
+        <button type="button" class="chip" data-theme-pick="cosmic-blue" aria-pressed="false"><span class="theme-dot cosmic" aria-hidden="true"></span><span class="theme-text">宇宙蓝</span></button>
+        <button type="button" class="chip" data-theme-pick="classic-beige" aria-pressed="false"><span class="theme-dot beige" aria-hidden="true"></span><span class="theme-text">米黄古典</span></button>
+      </div>
+      <div class="seg" role="group" aria-label="语言">
+        <span class="seg-label" data-i18n="ctrl.langLabel">语言</span>
+        <button type="button" class="chip" data-lang-pick="zh" aria-pressed="true" aria-label="中文">中文</button>
+        <button type="button" class="chip" data-lang-pick="en" aria-pressed="false" aria-label="English">EN</button>
+        <button type="button" class="chip" data-lang-pick="fr" aria-pressed="false" aria-label="Français">FR</button>
+        <button type="button" class="chip" data-lang-pick="es" aria-pressed="false" aria-label="Español">ES</button>
+        <button type="button" class="chip" data-lang-pick="ru" aria-pressed="false" aria-label="Русский">RU</button>
+        <button type="button" class="chip" data-lang-pick="ar" aria-pressed="false" aria-label="العربية">AR</button>
+        <button type="button" class="chip" data-lang-pick="hi" aria-pressed="false" aria-label="हिन्दी">HI</button>
+        <button type="button" class="chip" data-lang-pick="ja" aria-pressed="false" aria-label="日本語">JA</button>
+        <button type="button" class="chip" data-reset aria-pressed="false" data-i18n="ctrl.reset">重置</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="EACO">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="var(--primary)" stroke-width="3"/>
+        <circle cx="24" cy="24" r="12" fill="var(--primary)"/>
+        <path d="M24 12 v24 M12 24 h24" stroke="var(--on-primary)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand-name">EACO</span>
+        <span class="brand-sub">Earth&rsquo;s Best Coin</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#linux" data-i18n="nav.linux">Linux 用途</a>
+      <a href="#eaco" data-i18n="nav.eaco">EACO 用途</a>
+      <a href="#combined" data-i18n="nav.combined">结合用途</a>
+      <a href="#links" data-i18n="nav.links">常用链接</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <noscript>
+    <div class="noscript-note" role="alert" data-i18n="noscript.note">此页面需要启用 JavaScript 才能使用 8 种语言与 3 套主题切换功能；当前显示默认中文内容。</div>
+  </noscript>
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-label="EACO x Linux">
+    <svg class="hero-orbit" viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+      <circle cx="110" cy="110" r="96" class="orbit"/>
+      <circle cx="110" cy="110" r="70" class="orbit"/>
+      <circle cx="110" cy="110" r="44" class="orbit"/>
+      <circle cx="110" cy="110" r="17" class="planet"/>
+      <path class="term" d="M92 96 h36 v14 l-9 9 h9 M96 112 h30"/>
+      <circle cx="198" cy="78" r="6" class="moon"/>
+      <circle cx="30" cy="148" r="4" class="moon"/>
+    </svg>
+    <div class="wrap hero-inner">
+      <span class="eyebrow" data-i18n="hero.eyebrow">EACO × LINUX 用途指南</span>
+      <h1 id="title"><span data-i18n="hero.titleA">Linux 能做什么？</span><span class="grad" data-i18n="hero.titleB">EACO 能做什么？两者结合能做什么？</span></h1>
+      <p class="hero-desc" data-i18n="hero.desc">一页看懂 Linux 的通用能力、EACO 的公开项目与链上事实，以及它们在自托管、开源开发与学习教育中的结合方式。内容保持中立，仅供技术交流与信息参考。</p>
+      <div class="ca-box">
+        <span class="ca-label" data-i18n="hero.caLabel">合约地址（Solana）</span>
+        <div class="ca-row">
+          <code class="ca-code" id="ca-code">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+          <button type="button" class="ca-copy" data-copy-ca data-i18n="hero.copyBtn">选中地址</button>
+        </div>
+        <span class="ca-hint" data-i18n="hero.caCopyHint">点击按钮选中合约地址，再手动复制</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#linux" data-i18n="hero.primaryAction">查看 Linux 用途</a>
+        <a class="btn btn-ghost" href="#eaco" data-i18n="hero.secondaryAction">查看 EACO 用途</a>
+      </div>
+      <span class="hero-next"><span class="scroll-line" aria-hidden="true"></span><span data-i18n="hero.nextHint">向下浏览 · Linux → EACO → 结合</span></span>
+    </div>
+  </section>
+
+  <!-- LINUX USE CASES -->
+  <section class="uc-section wrap" id="linux" aria-labelledby="linux-title">
+    <div class="uc-head">
+      <span class="eyebrow" data-i18n="s1.eyebrow">为什么需要 Linux</span>
+      <h2 id="linux-title" data-i18n="s1.title">Linux 有哪些用途？</h2>
+      <p class="lead" data-i18n="s1.lead">从服务器到桌面，从超算到物联网，Linux 是全球使用最广泛的开源操作系统之一。以下八类用途是其最典型的应用场景。</p>
+    </div>
+    <div class="uc-grid">
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">1</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.1t">服务器与云基础设施</h3><p class="uc-desc" data-i18n="s1.1d">全球大多数网站、数据库与云主机运行 Linux；Nginx、Apache、MySQL/PostgreSQL、DNS、邮件等核心服务在 Linux 上稳定可靠。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">2</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.2t">软件开发与工程</h3><p class="uc-desc" data-i18n="s1.2d">Linux 提供完整的开发工具链（gcc、Python、Node.js、Git），终端与脚本让构建、测试、部署流水线高效且可复用。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">3</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.3t">容器与 DevOps</h3><p class="uc-desc" data-i18n="s1.3d">Docker 与 Kubernetes 的事实标准宿主是 Linux；配合 Ansible、Terraform、Prometheus 可构建现代 CI/CD 与可观测体系。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">4</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.4t">嵌入式与物联网</h3><p class="uc-desc" data-i18n="s1.4d">Android 内核、路由器、智能家电、车载系统与树莓派等开发板均基于 Linux，是硬件创新的基础平台。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">5</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.5t">超级计算与科研</h3><p class="uc-desc" data-i18n="s1.5d">TOP500 超算绝大多数运行 Linux；科学计算、气象、基因组与 AI 训练（CUDA 生态）广泛依赖它。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">6</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.6t">网络安全</h3><p class="uc-desc" data-i18n="s1.6d">Kali、Parrot 等安全发行版与防火墙、入侵检测（Snort/Suricata）等开源工具，让 Linux 成为安全研究与防护的基础。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">7</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.7t">桌面与办公</h3><p class="uc-desc" data-i18n="s1.7d">Ubuntu、Fedora、Debian 等桌面发行版配合 LibreOffice、浏览器与 IDE，满足日常办公与个人开发，隐私可控、高度可定制。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">8</span><div class="uc-body"><h3 class="uc-title" data-i18n="s1.8t">开源教育与治理</h3><p class="uc-desc" data-i18n="s1.8d">Linux 免费开放、文档丰富，是学习操作系统、Git 协作与开源许可（GPL/MIT）的最佳入口，也是数字主权的长期选择。</p></div></article>
+    </div>
+  </section>
+
+  <!-- EACO USE CASES -->
+  <section class="uc-section uc-band" id="eaco" aria-labelledby="eaco-title">
+    <div class="wrap">
+      <div class="uc-head">
+        <span class="eyebrow" data-i18n="s2.eyebrow">基于已验证事实</span>
+        <h2 id="eaco-title" data-i18n="s2.title">EACO 有哪些用途？</h2>
+        <p class="lead" data-i18n="s2.lead">EACO 是 Solana 链上的 SPL 代币（Earth's Best Coin），以开源项目、公开网页与社区协作的形式传播信息与知识。以下用途均来自官方公开事实，不含任何投资引导。</p>
+      </div>
+      <div class="uc-grid">
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">1</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.1t">链上公开记录</h3><p class="uc-desc" data-i18n="s2.1d">EACO 是 Solana 链上的 SPL 代币（9 位小数，总供应量 1,350,000,000 EACO），供应、持有与元数据可在链上浏览器公开查询。</p></div></article>
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">2</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.2t">开源项目组合</h3><p class="uc-desc" data-i18n="s2.2d">官方 GitHub 组织 ucoingroup 公开维护 earths-best-coin、eacoweb3-2026、eacoSWAP、EACO-SOL-DOGE-EAC 等仓库，代码以 MIT 许可公开，可供学习与贡献。</p></div></article>
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">3</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.3t">网页信息传播</h3><p class="uc-desc" data-i18n="s2.3d">官方托管页与 Web3 系列页面（GitHub Pages、freedev）用于承载项目介绍、社区导航与技术说明，均可公开访问。</p></div></article>
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">4</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.4t">链上数据查询</h3><p class="uc-desc" data-i18n="s2.4d">通过 Solscan、Solana Explorer、OrbMarkets 等公开浏览器可查看 EACO 的地址、元数据与链上信息，适合做数据分析与记录。</p></div></article>
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">5</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.5t">社区与交流</h3><p class="uc-desc" data-i18n="s2.5d">官方社区渠道（X、Telegram、Discord）用于项目讨论、技术交流与多语言协作；Linktree 聚合了全部官方入口。</p></div></article>
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">6</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.6t">定义与文化表达</h3><p class="uc-desc" data-i18n="s2.6d">EACO = Energy × Attitude × Cooperation × Optimization，口号 "eaco for earth"，使命为"计算劳动价值，量化地球资源；不属于任何个人和组织"。</p></div></article>
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">7</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.7t">学习与教育素材</h3><p class="uc-desc" data-i18n="s2.7d">作为一个 AI + RWA + Web3 的开源社区项目，EACO 的公开代码与文档可作为学习 Solana、智能合约与国际化（i18n）的素材。</p></div></article>
+        <article class="uc-card"><span class="uc-no" aria-hidden="true">8</span><div class="uc-body"><h3 class="uc-title" data-i18n="s2.8t">元数据与版本发布</h3><p class="uc-desc" data-i18n="s2.8d">EACO 元数据每周四 15:00（GMT+8）更新，当前版本 0.0.1；版本信息与元数据字段对公众透明可见。</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EACO x LINUX USE CASES -->
+  <section class="uc-section wrap" id="combined" aria-labelledby="combined-title">
+    <div class="uc-head">
+      <span class="eyebrow" data-i18n="s3.eyebrow">开源 × 开放</span>
+      <h2 id="combined-title" data-i18n="s3.title">EACO 结合 Linux 有哪些用途？</h2>
+      <p class="lead" data-i18n="s3.lead">EACO 的公开代码与网页都是标准开源资产，任何人在 Linux 环境下都可以自由访问、构建与学习。以下是八类典型的中性结合方式。</p>
+    </div>
+    <div class="uc-grid">
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">1</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.1t">自托管官方网站</h3><p class="uc-desc" data-i18n="s3.1d">在 Linux 服务器上用 Nginx 或静态服务器自托管 EACO 官方网页与社区导航页，数据自主可控，不依赖第三方托管。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">2</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.2t">开源构建与部署</h3><p class="uc-desc" data-i18n="s3.2d">在 Linux 上使用 Git 克隆 ucoingroup 仓库，用 Node.js/Python 构建静态站点，再部署到 GitHub Pages 或 freedev。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">3</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.3t">链上数据脚本</h3><p class="uc-desc" data-i18n="s3.3d">编写 Python/Shell 脚本调用 Solana RPC 读取 EACO 合约元数据、供应量与持有分布，生成定期快照与图表。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">4</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.4t">定时任务与自动化</h3><p class="uc-desc" data-i18n="s3.4d">用 crontab 定时同步链上数据、更新页面缓存或生成日报；用轻量监控脚本检查服务可用性并告警。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">5</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.5t">容器化部署</h3><p class="uc-desc" data-i18n="s3.5d">用 Docker Compose 或 Kubernetes 在 Linux 上编排运行 EACO 相关网页、数据服务与工具链，便于迁移与回滚。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">6</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.6t">密钥与安全实践</h3><p class="uc-desc" data-i18n="s3.6d">在 Linux 上使用命令行工具生成与备份 Solana 密钥（离线、加密），配合 SSH、防火墙与最小权限保护自托管服务。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">7</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.7t">开源协作与技能学习</h3><p class="uc-desc" data-i18n="s3.7d">参与 EACO 开源仓库贡献，可在 Linux 环境中系统练习 Git、Web 开发、多语言国际化与 Solana/web3 知识。</p></div></article>
+      <article class="uc-card"><span class="uc-no" aria-hidden="true">8</span><div class="uc-body"><h3 class="uc-title" data-i18n="s3.8t">低成本实验环境</h3><p class="uc-desc" data-i18n="s3.8d">用一台 Linux 主机或树莓派搭建 EACO 信息站、数据看板与测试服务，低成本演练真实服务器的运维流程。</p></div></article>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="wrap">
+      <div class="dis-card">
+        <span class="eyebrow" data-i18n="disc.eyebrow">中立声明</span>
+        <h2 data-i18n="disc.title">请注意</h2>
+        <p data-i18n="disc.p1">本页是 EACO 开源项目的中立技术信息页，并非投资页面。本页任何内容均不构成投资建议、收益承诺或交易引导；涉及加密资产请自行研究并遵守所在地法律法规。</p>
+        <p data-i18n="disc.p2">本页引用的第三方链接（GitHub、托管页、链上浏览器、社交频道等）由各自团队维护，与本页无关。链上事实以官方仓库 eaco.json 元数据为准，每周四 15:00（GMT+8）更新；当前版本 0.0.1（MIT 许可）。</p>
+        <p data-i18n="disc.p3">未经核实的能力、指标、价格与收益数据，本页一律不予展示。</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="wrap links-panel" id="links" aria-labelledby="links-title">
+  <h2 class="links-title" id="links-title" data-i18n="links.title">EACO 常用链接</h2>
+  <p class="links-desc" data-i18n="links.desc">以下为社区维护的官方托管页面与公开技术系列，仅供查阅。</p>
+  <ul class="links-list">
+    <li><a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener" data-i18n="links.l1">EACO 官方主页（GitHub Pages）</a></li>
+    <li><a href="https://ucoingroup.github.io/earths-best-coin/eaco-sol-top10-dex2025.html" target="_blank" rel="noopener" data-i18n="links.l2">EACO SOL Top10 DEX 2025 页面</a></li>
+    <li><a href="https://ucoingroup.github.io/eacoweb3-2026/Earth-Village-EACO-Network2024.html" target="_blank" rel="noopener" data-i18n="links.l3">Earth Village EACO Network 2024</a></li>
+    <li><a href="https://eaco.freedev.app/eaco_web3_series" target="_blank" rel="noopener" data-i18n="links.l4">EACO Web3 技术系列</a></li>
+  </ul>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="var(--primary)" stroke-width="3"/>
+        <circle cx="24" cy="24" r="12" fill="var(--primary)"/>
+        <path d="M24 12 v24 M12 24 h24" stroke="var(--on-primary)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>EACO × Linux</span>
+    </div>
+    <div class="footer-note" data-i18n="foot.note">eaco for earth · 开源 · 中立 · 用途指南 2026</div>
+    <div class="footer-note" data-i18n="foot.reserved">© 2026 eaco community · 依据公开信息整理</div>
+  </div>
+</footer>
+
+<script>var I18N = {"zh": {"a11y.skip": "跳到主要内容", "ctrl.themeLabel": "主题", "ctrl.langLabel": "语言", "ctrl.reset": "重置", "nav.linux": "Linux 用途", "nav.eaco": "EACO 用途", "nav.combined": "结合用途", "nav.links": "常用链接", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "苹果绿", "theme.cosmic-blue": "宇宙蓝", "theme.classic-beige": "米黄古典", "noscript.note": "此页面需要启用 JavaScript 才能使用 8 种语言与 3 套主题切换功能；当前显示默认中文内容。", "meta.title": "EACO × Linux — Use-Case Guide 2026", "hero.eyebrow": "EACO × LINUX 用途指南", "hero.titleA": "Linux 能做什么？", "hero.titleB": "EACO 能做什么？两者结合能做什么？", "hero.desc": "一页看懂 Linux 的通用能力、EACO 的公开项目与链上事实，以及它们在自托管、开源开发与学习教育中的结合方式。内容保持中立，仅供技术交流与信息参考。", "hero.caLabel": "合约地址（Solana）", "hero.copyBtn": "选中地址", "hero.caCopyHint": "点击按钮选中合约地址，再手动复制", "hero.primaryAction": "查看 Linux 用途", "hero.secondaryAction": "查看 EACO 用途", "hero.nextHint": "向下浏览 · Linux → EACO → 结合", "s1.eyebrow": "为什么需要 Linux", "s1.title": "Linux 有哪些用途？", "s1.lead": "从服务器到桌面，从超算到物联网，Linux 是全球使用最广泛的开源操作系统之一。以下八类用途是其最典型的应用场景。", "s1.1t": "服务器与云基础设施", "s1.1d": "全球大多数网站、数据库与云主机运行 Linux；Nginx、Apache、MySQL/PostgreSQL、DNS、邮件等核心服务在 Linux 上稳定可靠。", "s1.2t": "软件开发与工程", "s1.2d": "Linux 提供完整的开发工具链（gcc、Python、Node.js、Git），终端与脚本让构建、测试、部署流水线高效且可复用。", "s1.3t": "容器与 DevOps", "s1.3d": "Docker 与 Kubernetes 的事实标准宿主是 Linux；配合 Ansible、Terraform、Prometheus 可构建现代 CI/CD 与可观测体系。", "s1.4t": "嵌入式与物联网", "s1.4d": "Android 内核、路由器、智能家电、车载系统与树莓派等开发板均基于 Linux，是硬件创新的基础平台。", "s1.5t": "超级计算与科研", "s1.5d": "TOP500 超算绝大多数运行 Linux；科学计算、气象、基因组与 AI 训练（CUDA 生态）广泛依赖它。", "s1.6t": "网络安全", "s1.6d": "Kali、Parrot 等安全发行版与防火墙、入侵检测（Snort/Suricata）等开源工具，让 Linux 成为安全研究与防护的基础。", "s1.7t": "桌面与办公", "s1.7d": "Ubuntu、Fedora、Debian 等桌面发行版配合 LibreOffice、浏览器与 IDE，满足日常办公与个人开发，隐私可控、高度可定制。", "s1.8t": "开源教育与治理", "s1.8d": "Linux 免费开放、文档丰富，是学习操作系统、Git 协作与开源许可（GPL/MIT）的最佳入口，也是数字主权的长期选择。", "s2.eyebrow": "基于已验证事实", "s2.title": "EACO 有哪些用途？", "s2.lead": "EACO 是 Solana 链上的 SPL 代币（Earth's Best Coin），以开源项目、公开网页与社区协作的形式传播信息与知识。以下用途均来自官方公开事实，不含任何投资引导。", "s2.1t": "链上公开记录", "s2.1d": "EACO 是 Solana 链上的 SPL 代币（9 位小数，总供应量 1,350,000,000 EACO），供应、持有与元数据可在链上浏览器公开查询。", "s2.2t": "开源项目组合", "s2.2d": "官方 GitHub 组织 ucoingroup 公开维护 earths-best-coin、eacoweb3-2026、eacoSWAP、EACO-SOL-DOGE-EAC 等仓库，代码以 MIT 许可公开，可供学习与贡献。", "s2.3t": "网页信息传播", "s2.3d": "官方托管页与 Web3 系列页面（GitHub Pages、freedev）用于承载项目介绍、社区导航与技术说明，均可公开访问。", "s2.4t": "链上数据查询", "s2.4d": "通过 Solscan、Solana Explorer、OrbMarkets 等公开浏览器可查看 EACO 的地址、元数据与链上信息，适合做数据分析与记录。", "s2.5t": "社区与交流", "s2.5d": "官方社区渠道（X、Telegram、Discord）用于项目讨论、技术交流与多语言协作；Linktree 聚合了全部官方入口。", "s2.6t": "定义与文化表达", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization，口号 \"eaco for earth\"，使命为\"计算劳动价值，量化地球资源；不属于任何个人和组织\"。", "s2.7t": "学习与教育素材", "s2.7d": "作为一个 AI + RWA + Web3 的开源社区项目，EACO 的公开代码与文档可作为学习 Solana、智能合约与国际化（i18n）的素材。", "s2.8t": "元数据与版本发布", "s2.8d": "EACO 元数据每周四 15:00（GMT+8）更新，当前版本 0.0.1；版本信息与元数据字段对公众透明可见。", "s3.eyebrow": "开源 × 开放", "s3.title": "EACO 结合 Linux 有哪些用途？", "s3.lead": "EACO 的公开代码与网页都是标准开源资产，任何人在 Linux 环境下都可以自由访问、构建与学习。以下是八类典型的中性结合方式。", "s3.1t": "自托管官方网站", "s3.1d": "在 Linux 服务器上用 Nginx 或静态服务器自托管 EACO 官方网页与社区导航页，数据自主可控，不依赖第三方托管。", "s3.2t": "开源构建与部署", "s3.2d": "在 Linux 上使用 Git 克隆 ucoingroup 仓库，用 Node.js/Python 构建静态站点，再部署到 GitHub Pages 或 freedev。", "s3.3t": "链上数据脚本", "s3.3d": "编写 Python/Shell 脚本调用 Solana RPC 读取 EACO 合约元数据、供应量与持有分布，生成定期快照与图表。", "s3.4t": "定时任务与自动化", "s3.4d": "用 crontab 定时同步链上数据、更新页面缓存或生成日报；用轻量监控脚本检查服务可用性并告警。", "s3.5t": "容器化部署", "s3.5d": "用 Docker Compose 或 Kubernetes 在 Linux 上编排运行 EACO 相关网页、数据服务与工具链，便于迁移与回滚。", "s3.6t": "密钥与安全实践", "s3.6d": "在 Linux 上使用命令行工具生成与备份 Solana 密钥（离线、加密），配合 SSH、防火墙与最小权限保护自托管服务。", "s3.7t": "开源协作与技能学习", "s3.7d": "参与 EACO 开源仓库贡献，可在 Linux 环境中系统练习 Git、Web 开发、多语言国际化与 Solana/web3 知识。", "s3.8t": "低成本实验环境", "s3.8d": "用一台 Linux 主机或树莓派搭建 EACO 信息站、数据看板与测试服务，低成本演练真实服务器的运维流程。", "disc.eyebrow": "中立声明", "disc.title": "请注意", "disc.p1": "本页是 EACO 开源项目的中立技术信息页，并非投资页面。本页任何内容均不构成投资建议、收益承诺或交易引导；涉及加密资产请自行研究并遵守所在地法律法规。", "disc.p2": "本页引用的第三方链接（GitHub、托管页、链上浏览器、社交频道等）由各自团队维护，与本页无关。链上事实以官方仓库 eaco.json 元数据为准，每周四 15:00（GMT+8）更新；当前版本 0.0.1（MIT 许可）。", "disc.p3": "未经核实的能力、指标、价格与收益数据，本页一律不予展示。", "links.title": "EACO 常用链接", "links.desc": "以下为社区维护的官方托管页面与公开技术系列，仅供查阅。", "links.l1": "EACO 官方主页（GitHub Pages）", "links.l2": "EACO SOL Top10 DEX 2025 页面", "links.l3": "Earth Village EACO Network 2024", "links.l4": "EACO Web3 技术系列", "foot.note": "eaco for earth · 开源 · 中立 · 用途指南 2026", "foot.reserved": "© 2026 eaco community · 依据公开信息整理", "ann.copy": "合约地址已选中，请手动复制", "ann.theme": "主题已切换为 %s", "ann.lang": "语言已切换为 %s", "ann.reset": "已恢复默认主题与中文"}, "en": {"a11y.skip": "Skip to main content", "ctrl.themeLabel": "Theme", "ctrl.langLabel": "Language", "ctrl.reset": "Reset", "nav.linux": "Linux Uses", "nav.eaco": "EACO Uses", "nav.combined": "Combined Uses", "nav.links": "Useful Links", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "Apple Green", "theme.cosmic-blue": "Cosmic Blue", "theme.classic-beige": "Classic Beige", "noscript.note": "This page requires JavaScript to switch between 8 languages and 3 themes. The default Chinese content is shown for now.", "meta.title": "EACO × Linux — Use-Case Guide 2026", "hero.eyebrow": "EACO × LINUX USE-CASE GUIDE", "hero.titleA": "What can Linux do?", "hero.titleB": "What can EACO do? What can they do together?", "hero.desc": "Understand in one page what Linux is capable of, the public projects and on-chain facts of EACO, and how the two combine for self-hosting, open-source development, and learning. The content stays neutral and is provided for information and technical exchange only.", "hero.caLabel": "Contract Address (Solana)", "hero.copyBtn": "Select address", "hero.caCopyHint": "Click the button to select the contract address, then copy it manually", "hero.primaryAction": "View Linux uses", "hero.secondaryAction": "View EACO uses", "hero.nextHint": "Scroll down · Linux → EACO → Combined", "s1.eyebrow": "Why Linux matters", "s1.title": "What is Linux used for?", "s1.lead": "From servers to desktops, from supercomputers to the Internet of Things, Linux is one of the most widely used open-source operating systems in the world. The eight use cases below are its most typical scenarios.", "s1.1t": "Servers & Cloud Infrastructure", "s1.1d": "Most websites, databases, and cloud hosts worldwide run Linux; core services such as Nginx, Apache, MySQL/PostgreSQL, DNS, and mail run stably and reliably on Linux.", "s1.2t": "Software Development & Engineering", "s1.2d": "Linux provides a complete toolchain (gcc, Python, Node.js, Git). Terminals and scripts make build, test, and deployment pipelines efficient and reusable.", "s1.3t": "Containers & DevOps", "s1.3d": "Linux is the de facto host for Docker and Kubernetes; combined with Ansible, Terraform, and Prometheus it enables modern CI/CD and observability stacks.", "s1.4t": "Embedded & IoT", "s1.4d": "The Android kernel, routers, smart appliances, vehicle systems, and boards like Raspberry Pi are all based on Linux — a foundational platform for hardware innovation.", "s1.5t": "Supercomputing & Research", "s1.5d": "The vast majority of TOP500 supercomputers run Linux; scientific computing, weather, genomics, and AI training (CUDA ecosystem) depend heavily on it.", "s1.6t": "Cybersecurity", "s1.6d": "Security distributions such as Kali and Parrot, plus open-source firewalls and IDS tools (Snort/Suricata), make Linux the foundation of security research and defense.", "s1.7t": "Desktop & Office", "s1.7d": "Desktop distributions like Ubuntu, Fedora, and Debian, with LibreOffice, browsers, and IDEs, cover daily office work and personal development with controllable privacy and high customizability.", "s1.8t": "Open-Source Education & Governance", "s1.8d": "Free and richly documented, Linux is the best entry point for learning operating systems, Git collaboration, and open-source licenses (GPL/MIT), and a long-term choice for digital sovereignty.", "s2.eyebrow": "Based on verified facts", "s2.title": "What is EACO used for?", "s2.lead": "EACO is an SPL token on the Solana chain (Earth's Best Coin) that spreads information and knowledge through open-source projects, public pages, and community collaboration. The uses below all come from official public facts and contain no investment guidance.", "s2.1t": "Public On-Chain Records", "s2.1d": "EACO is an SPL token on Solana (9 decimals, total supply 1,350,000,000 EACO). Supply, holders, and metadata are publicly queryable in on-chain explorers.", "s2.2t": "Open-Source Project Portfolio", "s2.2d": "The official GitHub organization ucoingroup publicly maintains repositories including earths-best-coin, eacoweb3-2026, eacoSWAP, and EACO-SOL-DOGE-EAC. The code is released under the MIT license for learning and contributions.", "s2.3t": "Web-Based Information Sharing", "s2.3d": "Official hosting pages and Web3 series pages (GitHub Pages, freedev) carry project introductions, community navigation, and technical notes, all publicly accessible.", "s2.4t": "On-Chain Data Lookup", "s2.4d": "Public explorers such as Solscan, Solana Explorer, and OrbMarkets let anyone view EACO's address, metadata, and on-chain information — suitable for data analysis and records.", "s2.5t": "Community & Communication", "s2.5d": "Official community channels (X, Telegram, Discord) are used for project discussion, technical exchange, and multilingual collaboration; Linktree aggregates all official entry points.", "s2.6t": "Definition & Cultural Expression", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization, with the slogan \"eaco for earth\" and the mission of \"valuing labor and quantifying Earth's resources; belonging to no individual or organization\".", "s2.7t": "Learning & Educational Material", "s2.7d": "As an open-source community project combining AI + RWA + Web3, EACO's public code and documentation can serve as material for learning Solana, smart contracts, and internationalization (i18n).", "s2.8t": "Metadata & Version Releases", "s2.8d": "EACO metadata updates every Thursday at 15:00 (GMT+8); the current version is 0.0.1. Version information and metadata fields are transparent to the public.", "s3.eyebrow": "Open Source × Open", "s3.title": "What can EACO do combined with Linux?", "s3.lead": "EACO's public code and pages are standard open-source assets that anyone can freely access, build, and learn in a Linux environment. Below are eight typical neutral ways to combine them.", "s3.1t": "Self-Host the Official Website", "s3.1d": "Self-host EACO's official pages and community navigation on a Linux server with Nginx or a static server, keeping data under your own control without third-party hosting.", "s3.2t": "Open-Source Build & Deploy", "s3.2d": "Use Git on Linux to clone the ucoingroup repositories, build the static site with Node.js/Python, then deploy to GitHub Pages or freedev.", "s3.3t": "On-Chain Data Scripts", "s3.3d": "Write Python/Shell scripts that call Solana RPC to read EACO contract metadata, supply, and holder distribution, generating periodic snapshots and charts.", "s3.4t": "Scheduled Tasks & Automation", "s3.4d": "Use crontab to sync on-chain data, refresh page caches, or generate daily reports; use lightweight monitoring scripts to check service availability and send alerts.", "s3.5t": "Containerized Deployment", "s3.5d": "Orchestrate EACO-related pages, data services, and toolchains on Linux with Docker Compose or Kubernetes for easy migration and rollback.", "s3.6t": "Keys & Security Practices", "s3.6d": "On Linux, use command-line tools to generate and back up Solana keys (offline, encrypted), and protect self-hosted services with SSH, firewalls, and least privilege.", "s3.7t": "Open-Source Collaboration & Skill Learning", "s3.7d": "Contributing to EACO's open-source repositories is a systematic way to practice Git, web development, multilingual i18n, and Solana/web3 knowledge in a Linux environment.", "s3.8t": "Low-Cost Lab Environment", "s3.8d": "Use one Linux host or a Raspberry Pi to set up an EACO info station, data dashboard, and test services, rehearsing real server operations at low cost.", "disc.eyebrow": "Neutrality statement", "disc.title": "Please note", "disc.p1": "This page is a neutral technical information page for the EACO open-source project, not an investment page. Nothing on this page constitutes investment advice, a promise of returns, or trading guidance; please do your own research on crypto assets and follow the laws of your jurisdiction.", "disc.p2": "Third-party links referenced on this page (GitHub, hosting pages, on-chain explorers, social channels, etc.) are maintained by their respective teams and unrelated to this page. On-chain facts follow the official eaco.json metadata, updated every Thursday at 15:00 (GMT+8); current version 0.0.1 (MIT license).", "disc.p3": "Unverified capabilities, metrics, prices, and return data are not shown on this page.", "links.title": "EACO Useful Links", "links.desc": "The following are community-maintained official hosting pages and public technical series, provided for reference only.", "links.l1": "EACO Official Home (GitHub Pages)", "links.l2": "EACO SOL Top10 DEX 2025 Page", "links.l3": "Earth Village EACO Network 2024", "links.l4": "EACO Web3 Technical Series", "foot.note": "eaco for earth · open source · neutral · use-case guide 2026", "foot.reserved": "© 2026 eaco community · compiled from public information", "ann.copy": "Contract address selected — copy it manually", "ann.theme": "Theme switched to %s", "ann.lang": "Language switched to %s", "ann.reset": "Restored default theme and Chinese"}, "fr": {"a11y.skip": "Aller au contenu principal", "ctrl.themeLabel": "Thème", "ctrl.langLabel": "Langue", "ctrl.reset": "Réinitialiser", "nav.linux": "Usages de Linux", "nav.eaco": "Usages d'EACO", "nav.combined": "Usages combinés", "nav.links": "Liens utiles", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "Vert pomme", "theme.cosmic-blue": "Bleu cosmique", "theme.classic-beige": "Beige classique", "noscript.note": "Cette page nécessite JavaScript pour basculer entre 8 langues et 3 thèmes. Le contenu chinois par défaut est affiché pour le moment.", "meta.title": "EACO × Linux — Guide des cas d'usage 2026", "hero.eyebrow": "EACO × LINUX — GUIDE DES CAS D'USAGE", "hero.titleA": "Que peut faire Linux ?", "hero.titleB": "Que peut faire EACO ? Que peuvent-ils faire ensemble ?", "hero.desc": "Comprenez en une page les capacités générales de Linux, les projets publics et les faits on-chain d'EACO, ainsi que la façon de les combiner pour l'auto-hébergement, le développement open source et l'apprentissage. Le contenu reste neutre et est fourni à titre informatif et d'échange technique uniquement.", "hero.caLabel": "Adresse du contrat (Solana)", "hero.copyBtn": "Sélectionner l'adresse", "hero.caCopyHint": "Cliquez sur le bouton pour sélectionner l'adresse du contrat, puis copiez-la manuellement", "hero.primaryAction": "Voir les usages de Linux", "hero.secondaryAction": "Voir les usages d'EACO", "hero.nextHint": "Faites défiler · Linux → EACO → Combiné", "s1.eyebrow": "Pourquoi Linux compte", "s1.title": "À quoi sert Linux ?", "s1.lead": "Des serveurs aux postes de travail, des superordinateurs à l'Internet des objets, Linux est l'un des systèmes d'exploitation open source les plus utilisés au monde. Les huit cas d'usage ci-dessous sont ses scénarios les plus typiques.", "s1.1t": "Serveurs & infrastructure cloud", "s1.1d": "La plupart des sites web, bases de données et hôtes cloud du monde fonctionnent sous Linux ; des services essentiels comme Nginx, Apache, MySQL/PostgreSQL, DNS et messagerie y tournent de manière stable et fiable.", "s1.2t": "Développement logiciel & ingénierie", "s1.2d": "Linux fournit une chaîne d'outils complète (gcc, Python, Node.js, Git). Les terminaux et scripts rendent les pipelines de build, test et déploiement efficaces et réutilisables.", "s1.3t": "Conteneurs & DevOps", "s1.3d": "Linux est l'hôte de fait de Docker et Kubernetes ; avec Ansible, Terraform et Prometheus, il permet des chaînes CI/CD modernes et une observabilité complète.", "s1.4t": "Embarqué & IoT", "s1.4d": "Le noyau Android, les routeurs, les appareils intelligents, les systèmes embarqués et les cartes comme le Raspberry Pi reposent tous sur Linux — une plateforme fondamentale pour l'innovation matérielle.", "s1.5t": "Supercalcul & recherche", "s1.5d": "La grande majorité des superordinateurs TOP500 fonctionnent sous Linux ; le calcul scientifique, la météo, la génomique et l'entraînement IA (écosystème CUDA) en dépendent fortement.", "s1.6t": "Cybersécurité", "s1.6d": "Les distributions de sécurité comme Kali et Parrot, ainsi que les pare-feu et outils IDS open source (Snort/Suricata), font de Linux le socle de la recherche et de la défense en sécurité.", "s1.7t": "Bureau & bureautique", "s1.7d": "Les distributions de bureau comme Ubuntu, Fedora et Debian, avec LibreOffice, les navigateurs et les IDE, couvrent le travail quotidien et le développement personnel avec une vie privée maîtrisée et une grande personnalisation.", "s1.8t": "Éducation & gouvernance open source", "s1.8d": "Gratuit et richement documenté, Linux est la meilleure porte d'entrée pour apprendre les systèmes d'exploitation, la collaboration Git et les licences open source (GPL/MIT), et un choix de long terme pour la souveraineté numérique.", "s2.eyebrow": "Basé sur des faits vérifiés", "s2.title": "À quoi sert EACO ?", "s2.lead": "EACO est un jeton SPL sur la chaîne Solana (Earth's Best Coin) qui diffuse des informations et des connaissances via des projets open source, des pages publiques et la collaboration communautaire. Les usages ci-dessous proviennent tous de faits publics officiels et ne contiennent aucun conseil d'investissement.", "s2.1t": "Registres publics on-chain", "s2.1d": "EACO est un jeton SPL sur Solana (9 décimales, offre totale de 1 350 000 000 EACO). L'offre, les détenteurs et les métadonnées sont consultables publiquement dans les explorateurs de chaîne.", "s2.2t": "Portefeuille de projets open source", "s2.2d": "L'organisation GitHub officielle ucoingroup maintient publiquement des dépôts dont earths-best-coin, eacoweb3-2026, eacoSWAP et EACO-SOL-DOGE-EAC. Le code est publié sous licence MIT pour l'apprentissage et les contributions.", "s2.3t": "Diffusion d'informations sur le web", "s2.3d": "Les pages d'hébergement officielles et les pages de la série Web3 (GitHub Pages, freedev) portent les présentations du projet, la navigation communautaire et les notes techniques, toutes accessibles au public.", "s2.4t": "Consultation de données on-chain", "s2.4d": "Des explorateurs publics comme Solscan, Solana Explorer et OrbMarkets permettent de consulter l'adresse, les métadonnées et les informations on-chain d'EACO — utiles pour l'analyse et la documentation.", "s2.5t": "Communauté & communication", "s2.5d": "Les canaux communautaires officiels (X, Telegram, Discord) servent aux discussions, aux échanges techniques et à la collaboration multilingue ; Linktree agrège toutes les entrées officielles.", "s2.6t": "Définition & expression culturelle", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization, avec le slogan \"eaco for earth\" et la mission de « valoriser le travail et quantifier les ressources de la Terre ; n'appartenir à aucun individu ni organisation ».", "s2.7t": "Matériel d'apprentissage & pédagogie", "s2.7d": "En tant que projet communautaire open source combinant IA + RWA + Web3, le code et la documentation publics d'EACO peuvent servir à apprendre Solana, les smart contracts et l'internationalisation (i18n).", "s2.8t": "Métadonnées & publications de versions", "s2.8d": "Les métadonnées d'EACO sont mises à jour chaque jeudi à 15h00 (GMT+8) ; la version actuelle est 0.0.1. Les informations de version et les champs de métadonnées sont transparents pour le public.", "s3.eyebrow": "Open source × Ouvert", "s3.title": "Que peut faire EACO combiné avec Linux ?", "s3.lead": "Le code et les pages publics d'EACO sont des actifs open source standard que chacun peut librement consulter, construire et étudier dans un environnement Linux. Voici huit façons neutres et typiques de les combiner.", "s3.1t": "Auto-héberger le site officiel", "s3.1d": "Auto-hébergez les pages officielles et la navigation communautaire d'EACO sur un serveur Linux avec Nginx ou un serveur statique, en gardant le contrôle de vos données sans hébergement tiers.", "s3.2t": "Build & déploiement open source", "s3.2d": "Utilisez Git sous Linux pour cloner les dépôts ucoingroup, construire le site statique avec Node.js/Python, puis le déployer sur GitHub Pages ou freedev.", "s3.3t": "Scripts de données on-chain", "s3.3d": "Écrivez des scripts Python/Shell qui appellent le RPC Solana pour lire les métadonnées, l'offre et la répartition des détenteurs d'EACO, générant des instantanés et des graphiques périodiques.", "s3.4t": "Tâches planifiées & automatisation", "s3.4d": "Utilisez crontab pour synchroniser les données on-chain, actualiser les caches de pages ou générer des rapports quotidiens ; des scripts de surveillance légers vérifient la disponibilité des services et émettent des alertes.", "s3.5t": "Déploiement conteneurisé", "s3.5d": "Orchestrez les pages, services de données et chaînes d'outils liés à EACO sur Linux avec Docker Compose ou Kubernetes pour faciliter la migration et le rollback.", "s3.6t": "Clés & pratiques de sécurité", "s3.6d": "Sur Linux, utilisez des outils en ligne de commande pour générer et sauvegarder les clés Solana (hors ligne, chiffrées), et protégez les services auto-hébergés avec SSH, pare-feu et privilèges minimaux.", "s3.7t": "Collaboration open source & apprentissage", "s3.7d": "Contribuer aux dépôts open source d'EACO est une façon systématique de pratiquer Git, le développement web, l'internationalisation multilingue et les connaissances Solana/web3 dans un environnement Linux.", "s3.8t": "Environnement de laboratoire à faible coût", "s3.8d": "Utilisez un hôte Linux ou un Raspberry Pi pour installer un point d'information EACO, un tableau de bord de données et des services de test, en répétant des opérations de serveur réelles à moindre coût.", "disc.eyebrow": "Déclaration de neutralité", "disc.title": "À noter", "disc.p1": "Cette page est une page d'information technique neutre consacrée au projet open source EACO, et non une page d'investissement. Rien sur cette page ne constitue un conseil en investissement, une promesse de rendement ou une incitation à trader ; veuillez faire vos propres recherches sur les actifs cryptographiques et respecter les lois de votre juridiction.", "disc.p2": "Les liens tiers référencés sur cette page (GitHub, pages d'hébergement, explorateurs on-chain, canaux sociaux, etc.) sont maintenus par leurs équipes respectives et sans lien avec cette page. Les faits on-chain suivent les métadonnées officielles eaco.json, mises à jour chaque jeudi à 15h00 (GMT+8) ; version actuelle 0.0.1 (licence MIT).", "disc.p3": "Les capacités, indicateurs, prix et données de rendement non vérifiés ne sont pas affichés sur cette page.", "links.title": "Liens utiles EACO", "links.desc": "Voici les pages d'hébergement officielles maintenues par la communauté et les séries techniques publiques, fournies à titre de référence.", "links.l1": "Page d'accueil officielle EACO (GitHub Pages)", "links.l2": "Page EACO SOL Top10 DEX 2025", "links.l3": "Earth Village EACO Network 2024", "links.l4": "Série technique EACO Web3", "foot.note": "eaco for earth · open source · neutre · guide des cas d'usage 2026", "foot.reserved": "© 2026 communauté eaco · compilé à partir d'informations publiques", "ann.copy": "Adresse du contrat sélectionnée — copiez-la manuellement", "ann.theme": "Thème changé en %s", "ann.lang": "Langue changée en %s", "ann.reset": "Thème par défaut et chinois restaurés"}, "es": {"a11y.skip": "Saltar al contenido principal", "ctrl.themeLabel": "Tema", "ctrl.langLabel": "Idioma", "ctrl.reset": "Restablecer", "nav.linux": "Usos de Linux", "nav.eaco": "Usos de EACO", "nav.combined": "Usos combinados", "nav.links": "Enlaces útiles", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "Verde manzana", "theme.cosmic-blue": "Azul cósmico", "theme.classic-beige": "Beige clásico", "noscript.note": "Esta página necesita JavaScript para cambiar entre 8 idiomas y 3 temas. Por ahora se muestra el contenido en chino predeterminado.", "meta.title": "EACO × Linux — Guía de casos de uso 2026", "hero.eyebrow": "EACO × LINUX — GUÍA DE CASOS DE USO", "hero.titleA": "¿Qué puede hacer Linux?", "hero.titleB": "¿Qué puede hacer EACO? ¿Qué pueden hacer juntos?", "hero.desc": "Entienda en una página las capacidades generales de Linux, los proyectos públicos y los hechos on-chain de EACO, y cómo ambos se combinan para el autoalojamiento, el desarrollo de código abierto y el aprendizaje. El contenido se mantiene neutral y se ofrece solo con fines informativos y de intercambio técnico.", "hero.caLabel": "Dirección del contrato (Solana)", "hero.copyBtn": "Seleccionar dirección", "hero.caCopyHint": "Haga clic en el botón para seleccionar la dirección del contrato y luego cópiela manualmente", "hero.primaryAction": "Ver usos de Linux", "hero.secondaryAction": "Ver usos de EACO", "hero.nextHint": "Desplácese · Linux → EACO → Combinado", "s1.eyebrow": "Por qué Linux importa", "s1.title": "¿Para qué se usa Linux?", "s1.lead": "De los servidores a los escritorios, de las supercomputadoras al Internet de las cosas, Linux es uno de los sistemas operativos de código abierto más utilizados del mundo. Los ocho casos de uso siguientes son sus escenarios más típicos.", "s1.1t": "Servidores e infraestructura en la nube", "s1.1d": "La mayoría de sitios web, bases de datos y hosts en la nube del mundo funcionan con Linux; servicios esenciales como Nginx, Apache, MySQL/PostgreSQL, DNS y correo se ejecutan de forma estable y fiable.", "s1.2t": "Desarrollo de software e ingeniería", "s1.2d": "Linux ofrece una cadena de herramientas completa (gcc, Python, Node.js, Git). Las terminales y los scripts hacen que los pipelines de build, prueba y despliegue sean eficientes y reutilizables.", "s1.3t": "Contenedores y DevOps", "s1.3d": "Linux es el anfitrión de facto de Docker y Kubernetes; junto con Ansible, Terraform y Prometheus permite cadenas CI/CD modernas y observabilidad completa.", "s1.4t": "Embebidos e IoT", "s1.4d": "El kernel de Android, los routers, los electrodomésticos inteligentes, los sistemas de vehículos y las placas como Raspberry Pi se basan en Linux: una plataforma fundamental para la innovación en hardware.", "s1.5t": "Supercomputación e investigación", "s1.5d": "La gran mayoría de las supercomputadoras TOP500 funcionan con Linux; la computación científica, la meteorología, la genómica y el entrenamiento de IA (ecosistema CUDA) dependen en gran medida de él.", "s1.6t": "Ciberseguridad", "s1.6d": "Las distribuciones de seguridad como Kali y Parrot, junto con cortafuegos y herramientas IDS de código abierto (Snort/Suricata), hacen de Linux la base de la investigación y la defensa en seguridad.", "s1.7t": "Escritorio y oficina", "s1.7d": "Las distribuciones de escritorio como Ubuntu, Fedora y Debian, con LibreOffice, navegadores e IDE, cubren el trabajo diario y el desarrollo personal con privacidad controlable y alta personalización.", "s1.8t": "Educación y gobernanza de código abierto", "s1.8d": "Gratuito y ricamente documentado, Linux es la mejor puerta de entrada para aprender sistemas operativos, colaboración con Git y licencias de código abierto (GPL/MIT), y una opción a largo plazo para la soberanía digital.", "s2.eyebrow": "Basado en hechos verificados", "s2.title": "¿Para qué se usa EACO?", "s2.lead": "EACO es un token SPL en la cadena Solana (Earth's Best Coin) que difunde información y conocimiento mediante proyectos de código abierto, páginas públicas y colaboración comunitaria. Los usos siguientes provienen todos de hechos públicos oficiales y no contienen ningún consejo de inversión.", "s2.1t": "Registros públicos on-chain", "s2.1d": "EACO es un token SPL en Solana (9 decimales, oferta total de 1.350.000.000 EACO). La oferta, los poseedores y los metadatos se pueden consultar públicamente en los exploradores de cadena.", "s2.2t": "Cartera de proyectos de código abierto", "s2.2d": "La organización oficial de GitHub ucoingroup mantiene públicamente repositorios como earths-best-coin, eacoweb3-2026, eacoSWAP y EACO-SOL-DOGE-EAC. El código se publica bajo licencia MIT para aprendizaje y contribuciones.", "s2.3t": "Difusión de información en la web", "s2.3d": "Las páginas de alojamiento oficiales y las páginas de la serie Web3 (GitHub Pages, freedev) dan cabida a presentaciones del proyecto, navegación comunitaria y notas técnicas, todas de acceso público.", "s2.4t": "Consulta de datos on-chain", "s2.4d": "Exploradores públicos como Solscan, Solana Explorer y OrbMarkets permiten ver la dirección, los metadatos y la información on-chain de EACO, útil para análisis y documentación.", "s2.5t": "Comunidad y comunicación", "s2.5d": "Los canales oficiales de la comunidad (X, Telegram, Discord) se utilizan para discusión, intercambio técnico y colaboración multilingüe; Linktree agrega todas las entradas oficiales.", "s2.6t": "Definición y expresión cultural", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization, con el lema \"eaco for earth\" y la misión de «valorar el trabajo y cuantificar los recursos de la Tierra; no pertenecer a ningún individuo ni organización».", "s2.7t": "Material de aprendizaje y educación", "s2.7d": "Como proyecto comunitario de código abierto que combina IA + RWA + Web3, el código y la documentación públicos de EACO pueden servir para aprender Solana, smart contracts e internacionalización (i18n).", "s2.8t": "Metadatos y publicaciones de versiones", "s2.8d": "Los metadatos de EACO se actualizan cada jueves a las 15:00 (GMT+8); la versión actual es 0.0.1. La información de versión y los campos de metadatos son transparentes para el público.", "s3.eyebrow": "Código abierto × Abierto", "s3.title": "¿Qué puede hacer EACO combinado con Linux?", "s3.lead": "El código y las páginas públicos de EACO son activos estándar de código abierto que cualquiera puede consultar, construir y estudiar libremente en un entorno Linux. A continuación hay ocho formas neutras y típicas de combinarlos.", "s3.1t": "Autoalojar el sitio oficial", "s3.1d": "Autoaloje las páginas oficiales y la navegación comunitaria de EACO en un servidor Linux con Nginx o un servidor estático, manteniendo el control de los datos sin depender de un hosting de terceros.", "s3.2t": "Build y despliegue de código abierto", "s3.2d": "Use Git en Linux para clonar los repositorios de ucoingroup, construir el sitio estático con Node.js/Python y desplegarlo en GitHub Pages o freedev.", "s3.3t": "Scripts de datos on-chain", "s3.3d": "Escriba scripts Python/Shell que llamen a Solana RPC para leer los metadatos, la oferta y la distribución de poseedores del contrato EACO, generando instantáneas y gráficos periódicos.", "s3.4t": "Tareas programadas y automatización", "s3.4d": "Use crontab para sincronizar datos on-chain, actualizar cachés de páginas o generar informes diarios; scripts de monitoreo ligeros verifican la disponibilidad del servicio y envían alertas.", "s3.5t": "Despliegue contenerizado", "s3.5d": "Orqueste páginas, servicios de datos y cadenas de herramientas relacionados con EACO en Linux con Docker Compose o Kubernetes para facilitar la migración y el rollback.", "s3.6t": "Claves y prácticas de seguridad", "s3.6d": "En Linux, use herramientas de línea de comandos para generar y respaldar claves de Solana (fuera de línea, cifradas), y proteja los servicios autoalojados con SSH, cortafuegos y privilegios mínimos.", "s3.7t": "Colaboración de código abierto y aprendizaje", "s3.7d": "Contribuir a los repositorios de código abierto de EACO es una forma sistemática de practicar Git, desarrollo web, internacionalización multilingüe y conocimientos de Solana/web3 en un entorno Linux.", "s3.8t": "Entorno de laboratorio de bajo coste", "s3.8d": "Use un host Linux o una Raspberry Pi para montar un punto de información de EACO, un panel de datos y servicios de prueba, ensayando operaciones reales de servidor a bajo coste.", "disc.eyebrow": "Declaración de neutralidad", "disc.title": "Tenga en cuenta", "disc.p1": "Esta página es una página de información técnica neutral sobre el proyecto de código abierto EACO, no una página de inversión. Nada en esta página constituye un consejo de inversión, una promesa de rendimiento o una indicación de trading; investigue por su cuenta los activos criptográficos y cumpla las leyes de su jurisdicción.", "disc.p2": "Los enlaces de terceros citados en esta página (GitHub, páginas de alojamiento, exploradores on-chain, canales sociales, etc.) son mantenidos por sus respectivos equipos y no están relacionados con esta página. Los hechos on-chain siguen los metadatos oficiales eaco.json, actualizados cada jueves a las 15:00 (GMT+8); versión actual 0.0.1 (licencia MIT).", "disc.p3": "Las capacidades, métricas, precios y datos de rendimiento no verificados no se muestran en esta página.", "links.title": "Enlaces útiles de EACO", "links.desc": "Las siguientes son páginas de alojamiento oficiales mantenidas por la comunidad y series técnicas públicas, solo para consulta.", "links.l1": "Página de inicio oficial de EACO (GitHub Pages)", "links.l2": "Página EACO SOL Top10 DEX 2025", "links.l3": "Earth Village EACO Network 2024", "links.l4": "Serie técnica EACO Web3", "foot.note": "eaco for earth · código abierto · neutral · guía de casos de uso 2026", "foot.reserved": "© 2026 comunidad eaco · recopilado de información pública", "ann.copy": "Dirección del contrato seleccionada — cópiela manualmente", "ann.theme": "Tema cambiado a %s", "ann.lang": "Idioma cambiado a %s", "ann.reset": "Tema predeterminado y chino restaurados"}, "ru": {"a11y.skip": "Перейти к основному содержимому", "ctrl.themeLabel": "Тема", "ctrl.langLabel": "Язык", "ctrl.reset": "Сбросить", "nav.linux": "Возможности Linux", "nav.eaco": "Возможности EACO", "nav.combined": "Совместное использование", "nav.links": "Полезные ссылки", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "Яблочно-зелёный", "theme.cosmic-blue": "Космический синий", "theme.classic-beige": "Классический бежевый", "noscript.note": "Для переключения между 8 языками и 3 темами этой странице требуется JavaScript. Сейчас отображается содержимое по умолчанию на китайском.", "meta.title": "EACO × Linux — Путеводитель по вариантам использования 2026", "hero.eyebrow": "EACO × LINUX — ПУТЕВОДИТЕЛЬ ПО ВАРИАНТАМ ИСПОЛЬЗОВАНИЯ", "hero.titleA": "Что умеет Linux?", "hero.titleB": "Что умеет EACO? Что они могут делать вместе?", "hero.desc": "На одной странице — общие возможности Linux, публичные проекты и ончейн-факты EACO, а также способы их сочетания для самостоятельного хостинга, открытой разработки и обучения. Содержимое остаётся нейтральным и приводится только для информации и технического обмена.", "hero.caLabel": "Адрес контракта (Solana)", "hero.copyBtn": "Выделить адрес", "hero.caCopyHint": "Нажмите кнопку, чтобы выделить адрес контракта, затем скопируйте его вручную", "hero.primaryAction": "Смотреть возможности Linux", "hero.secondaryAction": "Смотреть возможности EACO", "hero.nextHint": "Прокрутите вниз · Linux → EACO → Совместно", "s1.eyebrow": "Почему Linux важен", "s1.title": "Для чего используется Linux?", "s1.lead": "От серверов до рабочих столов, от суперкомпьютеров до интернета вещей — Linux одна из самых широко используемых открытых операционных систем в мире. Ниже приведены восемь наиболее типичных сценариев её применения.", "s1.1t": "Серверы и облачная инфраструктура", "s1.1d": "Большинство сайтов, баз данных и облачных хостов в мире работают на Linux; ключевые сервисы — Nginx, Apache, MySQL/PostgreSQL, DNS, почта — стабильны и надёжны.", "s1.2t": "Разработка ПО и инженерия", "s1.2d": "Linux предоставляет полный инструментарий (gcc, Python, Node.js, Git). Терминал и скрипты делают конвейеры сборки, тестирования и развёртывания эффективными и переиспользуемыми.", "s1.3t": "Контейнеры и DevOps", "s1.3d": "Linux — фактический хост для Docker и Kubernetes; вместе с Ansible, Terraform и Prometheus он позволяет строить современные CI/CD и системы наблюдаемости.", "s1.4t": "Встраиваемые системы и IoT", "s1.4d": "Ядро Android, роутеры, умная техника, автомобильные системы и платы вроде Raspberry Pi основаны на Linux — это фундаментальная платформа для инноваций в оборудовании.", "s1.5t": "Суперкомпьютеры и наука", "s1.5d": "Подавляющее большинство суперкомпьютеров TOP500 работают на Linux; научные вычисления, метеорология, геномика и обучение ИИ (экосистема CUDA) сильно зависят от него.", "s1.6t": "Кибербезопасность", "s1.6d": "Специализированные дистрибутивы вроде Kali и Parrot, а также открытые межсетевые экраны и IDS (Snort/Suricata) делают Linux основой исследований и защиты в сфере безопасности.", "s1.7t": "Рабочий стол и офис", "s1.7d": "Настольные дистрибутивы Ubuntu, Fedora, Debian вместе с LibreOffice, браузерами и IDE покрывают повседневную работу и личную разработку с контролируемой приватностью и высокой настраиваемостью.", "s1.8t": "Открытое образование и управление", "s1.8d": "Бесплатный и отлично документированный Linux — лучшая точка входа для изучения операционных систем, совместной работы с Git и открытых лицензий (GPL/MIT), а также долгосрочный выбор для цифрового суверенитета.", "s2.eyebrow": "На основе проверенных фактов", "s2.title": "Для чего используется EACO?", "s2.lead": "EACO — SPL-токен в сети Solana (Earth's Best Coin), распространяющий информацию и знания через открытые проекты, публичные страницы и сотрудничество сообщества. Все перечисленные ниже применения основаны на официальных публичных фактах и не содержат инвестиционных советов.", "s2.1t": "Публичные ончейн-записи", "s2.1d": "EACO — SPL-токен в Solana (9 знаков после запятой, общий объём 1 350 000 000 EACO). Эмиссия, держатели и метаданные доступны для публичного просмотра в ончейн-обозревателях.", "s2.2t": "Портфель открытых проектов", "s2.2d": "Официальная организация GitHub ucoingroup публично поддерживает репозитории earths-best-coin, eacoweb3-2026, eacoSWAP, EACO-SOL-DOGE-EAC. Код опубликован по лицензии MIT для изучения и вклада.", "s2.3t": "Распространение информации в вебе", "s2.3d": "Официальные страницы хостинга и страницы серии Web3 (GitHub Pages, freedev) содержат описание проекта, навигацию сообщества и технические заметки — всё доступно публично.", "s2.4t": "Ончейн-запросы данных", "s2.4d": "Публичные обозреватели Solscan, Solana Explorer и OrbMarkets позволяют просматривать адрес, метаданные и ончейн-информацию EACO — удобно для анализа и документирования.", "s2.5t": "Сообщество и общение", "s2.5d": "Официальные каналы сообщества (X, Telegram, Discord) используются для обсуждений, технического обмена и многоязычного сотрудничества; Linktree объединяет все официальные входы.", "s2.6t": "Определение и культурное выражение", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization, слоган \"eaco for earth\", миссия — «оценивать труд и измерять ресурсы Земли; не принадлежать никакому лицу или организации».", "s2.7t": "Учебные и образовательные материалы", "s2.7d": "Как открытый общественный проект, сочетающий AI + RWA + Web3, публичные код и документация EACO могут использоваться для изучения Solana, смарт-контрактов и интернационализации (i18n).", "s2.8t": "Метаданные и выпуски версий", "s2.8d": "Метаданные EACO обновляются каждый четверг в 15:00 (GMT+8); текущая версия — 0.0.1. Информация о версиях и поля метаданных прозрачны для всех.", "s3.eyebrow": "Открытый код × Открытость", "s3.title": "Что можно делать с EACO вместе с Linux?", "s3.lead": "Публичные код и страницы EACO — стандартные открытые активы, которые любой желающий может свободно просматривать, собирать и изучать в среде Linux. Ниже — восемь типичных нейтральных способов их сочетания.", "s3.1t": "Самостоятельное размещение сайта", "s3.1d": "Разместите официальные страницы EACO и навигацию сообщества на сервере Linux с Nginx или статическим сервером, сохраняя контроль над данными без стороннего хостинга.", "s3.2t": "Открытая сборка и развёртывание", "s3.2d": "Клонируйте репозитории ucoingroup через Git на Linux, соберите статический сайт с Node.js/Python и разверните его на GitHub Pages или freedev.", "s3.3t": "Скрипты ончейн-данных", "s3.3d": "Пишите скрипты на Python/Shell, вызывающие Solana RPC для чтения метаданных, эмиссии и распределения держателей контракта EACO, и формируйте периодические снимки и графики.", "s3.4t": "Плановые задачи и автоматизация", "s3.4d": "Используйте crontab для синхронизации ончейн-данных, обновления кэшей страниц или генерации ежедневных отчётов; лёгкие скрипты мониторинга проверяют доступность сервисов и отправляют оповещения.", "s3.5t": "Контейнеризированное развёртывание", "s3.5d": "Оркеструйте страницы, сервисы данных и инструментальные цепочки EACO на Linux с помощью Docker Compose или Kubernetes для удобной миграции и отката.", "s3.6t": "Ключи и практики безопасности", "s3.6d": "На Linux используйте командные утилиты для генерации и резервного копирования ключей Solana (офлайн, с шифрованием), а также защищайте свои сервисы с помощью SSH, межсетевых экранов и минимальных привилегий.", "s3.7t": "Открытая коллаборация и обучение", "s3.7d": "Участие в открытых репозиториях EACO — систематический способ практиковать Git, веб-разработку, многоязычную интернационализацию и знания Solana/web3 в среде Linux.", "s3.8t": "Недорогая лабораторная среда", "s3.8d": "Используйте один Linux-хост или Raspberry Pi, чтобы развернуть информационную станцию EACO, панель данных и тестовые сервисы, отрабатывая реальные операции на сервере с минимальными затратами.", "disc.eyebrow": "Заявление о нейтральности", "disc.title": "Обратите внимание", "disc.p1": "Эта страница — нейтральная техническая информация об открытом проекте EACO, а не инвестиционная страница. Ничто на ней не является инвестиционной рекомендацией, обещанием доходности или руководством к торговле; при работе с криптоактивами проводите собственное исследование и соблюдайте законы вашей юрисдикции.", "disc.p2": "Сторонние ссылки на этой странице (GitHub, страницы хостинга, ончейн-обозреватели, соцканалы и др.) поддерживаются соответствующими командами и не связаны с этой страницей. Ончейн-факты основаны на официальных метаданных eaco.json, обновляемых каждый четверг в 15:00 (GMT+8); текущая версия 0.0.1 (лицензия MIT).", "disc.p3": "Непроверенные возможности, показатели, цены и данные о доходности на этой странице не отображаются.", "links.title": "Полезные ссылки EACO", "links.desc": "Ниже приведены официальные страницы хостинга и публичные технические серии, поддерживаемые сообществом, только для ознакомления.", "links.l1": "Официальная страница EACO (GitHub Pages)", "links.l2": "Страница EACO SOL Top10 DEX 2025", "links.l3": "Earth Village EACO Network 2024", "links.l4": "Техническая серия EACO Web3", "foot.note": "eaco for earth · открытый код · нейтрально · путеводитель по применению 2026", "foot.reserved": "© 2026 сообщество eaco · по материалам открытых источников", "ann.copy": "Адрес контракта выделен — скопируйте вручную", "ann.theme": "Тема изменена на %s", "ann.lang": "Язык изменён на %s", "ann.reset": "Восстановлены тема по умолчанию и китайский язык"}, "ar": {"a11y.skip": "تخطَّ إلى المحتوى الرئيسي", "ctrl.themeLabel": "السمة", "ctrl.langLabel": "اللغة", "ctrl.reset": "إعادة تعيين", "nav.linux": "استخدامات لينكس", "nav.eaco": "استخدامات EACO", "nav.combined": "الاستخدامات المشتركة", "nav.links": "روابط مفيدة", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "أخضر تفاحي", "theme.cosmic-blue": "أزرق كوني", "theme.classic-beige": "بيج كلاسيكي", "noscript.note": "تتطلب هذه الصفحة تفعيل جافاسكريبت للتبديل بين 8 لغات و3 سمات؛ يُعرض حالياً المحتوى الصيني الافتراضي.", "meta.title": "EACO × لينكس — دليل حالات الاستخدام 2026", "hero.eyebrow": "EACO × لينكس — دليل حالات الاستخدام", "hero.titleA": "ما الذي يمكن أن يفعله لينكس؟", "hero.titleB": "ما الذي يمكن أن تفعله EACO؟ وماذا يمكن أن تفعلا معاً؟", "hero.desc": "افهم في صفحة واحدة القدرات العامة للينكس، والمشاريع العامة والحقائق على السلسلة الخاصة بـ EACO، وطرق الجمع بينهما للاستضافة الذاتية والتطوير مفتوح المصدر والتعلم. يبقى المحتوى محايداً ويُقدَّم للمعلومات والتبادل التقني فقط.", "hero.caLabel": "عنوان العقد (سولانا)", "hero.copyBtn": "تحديد العنوان", "hero.caCopyHint": "اضغط الزر لتحديد عنوان العقد، ثم انسخه يدوياً", "hero.primaryAction": "عرض استخدامات لينكس", "hero.secondaryAction": "عرض استخدامات EACO", "hero.nextHint": "مرِّر للأسفل · لينكس ← EACO ← مشترك", "s1.eyebrow": "لماذا يهم لينكس", "s1.title": "لأي شيء يُستخدم لينكس؟", "s1.lead": "من الخوادم إلى أجهزة المكتب، ومن الحواسيب العملاقة إلى إنترنت الأشياء، يُعد لينكس أحد أكثر أنظمة التشغيل مفتوحة المصدر استخداماً في العالم. فيما يلي ثمانية من أكثر سيناريوهات استخدامه شيوعاً.", "s1.1t": "الخوادم والبنية التحتية السحابية", "s1.1d": "تعمل معظم المواقع وقواعد البيانات والمستضيفات السحابية في العالم على لينكس؛ وتعمل الخدمات الأساسية مثل Nginx وApache وMySQL/PostgreSQL وDNS والبريد بثبات وموثوقية.", "s1.2t": "تطوير البرمجيات والهندسة", "s1.2d": "يوفر لينكس سلسلة أدوات متكاملة (gcc وPython وNode.js وGit)، وتجعل الطرفية والبرامج النصية مسارات البناء والاختبار والنشر فعّالة وقابلة لإعادة الاستخدام.", "s1.3t": "الحاويات وDevOps", "s1.3d": "لينكس هو المضيف الفعلي لـ Docker وKubernetes؛ ومع Ansible وTerraform وPrometheus يتيح بناء أنظمة CI/CD حديثة وقابلية مراقبة كاملة.", "s1.4t": "الأنظمة المدمجة وإنترنت الأشياء", "s1.4d": "نواة أندرويد والموجّهات والأجهزة الذكية وأنظمة المركبات واللوحات مثل Raspberry Pi مبنية على لينكس — منصة أساسية للابتكار في الأجهزة.", "s1.5t": "الحوسبة الفائقة والبحث العلمي", "s1.5d": "الغالبية العظمى من حواسيب TOP500 العملاقة تعمل على لينكس؛ وتعتمد عليه الحوسبة العلمية والطقس والجينوم وتدريب الذكاء الاصطناعي (نظام CUDA) بشكل كبير.", "s1.6t": "الأمن السيبراني", "s1.6d": "التوزيعات الأمنية مثل Kali وParrot، إضافة إلى جدران الحماية وأدوات كشف التسلل مفتوحة المصدر (Snort/Suricata)، تجعل لينكس أساس البحث والحماية الأمنية.", "s1.7t": "سطح المكتب والمكتب", "s1.7d": "توزيعات سطح المكتب مثل Ubuntu وFedora وDebian مع LibreOffice والمتصفحات وبيئات التطوير تغطي العمل اليومي والتطوير الشخصي بخصوصية مضبوطة وتخصيص عالٍ.", "s1.8t": "التعليم والحوكمة مفتوحة المصدر", "s1.8d": "لينكس مجاني وغني بالتوثيق، وهو أفضل مدخل لتعلم أنظمة التشغيل والتعاون عبر Git والرخص مفتوحة المصدر (GPL/MIT)، وخيار طويل الأمد للسيادة الرقمية.", "s2.eyebrow": "استناداً إلى حقائق مُتحقق منها", "s2.title": "لأي شيء تُستخدم EACO؟", "s2.lead": "EACO رمز SPL على سلسلة سولانا (Earth's Best Coin) ينشر المعلومات والمعرفة عبر مشاريع مفتوحة المصدر وصفحات عامة وتعاون مجتمعي. جميع الاستخدامات أدناه مأخوذة من حقائق رسمية عامة ولا تحتوي على أي توجيه استثماري.", "s2.1t": "سجلات عامة على السلسلة", "s2.1d": "EACO رمز SPL على سولانا (9 خانات عشرية، إجمالي الإصدار 1,350,000,000 EACO). يمكن الاستعلام علناً عن الإصدار والحائزين والبيانات الوصفية في مستكشفي السلسلة.", "s2.2t": "محفظة مشاريع مفتوحة المصدر", "s2.2d": "منظمة GitHub الرسمية ucoingroup تدير علناً مستودعات منها earths-best-coin وeacoweb3-2026 وeacoSWAP وEACO-SOL-DOGE-EAC. يُنشر الكود بترخيص MIT للتعلم والمساهمة.", "s2.3t": "نشر المعلومات عبر الويب", "s2.3d": "صفحات الاستضافة الرسمية وصفحات سلسلة Web3 (GitHub Pages وfreedev) تحمل تقديم المشروع وتنقل المجتمع وملاحظات تقنية، وكلها متاحة للعموم.", "s2.4t": "الاستعلام عن بيانات السلسلة", "s2.4d": "تتيح المستكشفات العامة مثل Solscan وSolana Explorer وOrbMarkets عرض عنوان EACO وبياناتها الوصفية ومعلوماتها على السلسلة — مناسبة للتحليل والتوثيق.", "s2.5t": "المجتمع والتواصل", "s2.5d": "تُستخدم قنوات المجتمع الرسمية (X وTelegram وDiscord) للنقاش والتبادل التقني والتعاون متعدد اللغات؛ ويجمع Linktree جميع المداخل الرسمية.", "s2.6t": "التعريف والتعبير الثقافي", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization، بشعار \"eaco for earth\"، ورسالة تتمثل في «تقدير قيمة العمل وقياس موارد الأرض؛ وعدم الانتماء لأي فرد أو منظمة».", "s2.7t": "مواد تعليمية وتثقيفية", "s2.7d": "باعتباره مشروع مجتمع مفتوح المصدر يجمع بين AI وRWA وWeb3، يمكن استخدام الكود والوثائق العامة لـ EACO لتعلم سولانا والعقود الذكية والعولمة (i18n).", "s2.8t": "البيانات الوصفية وإصدارات النسخ", "s2.8d": "تُحدَّث بيانات EACO الوصفية كل خميس الساعة 15:00 (GMT+8)؛ النسخة الحالية 0.0.1. معلومات الإصدار وحقول البيانات الوصفية شفافة للعموم.", "s3.eyebrow": "مفتوح المصدر × انفتاح", "s3.title": "ماذا يمكن أن تفعل EACO مع لينكس؟", "s3.lead": "الكود والصفحات العامة لـ EACO أصول قياسية مفتوحة المصدر يمكن لأي شخص الوصول إليها وبناؤها وتعلمها بحرية في بيئة لينكس. فيما يلي ثماني طرق محايدة نموذجية للجمع بينهما.", "s3.1t": "استضافة الموقع الرسمي ذاتياً", "s3.1d": "استضف الصفحات الرسمية لـ EACO وتنقل المجتمع على خادم لينكس باستخدام Nginx أو خادم ثابت، مع بقاء البيانات تحت سيطرتك دون استضافة طرف ثالث.", "s3.2t": "بناء ونشر مفتوح المصدر", "s3.2d": "استخدم Git على لينكس لاستنساخ مستودعات ucoingroup، وابنِ الموقع الثابت باستخدام Node.js/Python، ثم انشره على GitHub Pages أو freedev.", "s3.3t": "برامج بيانات السلسلة", "s3.3d": "اكتب برامج Python/Shell تستدعي Solana RPC لقراءة البيانات الوصفية والإصدار وتوزيع الحائزين لعقد EACO، وتوليد لقطات ورسوم بيانية دورية.", "s3.4t": "المهام المجدولة والأتمتة", "s3.4d": "استخدم crontab لمزامنة بيانات السلسلة وتحديث ذواكر الصفحات أو توليد تقارير يومية؛ وتتحقق برامج مراقبة خفيفة من توفر الخدمة وتصدر تنبيهات.", "s3.5t": "النشر بحاويات", "s3.5d": "نظّم الصفحات وخدمات البيانات وسلاسل الأدوات المرتبطة بـ EACO على لينكس عبر Docker Compose أو Kubernetes لتسهيل الترحيل والاسترجاع.", "s3.6t": "المفاتيح وممارسات الأمان", "s3.6d": "على لينكس، استخدم أدوات سطر الأوامر لتوليد ونسخ احتياطي لمفاتيح سولانا (دون اتصال، مشفرة)، واحمِ خدماتك المستضافة ذاتياً بـ SSH وجدران الحماية والصلاحيات الأقل.", "s3.7t": "تعاون مفتوح المصدر وتعلم مهارات", "s3.7d": "المساهمة في مستودعات EACO مفتوحة المصدر طريقة منهجية لممارسة Git وتطوير الويب والعولمة متعددة اللغات ومعرفة Solana/web3 في بيئة لينكس.", "s3.8t": "بيئة تجريبية منخفضة التكلفة", "s3.8d": "استخدم مضيف لينكس واحداً أو Raspberry Pi لإنشاء محطة معلومات EACO ولوحة بيانات وخدمات اختبار، وتدرب على عمليات الخوادم الحقيقية بتكلفة منخفضة.", "disc.eyebrow": "بيان الحياد", "disc.title": "يرجى الانتباه", "disc.p1": "هذه الصفحة صفحة معلومات تقنية محايدة لمشروع EACO مفتوح المصدر، وليست صفحة استثمار. لا يشكل أي محتوى فيها نصيحة استثمارية أو وعداً بعائدات أو توجيهاً للتداول؛ يرجى إجراء بحثك الخاص حول الأصول الرقمية والالتزام بقوانين بلدك.", "disc.p2": "الروابط الخارجية المشار إليها في هذه الصفحة (GitHub وصفحات الاستضافة ومستكشفات السلسلة والقنوات الاجتماعية وغيرها) يديرها فرقها المعنية ولا علاقة لها بهذه الصفحة. الحقائق على السلسلة تتبع البيانات الوصفية الرسمية eaco.json، وتُحدَّث كل خميس الساعة 15:00 (GMT+8)؛ النسخة الحالية 0.0.1 (ترخيص MIT).", "disc.p3": "لا تُعرض في هذه الصفحة قدرات أو مؤشرات أو أسعار أو بيانات عوائد غير مُتحقق منها.", "links.title": "روابط EACO المفيدة", "links.desc": "فيما يلي صفحات الاستضافة الرسمية التي يديرها المجتمع وسلاسل تقنية عامة، للاطلاع فقط.", "links.l1": "الصفحة الرئيسية الرسمية لـ EACO (GitHub Pages)", "links.l2": "صفحة EACO SOL Top10 DEX 2025", "links.l3": "Earth Village EACO Network 2024", "links.l4": "السلسلة التقنية EACO Web3", "foot.note": "eaco for earth · مفتوح المصدر · محايد · دليل الاستخدامات 2026", "foot.reserved": "© 2026 مجتمع eaco · بتجميع من المعلومات العامة", "ann.copy": "تم تحديد عنوان العقد — انسخه يدوياً", "ann.theme": "تم تغيير السمة إلى %s", "ann.lang": "تم تغيير اللغة إلى %s", "ann.reset": "تمت استعادة السمة الافتراضية واللغة الصينية"}, "hi": {"a11y.skip": "मुख्य सामग्री पर जाएँ", "ctrl.themeLabel": "थीम", "ctrl.langLabel": "भाषा", "ctrl.reset": "रीसेट", "nav.linux": "लिनक्स उपयोग", "nav.eaco": "EACO उपयोग", "nav.combined": "संयुक्त उपयोग", "nav.links": "उपयोगी लिंक", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "सेब हरा", "theme.cosmic-blue": "ब्रह्मांडीय नीला", "theme.classic-beige": "क्लासिक बेज", "noscript.note": "8 भाषाओं और 3 थीम के बीच स्विच करने के लिए इस पृष्ठ को जावास्क्रिप्ट की आवश्यकता है। अभी डिफ़ॉल्ट चीनी सामग्री दिखाई जा रही है।", "meta.title": "EACO × लिनक्स — उपयोग-केस गाइड 2026", "hero.eyebrow": "EACO × लिनक्स — उपयोग-केस गाइड", "hero.titleA": "लिनक्स क्या कर सकता है?", "hero.titleB": "EACO क्या कर सकती है? दोनों मिलकर क्या कर सकते हैं?", "hero.desc": "एक पृष्ठ में समझें — लिनक्स की सामान्य क्षमताएँ, EACO के सार्वजनिक प्रोजेक्ट और ऑन-चेन तथ्य, और सेल्फ-होस्टिंग, ओपन-सोर्स विकास और सीखने के लिए दोनों का संयोजन। सामग्री तटस्थ रहती है और केवल सूचना एवं तकनीकी आदान-प्रदान के लिए दी जाती है।", "hero.caLabel": "कॉन्ट्रैक्ट पता (सोलाना)", "hero.copyBtn": "पता चुनें", "hero.caCopyHint": "कॉन्ट्रैक्ट पता चुनने के लिए बटन दबाएँ, फिर मैन्युअल रूप से कॉपी करें", "hero.primaryAction": "लिनक्स उपयोग देखें", "hero.secondaryAction": "EACO उपयोग देखें", "hero.nextHint": "नीचे स्क्रॉल करें · लिनक्स → EACO → संयुक्त", "s1.eyebrow": "लिनक्स क्यों महत्वपूर्ण है", "s1.title": "लिनक्स किस लिए उपयोग होता है?", "s1.lead": "सर्वर से डेस्कटॉप तक, सुपरकंप्यूटर से इंटरनेट ऑफ थिंग्स तक, लिनक्स दुनिया के सबसे व्यापक रूप से उपयोग किए जाने वाले ओपन-सोर्स ऑपरेटिंग सिस्टम में से एक है। नीचे दिए गए आठ उपयोग इसके सबसे विशिष्ट परिदृश्य हैं।", "s1.1t": "सर्वर और क्लाउड इंफ्रास्ट्रक्चर", "s1.1d": "दुनिया की अधिकांश वेबसाइटें, डेटाबेस और क्लाउड होस्ट लिनक्स पर चलते हैं; Nginx, Apache, MySQL/PostgreSQL, DNS, मेल जैसी मुख्य सेवाएँ लिनक्स पर स्थिर और विश्वसनीय रूप से चलती हैं।", "s1.2t": "सॉफ्टवेयर विकास और इंजीनियरिंग", "s1.2d": "लिनक्स एक पूर्ण टूलचेन प्रदान करता है (gcc, Python, Node.js, Git)। टर्मिनल और स्क्रिप्ट बिल्ड, टेस्ट और डिप्लॉय पाइपलाइनों को कुशल और पुनः उपयोग योग्य बनाते हैं।", "s1.3t": "कंटेनर और DevOps", "s1.3d": "Docker और Kubernetes के लिए लिनक्स वास्तविक होस्ट है; Ansible, Terraform और Prometheus के साथ यह आधुनिक CI/CD और ऑब्ज़र्वेबिलिटी स्टैक सक्षम करता है।", "s1.4t": "एम्बेडेड और IoT", "s1.4d": "एंड्रॉइड कर्नेल, राउटर, स्मार्ट उपकरण, वाहन सिस्टम और Raspberry Pi जैसी बोर्ड सभी लिनक्स पर आधारित हैं — हार्डवेयर नवाचार का मूल मंच।", "s1.5t": "सुपरकंप्यूटिंग और शोध", "s1.5d": "TOP500 सुपरकंप्यूटरों का विशाल बहुमत लिनक्स पर चलता है; वैज्ञानिक गणना, मौसम, जीनोमिक्स और AI प्रशिक्षण (CUDA पारिस्थितिकी) इस पर अत्यधिक निर्भर हैं।", "s1.6t": "साइबर सुरक्षा", "s1.6d": "Kali और Parrot जैसे सुरक्षा डिस्ट्रो, साथ ही ओपन-सोर्स फ़ायरवॉल और IDS टूल (Snort/Suricata), लिनक्स को सुरक्षा अनुसंधान और रक्षा की नींव बनाते हैं।", "s1.7t": "डेस्कटॉप और ऑफिस", "s1.7d": "Ubuntu, Fedora, Debian जैसे डेस्कटॉप डिस्ट्रो, LibreOffice, ब्राउज़र और IDE के साथ, दैनिक कार्यालयी कार्य और व्यक्तिगत विकास को नियंत्रित गोपनीयता और उच्च अनुकूलन क्षमता के साथ पूरा करते हैं।", "s1.8t": "ओपन-सोर्स शिक्षा और शासन", "s1.8d": "मुफ्त और समृद्ध दस्तावेज़ीकरण वाला लिनक्स ऑपरेटिंग सिस्टम, Git सहयोग और ओपन-सोर्स लाइसेंस (GPL/MIT) सीखने का सर्वोत्तम प्रवेश द्वार है, और डिजिटल संप्रभुता का दीर्घकालिक विकल्प है।", "s2.eyebrow": "सत्यापित तथ्यों पर आधारित", "s2.title": "EACO किस लिए उपयोग होती है?", "s2.lead": "EACO सोलाना चेन पर एक SPL टोकन (Earth's Best Coin) है जो ओपन-सोर्स प्रोजेक्ट्स, सार्वजनिक पृष्ठों और समुदायिक सहयोग के माध्यम से सूचना और ज्ञान का प्रसार करती है। नीचे दिए गए सभी उपयोग आधिकारिक सार्वजनिक तथ्यों से हैं और इनमें कोई निवेश मार्गदर्शन नहीं है।", "s2.1t": "सार्वजनिक ऑन-चेन रिकॉर्ड", "s2.1d": "EACO सोलाना पर एक SPL टोकन है (9 दशमलव, कुल आपूर्ति 1,350,000,000 EACO)। आपूर्ति, धारक और मेटाडेटा चेन एक्सप्लोरर में सार्वजनिक रूप से देखे जा सकते हैं।", "s2.2t": "ओपन-सोर्स प्रोजेक्ट पोर्टफोलियो", "s2.2d": "आधिकारिक GitHub संगठन ucoingroup earths-best-coin, eacoweb3-2026, eacoSWAP, EACO-SOL-DOGE-EAC आदि रिपॉजिटरी सार्वजनिक रूप से बनाए रखता है। कोड MIT लाइसेंस के तहत सीखने और योगदान के लिए जारी है।", "s2.3t": "वेब-आधारित सूचना प्रसार", "s2.3d": "आधिकारिक होस्टिंग पृष्ठ और Web3 श्रृंखला पृष्ठ (GitHub Pages, freedev) प्रोजेक्ट परिचय, समुदाय नेविगेशन और तकनीकी नोट्स रखते हैं, सभी सार्वजनिक रूप से सुलभ हैं।", "s2.4t": "ऑन-चेन डेटा खोज", "s2.4d": "Solscan, Solana Explorer, OrbMarkets जैसे सार्वजनिक एक्सप्लोरर से EACO का पता, मेटाडेटा और ऑन-चेन जानकारी देखी जा सकती है — डेटा विश्लेषण और रिकॉर्ड के लिए उपयुक्त।", "s2.5t": "समुदाय और संचार", "s2.5d": "आधिकारिक समुदायी चैनल (X, Telegram, Discord) परियोजना चर्चा, तकनीकी आदान-प्रदान और बहुभाषी सहयोग के लिए उपयोग होते हैं; Linktree सभी आधिकारिक प्रवेश बिंदुओं को एकत्र करता है।", "s2.6t": "परिभाषा और सांस्कृतिक अभिव्यक्ति", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization, नारा \"eaco for earth\", मिशन — \"श्रम के मूल्य की गणना करना और पृथ्वी के संसाधनों को मापना; किसी व्यक्ति या संगठन से संबंधित नहीं\"।", "s2.7t": "सीखने और शिक्षा की सामग्री", "s2.7d": "AI + RWA + Web3 को जोड़ने वाले ओपन-सोर्स समुदाय प्रोजेक्ट के रूप में, EACO के सार्वजनिक कोड और दस्तावेज़ सोलाना, स्मार्ट कॉन्ट्रैक्ट और अंतर्राष्ट्रीयकरण (i18n) सीखने के लिए सामग्री बन सकते हैं।", "s2.8t": "मेटाडेटा और संस्करण प्रकाशन", "s2.8d": "EACO मेटाडेटा प्रत्येक गुरुवार 15:00 (GMT+8) पर अपडेट होता है; वर्तमान संस्करण 0.0.1 है। संस्करण जानकारी और मेटाडेटा क्षेत्र जनता के लिए पारदर्शी हैं।", "s3.eyebrow": "ओपन सोर्स × खुलापन", "s3.title": "लिनक्स के साथ EACO क्या कर सकती है?", "s3.lead": "EACO का सार्वजनिक कोड और पृष्ठ मानक ओपन-सोर्स संपत्तियाँ हैं जिन्हें कोई भी लिनक्स वातावरण में स्वतंत्र रूप से एक्सेस, निर्मित और सीख सकता है। नीचे आठ विशिष्ट तटस्थ संयोजन तरीके हैं।", "s3.1t": "आधिकारिक वेबसाइट सेल्फ-होस्ट करें", "s3.1d": "लिनक्स सर्वर पर Nginx या स्टैटिक सर्वर के साथ EACO के आधिकारिक पृष्ठों और समुदाय नेविगेशन को सेल्फ-होस्ट करें, डेटा पर पूर्ण नियंत्रण रखते हुए बिना तीसरे पक्ष के होस्टिंग।", "s3.2t": "ओपन-सोर्स बिल्ड और डिप्लॉय", "s3.2d": "लिनक्स पर Git से ucoingroup रिपॉजिटरी क्लोन करें, Node.js/Python से स्टैटिक साइट बनाएँ, फिर GitHub Pages या freedev पर डिप्लॉय करें।", "s3.3t": "ऑन-चेन डेटा स्क्रिप्ट", "s3.3d": "Python/Shell स्क्रिप्ट लिखें जो Solana RPC कॉल करके EACO कॉन्ट्रैक्ट मेटाडेटा, आपूर्ति और धारक वितरण पढ़ें, और समय-समय पर स्नैपशॉट व चार्ट बनाएँ।", "s3.4t": "अनुसूचित कार्य और स्वचालन", "s3.4d": "crontab का उपयोग करके ऑन-चेन डेटा सिंक करें, पृष्ठ कैश अपडेट करें या दैनिक रिपोर्ट बनाएँ; हल्के मॉनिटरिंग स्क्रिप्ट सेवा उपलब्धता जाँचते हैं और अलर्ट भेजते हैं।", "s3.5t": "कंटेनरीकृत डिप्लॉयमेंट", "s3.5d": "Docker Compose या Kubernetes से लिनक्स पर EACO से संबंधित पृष्ठों, डेटा सेवाओं और टूलचेन को ऑर्केस्ट्रेट करें, जिससे माइग्रेशन और रोलबैक आसान हो।", "s3.6t": "कुंजी और सुरक्षा अभ्यास", "s3.6d": "लिनक्स पर कमांड-लाइन टूल से सोलाना कुंजियाँ (ऑफ़लाइन, एन्क्रिप्टेड) बनाएँ और बैकअप करें, और SSH, फ़ायरवॉल व न्यूनतम विशेषाधिकार के साथ सेल्फ-होस्टेड सेवाओं की रक्षा करें।", "s3.7t": "ओपन-सोर्स सहयोग और कौशल सीखना", "s3.7d": "EACO के ओपन-सोर्स रिपॉजिटरी में योगदान करना लिनक्स वातावरण में Git, वेब विकास, बहुभाषी i18n और Solana/web3 ज्ञान का व्यवस्थित अभ्यास है।", "s3.8t": "कम लागत वाला प्रयोगशाला वातावरण", "s3.8d": "एक लिनक्स होस्ट या Raspberry Pi का उपयोग करके EACO सूचना केंद्र, डेटा डैशबोर्ड और परीक्षण सेवाएँ बनाएँ, और कम लागत में वास्तविक सर्वर संचालन का अभ्यास करें।", "disc.eyebrow": "तटस्थता घोषणा", "disc.title": "कृपया ध्यान दें", "disc.p1": "यह पृष्ठ EACO ओपन-सोर्स प्रोजेक्ट की एक तटस्थ तकनीकी सूचना पृष्ठ है, निवेश पृष्ठ नहीं। इस पृष्ठ की कोई भी सामग्री निवेश सलाह, रिटर्न का वादा या ट्रेडिंग मार्गदर्शन नहीं है; कृपया क्रिप्टो परिसंपत्तियों पर स्वयं शोध करें और अपने क्षेत्र के कानूनों का पालन करें।", "disc.p2": "इस पृष्ठ पर संदर्भित तृतीय-पक्ष लिंक (GitHub, होस्टिंग पृष्ठ, ऑन-चेन एक्सप्लोरर, सोशल चैनल आदि) संबंधित टीमों द्वारा बनाए रखे जाते हैं और इस पृष्ठ से संबंधित नहीं हैं। ऑन-चेन तथ्य आधिकारिक eaco.json मेटाडेटा का पालन करते हैं, जो प्रत्येक गुरुवार 15:00 (GMT+8) पर अपडेट होता है; वर्तमान संस्करण 0.0.1 (MIT लाइसेंस)।", "disc.p3": "असत्यापित क्षमताएँ, मीट्रिक्स, मूल्य और रिटर्न डेटा इस पृष्ठ पर नहीं दिखाए जाते।", "links.title": "EACO उपयोगी लिंक", "links.desc": "निम्नलिखित समुदाय द्वारा अनुरक्षित आधिकारिक होस्टिंग पृष्ठ और सार्वजनिक तकनीकी श्रृंखलाएँ हैं, केवल संदर्भ के लिए।", "links.l1": "EACO आधिकारिक होम (GitHub Pages)", "links.l2": "EACO SOL Top10 DEX 2025 पृष्ठ", "links.l3": "Earth Village EACO Network 2024", "links.l4": "EACO Web3 तकनीकी श्रृंखला", "foot.note": "eaco for earth · ओपन सोर्स · तटस्थ · उपयोग-केस गाइड 2026", "foot.reserved": "© 2026 eaco समुदाय · सार्वजनिक जानकारी से संकलित", "ann.copy": "कॉन्ट्रैक्ट पता चुना गया — मैन्युअल रूप से कॉपी करें", "ann.theme": "थीम बदलकर %s की गई", "ann.lang": "भाषा बदलकर %s की गई", "ann.reset": "डिफ़ॉल्ट थीम और चीनी भाषा पुनर्स्थापित की गई"}, "ja": {"a11y.skip": "メインコンテンツへ移動", "ctrl.themeLabel": "テーマ", "ctrl.langLabel": "言語", "ctrl.reset": "リセット", "nav.linux": "Linux の用途", "nav.eaco": "EACO の用途", "nav.combined": "組み合わせの用途", "nav.links": "便利リンク", "lang.zh": "中文", "lang.en": "English", "lang.fr": "Français", "lang.es": "Español", "lang.ru": "Русский", "lang.ar": "العربية", "lang.hi": "हिन्दी", "lang.ja": "日本語", "theme.apple-green": "アップルグリーン", "theme.cosmic-blue": "コズミックブルー", "theme.classic-beige": "クラシックベージュ", "noscript.note": "8言語・3テーマを切り替えるには、このページで JavaScript を有効にする必要があります。現在は既定の中国語内容を表示しています。", "meta.title": "EACO × Linux — ユースケースガイド 2026", "hero.eyebrow": "EACO × LINUX — ユースケースガイド", "hero.titleA": "Linux で何ができるか？", "hero.titleB": "EACO で何ができるか？両者を組み合わせると？", "hero.desc": "Linux の一般的な能力、EACO の公開プロジェクトとオンチェーン上の事実、そしてセルフホスティング・オープンソース開発・学習における両者の組み合わせ方を1ページで理解できます。内容は中立的に保たれ、情報提供と技術交流のみを目的としています。", "hero.caLabel": "コントラクトアドレス（Solana）", "hero.copyBtn": "アドレスを選択", "hero.caCopyHint": "ボタンを押してコントラクトアドレスを選択し、手動でコピーしてください", "hero.primaryAction": "Linux の用途を見る", "hero.secondaryAction": "EACO の用途を見る", "hero.nextHint": "下へスクロール · Linux → EACO → 組み合わせ", "s1.eyebrow": "Linux が重要な理由", "s1.title": "Linux は何に使われているか？", "s1.lead": "サーバーからデスクトップ、スーパーコンピューターから IoT まで、Linux は世界で最も広く使われているオープンソース OS のひとつです。以下はその代表的な8つの利用シーンです。", "s1.1t": "サーバーとクラウド基盤", "s1.1d": "世界の大多数のウェブサイト・データベース・クラウドホストは Linux 上で動作します。Nginx、Apache、MySQL/PostgreSQL、DNS、メールなどの基幹サービスは安定して信頼性高く稼働します。", "s1.2t": "ソフトウェア開発とエンジニアリング", "s1.2d": "Linux は完全な開発ツールチェーン（gcc、Python、Node.js、Git）を提供し、ターミナルとスクリプトによりビルド・テスト・デプロイのパイプラインを効率的かつ再利用可能にします。", "s1.3t": "コンテナと DevOps", "s1.3d": "Docker と Kubernetes の事実上の標準ホストは Linux です。Ansible、Terraform、Prometheus と組み合わせて、現代的な CI/CD と可観測性のスタックを構築できます。", "s1.4t": "組み込みと IoT", "s1.4d": "Android カーネル、ルーター、スマート家電、車載システム、Raspberry Pi などのボードはすべて Linux ベースで、ハードウェアイノベーションの基盤プラットフォームです。", "s1.5t": "スーパーコンピューティングと研究", "s1.5d": "TOP500 スーパーコンピューターの大多数が Linux を実行しています。科学計算、気象、ゲノム、AI トレーニング（CUDA エコシステム）は Linux に大きく依存しています。", "s1.6t": "サイバーセキュリティ", "s1.6d": "Kali や Parrot などのセキュリティ向けディストリビューションと、オープンソースのファイアウォール・IDS（Snort/Suricata）により、Linux はセキュリティ研究と防御の土台となっています。", "s1.7t": "デスクトップとオフィス", "s1.7d": "Ubuntu、Fedora、Debian などのデスクトップディストリビューションは、LibreOffice、ブラウザー、IDE と組み合わせて、プライバシーを制御し高度にカスタマイズ可能な日常業務と個人開発を実現します。", "s1.8t": "オープンソース教育とガバナンス", "s1.8d": "無料でドキュメントが豊富な Linux は、OS・Git コラボレーション・オープンソースライセンス（GPL/MIT）を学ぶ最適な入り口であり、デジタル主権の長期的な選択肢でもあります。", "s2.eyebrow": "検証済みの事実に基づく", "s2.title": "EACO は何に使われているか？", "s2.lead": "EACO は Solana チェーン上の SPL トークン（Earth's Best Coin）で、オープンソースプロジェクト・公開ページ・コミュニティ協力を通じて情報と知識を発信しています。以下の用途はすべて公式の公開事実に基づき、投資誘導を含みません。", "s2.1t": "オンチェーン上の公開記録", "s2.1d": "EACO は Solana 上の SPL トークンです（小数9桁、総供給量 1,350,000,000 EACO）。供給量・保有者・メタデータはチェーン上のエクスプローラーで公開確認できます。", "s2.2t": "オープンソースプロジェクト群", "s2.2d": "公式 GitHub 組織 ucoingroup は earths-best-coin、eacoweb3-2026、eacoSWAP、EACO-SOL-DOGE-EAC などのリポジトリを公開管理しています。コードは MIT ライセンスで公開され、学習と貢献に利用できます。", "s2.3t": "ウェブによる情報発信", "s2.3d": "公式ホスティングページと Web3 シリーズページ（GitHub Pages、freedev）が、プロジェクト紹介・コミュニティナビ・技術解説を掲載しており、すべて公開アクセス可能です。", "s2.4t": "オンチェーンデータの照会", "s2.4d": "Solscan、Solana Explorer、OrbMarkets などの公開エクスプローラーで、EACO のアドレス・メタデータ・オンチェーン情報を確認でき、データ分析や記録に適しています。", "s2.5t": "コミュニティと交流", "s2.5d": "公式コミュニティチャンネル（X、Telegram、Discord）は、プロジェクト討議・技術交流・多言語協力に使われています。Linktree がすべての公式入口を集約しています。", "s2.6t": "定義と文化的表現", "s2.6d": "EACO = Energy × Attitude × Cooperation × Optimization。スローガンは「eaco for earth」、使命は「労働の価値を計算し地球の資源を定量化する。個人や組織に属さない」ことです。", "s2.7t": "学習・教育素材", "s2.7d": "AI + RWA + Web3 を組み合わせたオープンソースコミュニティプロジェクトとして、EACO の公開コードとドキュメントは、Solana・スマートコントラクト・国際化（i18n）の学習素材になります。", "s2.8t": "メタデータとバージョン公開", "s2.8d": "EACO のメタデータは毎週木曜 15:00（GMT+8）に更新され、現在のバージョンは 0.0.1 です。バージョン情報とメタデータのフィールドは一般に公開されています。", "s3.eyebrow": "オープンソース × オープン", "s3.title": "EACO と Linux を組み合わせると何ができるか？", "s3.lead": "EACO の公開コードとページは標準的なオープンソース資産であり、誰でも Linux 環境で自由にアクセス・構築・学習できます。以下は代表的な8つの中立的な組み合わせ方です。", "s3.1t": "公式サイトのセルフホスティング", "s3.1d": "Linux サーバー上で Nginx や静的サーバーを使い、EACO の公式ページとコミュニティナビをセルフホスティングします。データを自社管理し、第三者ホスティングに依存しません。", "s3.2t": "オープンソースのビルドとデプロイ", "s3.2d": "Linux で Git を使い ucoingroup のリポジトリをクローンし、Node.js/Python で静的サイトをビルドして、GitHub Pages や freedev にデプロイします。", "s3.3t": "オンチェーンデータのスクリプト", "s3.3d": "Python/Shell スクリプトで Solana RPC を呼び出し、EACO コントラクトのメタデータ・供給量・保有者分布を読み取り、定期的なスナップショットとグラフを生成します。", "s3.4t": "定期実行と自動化", "s3.4d": "crontab でオンチェーンデータの同期、ページキャッシュの更新、日次レポートの生成を行います。軽量な監視スクリプトでサービス稼働状態を確認し、アラートを送信します。", "s3.5t": "コンテナ化デプロイ", "s3.5d": "Docker Compose や Kubernetes を使い、Linux 上で EACO 関連のページ・データサービス・ツールチェーンをオーケストレーションし、移行とロールバックを容易にします。", "s3.6t": "鍵管理とセキュリティ実践", "s3.6d": "Linux 上でコマンドラインツールを使い、Solana の鍵を（オフライン・暗号化状態で）生成・バックアップし、SSH・ファイアウォール・最小権限でセルフホストサービスを保護します。", "s3.7t": "オープンソース協働とスキル学習", "s3.7d": "EACO のオープンソースリポジトリへの貢献は、Linux 環境で Git・ウェブ開発・多言語 i18n・Solana/web3 の知識を体系的に練習する機会になります。", "s3.8t": "低コストの実験環境", "s3.8d": "Linux ホスト1台または Raspberry Pi で、EACO 情報ステーション・データダッシュボード・テストサービスを構築し、実サーバーの運用を低コストで訓練できます。", "disc.eyebrow": "中立性の宣言", "disc.title": "ご注意ください", "disc.p1": "このページは EACO オープンソースプロジェクトに関する中立な技術情報ページであり、投資ページではありません。本ページの内容は投資助言・収益の約束・取引誘導を構成するものではありません。暗号資産についてはご自身で調査し、お住まいの地域の法令を遵守してください。", "disc.p2": "本ページの第三者リンク（GitHub、ホスティングページ、オンチェーンエクスプローラー、ソーシャルチャンネルなど）は各チームが管理しており、本ページとは無関係です。オンチェーンの事実は公式リポジトリの eaco.json メタデータに従い、毎週木曜 15:00（GMT+8）に更新されます。現在のバージョンは 0.0.1（MIT ライセンス）です。", "disc.p3": "未検証の能力・指標・価格・収益データは、本ページでは一切表示しません。", "links.title": "EACO の便利リンク", "links.desc": "以下はコミュニティが管理する公式ホスティングページと公開技術シリーズで、参照専用です。", "links.l1": "EACO 公式ホーム（GitHub Pages）", "links.l2": "EACO SOL Top10 DEX 2025 ページ", "links.l3": "Earth Village EACO Network 2024", "links.l4": "EACO Web3 技術シリーズ", "foot.note": "eaco for earth · オープンソース · 中立 · ユースケースガイド 2026", "foot.reserved": "© 2026 eaco コミュニティ · 公開情報をもとに作成", "ann.copy": "コントラクトアドレスを選択しました — 手動でコピーしてください", "ann.theme": "テーマを %s に変更しました", "ann.lang": "言語を %s に変更しました", "ann.reset": "既定のテーマと言語（中国語）に戻しました"}};</script>
+<script>(function () {
+  "use strict";
+
+  var CA = "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH";
+  var THEMES = ["apple-green", "cosmic-blue", "classic-beige"];
+  var LANGS = ["zh", "en", "fr", "es", "ru", "ar", "hi", "ja"];
+  var DEFAULT_THEME = "apple-green";
+  var DEFAULT_LANG = "zh";
+
+  document.documentElement.classList.remove("no-js");
+  document.documentElement.classList.add("js");
+
+  /* In-memory UI state: the delivered page may run inside a sandboxed
+     iframe without same-origin access, so browser storage must not be
+     touched. Persistence is intentionally limited to the current view. */
+  var memoryState = Object.create(null);
+  function stateGet(key) {
+    return Object.prototype.hasOwnProperty.call(memoryState, key) ? memoryState[key] : null;
+  }
+  function stateSet(key, val) {
+    memoryState[key] = val;
+  }
+
+  function t(lang, key) {
+    var dict = I18N[lang] || I18N[DEFAULT_LANG];
+    var val = (dict && dict[key]) || I18N[DEFAULT_LANG][key];
+    return typeof val === "string" ? val : key;
+  }
+  function fmt(str, rep) {
+    return String(str).replace("%s", rep);
+  }
+
+  var annContent = document.getElementById("announcer-content");
+  var announceTimer = null;
+  function announce(text) {
+    if (!annContent) { return; }
+    annContent.textContent = text;
+    annContent.setAttribute("aria-hidden", "false");
+    if (announceTimer) { clearTimeout(announceTimer); }
+    announceTimer = setTimeout(function () {
+      annContent.setAttribute("aria-hidden", "true");
+    }, 3200);
+  }
+
+  function applyLanguage(lang) {
+    if (LANGS.indexOf(lang) === -1) { lang = DEFAULT_LANG; }
+    stateSet("lang", lang);
+    var root = document.documentElement;
+    root.setAttribute("lang", lang === "zh" ? "zh-CN" : lang);
+    root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+    var nodes = document.querySelectorAll("[data-i18n]");
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-i18n");
+      if (key) { nodes[i].textContent = t(lang, key); }
+    }
+    var attrs = document.querySelectorAll("[data-i18n-attr]");
+    for (i = 0; i < attrs.length; i++) {
+      var spec = attrs[i].getAttribute("data-i18n-attr");
+      if (spec) {
+        var parts = spec.split("|");
+        if (parts.length === 2) {
+          attrs[i].setAttribute(parts[1], t(lang, parts[0]));
+        }
+      }
+    }
+    var langBtns = document.querySelectorAll("[data-lang-pick]");
+    for (i = 0; i < langBtns.length; i++) {
+      var pressed = langBtns[i].getAttribute("data-lang-pick") === lang;
+      langBtns[i].setAttribute("aria-pressed", pressed ? "true" : "false");
+      langBtns[i].setAttribute("aria-label", t(lang, "lang." + langBtns[i].getAttribute("data-lang-pick")));
+    }
+    var themeBtns = document.querySelectorAll("[data-theme-pick]");
+    for (i = 0; i < themeBtns.length; i++) {
+      themeBtns[i].setAttribute("aria-label", t(lang, "theme." + themeBtns[i].getAttribute("data-theme-pick")));
+    }
+    document.title = t(lang, "meta.title");
+  }
+
+  function applyTheme(theme) {
+    if (THEMES.indexOf(theme) === -1) { theme = DEFAULT_THEME; }
+    stateSet("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    var btns = document.querySelectorAll("[data-theme-pick]");
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      btns[i].setAttribute("aria-pressed", btns[i].getAttribute("data-theme-pick") === theme ? "true" : "false");
+    }
+  }
+
+  function selectText(el) {
+    if (!el) { return; }
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection ? window.getSelection() : null;
+    if (sel) {
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+  }
+
+  function wireCopyButtons() {
+    var btns = document.querySelectorAll("[data-copy-ca]");
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function (ev) {
+        var btn = ev.currentTarget;
+        var box = btn.closest(".ca-box");
+        var codeEl = box ? box.querySelector("code.ca-code") : document.getElementById("ca-code");
+        selectText(codeEl);
+        var lang = document.documentElement.getAttribute("lang") === "zh-CN" ? "zh" : document.documentElement.getAttribute("lang");
+        announce(t(lang, "ann.copy"));
+      });
+    }
+  }
+
+  function wireControls(lang) {
+    var i;
+    var themeBtns = document.querySelectorAll("[data-theme-pick]");
+    for (i = 0; i < themeBtns.length; i++) {
+      themeBtns[i].addEventListener("click", function (ev) {
+        var theme = ev.currentTarget.getAttribute("data-theme-pick");
+        applyTheme(theme);
+        var curLang = document.documentElement.getAttribute("lang") === "zh-CN" ? "zh" : document.documentElement.getAttribute("lang");
+        announce(fmt(t(curLang, "ann.theme"), t(curLang, "theme." + theme)));
+      });
+    }
+    var langBtns = document.querySelectorAll("[data-lang-pick]");
+    for (i = 0; i < langBtns.length; i++) {
+      langBtns[i].addEventListener("click", function (ev) {
+        var lang = ev.currentTarget.getAttribute("data-lang-pick");
+        applyLanguage(lang);
+        announce(fmt(t(lang, "ann.lang"), t(lang, "lang." + lang)));
+      });
+    }
+    var resetBtn = document.querySelector("[data-reset]");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function () {
+        applyTheme(DEFAULT_THEME);
+        applyLanguage(DEFAULT_LANG);
+        announce(t(DEFAULT_LANG, "ann.reset"));
+      });
+    }
+  }
+
+  function boot() {
+    var savedTheme = stateGet("theme") || DEFAULT_THEME;
+    var savedLang = stateGet("lang") || DEFAULT_LANG;
+    applyTheme(savedTheme);
+    applyLanguage(savedLang);
+    document.documentElement.classList.add("booted");
+
+    var bootEl = document.getElementById("boot");
+    if (bootEl) {
+      bootEl.style.opacity = "0";
+      setTimeout(function () {
+        if (bootEl.parentNode) { bootEl.parentNode.removeChild(bootEl); }
+      }, 220);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      wireCopyButtons();
+      wireControls();
+      boot();
+    });
+  } else {
+    wireCopyButtons();
+    wireControls();
+    boot();
+  }
+})();</script>
+<script>(function(){function settle(){requestAnimationFrame(function(){setTimeout(function(){var root=document.documentElement;var main=document.querySelector("main");var rect=main&&main.getBoundingClientRect();var visible=!!(rect&&rect.width>0&&rect.height>0&&getComputedStyle(main).display!=="none"&&getComputedStyle(main).visibility!=="hidden");var shell=false?document.querySelector(null):null;var shellReady=!false||!!shell;var errors=window.__DESIGN_SUITE_STATIC_ERRORS__||[];var overflow=Math.max(document.documentElement.scrollWidth,document.body?document.body.scrollWidth:0)>document.documentElement.clientWidth+1;root.dataset.designSuiteStaticState=visible&&shellReady&&errors.length===0?"ready":"blocked";root.dataset.designSuiteStaticProvider=shellReady?"none":"missing";root.dataset.designSuiteStaticMain=visible?"visible":"missing";root.dataset.designSuiteStaticErrors=String(errors.length);root.dataset.designSuiteStaticOverflow=String(overflow)},50)})}if(document.readyState==="complete")settle();else window.addEventListener("load",settle,{once:true})})();</script></body>
+</html>
