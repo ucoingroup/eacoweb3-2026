@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Earth · 文化产业 | EACO Earth Culture Industry</title>
+<meta name="description" content="地球EACO文化产业网站APP：为什么文化产业是未来长期经济增长点，音乐/电影/能源等前20大行业与EACO结合，6种语言切换，3套主题设计。">
+<style>
+:root{
+  --bg:#f2f9f0; --bg2:#ffffff; --card:rgba(255,255,255,.85);
+  --text:#1d3a22; --muted:#5a7a60; --accent:#2e9e4f; --accent2:#7ec850;
+  --border:#cfe8d2; --glow:rgba(46,158,79,.25); --heading:#14532d;
+}
+html[data-theme="blue"]{
+  --bg:#0b1026; --bg2:#0f1633; --card:rgba(20,30,66,.75);
+  --text:#dfe8ff; --muted:#8fa3d9; --accent:#3b82f6; --accent2:#7dd3fc;
+  --border:#26355e; --glow:rgba(59,130,246,.35); --heading:#bfdbfe;
+}
+html[data-theme="classic"]{
+  --bg:#f7f1e3; --bg2:#fffdf6; --card:rgba(255,253,246,.9);
+  --text:#3d2b1f; --muted:#8a6d4e; --accent:#a03428; --accent2:#b8860b;
+  --border:#e2d3b8; --glow:rgba(160,52,40,.2); --heading:#6b1f14;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.75;
+  background-image:radial-gradient(circle at 15% 10%,var(--glow),transparent 45%),
+                   radial-gradient(circle at 85% 90%,var(--glow),transparent 45%);
+  transition:background .4s,color .4s;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+  background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 20px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.1rem;color:var(--heading)}
+.logo span{color:var(--accent)}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,button.ctrl{background:var(--card);color:var(--text);border:1px solid var(--border);
+  border-radius:10px;padding:7px 10px;font-size:.85rem;cursor:pointer}
+select:hover,button.ctrl:hover{border-color:var(--accent)}
+button.ctrl.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hero{text-align:center;padding:70px 0 40px}
+.hero h1{font-size:clamp(1.8rem,5vw,3rem);color:var(--heading);letter-spacing:.02em}
+.hero h1 b{color:var(--accent)}
+.hero p{color:var(--muted);max-width:720px;margin:16px auto 0;font-size:1.02rem}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.badge{border:1px solid var(--border);background:var(--card);border-radius:999px;padding:5px 14px;font-size:.8rem;color:var(--muted)}
+section{padding:44px 0}
+h2{font-size:1.5rem;color:var(--heading);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:10px;height:26px;border-radius:5px;background:linear-gradient(var(--accent),var(--accent2))}
+.sec-sub{color:var(--muted);margin-bottom:24px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,.05);transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.card h3{color:var(--heading);font-size:1.05rem;margin-bottom:8px}
+.card p{font-size:.92rem;color:var(--text)}
+.num{font-size:1.6rem;font-weight:800;color:var(--accent)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--border);font-size:.9rem}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--heading);font-weight:700}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.tbl-scroll{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--card);border-radius:0 14px 14px 0;padding:16px 20px;margin:18px 0;font-size:.95rem}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+a.link-item{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:12px 14px;color:var(--text);text-decoration:none;font-size:.88rem;transition:border-color .2s,transform .2s;word-break:break-all}
+a.link-item:hover{border-color:var(--accent);transform:translateX(3px)}
+a.link-item .tag{flex-shrink:0;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);
+  border-radius:8px;padding:1px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;margin-top:2px}
+footer{border-top:1px solid var(--border);margin-top:40px;padding:34px 0 50px;text-align:center;color:var(--muted);font-size:.85rem}
+#topBtn{position:fixed;right:18px;bottom:18px;border-radius:50%;width:44px;height:44px;
+  background:var(--accent);color:#fff;border:none;font-size:1.2rem;cursor:pointer;display:none;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+[dir="rtl"] .card h3::before{content:""}
+@media(max-width:600px){.bar{justify-content:center}.hero{padding:44px 0 26px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="logo">🌍 EACO <span data-i="logo">地球 · 文化产业</span></div>
+    <div class="ctrls">
+      <select id="langSel" aria-label="Language">
+        <option value="zh">🇨🇳 中文</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="ar">🇸🇦 العربية</option>
+      </select>
+      <button class="ctrl active" data-theme-btn="green" title="Apple Green">🍏</button>
+      <button class="ctrl" data-theme-btn="blue" title="Cosmic Blue">🌌</button>
+      <button class="ctrl" data-theme-btn="classic" title="Chinese Classic">🏮</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>🌍 <b>EACO</b> <span data-i="hero1">地球文化产业</span></h1>
+    <p data-i="heroP">以 EACO（Earth's All-China Organization / 地球链上通证）为纽带，把音乐、电影、能源等地球村前 20 大行业与文化产业链结合，构建 Web3 时代长期经济增长的新引擎。</p>
+    <div class="badges">
+      <span class="badge" data-i="b1">🌐 6 种语言</span>
+      <span class="badge" data-i="b2">🎨 3 套主题</span>
+      <span class="badge" data-i="b3">🔗 内容闭环</span>
+      <span class="badge" data-i="b4">🪙 Web3 · EACO</span>
+    </div>
+  </div>
+
+  <!-- 1 为什么 -->
+  <section id="why">
+    <h2 data-i="whyT">一、为什么地球 EACO 把文化产业当作未来长期经济新的增长点？</h2>
+    <p class="sec-sub" data-i="whyS">Why does EACO Earth treat the culture industry as a new long-term growth engine?</p>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h3 data-i="w1t">精神消费升级</h3><p data-i="w1p">物质满足之后，人类需求向精神层面迁移。音乐、影视、游戏、出版等文化消费占 GDP 比重持续上升，是确定性最强的长期赛道。</p></div>
+      <div class="card"><div class="num">02</div><h3 data-i="w2t">边际成本趋零</h3><p data-i="w2p">文化内容可无限复制、全球分发，一旦创作完成，传播与复用成本极低，规模效应远超传统制造业。</p></div>
+      <div class="card"><div class="num">03</div><h3 data-i="w3t">绿色可持续</h3><p data-i="w3p">文化产业几乎不消耗自然资源、不产生污染，契合地球可持续发展的长期共识，是"碳友好"的增长方式。</p></div>
+      <div class="card"><div class="num">04</div><h3 data-i="w4t">AI 与 Web3 放大器</h3><p data-i="w4p">AI 降低创作门槛，Web3（区块链、NFT、通证）重构版权确权与收益分配，EACO 让全球创作者"贡献即确权、确权即收益"。</p></div>
+      <div class="card"><div class="num">05</div><h3 data-i="w5t">文明软实力</h3><p data-i="w5p">文化输出是最高层次的竞争力。地球村需要跨语言、跨文化的公共文化基础设施，EACO 以"地球"为共同体叙事，天然承载这一使命。</p></div>
+      <div class="card"><div class="num">06</div><h3 data-i="w6t">长期复利属性</h3><p data-i="w6p">经典文化内容（音乐、电影、书籍）具备"长尾复利"——时间越长、传播越广、价值越大，与长期经济新增长点的定义高度吻合。</p></div>
+    </div>
+  </section>
+
+  <!-- 2 EACO 是什么/有什么用 -->
+  <section id="what">
+    <h2 data-i="whatT">二、地球 EACO 有什么用？能做哪些事情？</h2>
+    <p class="sec-sub" data-i="whatS">What is EACO for, and what can it do?</p>
+    <div class="callout" data-i="whatCall">EACO 是以"地球村共同体"为叙事的 Web3 通证生态：它既是价值载体（通证），也是协作协议（社区 DAO），更是文化资产的流通轨道（Swap / 池 / 自由通证）。一句话：让全球的文化、能源与社区价值在链上自由流动。</div>
+    <div class="cards">
+      <div class="card"><h3>🪙 <span data-i="u1t">价值载体与交换</span></h3><p data-i="u1p">通过 eacoSWAP、Meteora 池、eaco-DOGE 池等实现 EACO 与其他资产的链上兑换与流动性。</p></div>
+      <div class="card"><h3>🎨 <span data-i="u2t">文化产业确权与激励</span></h3><p data-i="u2p">音乐、电影、书籍、文明足迹等内容用通证记录贡献，创作者与传播者按贡献获得 EACO 激励。</p></div>
+      <div class="card"><h3>🗳️ <span data-i="u3t">DAO 社区治理</span></h3><p data-i="u3p">eaco-dao-pool 支持社区提案、投票与资金池共管，全球"地球 100 朋友"共建共享。</p></div>
+      <div class="card"><h3>📚 <span data-i="u4t">知识与教育</span></h3><p data-i="u4p">good-books 好书计划、100 Ways To Wealth、linguistic-capital 语言资本：把知识本身变成可流通的财富。</p></div>
+      <div class="card"><h3>🌍 <span data-i="u5t">文明与科技叙事</span></h3><p data-i="u5p">Footsteps-of-Civilization 文明足迹、Mohist-Tech 墨家科技、eur-eaco / au-trade 区域贸易，连接古今与全球市场。</p></div>
+      <div class="card"><h3>🎁 <span data-i="u6t">普惠入口</span></h3><p data-i="u6p">eaco-freetoken 免费领取、eaco50rate 汇率参考、eaco-web3 系列教程：让每个人零门槛进入地球村 Web3。</p></div>
+    </div>
+  </section>
+
+  <!-- 3 前20大行业 -->
+  <section id="top20">
+    <h2 data-i="t20T">三、地球村未来前 20 大行业 × EACO 文化产业结合</h2>
+    <p class="sec-sub" data-i="t20S">How the top 20 future industries of the global village combine with the EACO culture industry.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th data-i="h1">#</th><th data-i="h2c">行业 Industry</th><th data-i="h3c">与 EACO 文化产业结合点</th></tr></thead>
+        <tbody id="t20body"></tbody>
+      </table>
+    </div>
+    <div class="callout" data-i="t20Call">核心逻辑：文化是"内容"，EACO 是"轨道"，20 大行业是"场景"——内容上轨道、场景出价值，三者闭环即形成地球村长期经济增长的新引擎。</div>
+  </section>
+
+  <!-- 4 链接 -->
+  <section id="links">
+    <h2 data-i="lkT">四、EACO 生态链接大全（内容闭环）</h2>
+    <p class="sec-sub" data-i="lkS">EACO ecosystem links — click to explore the full loop.</p>
+    <div class="links" id="linkList"></div>
+  </section>
+</div>
+
+<footer>
+  <div>🌍 EACO Earth · <span data-i="f1">地球 eaco 文化产业</span> · <span data-i="f2">音乐 · 电影 · 能源 · 文明</span></div>
+  <div style="margin-top:6px" data-i="f3">六种语言 · 三种主题 · 为地球村的每一位读者而建</div>
+</footer>
+<button id="topBtn" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ---------------- i18n ---------------- */
+const I18N = {
+zh:{
+  logo:"地球 · 文化产业", hero1:"地球文化产业",
+  heroP:"以 EACO（地球链上通证）为纽带，把音乐、电影、能源等地球村前 20 大行业与文化产业链结合，构建 Web3 时代长期经济增长的新引擎。",
+  b1:"🌐 6 种语言", b2:"🎨 3 套主题", b3:"🔗 内容闭环", b4:"🪙 Web3 · EACO",
+  whyT:"一、为什么地球 EACO 把文化产业当作未来长期经济新的增长点？",
+  whyS:"文化，是物质文明之后的下一座金矿。",
+  w1t:"精神消费升级", w1p:"物质满足之后，人类需求向精神层面迁移。音乐、影视、游戏、出版等文化消费占 GDP 比重持续上升，是确定性最强的长期赛道。",
+  w2t:"边际成本趋零", w2p:"文化内容可无限复制、全球分发，一旦创作完成，传播与复用成本极低，规模效应远超传统制造业。",
+  w3t:"绿色可持续", w3p:"文化产业几乎不消耗自然资源、不产生污染，契合地球可持续发展的长期共识，是"碳友好"的增长方式。",
+  w4t:"AI 与 Web3 放大器", w4p:"AI 降低创作门槛，Web3 重构版权确权与收益分配，EACO 让全球创作者"贡献即确权、确权即收益"。",
+  w5t:"文明软实力", w5p:"文化输出是最高层次的竞争力。地球村需要跨语言、跨文化的公共文化基础设施，EACO 以"地球"为共同体叙事，天然承载这一使命。",
+  w6t:"长期复利属性", w6p:"经典文化内容具备"长尾复利"——时间越长、传播越广、价值越大，与长期经济新增长点的定义高度吻合。",
+  whatT:"二、地球 EACO 有什么用？能做哪些事情？",
+  whatS:"既是价值载体，也是协作协议，更是文化资产的流通轨道。",
+  whatCall:"EACO 是以"地球村共同体"为叙事的 Web3 通证生态：它既是价值载体（通证），也是协作协议（社区 DAO），更是文化资产的流通轨道（Swap / 池 / 自由通证）。一句话：让全球的文化、能源与社区价值在链上自由流动。",
+  u1t:"价值载体与交换", u1p:"通过 eacoSWAP、Meteora 池、eaco-DOGE 池等实现 EACO 与其他资产的链上兑换与流动性。",
+  u2t:"文化产业确权与激励", u2p:"音乐、电影、书籍、文明足迹等内容用通证记录贡献，创作者与传播者按贡献获得 EACO 激励。",
+  u3t:"DAO 社区治理", u3p:"eaco-dao-pool 支持社区提案、投票与资金池共管，全球"地球 100 朋友"共建共享。",
+  u4t:"知识与教育", u4p:"good-books 好书计划、100 Ways To Wealth、linguistic-capital 语言资本：把知识本身变成可流通的财富。",
+  u5t:"文明与科技叙事", u5p:"Footsteps-of-Civilization 文明足迹、Mohist-Tech 墨家科技、eur-eaco / au-trade 区域贸易，连接古今与全球市场。",
+  u6t:"普惠入口", u6p:"eaco-freetoken 免费领取、eaco50rate 汇率参考、eaco-web3 系列教程：让每个人零门槛进入地球村 Web3。",
+  t20T:"三、地球村未来前 20 大行业 × EACO 文化产业结合",
+  t20S:"内容上轨道、场景出价值，三者闭环形成新引擎。",
+  h1:"序号", h2c:"行业 Industry", h3c:"与 EACO 文化产业结合点",
+  t20Call:"核心逻辑：文化是"内容"，EACO 是"轨道"，20 大行业是"场景"——内容上轨道、场景出价值，三者闭环即形成地球村长期经济增长的新引擎。",
+  lkT:"四、EACO 生态链接大全（内容闭环）", lkS:"点击卡片，探索完整的 EACO 地球生态。",
+  f1:"地球 eaco 文化产业", f2:"音乐 · 电影 · 能源 · 文明",
+  f3:"六种语言 · 三种主题 · 为地球村的每一位读者而建"
+},
+en:{
+  logo:"Earth · Culture Industry", hero1:"Earth Culture Industry",
+  heroP:"With EACO (the Earth on-chain token) as the bond, the top 20 industries of the global village — music, film, energy and more — are combined with the culture industry to build a new long-term growth engine of the Web3 era.",
+  b1:"🌐 6 Languages", b2:"🎨 3 Themes", b3:"🔗 Content Loop", b4:"🪙 Web3 · EACO",
+  whyT:"1. Why does EACO Earth treat the culture industry as a new long-term growth engine?",
+  whyS:"Culture is the next gold mine after material civilization.",
+  w1t:"Upgrading to Spiritual Consumption", w1p:"Beyond material needs, humanity moves toward the spiritual. Cultural consumption — music, film, gaming, publishing — keeps rising as a share of GDP: the most certain long-term track.",
+  w2t:"Near-Zero Marginal Cost", w2p:"Cultural content can be copied and distributed globally without limit. Once created, the cost of spreading it is minimal — a scale effect far beyond traditional manufacturing.",
+  w3t:"Green & Sustainable", w3p:"The culture industry barely consumes natural resources or produces pollution — a "carbon-friendly" way to grow, aligned with the planet's long-term consensus.",
+  w4t:"AI & Web3 as Amplifiers", w4p:"AI lowers the barrier to creation; Web3 rebuilds copyright and revenue sharing. EACO lets creators worldwide enjoy "contribution = ownership = income".",
+  w5t:"Soft Power of Civilization", w5p:"Cultural influence is the highest form of competitiveness. With "Earth community" as its narrative, EACO naturally carries this cross-language, cross-cultural mission.",
+  w6t:"Long-Term Compound Value", w6p:"Classic cultural content compounds like interest: the longer it lives and the wider it spreads, the more valuable it becomes — the very definition of long-term growth.",
+  whatT:"2. What is EACO for? What can it do?",
+  whatS:"A value carrier, a collaboration protocol, and a circulation track for cultural assets.",
+  whatCall:"EACO is a Web3 token ecosystem built on the narrative of the "global village community": a value carrier (token), a collaboration protocol (community DAO), and a circulation track for cultural assets (Swap / pools / free token). In one sentence: let the world's culture, energy and community value flow freely on-chain.",
+  u1t:"Value Carrier & Exchange", u1p:"eacoSWAP, Meteora pools and the eaco-DOGE pool provide on-chain swapping and liquidity for EACO.",
+  u2t:"Culture Rights & Incentives", u2p:"Music, film, books and civilization footprints record contributions on-chain; creators and spreaders earn EACO rewards by contribution.",
+  u3t:"DAO Governance", u3p:"eaco-dao-pool supports proposals, voting and shared treasuries, co-built by the global "Earth 100 Friends".",
+  u4t:"Knowledge & Education", u4p:"good-books, 100 Ways To Wealth and linguistic-capital turn knowledge itself into circulating wealth.",
+  u5t:"Civilization & Tech Narrative", u5p:"Footsteps-of-Civilization, Mohist-Tech, eur-eaco and au-trade connect ancient wisdom with global markets.",
+  u6t:"Inclusive Entry", u6p:"eaco-freetoken, eaco50rate and the eaco-web3 tutorial series give everyone a zero-threshold entrance to the global village Web3.",
+  t20T:"3. Top 20 Future Industries × EACO Culture Industry",
+  t20S:"Content on the track, value out of scenarios — a closed loop engine.",
+  h1:"No.", h2c:"Industry", h3c:"Combination with the EACO culture industry",
+  t20Call:"Core logic: culture is the "content", EACO is the "track", the 20 industries are the "scenarios". Content on the track, value out of scenarios — the closed loop becomes the new growth engine of the global village.",
+  lkT:"4. EACO Ecosystem Links (Content Loop)", lkS:"Click a card to explore the full EACO Earth ecosystem.",
+  f1:"Earth EACO Culture Industry", f2:"Music · Film · Energy · Civilization",
+  f3:"Six languages · Three themes · Built for every reader of the global village"
+},
+es:{
+  logo:"Tierra · Industria Cultural", hero1:"Industria Cultural de la Tierra",
+  heroP:"Con EACO (el token terrestre on-chain) como vínculo, las 20 principales industrias del futuro —música, cine, energía y más— se combinan con la industria cultural para construir un nuevo motor de crecimiento a largo plazo en la era Web3.",
+  b1:"🌐 6 idiomas", b2:"🎨 3 temas", b3:"🔗 Ciclo de contenido", b4:"🪙 Web3 · EACO",
+  whyT:"1. ¿Por qué EACO Tierra ve la industria cultural como un nuevo motor de crecimiento a largo plazo?",
+  whyS:"La cultura es la próxima mina de oro tras la civilización material.",
+  w1t:"Consumo espiritual", w1p:"Tras satisfacer lo material, la humanidad busca lo espiritual. El consumo cultural (música, cine, juegos, editoriales) crece constantemente en el PIB: la pista a largo plazo más segura.",
+  w2t:"Costo marginal casi cero", w2p:"El contenido cultural se copia y distribuye globalmente sin límite. Una vez creado, su difusión es casi gratuita: una escala muy superior a la industria tradicional.",
+  w3t:"Verde y sostenible", w3p:"La industria cultural casi no consume recursos ni genera contaminación: un crecimiento "amigable con el carbono", alineado con el consenso global.",
+  w4t:"IA y Web3 como amplificadores", w4p:"La IA baja la barrera de creación; Web3 rehace los derechos y los ingresos. EACO permite "contribución = propiedad = ingreso".",
+  w5t:"Poder blando de la civilización", w5p:"La influencia cultural es la máxima competitividad. Con la narrativa de la "comunidad terrestre", EACO lleva esa misión intercultural.",
+  w6t:"Valor compuesto a largo plazo", w6p:"El contenido cultural clásico se acumula como intereses: cuanto más tiempo y difusión, más valor — la definición exacta del crecimiento a largo plazo.",
+  whatT:"2. ¿Para qué sirve EACO? ¿Qué puede hacer?",
+  whatS:"Portador de valor, protocolo de colaboración y vía de circulación para activos culturales.",
+  whatCall:"EACO es un ecosistema Web3 basado en la "comunidad de la aldea global": portador de valor (token), protocolo de colaboración (DAO) y vía de circulación cultural (Swap / pools / token libre). En una frase: dejar que la cultura, la energía y el valor comunitario fluyan libremente on-chain.",
+  u1t:"Valor e intercambio", u1p:"eacoSWAP, los pools de Meteora y el pool eaco-DOGE ofrecen intercambio y liquidez on-chain para EACO.",
+  u2t:"Derechos e incentivos culturales", u2p:"Música, cine, libros y huellas de civilización registran contribuciones; creadores y difusores reciben EACO por su aporte.",
+  u3t:"Gobernanza DAO", u3p:"eaco-dao-pool permite propuestas, votos y tesorerías compartidas por los "100 Amigos de la Tierra".",
+  u4t:"Conocimiento y educación", u4p:"good-books, 100 Ways To Wealth y linguistic-capital convierten el conocimiento en riqueza circulante.",
+  u5t:"Civilización y tecnología", u5p:"Footsteps-of-Civilization, Mohist-Tech, eur-eaco y au-trade conectan la sabiduría antigua con los mercados globales.",
+  u6t:"Entrada inclusiva", u6p:"eaco-freetoken, eaco50rate y la serie eaco-web3 dan a todos una entrada sin barreras al Web3.",
+  t20T:"3. Las 20 industrias del futuro × EACO",
+  t20S:"Contenido en la vía, valor en los escenarios: un motor de ciclo cerrado.",
+  h1:"N.º", h2c:"Industria", h3c:"Combinación con la industria cultural EACO",
+  t20Call:"Lógica central: la cultura es el "contenido", EACO es la "vía", las 20 industrias son los "escenarios". El ciclo cerrado se convierte en el nuevo motor de crecimiento de la aldea global.",
+  lkT:"4. Enlaces del ecosistema EACO", lkS:"Haz clic para explorar todo el ecosistema EACO.",
+  f1:"Industria Cultural EACO Tierra", f2:"Música · Cine · Energía · Civilización",
+  f3:"Seis idiomas · Tres temas · Hecho para cada lector de la aldea global"
+},
+fr:{
+  logo:"Terre · Industrie culturelle", hero1:"Industrie culturelle de la Terre",
+  heroP:"Avec EACO (le token terrestre on-chain) comme lien, les 20 principales industries du futur — musique, cinéma, énergie… — se combinent avec l'industrie culturelle pour bâtir un nouveau moteur de croissance à long terme de l'ère Web3.",
+  b1:"🌐 6 langues", b2:"🎨 3 thèmes", b3:"🔗 Boucle de contenu", b4:"🪙 Web3 · EACO",
+  whyT:"1. Pourquoi EACO Terre fait-elle de l'industrie culturelle un nouveau moteur de croissance à long terme ?",
+  whyS:"La culture est la prochaine mine d'or après la civilisation matérielle.",
+  w1t:"Consommation spirituelle", w1p:"Au-delà du matériel, l'humanité aspire au spirituel. La consommation culturelle (musique, cinéma, jeux, édition) grimpe dans le PIB : la piste long terme la plus sûre.",
+  w2t:"Coût marginal quasi nul", w2p:"Le contenu culturel se copie et se diffuse à l'échelle mondiale sans limite. Une fois créé, sa diffusion est presque gratuite.",
+  w3t:"Vert et durable", w3p:"L'industrie culturelle consomme peu de ressources et pollue peu : une croissance « carbone-compatible », alignée sur le consensus planétaire.",
+  w4t:"IA et Web3 comme amplificateurs", w4p:"L'IA abaisse la barrière de création ; le Web3 reconstruit les droits et revenus. EACO offre « contribution = propriété = revenu ».",
+  w5t:"Soft power de la civilisation", w5p:"L'influence culturelle est la compétitivité suprême. Avec le récit de la « communauté terrestre », EACO porte cette mission interculturelle.",
+  w6t:"Valeur composée à long terme", w6p:"Le contenu culturel classique capitalise comme un intérêt : plus il dure et se diffuse, plus il vaut — la définition même de la croissance long terme.",
+  whatT:"2. À quoi sert EACO ? Que peut-elle faire ?",
+  whatS:"Porteur de valeur, protocole de collaboration et voie de circulation des actifs culturels.",
+  whatCall:"EACO est un écosystème Web3 bâti sur le récit de la « communauté du village mondial » : porteur de valeur (token), protocole de collaboration (DAO) et voie de circulation culturelle (Swap / pools / token libre). En une phrase : laisser la culture, l'énergie et la valeur communautaire circuler librement on-chain.",
+  u1t:"Valeur et échange", u1p:"eacoSWAP, les pools Meteora et le pool eaco-DOGE offrent échange et liquidité on-chain pour EACO.",
+  u2t:"Droits et incitations culturelles", u2p:"Musique, cinéma, livres et empreintes de civilisation enregistrent les contributions ; créateurs et diffuseurs gagnent des EACO.",
+  u3t:"Gouvernance DAO", u3p:"eaco-dao-pool permet propositions, votes et trésors partagés par les « 100 Amis de la Terre ».",
+  u4t:"Savoir et éducation", u4p:"good-books, 100 Ways To Wealth et linguistic-capital transforment le savoir en richesse circulante.",
+  u5t:"Civilisation et technologie", u5p:"Footsteps-of-Civilization, Mohist-Tech, eur-eaco et au-trade relient la sagesse ancienne aux marchés mondiaux.",
+  u6t:"Entrée inclusive", u6p:"eaco-freetoken, eaco50rate et la série eaco-web3 offrent à tous un accès sans barrière au Web3.",
+  t20T:"3. Les 20 industries du futur × EACO",
+  t20S:"Contenu sur la voie, valeur dans les scénarios : un moteur en boucle fermée.",
+  h1:"N°", h2c:"Industrie", h3c:"Combinaison avec l'industrie culturelle EACO",
+  t20Call:"Logique centrale : la culture est le « contenu », EACO la « voie », les 20 industries les « scénarios ». La boucle fermée devient le nouveau moteur du village mondial.",
+  lkT:"4. Liens de l'écosystème EACO", lkS:"Cliquez pour explorer tout l'écosystème EACO.",
+  f1:"Industrie culturelle EACO Terre", f2:"Musique · Cinéma · Énergie · Civilisation",
+  f3:"Six langues · Trois thèmes · Construit pour chaque lecteur du village mondial"
+},
+ru:{
+  logo:"Земля · Культурная индустрия", hero1:"Культурная индустрия Земли",
+  heroP:"С EACO (земным on-chain токеном) как связующим звеном 20 главных отраслей будущего — музыка, кино, энергетика и др. — объединяются с культурной индустрией, создавая новый долгосрочный двигатель роста эпохи Web3.",
+  b1:"🌐 6 языков", b2:"🎨 3 темы", b3:"🔗 Замкнутый контент", b4:"🪙 Web3 · EACO",
+  whyT:"1. Почему EACO Земля считает культурную индустрию новым долгосрочным двигателем роста?",
+  whyS:"Культура — следующая золотая жила после материальной цивилизации.",
+  w1t:"Духовное потребление", w1p:"После материальных потребностей человечество обращается к духовным. Доля культурного потребления в ВВП постоянно растёт — самая надёжная долгосрочная траектория.",
+  w2t:"Почти нулевые предельные издержки", w2p:"Культурный контент копируется и распространяется по всему миру без ограничений. После создания его распространение почти бесплатно.",
+  w3t:"Зелёная устойчивость", w3p:"Культурная индустрия почти не потребляет ресурсов и не загрязняет среду — «углеродно-дружественный» рост в согласии с консенсусом планеты.",
+  w4t:"ИИ и Web3 как усилители", w4p:"ИИ снижает порог творчества; Web3 перестраивает права и доходы. EACO даёт «вклад = собственность = доход».",
+  w5t:"Мягкая сила цивилизации", w5p:"Культурное влияние — высшая форма конкурентоспособности. С нарративом «земного сообщества» EACO несёт эту межкультурную миссию.",
+  w6t:"Долгосрочный сложный процент", w6p:"Классический культурный контент накапливает ценность как проценты: чем дольше живёт и шире распространяется — тем дороже. Именно это и есть долгосрочный рост.",
+  whatT:"2. Для чего EACO? Что она может?",
+  whatS:"Носитель ценности, протокол сотрудничества и канал оборота культурных активов.",
+  whatCall:"EACO — экосистема Web3 на нарративе «сообщества мировой деревни»: носитель ценности (токен), протокол сотрудничества (DAO) и канал оборота культуры (Swap / пулы / свободный токен). Одним словом: культура, энергия и ценности сообщества свободно текут в блокчейне.",
+  u1t:"Ценность и обмен", u1p:"eacoSWAP, пулы Meteora и пул eaco-DOGE обеспечивают on-chain обмен и ликвидность EACO.",
+  u2t:"Права и стимулы в культуре", u2p:"Музыка, кино, книги и следы цивилизации фиксируют вклад в блокчейне; создатели и распространители получают EACO.",
+  u3t:"Управление DAO", u3p:"eaco-dao-pool поддерживает предложения, голосование и общие казначейства «100 Друзей Земли».",
+  u4t:"Знания и образование", u4p:"good-books, 100 Ways To Wealth и linguistic-capital превращают знания в оборачиваемое богатство.",
+  u5t:"Цивилизация и технологии", u5p:"Footsteps-of-Civilization, Mohist-Tech, eur-eaco и au-trade соединяют древнюю мудрость с мировыми рынками.",
+  u6t:"Доступный вход", u6p:"eaco-freetoken, eaco50rate и серия eaco-web3 дают каждому вход в Web3 без барьеров.",
+  t20T:"3. 20 отраслей будущего × EACO",
+  t20S:"Контент на рельсах, ценность в сценариях — двигатель замкнутого цикла.",
+  h1:"№", h2c:"Отрасль", h3c:"Связка с культурной индустрией EACO",
+  t20Call:"Ключевая логика: культура — «контент», EACO — «рельсы», 20 отраслей — «сценарии». Замкнутый цикл становится новым двигателем роста мировой деревни.",
+  lkT:"4. Ссылки экосистемы EACO", lkS:"Нажмите, чтобы изучить всю экосистему EACO.",
+  f1:"Культурная индустрия EACO Земля", f2:"Музыка · Кино · Энергия · Цивилизация",
+  f3:"Шесть языков · Три темы · Создано для каждого читателя мировой деревни"
+},
+ar:{
+  logo:"الأرض · الصناعة الثقافية", hero1:"الصناعة الثقافية للأرض",
+  heroP:"برابطة EACO (رمز الأرض على السلسلة) يجتمع أكبر 20 صناعة مستقبلية — الموسيقى والسينما والطاقة وغيرها — مع الصناعة الثقافية لبناء محرك نمو طويل الأمد لعصر Web3.",
+  b1:"🌐 6 لغات", b2:"🎨 3 سِمات", b3:"🔗 حلقة محتوى", b4:"🪙 Web3 · EACO",
+  whyT:"1. لماذا تعتبر EACO الأرض الصناعة الثقافية محرك نمو جديدًا طويل الأمد؟",
+  whyS:"الثقافة هي منجم الذهب القادم بعد الحضارة المادية.",
+  w1t:"الاستهلاك الروحي", w1p:"بعد تلبية الاحتياجات المادية، يتجه البشر إلى الروح. يرتفع نصيب الاستهلاك الثقافي من الناتج المحلي باستمرار — المسار الأكثر تأكيدًا على المدى الطويل.",
+  w2t:"تكلفة حدية شبه صفرية", w2p:"المحتوى الثقافي يُنسخ ويُوزَّع عالميًا بلا حدود. بعد الإبداع تكاد نشرته تكون مجانية.",
+  w3t:"أخضر ومستدام", w3p:"الصناعة الثقافية تستهلك موارد قليلة ولا تلوث تقريبًا — نمو «صديق للمناخ» يتوافق مع إجماع الكوكب.",
+  w4t:"الذكاء الاصطناعي وWeb3 مضاعِفان", w4p:"الذكاء الاصطناعي يخفض عتبة الإبداع، وWeb3 يعيد بناء الحقوق والعوائد. EACO تحقق «المساهمة = الملكية = الدخل».",
+  w5t:"القوة الناعمة للحضارة", w5p:"التأثير الثقافي هو أعلى أشكال التنافسية. بسردية «مجتمع الأرض» تحمل EACO هذه المهمة بين الحضارات.",
+  w6t:"قيمة مركّبة طويلة الأمد", w6p:"المحتوى الثقافي الكلاسيكي يراكم قيمته كالفوائد: كلما طال عمره واتسع انتشاره زادت قيمته — وهذا هو تعريف النمو طويل الأمد.",
+  whatT:"2. لماذا EACO؟ وماذا تستطيع أن تفعل؟",
+  whatS:"حامل قيمة، وبروتوكول تعاون، ومسار تداول للأصول الثقافية.",
+  whatCall:"EACO منظومة Web3 قائمة على سردية «مجتمع القرية العالمية»: حامل قيمة (رمز)، وبروتوكول تعاون (DAO)، ومسار تداول ثقافي (Swap / مجمعات / رمز حر). باختصار: الثقافة والطاقة وقيم المجتمع تتدفق بحرية على السلسلة.",
+  u1t:"القيمة والتبادل", u1p:"توفر eacoSWAP ومجمعات Meteora ومجمع eaco-DOGE التبادل والسيولة على السلسلة لعملة EACO.",
+  u2t:"حقوق وحوافز ثقافية", u2p:"الموسيقى والسينما والكتب وآثار الحضارة تسجل المساهمات؛ ويحصل المبدعون والناشرون على EACO.",
+  u3t:"حوكمة الـDAO", u3p:"يدعم eaco-dao-pool المقترحات والتصويت والخزائن المشتركة لـ«100 صديق للأرض».",
+  u4t:"المعرفة والتعليم", u4p:"good-books و100 Ways To Wealth وlinguistic-capital تحوّل المعرفة نفسها إلى ثروة متداولة.",
+  u5t:"الحضارة والتقنية", u5p:"تربط Footsteps-of-Civilization وMohist-Tech وeur-eaco وau-trade حكمة القديم بالأسواق العالمية.",
+  u6t:"مدخل شامل", u6p:"eaco-freetoken وeaco50rate وسلسلة eaco-web3 تمنح الجميع بوابة بلا عوائق إلى Web3.",
+  t20T:"3. أكبر 20 صناعة مستقبلية × EACO",
+  t20S:"المحتوى على المسار، والقيمة من المشاهد — محرك حلقة مغلقة.",
+  h1:"#", h2c:"الصناعة", h3c:"نقطة الاندماج مع الصناعة الثقافية EACO",
+  t20Call:"المنطق الجوهري: الثقافة «محتوى»، وEACO «مسار»، والعشرون صناعة «مشاهد». الحلقة المغلقة تصبح محرك النمو الجديد للقرية العالمية.",
+  lkT:"4. روابط منظومة EACO", lkS:"انقر لاستكشاف منظومة EACO الكاملة.",
+  f1:"الصناعة الثقافية EACO الأرض", f2:"موسيقى · سينما · طاقة · حضارة",
+  f3:"ست لغات · ثلاث سِمات · صُنع لكل قارئ في القرية العالمية"
+}
+};
+
+/* ---------------- Top 20 industries ---------------- */
+const INDUSTRIES = {
+zh:[["音乐","音乐 NFT 与粉丝通证：专辑发行、版权分红、演出票务用 EACO 结算，歌迷共享成长收益。"],
+["电影","电影投资碎片化：影片收益权通证化，全球观众可持小额份额参与票房分红。"],
+["能源","绿色能源 + 文化：光伏/风电收益反哺文化创作基金，EACO 记录绿色贡献。"],
+["游戏","链游资产与剧情 IP 打通，游戏道具、角色以 EACO 计价流通。"],
+["出版与阅读","好书计划（good-books）上链，读书笔记与书评获通证激励。"],
+["人工智能","AI 生成内容（AIGC）经 EACO 确权，创作贡献可追溯、可分配。"],
+["直播与短视频","打赏、订阅、创作者激励统一用 EACO，跨币种无摩擦。"],
+["体育","赛事门票、球星卡、粉丝社区通证化，EACO 连接全球球迷。"],
+["旅游","文明足迹（Footsteps-of-Civilization）：旅行打卡、文化遗产游览获得 EACO 勋章。"],
+["教育与知识付费","100 Ways To Wealth、语言资本课程用 EACO 支付与奖励。"],
+["艺术品与收藏","数字藏品与实体艺术品双重确权，eacoSWAP 提供流通市场。"],
+["时尚与设计","国潮/汉服/数字时装 IP 上链，设计师按传播效果获 EACO。"],
+["传媒与新闻","优质深度报道由 DAO 资助（eaco-dao-pool），读者打赏直达作者。"],
+["动漫","漫画连载按章节通证化，粉丝提前订阅支持创作。"],
+["演艺与演出","虚拟演唱会 NFT 门票，门票可转售、可分红。"],
+["影视衍生品","IP 衍生品销售与 EACO 挂钩，粉丝持有即会员。"],
+["区块链与 Web3","EACO 本身即轨道：Swap、流动性池、自由通证构成文化资产基础设施。"],
+["农业与食品","地域美食纪录片 + 农产品品牌叙事，文化赋能农产品溢价。"],
+["健康与养老","文化疗愈（音乐、书法、园林）服务通证化，普惠银发经济。"],
+["航空航天与科普","太空探索内容 IP 化，科普创作以 EACO 激励下一代仰望星空。"]],
+en:[["Music","Music NFTs & fan tokens: album releases, royalty splits and ticketing settled in EACO."],
+["Film","Fractional film investment: box-office revenue rights tokenized so global audiences hold small shares."],
+["Energy","Green energy + culture: solar/wind returns fund a creation grant recorded in EACO."],
+["Gaming","On-chain game assets and story IP; items priced and traded in EACO."],
+["Publishing","good-books on-chain; reading notes and reviews earn token rewards."],
+["Artificial Intelligence","AI-generated content (AIGC) attributed via EACO — traceable, distributable."],
+["Live-streaming & Short Video","Tips, subscriptions and creator rewards unified in EACO, frictionless across borders."],
+["Sports","Tokenized tickets, fan cards and communities; EACO connects fans worldwide."],
+["Tourism","Footsteps-of-Civilization: travel check-ins and heritage tours earn EACO badges."],
+["Education","Courses like 100 Ways To Wealth paid and rewarded in EACO."],
+["Art & Collectibles","Dual attestation of digital and physical art; eacoSWAP provides the market."],
+["Fashion & Design","Guochao/Hanfu/digital couture IP on-chain; designers earn by spread."],
+["Media & Journalism","In-depth reporting funded by the DAO; reader tips go straight to authors."],
+["Animation","Comic chapters tokenized; fans subscribe early to support creators."],
+["Performing Arts","Virtual-concert NFT tickets — resellable and revenue-sharing."],
+["Film Merchandise","IP merchandise tied to EACO; holding equals membership."],
+["Blockchain & Web3","EACO itself is the track: swaps, liquidity pools and free tokens form cultural-asset infrastructure."],
+["Agriculture & Food","Regional food documentaries + brand storytelling: culture adds premium to produce."],
+["Health & Senior Care","Cultural wellness (music, calligraphy, gardens) tokenized for an inclusive silver economy."],
+["Aerospace & Science Outreach","Space-exploration IP; outreach creators rewarded in EACO to inspire the next generation."]],
+es:[["Música","NFT musicales y tokens de fans: álbumes, regalías y entradas liquidados en EACO."],
+["Cine","Inversión fraccionada: derechos de taquilla tokenizados para el público global."],
+["Energía","Energía verde + cultura: los retornos solares/eólicos financian la creación, registrados en EACO."],
+["Videojuegos","Activos on-chain e IP narrativa; objetos cotizados en EACO."],
+["Editorial","good-books en cadena; reseñas y notas reciben recompensas."],
+["Inteligencia Artificial","Contenido AIGC atribuido vía EACO, trazable y distribuible."],
+["Streaming y vídeo corto","Propinas, suscripciones y premios unificados en EACO."],
+["Deporte","Entradas, cartas y comunidades tokenizadas; EACO une aficionados globales."],
+["Turismo","Footsteps-of-Civilization: visitas y patrimonio ganan insignias EACO."],
+["Educación","Cursos como 100 Ways To Wealth pagados en EACO."],
+["Arte y coleccionismo","Doble certificación digital/física; eacoSWAP como mercado."],
+["Moda y diseño","IP guochao/hanfu/moda digital; diseñadores recompensados por difusión."],
+["Medios y periodismo","Reportajes profundos financiados por el DAO; propinas directas al autor."],
+["Animación","Capítulos tokenizados; los fans suscriben pronto y apoyan."],
+["Artes escénicas","Entradas NFT para conciertos virtuales: revendibles y con dividendos."],
+["Merchandising","Merchandising ligado a EACO; tener es ser miembro."],
+["Blockchain y Web3","EACO es la vía: swaps, pools y token libre como infraestructura cultural."],
+["Agricultura y alimentación","Documentales gastronómicos + narrativa de marca: la cultura agrega valor."],
+["Salud y tercera edad","Bienestar cultural (música, caligrafía) tokenizado para una economía plateada."],
+["Aeroespacial y divulgación","IP de exploración espacial; divulgadores premiados con EACO."]],
+fr:[["Musique","NFT musicaux et tokens de fans : albums, redevances et billets réglés en EACO."],
+["Cinéma","Investissement fractionné : droits de box-office tokenisés pour le public mondial."],
+["Énergie","Énergie verte + culture : les retours solaire/éolien financent la création, enregistrés en EACO."],
+["Jeux vidéo","Actifs on-chain et IP narrative ; objets cotés en EACO."],
+["Édition","good-books on-chain ; notes et critiques récompensées."],
+["Intelligence artificielle","Contenus AIGC attribués via EACO, traçables et partageables."],
+["Streaming et vidéos courtes","Pourboires, abonnements et récompenses unifiés en EACO."],
+["Sport","Billets, cartes et communautés tokenisés ; EACO relie les fans du monde."],
+["Tourisme","Footsteps-of-Civilization : visites et patrimoine rapportent des badges EACO."],
+["Éducation","Cours comme 100 Ways To Wealth payés en EACO."],
+["Art et collection","Double attestation numérique/physique ; eacoSWAP comme marché."],
+["Mode et design","IP guochao/hanfu/couture numérique ; designers récompensés par la diffusion."],
+["Médias et journalisme","Enquêtes financées par la DAO ; pourboires directs aux auteurs."],
+["Animation","Chapitres tokenisés ; les fans s'abonnent tôt pour soutenir."],
+["Arts du spectacle","Billets NFT de concerts virtuels : revendables et rémunérateurs."],
+["Produits dérivés","Dérivés liés à EACO ; détenir, c'est adhérer."],
+["Blockchain et Web3","EACO est la voie : swaps, pools et token libre en infrastructure culturelle."],
+["Agriculture et alimentation","Documentaires culinaires + storytelling : la culture valorise les produits."],
+["Santé et seniors","Bien-être culturel (musique, calligraphie) tokenisé pour l'économie argentée."],
+["Aérospatiale et vulgarisation","IP d'exploration spatiale ; vulgarisateurs récompensés en EACO."]],
+ru:[["Музыка","Музыкальные NFT и фан-токены: альбомы, роялти и билеты в EACO."],
+["Кино","Дробные инвестиции: права на кассовые сборы токенизированы для мировой аудитории."],
+["Энергетика","Зелёная энергия + культура: доходы солнца/ветра финансируют гранты, фиксируемые в EACO."],
+["Гейминг","Игровые активы on-chain и сюжетный IP; предметы в EACO."],
+["Издательское дело","good-books в блокчейне; заметки и рецензии получают награды."],
+["Искусственный интеллект","AIGC-контент атрибутируется через EACO — прослеживаемо и распределяемо."],
+["Стриминг и короткие видео","Чаевые, подписки и вознаграждения едины в EACO."],
+["Спорт","Токенизированные билеты, карточки и сообщества; EACO соединяет фанатов мира."],
+["Туризм","Footsteps-of-Civilization: чекины и наследие приносят значки EACO."],
+["Образование","Курсы вроде 100 Ways To Wealth оплачиваются в EACO."],
+["Искусство и коллекции","Двойное подтверждение цифрового/физического; eacoSWAP — рынок."],
+["Мода и дизайн","IP guochao/ханьфу/цифровой кутюр; дизайнеры получают за охват."],
+["Медиа и журналистика","Расследования финансирует DAO; чаевые идут автору напрямую."],
+["Анимация","Главы токенизированы; фанаты поддерживают создателей заранее."],
+["Сценическое искусство","NFT-билеты виртуальных концертов: перепродажа и дивиденды."],
+["Мерч","Мерч привязан к EACO; владение = членство."],
+["Блокчейн и Web3","EACO сама — рельсы: свопы, пулы и свободный токен как инфраструктура."],
+["Сельское хозяйство и еда","Гастродокументалистика + сторителлинг бренда: культура добавляет премию."],
+["Здоровье и старшее поколение","Культурный велнес (музыка, каллиграфия) токенизирован для серебряной экономики."],
+["Аэрокосмос и научпоп","IP космических исследований; научпоп-авторы получают EACO."]],
+ar:[["الموسيقى","NFT موسيقية ورموز جماهيرية: الألبومات والحقوق والتذاكر بـEACO."],
+["السينما","استثمار مجزأ: حقوق شباك التذكير مُرمَّزة للجمهور العالمي."],
+["الطاقة","طاقة خضراء + ثقافة: عوائد الشمس والرياح تمول الإبداع وتُسجَّل في EACO."],
+["الألعاب","أصول ألعاب على السلسلة وIP قصصي؛ العناصر بـEACO."],
+["النشر","good-books على السلسلة؛ الملاحظات والمراجعات تكسب مكافآت."],
+["الذكاء الاصطناعي","محتوى AIGC مُنسب عبر EACO، قابل للتتبع والتوزيع."],
+["البث والفيديو القصير","إكراميات واشتراكات ومكافآت موحدة بـEACO."],
+["الرياضة","تذاكر وبطاقات ومجتمعات مُرمَّزة؛ EACO تربط الجماهير عالميًا."],
+["السياحة","Footsteps-of-Civilization: الزيارات والتراث تكسب شارات EACO."],
+["التعليم","دورات مثل 100 Ways To Wealth تُدفع وتُكافأ بـEACO."],
+["الفن والتجميع","توثيق مزدوج رقمي/مادي؛ eacoSWAP سوق التداول."],
+["الأزياء والتصميم","IP guochao/هانفو/كوتور رقمي؛ المصممون يكسبون بالانتشار."],
+["الإعلام والصحافة","تقارير معمقة يمولها الـDAO؛ الإكراميات للكاتب مباشرة."],
+["الأنميشن","فصول مُرمَّزة؛ الجمهور يدعم مبكرًا."],
+["الفنون الأدائية","تذاكر NFT لحفلات افتراضية: قابلة لإعادة البيع وربحية."],
+["المشتقات","منتجات مرتبطة بـEACO؛ التملك عضوية."],
+["البلوكشين وWeb3","EACO هي المسار: تبادل ومجمعات ورمز حر كبنية تحتية ثقافية."],
+["الزراعة والغذاء","وثائقيات طعام + سرد العلامة: الثقافة تضيف قيمة."],
+["الصحة وكبار السن","علاج ثقافي (موسيقى، خط) مُرمَّز لاقتصاد الشيخوخة."],
+["الفضاء والتبسيط العلمي","IP لاستكشاف الفضاء؛ المبسّطون يكسبون EACO."]]
+};
+
+/* ---------------- Links ---------------- */
+const LINKS=[
+["orb","OrbMarkets · EACO Token","https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"],
+["git","GitHub · eacoweb3-2026","https://github.com/ucoingroup/eacoweb3-2026"],
+["git","GitHub · earths-best-coin","https://github.com/ucoingroup/earths-best-coin"],
+["web","Earths Best Coin 官网","https://ucoingroup.github.io/earths-best-coin/"],
+["web","eaco50rate 汇率","https://ucoingroup.github.io/eaco50rate/"],
+["web","100 Ways To Wealth","https://ucoingroup.github.io/100WaysToWealth/"],
+["web","Earth 100 Friends","https://ucoingroup.github.io/earth-100-friends/"],
+["web","eacoSWAP 交换","https://ucoingroup.github.io/eacoSWAP/"],
+["git","GitHub · eacoswap2025","https://github.com/ucoingroup/eacoswap2025"],
+["web","good-books 好书","https://ucoingroup.github.io/good-books/"],
+["web","eur-eaco 欧洲贸易","https://ucoingroup.github.io/eur-eaco/"],
+["web","au-trade 澳洲贸易","https://ucoingroup.github.io/au-trade/"],
+["web","Mohist-Tech 墨家科技","https://ucoingroup.github.io/Mohist-Tech/"],
+["web","eaco-build-world","https://eaco-build-world.base44.app/"],
+["web","eaco-web3 (base44)","https://eaco-web3.base44.app"],
+["web","Footsteps of Civilization 文明足迹","https://ucoingroup.github.io/Footsteps-of-Civilization/"],
+["web","linguistic-capital 语言资本","https://ucoingroup.github.io/linguistic-capital/"],
+["chat","Discord 社区","https://discord.gg/bWCDME9Pkc"],
+["dao","eaco-dao-pool DAO 池","https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc"],
+["web","eaco-web3 官网","https://ucoingroup.github.io/eaco-web3/"],
+["team","eaco-team 团队","https://earth-eaco-web3.base44.app/eaco-team"],
+["web","eaco_web3_series","https://eaco.freedev.app/eaco_web3_series/"],
+["web","eaco_web3_series2025","https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/"],
+["pool","eaco-DOGE pool","https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34"],
+["git","GitHub · FreeToken-eaco","https://github.com/ucoingroup/FreeToken-eaco"]
+];
+
+/* ---------------- render ---------------- */
+let lang="zh", theme="green";
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function render(){
+  const t=I18N[lang];
+  document.querySelectorAll("[data-i]").forEach(el=>{
+    const k=el.getAttribute("data-i");
+    if(t[k]) el.textContent=t[k];
+  });
+  document.documentElement.lang = lang==="zh"?"zh-CN":lang;
+  document.documentElement.dir = lang==="ar"?"rtl":"ltr";
+  // industries table
+  document.getElementById("t20body").innerHTML = INDUSTRIES[lang].map((r,i)=>
+    `<tr><td><b style="color:var(--accent)">${String(i+1).padStart(2,"0")}</b></td><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td></tr>`).join("");
+  // links
+  document.getElementById("linkList").innerHTML = LINKS.map(l=>
+    `<a class="link-item" href="${l[2]}" target="_blank" rel="noopener"><span class="tag">${l[0]}</span><span>${esc(l[1])}<br><small style="color:var(--muted)">${l[2]}</small></span></a>`).join("");
+}
+document.getElementById("langSel").addEventListener("change",e=>{lang=e.target.value;render()});
+document.querySelectorAll("[data-theme-btn]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    theme=btn.dataset.themeBtn;
+    document.documentElement.dataset.theme = theme==="green"?"":theme;
+    document.querySelectorAll("[data-theme-btn]").forEach(b=>b.classList.toggle("active",b===btn));
+  });
+});
+window.addEventListener("scroll",()=>{document.getElementById("topBtn").style.display=scrollY>500?"block":"none"});
+render();
+</script>
+</body>
+</html>
