@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="green" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EACO地球 · 地球村未来20大产业 × 文化产业长期增长</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%234DA6FF'/%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='%23FFFFFF' stroke-width='3'/%3E%3Cellipse cx='32' cy='32' rx='17' ry='7' fill='none' stroke='%23FFFFFF' stroke-width='2.5' transform='rotate(-20 32 32)'/%3E%3Ccircle cx='24' cy='27' r='3' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap">
+<style>
+/* ============================================================
+   EACO地球 · 三主题设计令牌（苹果绿 / 宇宙蓝 / 华夏古典）
+   ============================================================ */
+:root{
+  --font-sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --font-serif:"Noto Serif SC","Songti SC","STSong",Georgia,serif;
+  --radius:18px; --radius-sm:12px;
+  --shadow-soft:0 10px 30px -12px rgba(0,0,0,.18);
+  --shadow-lift:0 18px 44px -16px rgba(0,0,0,.28);
+  --speed:.28s;
+}
+/* 苹果绿 */
+html[data-theme="green"]{
+  --bg:#F2FBF0; --bg-2:#E7F6E2; --surface:#FFFFFF; --surface-2:#F6FCF3;
+  --ink:#15331D; --muted:#5E7C66; --line:#D7EAD0;
+  --primary:#3FAF4E; --primary-strong:#2E8F3D; --primary-2:#78C850;
+  --accent:#9CCB3B; --accent-2:#C8E86B; --ring:#C9F0C0;
+  --header:rgba(255,255,255,.82);
+  --hero-from:#DCF3D3; --hero-to:#F4FBF0;
+  --chip:#E8F7E3;
+}
+/* 宇宙蓝 */
+html[data-theme="cosmic"]{
+  --bg:#080C1E; --bg-2:#0C1430; --surface:#111A3A; --surface-2:#0E1633;
+  --ink:#EAF2FF; --muted:#93A4CC; --line:#2B3B6E;
+  --primary:#4DA6FF; --primary-strong:#2E86E0; --primary-2:#38D7E7;
+  --accent:#9B8CFF; --accent-2:#6A5CFF; --ring:#1E2D5E;
+  --header:rgba(8,12,30,.72);
+  --hero-from:#0C1430; --hero-to:#080C1E;
+  --chip:#16214A;
+  --star-opacity:.9;
+}
+/* 华夏古典 */
+html[data-theme="classic"]{
+  --bg:#F7F1E2; --bg-2:#EFE4CB; --surface:#FCF8EC; --surface-2:#F9F3E2;
+  --ink:#2C241C; --muted:#786A52; --line:#E0D2B2;
+  --primary:#A5342E; --primary-strong:#8A251F; --primary-2:#C0392B;
+  --accent:#C19A2E; --accent-2:#D8B84A; --ring:#EAD9AC;
+  --header:rgba(247,241,226,.9);
+  --hero-from:#F1E6CC; --hero-to:#F7F1E2;
+  --chip:#F1E7CE;
+}
+/* ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-sans); color:var(--ink); background:var(--bg);
+  line-height:1.7; font-size:16px; transition:background var(--speed),color var(--speed);
+  overflow-x:hidden;
+}
+html[data-theme="classic"] h1,h2,h3,.serif{font-family:var(--font-serif)}
+html[data-theme="classic"] body{line-height:1.85}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+/* ---------- 宇宙星野装饰 ---------- */
+.starfield{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:var(--star-opacity,0)}
+html[data-theme="cosmic"] .starfield{background:
+  radial-gradient(1px 1px at 18% 22%,#fff,transparent 100%),
+  radial-gradient(1.5px 1.5px at 68% 12%,#cfd8ff,transparent 100%),
+  radial-gradient(1px 1px at 34% 68%,#fff,transparent 100%),
+  radial-gradient(1.4px 1.4px at 82% 44%,#b9c6ff,transparent 100%),
+  radial-gradient(1px 1px at 52% 86%,#fff,transparent 100%),
+  radial-gradient(1.2px 1.2px at 90% 78%,#e6ecff,transparent 100%),
+  radial-gradient(1px 1px at 8% 88%,#fff,transparent 100%);
+}
+main{position:relative;z-index:1}
+/* ---------- 顶栏 ---------- */
+header{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+  background:var(--header);border-bottom:1px solid var(--line);
+  transition:background var(--speed),border var(--speed);
+}
+.nav{display:flex;align-items:center;gap:14px;height:64px;flex-wrap:nowrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px;white-space:nowrap}
+.brand .mark{width:34px;height:34px;flex:0 0 auto}
+.brand b{font-size:19px}
+.nav-links{display:none;gap:4px;margin-left:auto}
+.nav-links a{padding:8px 12px;border-radius:9px;font-weight:500;font-size:14.5px;color:var(--muted);transition:.2s}
+.nav-links a:hover{color:var(--primary);background:var(--chip)}
+.nav-controls{display:flex;align-items:center;gap:10px;margin-left:auto}
+/* 主题切换 */
+.theme-switch{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.theme-switch button{
+  width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;
+  transition:.2s;position:relative;display:inline-flex;align-items:center;justify-content:center
+}
+.theme-switch button[data-t="green"]{background:#8ECf63}
+.theme-switch button[data-t="cosmic"]{background:#3E5A9E}
+.theme-switch button[data-t="classic"]{background:#A5342E}
+.theme-switch button.on{border-color:#fff;box-shadow:0 0 0 2px var(--primary);transform:scale(1.1)}
+/* 语言下拉 */
+.lang-wrap{position:relative}
+.lang-btn{
+  display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);font-family:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:.2s
+}
+.lang-btn:hover{border-color:var(--primary)}
+.lang-btn svg{width:14px;height:14px;transition:.2s}
+.lang-menu{
+  position:absolute;right:0;top:calc(100% + 8px);min-width:172px;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lift);padding:6px;display:none;z-index:60
+}
+.lang-menu.open{display:block}
+.lang-menu button{
+  display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border:0;border-radius:9px;
+  background:transparent;color:var(--ink);font-family:inherit;font-size:14.5px;cursor:pointer;text-align:left
+}
+.lang-menu button:hover{background:var(--chip)}
+.lang-menu button.cur{color:var(--primary);font-weight:700}
+.lang-menu .code{font-weight:800;font-size:12px;color:var(--primary);min-width:22px;letter-spacing:.5px}
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:56px 0 40px;background:linear-gradient(180deg,var(--hero-from),var(--hero-to));transition:background var(--speed);overflow:hidden}
+.hero .orb{position:absolute;right:-60px;top:-40px;width:320px;height:320px;border-radius:50%;opacity:.5;filter:blur(2px);pointer-events:none;
+  background:radial-gradient(circle at 35% 35%,var(--primary-2),var(--primary) 60%,transparent 72%)}
+.hero .grid-deco{position:absolute;inset:0;pointer-events:none;opacity:.05;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:46px 46px}
+.hero-inner{position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--chip);color:var(--primary);border:1px solid var(--ring);font-size:13px;font-weight:600;letter-spacing:.6px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--primary);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-size:clamp(30px,5.2vw,54px);font-weight:900;line-height:1.15;margin:20px 0 14px;letter-spacing:-.5px}
+.hero h1 .hl{color:var(--primary)}
+.hero .sub{font-size:clamp(16px,2.2vw,21px);color:var(--muted);max-width:820px;font-weight:500}
+.hero .formula{display:inline-flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px;align-items:center}
+.hero .formula .f{background:var(--surface);border:1px solid var(--line);padding:7px 14px;border-radius:12px;font-weight:700;color:var(--ink)}
+.hero .formula .times{color:var(--accent);font-weight:900}
+.hero .cta{display:flex;flex-wrap:wrap;gap:14px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:14px;font-weight:700;font-size:15.5px;cursor:pointer;transition:.22s;border:0;font-family:inherit
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 8px 20px -8px var(--primary)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px var(--primary)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+/* 核心数据带 */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:34px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-soft)}
+.stat .k{font-size:clamp(20px,3vw,28px);font-weight:900;color:var(--primary);line-height:1.1}
+.stat .l{font-size:13.5px;color:var(--muted);margin-top:6px}
+@media(min-width:768px){.stats{grid-template-columns:repeat(4,1fr)}}
+/* ---------- 章节通用 ---------- */
+.section{padding:64px 0}
+.sec-head{max-width:760px;margin-bottom:38px}
+.sec-head .tag{display:inline-block;color:var(--primary);font-weight:800;font-size:13px;letter-spacing:2px;margin-bottom:10px}
+.sec-head h2{font-size:clamp(24px,3.6vw,38px);font-weight:900;line-height:1.2;letter-spacing:-.5px}
+.sec-head p{color:var(--muted);margin-top:12px;font-size:16px}
+/* ---------- 为何文化产业 ---------- */
+.reasons{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:768px){.reasons{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.reasons{grid-template-columns:repeat(3,1fr)}}
+.reason{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-soft);position:relative;transition:.25s;overflow:hidden}
+.reason:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);border-color:var(--primary)}
+.reason .no{position:absolute;top:14px;right:18px;font-size:44px;font-weight:900;color:var(--ring);line-height:1;font-family:var(--font-serif)}
+.reason .ic{width:46px;height:46px;border-radius:14px;background:var(--chip);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--primary)}
+.reason .ic svg{width:24px;height:24px}
+.reason h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.reason p{font-size:14.5px;color:var(--muted)}
+/* ---------- 20大产业 ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.filters button{
+  padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  font-family:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:.2s
+}
+.filters button.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+.industries{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:640px){.industries{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.industries{grid-template-columns:repeat(4,1fr)}}
+.icard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+  box-shadow:var(--shadow-soft);cursor:pointer;transition:.25s;display:flex;flex-direction:column
+}
+.icard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);border-color:var(--accent)}
+.icard .row1{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.icard .num{font-size:26px;font-weight:900;color:var(--ring);font-family:var(--font-serif)}
+.icard .name{font-size:17px;font-weight:800;line-height:1.3}
+.icard .cat{margin-left:auto;font-size:11px;color:var(--primary);background:var(--chip);padding:3px 9px;border-radius:999px;font-weight:700;white-space:nowrap}
+.icard .one{font-size:13.5px;color:var(--muted);line-height:1.6}
+.icard .more{margin-top:14px;font-size:13px;color:var(--primary);font-weight:700;display:flex;align-items:center;gap:5px}
+.icard .more svg{width:14px;height:14px;transition:.25s}
+.icard.open .more svg{transform:rotate(180deg)}
+.icard .detail{display:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:14px;font-size:13.5px}
+.icard.open .detail{display:block}
+.icard .detail b{color:var(--primary);display:block;margin:8px 0 4px;font-size:13px}
+.icard .detail p{color:var(--ink);line-height:1.65;opacity:.92}
+/* ---------- EACO用途 ---------- */
+.utils{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.utils{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.utils{grid-template-columns:repeat(4,1fr)}}
+.util{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-soft);transition:.25s}
+.util:hover{transform:translateY(-4px);border-color:var(--accent)}
+.util .ic{width:44px;height:44px;border-radius:13px;background:var(--chip);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:13px}
+.util .ic svg{width:22px;height:22px}
+.util h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
+.util p{font-size:13.8px;color:var(--muted);line-height:1.6}
+/* ---------- 体验说明：三主题×六语言 ---------- */
+.exp{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-soft)}
+.exp h3{font-size:19px;font-weight:800;margin-bottom:6px}
+.exp .lead{color:var(--muted);font-size:14.5px;margin-bottom:20px;max-width:760px}
+.exp-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:768px){.exp-grid{grid-template-columns:1fr 1fr}}
+.exp-col h4{font-size:14px;color:var(--muted);font-weight:700;margin-bottom:10px;letter-spacing:1px}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sw{display:flex;flex-direction:column;gap:8px;border-radius:12px;overflow:hidden;border:1px solid var(--line);cursor:pointer;transition:.2s}
+.sw:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+.sw .sw-av{height:44px;position:relative}
+.sw.green .sw-av{background:linear-gradient(135deg,#8ECf63,#3FAF4E)}
+.sw.cosmic .sw-av{background:linear-gradient(135deg,#0C1430,#3E5A9E);position:relative}
+.sw.cosmic .sw-av:after{content:"";position:absolute;inset:0;background:radial-gradient(1px 1px at 30% 40%,#fff,transparent 100%),radial-gradient(1px 1px at 70% 60%,#cfd8ff,transparent 100%)}
+.sw.classic .sw-av{background:linear-gradient(135deg,#E0C27A,#A5342E)}
+.sw .sw-t{padding:8px 10px;font-size:13px;font-weight:700;text-align:center;background:var(--surface)}
+.lang-chips{display:flex;flex-wrap:wrap;gap:9px}
+.lang-chips span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600}
+.lang-chips span em{font-style:normal;color:var(--primary);font-weight:800;margin-right:6px}
+/* ---------- 页脚链接 ---------- */
+footer{background:var(--surface-2);border-top:1px solid var(--line);padding:56px 0 40px;position:relative;z-index:1}
+footer .foot-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+footer .foot-head .mark{width:30px;height:30px}
+footer h2{font-size:clamp(22px,3vw,30px);font-weight:900}
+footer .foot-sub{color:var(--muted);font-size:14.5px;max-width:760px;margin-bottom:28px}
+.link-groups{display:grid;grid-template-columns:1fr;gap:26px}
+@media(min-width:768px){.link-groups{grid-template-columns:1fr 1fr}}
+.link-group h4{font-size:13px;letter-spacing:1.5px;color:var(--primary);font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.link-group h4::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block}
+.link-list{display:flex;flex-direction:column;gap:8px}
+.link-list a{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:8px;transition:.2s;word-break:break-all;line-height:1.5}
+.link-list a:hover{color:var(--primary);background:var(--chip)}
+.link-list a svg{width:13px;height:13px;flex:0 0 auto;opacity:.7}
+.pool-tag{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:6px 10px;margin-bottom:4px}
+.pool-tag b{color:var(--primary)}
+.foot-bottom{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:var(--muted);font-size:13px}
+.foot-bottom .quote{max-width:640px;font-style:italic}
+/* ---------- 响应式细节 ---------- */
+@media(min-width:768px){
+  .nav-links{display:flex}
+  .lang-btn .only-code{display:none}
+}
+@media(max-width:767px){
+  .nav{height:58px}
+  .brand b{font-size:16px}
+  .lang-btn .full{display:none}
+  .nav-links{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:var(--header);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:60}
+  .nav-links a{font-size:12.5px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px}
+  .nav-links a svg{width:18px;height:18px}
+  .section{padding:48px 0}
+  body{padding-bottom:58px}
+}
+/* 无障碍：减少动效 */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+</style>
+</head>
+<body>
+<div class="starfield" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--primary)"/><circle cx="32" cy="32" r="30" fill="none" stroke="var(--surface)" stroke-width="3"/><ellipse cx="32" cy="32" rx="17" ry="7" fill="none" stroke="var(--surface)" stroke-width="2.5" transform="rotate(-20 32 32)"/><circle cx="23" cy="26" r="3" fill="var(--surface)"/></svg>
+      <b>EACO<span class="hl" style="color:var(--primary)">地球</span></b>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#why" data-i18n="nav.why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg><span class="nav-txt"></span></a>
+      <a href="#industries" data-i18n="nav.industry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 18l4-4 4 3 4-6 6 6"/></svg><span class="nav-txt"></span></a>
+      <a href="#utility" data-i18n="nav.utility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 10l3-2 3 2"/></svg><span class="nav-txt"></span></a>
+      <a href="#ecosystem" data-i18n="nav.links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg><span class="nav-txt"></span></a>
+    </nav>
+    <div class="nav-controls">
+      <div class="theme-switch" id="themeSwitch" role="group" aria-label="Theme">
+        <button data-t="green" title="Apple Green" aria-label="green"></button>
+        <button data-t="cosmic" title="Cosmic Blue" aria-label="cosmic"></button>
+        <button data-t="classic" title="Classical China" aria-label="classic"></button>
+      </div>
+      <div class="lang-wrap" id="langWrap">
+        <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
+          <span class="full" id="langBtnLabel">华语</span><span class="only-code" id="langBtnCode">华</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu" id="langMenu"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ===== 视图：Hero ===== -->
+  <section class="hero">
+    <div class="grid-deco" aria-hidden="true"></div>
+    <div class="orb" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">EARTH'S BEST AI + RWA + WEB3 COIN · 地球村网民自己的MEMEcoin</span></span>
+      <h1 data-i18n="hero.h1">EACO<span class="hl">地球</span>：让文化成为文明的长青增长点</h1>
+      <p class="sub" data-i18n="hero.sub">EACO 是地球村的文明升级模型——计量劳动价值、量化地球资源、把每个人的善意与创造变成可积累的文明能量。</p>
+      <div class="formula" id="formula"></div>
+      <div class="cta">
+        <button class="btn btn-primary" onclick="document.getElementById('industries').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+          <span data-i18n="hero.cta1">探索前20大产业</span>
+        </button>
+        <button class="btn btn-ghost" onclick="document.getElementById('ecosystem').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+          <span data-i18n="hero.cta2">查看生态链接</span>
+        </button>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k" data-i18n="stat.supply.k">13.5亿</div><div class="l" data-i18n="stat.supply.l">EACO 总量 · 地球村网民共有</div></div>
+        <div class="stat"><div class="k" data-i18n="stat.def.k">E·A·C·O</div><div class="l" data-i18n="stat.def.l">能量·态度·协作·优化</div></div>
+        <div class="stat"><div class="k" data-i18n="stat.pos.k">文明升级模型</div><div class="l" data-i18n="stat.pos.l">计量劳动价值 · 量化地球资源</div></div>
+        <div class="stat"><div class="k" data-i18n="stat.comb.k">AI+RWA+Web3</div><div class="l" data-i18n="stat.comb.l">与100个认知模型结合</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：为什么文化产业 ===== -->
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag" data-i18n="why.tag">WHY CULTURE</span>
+        <h2 data-i18n="why.h">为什么文化产业是未来长期的增长点</h2>
+        <p data-i18n="why.p">当物质被满足，人类必然走向意义。文化是唯一越使用越增值、越传承越厚重的文明资产，也是 EACO 价值观最自然的载体。</p>
+      </div>
+      <div class="reasons" id="reasons"></div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：地球村未来前20大产业 ===== -->
+  <section class="section" id="industries" style="background:var(--surface-2)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag" data-i18n="ind.tag">TOP 20 INDUSTRIES</span>
+        <h2 data-i18n="ind.h">地球村未来前20大产业 × EACO × 文化</h2>
+        <p data-i18n="ind.p">音乐、电影、能源……每一个产业都能与 EACO 结合，沉淀为可持续的文化资产。点击卡片查看「与 EACO 结合」与「文化长期发展」。</p>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="industries" id="industriesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：EACO用途 ===== -->
+  <section class="section" id="utility">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag" data-i18n="util.tag">UTILITIES</span>
+        <h2 data-i18n="util.h">EACO 有什么用？能做哪些事情？</h2>
+        <p data-i18n="util.p">它不是一个投机符号，而是一台把「善待地球、利他共生」变成可量化、可积累、可流通的文明能量引擎。</p>
+      </div>
+      <div class="utils" id="utils"></div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：三主题 × 六语言 ===== -->
+  <section class="section" id="experience" style="padding-top:0">
+    <div class="wrap">
+      <div class="exp">
+        <h3 data-i18n="exp.h">三主题 × 六语言 · 一站式阅读体验</h3>
+        <p class="lead" data-i18n="exp.p">顶部可一键切换「苹果绿 / 宇宙蓝 / 华夏古典」三种设计风格，并在地球村通用六种语言（华语、English、缅甸语、日本語、Español、한국어）间自由切换，适配全球华商、欧美、东南亚读者的阅读习惯。</p>
+        <div class="exp-grid">
+          <div class="exp-col">
+            <h4 data-i18n="exp.t1">设计主题</h4>
+            <div class="swatches" id="swatches"></div>
+          </div>
+          <div class="exp-col">
+            <h4 data-i18n="exp.t2">通用语言</h4>
+            <div class="lang-chips" id="langChips"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 视图：生态链接页脚 ===== -->
+<footer id="ecosystem">
+  <div class="wrap">
+    <div class="foot-head">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--primary)"/><circle cx="32" cy="32" r="30" fill="none" stroke="var(--surface)" stroke-width="3"/><ellipse cx="32" cy="32" rx="17" ry="7" fill="none" stroke="var(--surface)" stroke-width="2.5" transform="rotate(-20 32 32)"/><circle cx="23" cy="26" r="3" fill="var(--surface)"/></svg>
+      <h2 data-i18n="foot.h">EACO 生态链接</h2>
+    </div>
+    <p class="foot-sub" data-i18n="foot.p">EACO —— Earth's Best AI + RWA + Web3 Coin。官网、交易流动性、生态应用、社区与系列内容，一站式抵达地球村的数字文明世界。</p>
+    <div class="link-groups" id="linkGroups"></div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.rights">EACO地球 · 文明自愈计划 · 感恩 · 利他 · 共生</span>
+      <span class="quote" data-i18n="foot.quote">「EACO = 正能量 × 积极态度 × 全球协作 × 持续优化」</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ============================================================
+   数据：语言 / 界面文案 / 分类 / 六大逻辑 / EACO用途
+   ============================================================ */
+var LANGS=[
+  {code:"zh",name:"华语",label:"华",full:"华语 (中文)"},
+  {code:"en",name:"English",label:"EN",full:"English"},
+  {code:"my",name:"မြန်မာ",label:"မြ",full:"မြန်မာ (缅甸语)"},
+  {code:"ja",name:"日本語",label:"日",full:"日本語 (日语)"},
+  {code:"es",name:"Español",label:"ES",full:"Español (西班牙语)"},
+  {code:"ko",name:"한국어",label:"한",full:"한국어 (韩语)"}
+];
+
+var CHROME={
+zh:{
+ "nav.why":"为何文化","nav.industry":"前20大产业","nav.utility":"EACO用途","nav.links":"生态链接",
+ "hero.eyebrow":"EARTH'S BEST AI + RWA + WEB3 COIN · 地球村网民自己的MEMEcoin",
+ "hero.sub":"EACO 是地球村的文明升级模型——计量劳动价值、量化地球资源、把每个人的善意与创造变成可积累的文明能量。",
+ "hero.cta1":"探索前20大产业","hero.cta2":"查看生态链接",
+ "stat.supply.k":"13.5亿","stat.supply.l":"EACO 总量 · 地球村网民共有",
+ "stat.def.k":"E·A·C·O","stat.def.l":"能量·态度·协作·优化",
+ "stat.pos.k":"文明升级模型","stat.pos.l":"计量劳动价值 · 量化地球资源",
+ "stat.comb.k":"AI+RWA+Web3","stat.comb.l":"与100个认知模型结合",
+ "why.tag":"WHY CULTURE","why.h":"为什么文化产业是未来长期的增长点",
+ "why.p":"当物质被满足，人类必然走向意义。文化是唯一越使用越增值、越传承越厚重的文明资产，也是 EACO 价值观最自然的载体。",
+ "ind.tag":"TOP 20 INDUSTRIES","ind.h":"地球村未来前20大产业 × EACO × 文化",
+ "ind.p":"音乐、电影、能源……每一个产业都能与 EACO 结合，沉淀为可持续的文化资产。点击卡片查看「与 EACO 结合」与「文化长期发展」。",
+ "util.tag":"UTILITIES","util.h":"EACO 有什么用？能做哪些事情？",
+ "util.p":"它不是一个投机符号，而是一台把「善待地球、利他共生」变成可量化、可积累、可流通的文明能量引擎。",
+ "exp.h":"三主题 × 六语言 · 一站式阅读体验",
+ "exp.p":"顶部可一键切换「苹果绿 / 宇宙蓝 / 华夏古典」三种设计风格，并在地球村通用六种语言（华语、English、缅甸语、日本語、Español、한국어）间自由切换，适配全球华商、欧美、东南亚读者的阅读习惯。",
+ "exp.t1":"设计主题","exp.t2":"通用语言",
+ "foot.h":"EACO 生态链接",
+ "foot.p":"EACO —— Earth's Best AI + RWA + Web3 Coin。官网、交易流动性、生态应用、社区与系列内容，一站式抵达地球村的数字文明世界。",
+ "foot.rights":"EACO地球 · 文明自愈计划 · 感恩 · 利他 · 共生",
+ "foot.quote":"「EACO = 正能量 × 积极态度 × 全球协作 × 持续优化」",
+ "f.all":"全部","f.content":"内容与创意","f.experience":"体验与生活","f.foundation":"基能与经济","f.future":"未来与社会",
+ "f.energy":"正能量","f.attitude":"积极态度","f.coop":"全球协作","f.optim":"持续优化",
+ "dl.w":"与 EACO 结合","dl.c":"文化长期发展"
+},
+en:{
+ "nav.why":"Why Culture","nav.industry":"Top 20","nav.utility":"Utilities","nav.links":"Ecosystem",
+ "hero.eyebrow":"EARTH'S BEST AI + RWA + WEB3 COIN · the global netizens' own MEMEcoin",
+ "hero.sub":"EACO is the Earth Village's civilization-upgrading model — measuring labor value, quantifying Earth's resources, turning every person's kindness and creation into storable civilizational energy.",
+ "hero.cta1":"Explore the Top 20","hero.cta2":"View Ecosystem Links",
+ "stat.supply.k":"1.35B","stat.supply.l":"Total EACO supply · owned by Earth Village netizens",
+ "stat.def.k":"E·A·C·O","stat.def.l":"Energy · Attitude · Cooperation · Optimization",
+ "stat.pos.k":"Civilization-upgrade model","stat.pos.l":"Measure labor value · quantify Earth's resources",
+ "stat.comb.k":"AI+RWA+Web3","stat.comb.l":"Integrated with 100 cognitive models",
+ "why.tag":"WHY CULTURE","why.h":"Why the Cultural Industry Is a Long-Term Growth Point",
+ "why.p":"When material needs are met, humanity inevitably turns to meaning. Culture is the only asset that appreciates with use and grows heavier with heritage — and the most natural carrier of EACO's values.",
+ "ind.tag":"TOP 20 INDUSTRIES","ind.h":"Earth Village Top 20 Future Industries × EACO × Culture",
+ "ind.p":"Music, film, energy... every industry can integrate with EACO and settle into sustainable cultural assets. Click a card to see \"Integration with EACO\" and \"Long-term cultural development.\"",
+ "util.tag":"UTILITIES","util.h":"What Is EACO For? What Can It Do?",
+ "util.p":"It is not a speculation symbol, but an engine that turns \"treasure the Earth, live in mutual benefit\" into measurable, storable, liquid civilizational energy.",
+ "exp.h":"Three Themes × Six Languages · All-in-one Reading",
+ "exp.p":"Switch instantly among Apple Green, Cosmic Blue and Classical China at the top, and read in six common Earth Village languages (华语, English, မြန်မာ, 日本語, Español, 한국어) — built for global Chinese, Western and Southeast Asian readers.",
+ "exp.t1":"Design Themes","exp.t2":"Common Languages",
+ "foot.h":"EACO Ecosystem Links",
+ "foot.p":"EACO — Earth's Best AI + RWA + Web3 Coin. Official site, trading liquidity, ecosystem apps, community and series content, all in one stop to the digital civilization of the Earth Village.",
+ "foot.rights":"EACO Earth · Civilization Healing · Gratitude · Altruism · Symbiosis",
+ "foot.quote":"\"EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization\"",
+ "f.all":"All","f.content":"Content & Creativity","f.experience":"Experience & Lifestyle","f.foundation":"Foundation & Economy","f.future":"Future & Society",
+ "f.energy":"Positive Energy","f.attitude":"Positive Mindset","f.coop":"Global Collaboration","f.optim":"Continuous Optimization",
+ "dl.w":"Integration with EACO","dl.c":"Long-term cultural development"
+},
+my:{
+ "nav.why":"အဘယ်ကြောင့် ယဉ်ကျေးမှု","nav.industry":"ထိပ်တန်း ၂၀","nav.utility":"အသုံးပြုမှု","nav.links":"ဂေဟစနစ်",
+ "hero.eyebrow":"EARTH'S BEST AI + RWA + WEB3 COIN · ကမ္ဘာ့နက်တစ်ဇင်များ၏ MEMEcoin",
+ "hero.sub":"EACO သည် ကမ္ဘာရွာ၏ ယဉ်ကျေးမှု အဆင့်မြှင့်တင်ရေး ပုံစံဖြစ်သည် — အလုပ်တန်ဖိုး တိုင်းတာခြင်း၊ ကမ္ဘာ့အရင်းအမြစ်များ သတ်မှတ်ခြင်း၊ လူတိုင်း၏ ကရုဏာနှင့် တီထွင်မှုကို စုဆောင်းနိုင်သော ယဉ်ကျေးမှု စွမ်းအင်အဖြစ် ပြောင်းလဲပေးသည်။",
+ "hero.cta1":"ထိပ်တန်း ၂၀ ရှာဖွေရန်","hero.cta2":"ဂေဟစနစ်လင့်ခ်များ",
+ "stat.supply.k":"၁.၃၅ ဘီလျံ","stat.supply.l":"EACO စုစုပေါင်း · ကမ္ဘာရွာသားများပိုင်",
+ "stat.def.k":"E·A·C·O","stat.def.l":"စွမ်းအင်·သဘောထား·ပူးပေါင်း·ပိုမိုကောင်း",
+ "stat.pos.k":"ယဉ်ကျေးမှုအဆင့်မြှင့်ပုံစံ","stat.pos.l":"အလုပ်တန်ဖိုး · ကမ္ဘာ့အရင်းအမြစ်",
+ "stat.comb.k":"AI+RWA+Web3","stat.comb.l":"သိမှုပုံစံ ၁၀၀ နှင့်ပေါင်းစည်း",
+ "why.tag":"WHY CULTURE","why.h":"အဘယ်ကြောင့် ယဉ်ကျေးမှုသည် ရေရှည်တိုးတက်မှုအမှတ်ဖြစ်သနည်း",
+ "why.p":"ပစ္စည်းလိုအပ်ချက် ပြည့်စုံသောအခါ လူသားသည် အဓိပ္ပါယ်ဆီသို့ ဦးတည်သည်။ ယဉ်ကျေးမှုသည် သုံးလေ တန်ဖိုးတက်လေ၊ ဆက်ခံလေ လေးနက်လေသော အရင်းအမြစ်ဖြစ်ပြီး EACO တန်ဖိုးများ၏ သဘာဝဆုံး သယ်ဆောင်သူဖြစ်သည်။",
+ "ind.tag":"TOP 20 INDUSTRIES","ind.h":"ကမ္ဘာရွာ အနာဂတ် ထိပ်တန်း ၂၀ × EACO × ယဉ်ကျေးမှု",
+ "ind.p":"ဂီတ၊ ရုပ်ရှင်၊ စွမ်းအင်… စက်မှုတိုင်းသည် EACO နှင့် ပေါင်းစည်းပြီး ရေရှည်တည်တံ့သော ယဉ်ကျေးမှုအရင်းအမြစ်အဖြစ် နံ့သာမှု့ပြုနိုင်သည်။",
+ "util.tag":"UTILITIES","util.h":"EACO ဘာအတွက်လဲ? ဘာတွေလုပ်နိုင်လဲ?",
+ "util.p":"၎င်းသည် ဈေးဝယ်သင်္ကေတမဟုတ်ဘဲ၊ 'ကမ္ဘာကိုဂရုစိုက်ခြင်း၊ သဟဇာတ' ကို တိုင်းတာ·စုဆောင်း·ဖြန့်ဝေနိုင်သော ယဉ်ကျေးမှုစွမ်းအင် အင်ဂျင်ဖြစ်သည်။",
+ "exp.h":"ပုံစံ ၃ × ဘာသာ ၆ · တစ်နေရာတည်း ဖတ်ရှုမှု",
+ "exp.p":"ထိပ်တွင် 'ပန်းသီးစိမ်း / စကြဝဠာပြာ / ဟွားရှားဂန္တဝင်' ပုံစံသုံးမျိုး ပြောင်းနိုင်ပြီး ကမ္ဘာရွာဘုံဘာသာ ခြောက်မျိုးတွင် ဖတ်နိုင်သည်။",
+ "exp.t1":"ဒီဇိုင်းပုံစံများ","exp.t2":"ဘုံဘာသာစကားများ",
+ "foot.h":"EACO ဂေဟစနစ်လင့်ခ်များ",
+ "foot.p":"EACO — Earth's Best AI + RWA + Web3 Coin။ ဝဘ်ဆိုက်၊ ငွေဖြစ်လွယ်မှု၊ ဂေဟစနစ်အက်ပလီကေးရှင်းနှင့် စီးရီးအကြောင်းအရာ။",
+ "foot.rights":"EACOကမ္ဘာ · ယဉ်ကျေးမှုကိုယ်တိုင်ပြုပြင် · ကရုဏာ · သဟဇာတ",
+ "foot.quote":"\"EACO = အပြုသဘောစွမ်းအင် × သဘောထား × ကမ္ဘာ့ပူးပေါင်း × ပိုမိုကောင်း\"",
+ "f.all":"အားလုံး","f.content":"အကြောင်းအရာနှင့်တီထွင်","f.experience":"အတွေ့အကြုံနှင့်ဘဝ","f.foundation":"အခြေခံနှင့်စီးပွားရေး","f.future":"အနာဂတ်နှင့်လူ့အဖွဲ့",
+ "f.energy":"အပြုသဘောစွမ်းအင်","f.attitude":"အပြုသဘောသဘောထား","f.coop":"ကမ္ဘာ့ပူးပေါင်း","f.optim":"စဉ်ဆက်မပြတ်",
+ "dl.w":"EACO နှင့်ပေါင်းစည်း","dl.c":"ယဉ်ကျေးမှုရေရှည်ဖွံ့ဖြိုး"
+},
+ja:{
+ "nav.why":"文化の理由","nav.industry":"主要20産業","nav.utility":"用途","nav.links":"エコシステム",
+ "hero.eyebrow":"EARTH'S BEST AI + RWA + WEB3 COIN · 地球村市民のMEMEcoin",
+ "hero.sub":"EACOは地球村の文明アップグレードモデルです——労働価値を計測し、地球の資源を定量化し、一人ひとりの善意と創造を蓄積可能な文明エネルギーへと変えます。",
+ "hero.cta1":"主要20産業を見る","hero.cta2":"エコシステムを見る",
+ "stat.supply.k":"13.5億","stat.supply.l":"EACO総供給 · 地球村市民の共有",
+ "stat.def.k":"E·A·C·O","stat.def.l":"エネルギー·態度·協働·最適化",
+ "stat.pos.k":"文明アップグレードモデル","stat.pos.l":"労働価値 · 地球資源の定量化",
+ "stat.comb.k":"AI+RWA+Web3","stat.comb.l":"100の認知モデルと統合",
+ "why.tag":"WHY CULTURE","why.h":"なぜ文化産業が長期的な成長点なのか",
+ "why.p":"物質が満たされると、人間は必然的に意味へ向かいます。文化は使えば使うほど価値を増し、継承すればするほど厚みを増す唯一の文明資産であり、EACOの価値観を最も自然に運ぶ媒体です。",
+ "ind.tag":"TOP 20 INDUSTRIES","ind.h":"地球村の未来主要20産業 × EACO × 文化",
+ "ind.p":"音楽、映画、エネルギー……あらゆる産業がEACOと統合し、持続可能な文化資産へと沈殿します。カードをクリックしてご覧ください。",
+ "util.tag":"UTILITIES","util.h":"EACOとは？何ができるの？",
+ "util.p":"投機の記号ではなく、「地球を大切にし、利他共生」を定量化・蓄積・流通可能な文明エネルギーへ変えるエンジンです。",
+ "exp.h":"三テーマ × 六言語 · ワンストップ読書体験",
+ "exp.p":"上部で「アップルグリーン／コスミックブルー／中国古典」の三デザインを切り替え、地球村共通の六言語で読むことができます。",
+ "exp.t1":"デザインテーマ","exp.t2":"共通言語",
+ "foot.h":"EACO エコシステム",
+ "foot.p":"EACO — Earth's Best AI + RWA + Web3 Coin。公式サイト、流動性、エコシステムアプリ、コミュニティとシリーズコンテンツ。",
+ "foot.rights":"EACO地球 · 文明自癒 · 感謝 · 利他 · 共生",
+ "foot.quote":"「EACO = ポジティブエネルギー × ポジティブ態度 × グローバル協働 × 継続的改善」",
+ "f.all":"すべて","f.content":"コンテンツと創造","f.experience":"体験と生活","f.foundation":"基盤と経済","f.future":"未来と社会",
+ "f.energy":"ポジティブエネルギー","f.attitude":"ポジティブ態度","f.coop":"グローバル協働","f.optim":"継続的改善",
+ "dl.w":"EACOとの統合","dl.c":"文化の長期的発展"
+},
+es:{
+ "nav.why":"Por qué Cultura","nav.industry":"Top 20","nav.utility":"Utilidades","nav.links":"Ecosistema",
+ "hero.eyebrow":"EARTH'S BEST AI + RWA + WEB3 COIN · el MEMEcoin de los internautas",
+ "hero.sub":"EACO es el modelo de actualización de la civilización de la Aldea Tierra: mide el valor del trabajo, cuantifica los recursos de la Tierra y convierte la bondad y la creación de cada persona en energía civilizacional acumulable.",
+ "hero.cta1":"Explorar las 20","hero.cta2":"Ver enlaces del ecosistema",
+ "stat.supply.k":"1.35 mil M","stat.supply.l":"Suministro total de EACO · propiedad de los internautas",
+ "stat.def.k":"E·A·C·O","stat.def.l":"Energía·Actitud·Cooperación·Optimización",
+ "stat.pos.k":"Modelo de actualización civilizacional","stat.pos.l":"Mide el trabajo · cuantifica los recursos",
+ "stat.comb.k":"AI+RWA+Web3","stat.comb.l":"Integrado con 100 modelos cognitivos",
+ "why.tag":"WHY CULTURE","why.h":"Por qué la industria cultural es un punto de crecimiento a largo plazo",
+ "why.p":"Cuando las necesidades materiales están cubiertas, la humanidad busca significado. La cultura es el único activo que se valora con el uso y se engrosa con la herencia — el portador más natural de los valores de EACO.",
+ "ind.tag":"TOP 20 INDUSTRIES","ind.h":"Las 20 industrias del futuro de la Aldea Tierra × EACO × Cultura",
+ "ind.p":"Música, cine, energía... cada industria puede integrarse con EACO y convertirse en activos culturales sostenibles. Haga clic en una tarjeta para ver los detalles.",
+ "util.tag":"UTILITIES","util.h":"¿Para qué sirve EACO? ¿Qué puede hacer?",
+ "util.p":"No es un símbolo de especulación, sino un motor que convierte \"cuidar la Tierra, vivir en beneficio mutuo\" en energía civilizacional medible, acumulable y líquida.",
+ "exp.h":"Tres temas × Seis idiomas · Experiencia integral",
+ "exp.p":"Cambie entre Verde Manzana, Azul Cósmico y Clásico Chino en la parte superior, y lea en seis idiomas comunes de la Aldea Tierra.",
+ "exp.t1":"Temas de diseño","exp.t2":"Idiomas comunes",
+ "foot.h":"Enlaces del ecosistema EACO",
+ "foot.p":"EACO — Earth's Best AI + RWA + Web3 Coin. Sitio oficial, liquidez, aplicaciones del ecosistema, comunidad y contenido en serie.",
+ "foot.rights":"EACO Tierra · Sanación de la civilización · Gratitud · Altruismo · Simbiosis",
+ "foot.quote":"\"EACO = Energía Positiva × Actitud Positiva × Colaboración Global × Optimización Continua\"",
+ "f.all":"Todos","f.content":"Contenido y Creatividad","f.experience":"Experiencia y Estilo","f.foundation":"Fundamento y Economía","f.future":"Futuro y Sociedad",
+ "f.energy":"Energía Positiva","f.attitude":"Actitud Positiva","f.coop":"Colaboración Global","f.optim":"Optimización Continua",
+ "dl.w":"Integración con EACO","dl.c":"Desarrollo cultural a largo plazo"
+},
+ko:{
+ "nav.why":"문화의 이유","nav.industry":"톱20","nav.utility":"활용","nav.links":"생태계",
+ "hero.eyebrow":"EARTH'S BEST AI + RWA + WEB3 COIN · 지구촌 네티즌의 MEMEcoin",
+ "hero.sub":"EACO는 지구촌의 문명 업그레이드 모델입니다 — 노동의 가치를 측정하고, 지구의 자원을 계량하며, 모든 이의 선의와 창작을 축적 가능한 문명 에너지로 바꿉니다.",
+ "hero.cta1":"톱20 탐색","hero.cta2":"생태계 링크 보기",
+ "stat.supply.k":"13.5억","stat.supply.l":"EACO 총 공급 · 지구촌 네티즌 공유",
+ "stat.def.k":"E·A·C·O","stat.def.l":"에너지·태도·협력·최적화",
+ "stat.pos.k":"문명 업그레이드 모델","stat.pos.l":"노동 가치 측정 · 지구 자원 계량",
+ "stat.comb.k":"AI+RWA+Web3","stat.comb.l":"100개 인지 모델과 통합",
+ "why.tag":"WHY CULTURE","why.h":"문화 산업이 왜 장기 성장점인가",
+ "why.p":"물질적 욕구가 채워지면 인간은 필연적으로 의미를 추구합니다. 문화는 쓸수록 가치가 늘고, 계승할수록 두터워지는 유일한 문명 자산이며, EACO 가치관을 가장 자연스럽게 담는 그릇입니다.",
+ "ind.tag":"TOP 20 INDUSTRIES","ind.h":"지구촌 미래 톱20 산업 × EACO × 문화",
+ "ind.p":"음악, 영화, 에너지... 모든 산업이 EACO와 결합해 지속가능한 문화 자산으로 자리 잡습니다. 카드를 클릭해 자세히 보세요.",
+ "util.tag":"UTILITIES","util.h":"EACO는 무엇에 쓰나? 무엇을 할 수 있나?",
+ "util.p":"투기 상징이 아니라 \"지구를 아끼고, 이타 공생\"을 측정·축적·유통 가능한 문명 에너지로 바꾸는 엔진입니다.",
+ "exp.h":"테마 3 × 언어 6 · 원스톱 읽기 경험",
+ "exp.p":"상단에서 '애플그린 / 코즈믹블루 / 화샤클래식' 세 디자인을 전환하고, 지구촌 공용 여섯 언어로 읽을 수 있습니다.",
+ "exp.t1":"디자인 테마","exp.t2":"공용 언어",
+ "foot.h":"EACO 생태계 링크",
+ "foot.p":"EACO — Earth's Best AI + RWA + Web3 Coin. 공식 사이트, 유동성, 생태계 앱, 커뮤니티와 시리즈 콘텐츠.",
+ "foot.rights":"EACO 지구 · 문명 자가회복 · 감사 · 이타 · 공생",
+ "foot.quote":"\"EACO = 긍정 에너지 × 긍정 태도 × 글로벌 협력 × 지속적 최적화\"",
+ "f.all":"전체","f.content":"콘텐츠와 창의","f.experience":"체험과 생활","f.foundation":"기반과 경제","f.future":"미래와 사회",
+ "f.energy":"긍정 에너지","f.attitude":"긍정적 태도","f.coop":"글로벌 협력","f.optim":"지속적 최적화",
+ "dl.w":"EACO와 결합","dl.c":"문화 장기 발전"
+}
+};
+
+var CATS=["content","experience","foundation","future"];
+
+var ICONS={
+ spark:'<path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/>',
+ zero:'<circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 10l3-2 3 2"/>',
+ vault:'<path d="M12 3l7 3v5c0 4-3 7-7 10-4-3-7-6-7-10V6l7-3z"/><path d="M12 9v4"/>',
+ shield:'<path d="M12 3l7 3v5c0 4-3 7-7 10-4-3-7-6-7-10V6l7-3z"/>',
+ heart:'<path d="M12 21C8 17 4 13 4 9a4 4 0 018-1 4 4 0 018 1c0 4-4 8-8 12z"/>',
+ brain:'<path d="M12 4a3 3 0 013 3c1-1 2-2 2 1 1-1 2-1 1 2 0 2-3 2-4 3l-4 0c-1-1-4-1-4-3-1-3 0-3 1-2 0-3 1-2 2-1a3 3 0 013-3z"/><path d="M9 8l3-1 3 1"/>',
+ model:'<path d="M12 3l8 4.5-8 4.5-8-4.5L12 3z"/><path d="M4 12l8 4.5 8-4.5"/><path d="M4 16.5L12 21l8-4.5"/>',
+ coin:'<circle cx="12" cy="12" r="8"/><text x="12" y="15.5" text-anchor="middle" font-size="9" font-weight="800" fill="currentColor">E</text>',
+ bridge:'<circle cx="7" cy="12" r="3.5"/><circle cx="17" cy="12" r="3.5"/><path d="M10.5 12h3M11 10l1-2 1 2"/>',
+ cog:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+ frame:'<rect x="4" y="6" width="16" height="13" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M4 16l4-3 3 2 4-4 5 4"/>',
+ sun:'<circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2L19 19M19 5l-1.8 1.8M6.8 17.2L5 19"/>',
+ community:'<circle cx="9" cy="9" r="3.4"/><circle cx="17.5" cy="10" r="2.4"/><path d="M3.5 19c.5-3.2 2.7-5 5.5-5 2 0 3.5.9 4.4 2.5M17 14c2.5 0 4 1.7 4.4 4.4"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/>'
+};
+function icon(n){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+ICONS[n]+'</svg>';}
+
+var REASONS=[
+ {ic:"spark",t:{zh:"精神需求升维",en:"Upgrade of Spiritual Demand",my:"စိတ်လိုအပ်ချက် မြှင့်တင်ခြင်း",ja:"精神需要の昇華",es:"Elevación de la demanda espiritual",ko:"정신적 수요 승격"},
+  b:{zh:"物质富足之后，人类从「生存」转向「意义」。认知、审美、情感体验成为新的刚需，文化消费占比随人均收入持续上升。",
+     en:"Once material needs are met, humanity moves from 'survival' to 'meaning.' Cognition, aesthetics and emotional experience become new essentials; the share of cultural consumption keeps rising with income.",
+     my:"ပစ္စည်းလိုအပ်ချက် ပြည့်စုံပြီးနောက် လူသားသည် 'အဓိပ္ပါယ်'ဆီသို့ ဦးတည်သည်။",
+     ja:"物質が満たされると、人間は「生存」から「意味」へ向かいます。認知・美学・感情体験が新しい必需品になります。",
+     es:"Una vez satisfechas las necesidades materiales, la humanidad pasa de la 'supervivencia' al 'significado'.",
+     ko:"물질이 풍요로워지면 인간은 '생존'에서 '의미'로 나아갑니다."}},
+ {ic:"zero",t:{zh:"边际成本趋零",en:"Marginal Cost Tends to Zero",my:"အစွန်းကုန်ကျစရိတ် သုည",ja:"限界費用ゼロ化",es:"Costo marginal a cero",ko:"한계 비용 제로화"},
+  b:{zh:"数字内容可零成本复制与分发，IP一旦建立，边际收益无限扩展，文化是最典型的「一次创造、全球共享」。",
+     en:"Digital content can be copied and distributed at near-zero cost; once an IP is built, marginal returns expand endlessly — culture is the classic 'create once, share worldwide.'",
+     my:"ဒစ်ဂျစ်တယ် အကြောင်းအရာကို ကုန်ကျစရိတ်နီးပါး သုညဖြင့် ဖြန့်ဝေနိုင်သည်။",
+     ja:"デジタルコンテンツはほぼゼロコストで複製・配信でき、一度確立したIPは限界収益を無限に広げます。",
+     es:"El contenido digital puede copiarse a costo casi cero; un IP establecido expande infinitamente su rendimiento.",
+     ko:"디지털 콘텐츠는 거의 제로 비용으로 복제·배포되며, 한 번 만들어진 IP는 한계수익을 무한히 늘립니다."}},
+ {ic:"vault",t:{zh:"文明资产复利",en:"Compounding of Civilization Assets",my:"ယဉ်ကျေးမှုအရင်းအမြစ် ရင်းနှီး",ja:"文明資産の複利",es:"Interés compuesto de activos",ko:"문명 자산 복리"},
+  b:{zh:"文化IP是可确权、可传承、可跨代的文明资产。时间让经典增值，文化与 EACO 的链上确权让其成为「文明的复利」。",
+     en:"Cultural IP is an ownable, inheritable, cross-generational civilization asset. Time appreciates classics; with EACO's on-chain rights, it becomes 'the compound interest of civilization.'",
+     my:"ယဉ်ကျေးမှု IP သည် ပိုင်ဆိုင်၍ ဆက်ခံနိုင်သော မျိုးဆက်စုံ အရင်းအမြစ်ဖြစ်သည်။",
+     ja:"文化IPは所有・継承・世代を超えた文明資産です。時間が名作を育てます。",
+     es:"El IP cultural es un activo apropiable y herencia; el tiempo hace valer los clásicos.",
+     ko:"문화 IP는 소유·계승·세대를 넘는 문명 자산입니다. 시간이 명작을 키웁니다."}},
+ {ic:"shield",t:{zh:"抗周期的韧性",en:"Recession-Resilience",my:"ဆန့်ကျင်စက်ဝန်း ခံနိုင်ရည်",ja:"逆周期の強靭さ",es:"Resiliencia anticíclica",ko:"역주기 회복력"},
+  b:{zh:"经济下行时人们更需要慰藉与精神寄托，「口红效应」下文化消费呈现逆周期韧性，是长期经济的安全垫。",
+     en:"In downturns people need comfort and spiritual anchors; under the 'lipstick effect,' cultural consumption shows counter-cyclical resilience — a safety cushion for the long run.",
+     my:"စီးပွားရေးကျဆင်းချိန်တွင် လူတို့သည် စိတ်ဖြေသိမ့်မှုလိုအပ်ပြီး ယဉ်ကျေးမှုစားသုံးမှုသည် ခံနိုင်ရည်ရှိသည်။",
+     ja:"景気後退期に人々は慰めを必要とし、文化消費は逆周期的な強靭さを持ちます。",
+     es:"En las crisis la gente necesita consuelo; el consumo cultural es resiliente y contracíclico.",
+     ko:"경기 침체기에는 위로가 필요하며, 문화 소비는 역주기적 회복력을 보입니다."}},
+ {ic:"heart",t:{zh:"价值观的载体",en:"Carrier of Values",my:"တန်ဖိုးများ၏ သယ်ဆောင်သူ",ja:"価値観の運び手",es:"Portador de valores",ko:"가치관의 그릇"},
+  b:{zh:"文化是感恩、利他、共生与正能量最自然的载体。当 IP 承载美好价值观，商业与文明便同频生长。",
+     en:"Culture is the most natural carrier of gratitude, altruism, symbiosis and positive energy. When IP carries wholesome values, business and civilization grow in harmony.",
+     my:"ယဉ်ကျေးမှုသည် ကရုဏာ၊ သဟဇာတနှင့် အပြုသဘောစွမ်းအင်၏ သဘာဝဆုံး သယ်ဆောင်သူဖြစ်သည်။",
+     ja:"文化は感謝・利他・共生の最も自然な運び手です。IPが良い価値観を担う時、ビジネスと文明は共鳴します。",
+     es:"La cultura es el portador más natural de gratitud, altruismo y energía positiva.",
+     ko:"문화는 감사·이타·공생·긍정 에너지의 가장 자연스러운 그릇입니다."}},
+ {ic:"brain",t:{zh:"认知科学驱动",en:"Driven by Cognitive Science",my:"သိမှုသိပ္ပံ မောင်းနှင်",ja:"認知科学が牽引",es:"Impulsado por la ciencia cognitiva",ko:"인지과학이 견인"},
+  b:{zh:"与100个认知模型结合，文化从娱乐升级为认知资本与语言资本，让「学习即成长、创作即贡献」成为可持续的正能量经济。",
+     en:"Integrated with 100 cognitive models, culture upgrades from entertainment into cognitive and linguistic capital, making 'learning is growth, creation is contribution' a sustainable positive-energy economy.",
+     my:"သိမှုပုံစံ ၁၀၀ နှင့် ပေါင်းစည်းထားပြီး ယဉ်ကျေးမှုသည် ဖျော်ဖြေရေးမှ သိမှုအရင်းအနှီးအဖြစ် အဆင့်မြှင့်တင်သည်။",
+     ja:"100の認知モデルと統合し、文化は娯楽から認知資本へと昇格します。",
+     es:"Integrado con 100 modelos cognitivos, la cultura pasa de entretenimiento a capital cognitivo.",
+     ko:"100개 인지 모델과 통합해 문화는 오락에서 인지 자본으로 승격됩니다."}}
+];
+
+var UTILITIES=[
+ {ic:"model",t:{zh:"文明升级模型",en:"Civilization-upgrade Model",my:"ယဉ်ကျေးမှုအဆင့်မြှင့်ပုံစံ",ja:"文明アップグレードモデル",es:"Modelo de actualización",ko:"문명 업그레이드 모델"},
+  b:{zh:"计量劳动价值、量化地球资源，把个体认知与组织效率一起推高，成为全球文明的通用升级层。",
+     en:"Measures labor value, quantifies Earth's resources, and lifts individual cognition and organizational efficiency as a common upgrade layer for global civilization.",
+     my:"အလုပ်တန်ဖိုးတိုင်း၍ ကမ္ဘာ့အရင်းအမြစ်ကို သတ်မှတ်ပြီး လူတိုင်းကို တိုးတက်စေသည်။",
+     ja:"労働価値を計測し、個人の認知と組織効率を引き上げる文明共通のアップグレード層です。",
+     es:"Mide el trabajo y eleva la cognición individual como capa común de actualización civilizacional.",
+     ko:"노동 가치를 측정하고 개인 인지와 조직 효율을 높이는 문명 공용 업그레이드 층입니다."}},
+ {ic:"coin",t:{zh:"全球协作货币",en:"Global Collaboration Currency",my:"ကမ္ဘာ့ပူးပေါင်းငွေကြေး",ja:"グローバル協働の通貨",es:"Moneda de colaboración global",ko:"글로벌 협력 화폐"},
+  b:{zh:"让跨国家、跨文化、跨行业的善意与贡献，被统一衡量、被公平回馈。",
+     en:"Lets kindness and contribution across nations, cultures and industries be measured uniformly and rewarded fairly.",
+     my:"နိုင်ငံ၊ ယဉ်ကျေးမှု၊ လုပ်ငန်းအလွှာခံ ကရုဏာနှင့် အလုပ်ကို တူညီစွာ တိုင်းတာ၍ တန်ဖိုးပေးသည်။",
+     ja:"国・文化・業界を超えた善意と貢献を、統一して計測し公平に報酬します。",
+     es:"Mide y recompensa equitativamente la bondad y la contribución entre naciones, culturas e industrias.",
+     ko:"국가·문화·산업을 넘는 선의와 기여를 균등하게 측정하고 공정하게 보상합니다."}},
+ {ic:"bridge",t:{zh:"RWA+Web3桥梁",en:"RWA + Web3 Bridge",my:"RWA+Web3 တံတား",ja:"RWA+Web3ブリッジ",es:"Puente RWA + Web3",ko:"RWA+Web3 브리지"},
+  b:{zh:"把真实世界资产——能源、版权、房产、文旅——与链上经济连接，让实体价值可确权、可流通。",
+     en:"Connects real-world assets — energy, copyrights, property, travel — with on-chain economy, making tangible value ownable and liquid.",
+     my:"စွမ်းအင်၊ မူပိုင်ခွင့်၊ အိမ်ခြံမြေ စသည့် အစစ်အမှန်အရင်းအမြစ်များကို ကွင်းဆက်စီးပွားရေးနှင့် ချိတ်ဆက်သည်။",
+     ja:"エネルギー・著作権・不動産など現実資産をチェーン経済とつなぎ、価値を所有・流通可能にします。",
+     es:"Conecta activos del mundo real — energía, derechos, propiedad — con la economía on-chain.",
+     ko:"에너지·저작권·부동산 등 실물 자산을 체인 경제와 연결합니다."}},
+ {ic:"cog",t:{zh:"100个认知模型",en:"100 Cognitive Models",my:"သိမှုပုံစံ ၁၀၀",ja:"100の認知モデル",es:"100 modelos cognitivos",ko:"100개 인지 모델"},
+  b:{zh:"与认知科学结合，把学习、创作、分享都变成可积累的个人成长资本与语言资本。",
+     en:"Combined with cognitive science, turns learning, creation and sharing into storable personal growth and linguistic capital.",
+     my:"သိမှုသိပ္ပံနှင့် ပေါင်းစည်း၍ သင်ယူမှု၊ တီထွင်မှုကို တိုးတက်မှုအရင်းအနှီးဖြစ်စေသည်။",
+     ja:"認知科学と組み合わせ、学び・創作・共有を蓄積可能な成長資本にします。",
+     es:"Combina la ciencia cognitiva y convierte aprender y crear en capital de crecimiento.",
+     ko:"인지과학과 결합해 학습·창작·공유를 성장 자본으로 만듭니다."}},
+ {ic:"frame",t:{zh:"文化确权工具",en:"Culture Rights Tool",my:"ယဉ်ကျေးမှု ခွင့်ပြုချက်ကိရိယာ",ja:"文化の権利ツール",es:"Herramienta de derechos culturales",ko:"문화 권리 도구"},
+  b:{zh:"为音乐、电影、艺术等作品提供链上确权与收益分配，让创作者直接分享价值。",
+     en:"Provides on-chain rights and revenue sharing for music, film and art, letting creators directly share the value.",
+     my:"ဂီတ၊ ရုပ်ရှင်၊ အနုပညာ စသည့် လက်ရာများအတွက် ခွင့်နှင့် အကျိုးခံစားခွဲဝေမှုကို ပေးသည်။",
+     ja:"音楽・映画・芸術の作品にオンチェーン権利と収益分配を提供し、クリエイターが価値を直接受け取ります。",
+     es:"Proporciona derechos on-chain y reparto de ingresos para música, cine y arte.",
+     ko:"음악·영화·예술 작품에 체인 상 권리와 수익 분배를 제공합니다."}},
+ {ic:"sun",t:{zh:"正能量经济",en:"Positive-Energy Economy",my:"အပြုသဘောစွမ်းအင် စီးပွားရေး",ja:"ポジティブエネルギー経済",es:"Economía de energía positiva",ko:"긍정 에너지 경제"},
+  b:{zh:"用激励机制让「善待地球、利他共生」成为有利可图的美德，好行为被看见、被奖励。",
+     en:"Uses incentives to make 'treasure the Earth, live in mutual benefit' a profitable virtue — good deeds get seen and rewarded.",
+     my:"'ကမ္ဘာကိုဂရုစိုက်၊ သဟဇာတ' ကို အကျိုးရှိသော ကောင်းမှုဖြစ်စေသည်။",
+     ja:"「地球を大切に、利他共生」を利益のある美徳にし、良い行動を報酬します。",
+     es:"Convierte 'cuidar la Tierra' en una virtud rentable; las buenas acciones se recompensan.",
+     ko:"'지구를 아끼고 이타 공생'을 이익이 되는 미덕으로 만듭니다."}},
+ {ic:"community",t:{zh:"社区自治",en:"Community Governance",my:"အသိုင်းအဝိုင်း ကိုယ်တိုင်အုပ်ချုပ်",ja:"コミュニティ自治",es:"Autogobierno comunitario",ko:"커뮤니티 자치"},
+  b:{zh:"通过 DAO 金库、万友计划、地球村商学院，实现共建、共享、共治的利他共同体。",
+     en:"Through DAO treasury, the 100-Friends plan and the Earth Village Academy, builds a shared, co-governed altruistic community.",
+     my:"DAO ဘဏ္ဍာရေး၊ မိတ်ဆွေ ၁၀၀ စီမံကိန်း၊ ကမ္ဘာရွာစာသင်ကျောင်းဖြင့် အတူတည်ဆောက် အတူအုပ်ချုပ်သည်။",
+     ja:"DAO金庫、百友計画、地球村アカデミーで、共創・共治の利他共同体を築きます。",
+     es:"Con tesorería DAO, plan de 100 amigos y la Academia Aldea Tierra, construye una comunidad altruista y autogobernada.",
+     ko:"DAO 금고, 백우 계획, 지구촌 아카데미로 공동 창조·공동 자치의 이타 공동체를 만듭니다."}},
+ {ic:"globe",t:{zh:"语言与文明资本",en:"Linguistic & Civilizational Capital",my:"ဘာသာစကားနှင့် ယဉ်ကျေးမှုအရင်းအနှီး",ja:"言語と文明資本",es:"Capital lingüístico y civilizacional",ko:"언어와 문명 자본"},
+  b:{zh:"以华语、英语、缅甸语等为纽带，多语言内容生态让文明价值跨越边界自由流动。",
+     en:"With Chinese, English, Myanmar and more, a multilingual content ecosystem lets civilizational value flow freely across borders.",
+     my:"တရုတ်၊ အင်္ဂလိပ်၊ မြန်မာ စသည့် ဘာသာများဖြင့် ယဉ်ကျေးမှုတန်ဖိုးကို ကမ္ဘာတွင် ဖြန့်ဝေသည်။",
+     ja:"中国語・英語・ミャンマー語など多言語で、文明の価値が国境を越えて流れます。",
+     es:"Con chino, inglés, birmano y más, el valor civilizacional fluye libremente entre fronteras.",
+     ko:"중국어·영어·미얀마어 등 다국어로 문명의 가치가 국경을 넘어 흐릅니다."}}
+];
+var INDUSTRIES=[
+ {cat:"content",name:{zh:"音乐",en:"Music",my:"ဂီတ",ja:"音楽",es:"Música",ko:"음악"},
+  one:{zh:"声音是文明的第一语言，链上确权让每首创作被世界听见。",en:"Sound is civilization's first language; on-chain rights let every creation be heard worldwide.",my:"အသံသည် ယဉ်ကျေးမှု၏ ပထမဘာသာစကား၊ ကွင်းဆက်မှု ကမ္ဘာ့ခံစားစေသည်။",ja:"音は文明の第一言語。オンチェーン確権で世界に届きます。",es:"El sonido es la primera lengua de la civilización; los derechos on-chain llegan al mundo.",ko:"소리는 문명의 첫 언어, 체인 권리 증명으로 세계에 닿습니다."},
+  d:{zh:{w:"音乐人作品链上确权，粉丝共创收益回流社区；EACO 作为收听、打赏与版税分成的文明积分。",c:"从唱片→流媒体→链上音乐资产；全球共创歌单成为「地球村之声」，声音档案沉淀为文明记忆。"},
+     en:{w:"Musicians register works on-chain, fan co-creation returns revenue to community; EACO serves as a civilization credit for listening, tipping and royalty splits.",c:"From records to streaming to on-chain music assets; global co-created playlists become 'the Voice of Earth Village', an audio archive of civilizational memory."},
+     my:"ဂီတသမားလက်ရာ ကွင်းဆက်မှု့၊ ပရိသတ်ပူးပေါင်း အကျိုးခံစားခွဲဝေ။",ja:"作品のチェーン確権、ファン共創で収益還元、EACOがロイヤルティ通貨に。",es:"Derechos on-chain para músicos y reparto con los fans; EACO como crédito de regalías.",ko:"음악가 작품 체인 권리 증명, 팬 공동 창작으로 수익 환원, EACO가 로열티 화폐가 됩니다."}},
+ {cat:"content",name:{zh:"影视电影",en:"Film & Cinema",my:"ရုပ်ရှင်",ja:"映画",es:"Cine",ko:"영화·영상"},
+  one:{zh:"光影承载集体记忆，好故事是跨越国界的文化货币。",en:"Cinema carries collective memory; good stories are cross-border cultural currency.",my:"အလင်းအရိပ်သည် စုပေါင်းအမှတ်ရ၊ ဇာတ်လမ်းကောင်းသည် နယ်စပ်ဖြတ် ငွေကြေး။",ja:"映画は集合的記憶を運び、良い物語は国境を越える文化通貨です。",es:"El cine lleva la memoria colectiva; las buenas historias son moneda cultural.",ko:"영화는 집단 기억을 담고, 좋은 이야기는 국경을 넘는 문화 화폐입니다."},
+  d:{zh:{w:"制片众筹、票房分账、版权 NFT；EACO 激励创作者与观众共创正能量叙事。",c:"从院线→流媒体→去中心化制片；正能量剧集成为全球价值输出的主频道。"},
+     en:{w:"Co-production crowdfunding, box-office splits, copyright NFTs; EACO incentivizes creators and audiences to co-create positive narratives.",c:"From cinemas to streaming to decentralized production; positive series become the main channel of global value export."},
+     my:"ထုတ်လုပ်ရေးရန်ပုံငွေ၊ ဘောက်အော့ဖ့်ခွဲဝေ၊ မူပိုင် NFT၊ EACO ဖြင့် အားပေးသည်။",ja:"制作クラウドファンディング、興行分益、著作権NFTでポジティブな物語を共創。",es:"Crowdfunding de producción, reparto de taquilla y NFT de derechos; EACO impulsa narrativas positivas.",ko:"제작 크라우드펀딩, 흥행 분배, 저작권 NFT로 긍정 내러티브를 공동 창작합니다."}},
+ {cat:"content",name:{zh:"出版阅读",en:"Publishing",my:"စာပေထုတ်",ja:"出版",es:"Publicación",ko:"출판·독서"},
+  one:{zh:"知识是最公平的财富，文字让文明跨越时空传递。",en:"Knowledge is the fairest wealth; words let civilization travel across time.",my:"အသိပညာသည် အမျှဆုံးဥစ္စာ၊ စာသားသည် ယဉ်ကျေးမှုကို ဖြတ်ကျော်ပေးသည်။",ja:"知識は最も公平な富。文字は文明を時空を越えて運びます。",es:"El conocimiento es la riqueza más justa; las palabras cruzan el tiempo.",ko:"지식은 가장 공정한 부, 글은 문명을 시공간을 넘어 전합니다."},
+  d:{zh:{w:"电子书版权确权、知识打赏、读书社区互证；写作者按认知贡献获得回报。",c:"从纸书→电子书→链上知识库；100门课程与经典成为可传承的智慧资产。"},
+     en:{w:"E-book rights on-chain, knowledge tipping, reading-community attestation; writers are rewarded by cognitive contribution.",c:"From paper to e-books to on-chain knowledge libraries; 100 courses and classics become inheritable wisdom assets."},
+     my:"စာအုပ်မူပိုင် ကွင်းဆက်မှု၊ အသိပညာလက်ဆောင်၊ စာဖတ်အသိုင်းအဝိုင်း။",ja:"電子書籍の確権、知識投げ銭、読書コミュニティで執筆者に報酬。",es:"Derechos de libros electrónicos, propinas por conocimiento y comunidades de lectura.",ko:"전자책 권리 증명, 지식 팁, 독서 커뮤니티로 작가에게 보상합니다."}},
+ {cat:"content",name:{zh:"游戏互动",en:"Gaming",my:"ဂိမ်း",ja:"ゲーム",es:"Juegos",ko:"게임"},
+  one:{zh:"游戏是互动式文明实验室，规则即价值观。",en:"Games are interactive civilization labs; rules are values.",my:"ဂိမ်းသည် အပြန်အလှန် ယဉ်ကျေးမှုဓာတ်ခွဲခန်း၊ စည်းမျဉ်းသည် တန်ဖိုး။",ja:"ゲームはインタラクティブな文明実験室。ルールは価値観です。",es:"Los juegos son laboratorios interactivos; las reglas son valores.",ko:"게임은 상호작용 문명 실험실, 규칙은 가치관입니다."},
+  d:{zh:{w:"游戏资产 NFT、玩家共创世界、任务即贡献；EACO 奖励协作而非内卷。",c:"从单机→网络→开放宇宙；正能量游戏成为下一代文明教育场。"},
+     en:{w:"Game-asset NFTs, player co-created worlds, quests-as-contribution; EACO rewards collaboration over cutthroat competition.",c:"From offline to online to open universes; positive games become the next-generation arena of civilizational education."},
+     my:"ဂိမ်းအရင်းအမြစ် NFT၊ ကစားသမားပူးပေါင်းဖန်တီး၊ EACO ဖြင့် ပူးပေါင်းကို ဆု။",ja:"ゲーム資産NFT、プレイヤー共創、協働をEACOが報酬。",es:"NFT de activos, mundos co-creados y cooperación recompensada por EACO.",ko:"게임 자산 NFT, 플레이어 공동 창작, 협력을 EACO가 보상합니다."}},
+ {cat:"content",name:{zh:"数字艺术",en:"Digital Art",my:"ဒစ်ဂျစ်တယ်အနုပညာ",ja:"デジタルアート",es:"Arte Digital",ko:"디지털 아트"},
+  one:{zh:"数字艺术让每个创作者的灵感成为可确权的世界财富。",en:"Digital art turns every creator's inspiration into ownable world wealth.",my:"ဒစ်ဂျစ်တယ်အနုပညာသည် တီထွင်မှုကို ပိုင်ဆိုင်နိုင်သော ကမ္ဘာ့ဥစ္စာဖြစ်စေသည်။",ja:"デジタルアートは創作のひらめきを所有可能な世界の富にします。",es:"El arte digital convierte la inspiración en riqueza mundial apropiable.",ko:"디지털 아트는 창작자의 영감을 소유 가능한 세계의 부로 만듭니다."},
+  d:{zh:{w:"数字藏品铸造、创作者分成、社区策展；EACO 衡量艺术的社会价值。",c:"从画廊→链上美术馆→全球共创；艺术档案成为文明美学数据库。"},
+     en:{w:"Minting digital collections, creator revenue share, community curation; EACO measures the social value of art.",c:"From galleries to on-chain museums to global co-creation; art archives become civilization's aesthetic database."},
+     my:"ဒစ်ဂျစ်တယ်စုဆောင်းမှု၊ ဖန်တီးသူအကျိုးခွဲဝေ၊ အသိုင်းအဝိုင်း။",ja:"デジタルコレクション鋳造、クリエイター収益、コミュニティキュレーション。",es:"Acuñación digital, reparto al creador y curación comunitaria.",ko:"디지털 컬렉션 민팅, 창작자 수익 분배, 커뮤니티 큐레이션."}},
+ {cat:"future",name:{zh:"AI内容创作",en:"AI Content Creation",my:"AI အကြောင်းအရာ",ja:"AIコンテンツ",es:"Contenido con IA",ko:"AI 콘텐츠"},
+  one:{zh:"人机共创让创作从稀缺走向普惠。",en:"Human-AI co-creation makes creation abundant and universal.",my:"လူနှင့် AI အတူတီထွင် ဖန်တီးမှု ပြန့်ကျက်။",ja:"人とAIの共創が創作を普遍化します。",es:"La co-creación humano-IA hace abundante la creación.",ko:"인간과 AI의 공동 창작이 창작을 보편화합니다."},
+  d:{zh:{w:"内容价值标注、AI 训练数据确权、创作者收益共享；EACO 连接人与 AI 的贡献度量。",c:"从 PGC→UGC→AIGC→CGC（文明共创）；AI 时代文化生产力成倍释放。"},
+     en:{w:"Content value labeling, AI training-data rights, shared creator revenue; EACO links the contribution metrics of humans and AI.",c:"From PGC to UGC to AIGC to CGC (civilization co-creation); cultural productivity multiplies in the AI era."},
+     my:"အကြောင်းအရာတန်ဖိုး၊ AI ဒေတာခွင့်၊ ဖန်တီးသူအကျိုး မျှဝေ။",ja:"コンテンツ価値、AIデータ確権、クリエイター収益共有で文明共創へ。",es:"Valor del contenido, derechos de datos de IA y reparto al creador.",ko:"콘텐츠 가치, AI 데이터 권리, 창작자 수익 공유로 문명 공동 창작을 이끕니다."}},
+ {cat:"experience",name:{zh:"文旅体验",en:"Culture Travel",my:"ယဉ်ကျေးမှုခရီး",ja:"文旅体験",es:"Turismo Cultural",ko:"문화 여행"},
+  one:{zh:"行走是理解文明的课堂，人文与自然皆是世界遗产。",en:"Travel is a classroom for understanding civilization; heritage lies in people and nature.",my:"ခရီးသည် ယဉ်ကျေးမှုနားလည်ရန် ကျောင်း၊ လူနှင့် သဘာဝ နှစ်မျိုးလုံး။",ja:"旅は文明を理解する教室。人と自然が世界遺産です。",es:"Viajar es la clase para entender la civilización; el patrimonio está en la gente y la naturaleza.",ko:"여행은 문명을 이해하는 교실, 인문과 자연 모두 세계 유산입니다."},
+  d:{zh:{w:"景区通票、非遗体验、房车文旅会员；EACO 激励文明足迹与可持续旅行。",c:"从观光→沉浸体验→文明研学；地球村文旅走廊成为共享人文资产。"},
+     en:{w:"Attraction passes, intangible-heritage experiences, RV-travel memberships; EACO rewards civilizational footprints and sustainable travel.",c:"From sightseeing to immersive experiences to cultural research trips; the Earth Village travel corridor becomes shared heritage."},
+     my:"ခရီးသွားကတ်၊ ယဉ်ကျေးမှုအတွေ့အကြုံ၊ RV ခရီးသွား။",ja:"観光パス、無形文化体験、RV旅メンバーで持続可能な旅を推進。",es:"Pases, experiencias de patrimonio y viajes en autocaravana recompensados.",ko:"관광 패스, 무형유산 체험, RV 여행 멤버십으로 지속가능한 여행을 장려합니다."}},
+ {cat:"experience",name:{zh:"时尚设计",en:"Fashion Design",my:"ဖက်ရှင်",ja:"ファッション",es:"Moda",ko:"패션"},
+  one:{zh:"风格是自我表达，东方美学正成为全球审美新共识。",en:"Style is self-expression; Oriental aesthetics is becoming a new global consensus.",my:"ပုံစံသည် မိမိကိုပြသခြင်း၊ အရှေ့တိုင်း အလှအပ ကမ္ဘာ့သဘောတူ။",ja:"スタイルは自己表現。東洋美学が新たな世界の合意に。",es:"El estilo es autoexpresión; la estética oriental se vuelve consenso global.",ko:"스타일은 자기표현, 동양 미학이 세계의 새 합의가 됩니다."},
+  d:{zh:{w:"设计师共创、面料溯源、穿搭社群；EACO 奖励原创与可持续时尚。",c:"从快时尚→可持续→文化符号；华夏古典与星际美学融合成全球风格语言。"},
+     en:{w:"Designer co-creation, fabric traceability, styling communities; EACO rewards originality and sustainable fashion.",c:"From fast fashion to sustainability to cultural symbols; Chinese classical and cosmic aesthetics merge into a global style language."},
+     my:"ဒီဇိုင်နာပူးပေါင်း၊ အထည်အလိပ်ရှာဖွေ၊ ဝတ်စုံအသိုင်း။",ja:"デザイナー共創、素材トレーサビリティ、持続可能なファッションをEACOが報酬。",es:"Co-creación de diseñadores, trazabilidad y moda sostenible recompensada.",ko:"디자이너 공동 창작, 소재 추적, 지속가능 패션을 EACO가 보상합니다."}},
+ {cat:"experience",name:{zh:"康养文化",en:"Wellness Culture",my:"ကျန်းမာရေးယဉ်",ja:"康養",es:"Bienestar",ko:"웰니스"},
+  one:{zh:"健康是最大的财富，身心合一是现代康养之道。",en:"Health is the greatest wealth; mind-body harmony is modern wellness.",my:"ကျန်းမာရေးသည် အကြီးဆုံးဥစ္စာ၊ စိတ်နှင့်ကိုယ် ညီညွတ်မှု။",ja:"健康は最大の富。心身一如が現代の康養。",es:"La salud es la mayor riqueza; la armonía mente-cuerpo es el bienestar moderno.",ko:"건강은 최고의 부, 심신일여가 현대 웰니스입니다."},
+  d:{zh:{w:"健康打卡、运动社群、康养旅居；EACO 奖励自律与利他。",c:"从治病→预防→主动健康；东方养生智慧成为全球康养文化资产。"},
+     en:{w:"Health check-ins, exercise communities, wellness retreats; EACO rewards self-discipline and altruism.",c:"From treatment to prevention to proactive health; Eastern wellness wisdom becomes global cultural capital."},
+     my:"ကျန်းမာရေးမှတ်တမ်း၊ လေ့ကျင့်ခန်းအသိုက်၊ ကျန်းမာရေးခရီး။",ja:"健康記録、運動コミュニティ、保養で自律を報酬。",es:"Registros de salud, comunidades deportivas y retiros recompensados.",ko:"건강 기록, 운동 커뮤니티, 웰니스 여행으로 자율을 보상합니다."}},
+ {cat:"experience",name:{zh:"饮食文化",en:"Food Culture",my:"အစားအစာယဉ်",ja:"食文化",es:"Gastronomía",ko:"식문화"},
+  one:{zh:"味道记忆着一个民族，饮食是触手可及的文明。",en:"Taste remembers a nation; food is civilization within reach.",my:"အရသာသည် လူမျိုးကို မှတ်မိ၊ အစားအစာသည် လက်လှမ်းမီသော ယဉ်ကျေးမှု။",ja:"味は民族を記憶します。食は手の届く文明。",es:"El sabor recuerda a una nación; la comida es civilización al alcance.",ko:"맛은 민족을 기억하고, 음식은 손에 닿는 문명입니다."},
+  d:{zh:{w:"食材溯源、名厨共创、家乡味道社群；EACO 连接产地与食客的信任。",c:"从餐饮→美食文化→地方品牌；地球村食谱成为活态非遗与 RWA 资产。"},
+     en:{w:"Ingredient traceability, chef co-creation, hometown-taste communities; EACO connects producer and diner trust.",c:"From dining to food culture to local brands; the Earth Village cookbook becomes living heritage and RWA assets."},
+     my:"ပါဝင်ပစ္စည်းရှာဖွေ၊ စားဖိုမှူးပူးပေါင်း၊ မွေးရပ်အရသာအသိုက်။",ja:"食材トレーサビリティ、シェフ共創、郷土の味で信頼を繋ぎます。",es:"Trazabilidad de ingredientes, co-creación de chefs y comunidades de sabor.",ko:"식재료 추적, 셰프 공동 창작, 고향 맛 커뮤니티로 신뢰를 잇습니다."}},
+ {cat:"experience",name:{zh:"体育赛事",en:"Sports",my:"အားကစား",ja:"スポーツ",es:"Deporte",ko:"스포츠"},
+  one:{zh:"拼搏与协作点燃激情，赛事是共同体的集体庆典。",en:"Striving and teamwork ignite passion; tournaments are collective celebration.",my:"ကြိုးစားမှုနှင့် ပူးပေါင်းမှု၊ ပြိုင်ပွဲသည် စုပေါင်းပွဲတော်။",ja:"努力と協働が情熱を燃え上がらせます。",es:"El esfuerzo y el trabajo en equipo encienden la pasión.",ko:"투지와 협력이 열정을 태우고, 대회는 공동의 축제입니다."},
+  d:{zh:{w:"赛事门票、粉丝代币、青训共创；EACO 奖励公平与坚持。",c:"从观赛→参与→全民体育文化；健康积极的体育精神成为文明底色。"},
+     en:{w:"Event tickets, fan tokens, youth-training co-creation; EACO rewards fairness and perseverance.",c:"From watching to participating to a culture of mass sports; a healthy sports spirit becomes the civilizational baseline."},
+     my:"ပြိုင်ပွဲလက်မှတ်၊ ပရိသတ်တိုကင်၊ လူငယ်လေ့ကျင့်ရေး။",ja:"チケット、ファントークン、育成共創で公平と継続を報酬。",es:"Entradas, fan tokens y formación juvenil; EACO premia la equidad.",ko:"경기 티켓, 팬 토큰, 유소년 훈련 공동 창작으로 공정을 보상합니다."}},
+ {cat:"foundation",name:{zh:"能源",en:"Energy",my:"စွမ်းအင်",ja:"エネルギー",es:"Energía",ko:"에너지"},
+  one:{zh:"清洁能源是文明的地基，光与风皆是地球的馈赠。",en:"Clean energy is the bedrock of civilization; light and wind are Earth's gifts.",my:"သန့်စင်စွမ်းအင်သည် ယဉ်ကျေးမှုအခြေခံ၊ နေနှင့်လေသည် ကမ္ဘာ၏လက်ဆောင်။",ja:"クリーンエネルギーは文明の基盤。光と風は地球の贈り物。",es:"La energía limpia es la base de la civilización; la luz y el viento son regalos de la Tierra.",ko:"청정 에너지는 문명의 기반, 빛과 바람은 지구의 선물입니다."},
+  d:{zh:{w:"绿电项目确权、碳中和积分、能源社群；EACO 把「节能=贡献」写入文明账本。",c:"从火电→绿电→能源即文化；光伏阳光房等 EMC 模式让能源走进千家万户。"},
+     en:{w:"Green-power project rights, carbon-neutral credits, energy communities; EACO writes 'saving energy = contribution' into civilization's ledger.",c:"From fossil to green to energy-as-culture; EMC models like solar sunrooms bring energy into every home."},
+     my:"စိမ်းစွမ်းအင်ခွင့်၊ ကာဗွန်ကြားနေအမှတ်၊ စွမ်းအင်အသိုက်။",ja:"グリーン電力確権、カーボンニュートラル、省エネを文明台帳に。",es:"Derechos de energía verde, créditos de carbono y comunidades energéticas.",ko:"녹색전력 권리, 탄소중립 포인트, 에너지 커뮤니티로 '절약=기여'를 새깁니다."}},
+ {cat:"foundation",name:{zh:"教育",en:"Education",my:"ပညာရေး",ja:"教育",es:"Educación",ko:"교육"},
+  one:{zh:"教育是改变命运的最短路径，认知升级是文明升级的引擎。",en:"Education is the shortest path to change fate; cognitive upgrade drives civilizational upgrade.",my:"ပညာရေးသည် ကံကြမ္မာပြောင်းရန် အတိုဆုံးလမ်း။",ja:"教育は運命を変える最短の道。認知の向上が文明を駆動。",es:"La educación es el camino más corto para cambiar el destino.",ko:"교육은 운명을 바꾸는 최단 경로, 인지 승격이 문명의 엔진입니다."},
+  d:{zh:{w:"地球村商学院、100门课程、学习即贡献；EACO 奖励学习与分享知识。",c:"从应试→能力→终身认知；认知科学与传统文化融合成全球课程体系。"},
+     en:{w:"Earth Village Academy, 100 courses, learning-as-contribution; EACO rewards learning and knowledge sharing.",c:"From exams to skills to lifelong cognition; cognitive science and traditional culture fuse into a global curriculum."},
+     my:"ကမ္ဘာရွာစာသင်ကျောင်း၊ သင်တန်း ၁၀၀၊ သင်ယူမှုကို ဆု။",ja:"地球村アカデミー、100講座、学びを報酬で奨励。",es:"Academia Aldea Tierra, 100 cursos y aprendizaje recompensado.",ko:"지구촌 아카데미, 100개 강좌, 학습에 보상을 줍니다."}},
+ {cat:"foundation",name:{zh:"文化金融",en:"Cultural Finance",my:"ယဉ်ကျေးမှုဘဏ္ဍာ",ja:"文化金融",es:"Finanzas Culturales",ko:"문화 금융"},
+  one:{zh:"让文化资产可投资，让创作者可融资。",en:"Make cultural assets investable and creators fundable.",my:"ယဉ်ကျေးမှုအရင်းအမြစ် ရင်းနှီးမြုပ်နှံနိုင်။",ja:"文化資産を投資可能に、クリエイターを資金調達可能に。",es:"Hacer invertibles los activos culturales y financiables a los creadores.",ko:"문화 자산을 투자 가능하게, 창작자를 조달 가능하게 합니다."},
+  d:{zh:{w:"版权金融、数字资产质押、社区金库；EACO 成为文化经济的基础结算层。",c:"从投机→价值投资→文明投资；文化 RWA 成为全球资产配置新极。"},
+     en:{w:"Copyright finance, digital-asset staking, community treasuries; EACO becomes the base settlement layer of the cultural economy.",c:"From speculation to value investing to civilizational investing; cultural RWA becomes a new pole of global allocation."},
+     my:"မူပိုင်ဘဏ္ဍာ၊ ဒစ်ဂျစ်တယ်အရင်းအမြစ်သာဓက၊ အသိုင်းအဝိုင်းဘဏ္ဍာ။",ja:"著作権金融、デジタル資産ステーキング、コミュニティ金庫。",es:"Financiación de derechos, staking de activos y tesorerías comunitarias.",ko:"저작권 금융, 디지털 자산 스테이킹, 커뮤니티 금고로 문화 경제를 결제합니다."}},
+ {cat:"foundation",name:{zh:"社区社交",en:"Community",my:"အသိုင်းအဝိုင်း",ja:"コミュニティ",es:"Comunidad",ko:"커뮤니티"},
+  one:{zh:"人是万物的尺度，协作社群是地球村的细胞。",en:"People are the measure of all things; communities are Earth Village's cells.",my:"လူသည် အတိုင်းအတာ၊ အသိုင်းအဝိုင်းသည် ကမ္ဘာရွာ၏ ဆဲလ်။",ja:"人は万物の尺度。協働するコミュニティが地球村の細胞。",es:"Las personas son la medida; las comunidades son las células de la Aldea Tierra.",ko:"사람은 만물의 척도, 협력 커뮤니티는 지구촌의 세포입니다."},
+  d:{zh:{w:"万友计划（earth-100-friends）、DAO 自治、互助网络；EACO 奖励善意与连接。",c:"从流量→关系→意义共同体；利他共生的社群文化成为社会资本。"},
+     en:{w:"The 100-Friends plan, DAO governance, mutual-aid networks; EACO rewards kindness and connection.",c:"From traffic to relationships to communities of meaning; an altruistic symbiosis culture becomes social capital."},
+     my:"မိတ်ဆွေ ၁၀၀၊ DAO အုပ်ချုပ်၊ အပြန်အလှန်ကူညီ။",ja:"百友計画、DAO自治、互助で善意を報酬。",es:"Plan de 100 amigos, gobernanza DAO y redes de ayuda mutua.",ko:"백우 계획, DAO 자치, 상호 도움 네트워크로 선의를 보상합니다."}},
+ {cat:"foundation",name:{zh:"生态环保文化",en:"Green Culture",my:"ဂေဟယဉ်ကျ",ja:"生態文化",es:"Cultura Verde",ko:"친환경 문화"},
+  one:{zh:"与自然共生是文明的底线，绿色生活是最新的时尚。",en:"Living with nature is civilization's baseline; green living is the newest trend.",my:"သဘာဝနှင့် ယှဉ်တွဲခြင်းသည် ယဉ်ကျေးမှုအခြေခံ။",ja:"自然と共生することは文明の基線。緑の暮らしが最新のトレンド。",es:"Vivir con la naturaleza es la base; la vida verde es la tendencia más nueva.",ko:"자연과 공생은 문명의 기준선, 녹색 생활이 최신 트렌드입니다."},
+  d:{zh:{w:"碳足迹记录、绿色积分、环保公益；EACO 把「善待地球」变成可量化的美德。",c:"从污染→减排→零碳文明；环保理念沉淀为全球共识文化。"},
+     en:{w:"Carbon-footprint tracking, green credits, eco-philanthropy; EACO turns 'treasure the Earth' into a measurable virtue.",c:"From pollution to reduction to a zero-carbon civilization; environmentalism settles into a global consensus culture."},
+     my:"ကာဗွန်မှတ်တမ်း၊ အစိမ်းအမှတ်၊ ဂေဟပရဟိတ။",ja:"カーボン記録、グリーンクレジットで地球への愛を美徳に。",es:"Registro de carbono, créditos verdes y eco-filantropía.",ko:"탄소 기록, 그린 포인트, 환경 공익으로 '지구 사랑'을 미덕으로 만듭니다."}},
+ {cat:"future",name:{zh:"元宇宙",en:"Metaverse",my:"မီတာဗတ်စ်",ja:"メタバース",es:"Metaverso",ko:"메타버스"},
+  one:{zh:"虚拟世界是文明的新大陆，数字身份是星际公民的护照。",en:"The metaverse is civilization's new continent; digital identity is a star-citizen passport.",my:"ပကတိကမ္ဘာသည် ယဉ်ကျေးမှုနယ်မြေသစ်၊ ဒစ်ဂျစ်တယ်အထောက်အထား နိုင်ငံကူး။",ja:"メタバースは文明の新大陸。デジタルIDは星市民のパスポート。",es:"El metaverso es el nuevo continente; la identidad digital es el pasaporte.",ko:"메타버스는 문명의 신대륙, 디지털 정체성은 별 시민의 여권입니다."},
+  d:{zh:{w:"虚拟资产、数字土地、跨链身份；EACO 统一虚拟与现实的劳动价值。",c:"从互联网→元宇宙→星际网络；虚拟文明与地球文明互哺共生。"},
+     en:{w:"Virtual assets, digital land, cross-chain identity; EACO unifies virtual and real labor value.",c:"From the internet to the metaverse to an interstellar network; virtual and earthly civilizations nurture each other."},
+     my:"ပကတိအရင်းအမြစ်၊ ဒစ်ဂျစ်တယ်မြေ၊ ခရိုက်ချိန်းခွဲခြား။",ja:"仮想資産、デジタル土地、クロスチェーンIDで労働価値を統一。",es:"Activos virtuales, tierra digital e identidad entre cadenas.",ko:"가상 자산, 디지털 토지, 크로스체인 신원으로 노동 가치를 통일합니다."}},
+ {cat:"future",name:{zh:"建筑空间文化",en:"Architecture & Space",my:"ဗိသုကာ",ja:"建築空間",es:"Arquitectura",ko:"건축 공간"},
+  one:{zh:"空间是凝固的文明，宜居设计重塑人与城市的关系。",en:"Space is frozen civilization; livable design reshapes city life.",my:"နေရာသည် ခဲသော ယဉ်ကျေးမှု၊ နေထိုင်ကောင်းသော ဒီဇိုင်း။",ja:"空間は凍結された文明。住み良い設計が都市を変える。",es:"El espacio es civilización congelada; el diseño habitable remodela la ciudad.",ko:"공간은 얼어붙은 문명, 살기 좋은 설계가 도시를 바꿉니다."},
+  d:{zh:{w:"绿色建筑、社区营造、城市共创；EACO 奖励宜居与人文设计。",c:"从水泥森林→人文空间→智慧社区；建筑成为承载文化记忆的容器。"},
+     en:{w:"Green buildings, community-making, co-created cities; EACO rewards livable, humane design.",c:"From concrete jungles to human spaces to smart communities; architecture becomes a vessel of cultural memory."},
+     my:"စိမ်းလန်းအဆောက်အအုံ၊ ရပ်ကွက်ဖန်တီး၊ မြို့ပူးပေါင်း။",ja:"グリーンビル、地域づくりで住み良い設計を報酬。",es:"Edificios verdes, creación comunitaria y ciudades co-creadas.",ko:"그린 빌딩, 공동체 조성, 도시 공동 창작으로 인간적 설계를 보상합니다."}},
+ {cat:"future",name:{zh:"移动出行文化",en:"Mobility Culture",my:"သွားလာရေးယဉ်",ja:"移動文化",es:"Movilidad",ko:"모빌리티"},
+  one:{zh:"移动重塑自由，出行本身成为风景与文化体验。",en:"Mobility reshapes freedom; the journey itself becomes scenery and culture.",my:"သွားလာမှုသည် လွတ်လပ်မှုကို ပြောင်းလဲ၊ ခရီးသည် မြင်ကွင်းနှင့် ယဉ်ကျေးမှု။",ja:"移動は自由を再定義し、旅そのものが風景と文化に。",es:"La movilidad redefine la libertad; el viaje mismo es paisaje y cultura.",ko:"모빌리티는 자유를 재정의하고, 여정 자체가 풍경과 문화가 됩니다."},
+  d:{zh:{w:"房车文旅、出行通证、驿站社群；EACO 连接旅人与目的地。",c:"从通勤→旅居→移动生活；出行文化成为流动的文明叙事。"},
+     en:{w:"RV travel, mobility tokens, waystation communities; EACO connects travelers with destinations.",c:"From commuting to dwelling to mobile life; travel culture becomes a flowing civilizational narrative."},
+     my:"RV ခရီး၊ သွားလာရေးတိုကင်၊ နားနေရာအသိုက်။",ja:"RV旅、移動トークン、宿場コミュニティで旅人と目的地を繋ぐ。",es:"Viaje en RV, tokens de movilidad y comunidades de parada.",ko:"RV 여행, 이동 토큰, 주막 커뮤니티로 여행자와 목적지를 잇습니다."}},
+ {cat:"future",name:{zh:"公益与文明自愈",en:"Philanthropy & Healing",my:"ပရဟိတ",ja:"公益",es:"Filantropía",ko:"공익·문명 자가회복"},
+  one:{zh:"行善是文明的自我修复，每一个善念都是未来的种子。",en:"Doing good is civilization's self-healing; every kind thought is a seed of the future.",my:"ကောင်းမှုသည် ယဉ်ကျေးမှုကိုယ်တိုင်ပြုပြင်၊ ကောင်းစိတ်တိုင်း အနာဂတ်မျိုးစေ့။",ja:"善行は文明の自己修復。すべての善い思いは未来の種。",es:"Hacer el bien es la autocuración de la civilización; cada bondad es una semilla del futuro.",ko:"선행은 문명의 자가회복, 모든 선한 마음은 미래의 씨앗입니다."},
+  d:{zh:{w:"公益金库、志愿积分、发愿行善计划；EACO 把善意变成可流通的文明能量。",c:"从捐赠→影响力投资→文明自愈；感恩利他的精神成为文明升级的引擎。"},
+     en:{w:"Philanthropy treasury, volunteer credits, vow-to-do-good plans; EACO turns kindness into liquid civilizational energy.",c:"From donation to impact investing to civilizational healing; a grateful, altruistic spirit becomes the engine of upgrade."},
+     my:"ပရဟိတဘဏ္ဍာ၊ စေတနာ့အမှတ်၊ ကောင်းမှုစီမံကိန်း။",ja:"公益金庫、ボランティアクレジット、発願計画で善意を流通エネルギーに。",es:"Tesorería filantrópica, créditos de voluntariado y planes de buena acción.",ko:"공익 금고, 봉사 포인트, 발원 선행 계획으로 선의를 문명 에너지로 바꿉니다."}}
+];
+/* ============================================================
+   渲染引擎 / 交互 / 生态链接 / 初始化
+   ============================================================ */
+var curLang="zh", curTheme="green", curFilter="all";
+
+var H1={zh:{hl:"地球",post:"：让文化成为文明的长青增长点"},
+        en:{hl:"Earth",post:": Make Culture the Evergreen Growth of Civilization"},
+        my:{hl:"ကမ္ဘာ",post:"- ယဉ်ကျေးမှုကို အစဉ်တည်မြဲသော တိုးတက်မှုအဖြစ်"},
+        ja:{hl:"地球",post:"：文化を文明の長寿の成長点に"},
+        es:{hl:"Tierra",post:": que la cultura sea el crecimiento perenne de la civilización"},
+        ko:{hl:"지구",post:": 문화를 문명의 상록 성장점으로"}};
+var THEMES={green:{zh:"苹果绿",en:"Apple Green",my:"ပန်းသီးစိမ်း",ja:"アップルグリーン",es:"Verde Manzana",ko:"애플그린"},
+            cosmic:{zh:"宇宙蓝",en:"Cosmic Blue",my:"စကြဝဠာပြာ",ja:"コスミックブルー",es:"Azul Cósmico",ko:"코즈믹블루"},
+            classic:{zh:"华夏古典",en:"Classical China",my:"ဟွားရှားဂန္တဝင်",ja:"中国古典",es:"Clásico Chino",ko:"화샤클래식"}};
+var MORE={zh:"查看详情",en:"Details",my:"အသေးစိတ်",ja:"詳細",es:"Detalles",ko:"자세히"};
+
+var GROUPS={
+ official:{zh:"官网与品牌",en:"Official & Brand",my:"ဝဘ်ဆိုက်နှင့်အမှတ်",ja:"公式サイトとブランド",es:"Oficial y Marca",ko:"공식 사이트와 브랜드"},
+ trading:{zh:"交易与流动性",en:"Trading & Liquidity",my:"အရောင်းဝယ်နှင့်ငွေဖြစ်လွယ်",ja:"取引と流動性",es:"Comercio y Liquidez",ko:"거래와 유동성"},
+ apps:{zh:"生态应用",en:"Ecosystem Apps",my:"ဂေဟစနစ်အက်ပ်များ",ja:"エコシステムアプリ",es:"Apps del Ecosistema",ko:"생태계 앱"},
+ community:{zh:"社区与系列",en:"Community & Series",my:"အသိုင်းအဝိုင်းနှင့်စီးရီး",ja:"コミュニティとシリーズ",es:"Comunidad y Series",ko:"커뮤니티와 시리즈"}
+};
+var LINKS=[
+ {g:"official",items:[
+   {t:"EACO 官网 · Earth's Best Coin",h:"https://ucoingroup.github.io/earths-best-coin/"},
+   {t:"EACO Web3 2026 (GitHub)",h:"https://github.com/ucoingroup/eacoweb3-2026"},
+   {t:"EACO Web3 官网",h:"https://ucoingroup.github.io/eaco-web3/"}
+ ]},
+ {g:"trading",items:[
+   {t:"eacoSWAP 兑换",h:"https://ucoingroup.github.io/eacoSWAP/"},
+   {t:"eacoswap2025 (GitHub)",h:"https://github.com/ucoingroup/eacoswap2025"},
+   {t:"eaco-DOGE 流动性池",h:"https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34"},
+   {t:"meteora 流动性池",h:"https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc"},
+   {t:"eaco-dao-pool202601",h:"https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc"}
+ ]},
+ {g:"apps",items:[
+   {t:"100WaysToWealth · 100种致富之道",h:"https://ucoingroup.github.io/100WaysToWealth/"},
+   {t:"earth-100-friends · 地球百友",h:"https://ucoingroup.github.io/earth-100-friends/"},
+   {t:"good-books · 好书",h:"https://ucoingroup.github.io/good-books/"},
+   {t:"eaco50rate",h:"https://ucoingroup.github.io/eaco50rate/"},
+   {t:"eur-eaco",h:"https://ucoingroup.github.io/eur-eaco/"},
+   {t:"au-trade",h:"https://ucoingroup.github.io/au-trade/"},
+   {t:"Mohist-Tech",h:"https://ucoingroup.github.io/Mohist-Tech/"},
+   {t:"eaco-build-world · 建世",h:"https://eaco-build-world.base44.app/"},
+   {t:"eaco-web3 (base44)",h:"https://eaco-web3.base44.app"},
+   {t:"Footsteps-of-Civilization · 文明足迹",h:"https://ucoingroup.github.io/Footsteps-of-Civilization/"},
+   {t:"linguistic-capital · 语言资本",h:"https://ucoingroup.github.io/linguistic-capital/"}
+ ]},
+ {g:"community",items:[
+   {t:"Discord 社区",h:"https://discord.gg/bWCDME9Pkc"},
+   {t:"EACO 团队 · eaco-team",h:"https://earth-eaco-web3.base44.app/eaco-team"},
+   {t:"EACO Web3 系列",h:"https://eaco.freedev.app/eaco_web3_series/"},
+   {t:"EACO Web3 系列 2025",h:"https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/"},
+   {t:"FreeToken-eaco",h:"https://github.com/ucoingroup/FreeToken-eaco"}
+ ]}
+];
+
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function langName(code){for(var i=0;i<LANGS.length;i++){if(LANGS[i].code===code)return LANGS[i];}return LANGS[0];}
+
+/* ---------- 渲染 ---------- */
+function renderChrome(){
+  document.documentElement.setAttribute("lang",curLang);
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k=el.getAttribute("data-i18n");
+    if(k==="hero.h1")return;
+    var s=(CHROME[curLang]||{})[k];
+    if(s==null)return;
+    var nt=el.querySelector(".nav-txt");
+    if(nt){nt.textContent=s;} else {el.textContent=s;}
+  });
+  var h1=document.querySelector('[data-i18n="hero.h1"]');
+  if(h1){var h=H1[curLang];if(h)h1.innerHTML="EACO<span class=\"hl\">"+esc(h.hl)+"</span>"+esc(h.post);}
+  var lb=document.getElementById("langBtnLabel"),lc=document.getElementById("langBtnCode");
+  if(lb)lb.textContent=langName(curLang).name;
+  if(lc)lc.textContent=langName(curLang).label;
+}
+function renderFormula(){
+  var el=document.getElementById("formula");if(!el)return;
+  var f=CHROME[curLang];
+  var html='<span class="f" style="color:var(--primary)">EACO</span><span class="times">=</span>';
+  var terms=[["f.energy",f["f.energy"]],["f.attitude",f["f.attitude"]],["f.coop",f["f.coop"]],["f.optim",f["f.optim"]]];
+  terms.forEach(function(t,i){if(i>0)html+='<span class="times">×</span>';html+='<span class="f">'+esc(t[1])+'</span>';});
+  el.innerHTML=html;
+}
+function renderReasons(){
+  var grid=document.getElementById("reasons");if(!grid)return;
+  var h="";
+  REASONS.forEach(function(r,i){
+    h+='<div class="reason"><span class="no">0'+(i+1)+'</span>'
+      +'<div class="ic">'+icon(r.ic)+'</div>'
+      +'<h3>'+esc(r.t[curLang]||r.t.zh)+'</h3>'
+      +'<p>'+esc(r.b[curLang]||r.b.zh)+'</p></div>';
+  });
+  grid.innerHTML=h;
+}
+function renderUtils(){
+  var grid=document.getElementById("utils");if(!grid)return;
+  var h="";
+  UTILITIES.forEach(function(u){
+    h+='<div class="util"><div class="ic">'+icon(u.ic)+'</div>'
+      +'<h3>'+esc(u.t[curLang]||u.t.zh)+'</h3>'
+      +'<p>'+esc(u.b[curLang]||u.b.zh)+'</p></div>';
+  });
+  grid.innerHTML=h;
+}
+function renderFilters(){
+  var f=document.getElementById("filters");if(!f)return;
+  var h='<button data-cat="all" class="'+(curFilter==="all"?"on":"")+'">'+esc(CHROME[curLang]["f.all"])+'</button>';
+  CATS.forEach(function(c){h+='<button data-cat="'+c+'" class="'+(curFilter===c?"on":"")+'">'+esc(CHROME[curLang]["f."+c])+'</button>';});
+  f.innerHTML=h;
+  f.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){setFilter(b.getAttribute("data-cat"));});});
+}
+function industryDetail(rec,lang){
+  var dl=CHROME[lang],d=rec.d;
+  if(lang==="zh"||lang==="en"){
+    return '<b>'+esc(dl["dl.w"])+'</b><p>'+esc(d.w)+'</p><b>'+esc(dl["dl.c"])+'</b><p>'+esc(d.c)+'</p>';
+  }
+  return '<p>'+esc(d[lang]||"")+'</p>';
+}
+function renderIndustries(){
+  var grid=document.getElementById("industriesGrid");if(!grid)return;
+  var list=INDUSTRIES.filter(function(r){return curFilter==="all"||r.cat===curFilter;});
+  var h="";
+  list.forEach(function(r){
+    var idx=INDUSTRIES.indexOf(r),num=("0"+(idx+1)).slice(-2);
+    h+='<div class="icard" data-idx="'+idx+'">'
+      +'<div class="row1"><span class="num">'+num+'</span><div class="name">'+esc(r.name[curLang]||r.name.zh)+'</div><span class="cat">'+esc(CHROME[curLang]["f."+r.cat])+'</span></div>'
+      +'<p class="one">'+esc(r.one[curLang]||r.one.zh)+'</p>'
+      +'<span class="more">'+esc(MORE[curLang])+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></span>'
+      +'<div class="detail">'+industryDetail(r,curLang)+'</div>'
+      +'</div>';
+  });
+  grid.innerHTML=h;
+  grid.querySelectorAll(".icard").forEach(function(c){c.addEventListener("click",function(){c.classList.toggle("open");});});
+}
+function renderSwatches(){
+  var s=document.getElementById("swatches");if(!s)return;
+  var h="";
+  ["green","cosmic","classic"].forEach(function(t){
+    h+='<div class="sw '+t+(curTheme===t?" on":"")+'" data-t="'+t+'"><div class="sw-av"></div><div class="sw-t">'+esc(THEMES[t][curLang])+'</div></div>';
+  });
+  s.innerHTML=h;
+  s.querySelectorAll(".sw").forEach(function(x){x.addEventListener("click",function(){setTheme(x.getAttribute("data-t"));});});
+}
+function renderLangChips(){
+  var c=document.getElementById("langChips");if(!c)return;
+  c.innerHTML=LANGS.map(function(l){return '<span data-code="'+l.code+'" class="'+(l.code===curLang?"on":"")+'"><em>'+l.label+'</em>'+esc(l.name)+'</span>';}).join("");
+  c.querySelectorAll("span").forEach(function(x){x.addEventListener("click",function(){setLang(x.getAttribute("data-code"));});});
+}
+function renderLangMenu(){
+  var m=document.getElementById("langMenu");if(!m)return;
+  m.innerHTML=LANGS.map(function(l){
+    return '<button data-code="'+l.code+'" class="'+(l.code===curLang?"cur":"")+'"><span class="code">'+l.label+'</span><span>'+esc(l.name)+'</span></button>';
+  }).join("");
+  m.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){setLang(b.getAttribute("data-code"));});});
+}
+function renderLinkGroups(){
+  var el=document.getElementById("linkGroups");if(!el)return;
+  var h="";
+  LINKS.forEach(function(gr){
+    h+='<div class="link-group"><h4>'+esc(GROUPS[gr.g][curLang]||GROUPS[gr.g].zh)+'</h4><div class="link-list">';
+    gr.items.forEach(function(it){
+      h+='<a href="'+it.h+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg>'+esc(it.t)+'</a>';
+    });
+    h+='</div></div>';
+  });
+  el.innerHTML=h;
+}
+function renderAll(){
+  renderChrome();renderFormula();renderReasons();renderUtils();
+  renderFilters();renderIndustries();renderSwatches();renderLangChips();
+  renderLangMenu();renderLinkGroups();
+  document.querySelectorAll("#themeSwitch button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")===curTheme);});
+}
+
+/* ---------- 交互 ---------- */
+function setTheme(t){
+  curTheme=t;document.documentElement.setAttribute("data-theme",t);
+  try{localStorage.setItem("eaco_culture_theme",t);}catch(e){}
+  renderAll();
+}
+function setLang(code){
+  curLang=code;document.documentElement.setAttribute("lang",code);
+  try{localStorage.setItem("eaco_culture_lang",code);}catch(e){}
+  var lb=document.getElementById("langBtnLabel"),lc=document.getElementById("langBtnCode");
+  if(lb)lb.textContent=langName(code).name;if(lc)lc.textContent=langName(code).label;
+  renderAll();
+  var m=document.getElementById("langMenu");if(m)m.classList.remove("open");
+  var bb=document.getElementById("langBtn");if(bb)bb.setAttribute("aria-expanded","false");
+}
+function setFilter(cat){curFilter=cat;renderFilters();renderIndustries();}
+
+function init(){
+  try{
+    var t=localStorage.getItem("eaco_culture_theme");if(t)curTheme=t;
+    var l=localStorage.getItem("eaco_culture_lang");if(l)curLang=l;
+  }catch(e){}
+  document.documentElement.setAttribute("data-theme",curTheme);
+  document.documentElement.setAttribute("lang",curLang);
+  var st=document.createElement("style");
+  st.textContent=".lang-chips span.on{background:var(--primary);color:#fff;border-color:var(--primary)}.lang-chips span.on em{color:#fff}.sw.on{border-color:var(--primary)}.sw.on .sw-t{color:var(--primary)}.lang-menu button.cur{background:var(--chip)}";
+  document.head.appendChild(st);
+  document.querySelectorAll("#themeSwitch button").forEach(function(b){
+    b.addEventListener("click",function(){setTheme(b.getAttribute("data-t"));});
+  });
+  var lb=document.getElementById("langBtn"),m=document.getElementById("langMenu");
+  lb.addEventListener("click",function(e){
+    e.stopPropagation();var open=m.classList.toggle("open");
+    lb.setAttribute("aria-expanded",open?"true":"false");
+  });
+  document.addEventListener("click",function(e){
+    if(!e.target.closest("#langWrap")){m.classList.remove("open");lb.setAttribute("aria-expanded","false");}
+  });
+  renderAll();
+}
+document.addEventListener("DOMContentLoaded",init);
+if(document.readyState!=="loading")init();
+</script>
+</body>
+</html>
