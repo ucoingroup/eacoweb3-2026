@@ -1,0 +1,2217 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EACO 九国语言与流通小组 · 美国 / 日本 / 澳大利亚 / 加拿大 / 法国 / 德国 / 荷兰 / 新西兰 / 菲律宾：官方语言、轻资产 Top10、EACO 兑换方式与汇率、九语对照，以及虚拟地球、模拟地球、宇宙档案、文明经典（金刚经 / 易经 / 宝箧印）、华商十城地图与地球最好的 100 个朋友。">
+<title>EACO 九国 · 语言 / 轻资产 / 兑换 / 虚拟地球 · 模拟地球 · 宇宙档案 · 文明经典 · 百友矩阵 | EACO NINE</title>
+<style>
+/* ============ 主题变量 ============ */
+:root{
+  --bg:#f2f7ea; --bg2:#ffffff; --fg:#1b2a1b; --muted:#5c6d5c; --line:#dce7d0;
+  --card:#ffffff; --card2:#fbfdf7;
+  --primary:#3f9d3f; --primary-2:#2b7a2b; --primary-soft:#e5f2da; --accent:#8bd06b;
+  --hero:linear-gradient(135deg,#79c675 0%,#3f9d3f 45%,#1f6321 100%);
+  --hero-fg:#ffffff;
+  --shadow:0 10px 30px rgba(43,122,43,.12);
+  --shadow-sm:0 2px 10px rgba(43,122,43,.08);
+  --radius:18px; --radius-sm:11px;
+  --warn:#b45309; --warn-bg:#fff6e6; --warn-line:#f2d9a8;
+  --ok:#2b7a2b; --bad:#b91c1c;
+  --font:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+}
+body[data-theme="blue"]{
+  --bg:#eef3fb; --bg2:#ffffff; --fg:#0f1f38; --muted:#4d6080; --line:#d3e0f2;
+  --card:#ffffff; --card2:#f8fbff;
+  --primary:#2563eb; --primary-2:#17409b; --primary-soft:#e2edff; --accent:#5b9dff;
+  --hero:linear-gradient(135deg,#0c2350 0%,#17409b 45%,#2563eb 100%);
+  --hero-fg:#ffffff;
+  --shadow:0 10px 30px rgba(23,64,155,.14);
+  --shadow-sm:0 2px 10px rgba(23,64,155,.09);
+  --warn:#9a5b00; --warn-bg:#fff7e8; --warn-line:#f0d8a9;
+  --ok:#17409b; --bad:#b91c1c;
+}
+body[data-theme="beige"]{
+  --bg:#f7f0df; --bg2:#fdf9ee; --fg:#3f3123; --muted:#7b6749; --line:#e5d5b4;
+  --card:#fdf9ee; --card2:#fbf4e2;
+  --primary:#a4642a; --primary-2:#7c4715; --primary-soft:#f3e6cc; --accent:#d9a95c;
+  --hero:linear-gradient(135deg,#c99a5c 0%,#a0702a 42%,#5e3a0e 100%);
+  --hero-fg:#ffffff;
+  --shadow:0 10px 30px rgba(122,90,45,.16);
+  --shadow-sm:0 2px 10px rgba(122,90,45,.1);
+  --warn:#8a4b12; --warn-bg:#fdf3e0; --warn-line:#e5cfa6;
+  --ok:#7c4715; --bad:#a12a1c;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:var(--font);color:var(--fg);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--primary-2);text-decoration:none}
+a:hover{color:var(--primary);text-decoration:underline}
+h1,h2,h3,h4{line-height:1.28;margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+.small{font-size:.82rem}
+.muted{color:var(--muted)}
+
+/* ============ 顶栏 ============ */
+.topbar{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:12px;padding:10px 20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:.4px;font-size:1.02rem;white-space:nowrap}
+.brand .logo{width:32px;height:32px;border-radius:10px;background:var(--hero);color:#fff;display:grid;place-items:center;font-size:1rem;font-weight:900;box-shadow:var(--shadow-sm)}
+.brand small{display:block;font-size:.62rem;font-weight:600;letter-spacing:1.6px;color:var(--muted);text-transform:uppercase;line-height:1}
+.nav{display:flex;gap:2px;flex-wrap:wrap}
+.nav a{font-size:.8rem;padding:6px 9px;border-radius:8px;color:var(--muted);font-weight:600}
+.nav a:hover{background:var(--primary-soft);color:var(--primary-2);text-decoration:none}
+.tools{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.seg button{border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:.75rem;font-weight:700;padding:7px 11px;cursor:pointer;border-left:1px solid var(--line);display:flex;align-items:center;gap:5px}
+.seg button:first-child{border-left:0}
+.seg button.on{background:var(--primary);color:#fff}
+.dotc{width:9px;height:9px;border-radius:50%;display:inline-block}
+button.btn{font-family:inherit;font-size:.78rem;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;padding:7px 12px;cursor:pointer;box-shadow:var(--shadow-sm);transition:.15s}
+button.btn:hover{border-color:var(--primary);color:var(--primary-2)}
+button.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+button.btn.primary:hover{filter:brightness(1.08);color:#fff}
+
+/* ============ Hero ============ */
+.hero{background:var(--hero);color:var(--hero-fg);position:relative;overflow:hidden;padding:54px 0 44px}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 18%,rgba(255,255,255,.28),transparent 42%),radial-gradient(circle at 12% 92%,rgba(255,255,255,.16),transparent 46%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.tagline{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.36);padding:5px 12px;border-radius:999px;margin-bottom:16px}
+.hero h1{font-size:clamp(1.75rem,4vw,2.7rem);font-weight:900;letter-spacing:.5px}
+.hero h1 em{font-style:normal;opacity:.85}
+.hero p.lead{margin:10px 0 0;max-width:760px;font-size:1rem;opacity:.96}
+.ca-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.ca{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.34);border-radius:12px;padding:9px 13px;font-size:.75rem;max-width:100%}
+.ca b{font-weight:800;letter-spacing:.5px}
+.ca code{font-family:var(--mono);font-size:.72rem;word-break:break-all;opacity:.95}
+.ca button{border:0;background:rgba(255,255,255,.26);color:#fff;border-radius:7px;padding:4px 9px;font-size:.7rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.ca button:hover{background:rgba(255,255,255,.4)}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:24px;max-width:940px}
+.hstat{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:13px;padding:11px 14px}
+.hstat .k{font-size:.68rem;letter-spacing:.9px;text-transform:uppercase;opacity:.85;font-weight:700}
+.hstat .v{font-size:1.28rem;font-weight:900;line-height:1.3;margin-top:2px}
+.hstat .s{font-size:.7rem;opacity:.85}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.chips a{font-size:.75rem;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:5px 11px;border-radius:999px}
+.chips a:hover{background:rgba(255,255,255,.28);text-decoration:none}
+
+/* ============ 区块 ============ */
+section.block{padding:46px 0 8px}
+.shead{display:block;margin-bottom:6px}
+.shead h2{font-size:1.42rem;font-weight:900;letter-spacing:.3px;display:flex;align-items:center;gap:9px}
+.shead h2 .num{font-family:var(--mono);font-size:.72rem;font-weight:800;color:var(--primary-2);background:var(--primary-soft);border:1px solid var(--line);padding:2px 8px;border-radius:7px;letter-spacing:.5px}
+.shead .desc{color:var(--muted);font-size:.86rem;max-width:820px;margin-top:5px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:20px}
+.card.col{padding:0;overflow:hidden}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.kpi{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px}
+.kpi .k{font-size:.7rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-size:1.22rem;font-weight:900;font-family:var(--mono);margin-top:2px;word-break:break-all}
+.kpi .s{font-size:.72rem;color:var(--muted)}
+.live{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:700;color:var(--ok);background:var(--primary-soft);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:p 1.8s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* 表格 */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.82rem;min-width:560px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{background:var(--primary-soft);font-size:.72rem;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--primary-2);white-space:nowrap;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card2)}
+td.num,th.num{text-align:right;font-family:var(--mono);white-space:nowrap}
+.flagcell{font-size:1.15rem;line-height:1}
+.tag{display:inline-block;font-size:.68rem;font-weight:800;padding:1px 7px;border-radius:6px;background:var(--primary-soft);color:var(--primary-2);border:1px solid var(--line);white-space:nowrap}
+.tag.warn{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-line)}
+.tag.gray{background:var(--bg);color:var(--muted)}
+
+/* 国家卡片 */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.ncard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;display:flex;flex-direction:column}
+.ncard header{display:flex;gap:11px;align-items:flex-start;padding:15px 16px 12px;border-bottom:1px dashed var(--line);background:linear-gradient(180deg,var(--card2),transparent)}
+.ncard .flag{font-size:1.9rem;line-height:1}
+.ncard h3{font-size:1.03rem;font-weight:900;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ncard h3 span.code{font-family:var(--mono);font-size:.66rem;font-weight:800;color:var(--muted);border:1px solid var(--line);padding:1px 5px;border-radius:5px}
+.ncard .langline{font-size:.75rem;color:var(--muted);margin-top:3px}
+.ncard .body{padding:12px 16px 4px}
+.ncard .grp{background:var(--primary-soft);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:.78rem;margin-bottom:11px}
+.ncard .grp b{color:var(--primary-2)}
+.minirow{display:flex;justify-content:space-between;gap:8px;font-size:.78rem;padding:4px 0;border-bottom:1px dotted var(--line)}
+.minirow:last-of-type{border-bottom:0}
+.minirow span:last-child{font-family:var(--mono);font-weight:700;white-space:nowrap}
+.bar{height:7px;border-radius:99px;background:var(--primary-soft);overflow:hidden;margin:7px 0 9px;border:1px solid var(--line)}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--primary))}
+details.assets{margin:8px 0 10px;border:1px solid var(--line);border-radius:10px;background:var(--card2);overflow:hidden}
+details.assets summary{cursor:pointer;font-size:.78rem;font-weight:800;padding:8px 11px;color:var(--primary-2);list-style:none;display:flex;justify-content:space-between;gap:8px}
+details.assets summary::-webkit-details-marker{display:none}
+details.assets summary::after{content:"▾";font-size:.7rem;opacity:.7}
+details.assets[open] summary::after{content:"▴"}
+details.assets ol{margin:0;padding:2px 12px 12px 28px;font-size:.76rem;color:var(--fg)}
+details.assets li{margin:3px 0}
+details.assets li b{font-weight:800}
+details.assets li em{font-style:normal;color:var(--muted);font-size:.72rem;display:block}
+.ncard .foot{margin-top:auto;padding:10px 16px 14px;border-top:1px solid var(--line);display:flex;gap:7px;flex-wrap:wrap;background:var(--card2)}
+.ncard .foot .pill{font-size:.7rem;font-weight:700;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--muted)}
+
+/* 计算器 */
+.calc{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.calc .g2{grid-template-columns:1fr 1fr}
+@media(max-width:860px){.calc{grid-template-columns:1fr}}
+@media(max-width:520px){.calc .g2{grid-template-columns:1fr}}
+.field{margin-bottom:11px}
+.field label{display:block;font-size:.72rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.inrow{display:flex;gap:8px}
+input[type=number],input[type=text],select{font-family:inherit;font-size:.88rem;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 11px;width:100%;outline:none}
+input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+.res{background:var(--primary-soft);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.res .big{font-family:var(--mono);font-size:1.5rem;font-weight:900;color:var(--primary-2);word-break:break-all;line-height:1.25}
+.res .label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}
+.res .sub{font-size:.76rem;color:var(--muted);margin-top:4px}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.presets button{font-size:.7rem;font-weight:700;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--primary-2);cursor:pointer;font-family:inherit}
+.presets button:hover{background:var(--primary-soft)}
+.note{font-size:.78rem;border-radius:10px;padding:10px 13px;border:1px solid var(--line);background:var(--card2);margin-top:10px}
+.note.warn{background:var(--warn-bg);border-color:var(--warn-line);color:var(--warn)}
+
+/* 语言表 */
+.flagline{display:flex;gap:6px;align-items:center}
+.langsel{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.langsel input{max-width:280px}
+.phrase{font-weight:700}
+#langTable td:nth-child(3){white-space:nowrap}
+#langTable td{padding-right:6px}
+.pron{font-size:.68rem;color:var(--muted);display:block;font-weight:500}
+button.speak{border:1px solid var(--line);background:var(--card);border-radius:7px;width:22px;height:22px;display:inline-grid;place-items:center;font-size:.66rem;cursor:pointer;color:var(--primary-2);padding:0;margin-left:5px;vertical-align:middle}
+button.speak:hover{background:var(--primary-soft)}
+.nzsl{font-size:.72rem;color:var(--muted);font-style:italic}
+
+/* 路线图 */
+.phase{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px}
+.phase h4{font-size:.9rem;font-weight:900;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.phase h4 .badge{font-family:var(--mono);font-size:.66rem;background:var(--primary);color:#fff;padding:1px 7px;border-radius:6px}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:.81rem;padding:5px 0;cursor:pointer;border-bottom:1px dotted var(--line)}
+.chk:last-child{border-bottom:0}
+.chk input{margin:4px 0 0;accent-color:var(--primary);width:15px;height:15px;flex:0 0 auto}
+.chk span.done{text-decoration:line-through;color:var(--muted)}
+
+/* 方法卡 */
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 15px;display:flex;flex-direction:column;gap:6px}
+.mcard .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.mcard h4{font-size:.9rem;font-weight:900}
+.mcard .cost{font-family:var(--mono);font-size:.7rem;font-weight:800;color:var(--primary-2);background:var(--primary-soft);border:1px solid var(--line);padding:1px 7px;border-radius:6px;white-space:nowrap}
+.mcard p{margin:0;font-size:.78rem;color:var(--muted)}
+.mcard .steps{font-size:.74rem;color:var(--fg);margin:0;padding-left:16px}
+.mcard .steps li{margin:2px 0}
+
+/* 页脚 */
+footer{margin-top:52px;background:var(--hero);color:#fff;padding:38px 0 26px}
+footer a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+footer a:hover{opacity:.85}
+.fgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:26px}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr}}
+footer h5{font-size:.74rem;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 9px;opacity:.85;font-weight:800}
+footer ul{list-style:none;margin:0;padding:0;font-size:.82rem}
+footer li{margin:5px 0;opacity:.95}
+.fca{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);border-radius:11px;padding:10px 12px;margin-top:10px;font-family:var(--mono);font-size:.72rem;word-break:break-all;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.fca button{border:0;background:rgba(255,255,255,.26);color:#fff;border-radius:7px;padding:4px 9px;font-size:.7rem;font-weight:700;cursor:pointer}
+.copyok{color:#fff;font-size:.7rem;font-weight:800}
+.fbot{margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.24);font-size:.72rem;opacity:.85;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* ===== 定义 / 虚拟地球 / 模拟地球 / 宇宙档案 ===== */
+.defcard{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm)}
+.defcard .eq{font-family:var(--mono);font-size:.95rem;font-weight:800;color:var(--primary-2);background:var(--primary-soft);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:10px 0;line-height:1.5}
+.kw{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px}
+.kw div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:.78rem}
+.kw div b{display:block;font-size:.88rem;color:var(--primary-2);margin-bottom:1px;letter-spacing:.3px}
+.principle{background:var(--primary-soft);border:1px solid var(--line);border-left:4px solid var(--primary);border-radius:10px;padding:11px 14px;font-weight:800;font-size:.86rem;margin-top:12px}
+
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}
+#sim .vgrid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.vcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 15px;box-shadow:var(--shadow-sm)}
+.vcard .ico{font-size:1.35rem;line-height:1}
+.vcard h4{font-size:.9rem;font-weight:900;margin:5px 0 4px}
+.vcard p{margin:0;font-size:.78rem;color:var(--muted)}
+.vcard .eaco{margin-top:7px;font-size:.74rem;background:var(--card2);border:1px dashed var(--line);border-radius:8px;padding:6px 8px}
+
+.ringbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:var(--shadow-sm);overflow:hidden}
+.ringbox svg{width:100%;height:auto;display:block}
+
+.timeline{position:relative}
+.tstep{display:grid;grid-template-columns:36px 1fr;gap:13px;padding-bottom:15px;position:relative}
+.tstep::before{content:"";position:absolute;left:17px;top:34px;bottom:0;width:2px;background:var(--line)}
+.tstep:last-child::before{display:none}
+.tstep .dotn{width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:900;font-size:.78rem;z-index:1;font-family:var(--mono)}
+.tstep h4{font-size:.9rem;font-weight:900;margin:2px 0 3px}
+.tstep p{margin:0;font-size:.79rem;color:var(--muted)}
+
+.simwrap{display:grid;grid-template-columns:1.02fr .98fr;gap:20px}
+@media(max-width:900px){.simwrap{grid-template-columns:1fr}}
+.ctrl{margin-bottom:13px}
+.ctrl .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:.78rem;font-weight:800;margin-bottom:2px}
+.ctrl .lab b{font-family:var(--mono);color:var(--primary-2);font-size:.9rem}
+.ctrl .hint{font-size:.68rem;color:var(--muted);margin-top:-1px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:99px;background:var(--primary-soft);border:1px solid var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--primary);border:2px solid var(--card);box-shadow:0 1px 4px rgba(0,0,0,.18);margin-top:-7px}
+input[type=range]::-moz-range-track{height:6px;border-radius:99px;background:var(--primary-soft);border:1px solid var(--line)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--primary);border:2px solid var(--card);box-shadow:0 1px 4px rgba(0,0,0,.18)}
+input[type=range]:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:8px}
+.simout{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.indexbig{font-family:var(--mono);font-size:2.7rem;font-weight:900;line-height:1;color:var(--primary-2)}
+.stagebar{height:11px;border-radius:99px;background:var(--primary-soft);border:1px solid var(--line);overflow:hidden;margin:10px 0 8px}
+.stagebar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--primary));transition:width .25s}
+.stagetags{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);margin-top:-4px}
+.fbar{margin:7px 0}
+.fbar .t{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:2px}
+.fbar .b{height:6px;border-radius:99px;background:var(--primary-soft);overflow:hidden}
+.fbar .b i{display:block;height:100%;background:var(--primary);transition:width .25s}
+.simnote{font-size:.78rem;border-radius:10px;padding:9px 11px;background:var(--card);border:1px solid var(--line);margin-top:10px}
+
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font-family:inherit;font-size:.79rem;font-weight:800;padding:8px 13px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer}
+.tabs button:hover{border-color:var(--primary);color:var(--primary-2)}
+.tabs button.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.doc{display:none;font-size:.86rem}
+.doc.on{display:block;animation:fade .2s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.doc h4{font-size:.95rem;font-weight:900;margin:16px 0 5px;display:flex;align-items:center;gap:7px}
+.doc h4:first-child{margin-top:0}
+.doc h4 .n{font-family:var(--mono);font-size:.68rem;background:var(--primary-soft);border:1px solid var(--line);color:var(--primary-2);padding:1px 6px;border-radius:5px}
+.doc p{margin:0 0 8px}
+.doc ul,.doc ol{margin:0 0 9px;padding-left:20px}
+.doc li{margin:3px 0}
+.lvl{display:grid;grid-template-columns:64px 1fr;gap:11px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:start}
+.lvl:last-child{border-bottom:0}
+.lvl .chip{font-family:var(--mono);font-size:.7rem;font-weight:900;background:var(--primary);color:#fff;border-radius:7px;padding:2px 5px;text-align:center}
+.lvl b{font-size:.85rem}
+.lvl p{margin:1px 0 0;font-size:.76rem;color:var(--muted)}
+
+.linkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.lcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px}
+.lcard h4{font-size:.84rem;font-weight:900;margin-bottom:6px;color:var(--primary-2);letter-spacing:.3px}
+.lcard a{display:block;font-size:.78rem;padding:3px 0;color:var(--fg);border-bottom:1px dotted var(--line);word-break:break-all}
+.lcard a:hover{color:var(--primary-2);text-decoration:none}
+.lcard a span{color:var(--muted);font-size:.68rem;display:block}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--fg);color:var(--bg);font-size:.8rem;font-weight:700;padding:9px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* 文明经典 / 华商 / 百友 */
+.frgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:12px}
+.fcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 14px;box-shadow:var(--shadow-sm)}
+.fcard h4{font-size:.84rem;font-weight:900;margin:0 0 9px;display:flex;align-items:center;justify-content:space-between;gap:7px}
+.fcard h4 em{font-family:var(--mono);font-style:normal;font-size:.66rem;color:var(--primary-2);background:var(--primary-soft);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.fchips{display:flex;flex-wrap:wrap;gap:5px}
+.fchips span{font-size:.72rem;padding:2px 7px;border-radius:6px;background:var(--card2);border:1px solid var(--line);color:var(--muted)}
+.qcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px}
+.qcard b{font-size:.83rem}
+.qcard p{margin:5px 0 0;font-size:.76rem;color:var(--muted)}
+@media(max-width:760px){.nav{flex-wrap:nowrap;overflow-x:auto;max-width:100%}.nav a{white-space:nowrap}}
+@media print{.topbar,.tools,.chips{display:none}body{background:#fff}}
+</style>
+</head>
+<body data-theme="green">
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <span class="logo">e</span>
+      <span>EACO NINE<small>9 countries · 9 groups</small></span>
+    </div>
+    <nav class="nav">
+      <a href="#market">定义</a>
+      <a href="#countries">九国</a>
+      <a href="#rates">汇率</a>
+      <a href="#calc">计算器</a>
+      <a href="#methods">兑换</a>
+      <a href="#langs">九语</a>
+      <a href="#virtual">虚拟地球</a>
+      <a href="#sim">模拟地球</a>
+      <a href="#cosmos">宇宙档案</a>
+      <a href="#wisdom">文明经典</a>
+      <a href="#huashang">华商地图</a>
+      <a href="#friends">百友矩阵</a>
+      <a href="#ops">落地</a>
+      <a href="#risk">风险</a>
+    </nav>
+    <div class="tools">
+      <div class="seg" id="themeSeg" role="group" aria-label="设计风格">
+        <button data-t="green" class="on"><i class="dotc" style="background:#3f9d3f"></i>苹果绿</button>
+        <button data-t="blue"><i class="dotc" style="background:#2563eb"></i>科技蓝</button>
+        <button data-t="beige"><i class="dotc" style="background:#a4642a"></i>米黄古典</button>
+      </div>
+      <button class="btn" id="refreshBtn" title="从 DexScreener / 汇率接口刷新">刷新行情</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="tagline">EACO · Earth's Best Coin · 9 Nations Language Group</span>
+    <h1>九个国家 · 九种语言 · 九个 EACO 小组<br><em>每个国家流通 1,000 万 – 9,000 万 EACO</em></h1>
+    <p class="lead">美国、日本、澳大利亚、加拿大、法国、德国、荷兰、新西兰、菲律宾——官方语言现状、前 10 大轻资产、EACO 兑换方式与实时汇率、九语（含华语）对照表，再加<b>虚拟地球</b>、<b>模拟地球</b>、<b>宇宙档案</b>、<b>文明经典</b>（金刚经 / 易经 / 宝箧印）、<b>华商十城地图</b>与<b>地球最好的 100 个朋友</b>，全部在一页。零预算也能启动，每一档都写明成本与动作。</p>
+    <div class="ca-row">
+      <div class="ca">
+        <b>EACO CA</b>
+        <code id="caText">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+        <button data-copy="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH">复制</button>
+      </div>
+      <div class="ca">
+        <b>SOL</b>
+        <code>So11111111111111111111111111111111111111112</code>
+        <button data-copy="So11111111111111111111111111111111111111112">复制</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="k">EACO / USD</div><div class="v" id="hsPrice">—</div><div class="s" id="hsPriceSrc">读取中</div></div>
+      <div class="hstat"><div class="k">SOL / USD</div><div class="v" id="hsSol">—</div><div class="s">1 SOL ≈ <span id="hsSolEaco">—</span> EACO</div></div>
+      <div class="hstat"><div class="k">九国计划流通</div><div class="v" id="hsTotal">—</div><div class="s">EACO · 单国 10M–90M</div></div>
+      <div class="hstat"><div class="k">语言覆盖</div><div class="v">9 种</div><div class="s">含华语 / 手语单列</div></div>
+    </div>
+    <div class="chips">
+      <a href="#market">① EACO 是什么</a>
+      <a href="#countries">② 九国矩阵</a>
+      <a href="#rates">③ 汇率总表</a>
+      <a href="#calc">④ 兑换计算器</a>
+      <a href="#methods">⑤ 免费 / 低成本获取</a>
+      <a href="#langs">⑥ 九语翻译</a>
+      <a href="#virtual">⑦ 虚拟地球</a>
+      <a href="#sim">⑧ 模拟地球</a>
+      <a href="#cosmos">⑨ 宇宙档案</a>
+      <a href="#wisdom">⑩ 文明经典</a>
+      <a href="#huashang">⑪ 华商地图</a>
+      <a href="#friends">⑫ 百友矩阵</a>
+      <a href="#ops">⑬ 90 天计划</a>
+      <a href="#links">⑭ 链接与合约</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 行情 ========== -->
+<section class="block" id="market">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">01</span>EACO 是什么 · 行情与计算参数</h2>
+      <div class="desc">数据来自 DexScreener（EACO / SOL 链上池）与 open.er-api.com（法币中间价）。所有数值可手动改写，改写后全站表格、计算器即时重算，并保存在本机浏览器。</div>
+    </div>
+
+    <div class="defcard" style="margin-top:14px">
+      <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline">
+        <h3 style="font-size:1.05rem;font-weight:900">Earth's Best Coin = EACO = $e</h3>
+        <span class="tag">AI + RWA + Web3</span>
+      </div>
+      <div class="eq">EACO = 正能量（Energy）× 积极态度（Attitude）× 全球协作（Cooperation）× 持续优化（Optimization）</div>
+      <p class="small muted" style="margin:0">乘法而非加法：任何一项趋近于零，整体就趋近于零。它不是一句口号，而是一个可以被度量、被治理、被写进合约的文明升级模型。</p>
+      <div class="kw">
+        <div><b>Energy 能量</b>能量与资源的可得性，是一切文明活动的地基。</div>
+        <div><b>Attitude 态度</b>个体与组织的正向心智，决定协作的摩擦系数。</div>
+        <div><b>Cooperation 协作</b>跨语言、跨法币、跨司法辖区的协同能力。</div>
+        <div><b>Optimization 优化</b>持续迭代，把每一次协作变成下一次的起点。</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:11px">
+        <div class="kpi" style="padding:9px 11px"><div class="k" style="font-size:.64rem">目标一</div><div style="font-size:.79rem;font-weight:700">提升个人认知</div></div>
+        <div class="kpi" style="padding:9px 11px"><div class="k" style="font-size:.64rem">目标二</div><div style="font-size:.79rem;font-weight:700">提升组织效率</div></div>
+        <div class="kpi" style="padding:9px 11px"><div class="k" style="font-size:.64rem">目标三</div><div style="font-size:.79rem;font-weight:700">提升社会文明</div></div>
+        <div class="kpi" style="padding:9px 11px"><div class="k" style="font-size:.64rem">目标四</div><div style="font-size:.79rem;font-weight:700">地球可持续发展</div></div>
+        <div class="kpi" style="padding:9px 11px"><div class="k" style="font-size:.64rem">目标五</div><div style="font-size:.79rem;font-weight:700">与 100 个认知模型结合</div></div>
+      </div>
+      <div class="principle">最高原则：所有文明——包括 EACO 本身——都为人类文明服务。任何叙事、路线或提案，一旦与这条原则冲突，即视为无效。</div>
+    </div>
+
+    <div class="grid g4" style="margin-top:14px">
+      <div class="kpi"><div class="k">EACO 价格</div><div class="v" id="kEaco">—</div><div class="s">USD · <span id="kEacoNative">—</span> SOL</div></div>
+      <div class="kpi"><div class="k">市值 / FDV</div><div class="v" id="kMc">—</div><div class="s">总供应 ≈ 13.5 亿 EACO</div></div>
+      <div class="kpi"><div class="k">链上流动性</div><div class="v" id="kLiq">—</div><div class="s">决定单笔可兑换上限</div></div>
+      <div class="kpi"><div class="k">汇率时间</div><div class="v" id="kFxTime" style="font-size:.9rem">—</div><div class="s">open.er-api.com 中间价</div></div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+        <h3 style="font-size:.98rem;font-weight:900">手动校准（离线可用）</h3>
+        <span class="live"><i class="pulse"></i><span id="liveState">静态快照</span></span>
+      </div>
+      <div class="grid g4">
+        <div class="field"><label>EACO 价格 (USD)</label><input type="number" id="inEaco" step="0.0000001" min="0"></div>
+        <div class="field"><label>SOL 价格 (USD)</label><input type="number" id="inSol" step="0.01" min="0"></div>
+        <div class="field"><label>池流动性 (USD)</label><input type="number" id="inLiq" step="1" min="0"></div>
+        <div class="field"><label>总供应 (EACO)</label><input type="number" id="inSupply" step="1000000" min="0"></div>
+      </div>
+      <div class="grid g4">
+        <div class="field"><label>USD → 当地币 (每 1 USD)</label><input type="number" id="fxUSD" step="0.0001" min="0"></div>
+        <div class="field"><label>JPY 日本</label><input type="number" id="fxJPY" step="0.01" min="0"></div>
+        <div class="field"><label>AUD 澳大利亚</label><input type="number" id="fxAUD" step="0.0001" min="0"></div>
+        <div class="field"><label>CAD 加拿大</label><input type="number" id="fxCAD" step="0.0001" min="0"></div>
+      </div>
+      <div class="grid g4">
+        <div class="field"><label>EUR 法 / 德 / 荷</label><input type="number" id="fxEUR" step="0.0001" min="0"></div>
+        <div class="field"><label>NZD 新西兰</label><input type="number" id="fxNZD" step="0.0001" min="0"></div>
+        <div class="field"><label>PHP 菲律宾</label><input type="number" id="fxPHP" step="0.01" min="0"></div>
+        <div class="field" style="display:flex;align-items:flex-end;gap:8px"><button class="btn" id="resetBtn" style="width:100%">恢复默认快照</button></div>
+      </div>
+      <div class="note">口径说明：汇率取「1 USD = X 当地币」的中间价。EACO 价格取 Raydium SOL 池 <span class="mono">priceUsd</span> 为主、Orca/Meteora 稳定币池交叉校验。价格与流动性极低（MC ≈ 5.8 万美元、池子 ≈ 600 美元），任何大额兑换都会显著推动价格，请看 05 节滑点提示。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 九国矩阵 ========== -->
+<section class="block" id="countries">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">02</span>九国矩阵 · 语言现状 / 小组 / 轻资产</h2>
+      <div class="desc">每国一个 EACO 小组，计划流通量 1,000 万 – 9,000 万 EACO。轻资产＝不靠厂房与库存、靠人、版权、品牌、软件、服务赚钱的资产；每条都标注了与 EACO 的结合点。</div>
+    </div>
+    <div class="grid g3" style="margin:14px 0 4px">
+      <div class="kpi"><div class="k">单一主要语言</div><div class="v" style="font-size:.95rem;font-family:inherit;line-height:1.5">日本 · 法国 · 德国 · 荷兰（荷兰语为主，弗里斯兰语在弗里斯兰省具官方地位）</div></div>
+      <div class="kpi"><div class="k">多官方语言</div><div class="v" style="font-size:.95rem;font-family:inherit;line-height:1.5">加拿大（英/法）· 新西兰（英/毛利/新西兰手语）· 菲律宾（菲律宾语/英语）</div></div>
+      <div class="kpi"><div class="k">无法定官方语言</div><div class="v" style="font-size:.95rem;font-family:inherit;line-height:1.5">美国（英语为事实通用语，部分州立法）· 澳大利亚（英语为事实通用语）</div></div>
+    </div>
+    <div class="cgrid" id="countryGrid"></div>
+    <div class="note" style="margin-top:14px">语言口径说明：美国联邦层面没有法定官方语言，英语是事实上的全国通用语言，部分州将英语定为官方语言，西班牙语在部分地区广泛使用；澳大利亚联邦层面同样没有法定官方语言；新西兰有三种官方语言，其中新西兰手语（NZSL）是<b>视觉语言</b>，不能用手写文字"翻译"，正规做法是录 NZSL 视频或使用 NZSL 拼写，本站第六节单独标注。</div>
+  </div>
+</section>
+
+<!-- ========== 汇率总表 ========== -->
+<section class="block" id="rates">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">03</span>汇率总表 · EACO ↔ 九国货币 ↔ SOL</h2>
+      <div class="desc">按当前价换算。<b>1 EACO</b> 折成当地货币、<b>1 当地货币</b> 能换多少 EACO、以及单国 1,000 万 / 9,000 万流通池的法币等值。</div>
+    </div>
+    <div class="tablewrap" style="margin-top:14px">
+      <table id="rateTable">
+        <thead>
+          <tr>
+            <th>国家</th><th>货币</th>
+            <th class="num">1 EACO =</th>
+            <th class="num">1,000 EACO =</th>
+            <th class="num">1 当地币 = EACO</th>
+            <th class="num">1,000 万 EACO 等值</th>
+            <th class="num">9,000 万 EACO 等值</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:10px">EACO / SOL 换算</h3>
+        <div class="grid g2">
+          <div class="kpi"><div class="k">1 SOL =</div><div class="v" id="solToEaco">—</div><div class="s">EACO</div></div>
+          <div class="kpi"><div class="k">1 EACO =</div><div class="v" id="eacoToSol">—</div><div class="s">SOL</div></div>
+          <div class="kpi"><div class="k">0.1 SOL =</div><div class="v" id="sol01">—</div><div class="s">EACO（小额入场）</div></div>
+          <div class="kpi"><div class="k">1,000,000 EACO =</div><div class="v" id="m1">—</div><div class="s">SOL · <span id="m1usd">—</span> USD</div></div>
+        </div>
+        <div class="note" style="margin-top:12px">EACO 的链上报价本身就是以 SOL 计价（<span class="mono">priceNative</span>），所以「EACO + SOL」是它最自然的一对：换 EACO 最省事的路径就是 <b>法币 → SOL/USDC → EACO</b>，一次 Swap 完成，不需要经过任何中心化交易所。</div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:10px">价格阶梯：流通池值多少钱</h3>
+        <div class="tablewrap" style="border:0">
+          <table id="ladderTable" style="min-width:420px">
+            <thead><tr><th>阶段</th><th class="num">1 EACO</th><th class="num">1,000 万池</th><th class="num">9,000 万池</th><th class="num">九国合计</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:10px">阶梯取自社区目标：1 厘 → 1 分 → 1 毛 → 1 美元 → 10–20 → 100–200 美元。这是目标推演，不是承诺；从 $0.0000433 到 $0.01 需要约 231 倍，务必看清 08 节风险。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 计算器 ========== -->
+<section class="block" id="calc">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">04</span>兑换计算器 · 任意币种互转</h2>
+      <div class="desc">EACO、SOL、美元与九国本币两两互转，并给出链上成本与滑点预警。</div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="calc">
+        <div>
+          <div class="grid g2">
+            <div class="field"><label>金额</label><input type="number" id="calcAmt" value="1000" min="0" step="any"></div>
+            <div class="field"><label>从</label><select id="calcFrom"></select></div>
+          </div>
+          <div class="grid g2">
+            <div class="field"><label>换成</label><select id="calcTo"></select></div>
+            <div class="field"><label>&nbsp;</label><button class="btn primary" id="swapBtn" style="width:100%">⇅ 交换方向</button></div>
+          </div>
+          <div class="presets" id="presets">
+            <button data-a="10000000" data-u="EACO">1,000 万 EACO</button>
+            <button data-a="60000000" data-u="EACO">6,000 万 EACO</button>
+            <button data-a="90000000" data-u="EACO">9,000 万 EACO</button>
+            <button data-a="1" data-u="SOL">1 SOL</button>
+            <button data-a="100" data-u="USD">100 USD</button>
+            <button data-a="100000" data-u="PHP">10 万比索</button>
+          </div>
+        </div>
+        <div>
+          <div class="res">
+            <div class="label" id="resLabel">可兑换</div>
+            <div class="big" id="resBig">—</div>
+            <div class="sub" id="resSub">—</div>
+          </div>
+          <div class="note" style="margin-top:10px" id="routeNote">路径提示</div>
+          <div class="note warn" id="slipNote" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 兑换方式 ========== -->
+<section class="block" id="methods">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">05</span>拿到 EACO 的 9 种方式 · 免费 → 低成本</h2>
+      <div class="desc">从「一分钱不花」到「几美元手续费」，按成本从低到高排列。前 4 种是纯免费（用时间与内容换），后 5 种是低成本（用 SOL/USDC 换）。</div>
+    </div>
+
+    <div class="grid g3" style="margin-top:14px">
+      <div class="mcard">
+        <div class="top"><h4>① 官方水龙头 Faucet</h4><span class="cost">$0</span></div>
+        <p>社区为地球村村民免费发放 EACO 的入口，属于零成本体验通道。</p>
+        <ul class="steps">
+          <li>准备 Phantom / Backpack 钱包，复制 Solana 地址</li>
+          <li>打开 <a href="https://ucoingroup.github.io/eaco-faucet/" target="_blank" rel="noopener">eaco-faucet</a> 粘贴地址</li>
+          <li>在 Solscan 核对到账，用于测试转账与社区打赏</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>② 社区空投 / 任务</h4><span class="cost">$0</span></div>
+        <p>关注、转发、翻译、做图、参加 Space——用行为换币，是九国小组最现实的启动燃料。</p>
+        <ul class="steps">
+          <li>Discord 角色认证，领取 contributor 身份</li>
+          <li>完成「每周 1 条母语内容」任务</li>
+          <li>结算按周发放，链上可查</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>③ 翻译 / 内容赏金</h4><span class="cost">$0 现金</span></div>
+        <p>本站的九语对照表就是模板：把 EACO 一页纸译成母语，按条计酬。</p>
+        <ul class="steps">
+          <li>领取 1 个语言包（如 Māori、Filipino）</li>
+          <li>交付校对版 + 3 条社媒短文</li>
+          <li>以 EACO 结算，形成本地内容资产</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>④ 推荐 / 裂变</h4><span class="cost">$0</span></div>
+        <p>每季度 5–10 个长期活跃用户的目标，靠推荐码追踪最省力。</p>
+        <ul class="steps">
+          <li>每人专属邀请链接（可在群公告固定）</li>
+          <li>新用户完成首笔链上交互即计为活跃</li>
+          <li>按活跃留存（30 天）而非注册数结算</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>⑤ Jupiter 聚合兑换</h4><span class="cost">gas &lt; $0.01</span></div>
+        <p>SOL 或 USDC 直接换 EACO，聚合全 Solana 流动性，最优路由。</p>
+        <ul class="steps">
+          <li>钱包备 0.02 SOL 作为 gas</li>
+          <li>粘贴 CA，输入金额，设置滑点 2%–5%</li>
+          <li>单笔建议 ≤ $30，分批买入</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>⑥ Raydium / Orca 直兑</h4><span class="cost">0.25%–1%</span></div>
+        <p>EACO 的主池在 Raydium（EACO/SOL），另有 Orca、Meteora 稳定币池。</p>
+        <ul class="steps">
+          <li>Raydium：EACO/SOL，深度最好</li>
+          <li>Orca / Meteora：EACO/USDC、EACO/USDT</li>
+          <li>对比三家报价后再成交</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>⑦ 做市 / 提供流动性</h4><span class="cost">本金 + 无常损失</span></div>
+        <p>在 Meteora DLMM 建 EACO/USDT 池，赚手续费，同时给小组成员提供兑换深度。</p>
+        <ul class="steps">
+          <li>小额试水（如 $50 双边）</li>
+          <li>窄区间挂单，注意无常损失</li>
+          <li>先与小组约定做市规则，避免内部砸盘</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>⑧ 线下 / P2P 当面转账</h4><span class="cost">≈ $0.0005</span></div>
+        <p>Meetup 现场用手机钱包直接转账，现金换币，最适合菲律宾、日本、德国的小型聚会。</p>
+        <ul class="steps">
+          <li>当面展示 Solscan 交易确认</li>
+          <li>按当日站内汇率定价，公开透明</li>
+          <li>做好记录，遵守当地税务与 AML 要求</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <div class="top"><h4>⑨ 商户收单（反向流通）</h4><span class="cost">$0</span></div>
+        <p>让轻资产商家接受 EACO 付款——咖啡、课程、设计稿、翻译单，形成真实使用闭环。</p>
+        <ul class="steps">
+          <li>给商家一个收款二维码 / 钱包地址</li>
+          <li>标价用本币 + EACO 双价签</li>
+          <li>每周结算，公开流水增强信任</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:16px">
+      <table>
+        <thead><tr><th>方式</th><th>成本</th><th>到账速度</th><th>适合谁</th><th>主要风险</th></tr></thead>
+        <tbody>
+          <tr><td>水龙头 / 空投</td><td><span class="tag">$0</span></td><td>分钟级</td><td>新成员、学生</td><td>额度小、需防钓鱼站点</td></tr>
+          <tr><td>内容 / 翻译赏金</td><td><span class="tag">$0 现金</span></td><td>按周结算</td><td>母语写作者、设计师</td><td>交付验收标准要事先写清</td></tr>
+          <tr><td>Jupiter / Raydium 兑换</td><td><span class="tag">gas + 0.25%–1%</span></td><td>秒级</td><td>已有 SOL 的人</td><td>滑点、池子太浅</td></tr>
+          <tr><td>做市</td><td><span class="tag warn">本金风险</span></td><td>持续</td><td>有经验的小组负责人</td><td>无常损失、价格操纵</td></tr>
+          <tr><td>P2P / 线下</td><td><span class="tag">≈ $0.0005</span></td><td>即时</td><td>九国线下聚会</td><td>现金合规、身份与税务</td></tr>
+          <tr><td>商户收单</td><td><span class="tag">$0</span></td><td>即时</td><td>咖啡馆、培训班、工作室</td><td>价格波动需双价签</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:12px">流动性现实：EACO 全链流动性约 600 美元级别，意味着 <b>单笔 30 美元以上就可能把价格推高几个百分点</b>。小组统一做法建议：单笔 ≤ $20–30、每人每日 ≤ 2 笔、用 Jupiter 限价或分批成交，禁止在群里喊单制造 FOMO。</div>
+  </div>
+</section>
+
+<!-- ========== 九语对照 ========== -->
+<section class="block" id="langs">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">06</span>九语对照表 · 华语 + 8 种语言</h2>
+      <div class="desc">16 句社区高频用语，覆盖九国。点小喇叭可用浏览器语音朗读（免费、离线可用，取决于系统语音包）。新西兰手语单列说明。</div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="langsel">
+        <input type="text" id="langFilter" placeholder="筛选：输入「兑换」「hello」「両替」…">
+        <button class="btn" id="clearLang">清空</button>
+        <span class="small muted" id="langCount"></span>
+      </div>
+      <div class="tablewrap">
+        <table id="langTable" style="min-width:980px">
+          <thead>
+            <tr>
+              <th style="width:130px">华语</th>
+              <th>English <span class="small muted">美/澳/加/新西兰</span></th>
+              <th>日本語 <span class="small muted">日本</span></th>
+              <th>Français <span class="small muted">法/加</span></th>
+              <th>Deutsch <span class="small muted">德国</span></th>
+              <th>Nederlands <span class="small muted">荷兰</span></th>
+              <th>Te Reo Māori <span class="small muted">新西兰</span></th>
+              <th>Filipino <span class="small muted">菲律宾</span></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:12px"><b>新西兰手语（NZSL）：</b>NZSL 是新西兰的三种官方语言之一，属于视觉语言，没有"书面翻译"形式。正确做法是：录制 NZSL 视频版介绍（YouTube 无字幕 + 手语画面）、在页面提供 NZSL 视频链接，或使用 NZSL 手指字母拼写专有名词（如 E-A-C-O）。请不要用文字冒充手语翻译。<br>
+      <b>语言细节：</b>毛利语书写必须保留长音符（macron），如 <i>Māori</i>、<i>kōrero</i>、<i>Papatūānuku</i>；加拿大法语与法国法语在数字与口语上有差异（如 <i>quatre-vingts</i> vs <i>huitante</i>）；菲律宾语以他加禄语为基础，日常口语中英菲混用（Taglish）非常普遍。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 90 天落地 ========== -->
+<section class="block" id="ops">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">07</span>90 天落地计划 · 零预算起步</h2>
+      <div class="desc">对照桌面那份 txt 里的问题：「你能帮 EACO 每季度发展 5–10 个活跃且长期的用户吗？」——这里把它拆成可勾选的动作。勾选状态存在本机。</div>
+    </div>
+    <div class="grid g3" id="phaseGrid" style="margin-top:14px"></div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:8px">三档预算怎么花</h3>
+        <div class="tablewrap">
+          <table style="min-width:420px">
+            <thead><tr><th>档位</th><th>月度</th><th>主要用途</th><th>预期</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag">零预算</span></td><td class="num">$0</td><td>大学社团、图书馆免费场地、Discord/Telegram、母语内容</td><td>3 个月 5–10 位活跃</td></tr>
+              <tr><td><span class="tag">轻预算</span></td><td class="num">$50</td><td>域名 + 打印物料 + 咖啡 AA 补贴 + Canva</td><td>单场 8–15 人到场</td></tr>
+              <tr><td><span class="tag warn">进阶</span></td><td class="num">$200</td><td>场地、翻译赏金、微型 KOL 合作、周边</td><td>单国 30+ 活跃 / 季</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:10px">九国同时铺开不现实。建议先做 2 个「低成本高密度」市场：<b>菲律宾</b>（英语+社媒密度高、人力成本低）与<b>荷兰</b>（英语普及率极高、圈子小易穿透），跑通后再复制到德/法/日。</div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:8px">每个小组的最小配置</h3>
+        <div class="minirow"><span>1 位组长（母语 + 本地社群）</span><span>必需</span></div>
+        <div class="minirow"><span>1 位翻译 / 内容（可兼）</span><span>必需</span></div>
+        <div class="minirow"><span>1 位技术（钱包、Swap、收款码）</span><span>必需</span></div>
+        <div class="minirow"><span>群：Discord 频道 + WhatsApp/Telegram</span><span>$0</span></div>
+        <div class="minirow"><span>固定节奏：每月 1 次线上 + 每季 1 次线下</span><span>$0–50</span></div>
+        <div class="minirow"><span>指标：30 天留存活跃 &gt; 5 人</span><span>KPI</span></div>
+        <div class="note" style="margin-top:10px">只写事实、不写情绪：如果某国三个月拉不到 5 个活跃用户，先查三个内因——① 有没有母语内容；② 有没有人愿意每周出现；③ 新人第一次拿到 EACO 是否在 10 分钟内完成。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 虚拟地球 ========== -->
+<section class="block" id="virtual">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">08</span>虚拟地球 · Virtual Earth</h2>
+      <div class="desc">关键词：数字孪生 + 地球村 + Web3。把现实地球映射成一个可以参与、协作、创造价值的数字地球——九个国家就是九个入口节点。</div>
+    </div>
+
+    <div class="vgrid" style="margin-top:14px">
+      <div class="vcard"><div class="ico">🌐</div><h4>数字孪生地球</h4><p>把土地、港口、电网、供应链、文化资产做成可查询、可验证的数字副本。先孪生「能计量的部分」，再孪生「有共识的部分」。</p><div class="eaco">EACO：孪生数据的贡献按次计酬，微支付成本 &lt; $0.001</div></div>
+      <div class="vcard"><div class="ico">🏙️</div><h4>元宇宙城市 / 地球村</h4><p>九国各建一个「村口」：语言、时区、轻资产清单、本地商户。不是建一个巨大世界，而是建九个能走进去的小房间。</p><div class="eaco">EACO：村口门票、摊位、课程、打赏统一计价</div></div>
+      <div class="vcard"><div class="ico">🆔</div><h4>链上身份 DID</h4><p>一人一身份，可携带语言能力、贡献记录、信用。身份不等于钱包地址，而是「可验证的声明集合」。</p><div class="eaco">EACO：身份不卖钱，贡献才结算；防女巫靠行为不靠付费</div></div>
+      <div class="vcard"><div class="ico">💰</div><h4>链上资产 · RWA · NFT</h4><p>轻资产最适合上链：版权、商标、专利许可、课程、票务、收益分成权。重资产上链要先解决确权与审计。</p><div class="eaco">EACO：作为这些资产的分账与结算单位</div></div>
+      <div class="vcard"><div class="ico">🤝</div><h4>DAO 全球协作</h4><p>九国小组 + 地球村议会 + 星际委员会三层结构，提案必须过九语翻译才能投票。</p><div class="eaco">EACO：治理权与结算权分离，投票权不随持币量无限放大</div></div>
+      <div class="vcard"><div class="ico">📚</div><h4>AI 教育与文明知识库</h4><p>把「100 个认知模型」做成可检索、可翻译、可引用的公共知识层，AI 负责答疑与跨语言解释。</p><div class="eaco">EACO：学习打卡、翻译、校对、出题都可结算</div></div>
+      <div class="vcard"><div class="ico">🌱</div><h4>可持续发展与绿色经济</h4><p>绿电凭证、碳资产、循环再用、在地农业。所有绿色数据必须可溯源，否则只是营销。</p><div class="eaco">EACO：绿电与碳凭证的清算单位，链上可查</div></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="ringbox">
+        <svg viewBox="0 0 680 380" role="img" aria-label="EACO 九国节点环示意图">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity=".45"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="340" cy="190" r="150" fill="url(#glow)"/>
+          <circle cx="340" cy="190" r="138" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="5 6"/>
+          <circle cx="340" cy="190" r="96" fill="none" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 7" opacity=".7"/>
+          <g stroke="var(--line)" stroke-width="1">
+            <line x1="340" y1="190" x2="340" y2="52"/><line x1="340" y1="190" x2="428.7" y2="84.3"/>
+            <line x1="340" y1="190" x2="475.9" y2="166"/><line x1="340" y1="190" x2="459.5" y2="259"/>
+            <line x1="340" y1="190" x2="387.2" y2="319.7"/><line x1="340" y1="190" x2="292.8" y2="319.7"/>
+            <line x1="340" y1="190" x2="220.5" y2="259"/><line x1="340" y1="190" x2="204.1" y2="166"/>
+            <line x1="340" y1="190" x2="251.3" y2="84.3"/>
+          </g>
+          <circle cx="340" cy="190" r="46" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="2"/>
+          <text x="340" y="186" text-anchor="middle" font-size="15" font-weight="900" fill="var(--primary-2)" font-family="ui-monospace,monospace">EACO</text>
+          <text x="340" y="203" text-anchor="middle" font-size="10" fill="var(--muted)">地球村 · 九节点</text>
+          <g font-size="11" font-weight="800" fill="var(--primary-2)" text-anchor="middle" font-family="ui-monospace,monospace">
+            <circle cx="340" cy="52" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="340" y="58">NL</text>
+            <circle cx="428.7" cy="84.3" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="428.7" y="90.3">DE</text>
+            <circle cx="475.9" cy="166" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="475.9" y="172">FR</text>
+            <circle cx="459.5" cy="259" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="459.5" y="265">CA</text>
+            <circle cx="387.2" cy="319.7" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="387.2" y="325.7">US</text>
+            <circle cx="292.8" cy="319.7" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="292.8" y="325.7">PH</text>
+            <circle cx="220.5" cy="259" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="220.5" y="265">AU</text>
+            <circle cx="204.1" cy="166" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="204.1" y="172">NZ</text>
+            <circle cx="251.3" cy="84.3" r="17" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6"/><text x="251.3" y="90.3">JP</text>
+          </g>
+          <g font-size="10" font-weight="700" fill="var(--fg)" text-anchor="middle">
+            <text x="340" y="20">NL 荷兰</text>
+            <text x="453" y="56">DE 德国</text>
+            <text x="512" y="163">FR 法国</text>
+            <text x="492" y="279">CA 加拿大</text>
+            <text x="400" y="355">US 美国</text>
+            <text x="281" y="355">PH 菲律宾</text>
+            <text x="189" y="279">AU 澳大利亚</text>
+            <text x="166" y="163">NZ 新西兰</text>
+            <text x="227" y="56">JP 日本</text>
+          </g>
+        </svg>
+        <p class="small muted" style="margin:6px 8px 4px">示意：九国作为地球村的九个入口节点，彼此不互为上下级，只共享一套语言包、身份标准与结算单位。</p>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:8px">地球村的「24 小时接力」</h3>
+        <div class="timeline">
+          <div class="tstep"><div class="dotn">01</div><div><h4>亚太班次 · 07:00–15:00（UTC+8 / +9 / +12）</h4><p>菲律宾、日本、澳大利亚、新西兰上线：内容生产、客服、翻译校对、社区答疑。</p></div></div>
+          <div class="tstep"><div class="dotn">02</div><div><h4>欧洲班次 · 08:00–16:00（UTC+1）</h4><p>法国、德国、荷兰接手：合规审查、商户拓展、做市与结算、与亚太交接未完成事项。</p></div></div>
+          <div class="tstep"><div class="dotn">03</div><div><h4>美洲班次 · 08:00–17:00（UTC−5 / −8）</h4><p>美国、加拿大收尾：资本与叙事、机构沟通、把当天产出写成英文与法文摘要。</p></div></div>
+          <div class="tstep"><div class="dotn">∞</div><div><h4>结果：任何一个时区提问，8 小时内必有人回应</h4><p>这是零预算能做到的「全球化」，靠的是时区，不是预算。</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:900;margin:22px 0 8px">九国数字孪生节点分工</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>国家</th><th>节点名</th><th>优先上链的轻资产</th><th>节点角色</th><th>时区</th></tr></thead>
+        <tbody>
+          <tr><td>🇺🇸 美国</td><td>NA-EAST</td><td>软件订阅 · IP 授权 · AI 模型调用</td><td>资本与叙事引擎</td><td class="num">UTC−5 / −8</td></tr>
+          <tr><td>🇨🇦 加拿大</td><td>NA-NORTH</td><td>AI 研究 · 游戏外包 · 清洁技术</td><td>英法双语桥</td><td class="num">UTC−5</td></tr>
+          <tr><td>🇯🇵 日本</td><td>JP-TOKYO</td><td>动漫 IP · 精密专利 · 入境旅游</td><td>内容与制造桥</td><td class="num">UTC+9</td></tr>
+          <tr><td>🇦🇺 澳大利亚</td><td>OC-SYD</td><td>教育出口 · 矿业技术 · VFX</td><td>南半球接力点</td><td class="num">UTC+10</td></tr>
+          <tr><td>🇳🇿 新西兰</td><td>OC-AKL</td><td>影视特效 · 农食品牌 · 毛利文化 IP</td><td>最小可行社区实验田</td><td class="num">UTC+12</td></tr>
+          <tr><td>🇵🇭 菲律宾</td><td>SEA-MNL</td><td>BPO · 英语教育 · 游戏美术</td><td>人力与语言引擎</td><td class="num">UTC+8</td></tr>
+          <tr><td>🇫🇷 法国</td><td>EU-PAR</td><td>奢侈品牌 · 葡萄酒 · 文旅</td><td>文化与品牌桥</td><td class="num">UTC+1</td></tr>
+          <tr><td>🇩🇪 德国</td><td>EU-BER</td><td>工业软件 · 隐形冠军专利 · 会展</td><td>工程与标准</td><td class="num">UTC+1</td></tr>
+          <tr><td>🇳🇱 荷兰</td><td>EU-AMS</td><td>港口物流 · 温室农业 · 支付</td><td>结算与物流枢纽</td><td class="num">UTC+1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:12px">虚拟地球的第一条纪律：<b>先孪生能验证的，再孪生有共识的</b>。一个商户的收款流水、一门课的完课记录、一次翻译的交付，都比一张漂亮的宇宙概念图更有价值——因为它们可被第三方核验。</div>
+    <div class="note" style="margin-top:10px"><b>从地球村到星际的第二层：</b>虚拟地球的第一阶段是九国节点，第二阶段是「地月系统孪生」——把月球轨道、中继卫星、着陆点、水冰分布也做成可查询的图层。当地月之间的物流、通信、能源都能被孪生，星际文明才有第一张真实的地图；否则所谓的星际只是又一层叙事。</div>
+  </div>
+</section>
+
+<!-- ========== 模拟地球 ========== -->
+<section class="block" id="sim">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">09</span>模拟地球 · Simulation Earth</h2>
+      <div class="desc">关键词：AI 文明模拟 + 资源优化 + 星际沙盘。先在数字世界里把未来跑一遍，再回到现实做决策。</div>
+    </div>
+
+    <div class="vgrid" style="margin-top:14px">
+      <div class="vcard"><div class="ico">🧠</div><h4>文明发展路径模拟</h4><p>给定能量、态度、协作、优化四个输入，推演文明等级与瓶颈出现在哪一环。</p><div class="eaco">EACO：四元模型即模拟器的四个输入变量</div></div>
+      <div class="vcard"><div class="ico">🌎</div><h4>气候与生态模拟</h4><p>碳排放、升温、极端天气、生态承载力。所有经济模型都必须挂在这条曲线上。</p><div class="eaco">EACO：绿色行为的可验证计量与结算</div></div>
+      <div class="vcard"><div class="ico">⚡</div><h4>能源与资源分配</h4><p>人均能耗、能源结构、关键矿产、水与粮食。约束条件写错，结论一定错。</p><div class="eaco">EACO：能源与碳凭证的清算单位</div></div>
+      <div class="vcard"><div class="ico">💹</div><h4>经济与财富流动</h4><p>资金流向、乘数效应、贫富分布、跨境结算摩擦。看得见流动，才谈得上优化。</p><div class="eaco">EACO：小额跨境流动的低摩擦通道</div></div>
+      <div class="vcard"><div class="ico">👥</div><h4>人口与城市发展</h4><p>出生率、迁徙、城市化、养老负担。九国正好覆盖三种人口结构。</p><div class="eaco">EACO：跨国家庭的汇款与赡养结算</div></div>
+      <div class="vcard"><div class="ico">🤖</div><h4>AI / 科技发展</h4><p>算力、数据、人才、监管四条约束线，模拟技术扩散速度与就业替代节奏。</p><div class="eaco">EACO：模型调用与数据贡献的微支付</div></div>
+      <div class="vcard"><div class="ico">🌙</div><h4>月球基地模拟</h4><p>辐射屏蔽、月尘、水冰开采、3D 打印建材、地月运输成本。</p><div class="eaco">EACO：地月供应链的记账单位（延迟 1.28 s）</div></div>
+      <div class="vcard"><div class="ico">🔴</div><h4>火星殖民模拟</h4><p>3–22 分钟通信延迟、ISRU 制氧制甲烷、闭环生命支持、心理隔离。</p><div class="eaco">EACO：离线签名 + 延迟执行的治理试验</div></div>
+      <div class="vcard"><div class="ico">🛰️</div><h4>星际航行沙盘</h4><p>推进方式、载荷、代际飞船、目标恒星选择。先算清楚能量，再谈浪漫。</p><div class="eaco">EACO：跨代际的价值继承与信托结构</div></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+        <h3 style="font-size:1rem;font-weight:900">文明指数沙盘 · 拖动四个变量看结果</h3>
+        <button class="btn" id="simReset">恢复「现实地球」</button>
+      </div>
+      <div class="simwrap">
+        <div>
+          <div class="ctrl">
+            <div class="lab"><span>⚡ Energy 能量（能源与资源可得性）</span><b id="vE">45</b></div>
+            <input type="range" id="sE" min="1" max="100" value="45">
+            <div class="hint">人均可用能、能源结构清洁度、关键资源保障</div>
+          </div>
+          <div class="ctrl">
+            <div class="lab"><span>🧭 Attitude 态度（正向心智与信任）</span><b id="vA">40</b></div>
+            <input type="range" id="sA" min="1" max="100" value="40">
+            <div class="hint">契约精神、信息透明度、公共信任存量</div>
+          </div>
+          <div class="ctrl">
+            <div class="lab"><span>🤝 Cooperation 协作（跨语言跨辖区协同）</span><b id="vC">35</b></div>
+            <input type="range" id="sC" min="1" max="100" value="35">
+            <div class="hint">语言互通、支付互通、标准互通、争议解决效率</div>
+          </div>
+          <div class="ctrl">
+            <div class="lab"><span>⚙️ Optimization 优化（迭代与学习速度）</span><b id="vO">40</b></div>
+            <input type="range" id="sO" min="1" max="100" value="40">
+            <div class="hint">反馈闭环、知识沉淀、失败复盘机制</div>
+          </div>
+          <div class="presets" id="simPresets">
+            <button data-e="45" data-a="40" data-c="35" data-o="40">现实地球</button>
+            <button data-e="62" data-a="58" data-c="55" data-o="60">数字地球</button>
+            <button data-e="74" data-a="70" data-c="72" data-o="76">月球前哨</button>
+            <button data-e="86" data-a="84" data-c="88" data-o="85">火星殖民</button>
+            <button data-e="97" data-a="96" data-c="98" data-o="97">星际文明</button>
+          </div>
+        </div>
+        <div class="simout">
+          <div class="label small muted" style="font-weight:800;letter-spacing:.6px">文明指数 CI</div>
+          <div class="indexbig" id="simIndex">40.1</div>
+          <div style="margin-top:4px"><span class="tag" id="simStage">L1 地球村雏形</span></div>
+          <div class="stagebar"><i id="simBar" style="width:40%"></i></div>
+          <div class="stagetags"><span>L0</span><span>L2</span><span>L4</span><span>L6</span></div>
+          <div class="fbar"><div class="t"><span>能量</span><span id="fE">45</span></div><div class="b"><i id="bE" style="width:45%"></i></div></div>
+          <div class="fbar"><div class="t"><span>态度</span><span id="fA">40</span></div><div class="b"><i id="bA" style="width:40%"></i></div></div>
+          <div class="fbar"><div class="t"><span>协作</span><span id="fC">35</span></div><div class="b"><i id="bC" style="width:35%"></i></div></div>
+          <div class="fbar"><div class="t"><span>优化</span><span id="fO">40</span></div><div class="b"><i id="bO" style="width:40%"></i></div></div>
+          <div class="simnote" id="simAdvice">把最低的一项先抬起来，收益最大。</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:12px">算法：CI = (E/100)<sup>0.30</sup> × (A/100)<sup>0.25</sup> × (C/100)<sup>0.25</sup> × (O/100)<sup>0.20</sup> × 100。用加权几何平均而非算术平均，是为了表达「乘法模型」：任一项极低，总分就被拉垮——这正是 EACO 四元模型的本意。数值仅用于讨论与教学，不是对现实的预测。</div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:8px">星际沙盘的三组硬参数</h3>
+        <div class="tablewrap" style="border:0">
+          <table style="min-width:460px">
+            <thead><tr><th>目的地</th><th>距离</th><th class="num">单程延迟</th><th>窗口</th></tr></thead>
+            <tbody>
+              <tr><td>近地轨道 LEO</td><td>约 400 km</td><td class="num">0.0013 秒</td><td>随时</td></tr>
+              <tr><td>月球</td><td>约 38.44 万 km</td><td class="num">1.28 秒</td><td>随时（约 3 天）</td></tr>
+              <tr><td>火星</td><td>5,460 万 – 4.01 亿 km</td><td class="num">3.0 – 22.3 分钟</td><td>约 26 个月</td></tr>
+              <tr><td>比邻星</td><td>4.24 光年</td><td class="num">4.24 年</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:10px">推论：<b>延迟超过 1 分钟，就不能实时投票</b>。所以星际治理必须改成「预授权 + 延迟执行 + 事后审计」，否则飞船会等一句永远到不了的"同意"。用现在的化学火箭去比邻星要 7 万年以上，能量等级才是天花板。</div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:8px">从现实到星际的六步</h3>
+        <div class="timeline">
+          <div class="tstep"><div class="dotn">01</div><div><h4>现实地球</h4><p>先解决吃饭、能源、信任。这一层没打通，上面全是沙盘。</p></div></div>
+          <div class="tstep"><div class="dotn">02</div><div><h4>虚拟地球</h4><p>把可验证的部分映射上链：身份、资产、流水、课程、凭证。</p></div></div>
+          <div class="tstep"><div class="dotn">03</div><div><h4>模拟地球</h4><p>用 AI 把气候、能源、人口、财富流向跑上千遍，先失败在模型里。</p></div></div>
+          <div class="tstep"><div class="dotn">04</div><div><h4>月球</h4><p>第一个真正的「离地经济」：水冰、氦-3、地月运输、辐射工程。</p></div></div>
+          <div class="tstep"><div class="dotn">05</div><div><h4>火星</h4><p>第一个「不能返航」的社会：闭环生态、延迟治理、代际契约。</p></div></div>
+          <div class="tstep"><div class="dotn">06</div><div><h4>星际文明</h4><p>当能量不再稀缺，文明的稀缺品就只剩下「态度」与「协作」。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 宇宙档案 ========== -->
+<section class="block" id="cosmos">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">10</span>宇宙档案 · 白皮书 / 图谱 / 手册 / DAO</h2>
+      <div class="desc">四份文件，一条主线：现实地球 → 虚拟地球 → 模拟地球 → 月球 → 火星 → 星际文明。最高原则始终是那一句——所有文明，包括 EACO，都为人类文明服务。</div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div class="tabs" id="cosmosTabs">
+        <button data-doc="wp" class="on">① 宇宙白皮书</button>
+        <button data-doc="atlas">② 文明设定图谱</button>
+        <button data-doc="manual">③ 星际使用手册</button>
+        <button data-doc="dao">④ 宇宙 DAO 治理</button>
+      </div>
+
+      <!-- 白皮书 -->
+      <div class="doc on" id="doc-wp">
+        <h4><span class="n">0</span>一句话</h4>
+        <p>EACO 是地球文明向星际文明过渡期的<b>协作记账与激励层</b>：它不承诺价格，只承诺一套能被验证、被翻译、被治理的协作规则。</p>
+
+        <h4><span class="n">1</span>问题与机会</h4>
+        <ul>
+          <li><b>碎片化：</b>九种语言、九套监管、九种支付习惯，让「地球村」停在口号层面。</li>
+          <li><b>结算成本：</b>小额跨境支付的摩擦常常高于交易本身，创作者与小微商户被排除在外。</li>
+          <li><b>尺度断点：</b>一旦离开地球，主权货币与司法管辖同时失效，需要一套不依赖主权的记账约定。</li>
+          <li><b>机会：</b>Solana 级别的低成本结算 + 可验证身份 + 九语内容，第一次让「一个地球村账户」在工程上可行。</li>
+        </ul>
+
+        <h4><span class="n">2</span>四元模型（乘法，不是加法）</h4>
+        <p class="mono" style="background:var(--primary-soft);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:.82rem">EACO = Energy<sup>0.30</sup> × Attitude<sup>0.25</sup> × Cooperation<sup>0.25</sup> × Optimization<sup>0.20</sup></p>
+        <p>任一项趋零，整体趋零。这是本白皮书所有推演的前提：<b>不能靠单点爆发换取整体跃迁</b>。指数权重代表边际贡献——能量是地基，态度与协作是摩擦系数，优化是复利。</p>
+
+        <h4><span class="n">3</span>三层架构</h4>
+        <ul>
+          <li><b>价值层：</b>EACO 部署于 Solana，CA <span class="mono" style="font-size:.76rem">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>；主池为 Raydium EACO/SOL，另有 Orca、Meteora 稳定币池。</li>
+          <li><b>身份层：</b>DID + 语言包。身份声明可验证但不公开隐私；语言能力与贡献记录可携带。</li>
+          <li><b>治理层：</b>九国小组 → 地球村议会 → 星际委员会，三级结构，提案须过九语翻译。</li>
+        </ul>
+
+        <h4><span class="n">4</span>供给与分配（草案，需 DAO 表决）</h4>
+        <div class="tablewrap" style="margin:6px 0 8px">
+          <table style="min-width:520px">
+            <thead><tr><th>池</th><th class="num">数量（EACO）</th><th class="num">占比</th><th>用途</th><th>约束</th></tr></thead>
+            <tbody>
+              <tr><td>九国社区池</td><td class="num">450,000,000</td><td class="num">33.3%</td><td>水龙头、赏金、线下活动、翻译</td><td>按季度公开明细</td></tr>
+              <tr><td>流动性激励</td><td class="num">135,000,000</td><td class="num">10.0%</td><td>做市深度与 LP 激励</td><td>与锁仓期绑定</td></tr>
+              <tr><td>公共物品与教育</td><td class="num">135,000,000</td><td class="num">10.0%</td><td>九语教材、知识库、开源工具</td><td>成果公开可复用</td></tr>
+              <tr><td>长期储备</td><td class="num">405,000,000</td><td class="num">30.0%</td><td>跨周期储备、月球/火星专项</td><td>10 年线性，需多签</td></tr>
+              <tr><td>创始与运营</td><td class="num">225,000,000</td><td class="num">16.7%</td><td>持续开发与合规</td><td>4 年归属，按季披露</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">总量按链上 FDV / 价格反推约 13.5 亿枚；上表为结构建议，不构成已生效的分配承诺。</p>
+
+        <h4><span class="n">5</span>五阶段路线</h4>
+        <ol>
+          <li><b>2024–2029 数字地球：</b>九国小组跑通「拿到 → 用掉」，把轻资产上链做成可验证的样板。</li>
+          <li><b>2030s 月球经济：</b>水冰、能源、地月运输的供应链记账；1.28 秒延迟下的近实时治理。</li>
+          <li><b>2040s 火星社会：</b>3–22 分钟延迟倒逼「预授权 + 延迟执行」；闭环生态中的资源配额。</li>
+          <li><b>2050s+ 恒星文明：</b>代际飞船的价值继承、信托与跨代契约。</li>
+          <li><b>贯穿始终：</b>语言与教育。任何阶段，翻译与教学都是最低成本的基建。</li>
+        </ol>
+
+        <h4><span class="n">6</span>风险</h4>
+        <p>流动性极薄（全链约 600 美元级）、监管差异巨大、治理可能被少数人俘获、叙事通胀导致「故事跑在工程前面」。这四条写在白皮书里，而不是写在免责声明里，因为它们决定项目能否活过下一个周期。</p>
+
+        <div class="principle">最高原则：所有文明——包括 EACO——都为人类文明服务。任何条款、提案、路线，一旦与之冲突即无效。此条不可被投票修改。</div>
+      </div>
+
+      <!-- 图谱 -->
+      <div class="doc" id="doc-atlas">
+        <h4><span class="n">I</span>文明等级图谱（Kardashev 标度校准）</h4>
+        <p>卡尔达肖夫指数 K = (log₁₀P − 6) / 10，P 为可支配功率（瓦）。地球当前约 1.9×10¹³ W，K ≈ 0.73。下表把它拆成可理解的六级，并对齐 EACO 的角色。</p>
+        <div class="lvl"><span class="chip">L0</span><div><b>生存期 · K &lt; 0.7</b><p>能量靠生物质与化石燃料，协作半径 = 部落，记账靠信任。EACO 在这里只是「打赏与互助」。</p></div></div>
+        <div class="lvl"><span class="chip">L1</span><div><b>地球村雏形 · K 0.7–0.75</b><p>互联网把人连起来，但语言与支付仍是墙。九语内容 + 低成本结算开始有意义。</p></div></div>
+        <div class="lvl"><span class="chip">L2</span><div><b>数字孪生 · K 0.75–0.8</b><p>身份、资产、流水可验证。轻资产（版权、专利、课程）成为主要上链对象。</p></div></div>
+        <div class="lvl"><span class="chip">L3</span><div><b>行星文明 · K ≈ 1.0</b><p>可支配功率约 10¹⁶ W，能源近乎不稀缺，稀缺的是「态度与协作」。</p></div></div>
+        <div class="lvl"><span class="chip">L4</span><div><b>恒星文明 · K ≈ 2.0</b><p>约 10²⁶ W，戴森结构级别。地月—火星供应链成为常态，延迟治理成熟。</p></div></div>
+        <div class="lvl"><span class="chip">L5</span><div><b>星系文明 · K ≈ 3.0</b><p>约 10³⁶ W，跨恒星协作。此时「货币」退化为信用与配额的表达形式。</p></div></div>
+
+        <h4><span class="n">II</span>支撑星际航行的五项基础技术（公开状态）</h4>
+        <div class="tablewrap" style="margin:6px 0 10px">
+          <table style="min-width:520px">
+            <thead><tr><th>技术</th><th>作用</th><th>公开状态</th><th>EACO 关联</th></tr></thead>
+            <tbody>
+              <tr><td>零点能 / 无限能源</td><td>突破能量天花板</td><td><span class="tag warn">理论与争议</span></td><td>能量计价与配额</td></tr>
+              <tr><td>力凝成胶球 · 凭空造物</td><td>物质按需编程</td><td><span class="tag warn">未验证</span></td><td>物质资源账本</td></tr>
+              <tr><td>人体编程 · 长寿</td><td>跨越航行时长</td><td><span class="tag gray">实验阶段</span></td><td>跨代契约与信托</td></tr>
+              <tr><td>星门 / 虫洞跳跃</td><td>绕过光速限制</td><td><span class="tag warn">理论</span></td><td>跨节点清算协议</td></tr>
+              <tr><td>曲速引擎</td><td>超光速航行</td><td><span class="tag warn">未公开 / 未证实</span></td><td>跨恒星治理延迟</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">诚实标注状态，是这份图谱的第一条规矩。把「理论」写成「已实现」，等于把整个叙事变成不可信。</p>
+
+        <h4><span class="n">III</span>文明图谱的四条主线</h4>
+        <ul>
+          <li><b>能量线：</b>生物质 → 化石 → 裂变 → 聚变 → 零点能。每一次跃迁都伴随社会组织形式的重写。</li>
+          <li><b>物质线：</b>采集 → 制造 → 打印 → 编程。物质的稀缺性逐步让位于「设计能力」。</li>
+          <li><b>生命线：</b>治疗 → 增强 → 编程 → 延续。伦理边界必须先于技术落地。</li>
+          <li><b>协作线：</b>部落 → 城邦 → 国家 → 地球村 → 星际共同体。语言与记账是协作的两条腿。</li>
+        </ul>
+        <div class="principle">图谱不是预言，而是一张「约束清单」：它告诉你哪一步缺能量、哪一步缺信任、哪一步缺语言。</div>
+      </div>
+
+      <!-- 手册 -->
+      <div class="doc" id="doc-manual">
+        <h4><span class="n">01</span>出发前的三件套</h4>
+        <ul>
+          <li><b>身份：</b>DID + 一个可恢复的钱包（助记词离线分片保存，至少两地）。</li>
+          <li><b>语言包：</b>至少 2 种语言的高频词表（本站第 06 节就是最小可用版本）。</li>
+          <li><b>价值账户：</b>EACO + SOL（gas）+ USDC（稳定计价），三者比例按任务周期调整。</li>
+        </ul>
+
+        <h4><span class="n">02</span>通信协议</h4>
+        <ul>
+          <li><b>延迟优先：</b>先测往返延迟，再决定是「实时会议」还是「异步留言」。火星往返 6–44.6 分钟，实时会议不存在。</li>
+          <li><b>异步三原则：</b>结论先行、一条消息一件事、必须带可验证附件。</li>
+          <li><b>多语言：</b>技术指令用英文 + 母语双语，数字与单位必须写全（避免 1,000 与 1.000 的歧义）。</li>
+          <li><b>离线签名：</b>无法联网时先本地签名，回到窗口期再广播；所有交易带时间戳与序号，防重放。</li>
+        </ul>
+
+        <h4><span class="n">03</span>能源与物质</h4>
+        <ul>
+          <li>每公斤载荷成本决定一切：先减重，再谈速度。</li>
+          <li>ISRU（就地资源利用）优先：月壤制氧、水冰制氢、火星大气制甲烷。</li>
+          <li>闭环率是硬指标：水、氧气、食物的循环率每提升 1%，任务寿命延长数月。</li>
+        </ul>
+
+        <h4><span class="n">04</span>治理：延迟下的决策</h4>
+        <ul>
+          <li><b>预授权：</b>出发前把「可自行决定的范围」写进合约，超出即冻结。</li>
+          <li><b>延迟执行：</b>提案通过后设冷却期（地球 72 小时 / 月球 1 小时 / 火星 24 小时），期间可撤回。</li>
+          <li><b>事后审计：</b>每个行动留可验证日志，回地球后公开复盘。</li>
+        </ul>
+
+        <h4><span class="n">05</span>伦理三条</h4>
+        <ol>
+          <li><b>不干预：</b>不与未接触文明发生主动接触，观测优先。</li>
+          <li><b>可回溯：</b>任何不可逆操作必须有两级复核与冷却期。</li>
+          <li><b>最小伤害：</b>当收益与风险不可比时，选择保守。</li>
+        </ol>
+
+        <h4><span class="n">06</span>时间表</h4>
+        <ul>
+          <li><b>90 天：</b>九国各 5 位活跃；1 家商户收 EACO；1 份母语一页纸。</li>
+          <li><b>1 年：</b>九语内容库成型；每国 1 位本地组长；季度数据公开。</li>
+          <li><b>10 年：</b>轻资产上链样板 100 个；月球经济白皮书第一版；治理经受一次真实争议。</li>
+        </ul>
+        <div class="principle">手册的第一句话：先活下来，再谈星际。任何需要「先有巨额资金」才能启动的方案，都不属于这本手册。</div>
+      </div>
+
+      <!-- DAO -->
+      <div class="doc" id="doc-dao">
+        <h4><span class="n">01</span>三层架构</h4>
+        <div class="lvl"><span class="chip">L3</span><div><b>星际委员会（9 席，每国 1 席）</b><p>战略方向、紧急否决、跨代际事务。任期 1 年，可连任 1 次。</p></div></div>
+        <div class="lvl"><span class="chip">L2</span><div><b>地球村议会（27 席，按语言区分配）</b><p>预算审批、标准制定、九语内容基金、争议终审。</p></div></div>
+        <div class="lvl"><span class="chip">L1</span><div><b>九国小组（不限席）</b><p>日常执行：拉新、翻译、线下活动、商户拓展、做市沟通。</p></div></div>
+
+        <h4><span class="n">02</span>提案流程（最短 14 天）</h4>
+        <div class="timeline" style="margin-top:6px">
+          <div class="tstep"><div class="dotn">D1</div><div><h4>提交</h4><p>模板：问题 / 方案 / 预算 / 可验证指标 / 风险。缺一项即退回。</p></div></div>
+          <div class="tstep"><div class="dotn">D2</div><div><h4>九语翻译</h4><p>48 小时内出 9 个语言版本，未翻译的提案不得进入投票——语言不通等于剥夺投票权。</p></div></div>
+          <div class="tstep"><div class="dotn">D3–9</div><div><h4>公开讨论</h4><p>至少 1 场跨时区线上会；反对意见必须书面回应。</p></div></div>
+          <div class="tstep"><div class="dotn">D10–14</div><div><h4>投票与执行</h4><p>通过后进入 72 小时冷却期，随后由执行小组落地，30 天内提交复盘。</p></div></div>
+        </div>
+
+        <h4><span class="n">03</span>投票权重：防巨鲸设计</h4>
+        <ul>
+          <li><b>基础票：</b>1 人 1 票（DID 去重，防女巫靠行为验证）。</li>
+          <li><b>贡献加成：</b>按过去 12 个月的验证贡献最多 ×2，且单一地址不得超过总票权 5%。</li>
+          <li><b>否决门槛：</b>触及最高原则的提案，星际委员会 6/9 可一票否决。</li>
+          <li><b>不投票即失效：</b>连续两次未参与治理的席位自动补选，避免僵尸席位。</li>
+        </ul>
+
+        <h4><span class="n">04</span>财库</h4>
+        <ul>
+          <li>多签 5/9（九国各 1 席），单笔超过季度预算 10% 需议会二次确认。</li>
+          <li>所有支出附发票/链上凭证，季度全量公开。</li>
+          <li>设「反脆弱储备」：不低于总储备 20%，仅在极端情形下动用。</li>
+        </ul>
+
+        <h4><span class="n">05</span>争议解决</h4>
+        <p>三级仲裁：小组内部 → 议会调解 → 随机抽选 7 人陪审（利益相关方回避）。全程 30 天冷却期，期间资金冻结。</p>
+
+        <h4><span class="n">06</span>为星际延迟而设计</h4>
+        <ul>
+          <li><b>预授权额度：</b>月球节点可自主支出季度预算的 15%，火星 30%，超出需回传地球。</li>
+          <li><b>延迟执行：</b>地球 72 小时、月球 1 小时、火星 24 小时冷却，均可撤回。</li>
+          <li><b>离线签名：</b>通信窗口关闭期间累积的决议，窗口开启后按序号批量广播。</li>
+        </ul>
+
+        <div class="principle">最高原则条款：所有文明（包括 EACO）为人类文明服务。本条款不进入投票程序，任何试图修改它的提案自动作废。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 文明经典 ========== -->
+<section class="block" id="wisdom">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">11</span>文明经典 × EACO 地球 · 金刚经 / 易经 / 宝箧印</h2>
+      <div class="desc">三部经典提供的不是「加持」，而是三套约束：<b>怎样给而不执、怎样变而不乱、怎样存而不失</b>。每一条都落到一个可执行动作上——不做玄学，不做价格预言，不拿经文募资。</div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div class="tabs">
+        <button data-doc="jing" class="on">① 金刚经 · 无住</button>
+        <button data-doc="yi">② 易经 · 时位</button>
+        <button data-doc="bao">③ 宝箧印 · 封藏</button>
+      </div>
+
+      <div class="doc on" id="doc-jing">
+        <h4><span class="n">0</span>一句话</h4>
+        <p>「应无所住而生其心」——事要真做，但心不挂在结果上。EACO 的第一条纪律正是这个：<b>先做可验证的事，再谈价格</b>。</p>
+
+        <h4><span class="n">1</span>无住相布施 → 空投、赏金、水龙头</h4>
+        <p>布施而不住相，意思是给出去时不附带「你以后要还我」的隐性契约。对应到 EACO：九国水龙头与翻译赏金按「交付即发」结算，公告只写规则与数量，不写涨幅、不写预期收益、不绑定持仓要求。</p>
+        <ul>
+          <li><b>动作：</b>发放文案只写「做什么 / 得多少 / 怎么验」，不写「未来值多少」。</li>
+          <li><b>边界：</b>不做「持币生息」「拉人返佣」「保本回购」——那既是有相布施，也在多数司法辖区直接违法。</li>
+        </ul>
+
+        <h4><span class="n">2</span>筏喻 → 工具不是目的</h4>
+        <p>「法尚应舍，何况非法」：筏子用来渡河，到岸就该放下。EACO 是筏——它解决九国之间的小额结算与协作记账，不该反过来支配人的时间、判断与生活。</p>
+        <ul>
+          <li><b>动作：</b>白皮书里写死最高原则：所有文明（包括 EACO）为人类文明服务。</li>
+          <li><b>边界：</b>任何人以「EACO 信仰」要求你付费入会、发展下线、押上房租或学费，都是把筏子当成了岸。</li>
+        </ul>
+
+        <h4><span class="n">3</span>三心不可得 → 只记已发生的事实</h4>
+        <p>过去心、现在心、未来心皆不可得。落到账本上：只记录链上已经发生的转账、已经交付的翻译、已经上完的课；不预支未来的承诺，也不把「计划」写成「已完成」。</p>
+        <ul>
+          <li><b>动作：</b>本页所有价格都标注为「快照 + 时间戳」，而不是「目标价」。</li>
+          <li><b>动作：</b>月报里把「已发生」和「打算做」分成两栏，颜色不同，不许混排。</li>
+        </ul>
+
+        <h4><span class="n">4</span>凡所有相，皆是虚妄 → 对「市值」的态度</h4>
+        <p>K 线、市值、APR 都是相。EACO 目前全链流动性只有数百美元级，在这种情况下，任何「市值」都只是最后一笔成交价乘以总量的结果，一笔几百美元的交易就能让它变形。</p>
+        <ul>
+          <li><b>动作：</b>本页把「流动性」排在「市值」前面展示，就是为了提醒这件事。</li>
+        </ul>
+
+        <div class="principle">经典在这里的作用是「防止自我神化」，不是「给项目背书」。任何把经文当成收益承诺、募资话术或等级制度的说法，都已经违背了经文本身。</div>
+      </div>
+
+      <div class="doc" id="doc-yi">
+        <h4><span class="n">0</span>一句话</h4>
+        <p>《易》有三义：<b>变易、不易、简易</b>。EACO 要能变（策略随环境改），要守住不易（最高原则不动），还要做到简易（一句话说得清）。</p>
+
+        <h4><span class="n">1</span>六爻 → 六级治理</h4>
+        <p>爻位不是等级，而是<b>责任半径</b>。位越高，越要「中」——不偏不倚、不越权、不替下面的人做决定。</p>
+        <div class="lvl"><span class="chip">初爻</span><div><b>个人 · 学习与交付</b><p>先把一件事做完：一篇翻译、一次活动、一个商户接通。此位只对自己负责。</p></div></div>
+        <div class="lvl"><span class="chip">二爻</span><div><b>小组 · 三到十人</b><p>能被上级看见的稳定输出。此位的错是「承诺自己做不好的事」。</p></div></div>
+        <div class="lvl"><span class="chip">三爻</span><div><b>社区 · 跨小组协作</b><p>三爻多凶：处在上下交界，最容易两头不讨好。此位要做的是把规则讲清，而不是当好人。</p></div></div>
+        <div class="lvl"><span class="chip">四爻</span><div><b>国家小组 · 九国各一</b><p>对外代表一国社区，对内向议会负责。此位要「柔」：多听少断。</p></div></div>
+        <div class="lvl"><span class="chip">五爻</span><div><b>地球村议会</b><p>定规则、批预算。此位要「中正」：不偏向出资多的人，也不偏向声音大的人。</p></div></div>
+        <div class="lvl"><span class="chip">上爻</span><div><b>星际委员会 · 守原则</b><p>不日常管事，只在触及最高原则时行使否决。此位最忌「什么都想管」。</p></div></div>
+
+        <h4><span class="n">2</span>革卦「己日乃孚」→ 变革要等信任到位</h4>
+        <p>革卦讲改革必须「己日乃孚」——到了该革的那一天，人们已经信了，才革得成。所以 EACO 的顺序不能颠倒：<b>先把九国小组的交付做出来（孚），再改制度、改分配、改叙事</b>。反过来做，就是每次改规则都在消耗信任余额。</p>
+        <ul>
+          <li><b>动作：</b>任何规则变更，先在两个国家小组试点满 90 天，再全网推行。</li>
+          <li><b>动作：</b>改规则时必须同时公布「谁因此受损、怎么补」，否则不进入投票。</li>
+        </ul>
+
+        <h4><span class="n">3</span>既济 → 未济</h4>
+        <p>六十四卦以「未济」收尾：完成了，也要按未完成对待。一轮周期跑完，就把「已达成」的标签撕掉，重新测一次流动性、活跃地址、真实交付量。</p>
+        <ul>
+          <li><b>动作：</b>每季度做一次「归零复盘」：假设今天从零开始，哪些东西还值得重做一遍？</li>
+        </ul>
+
+        <h4><span class="n">4</span>简易 → 一句话说清</h4>
+        <p>「易简而天下之理得」。如果一句话说不清 EACO 是什么，说明机制还没设计好，而不是听众不够聪明。当前版本的一句话：<b>EACO 是九个国家之间的零钱和记分牌。</b></p>
+
+        <h4><span class="n">5</span>时位 → 不要在错的位置用力</h4>
+        <p>同一件事，在初爻做叫「学习」，在上爻做叫「越权」。九国小组长最常犯的错，是在自己只有二爻资源的时候，用五爻的口吻对外承诺。</p>
+        <ul>
+          <li><b>动作：</b>每个岗位写清「你能决定什么、不能决定什么」，一页纸，公开。</li>
+        </ul>
+
+        <div class="principle">不占卜价格，不把卦象当买卖信号。用《易》看结构与时机，不用它替代证据——这是本页与「算命」的分界线。</div>
+      </div>
+
+      <div class="doc" id="doc-bao">
+        <h4><span class="n">0</span>一句话</h4>
+        <p>宝箧是容器，印是验真，塔是公开，护持是传承。这四件事，正好对应一份文明档案的四个动作：<b>封存 → 签名 → 公开 → 传承</b>。</p>
+
+        <h4><span class="n">1</span>宝箧 → 档案要能封存</h4>
+        <p>经文说「书写此经，置于塔中」，重点不在塔的材质，而在<b>有一个不被随手改动的容器</b>。EACO 的做法很朴素：把九语文本、汇率快照、贡献记录做成一份份文件，算哈希，再把哈希写进链上备注。</p>
+        <ul>
+          <li><b>动作：</b>每月一份「九国月报」，文件存仓库/IPFS，哈希写链上，任何人可复算。</li>
+          <li><b>动作：</b>文档版本号写进文件名，旧版不删除，只标记 superseded。</li>
+        </ul>
+
+        <h4><span class="n">2</span>印 → CA 只有一个</h4>
+        <p>印是用来验真的。链上世界的印就是合约地址：<span class="mono" style="font-size:.76rem">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span>。任何同名代币、任何「新合约升级」「迁移空投」，一律先按假币处理。</p>
+        <ul>
+          <li><b>动作：</b>转账前从本页复制 CA，绝不在群里点别人发的链接。</li>
+          <li><b>动作：</b>对外物料只印一个 CA；多印一个，就等于给骗子多开一扇门。</li>
+        </ul>
+
+        <h4><span class="n">3</span>塔 → 公共物品必须公开</h4>
+        <p>塔立在城中，是给所有人看的，不是给持有人看的。对应项目里的公共物品池（10%）：词典、教材、开源工具——成果必须公开可复用，不能做成付费墙，也不能只给「持币者」看。</p>
+        <ul>
+          <li><b>动作：</b>公共物品资助的交付物，默认开源；确需闭源的，须在提案里写明理由并由议会批准。</li>
+        </ul>
+
+        <h4><span class="n">4</span>护持 → 跨代传承</h4>
+        <p>护持不是守财，是让东西活过下一代人。储备 10 年线性释放、多签 5/9、反脆弱储备不低于 20%——这三条的共同目的只有一个：<b>这一代人不能把储备一次用完</b>。</p>
+        <ul>
+          <li><b>动作：</b>任何单笔超过季度预算 10% 的支出，强制 30 天公示期。</li>
+        </ul>
+
+        <h4><span class="n">5</span>边界</h4>
+        <p>宗教文本用于伦理约束与自我提醒，<b>不用于募资、不承诺功德、不承诺收益</b>。把经文印在募资海报上，是最快失去信任的方式——信的人觉得被冒犯，不信的人觉得被套路。</p>
+
+        <div class="principle">封存 → 验真 → 公开 → 传承。四步做完，一份档案才算真正存在过；只做第一步，那叫「存了个网盘链接」。</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="font-size:.98rem;font-weight:900;margin-bottom:9px">三部经典对同一件事的四种回答</h3>
+      <div class="tablewrap">
+        <table style="min-width:640px">
+          <thead><tr><th>维度</th><th>金刚经</th><th>易经</th><th>宝箧印</th><th>对 EACO 的硬要求</th></tr></thead>
+          <tbody>
+            <tr><td>对待结果</td><td>无住相</td><td>时位</td><td>—</td><td>不承诺价格，只披露已发生的事实</td></tr>
+            <tr><td>对待变化</td><td>筏喻</td><td>革卦 · 未济</td><td>—</td><td>先试点 90 天，每季度归零重测</td></tr>
+            <tr><td>对待工具</td><td>法尚应舍</td><td>简易</td><td>宝箧</td><td>一句话说得清；说不清就重做机制</td></tr>
+            <tr><td>对待信任</td><td>三心不可得</td><td>己日乃孚</td><td>印</td><td>只认一个 CA；只记已发生</td></tr>
+            <tr><td>对待传承</td><td>—</td><td>既济 → 未济</td><td>塔 · 护持</td><td>公共物品开源 + 10 年线性储备</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">读法：左边三列是三种「看问题的角度」，最后一列才是可验收的条款。<b>经典给方向，条款给边界，代码给证据</b>——缺任何一个，这套东西都会散。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 华商地图 ========== -->
+<section class="block" id="huashang">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">12</span>华商 × EACO Web3 · 10 个最友善的海外国家与城市</h2>
+      <div class="desc">排序不是「最好」，而是<b>综合适配度</b>：华语可达性 40% + 监管明确度 30% + 综合成本 30%。同一座城市，对做合规主体的和对做线下商户的，分数完全不同——所以最后一列写「适合做什么」，而不是「好不好」。</div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:14px">
+      <table style="min-width:900px">
+        <thead>
+          <tr><th>#</th><th>国家 · 城市</th><th>华商基础</th><th>Web3 监管与牌照</th><th>综合成本</th><th>最适合做什么</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">1</td><td><b>新加坡</b> · Singapore</td><td>华商、家办、闽粤侨团密集；中英双语通行</td><td>MAS《支付服务法》DPT 牌照，规则清晰但门槛高</td><td><span class="tag warn">高</span></td><td>合规主体、基金架构、区域总部</td></tr>
+          <tr><td class="num">2</td><td><b>阿联酋</b> · 迪拜</td><td>华商贸易、转口、工程承包集中；龙城商圈成熟</td><td>VARA（迪拜）+ ADGM 双轨，有专门数字资产法</td><td><span class="tag gray">中</span></td><td>中东—非洲通道、RWA、家族办公室</td></tr>
+          <tr><td class="num">3</td><td><b>中国香港</b></td><td>与国际资本和内地供应链的唯一双向接口</td><td>SFC 虚拟资产交易平台发牌 + 稳定币条例</td><td><span class="tag warn">高</span></td><td>合规交易、RWA、离岸人民币结算</td></tr>
+          <tr><td class="num">4</td><td><b>马来西亚</b> · 吉隆坡</td><td>华语通行，中小华商密度高，生活成本低</td><td>SC 数字资产指引 + Labuan 离岸框架</td><td><span class="tag">低</span></td><td>运营中心、客服、内容与翻译团队</td></tr>
+          <tr><td class="num">5</td><td><b>泰国</b> · 曼谷</td><td>华商零售、旅游、餐饮集中；华人街区成熟</td><td>SEC 数字资产营业执照，东南亚较成熟</td><td><span class="tag">低</span></td><td>线下商户接入、旅游支付、社群运营</td></tr>
+          <tr><td class="num">6</td><td><b>日本</b> · 东京</td><td>华商制造、贸易、餐饮；华人 IT 社群大</td><td>资金决济法 + 金商法，牌照极严、审计重</td><td><span class="tag warn">高</span></td><td>合规合作、硬件与供应链、内容授权</td></tr>
+          <tr><td class="num">7</td><td><b>韩国</b> · 首尔</td><td>华人商圈与留学生群体活跃</td><td>特定金融情报法 VASP 申报，实名账户制</td><td><span class="tag warn">中高</span></td><td>社群、内容、KOL 合作</td></tr>
+          <tr><td class="num">8</td><td><b>瑞士</b> · 楚格</td><td>华商少，但中资家族办公室在增加</td><td>DLT Act，代币分类最清晰，法律确定性最高</td><td><span class="tag warn">极高</span></td><td>基金会、法律架构、长期储备托管</td></tr>
+          <tr><td class="num">9</td><td><b>格鲁吉亚</b> · 第比利斯</td><td>自由职业者、小型贸易与中转生意多</td><td>VASP 注册新规，2023 年起明显收紧</td><td><span class="tag">极低</span></td><td>小团队驻地、自由职业结算、低成本试错</td></tr>
+          <tr><td class="num">10</td><td><b>葡萄牙</b> · 里斯本</td><td>欧华商与数字游民聚集，生活成本可控</td><td>MiCA 全面适用，需欧盟牌照或与持牌方合作</td><td><span class="tag gray">中</span></td><td>欧元区入口、欧洲内容与多语翻译</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card">
+        <h3 style="font-size:.94rem;font-weight:900;margin-bottom:7px">选择公式</h3>
+        <p class="small muted" style="margin:0 0 9px">适配度 = 合规确定性 × 华语可达性 ÷ 综合成本。三项里任何一项接近零，总分就接近零——不要用「税低」这一项去覆盖「牌照不明」。</p>
+        <div class="minirow"><span>合规确定性</span><span>有无专门立法 / 牌照</span></div>
+        <div class="minirow"><span>华语可达性</span><span>能否用华语办事</span></div>
+        <div class="minirow"><span>综合成本</span><span>房租 + 薪酬 + 审计</span></div>
+        <div class="minirow"><span>银行开户</span><span>最容易被忽略的一票否决</span></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:.94rem;font-weight:900;margin-bottom:7px">三步尽调（两周内可做完）</h3>
+        <div class="minirow"><span>第一步</span><span>查监管白名单</span></div>
+        <div class="minirow"><span>第二步</span><span>问银行能否开户</span></div>
+        <div class="minirow"><span>第三步</span><span>找当地华商验证真实交付</span></div>
+        <p class="small muted" style="margin:9px 0 0">第三步最重要：一个城市是否「友善」，不看官网，看当地华商是否真的在那里做成了生意。找不到三个真实案例，就当它不存在。</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:.94rem;font-weight:900;margin-bottom:7px">一句话结论</h3>
+        <p class="small" style="margin:0 0 8px"><b>做合规主体</b>：新加坡 / 中国香港 / 瑞士楚格。<br><b>做成本中心</b>：吉隆坡 / 曼谷 / 第比利斯。<br><b>做通道生意</b>：迪拜 / 里斯本 / 东京。<br><b>做社群与内容</b>：首尔 / 曼谷 / 吉隆坡。</p>
+        <div class="note warn" style="margin-top:8px">中国内地对虚拟货币相关业务活动实行禁止性政策；本表只讨论海外城市的营商与监管环境，不构成在任何司法辖区开展业务的建议。监管随时变化，落地前请由当地执业律师出具书面意见。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 百友矩阵 ========== -->
+<section class="block" id="friends">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">13</span>地球最好的 100 个朋友 · 十类 × 十位</h2>
+      <div class="desc">「100 个朋友」不是一份名人名单，而是一张<b>可填满的矩阵</b>：十个类别，每类十个具体角色。空位是留给真实的人——名字填进去、交付记下来，这张表才有意义。一个 EACO 小组的最低配置，是在这十类里各找到至少一个人。</div>
+    </div>
+
+    <div class="frgrid" id="friendGrid" style="margin-top:14px"></div>
+
+    <div class="grid g4" style="margin-top:14px">
+      <div class="qcard"><b>① 这是资产还是费用？</b><p>买设备是资产，买流量是费用。EACO 奖励是费用还是资产，只看它有没有留下可复用的能力：译者、代码、商户关系。</p></div>
+      <div class="qcard"><b>② 现金流从哪来？</b><p>不来自后来入场的人，而来自真实交付：课程、翻译、商户折扣、内容授权。说不出来源的增长，都是转移，不是创造。</p></div>
+      <div class="qcard"><b>③ 复利在哪？</b><p>能积累的东西才复利：语言能力、代码、信任、档案。不能积累的（补贴、热度、喊单）只有一次性收益。</p></div>
+      <div class="qcard"><b>④ 杠杆与爆仓点在哪？</b><p>薄池 + 借贷 = 双重杠杆。先算最坏情况：如果价格归零、流动性抽干，你还剩什么？剩下的那部分，才是你的真实仓位。</p></div>
+    </div>
+
+    <div class="note" style="margin-top:12px">使用方式：把这张表打印出来，贴在墙上。每认识一个真实的人，就把名字写进对应格子里——<b>一百个格子填满之前，不需要再写新的白皮书</b>。这也是「地球最好的朋友」比「地球最好的币」更重要的原因。</div>
+  </div>
+</section>
+
+<!-- ========== 风险 ========== -->
+<section class="block" id="risk">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">14</span>风险、合规与边界</h2>
+      <div class="desc">这一节不能省。任何小组在九国落地，都绕不开下面六条。</div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <h4 style="font-weight:900;font-size:.92rem">1 · 市场风险（最硬的一条）</h4>
+        <p class="small muted" style="margin:6px 0 0">EACO 当前市值约 5.8 万美元、全链流动性约 600 美元、24 小时成交额常在 1 美元量级。这意味着：<b>价格极易被单笔交易推动，也极易在无人接盘时快速回落</b>。任何「1 厘 → 1 美元」的推演都是目标而非预测。</p>
+      </div>
+      <div class="card">
+        <h4 style="font-weight:900;font-size:.92rem">2 · 监管差异</h4>
+        <p class="small muted" style="margin:6px 0 0">美国（州级汇款牌照 / SEC 框架）、加拿大（MSB 注册）、欧盟（MiCA，法德荷适用）、日本（资金决済法 / 暗号資産交换业登记）、澳大利亚（AUSTRAC）、新西兰（FMA）、菲律宾（BSP 虚拟资产服务商）——<b>公开募集、代币发行、法币出入金</b>在不同辖区结论完全不同，落地前先问本地律师，不要用一国的做法套九国。</p>
+      </div>
+      <div class="card">
+        <h4 style="font-weight:900;font-size:.92rem">3 · 反洗钱与身份</h4>
+        <p class="small muted" style="margin:6px 0 0">P2P 与线下现金换币最容易踩线。保留交易记录、公开汇率、拒绝代持与代付、不与不明来源资金对接；如涉及法币兑换业务，必须做 KYC/AML。</p>
+      </div>
+      <div class="card">
+        <h4 style="font-weight:900;font-size:.92rem">4 · 税务</h4>
+        <p class="small muted" style="margin:6px 0 0">九国对加密资产的税务处理不同（持有 / 兑换 / 收款 / 空投的时点与税率都不同）。小组发放赏金、空投，需要按当地规则申报，不要用「空投不用交税」当默认假设。</p>
+      </div>
+      <div class="card">
+        <h4 style="font-weight:900;font-size:.92rem">5 · 别承诺收益</h4>
+        <p class="small muted" style="margin:6px 0 0">给新人的话术只讲三件事：这是什么、怎么免费拿到、怎么用掉。不讲「买了会涨到多少」，不做保本、回购、拉人头返利的承诺——那在多数辖区直接构成违法。</p>
+      </div>
+      <div class="card">
+        <h4 style="font-weight:900;font-size:.92rem">6 · 文化与语言尊重</h4>
+        <p class="small muted" style="margin:6px 0 0">毛利语长音符不能丢；菲律宾语不要一律当英语；加拿大法语区（魁北克）对语言极敏感，物料必须双语；新西兰手语要真人视频，不能文字冒充。语言做对了，信任才有一半。</p>
+      </div>
+    </div>
+    <div class="note warn" style="margin-top:14px">本页所有价格为公开链上数据快照与公开汇率中间价，仅用于社区协作、教学与工具演示，<b>不构成投资建议、要约、招揽或任何形式的收益承诺</b>。加密资产价格波动剧烈，可能损失全部本金。</div>
+  </div>
+</section>
+<!-- ========== 链接 ========== -->
+<section class="block" id="links">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">15</span>链接与合约 · 一页找齐</h2>
+      <div class="desc">行情、领取、内容、代码、九国专项。所有外部链接在新窗口打开，合约地址请以本页与 Solscan 为准，警惕同名假币。</div>
+    </div>
+
+    <div class="linkgrid" style="margin-top:14px">
+      <div class="lcard">
+        <h4>行情 · 交易 · 流动性</h4>
+        <a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Orb Markets · EACO<span>EACO 行情页</span></a>
+        <a href="https://orbmarkets.io/token/So11111111111111111111111111111111111111112" target="_blank" rel="noopener">Orb Markets · SOL<span>计价货币行情</span></a>
+        <a href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Solscan · 合约与持仓<span>核对 CA 真伪</span></a>
+        <a href="https://dexscreener.com/solana/7cmAfsKJrvcbMLWoXDTX5uZ2C8udBjzsKEgaxeweKMMU" target="_blank" rel="noopener">DexScreener · EACO/SOL<span>主池</span></a>
+        <a href="https://jup.ag/swap/SOL-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Jupiter 聚合兑换<span>最优路由</span></a>
+        <a href="https://app.meteora.ag/dlmm/create" target="_blank" rel="noopener">Meteora DLMM 建池<span>做市入口</span></a>
+        <a href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" rel="noopener">eaco-dao-pool 202601<span>DAMM v2 池</span></a>
+        <a href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank" rel="noopener">eaco / DOGE 池<span>社区实验池</span></a>
+      </div>
+      <div class="lcard">
+        <h4>免费领取 · 社区</h4>
+        <a href="https://ucoingroup.github.io/eaco-faucet/" target="_blank" rel="noopener">EACO 水龙头<span>零成本领取</span></a>
+        <a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener">EACO 50 汇率页<span>多币种换算</span></a>
+        <a href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">Discord 社区<span>九国频道入口</span></a>
+        <a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" rel="noopener">Earth's Best 100 Friends<span>100 个朋友计划</span></a>
+        <a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" rel="noopener">100 Ways to Wealth<span>财富认知</span></a>
+        <a href="https://ucoingroup.github.io/good-books/" target="_blank" rel="noopener">Good Books<span>书单</span></a>
+      </div>
+      <div class="lcard">
+        <h4>站点矩阵</h4>
+        <a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener">Earth's Best Coin<span>主站</span></a>
+        <a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" rel="noopener">eacoSWAP<span>兑换页</span></a>
+        <a href="https://ucoingroup.github.io/eaco-web3/" target="_blank" rel="noopener">EACO Web3<span>系列总览</span></a>
+        <a href="https://eastcoin.base44.app/" target="_blank" rel="noopener">East Coin 2026<span>东方叙事</span></a>
+        <a href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener">EACO Build World<span>共建世界</span></a>
+        <a href="https://eaco-web3.base44.app" target="_blank" rel="noopener">EACO Web3 App<span>应用入口</span></a>
+        <a href="https://earth-eaco-web3.base44.app/eaco-team" target="_blank" rel="noopener">EACO Team<span>团队页</span></a>
+        <a href="https://ucoingroup.github.io/linguistic-capital/" target="_blank" rel="noopener">Linguistic Capital<span>语言资本（与本页主题直接相关）</span></a>
+      </div>
+      <div class="lcard">
+        <h4>九国专项 · 文明叙事</h4>
+        <a href="https://ucoingroup.github.io/eur-eaco/" target="_blank" rel="noopener">EUR · EACO<span>欧洲 / 欧元区</span></a>
+        <a href="https://ucoingroup.github.io/au-trade/" target="_blank" rel="noopener">AU Trade<span>澳大利亚</span></a>
+        <a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" rel="noopener">Mohist Tech<span>墨家科技</span></a>
+        <a href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank" rel="noopener">Footsteps of Civilization<span>文明的足迹</span></a>
+        <a href="https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/" target="_blank" rel="noopener">EACO Web3 Series 2025<span>系列文档</span></a>
+        <a href="https://eaco.freedev.app/eaco_web3_series/" target="_blank" rel="noopener">Web3 Series（镜像）<span>备用访问</span></a>
+        <a href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank" rel="noopener">GitHub · eacoweb3-2026<span>源代码</span></a>
+        <a href="https://github.com/ucoingroup/FreeToken-eaco" target="_blank" rel="noopener">GitHub · FreeToken-eaco<span>免费发放工具</span></a>
+        <a href="https://github.com/ucoingroup/eacoswap2025" target="_blank" rel="noopener">GitHub · eacoswap2025<span>兑换前端</span></a>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:7px">流动性现状（必须说清楚）</h3>
+        <div class="minirow"><span>主池</span><span>Raydium EACO/SOL</span></div>
+        <div class="minirow"><span>全链流动性</span><span id="liqEcho">—</span></div>
+        <div class="minirow"><span>市值 / FDV</span><span id="mcEcho">—</span></div>
+        <div class="minirow"><span>社区公布 farm APR</span><span>23.56%</span></div>
+        <div class="minirow"><span>LP 状态</span><span>永久锁定（100%）</span></div>
+        <div class="note warn" style="margin-top:10px">APR 23.56% 是在极薄池子里算出来的数字：池子越小，同样手续费对应的年化越高，但同时价格冲击也越大、越容易被单笔交易推动。LP 永久锁定降低了「撤池跑路」的风险，但<b>不降低价格风险</b>。</div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:.98rem;font-weight:900;margin-bottom:7px">当下最重要的一件事</h3>
+        <p class="small" style="margin:0 0 8px">不是再写一版白皮书，而是<b>找到一位愿意为 EACO 添加流动性池的人</b>。私聊、不催促、把风险讲清楚——愿意在薄池里做市的人，通常不是被收益吸引，而是被「这件事值得存在」说服。</p>
+        <div class="minirow"><span>目标对象</span><span>已有 SOL、懂无常损失</span></div>
+        <div class="minirow"><span>最小可行规模</span><span>$200–500 双边</span></div>
+        <div class="minirow"><span>给对方的材料</span><span>本页 + CA + 池子链接</span></div>
+        <div class="minirow"><span>不能做的事</span><span>不许诺收益、不代持</span></div>
+        <div class="presets" style="margin-top:9px">
+          <a class="btn" style="text-decoration:none" href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" rel="noopener">打开 DAMM v2 池</a>
+          <a class="btn" style="text-decoration:none" href="https://app.meteora.ag/dlmm/create" target="_blank" rel="noopener">新建 DLMM 池</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="footer">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h5>EACO · Earth's Best Coin</h5>
+        <p style="font-size:.86rem;opacity:.95;margin:0 0 8px">EACO = Energy × Attitude × Cooperation × Optimization。人类生于群星，暂居于地球，现在终于开始了漫长的返乡之旅。</p>
+        <div class="fca"><span>CA DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span><button data-copy="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH">复制</button></div>
+        <div class="fca"><span>SOL So11111111111111111111111111111111111111112</span><button data-copy="So11111111111111111111111111111111111111112">复制</button></div>
+      </div>
+      <div>
+        <h5>行情与交易</h5>
+        <ul>
+          <li><a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Orb Markets · EACO</a></li>
+          <li><a href="https://orbmarkets.io/token/So11111111111111111111111111111111111111112" target="_blank" rel="noopener">Orb Markets · SOL</a></li>
+          <li><a href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Solscan · 合约</a></li>
+          <li><a href="https://dexscreener.com/solana/7cmAfsKJrvcbMLWoXDTX5uZ2C8udBjzsKEgaxeweKMMU" target="_blank" rel="noopener">DexScreener · EACO/SOL</a></li>
+          <li><a href="https://jup.ag/swap/SOL-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Jupiter 兑换</a></li>
+          <li><a href="https://app.meteora.ag/dlmm/create" target="_blank" rel="noopener">Meteora DLMM 做市</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>社区与领取</h5>
+        <ul>
+          <li><a href="https://ucoingroup.github.io/eaco-faucet/" target="_blank" rel="noopener">EACO 水龙头（免费领取）</a></li>
+          <li><a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener">EACO 50 汇率页</a></li>
+          <li><a href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener">EACO Build World</a></li>
+          <li><a href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank" rel="noopener">GitHub · eacoweb3-2026</a></li>
+          <li><a href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">Discord 社区</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 EACO NINE · 九国语言与流通小组工作台 · 仅供社区协作与信息参考，不构成投资建议、要约或收益承诺。</span>
+      <span>Built as a single static HTML · 离线可用 · 三个设计风格</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">已复制</div>
+
+<script>
+/* ==================== 数据层 ==================== */
+const DEFAULTS = {
+  eaco: 0.0000433,      // USD / EACO（Raydium SOL 池 priceUsd）
+  sol: 103.90,          // USD / SOL
+  liq: 601.36,          // 全链主要池流动性 USD
+  supply: 1350000000,   // 总供应
+  fx: { USD:1, JPY:158.100039, AUD:1.423201, CAD:1.404812, EUR:0.890292, NZD:1.755782, PHP:63.385294 },
+  fxTime: '2026-10-22'
+};
+const CA = 'DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH';
+
+const COUNTRIES = [
+  {
+    code:'US', flag:'🇺🇸', zh:'美国', en:'United States', ccy:'USD', ccyName:'美元 USD',
+    lang:'联邦层面没有法定官方语言；英语为事实上的全国通用语言，部分州将英语定为官方语言，西班牙语在部分地区广泛使用',
+    langs:['英语（事实）','西班牙语（地区）'], pop:'约 3.4 亿',
+    group:'EACO North America · English Core', alloc:90000000, target:'目标 60 位活跃',
+    channels:['大学区块链社团','X Space','Discord','创作者赏金'],
+    assets:[
+      ['软件与 SaaS 订阅','用 EACO 结算订阅，跨境小额支付零摩擦'],
+      ['影视 / 音乐 / 流媒体 IP 授权','版权收益按份额上链，EACO 自动分账'],
+      ['品牌与商标授权','品牌联名发行 EACO 会员卡'],
+      ['专利与技术许可','专利池许可费以 EACO 计价结算'],
+      ['数据与 AI 模型服务','按调用量做 EACO 微支付'],
+      ['在线教育与认证课程','课程凭证 NFT + EACO 付费解锁'],
+      ['财务 / 税务 / 法律咨询','远程咨询按小时用 EACO 结算'],
+      ['旅游体验与演出票务','票务 NFT，EACO 抵扣与转赠'],
+      ['远程医疗与心理健康','跨境问诊小额即时结算'],
+      ['数字营销与创作者经济','广告分成用 EACO 当日结清']
+    ],
+    methods:['大学社团 + 图书馆免费场地做首场 Meetup','英语短视频讲「10 分钟拿到第一个 EACO」','给独立创作者发内容赏金，形成英文素材库']
+  },
+  {
+    code:'JP', flag:'🇯🇵', zh:'日本', en:'Japan', ccy:'JPY', ccyName:'日元 JPY',
+    lang:'日语（事实上的官方语言）', langs:['日语'], pop:'约 1.24 亿',
+    group:'EACO 日本 · 日本語コミュニティ', alloc:60000000, target:'目标 40 位活跃',
+    channels:['勉強会','X（旧Twitter）','note 长文','动漫同人展'],
+    assets:[
+      ['动漫 / 游戏 IP 授权','IP 权益碎片化，EACO 结算授权分成'],
+      ['精密制造技术专利','技术许可费 EACO 计价'],
+      ['食品与化妆品品牌','地方品牌出海，EACO 会员制'],
+      ['机器人与自动化软件','按部署订阅，EACO 收款'],
+      ['出版内容（漫画 / 轻小说）','电子版 NFT，二级分成'],
+      ['入境旅游体验（民宿 / 温泉 / 文化）','预约与押金用 EACO'],
+      ['语言与技能研修','线上课程 EACO 付费'],
+      ['医疗健康与介护服务','跨境远程咨询结算'],
+      ['圣地巡礼与地方文旅 IP','数字集章 NFT + EACO 兑换周边'],
+      ['中古流通与鉴定服务','鉴定证书上链，EACO 支付服务费']
+    ],
+    methods:['以「勉強会」名义办小型学习会，2 小时讲清钱包与兑换','日语 thread 拆解 EACO 的定义与用途，不做价格预测','在同人展摆一桌，扫码送少量 EACO 做体验']
+  },
+  {
+    code:'AU', flag:'🇦🇺', zh:'澳大利亚', en:'Australia', ccy:'AUD', ccyName:'澳元 AUD',
+    lang:'联邦层面没有法定官方语言；英语是事实上的通用语言', langs:['英语（事实）'], pop:'约 2,700 万',
+    group:'EACO Oceania · English Chapter', alloc:35000000, target:'目标 30 位活跃',
+    channels:['大学 O-Week','户外社群','LinkedIn','图书馆'],
+    assets:[
+      ['教育出口（留学 / 在线课程）','学费与短课用 EACO 折扣结算'],
+      ['矿业技术与工程咨询','服务合同 EACO 计价，跨境秒结'],
+      ['旅游与户外体验','预订押金与向导小费 EACO'],
+      ['农业科技与食品品牌','产地溯源上链 + EACO 会员'],
+      ['SaaS（设计 / 协作 / 财务）','订阅费接受 EACO'],
+      ['影视后期与 VFX','外包结算按镜头计费'],
+      ['医疗与养老服务','远程问诊与护理预约'],
+      ['体育赛事与俱乐部 IP','球迷权益 NFT，EACO 兑换门票'],
+      ['金融科技与支付','EACO 作为结算通道之一'],
+      ['可再生能源咨询与碳资产','碳信用凭证上链，EACO 计价']
+    ],
+    methods:['大学 O-Week 摆摊，扫码领 EACO + 30 秒讲解','联合冲浪 / 徒步社群做「捡垃圾换 EACO」','LinkedIn 发案例文，导向本地群']
+  },
+  {
+    code:'CA', flag:'🇨🇦', zh:'加拿大', en:'Canada', ccy:'CAD', ccyName:'加元 CAD',
+    lang:'英语和法语同为联邦官方语言', langs:['英语','法语'], pop:'约 4,100 万',
+    group:'EACO Canada · Bilingual EN/FR', alloc:30000000, target:'目标 30 位活跃',
+    channels:['双语物料','华人 / 法语社区','Meetup','Co-op 学生'],
+    assets:[
+      ['AI 研究与模型许可','模型调用按次计费，EACO 结算'],
+      ['游戏与动画工作室外包','按资产包结算'],
+      ['SaaS 与云计算服务','订阅接受 EACO'],
+      ['影视拍摄与后期','剧组服务与场地结算'],
+      ['国际教育','短期课程与语言班'],
+      ['清洁技术与碳资产','碳凭证上链流通'],
+      ['金融与保险科技','微支付与理赔试点'],
+      ['远程医疗','跨境问诊结算'],
+      ['原住民文化艺术 IP','授权分成透明上链'],
+      ['冰雪运动与户外品牌','装备租赁 + 会员 NFT']
+    ],
+    methods:['所有物料强制英法双语，魁北克单独版本','借华人商会与法语商会双线渗透','Co-op 学生做校园大使，按活跃人数给赏金']
+  },
+  {
+    code:'FR', flag:'🇫🇷', zh:'法国', en:'France', ccy:'EUR', ccyName:'欧元 EUR',
+    lang:'法语', langs:['法语'], pop:'约 6,800 万',
+    group:'EACO France · Francophonie', alloc:40000000, target:'目标 35 位活跃',
+    channels:['Meetup','大学区块链协会','法语 newsletter','咖啡馆聚会'],
+    assets:[
+      ['奢侈品牌与授权','品牌权益 NFT + EACO 会员'],
+      ['葡萄酒与风土品牌','酒庄直供，EACO 支付与溯源'],
+      ['旅游与文化遗产体验','预约、导览、门票'],
+      ['航空航天工程软件 / 咨询','项目结算'],
+      ['时尚与设计','设计稿版权上链'],
+      ['美妆与香氛配方','配方授权分成'],
+      ['电影与艺术内容','独立影片众筹与分账'],
+      ['餐饮与厨艺教育','课程与私宴预订'],
+      ['AI（开源模型 / 研究）','研究资助与模型许可'],
+      ['语言教育与留学服务','课程 EACO 付费']
+    ],
+    methods:['在咖啡馆办「apéro」式小聚，先社交再讲币','法语 newsletter 每周一封，讲一个真实用例','与大学区块链协会合作办工作坊']
+  },
+  {
+    code:'DE', flag:'🇩🇪', zh:'德国', en:'Germany', ccy:'EUR', ccyName:'欧元 EUR',
+    lang:'德语', langs:['德语'], pop:'约 8,400 万',
+    group:'EACO Deutschland · DACH', alloc:45000000, target:'目标 35 位活跃',
+    channels:['Verein 协会','Hackathon','商会活动','德语播客'],
+    assets:[
+      ['隐形冠军工程专利（Mittelstand）','技术许可 EACO 计价'],
+      ['工业软件与自动化','按产线订阅'],
+      ['汽车工程与测试服务','测试项目结算'],
+      ['机床与精密设计','设计授权上链'],
+      ['医药与生物科技 IP','里程碑付款'],
+      ['物流与供应链服务','跨境运费即时结算'],
+      ['国际展会与会展服务','展位与门票 NFT'],
+      ['双元制职业培训','课程与认证 EACO 付费'],
+      ['可再生能源工程','绿电与碳资产凭证'],
+      ['古典音乐与文化 IP','演出票务与录音版权']
+    ],
+    methods:['注册 Verein（协会）取得合法办活动身份，年费极低','参加本地 Hackathon，把 EACO 做进作品','德语播客讲「轻资产 + 微支付」一集']
+  },
+  {
+    code:'NL', flag:'🇳🇱', zh:'荷兰', en:'Netherlands', ccy:'EUR', ccyName:'欧元 EUR',
+    lang:'荷兰语（弗里斯兰语在弗里斯兰省享有官方地位）', langs:['荷兰语','弗里斯兰语（省级）'], pop:'约 1,800 万',
+    group:'EACO Nederland · Benelux', alloc:20000000, target:'目标 25 位活跃',
+    channels:['学生社团','骑行活动','双语内容','海牙 / 阿姆斯特丹 Meetup'],
+    assets:[
+      ['港口物流与转运服务（鹿特丹）','运费与仓储结算'],
+      ['农业与温室技术（瓦赫宁根）','技术许可与产地溯源'],
+      ['水务与三角洲工程','工程咨询跨境结算'],
+      ['半导体设备供应链服务','零部件与服务合同'],
+      ['支付与金融科技','EACO 作为补充通道'],
+      ['设计与创意产业','设计版权分账'],
+      ['骑行旅游与绿色出行','路线、租赁、押金'],
+      ['养老基金与资管顾问','顾问费结算（合规优先）'],
+      ['能源枢纽与绿电交易','绿电凭证上链'],
+      ['国际教育与研究','短期项目与奖学金']
+    ],
+    methods:['英语普及率极高，用英语先跑通再做荷兰语版','与骑行社群合作「骑行打卡领 EACO」','学生社团开学季做一次 20 人工作坊']
+  },
+  {
+    code:'NZ', flag:'🇳🇿', zh:'新西兰', en:'New Zealand', ccy:'NZD', ccyName:'新西兰元 NZD',
+    lang:'英语、毛利语和新西兰手语同为官方语言', langs:['英语','毛利语','新西兰手语（NZSL）'], pop:'约 530 万',
+    group:'EACO Aotearoa · EN / Māori', alloc:10000000, target:'目标 20 位活跃',
+    channels:['大学 club','marae 社区','图书馆','户外社群'],
+    assets:[
+      ['影视特效与制作（Weta 生态）','项目分账上链'],
+      ['高端旅游与户外向导','预订与押金'],
+      ['乳制品与食品品牌 IP','溯源 + EACO 会员'],
+      ['葡萄酒（长相思）','酒庄直供与收藏凭证'],
+      ['国际教育','短期课程与游学'],
+      ['毛利文化与艺术 IP','授权分成，尊重 iwi 权益'],
+      ['农业科技','按季订阅服务'],
+      ['SaaS（Xero 生态）','订阅接受 EACO'],
+      ['户外装备品牌','租赁与二手交易'],
+      ['可再生能源与地热','绿电凭证']
+    ],
+    methods:['毛利语物料必须保留长音符，最好请母语者校对','与 marae / iwi 社区合作前先沟通授权与收益分配','图书馆免费场地办「咖啡 + 钱包」小课']
+  },
+  {
+    code:'PH', flag:'🇵🇭', zh:'菲律宾', en:'Philippines', ccy:'PHP', ccyName:'菲律宾比索 PHP',
+    lang:'菲律宾语（基于他加禄语）和英语同为官方语言', langs:['菲律宾语','英语'], pop:'约 1.15 亿',
+    group:'EACO Pilipinas · Filipino / English', alloc:25000000, target:'目标 50 位活跃',
+    channels:['Facebook 群组','大学校园大使','社区 / 教会','短视频'],
+    assets:[
+      ['BPO 外包与共享服务','按工时结算，EACO 秒付'],
+      ['英语教育与在线外教','课时包 EACO 付费'],
+      ['旅游与海岛度假','预订、押金、向导'],
+      ['汇款与金融科技','跨境小额汇款试点'],
+      ['游戏美术与创意外包','按资产结算'],
+      ['电商代运营与直播','佣金即时结算'],
+      ['海员劳务与培训','培训认证上链'],
+      ['医疗护理人力输出','资质凭证与结算'],
+      ['内容创作与社媒运营','按条计酬'],
+      ['农业与热带食品加工','产地溯源 + 预售']
+    ],
+    methods:['Facebook 群组是主战场，先做本地语言图文','大学校园大使制度，1 人带 5 人，按活跃结算','与小型咖啡店 / 打印店合作收 EACO，制造真实用例']
+  }
+];
+
+const UNITS = [
+  {k:'EACO', label:'EACO（$e）'},
+  {k:'SOL',  label:'SOL（Solana）'},
+  {k:'USD',  label:'USD 美元'},
+  {k:'JPY',  label:'JPY 日元'},
+  {k:'AUD',  label:'AUD 澳元'},
+  {k:'CAD',  label:'CAD 加元'},
+  {k:'EUR',  label:'EUR 欧元（法/德/荷）'},
+  {k:'NZD',  label:'NZD 新西兰元'},
+  {k:'PHP',  label:'PHP 菲律宾比索'}
+];
+
+const PHRASES = [
+  ['你好','Hello','こんにちは','Bonjour','Hallo','Hallo','Kia ora','Kumusta'],
+  ['谢谢','Thank you','ありがとう','Merci','Danke','Dank je','Kia ora','Salamat'],
+  ['欢迎','Welcome','ようこそ','Bienvenue','Willkommen','Welkom','Nau mai, haere mai','Maligayang pagdating'],
+  ['再见','Goodbye','さようなら','Au revoir','Auf Wiedersehen','Tot ziens','Ka kite anō','Paalam'],
+  ['是 / 不是','Yes / No','はい / いいえ','Oui / Non','Ja / Nein','Ja / Nee','Āe / Kāo','Oo / Hindi'],
+  ['多少钱？','How much?','いくらですか','Combien ?','Wie viel?','Hoeveel?','E hia te utu?','Magkano?'],
+  ['货币','Currency','通貨','Monnaie','Währung','Valuta','Moni','Pera'],
+  ['兑换','Exchange','両替','Échange','Tausch','Wisselen','Whakawhiti moni','Palitan'],
+  ['免费','Free','無料','Gratuit','Kostenlos','Gratis','Kore utu','Libre'],
+  ['社区','Community','コミュニティ','Communauté','Gemeinschaft','Gemeenschap','Hapori','Komunidad'],
+  ['财富','Wealth','富','Richesse','Wohlstand','Welvaart','Taonga','Kayamanan'],
+  ['未来','Future','未来','Avenir','Zukunft','Toekomst','Anamata','Hinaharap'],
+  ['地球','Earth','地球','Terre','Erde','Aarde','Papatūānuku','Daigdig'],
+  ['很高兴认识你','Nice to meet you','はじめまして','Enchanté(e)','Freut mich','Aangenaam','He harikoa ki te tūtaki ki a koe','Ikinagagalak kitang makilala'],
+  ['合作','Cooperation','協力','Coopération','Zusammenarbeit','Samenwerking','Mahi tahi','Pagtutulungan'],
+  ['一起成长','Grow together','一緒に成長しましょう','Grandir ensemble','Gemeinsam wachsen','Samen groeien','Tipu ngātahi','Sabay tayong umunlad']
+];
+const LANGS = [
+  {k:'en', bcp:'en-US'}, {k:'ja', bcp:'ja-JP'}, {k:'fr', bcp:'fr-FR'},
+  {k:'de', bcp:'de-DE'}, {k:'nl', bcp:'nl-NL'}, {k:'mi', bcp:'mi-NZ'}, {k:'fil', bcp:'fil-PH'}
+];
+
+const PHASES = [
+  {t:'第 1–30 天', s:'定人 · 定语言 · 定第一个 10 人', items:[
+    '选定 2 个优先国家（建议 菲律宾 + 荷兰）',
+    '建 Discord 频道 + 本地群，群规用母语写',
+    '用第 06 节表格做出 1 页母语介绍',
+    '每人配好钱包，领一次水龙头，链上可查',
+    '招募 3 位首批志愿者：组长 / 翻译 / 技术'
+  ]},
+  {t:'第 31–60 天', s:'跑通一次「拿到 → 用掉」的闭环', items:[
+    '办 1 场母语线上 Space（60 分钟，录播留存）',
+    '办 1 场线下小聚（图书馆 / 咖啡馆，5–10 人）',
+    '落实 1 家商户接受 EACO（咖啡 / 课程 / 设计）',
+    '发布 3 条母语短视频或图文',
+    '建立周报：新增 / 活跃 / 兑换笔数 / 商户流水'
+  ]},
+  {t:'第 61–90 天', s:'留存、复盘与复制', items:[
+    '30 天留存活跃 ≥ 5 人 / 国',
+    '每国 1 位本地组长转正（给预算与账号）',
+    '只写事实地复盘三个内因：内容 / 人 / 上手时长',
+    '把跑通的 SOP 复制到第 3、4 个国家',
+    '公开季度数据，链上流水可验证'
+  ]}
+];
+
+/* ==================== 状态 ==================== */
+const KEY = 'eaco9.state.v1';
+const RKEY = 'eaco9.roadmap.v1';
+let S = structuredClone(DEFAULTS);
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) { const o = JSON.parse(raw); S = Object.assign(structuredClone(DEFAULTS), o, {fx:Object.assign(structuredClone(DEFAULTS.fx), o.fx||{})}); }
+} catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* ==================== 工具 ==================== */
+const nf = (n,d=2)=> (isFinite(n)?n:0).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+function dec(n){
+  n = Math.abs(n);
+  if (n === 0) return 2;
+  if (n < 0.000001) return 10;
+  if (n < 0.0001) return 8;
+  if (n < 0.01) return 6;
+  if (n < 1) return 4;
+  if (n < 1000) return 2;
+  return 0;
+}
+const SYM = {USD:'$', JPY:'¥', AUD:'A$', CAD:'C$', EUR:'€', NZD:'NZ$', PHP:'₱'};
+function money(n, ccy){ return (SYM[ccy]||'') + nf(n, dec(n)); }
+const usdPer = u => u==='EACO' ? S.eaco : u==='SOL' ? S.sol : (1/(S.fx[u]||1));
+const eacoIn = ccy => S.eaco * (S.fx[ccy]||1);        // 1 EACO 值多少当地币
+const totalAlloc = () => COUNTRIES.reduce((a,c)=>a+c.alloc,0);
+
+function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove('on'), 1600); }
+
+/* ==================== 渲染：行情 ==================== */
+function renderMarket(){
+  document.getElementById('hsPrice').textContent = money(S.eaco,'USD');
+  document.getElementById('hsPriceSrc').textContent = 'MC ≈ ' + money(S.eaco*S.supply,'USD') + ' · 池 ≈ ' + money(S.liq,'USD');
+  document.getElementById('hsSol').textContent = money(S.sol,'USD');
+  document.getElementById('hsSolEaco').textContent = nf(S.sol/S.eaco, 0);
+  document.getElementById('hsTotal').textContent = nf(totalAlloc()/1e6,0) + 'M';
+  document.getElementById('kEaco').textContent = money(S.eaco,'USD');
+  document.getElementById('kEacoNative').textContent = nf(S.eaco/S.sol, 10);
+  document.getElementById('kMc').textContent = money(S.eaco*S.supply,'USD');
+  document.getElementById('kLiq').textContent = money(S.liq,'USD');
+  document.getElementById('kFxTime').textContent = S.fxTime || '—';
+
+  document.getElementById('solToEaco').textContent = nf(S.sol/S.eaco,0);
+  document.getElementById('eacoToSol').textContent = nf(S.eaco/S.sol,10);
+  document.getElementById('sol01').textContent = nf(0.1*S.sol/S.eaco,0);
+  document.getElementById('m1').textContent = nf(1e6*S.eaco/S.sol, 6);
+  document.getElementById('m1usd').textContent = money(1e6*S.eaco,'USD');
+
+  const le = document.getElementById('liqEcho'); if (le) le.textContent = money(S.liq,'USD');
+  const me2 = document.getElementById('mcEcho'); if (me2) me2.textContent = money(S.eaco*S.supply,'USD');
+
+  const setv=(id,v)=>{const el=document.getElementById(id); if(el && document.activeElement!==el) el.value=v;};
+  setv('inEaco', S.eaco); setv('inSol', S.sol); setv('inLiq', S.liq); setv('inSupply', S.supply);
+  setv('fxUSD', S.fx.USD); setv('fxJPY', S.fx.JPY); setv('fxAUD', S.fx.AUD);
+  setv('fxCAD', S.fx.CAD); setv('fxEUR', S.fx.EUR); setv('fxNZD', S.fx.NZD); setv('fxPHP', S.fx.PHP);
+}
+
+/* ==================== 渲染：汇率总表 ==================== */
+function renderRates(){
+  const tb = document.querySelector('#rateTable tbody');
+  tb.innerHTML = COUNTRIES.map(c=>{
+    const one = eacoIn(c.ccy);
+    const perLocal = 1/one;
+    return `<tr>
+      <td><span class="flagcell">${c.flag}</span> ${c.zh}<div class="small muted" style="font-size:.68rem">${c.en}</div></td>
+      <td>${c.ccyName}</td>
+      <td class="num">${money(one, c.ccy)}</td>
+      <td class="num">${money(one*1000, c.ccy)}</td>
+      <td class="num">${nf(perLocal, perLocal<10?2:0)}</td>
+      <td class="num">${money(1e7*one, c.ccy)}</td>
+      <td class="num">${money(9e7*one, c.ccy)}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ==================== 渲染：价格阶梯 ==================== */
+function renderLadder(){
+  const pts = [
+    ['当前', S.eaco],
+    ['1 厘（$0.001）', 0.001],
+    ['1 分（$0.01）', 0.01],
+    ['1 毛（$0.1）', 0.1],
+    ['1 美元', 1],
+    ['10 美元', 10],
+    ['100 美元', 100]
+  ];
+  const total = totalAlloc();
+  document.querySelector('#ladderTable tbody').innerHTML = pts.map(([l,p],i)=>{
+    const cur = i===0;
+    return `<tr${cur?' style="background:var(--primary-soft)"':''}>
+      <td>${l}${cur?' <span class="tag">现价</span>':''}</td>
+      <td class="num">${money(p,'USD')}</td>
+      <td class="num">${money(1e7*p, 'USD')}</td>
+      <td class="num">${money(9e7*p, 'USD')}</td>
+      <td class="num">${money(total*p, 'USD')}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ==================== 渲染：国家卡片 ==================== */
+function renderCards(){
+  const grid = document.getElementById('countryGrid');
+  grid.innerHTML = COUNTRIES.map(c=>{
+    const one = eacoIn(c.ccy);
+    const pct = (c.alloc/9e7*100).toFixed(0);
+    return `<article class="ncard">
+      <header>
+        <span class="flag">${c.flag}</span>
+        <div style="flex:1">
+          <h3>${c.zh} <span class="code">${c.code}</span></h3>
+          <div class="small muted" style="font-size:.72rem">${c.en} · ${c.pop}</div>
+          <div class="langline">官方语言：${c.langs.join(' / ')}</div>
+        </div>
+      </header>
+      <div class="body">
+        <div class="grp"><b>${c.group}</b><br><span class="small">${c.channels.join(' · ')}</span></div>
+        <div class="minirow"><span>计划流通量</span><span>${nf(c.alloc/1e6,0)}M EACO</span></div>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+        <div class="minirow"><span>池子法币等值（现价）</span><span>${money(c.alloc*one, c.ccy)}</span></div>
+        <div class="minirow"><span>1 EACO =</span><span>${money(one, c.ccy)}</span></div>
+        <div class="minirow"><span>1 ${c.ccy} =</span><span>${nf(1/one, 0)} EACO</span></div>
+        <div class="minirow"><span>小组规模</span><span>${c.target}</span></div>
+        <div class="minirow"><span>语言现状</span><span style="font-family:inherit;font-weight:500;font-size:.72rem;text-align:right;max-width:62%">${c.lang}</span></div>
+
+        <details class="assets">
+          <summary>前 10 大轻资产 · 与 EACO 的结合点</summary>
+          <ol>${c.assets.map(a=>`<li><b>${a[0]}</b><em>${a[1]}</em></li>`).join('')}</ol>
+        </details>
+        <details class="assets">
+          <summary>零 / 低成本起量方式</summary>
+          <ol>${c.methods.map(m=>`<li>${m}</li>`).join('')}</ol>
+        </details>
+      </div>
+      <div class="foot">
+        <span class="pill">流通 ${nf(c.alloc/1e6,0)}M</span>
+        <span class="pill">${c.ccy}</span>
+        <span class="pill">${c.langs.length} 种官方语言</span>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* ==================== 渲染：计算器 ==================== */
+function fillSelects(){
+  const from = document.getElementById('calcFrom');
+  const to = document.getElementById('calcTo');
+  const html = UNITS.map(u=>`<option value="${u.k}">${u.label}</option>`).join('');
+  from.innerHTML = html; to.innerHTML = html;
+  from.value = 'EACO'; to.value = 'USD';
+}
+function renderCalc(){
+  const amt = parseFloat(document.getElementById('calcAmt').value) || 0;
+  const from = document.getElementById('calcFrom').value;
+  const to = document.getElementById('calcTo').value;
+  const usd = amt * usdPer(from);
+  const res = usd / usdPer(to);
+  const unit = to==='EACO'?'EACO':to;
+
+  document.getElementById('resLabel').textContent = from + ' → ' + to;
+  document.getElementById('resBig').textContent = (to==='EACO' ? nf(res, res<1000?6:0) : (SYM[to]? money(res,to) : nf(res, 6))) + (to==='EACO'?' EACO': to==='SOL'?' SOL':'');
+  document.getElementById('resSub').innerHTML =
+    `≈ ${money(usd,'USD')} · 反向：1 ${to} = ${nf(usdPer(to)/usdPer(from), usdPer(to)/usdPer(from)<1?8:2)} ${from}` +
+    (to==='EACO' ? `<br>按 ${money(S.sol,'USD')}/SOL 计，需 ${nf(usd/S.sol,6)} SOL` : '');
+
+  let route = '';
+  if (from==='EACO' && ['USD','JPY','AUD','CAD','EUR','NZD','PHP'].includes(to))
+    route = '路径：EACO →（Jupiter / Raydium）→ SOL 或 USDC → 本地交易所或本地支付渠道 → ' + to + '。第二段通常比链上换币贵得多，小额不建议走这条路。';
+  else if (['USD','JPY','AUD','CAD','EUR','NZD','PHP'].includes(from) && to==='EACO')
+    route = '路径：' + from + ' → 买 SOL / USDC（本地交易所或 P2P）→ Jupiter 粘贴 CA 换成 EACO。全程约 3 分钟，链上 gas < $0.01。';
+  else if (from==='EACO' || to==='EACO')
+    route = '路径：Solana 钱包内直接 Swap，EACO 的主池是 Raydium 的 EACO/SOL，滑点设置 2%–5%。';
+  else
+    route = '不涉及 EACO，仅按中间价折算；实际换汇以银行 / 兑换点报价为准。';
+  document.getElementById('routeNote').textContent = route;
+
+  const tip = document.getElementById('slipNote');
+  const touchesEaco = from==='EACO' || to==='EACO';
+  if (touchesEaco && usd > S.liq*0.05) {
+    const impact = Math.min(99.9, usd/(S.liq*2)*100);
+    tip.style.display = 'block';
+    tip.innerHTML = `⚠️ 滑点预警：本笔折合 ${money(usd,'USD')}，已超过池子（${money(S.liq,'USD')}）的 5%，理论价格冲击约 <b>${nf(impact,1)}%</b>。建议拆成 ${Math.max(2, Math.ceil(usd/(S.liq*0.02)))} 笔、每笔 ≤ ${money(S.liq*0.02,'USD')}，或用限价单慢慢吃。`;
+  } else { tip.style.display = 'none'; }
+}
+
+/* ==================== 渲染：语言表 ==================== */
+function renderLang(){
+  const q = (document.getElementById('langFilter').value || '').trim().toLowerCase();
+  const tb = document.querySelector('#langTable tbody');
+  const rows = PHRASES.filter(r => !q || r.join(' ').toLowerCase().includes(q));
+  tb.innerHTML = rows.map(r=>{
+    const cells = r.slice(1).map((txt,i)=>{
+      const l = LANGS[i];
+      return `<td><span class="phrase">${txt}</span><button class="speak" data-lang="${l.bcp}" data-text="${String(txt).replace(/"/g,'&quot;')}" title="朗读">▶</button></td>`;
+    }).join('');
+    return `<tr><td><span class="phrase">${r[0]}</span><button class="speak" data-lang="zh-CN" data-text="${r[0]}" title="朗读">▶</button></td>${cells}</tr>`;
+  }).join('') || `<tr><td colspan="8" class="muted" style="text-align:center;padding:20px">没有匹配的短语</td></tr>`;
+  document.getElementById('langCount').textContent = rows.length + ' / ' + PHRASES.length + ' 条';
+}
+
+/* ==================== 渲染：路线图 ==================== */
+function renderPhases(){
+  let done = {};
+  try { done = JSON.parse(localStorage.getItem(RKEY) || '{}'); } catch(e){}
+  document.getElementById('phaseGrid').innerHTML = PHASES.map((p,pi)=>{
+    const items = p.items.map((it,ii)=>{
+      const id = pi+'-'+ii;
+      return `<label class="chk"><input type="checkbox" data-id="${id}" ${done[id]?'checked':''}><span class="${done[id]?'done':''}">${it}</span></label>`;
+    }).join('');
+    return `<div class="phase"><h4><span class="badge">0${pi+1}</span>${p.t}</h4>
+      <div class="small muted" style="margin-bottom:6px">${p.s}</div>${items}</div>`;
+  }).join('');
+  document.querySelectorAll('#phaseGrid input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      let d = {}; try { d = JSON.parse(localStorage.getItem(RKEY)||'{}'); } catch(e){}
+      if (cb.checked) d[cb.dataset.id] = 1; else delete d[cb.dataset.id];
+      localStorage.setItem(RKEY, JSON.stringify(d));
+      cb.nextElementSibling.classList.toggle('done', cb.checked);
+      toast(cb.checked ? '已完成一项' : '已取消');
+    });
+  });
+}
+
+/* ==================== 交互 ==================== */
+function bindTheme(){
+  const body = document.body;
+  const saved = localStorage.getItem('eaco9.theme');
+  if (saved) body.dataset.theme = saved;
+  document.querySelectorAll('#themeSeg button').forEach(b=>{
+    b.classList.toggle('on', b.dataset.t === body.dataset.theme);
+    b.addEventListener('click', ()=>{
+      body.dataset.theme = b.dataset.t;
+      localStorage.setItem('eaco9.theme', b.dataset.t);
+      document.querySelectorAll('#themeSeg button').forEach(x=>x.classList.toggle('on', x===b));
+    });
+  });
+}
+function bindInputs(){
+  const map = {inEaco:['eaco',1], inSol:['sol',1], inLiq:['liq',1], inSupply:['supply',1]};
+  Object.entries(map).forEach(([id,[key]])=>{
+    const el = document.getElementById(id);
+    el.addEventListener('input', ()=>{ const v = parseFloat(el.value); if (isFinite(v) && v>0){ S[key]=v; save(); renderAll(); } });
+  });
+  const fxMap = {fxUSD:'USD', fxJPY:'JPY', fxAUD:'AUD', fxCAD:'CAD', fxEUR:'EUR', fxNZD:'NZD', fxPHP:'PHP'};
+  Object.entries(fxMap).forEach(([id,ccy])=>{
+    const el = document.getElementById(id);
+    el.addEventListener('input', ()=>{ const v = parseFloat(el.value); if (isFinite(v) && v>0){ S.fx[ccy]=v; save(); renderAll(); } });
+  });
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    S = structuredClone(DEFAULTS); save(); renderAll(); toast('已恢复默认快照');
+  });
+  document.getElementById('calcAmt').addEventListener('input', renderCalc);
+  document.getElementById('calcFrom').addEventListener('change', renderCalc);
+  document.getElementById('calcTo').addEventListener('change', renderCalc);
+  document.getElementById('swapBtn').addEventListener('click', ()=>{
+    const a = document.getElementById('calcFrom'), b = document.getElementById('calcTo');
+    const t = a.value; a.value = b.value; b.value = t; renderCalc();
+  });
+  document.querySelectorAll('#presets button').forEach(b=>b.addEventListener('click', ()=>{
+    document.getElementById('calcAmt').value = b.dataset.a;
+    document.getElementById('calcFrom').value = b.dataset.u;
+    renderCalc();
+  }));
+  document.getElementById('langFilter').addEventListener('input', renderLang);
+  document.getElementById('clearLang').addEventListener('click', ()=>{ document.getElementById('langFilter').value=''; renderLang(); });
+
+  document.addEventListener('click', e=>{
+    const cp = e.target.closest('[data-copy]');
+    if (cp){
+      const text = cp.dataset.copy;
+      const ok = ()=>{ toast('已复制 CA'); };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok).catch(()=>fallback(text,ok));
+      else fallback(text, ok);
+    }
+    const sp = e.target.closest('button.speak');
+    if (sp){
+      if (!('speechSynthesis' in window)) return toast('此浏览器不支持语音朗读');
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(sp.dataset.text);
+      u.lang = sp.dataset.lang; u.rate = .9;
+      speechSynthesis.speak(u);
+    }
+  });
+  function fallback(text, ok){
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); ok(); } catch(err){ toast('复制失败，请手动选择'); }
+    document.body.removeChild(ta);
+  }
+}
+async function refresh(){
+  const btn = document.getElementById('refreshBtn');
+  const st = document.getElementById('liveState');
+  btn.disabled = true; btn.textContent = '刷新中…';
+  let okCount = 0;
+  try {
+    const r = await fetch('https://api.dexscreener.com/latest/dex/tokens/'+CA, {cache:'no-store'});
+    const j = await r.json();
+    const pairs = (j.pairs||[]).filter(p=>p.priceUsd);
+    if (pairs.length){
+      const best = pairs.reduce((a,b)=> (b.liquidity?.usd||0) > (a.liquidity?.usd||0) ? b : a);
+      const sumLiq = pairs.reduce((a,p)=> a + (p.liquidity?.usd||0), 0);
+      S.eaco = parseFloat(best.priceUsd);
+      S.liq = sumLiq || S.liq;
+      if (best.fdv) S.supply = Math.round(best.fdv / parseFloat(best.priceUsd));
+      okCount++;
+    }
+  } catch(e){}
+  try {
+    const r2 = await fetch('https://api.dexscreener.com/latest/dex/tokens/So11111111111111111111111111111111111111112?rankBy=price', {cache:'no-store'});
+    const j2 = await r2.json();
+    const solPairs = (j2.pairs||[]).filter(p=>p.baseToken?.symbol==='SOL' && p.priceUsd && ['USDC','USDT'].includes(p.quoteToken?.symbol));
+    if (solPairs.length){
+      const best = solPairs.reduce((a,b)=> (b.liquidity?.usd||0) > (a.liquidity?.usd||0) ? b : a);
+      S.sol = parseFloat(best.priceUsd); okCount++;
+    }
+  } catch(e){}
+  try {
+    const r3 = await fetch('https://open.er-api.com/v6/latest/USD', {cache:'no-store'});
+    const j3 = await r3.json();
+    if (j3 && j3.rates){
+      Object.keys(S.fx).forEach(k=>{ if (j3.rates[k]) S.fx[k] = j3.rates[k]; });
+      S.fxTime = (j3.time_last_update_utc||'').slice(0,16) || new Date().toISOString().slice(0,10);
+      okCount++;
+    }
+  } catch(e){}
+  save(); renderAll();
+  btn.disabled = false; btn.textContent = '刷新行情';
+  if (okCount === 3){ st.textContent = '已联网刷新'; toast('行情与汇率已更新'); }
+  else if (okCount > 0){ st.textContent = '部分刷新'; toast('部分数据更新，其余为快照'); }
+  else { st.textContent = '静态快照'; toast('网络受限，请手动填写价格'); }
+}
+
+/* ==================== 标签页（通用：宇宙档案 / 文明经典） ==================== */
+function bindTabs(){
+  document.querySelectorAll('.tabs').forEach(tabs=>{
+    const scope = tabs.closest('.card') || document;
+    tabs.addEventListener('click', e=>{
+      const b = e.target.closest('button[data-doc]');
+      if (!b) return;
+      tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on', x===b));
+      scope.querySelectorAll('.doc').forEach(d=>d.classList.toggle('on', d.id === 'doc-' + b.dataset.doc));
+    });
+  });
+}
+
+/* ==================== 地球最好的 100 个朋友 ==================== */
+const FRIENDS = [
+  ['语言与翻译', '让一句话穿过边界', ['笔译','口译','字幕组','手语翻译','方言记录','术语库','本地化测试','语音配音','排版与字体','词典编纂']],
+  ['教育与知识', '把经验变成可传的东西', ['中小学教师','大学研究者','课程设计','图书馆员','开源教材','科普作者','职业培训','导师制','博物馆讲解','教育测评']],
+  ['小微商户', '最小单位的经济体', ['咖啡馆','面包房','修理铺','理发店','洗衣店','菜市场','便利店','快递驿站','司机','民宿']],
+  ['创作者', '把感受变成作品', ['插画师','摄影师','音乐人','视频作者','播客','作家','手工艺人','独立游戏','字体设计','漫画']],
+  ['工程师', '把想法变成可运行的系统', ['前端','后端','智能合约','数据','运维','安全审计','硬件','机器人','能源系统','AI 应用']],
+  ['农民与土地', '真正的地基', ['种子保育','土壤修复','灌溉','渔业','果园','蜂农','合作社','冷链','农机手','林场']],
+  ['医与照护', '把脆弱接住', ['全科医生','护士','药师','心理咨询','康复师','助产士','养老照护','急救员','兽医','公共卫生']],
+  ['公共物品', '没人付费但所有人都用', ['开源维护者','标准制定者','公益组织','社区中心','志愿者','法律援助','档案管理员','统计员','审计员','记者']],
+  ['星际预备', '为离开地球做准备', ['航天工程师','天文学家','材料科学家','生命支持','辐射防护','地月物流','模拟训练','太空伦理','政策研究','航天科普']],
+  ['桥接者', '让两边的人能见面', ['华商','商会秘书','跨境支付','货代','律所','会计','移民顾问','侨团','留学生','长途旅行者']]
+];
+function renderFriends(){
+  const box = document.getElementById('friendGrid');
+  if (!box) return;
+  box.innerHTML = FRIENDS.map(([name, tag, items], i)=>`
+    <div class="fcard">
+      <h4>${name}<em>${String(i+1).padStart(2,'0')} · 10</em></h4>
+      <p class="small muted" style="margin:0 0 8px;font-size:.73rem">${tag}</p>
+      <div class="fchips">${items.map(x=>`<span>${x}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+/* ==================== 模拟地球：文明指数沙盘 ==================== */
+const SIM_STAGES = [
+  {max:16,  name:'L0 生存期'},
+  {max:32,  name:'L1 地球村雏形'},
+  {max:46,  name:'L2 数字孪生 · 起步'},
+  {max:60,  name:'L3 行星文明雏形'},
+  {max:74,  name:'L4 月球经济圈'},
+  {max:88,  name:'L5 火星社会'},
+  {max:101, name:'L6 星际文明'}
+];
+const SIM_TIPS = {
+  E:'能量是地基：先把能源可得性抬起来，其他三项的收益才会被放大。具体动作：绿电采购、储能、降低单位算力能耗。',
+  A:'态度决定摩擦系数：透明度与契约精神不足时，再多的协作工具都会被用来互相猜忌。具体动作：公开账本、公开汇率、公开复盘。',
+  C:'协作是当前最大的瓶颈：跨语言与跨支付的墙，比技术墙更高。具体动作：九语内容、统一收款码、跨时区例会。',
+  O:'优化是复利：没有复盘就没有迭代。具体动作：每周一次 15 分钟复盘，只写事实与一个可执行的改进点。'
+};
+function simValue(){
+  const e = +document.getElementById('sE').value;
+  const a = +document.getElementById('sA').value;
+  const c = +document.getElementById('sC').value;
+  const o = +document.getElementById('sO').value;
+  const ci = Math.pow(e/100,0.30) * Math.pow(a/100,0.25) * Math.pow(c/100,0.25) * Math.pow(o/100,0.20) * 100;
+  document.getElementById('vE').textContent = e;
+  document.getElementById('vA').textContent = a;
+  document.getElementById('vC').textContent = c;
+  document.getElementById('vO').textContent = o;
+  document.getElementById('fE').textContent = e;
+  document.getElementById('fA').textContent = a;
+  document.getElementById('fC').textContent = c;
+  document.getElementById('fO').textContent = o;
+  document.getElementById('bE').style.width = e+'%';
+  document.getElementById('bA').style.width = a+'%';
+  document.getElementById('bC').style.width = c+'%';
+  document.getElementById('bO').style.width = o+'%';
+  document.getElementById('simIndex').textContent = ci.toFixed(1);
+  document.getElementById('simBar').style.width = Math.min(100, ci)+'%';
+  const st = SIM_STAGES.find(s=>ci < s.max) || SIM_STAGES[SIM_STAGES.length-1];
+  const badge = document.getElementById('simStage');
+  badge.textContent = st.name;
+  const arr = [['E',e],['A',a],['C',c],['O',o]].sort((x,y)=>x[1]-y[1]);
+  const low = arr[0], second = arr[1];
+  const next = SIM_STAGES.find(s=>ci < s.max);
+  document.getElementById('simAdvice').innerHTML =
+    `<b>短板：${low[0] === 'E' ? '能量' : low[0] === 'A' ? '态度' : low[0] === 'C' ? '协作' : '优化'}（${low[1]}）</b> —— ${SIM_TIPS[low[0]]}` +
+    (next ? `<br><span class="small muted">距下一阶段（${next.name}）还差 ${(next.max - ci).toFixed(1)} 点；把短板与次短板各抬 10 点，比把长板再抬 30 点更有效。</span>` : '');
+}
+function bindSim(){
+  ['sE','sA','sC','sO'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', simValue);
+  });
+  document.querySelectorAll('#simPresets button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.getElementById('sE').value = b.dataset.e;
+      document.getElementById('sA').value = b.dataset.a;
+      document.getElementById('sC').value = b.dataset.c;
+      document.getElementById('sO').value = b.dataset.o;
+      simValue();
+    });
+  });
+  const r = document.getElementById('simReset');
+  if (r) r.addEventListener('click', ()=>{
+    document.getElementById('sE').value = 45;
+    document.getElementById('sA').value = 40;
+    document.getElementById('sC').value = 35;
+    document.getElementById('sO').value = 40;
+    simValue();
+  });
+  simValue();
+}
+
+/* ==================== 启动 ==================== */
+function renderAll(){ renderMarket(); renderRates(); renderLadder(); renderCards(); renderCalc(); }
+bindTheme(); fillSelects(); bindInputs(); bindTabs(); renderAll(); renderLang(); renderPhases(); bindSim(); renderFriends();
+document.getElementById('refreshBtn').addEventListener('click', refresh);
+
+</script>
+</body>
+</html>

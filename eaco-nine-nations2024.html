@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EACO Global Nation Groups｜全球9国小组</title>
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#222222;
+  --card:#f8f9fa;
+  --primary:#20c997;
+  --border:#cccccc;
+  --link:#0066cc;
+}
+/* 苹果绿 */
+.theme-green{
+  --bg:#f0faf4;
+  --text:#1a3b2f;
+  --card:#e6f7ef;
+  --primary:#20c997;
+  --border:#94d8bb;
+  --link:#008855;
+}
+/* 科技蓝 */
+.theme-blue{
+  --bg:#f0f5fc;
+  --text:#14243c;
+  --card:#e4edf9;
+  --primary:#2563eb;
+  --border:#82a8e0;
+  --link:#1d4ed8;
+}
+/* 米黄古典 */
+.theme-yellow{
+  --bg:#fff9e8;
+  --text:#4b3621;
+  --card:#fff3d4;
+  --primary:#b8860b;
+  --border:#d6bc84;
+  --link:#92400e;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans SC,sans-serif;
+  line-height:1.65;
+  padding:16px;
+  transition:background 0.4s,color 0.4s;
+}
+.container{max-width:1200px;margin:0 auto;}
+.theme-bar{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;}
+.theme-bar button{
+  padding:7px 14px;border:1px solid var(--border);
+  background:var(--card);color:var(--text);border-radius:6px;cursor:pointer;
+}
+h1,h2,h3{margin:18px 0 10px;color:var(--primary);}
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:16px;margin:14px 0;
+}
+table{
+  width:100%;border-collapse:collapse;margin:12px 0;
+}
+th,td{
+  border:1px solid var(--border);padding:9px 11px;text-align:left;
+}
+th{background:var(--card);}
+a{color:var(--link);word-break:break-all;}
+ul,ol{padding-left:22px;margin:10px 0;}
+footer{
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--border);
+  font-size:13px;
+}
+pre{
+  overflow-x:auto;background:rgba(0,0,0,0.04);padding:10px;border-radius:6px;
+}
+@media(max-width:720px){
+  th,td{padding:6px 4px;font-size:13px;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="theme-bar">
+    <button onclick="setTheme('')">默认</button>
+    <button onclick="setTheme('theme-green')">苹果绿</button>
+    <button onclick="setTheme('theme-blue')">科技蓝</button>
+    <button onclick="setTheme('theme-yellow')">米黄古典</button>
+  </div>
+
+  <h1>EACO 全球9国小组建设方案</h1>
+  <div class="card">
+    <h3>基础背景信息（9个目标国家）</h3>
+    <table>
+      <thead>
+        <tr><th>国家</th><th>语言情况</th><th>EACO流通规模</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>美国</td><td>联邦无法定官方语言；英语事实通用；部分州法定英语；西班牙语广泛使用</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>日本</td><td>日语（事实官方语言）</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>澳大利亚</td><td>联邦无法定官方语言，英语事实通用</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>加拿大</td><td>英语、法语联邦官方语言</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>法国</td><td>法语</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>德国</td><td>德语</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>荷兰</td><td>荷兰语；弗里斯兰省弗里斯兰语官方地位</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>新西兰</td><td>英语、毛利语、新西兰手语同为官方语言</td><td>3000万‑9000万 EACO</td></tr>
+        <tr><td>菲律宾</td><td>菲律宾语（他加禄）、英语官方语言</td><td>3000万‑9000万 EACO</td></tr>
+      </tbody>
+    </table>
+    <p><strong>分类：</strong></p>
+    <ul>
+      <li>单一主要语言：日本（日语）、法国（法语）、德国（德语）、荷兰（荷兰语为主）</li>
+      <li>多官方语言：加拿大（英/法）、新西兰（英/毛利/手语）、菲律宾（菲律宾语/英语）</li>
+      <li>无联邦法定官方语言：美国、澳大利亚</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>一、9国EACO小组免费 / 低成本落地方式</h2>
+    <p>目标：每个国家建立本地EACO小组，分配流通3000万‑9000万 EACO，低成本冷启动，参考EACO‑SOL池，<strong>不做高成本广告投放</strong>。</p>
+    <h3>1、社区组织（零成本）</h3>
+    <ol>
+      <li>Discord、Telegram建立各国本地子频道，复用项目已有Discord社区，分国家分组；</li>
+      <li>GitHub组织各国小组wiki文档，用issues做本地任务协作；</li>
+      <li>招募本地志愿者，DAO分工，对应EACO‑DAO‑Pool 2026流动性池，私下对接愿意添加流动性的参与者，不急于求成。</li>
+    </ol>
+    <h3>2、内容传播（低成本）</h3>
+    <ul>
+      <li>各国本地社交平台免费发帖：Reddit、X(Twitter)、Mastodon；菲律宾Facebook，日本X/Niconico；</li>
+      <li>翻译EACO定义：Energy能量‑Attitude态度‑Cooperation协作‑Optimization优化，全球文明升级模型文档到各国语言；</li>
+      <li>复用已有github.io静态站点，增加各国语言子页面，无需服务器成本。</li>
+    </ul>
+    <h3>3、链上与流动性低成本方案</h3>
+    <ul>
+      <li>参考交易对：EACO/SOL，orbmarkets市场；合约：DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</li>
+      <li>Meteora DAMM V2池 eaco‑dao‑pool202601，农场APR参考23.56%，100%永久锁仓；</li>
+      <li>各国小组不新建昂贵合约，复用现有链上池，分配额度在DAO内部记账、链上凭证；</li>
+      <li>各国小组货币兑换参考锚定 EACO &lt;&gt; SOL，再间接兑换各国法币，不直接搭建法币出入金系统（降低合规与开发成本）。</li>
+    </ul>
+    <h3>4、线上协作工具（免费）</h3>
+    <ul>
+      <li>Notion / GitHub Wiki：各国小组任务、轻资产清单、兑换规则；</li>
+      <li>虚拟地球、模拟地球栏目内容协作，各国补充本地视角；</li>
+      <li>把EACO公式 <code>EACO = 正能量 × 积极态度 × 全球协作 × 持续优化</code> 翻译成各国本地语言作为小组宣言。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>二、9国前10大轻资产类别 &amp; EACO兑换思路</h2>
+    <p>轻资产定义：不需要重厂房重设备，知识、版权、数字服务、社群、域名、模板、课程、RWA现实资产凭证、数字艺术品、咨询服务。</p>
+    <h3>通用前10类轻资产（适用于9国本地化调整）</h3>
+    <ol>
+      <li>数字课程 / AI教育课程（匹配EACO提升个人认知目标）</li>
+      <li>版权、书籍、文本知识库（对应文明知识库）</li>
+      <li>Web3 DID、域名、网站模板、开源组件</li>
+      <li>本地咨询服务、组织效率咨询（提升组织效率）</li>
+      <li>数字艺术品、NFT、元宇宙素材（虚拟地球内容）</li>
+      <li>社群运营、DAO治理服务、翻译本地化服务</li>
+      <li>RWA现实世界资产凭证（绿色可持续发展相关）</li>
+      <li>AI提示词库、模拟地球仿真脚本、文明模拟参数</li>
+      <li>电子书、手册、白皮书（EACO宇宙白皮书、星际文明手册）</li>
+      <li>开源项目贡献、代码、文档贡献证明凭证</li>
+    </ol>
+    <h3>轻资产兑换EACO可行方式（低成本）</h3>
+    <ul>
+      <li>方式1：DAO贡献奖励：提交轻资产作品，DAO评审，分配EACO额度（链上池发放）</li>
+      <li>方式2：点对点OTC：社区内部，轻资产持有者与EACO持有者私下置换，参考EACO/SOL市场价格做估值</li>
+      <li>方式3：Swap：使用eacoSWAP，链上资产之间交换；不直接对接法币，规避合规风险</li>
+      <li>方式4：任务挖矿：完成翻译、文档、模拟地球/虚拟地球内容建设，获得EACO农场奖励</li>
+    </ul>
+    <blockquote>提示：本页面仅为方案设想，不构成投资建议，加密资产存在极高风险。</blockquote>
+  </div>
+
+  <div class="card">
+    <h2>三、多国语言翻译对照表（含华语）</h2>
+    <p>核心EACO概念翻译，用于网站多语言版本扩展</p>
+    <table>
+      <thead>
+        <tr>
+          <th>中文(华语)</th>
+          <th>English(英语)</th>
+          <th>日本語(日语)</th>
+          <th>Français(法语)</th>
+          <th>Deutsch(德语)</th>
+          <th>Nederlands(荷兰语)</th>
+          <th>Tagalog(菲律宾语)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>EACO：能量</td>
+          <td>EACO‑Energy</td>
+          <td>EACO‑エネルギー</td>
+          <td>EACO‑Énergie</td>
+          <td>EACO‑Energie</td>
+          <td>EACO‑Energie</td>
+          <td>EACO‑Enerhiya</td>
+        </tr>
+        <tr>
+          <td>EACO：态度</td>
+          <td>EACO‑Attitude</td>
+          <td>EACO‑態度</td>
+          <td>EACO‑Attitude</td>
+          <td>EACO‑Einstellung</td>
+          <td>EACO‑Houding</td>
+          <td>EACO‑Saloobin</td>
+        </tr>
+        <tr>
+          <td>EACO：协作</td>
+          <td>EACO‑Cooperation</td>
+          <td>EACO‑協力</td>
+          <td>EACO‑Coopération</td>
+          <td>EACO‑Zusammenarbeit</td>
+          <td>EACO‑Samenwerking</td>
+          <td>EACO‑Kooperasyon</td>
+        </tr>
+        <tr>
+          <td>EACO：优化</td>
+          <td>EACO‑Optimization</td>
+          <td>EACO‑最適化</td>
+          <td>EACO‑Optimisation</td>
+          <td>EACO‑Optimierung</td>
+          <td>EACO‑Optimalisatie</td>
+          <td>EACO‑Pag‑optimisa</td>
+        </tr>
+        <tr>
+          <td>虚拟地球</td>
+          <td>Virtual Earth</td>
+          <td>仮想地球</td>
+          <td>Terre Virtuelle</td>
+          <td>Virtuelle Erde</td>
+          <td>Virtuele Aarde</td>
+          <td>Virtual na Daigdig</td>
+        </tr>
+        <tr>
+          <td>模拟地球</td>
+          <td>Simulation Earth</td>
+          <td>シミュレーション地球</td>
+          <td>Terre de Simulation</td>
+          <td>Simulations‑Erde</td>
+          <td>Simulatie Aarde</td>
+          <td>Simulasyon na Daigdig</td>
+        </tr>
+        <tr>
+          <td>DAO全球协作</td>
+          <td>DAO Global Collaboration</td>
+          <td>DAOグローバル協働</td>
+          <td>Collaboration Mondiale DAO</td>
+          <td>DAO globale Zusammenarbeit</td>
+          <td>DAO wereldwijde samenwerking</td>
+          <td>Pandaigdigang Kooperasyon ng DAO</td>
+        </tr>
+        <tr>
+          <td>星际文明</td>
+          <td>Interstellar Civilization</td>
+          <td>星間文明</td>
+          <td>Civilisation Interstellaire</td>
+          <td>Interstellare Zivilisation</td>
+          <td>Interstellaire beschaving</td>
+          <td>Sibilisasyong Interstellar</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>四、参考交易对与合约地址</h2>
+    <pre>
+EACO Token Contract:
+DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+
+EACO market:
+https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+
+SOL reference:
+https://orbmarkets.io/token/So11111111111111111111111111111111111111112
+
+EACO‑DAO‑Pool202601(Meteora):
+https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc
+    </pre>
+    <p><strong>汇率参考思路：</strong>以EACO/SOL市场价格作为中间锚，再通过SOL对各国法币行情间接换算EACO对应各国货币价值；项目本身不提供法币兑换接口。</p>
+  </div>
+
+  <footer>
+    <h3>EACO 项目全部链接（来自文档）</h3>
+    <ul>
+      <li><a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank">https://ucoingroup.github.io/earths-best-coin/</a></li>
+      <li><a href="https://ucoingroup.github.io/eaco50rate/" target="_blank">https://ucoingroup.github.io/eaco50rate/</a></li>
+      <li><a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank">https://ucoingroup.github.io/100WaysToWealth/</a></li>
+      <li><a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank">https://ucoingroup.github.io/earth-100-friends/</a></li>
+      <li><a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank">https://ucoingroup.github.io/eacoSWAP/</a></li>
+      <li><a href="https://github.com/ucoingroup/eacoswap2025" target="_blank">https://github.com/ucoingroup/eacoswap2025</a></li>
+      <li><a href="https://ucoingroup.github.io/good-books/" target="_blank">https://ucoingroup.github.io/good-books/</a></li>
+      <li><a href="https://ucoingroup.github.io/eur-eaco/" target="_blank">https://ucoingroup.github.io/eur-eaco/</a></li>
+      <li><a href="https://ucoingroup.github.io/au-trade/" target="_blank">https://ucoingroup.github.io/au-trade/</a></li>
+      <li><a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank">https://ucoingroup.github.io/Mohist-Tech/</a></li>
+      <li><a href="https://eaco-build-world.base44.app/" target="_blank">https://eaco-build-world.base44.app/</a></li>
+      <li><a href="https://eaco-web3.base44.app" target="_blank">https://eaco-web3.base44.app</a></li>
+      <li><a href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank">https://ucoingroup.github.io/Footsteps-of-Civilization/</a></li>
+      <li><a href="https://ucoingroup.github.io/linguistic-capital/" target="_blank">https://ucoingroup.github.io/linguistic-capital/</a></li>
+      <li><a href="https://discord.gg/bWCDME9Pkc" target="_blank">Discord: https://discord.gg/bWCDME9Pkc</a></li>
+      <li><a href="https://ucoingroup.github.io/eaco-web3/" target="_blank">https://ucoingroup.github.io/eaco-web3/</a></li>
+      <li><a href="https://earth-eaco-web3.base44.app/eaco-team" target="_blank">https://earth-eaco-web3.base44.app/eaco-team</a></li>
+      <li><a href="https://eaco.freedev.app/eaco_web3_series/" target="_blank">https://eaco.freedev.app/eaco_web3_series/</a></li>
+      <li><a href="https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/" target="_blank">https://ucoingroup.github.io/eacoweb3‑2026/eaco_web3_series2025/</a></li>
+      <li><a href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank">EACO‑DOGE pool</a></li>
+      <li><a href="https://github.com/ucoingroup/FreeToken-eaco" target="_blank">FreeToken‑eaco github</a></li>
+      <li><a href="https://eastcoin.base44.app/" target="_blank">https://eastcoin.base44.app/</a></li>
+    </ul>
+    <p>最高原则：所有文明建设为人类文明服务。<br>⚠️加密资产风险提示：本页面仅为概念演示页面，不构成任何投资建议。</p>
+  </footer>
+</div>
+
+<script>
+function setTheme(cls){
+  document.body.className = cls;
+}
+</script>
+</body>
+</html>
+<!-- （注：内容由AI生成） -->
