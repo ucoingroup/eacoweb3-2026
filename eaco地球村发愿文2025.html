@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="EACO 地球村发愿文（2025 · 全球华人版）——十六句原愿的乡音版、十九句全球华人大愿、五洲同愿、每日十愿与佛门/家书双轨回向；愿所有华人、所有众生离苦得乐。单文件离线可用，每句可一键复制。" />
+<title>EACO 地球村发愿文 2025 · 全球华人版</title>
+<script id="auto-designer-preview-contract" type="application/json">
+{"artifactRole":"web-page","authoringViewport":{"width":1440,"height":900},"deviceAdaptation":{"enabled":true,"strategy":"responsive","supportedDevices":["desktop","tablet","mobile"]},"breakpoints":{"mobileMax":767,"tabletMin":768,"tabletMax":1023,"desktopMin":1024},"defaultDevice":"canvas"}
+</script>
+<style>
+:root{
+--bg:#faf9f4;--surface:#fffefb;--fg:#26251f;--muted:#6f6d61;--faint:#8f8d80;
+--border:#dcd9c9;--hairline:#e4e1d2;
+--accent:#2f7d3b;
+--serif:'Source Han Serif SC','Noto Serif SC','Songti SC','STSong','SimSun',serif;
+--sans:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;
+--mono:ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 var(--serif);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inherit}
+
+/* ---------- 布局骨架 ---------- */
+.frame{max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:210px minmax(0,680px) 1fr;gap:64px}
+.rail{padding-top:64px}
+.rail nav{position:sticky;top:48px}
+.rail .r-k{font:600 11px/1 var(--sans);letter-spacing:.18em;color:var(--accent);margin:0 0 14px}
+.rail a{display:flex;justify-content:space-between;gap:12px;font:13px/1.5 var(--sans);color:var(--muted);padding:9px 0;border-top:1px solid var(--hairline)}
+.rail a:last-child{border-bottom:1px solid var(--hairline)}
+.rail a b{font-weight:400;color:var(--faint);font-family:var(--mono);font-size:11px}
+.rail a:hover{color:var(--accent)}
+.page{padding:64px 0 96px;min-width:0}
+.side{min-width:0}
+
+/* ---------- 封面 ---------- */
+.kicker{font:600 12px/1 var(--sans);letter-spacing:.24em;color:var(--accent);margin:0 0 22px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(40px,4.6vw,58px);line-height:1.12;letter-spacing:-.02em;margin:0 0 14px}
+.pill{display:inline-block;font:600 11px/1 var(--sans);letter-spacing:.14em;color:var(--muted);border:1px solid var(--border);border-radius:3px;padding:5px 9px;background:var(--surface);margin:0 0 22px}
+.epigraph{font:15px/1.7 var(--serif);color:var(--muted);letter-spacing:.06em;margin:0 0 18px;padding:14px 0 14px 18px;border-left:1px solid var(--border)}
+.lede{font-size:17px;line-height:1.75;color:var(--fg);margin:0 0 8px;max-width:62ch}
+.lede em{font-style:normal;color:var(--accent)}
+.mline{font:12.5px/1.7 var(--sans);color:var(--faint);letter-spacing:.02em;margin:18px 0 0}
+.toc-m{display:none;margin:36px 0 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.toc-m a{display:flex;justify-content:space-between;padding:11px 2px;font:14px/1.4 var(--sans);color:var(--muted);border-top:1px solid var(--hairline)}
+.toc-m a:first-child{border-top:0}
+.toc-m a b{font-weight:400;color:var(--faint);font-family:var(--mono);font-size:11px}
+
+/* ---------- 章 ---------- */
+section{padding-top:56px}
+.sec-head{border-top:1px solid var(--border);padding-top:18px;margin-bottom:6px}
+.sec-k{display:flex;align-items:baseline;gap:14px;margin:0 0 8px}
+.sec-k .no{font:400 12px/1 var(--mono);color:var(--accent);letter-spacing:.1em}
+.sec-k h2{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.2;letter-spacing:-.01em;margin:0}
+.sec-sub{font:14px/1.7 var(--sans);color:var(--muted);margin:0 0 10px;max-width:60ch}
+.sec-bar{display:flex;justify-content:flex-end;padding:6px 0 2px}
+.cp,.cp-sec{font:12px/1 var(--sans);letter-spacing:.08em;color:var(--muted);border:1px solid var(--border);border-radius:3px;padding:6px 11px;background:var(--surface);transition:color .15s,border-color .15s}
+.cp:hover,.cp-sec:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ---------- 愿条目 ---------- */
+.vow{display:grid;grid-template-columns:46px minmax(0,1fr) 62px;gap:14px;padding:20px 0;border-bottom:1px solid var(--hairline)}
+.vow:last-of-type{border-bottom:0}
+.vno{font:400 12px/1.9 var(--mono);color:var(--faint)}
+.vorig{font:13px/1.55 var(--sans);color:var(--muted);margin:0 0 8px}
+.vorig i{font-style:normal;font:600 10.5px/1 var(--sans);letter-spacing:.12em;color:var(--faint);border:1px solid var(--border);border-radius:2px;padding:2.5px 5px;margin-right:8px;vertical-align:1px}
+.vtxt{font:17px/1.68 var(--serif);margin:0}
+.vow.q .vtxt{font-size:16.5px}
+.vcp{align-self:start;justify-self:end}
+
+/* ---------- 回向 ---------- */
+.hui{margin:22px 0 0;padding:22px 0 4px;border-bottom:1px solid var(--hairline)}
+.hui-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.hui-top h3{font:600 15px/1.4 var(--sans);margin:0;letter-spacing:.04em}
+.hui-top .tag{font:600 10.5px/1 var(--sans);letter-spacing:.12em;color:var(--accent);margin-right:8px}
+.hui p{font:16.5px/1.9 var(--serif);margin:12px 0 20px;text-indent:0}
+
+/* ---------- 尾注 ---------- */
+.colo{margin-top:72px;border-top:1px solid var(--border);padding-top:20px}
+.colo p{font:12.5px/1.85 var(--sans);color:var(--muted);margin:0 0 10px}
+.colo b{font-weight:600;color:var(--fg)}
+.colo .fin{font:14px/1.8 var(--serif);color:var(--fg);margin-top:20px}
+
+/* ---------- 生态导航 ---------- */
+.eco{margin-top:56px;border-top:1px solid var(--border);padding-top:22px}
+.eco-k{font:600 12px/1 var(--sans);letter-spacing:.18em;color:var(--accent);margin:0 0 8px}
+.eco h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.2;margin:0 0 8px}
+.eco-sub{font:13.5px/1.7 var(--sans);color:var(--muted);margin:0 0 18px}
+.ca{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;border:1px solid var(--border);background:var(--surface);padding:14px 16px;margin:0 0 12px}
+.ca .k{font:600 11px/1 var(--sans);letter-spacing:.14em;color:var(--muted)}
+.ca code{flex:1;min-width:220px;font:12.5px/1.5 var(--mono);color:var(--fg);word-break:break-all}
+.ca-note{font:11.5px/1.6 var(--sans);color:var(--faint);margin:0 0 24px}
+.eco .gk{display:flex;justify-content:space-between;align-items:baseline;font:600 13px/1 var(--sans);letter-spacing:.08em;color:var(--fg);margin:0;padding-bottom:9px;border-bottom:1px solid var(--border)}
+.eco .gk i{font-style:normal;font:400 10.5px/1 var(--mono);color:var(--faint);letter-spacing:.06em}
+.eco ul{list-style:none;margin:0 0 22px;padding:0;column-count:2;column-gap:44px}
+.eco li{break-inside:avoid;border-bottom:1px solid var(--hairline)}
+.eco a{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:9px 2px;text-decoration:none}
+.eco a b{font-weight:500;font:13px/1.5 var(--sans);color:var(--fg)}
+.eco a span{font:10.5px/1.5 var(--mono);color:var(--faint);text-align:right}
+.eco a:hover b{color:var(--accent)}
+@media (max-width:767px){.eco ul{column-count:1}}
+
+/* ---------- toast ---------- */
+#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(8px);background:var(--fg);color:var(--bg);font:13px/1 var(--sans);letter-spacing:.06em;padding:9px 16px;border-radius:3px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1023px){
+.frame{grid-template-columns:minmax(0,1fr);padding:0 28px}
+.rail{display:none}
+.toc-m{display:block}
+}
+@media (max-width:767px){
+.frame{padding:0 20px}
+.page{padding:44px 0 72px}
+h1{font-size:34px}
+.vow{grid-template-columns:40px minmax(0,1fr);gap:10px;padding:16px 0}
+.vcp{grid-column:2;justify-self:start;margin-top:8px}
+.vtxt{font-size:16px}
+.hui p{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div class="frame">
+  <aside class="rail">
+    <nav>
+      <p class="r-k">目 次</p>
+      <a href="#c1"><span>十六愿 · 乡音版</span><b>16</b></a>
+      <a href="#c2"><span>全球华人大愿 · 续写</span><b>19</b></a>
+      <a href="#c3"><span>五洲同愿</span><b>5</b></a>
+      <a href="#c4"><span>每日十愿 · 速诵</span><b>10</b></a>
+      <a href="#c5"><span>回向文 · 双轨</span><b>2</b></a>
+      <a href="#colo"><span>用法与说明</span><b>—</b></a>
+      <a href="#lnk"><span>EACO 生态导航</span><b>22</b></a>
+    </nav>
+  </aside>
+
+  <main class="page">
+    <header>
+      <p class="kicker">EACO 地球村发愿文 · 全球华人版</p>
+      <h1>地球村发愿文</h1>
+      <p class="pill">2025 年版</p>
+      <p class="epigraph">海上生明月，天涯共此时。</p>
+      <p class="lede">无论你在五洲四海的哪一座城——唐人街、唐人街之外、或正走在回家的航班上——这一篇愿文，替你把愿发给整个地球村，也发回故乡。<em>月亮照到的地方，就都是一家人。</em></p>
+      <p class="mline">16 句原愿 × 19 句华人愿 × 5 句五洲愿 × 10 句速诵 × 2 篇回向 &nbsp;·&nbsp; 每句可一键复制，转发即结善缘</p>
+      <nav class="toc-m">
+        <a href="#c1"><span>第一章 · 十六愿（乡音版）</span><b>16</b></a>
+        <a href="#c2"><span>第二章 · 全球华人大愿（续写）</span><b>19</b></a>
+        <a href="#c3"><span>第三章 · 五洲同愿</span><b>5</b></a>
+        <a href="#c4"><span>第四章 · 每日十愿（速诵版）</span><b>10</b></a>
+        <a href="#c5"><span>第五章 · 回向文（佛门 / 家书）</span><b>2</b></a>
+        <a href="#lnk"><span>附 · EACO 生态导航</span><b>22</b></a>
+      </nav>
+    </header>
+
+    <section id="c1">
+      <div class="sec-head">
+        <div class="sec-k"><span class="no">第一章</span><h2>十六愿 · 乡音版</h2></div>
+        <p class="sec-sub">小字是原愿，大字是写给全球华人的版本——原意不动，添一把乡音。点「复制」取大字。</p>
+        <div class="sec-bar"><button type="button" class="cp-sec" data-sec="c1">复制本章</button></div>
+      </div>
+
+      <article class="vow"><span class="vno">01</span><div><p class="vorig"><i>原愿</i>愿所有众生平安出行，身体健康。</p><p class="vtxt">愿每一个在路上的华人，换登机牌顺顺利利，行李箱装得下乡愁也装得下远方；出门一路平安，回家一屋安康——故乡的灯，永远给你留一盏。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">02</span><div><p class="vorig"><i>原愿</i>愿所有众生吃饱穿暖，衣食无忧。</p><p class="vtxt">愿地球村每一张餐桌上都有热气：中餐馆的汤锅不凉，自家厨房的米饭喷香；异乡再忙，也吃得上母亲教的那道菜。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">03</span><div><p class="vorig"><i>原愿</i>愿所有众生今生乃至生生世世不邪淫，不妄语，保持正念善念。</p><p class="vtxt">愿今生乃至生生世世，说真话、守本分、护善念；华人走到哪里，就把「言而有信」带到哪里——网上说的每句话经得起良心，心里动的每个念头见得了太阳。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">04</span><div><p class="vorig"><i>原愿</i>愿所有众生心想事成。</p><p class="vtxt">愿每个认真打拼的人，想的都能落地，盼的都能开花；春天种下什么，秋天就收什么——上班的升职，开店的红火，种地的丰收。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">05</span><div><p class="vorig"><i>原愿</i>愿所有众生无病无灾无难。</p><p class="vtxt">愿风调雨顺、五谷丰登；病有良医、药有平价、难有援手；台风地震来的夜里，屋顶不塌、灯火不灭、村子不散，乡亲守望相助。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">06</span><div><p class="vorig"><i>原愿</i>愿所有众生负债累累清零，实现财务上自由。</p><p class="vtxt">愿所有的账一笔一笔还清，肩上的担子一年一年变轻；愿人人靠手艺、靠阳光、靠勤快，攒下睡得着觉的钱——房贷车贷都不慌，寄回家的红包越来越厚。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">07</span><div><p class="vorig"><i>原愿</i>愿所有众生自由自在，能够去自己想去的地方。</p><p class="vtxt">愿签证办得下、机票买得起、假期批得动、身体走得动；地球村的每一扇门，都为认真生活的人留一条路——想回家的时候，随时回得去。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">08</span><div><p class="vorig"><i>原愿</i>愿所有众生爱情顺利，婚姻美满。</p><p class="vtxt">愿相爱的人吵完架，还愿意给对方倒一杯热水；异国恋熬得过时差，柴米油盐里也存着甜，白头到老不只是一句祝福。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">09</span><div><p class="vorig"><i>原愿</i>愿所有众生福慧双修，福慧增长。</p><p class="vtxt">愿财富是修来的福，智慧是攒下的光；像屋顶那块光伏板，一面朝天采光，一面朝家发电——福往人间走，慧往心里亮。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">10</span><div><p class="vorig"><i>原愿</i>愿所有众生离苦得乐，清闲自在。</p><p class="vtxt">愿苦有尽头，乐有来处；忙时有奔头，闲时有茶喝；等干不动的那一天，就回老家去——一把摇椅、一个院子、一群还能讲家乡话的老友。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">11</span><div><p class="vorig"><i>原愿</i>愿所有众生有花不完的钱，每天有 1000 元零花钱，财源广进。</p><p class="vtxt">愿人人都有一份像太阳一样准时的进项，白天发电、夜里生息；愿钱像村口的活水，流过你也流过全村——汇率不折腾，钱包不缩水，取之有度，用之有暖。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">12</span><div><p class="vorig"><i>原愿</i>愿所有众生万事如意，平安顺遂。</p><p class="vtxt">愿顺境不骄、逆境不慌；一年四季，事顺、家顺、路顺、心顺；在地球村哪一站落脚，都遇贵人、都有好运。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">13</span><div><p class="vorig"><i>原愿</i>愿所有孩子健康快乐成长。</p><p class="vtxt">愿每个孩子有学上、有书读、有人陪、有饭吃；眼睛亮亮的，笑声大大的；华人的娃会讲家乡话，也讲得顺世界的话，长成比我们更好的人。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">14</span><div><p class="vorig"><i>原愿</i>愿所有老人子孝孙贤，平安喜乐。</p><p class="vtxt">愿村里每一位老人，老有所养、病有所医、心有所安；儿女常回家，饭桌有热菜，孙儿绕膝前——视频那头喊一声爷爷奶奶，皱纹里都藏着福。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">15</span><div><p class="vorig"><i>原愿</i>愿所有父母健康长寿快乐。</p><p class="vtxt">愿天下父母腰腿硬朗、心头舒坦；电话那头总有人接，过年桌上总有人等——你养我长大，我陪你到老；游子走得再远，也走不出你的牵挂。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">16</span><div><p class="vorig"><i>原愿</i>愿所有众生远离恶道，亲近善知识。</p><p class="vtxt">愿邪路无人走，恶念无处生；愿好人与好人相遇，善法与善心相传；跟着有光的人走有光的路，再把光传给身后的人——前人引路，后人接灯。</p></div><button type="button" class="cp vcp">复制</button></article>
+    </section>
+
+    <section id="c2">
+      <div class="sec-head">
+        <div class="sec-k"><span class="no">第二章</span><h2>全球华人大愿 · 续写</h2></div>
+        <p class="sec-sub">顺着十六愿往下发：唐人街、乡音、家书、团圆、光伏——愿力跟着华人的脚步，走遍地球村。</p>
+        <div class="sec-bar"><button type="button" class="cp-sec" data-sec="c2">复制本章</button></div>
+      </div>
+
+      <article class="vow"><span class="vno">华01</span><div><p class="vtxt">愿全球华人，四海一心：无论护照上是哪一国，心里都装着同一个家；一人有难，八方乡亲伸手——五洲四海，我们是一家人。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华02</span><div><p class="vtxt">愿异乡人被温柔相待：海关对你笑，房东不刁难，同事把你当自己人；你在别人的国家流汗，别人在你的心里留暖。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华03</span><div><p class="vtxt">愿唐人街的灯常亮：中餐馆的汤锅不凉，杂货店的货架满满，牌坊上的字被擦得亮亮的——那是游子路上的灯塔。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华04</span><div><p class="vtxt">愿乡音不老、方言有人传：娃会讲普通话，也记得外婆的家乡话；一句「呷饭没」「食咗饭未」「吃了吗」，走到哪里都是自家人。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华05</span><div><p class="vtxt">愿汉字被世界温柔读懂：把中文讲给世界听，也把世界的话译回中文；一撇一捺是「人」，你帮我、我帮你，才站得稳。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华06</span><div><p class="vtxt">愿汇款单变成回家票：寄回家的钱越来越少，买回来的机票越来越多——老家盖了房，屋顶装上光伏板，阳光也成了进项。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华07</span><div><p class="vtxt">愿除夕的团圆饭不缺人：桌上的饺子、年糕、汤圆都齐了，视频那头和视频这头都到了；推杯换盏之间，天涯也是咫尺。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华08</span><div><p class="vtxt">愿留学生学业有成：论文写得动，夜宵吃得上，想家的时候有人陪；平安毕业，前程似锦，回国留洋都随心。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华09</span><div><p class="vtxt">愿海外打拼的人身有所安：工地上的、后厨里的、写字楼里的、跑船的——劳有所得、病有所医、累有所歇，凭手艺吃饭，昂着头做人。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华10</span><div><p class="vtxt">愿春节成为地球村的节日：贴福字、舞龙灯、包红包，各国村邻一起过；红包发给不同肤色的小孩，笑是一样的。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华11</span><div><p class="vtxt">愿中餐、中医、茶与功夫成为桥：一碗面拉近的距离，胜过千言万语；以食会友，以医济人，以茶会心，以武会德。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华12</span><div><p class="vtxt">愿华人与村邻守望相助：他乡遇故知是喜，他乡遇好邻居也是福；华人帮华人，华人也帮所有帮过华人的人。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华13</span><div><p class="vtxt">愿落叶归根，也愿落地生根：老华侨回乡盖屋颐养天年，新华侨在新的土地上开花结果——根在故乡，枝向四方。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华14</span><div><p class="vtxt">愿华人孩子的行囊里有两样东西：一本文言启蒙，一张世界地图；走得远，也记得回家；看得见世界，也看得懂家乡。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华15</span><div><p class="vtxt">愿全球屋顶都有阳光：故乡的坡屋顶、唐人街的平屋顶、南洋的红铁皮——都能装上光伏板，白天发电，夜里照亮全家的账本。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华16</span><div><p class="vtxt">愿地球村的月亮，照着每一种乡愁：八月十五的月亮不分国界，你抬头的地方，就是思念抵达的地方——天涯共此时。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华17</span><div><p class="vtxt">愿两岸三地、五湖四海常来常往：血脉里的团圆不用签证；多走动、多说话、多一起吃几顿饭，天下华人是一家。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华18</span><div><p class="vtxt">愿华人走到哪里，把「礼」与「和」带到哪里：不惹事、不怕事，先敬人、再敬己；谦谦君子，也堂堂正正。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">华19</span><div><p class="vtxt">愿善念从唐人街出发，走遍地球村：从长安到罗马，从南洋到五洲；一人发一愿、一愿传一村——光不需要翻译，乡愁不需要签证，善念自己会走遍地球村。</p></div><button type="button" class="cp vcp">复制</button></article>
+    </section>
+
+    <section id="c3">
+      <div class="sec-head">
+        <div class="sec-k"><span class="no">第三章</span><h2>五洲同愿</h2></div>
+        <p class="sec-sub">一个大洲，一句愿——你在哪一洲，就把哪一愿复制去发。</p>
+        <div class="sec-bar"><button type="button" class="cp-sec" data-sec="c3">复制本章</button></div>
+      </div>
+
+      <article class="vow"><span class="vno">亚洲</span><div><p class="vtxt">愿故乡风调雨顺、稻香满仓，亲人常聚、灯火常明——这里是我们出发的地方。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">欧洲</span><div><p class="vtxt">愿留学生与务工的乡亲，学业顺遂、劳有所得；在古老的土地上，也有我们新的家。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">非洲</span><div><p class="vtxt">愿中非村邻一起修路、架桥、通电——把好日子一块一块，并上地球村的电网。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">美洲</span><div><p class="vtxt">愿新老移民落地生根、开花结果；再远的路，也隔不断一通越洋电话。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow"><span class="vno">大洋洲</span><div><p class="vtxt">愿南半球的月光，也照见家乡的团圆——季节倒着走，思念不倒着走。</p></div><button type="button" class="cp vcp">复制</button></article>
+    </section>
+
+    <section id="c4">
+      <div class="sec-head">
+        <div class="sec-k"><span class="no">第四章</span><h2>每日十愿 · 速诵版</h2></div>
+        <p class="sec-sub">早一遍、晚一遍，一分钟把愿发完；睡前默念一遍，给这一天收个好尾。</p>
+        <div class="sec-bar"><button type="button" class="cp-sec" data-sec="c4">复制本章</button></div>
+      </div>
+
+      <article class="vow q"><span class="vno">速01</span><div><p class="vtxt">愿我在异乡平安，家人在故乡安康。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速02</span><div><p class="vtxt">愿华人四海一心，互助共暖。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速03</span><div><p class="vtxt">愿父母身体硬朗，等得起我回家。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速04</span><div><p class="vtxt">愿孩子会讲家乡话，也讲得顺世界话。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速05</span><div><p class="vtxt">愿屋顶生金，阳光变福。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速06</span><div><p class="vtxt">愿乡愁有解药，团圆有日期。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速07</span><div><p class="vtxt">愿勤劳有回报，善意被善待。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速08</span><div><p class="vtxt">愿唐人街灯火长明，故乡蓝天常在。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速09</span><div><p class="vtxt">愿地球村村邻和睦，天下一家。</p></div><button type="button" class="cp vcp">复制</button></article>
+      <article class="vow q"><span class="vno">速10</span><div><p class="vtxt">愿我与众生，离苦得乐，一起把日子过亮。</p></div><button type="button" class="cp vcp">复制</button></article>
+    </section>
+
+    <section id="c5">
+      <div class="sec-head">
+        <div class="sec-k"><span class="no">第五章</span><h2>回向文 · 双轨</h2></div>
+        <p class="sec-sub">念完愿，收个尾：佛门版照传统回向偈，家书版念给家里的人和五洲四海的乡亲。</p>
+      </div>
+
+      <div class="hui">
+        <div class="hui-top"><h3><span class="tag">佛门版</span>愿以此愿力，回向地球村</h3><button type="button" class="cp" data-quote="hu1">复制</button></div>
+        <p id="hu1">愿以此愿力，回向地球村——愿电通、路通、心通；账清、身安、家旺。愿一束光照进一扇窗，一扇窗点亮一个家，一个家暖起一个村，一个村连成一个地球村。愿以此功德，庄严佛净土；上报四重恩，下济三途苦。若有见闻者，悉发菩提心；尽此一报身，同生极乐国。</p>
+      </div>
+      <div class="hui">
+        <div class="hui-top"><h3><span class="tag">家书版</span>见字如面</h3><button type="button" class="cp" data-quote="hu2">复制</button></div>
+        <p id="hu2">见字如面。这封信写给爸妈，也写给五洲四海的家里人：儿在地球村这一头，一切都好——吃得饱，穿得暖，遇的都是好人。愿你们身体硬朗，等得起我回家；愿乡亲们的债都还清、病都痊愈，屋顶都晒着太阳。等我忙完这一程，就买机票回家。海上生明月，天涯共此时——月亮升起的时候，就是全家团圆的时候。</p>
+      </div>
+    </section>
+
+    <footer class="colo" id="colo">
+      <p><b>怎么用：</b>早一遍、晚一遍；单句复制可发到家族群、同学群、唐人街的群里——与五洲四海的乡亲结一个善缘。</p>
+      <p><b>发愿的次第：</b>先把善意发出去，再把手里的日子过好；念愿不修行，愿只是愿——愿力加上行动，才算数。</p>
+      <p><b>说明：</b>本页为个人祈福与社区文化内容，不构成任何投资建议；EACO＝能量 × 态度 × 协作 × 优化，愿力亦当如是。</p>
+      <p><b>版本：</b>全球华人版 · 2025 年版，由《地球村发愿文》优化而来；旧版保留于 原型/地球村发愿文.html。</p>
+      <p class="fin">愿以此发愿，回向所有华人、所有众生：四海一心，乡音不老；平安出行，衣食无忧；正念善念，福慧增长；离苦得乐，共同富足；地球并网，天下一家。</p>
+    </footer>
+
+    <footer class="eco" id="lnk">
+      <p class="eco-k">附 录</p>
+      <h2>EACO 生态导航</h2>
+      <p class="eco-sub">地球村的邻居们，都在这里——发愿之外，也常来串门。社区生态链接仅为方便走访，不构成投资建议。</p>
+      <div class="ca">
+        <span class="k">EACO CA · Solana SPL</span>
+        <code id="caCode">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+        <button type="button" class="cp" data-ca>复制</button>
+      </div>
+      <p class="ca-note">复制后，可在 Solana 钱包中以此 CA 添加自定义代币。</p>
+
+      <p class="gk">生态站点 <i>15 个</i></p>
+      <ul>
+        <li><a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener"><b>earths-best-coin</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener"><b>eaco50rate</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" rel="noopener"><b>100WaysToWealth</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" rel="noopener"><b>earth-100-friends</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" rel="noopener"><b>eacoSWAP</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://github.com/ucoingroup/eacoswap2025" target="_blank" rel="noopener"><b>eacoswap2025</b><span>GitHub</span></a></li>
+        <li><a href="https://ucoingroup.github.io/good-books/" target="_blank" rel="noopener"><b>good-books</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/eur-eaco/" target="_blank" rel="noopener"><b>eur-eaco</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/au-trade/" target="_blank" rel="noopener"><b>au-trade</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" rel="noopener"><b>Mohist-Tech</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener"><b>eaco-build-world</b><span>base44.app</span></a></li>
+        <li><a href="https://eaco-web3.base44.app" target="_blank" rel="noopener"><b>eaco-web3</b><span>base44.app</span></a></li>
+        <li><a href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank" rel="noopener"><b>Footsteps-of-Civilization</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://ucoingroup.github.io/linguistic-capital/" target="_blank" rel="noopener"><b>linguistic-capital</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener"><b>Discord</b><span>社区聊天</span></a></li>
+      </ul>
+
+      <p class="gk">eaco-dao-pool202601 <i>5 个</i></p>
+      <ul>
+        <li><a href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" rel="noopener"><b>Meteora DAMM v2</b><span>app.meteora.ag</span></a></li>
+        <li><a href="https://ucoingroup.github.io/eaco-web3/" target="_blank" rel="noopener"><b>eaco-web3</b><span>ucoingroup.github.io</span></a></li>
+        <li><a href="https://earth-eaco-web3.base44.app/eaco-team" target="_blank" rel="noopener"><b>EACO Team</b><span>base44.app</span></a></li>
+        <li><a href="https://eaco.freedev.app/eaco_web3_series/" target="_blank" rel="noopener"><b>eaco_web3_series</b><span>freedev.app</span></a></li>
+        <li><a href="https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/" target="_blank" rel="noopener"><b>series2025</b><span>GitHub</span></a></li>
+      </ul>
+
+      <p class="gk">eaco-DOGE pool <i>1 个</i></p>
+      <ul>
+        <li><a href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank" rel="noopener"><b>orbmarkets 地址</b><span>orbmarkets.io</span></a></li>
+      </ul>
+
+      <p class="gk">eaco-freetoken <i>1 个</i></p>
+      <ul>
+        <li><a href="https://github.com/ucoingroup/FreeToken-eaco" target="_blank" rel="noopener"><b>FreeToken-eaco</b><span>GitHub</span></a></li>
+      </ul>
+    </footer>
+  </main>
+
+  <div class="side"></div>
+</div>
+<div id="toast">已复制到剪贴板</div>
+
+<script>
+(function(){
+  'use strict';
+  var toastEl=document.getElementById('toast'),tTimer=null;
+  function toast(msg){
+    toastEl.textContent=msg;toastEl.classList.add('on');
+    if(tTimer)clearTimeout(tTimer);
+    tTimer=setTimeout(function(){toastEl.classList.remove('on');},1600);
+  }
+  function done(btn){
+    toast('已复制到剪贴板');
+    if(!btn)return;
+    var old=btn.getAttribute('data-old')||btn.textContent;
+    btn.setAttribute('data-old',old);
+    btn.textContent='已复制';
+    setTimeout(function(){btn.textContent=btn.getAttribute('data-old');},1400);
+  }
+  function copyText(text,btn){
+    var t=text.replace(/\n{3,}/g,'\n\n').trim();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){done(btn);}).catch(function(){fallback(t,btn);});
+    }else{fallback(t,btn);}
+  }
+  function fallback(t,btn){
+    var ta=document.createElement('textarea');
+    ta.value=t;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.left='-9999px';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');done(btn);}
+    catch(e){toast('复制失败，请手动选择文字');}
+    document.body.removeChild(ta);
+  }
+  function secText(sec){
+    var out=[],name=sec.querySelector('.sec-k h2').textContent;
+    sec.querySelectorAll('.vtxt').forEach(function(p){out.push(p.textContent.trim());});
+    return '【'+name+'】\n'+out.join('\n');
+  }
+  function allText(){
+    var out=['《EACO 地球村发愿文 · 全球华人版（2025）》\n'];
+    document.querySelectorAll('main section').forEach(function(sec){out.push(secText(sec));out.push('');});
+    out.push('【卷尾总愿】\n'+document.querySelector('.colo .fin').textContent.trim());
+    return out.join('\n');
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('button');
+    if(!btn)return;
+    if(btn.classList.contains('cp-sec')){
+      var sec=document.getElementById(btn.getAttribute('data-sec'));
+      if(sec)copyText(secText(sec),btn);
+      return;
+    }
+    if(btn.hasAttribute('data-ca')){
+      var ca=document.getElementById('caCode');
+      if(ca)copyText(ca.textContent.trim(),btn);
+      return;
+    }
+    if(btn.hasAttribute('data-quote')){
+      var q=document.getElementById(btn.getAttribute('data-quote'));
+      if(q)copyText(q.textContent,btn);
+      return;
+    }
+    if(btn.classList.contains('cp')){
+      var vow=btn.closest('.vow');
+      if(vow){copyText(vow.querySelector('.vtxt').textContent,btn);return;}
+      var box=btn.closest('.hui');
+      if(box){copyText(box.querySelector('p').textContent,btn);}
+    }
+  });
+})();
+</script>
+</body>
+</html>
