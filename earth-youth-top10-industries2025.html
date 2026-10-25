@@ -1,0 +1,1208 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="地球村未来年轻人最喜欢的十大行业：电竞、潮玩、文创、打卡业态、短视频、宠物、户外、二次元、新餐饮、AI 创作与数字游民。六语切换，三套设计风格，零预算启动路径，EACO 结合点。">
+<title>地球村青年十大行业 · Earth's Best Youth Top 10 Industries · EACO</title>
+<style>
+/* ============ 主题变量 ============ */
+:root{
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --radius:16px; --radius-sm:12px;
+}
+body[data-theme="green"]{
+  --bg:#f1f8ec; --fg:#172617; --muted:#5a6d59; --line:#d8e8d0;
+  --card:#ffffff; --card2:#f8fcf5;
+  --primary:#3f9d3f; --primary-2:#2c7a2c; --primary-soft:#e6f5e4;
+  --accent:#f0a020; --accent-soft:#fdf1dc;
+  --hero:linear-gradient(135deg,#5fb85f 0%,#37873b 55%,#1e5c22 100%);
+  --shadow:0 6px 22px rgba(31,92,34,.10);
+}
+body[data-theme="blue"]{
+  --bg:#eef3fb; --fg:#0f1b2e; --muted:#4c5f7a; --line:#d3e0f0;
+  --card:#ffffff; --card2:#f6f9fe;
+  --primary:#2563eb; --primary-2:#1b47a8; --primary-soft:#e4edfd;
+  --accent:#7c3aed; --accent-soft:#efe8fd;
+  --hero:linear-gradient(135deg,#3b6fd4 0%,#24489c 55%,#0e1f4d 100%);
+  --shadow:0 6px 22px rgba(20,50,110,.12);
+}
+body[data-theme="classic"]{
+  --bg:#f6efe1; --fg:#2b1d12; --muted:#6d5946; --line:#e2d3b8;
+  --card:#fffdf7; --card2:#faf3e6;
+  --primary:#9e2b25; --primary-2:#7a1f1a; --primary-soft:#f6e6df;
+  --accent:#a8802a; --accent-soft:#f5ecd8;
+  --hero:linear-gradient(135deg,#b8443a 0%,#8a2a22 55%,#4d1a14 100%);
+  --shadow:0 6px 22px rgba(90,40,25,.12);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font);color:var(--fg);background:var(--bg);line-height:1.72;-webkit-font-smoothing:antialiased}
+a{color:var(--primary-2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{margin:0;line-height:1.35}
+
+/* ============ 顶栏 ============ */
+.topbar{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.topbar .wrap{display:flex;align-items:center;gap:14px;padding:11px 20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:.98rem;letter-spacing:.2px}
+.logo{width:29px;height:29px;border-radius:9px;background:var(--hero);color:#fff;display:grid;place-items:center;font-weight:900;font-size:1.02rem}
+.brand small{display:block;font-size:.62rem;color:var(--muted);font-weight:600;letter-spacing:.6px}
+.nav{display:flex;gap:2px;flex-wrap:wrap;margin-left:6px}
+.nav a{font-size:.79rem;padding:6px 9px;border-radius:8px;color:var(--muted);font-weight:600}
+.nav a:hover{background:var(--primary-soft);color:var(--primary-2);text-decoration:none}
+.tools{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:flex;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.seg button{font-family:inherit;font-size:.72rem;font-weight:800;border:0;background:transparent;color:var(--muted);padding:5px 9px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:5px}
+.seg button.on{background:var(--primary);color:#fff}
+.dotc{width:9px;height:9px;border-radius:50%;display:inline-block}
+select.lang{font-family:inherit;font-size:.76rem;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:9px;padding:6px 8px;cursor:pointer}
+
+/* ============ HERO ============ */
+.hero{background:var(--hero);color:#fff;padding:52px 0 42px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-90px;top:-90px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.07)}
+.hero .wrap{position:relative;z-index:1}
+.tagline{display:inline-flex;align-items:center;gap:7px;font-size:.71rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.36);padding:5px 12px;border-radius:999px;margin-bottom:15px}
+.hero h1{font-size:2.05rem;font-weight:900;letter-spacing:.4px;margin-bottom:10px}
+.hero .lead{font-size:.95rem;opacity:.96;max-width:760px;margin:9px 0 0}
+.ca-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.ca{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.34);border-radius:12px;padding:9px 13px;font-size:.74rem;max-width:100%}
+.ca code{font-family:var(--mono);font-size:.72rem;word-break:break-all}
+.ca button{font-family:inherit;font-size:.7rem;font-weight:800;border:0;background:#fff;color:var(--primary-2);border-radius:7px;padding:4px 9px;cursor:pointer}
+.hstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-top:22px;max-width:940px}
+.hstat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.26);border-radius:12px;padding:11px 13px}
+.hstat .k{font-size:.66rem;opacity:.9;letter-spacing:.6px;font-weight:700}
+.hstat .v{font-size:1.12rem;font-weight:900;font-family:var(--mono)}
+.hstat .s{font-size:.68rem;opacity:.88}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.chips a{font-size:.74rem;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:5px 11px;border-radius:999px}
+.chips a:hover{background:rgba(255,255,255,.28);text-decoration:none}
+
+/* ============ 区块 ============ */
+.block{padding:46px 0 8px}
+.shead{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.shead h2{font-size:1.36rem;font-weight:900;display:flex;align-items:center;gap:9px}
+.shead h2 .num{font-family:var(--mono);font-size:.7rem;font-weight:800;color:var(--primary-2);background:var(--primary-soft);border:1px solid var(--line);padding:2px 8px;border-radius:7px}
+.shead .desc{color:var(--muted);font-size:.85rem;max-width:820px;margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.note{font-size:.78rem;border-radius:10px;padding:10px 13px;border:1px solid var(--line);background:var(--card2);margin-top:10px}
+.note.warn{background:var(--accent-soft);border-color:var(--line);color:var(--primary-2)}
+.small{font-size:.78rem}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--card2);font-size:.73rem;letter-spacing:.4px;font-weight:800;color:var(--muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.tag{display:inline-block;font-size:.68rem;font-weight:800;padding:1px 7px;border-radius:6px;background:var(--primary-soft);color:var(--primary-2);border:1px solid var(--line);white-space:nowrap}
+.tag.gray{background:var(--card2);color:var(--muted)}
+.tag.free{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tag.mid{background:var(--accent-soft);color:var(--accent);border-color:var(--line)}
+
+/* ============ 行业卡片 ============ */
+.icard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:17px 18px;position:relative;overflow:hidden}
+.icard:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary)}
+.irank{position:absolute;right:14px;top:12px;font-family:var(--mono);font-size:1.6rem;font-weight:900;color:var(--primary-soft)}
+.iico{font-size:1.5rem;line-height:1}
+.icard h3{font-size:1rem;font-weight:900;margin:6px 0 3px}
+.itag{font-size:.78rem;color:var(--muted);margin:0 0 10px}
+.ilabel{font-size:.68rem;font-weight:900;letter-spacing:.8px;color:var(--primary-2);text-transform:uppercase;margin:11px 0 5px}
+.ilist{margin:0;padding-left:17px;font-size:.79rem}
+.ilist li{margin:2px 0}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:.71rem;padding:2px 8px;border-radius:999px;background:var(--card2);border:1px solid var(--line);color:var(--muted)}
+.eaco-line{margin-top:11px;font-size:.76rem;background:var(--primary-soft);border:1px dashed var(--line);border-radius:10px;padding:8px 10px}
+.imet{display:flex;gap:10px;flex-wrap:wrap;margin-top:11px;font-size:.72rem;color:var(--muted)}
+.imet span b{color:var(--fg)}
+
+/* ============ 深挖清单 ============ */
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:14px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:15px 16px;box-shadow:var(--shadow)}
+.dcard h4{font-size:.92rem;font-weight:900;display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.dcard .dico{font-size:1.25rem}
+.dlist{list-style:none;margin:0;padding:0;font-size:.77rem}
+.dlist li{padding:4px 0;border-bottom:1px dotted var(--line);display:flex;gap:8px;justify-content:space-between}
+.dlist li:last-child{border-bottom:0}
+.dlist .en{color:var(--muted);font-size:.71rem;text-align:right}
+
+/* ============ 步骤 ============ */
+.steps{display:grid;gap:11px}
+.step{display:grid;grid-template-columns:52px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px;box-shadow:var(--shadow);align-items:start}
+.step .n{font-family:var(--mono);font-size:.76rem;font-weight:900;background:var(--primary);color:#fff;border-radius:8px;text-align:center;padding:3px 0}
+.step h4{font-size:.88rem;font-weight:900;margin-bottom:3px}
+.step p{margin:0;font-size:.78rem;color:var(--muted)}
+
+/* ============ 三节课 ============ */
+.lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.lcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--primary);border-radius:12px;padding:14px 16px}
+.lcard h4{font-size:.9rem;font-weight:900;margin-bottom:5px}
+.lcard p{margin:0;font-size:.78rem;color:var(--muted)}
+
+/* ============ 链接 ============ */
+.linkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:13px}
+.lbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 15px;box-shadow:var(--shadow)}
+.lbox h4{font-size:.86rem;font-weight:900;margin-bottom:8px;color:var(--primary-2)}
+.lbox a{display:block;font-size:.78rem;font-weight:700;padding:5px 0;border-bottom:1px dotted var(--line)}
+.lbox a:last-child{border-bottom:0}
+.lbox a span{display:block;font-weight:500;color:var(--muted);font-size:.7rem}
+
+/* ============ 页脚 ============ */
+footer{margin-top:48px;background:var(--hero);color:#fff;padding:36px 0 24px}
+footer a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+footer h5{font-size:.72rem;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 8px;opacity:.85;font-weight:800}
+footer p{font-size:.85rem;opacity:.95;margin:0 0 8px}
+.fca{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);border-radius:11px;padding:9px 12px;margin-top:9px;font-family:var(--mono);font-size:.71rem;word-break:break-all;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.fmarket{margin-top:16px;padding:11px 14px;border-radius:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.fmarket .flabel{font-size:.76rem;font-weight:900;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.fmarket a{font-family:var(--mono);font-size:.72rem;word-break:break-all}
+.fbot{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.24);font-size:.74rem;opacity:.9;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--fg);color:var(--bg);font-size:.79rem;font-weight:700;padding:9px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.nav{flex-wrap:nowrap;overflow-x:auto;max-width:100%}.nav a{white-space:nowrap}}
+@media print{.topbar,.tools,.chips{display:none}}
+</style>
+</head>
+<body data-theme="green">
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <span class="logo">e</span>
+      <span>EACO YOUTH<small>top 10 industries</small></span>
+    </div>
+    <nav class="nav">
+      <a href="#top10" data-i18n="nav.top10">十大行业</a>
+      <a href="#compare" data-i18n="nav.compare">对比表</a>
+      <a href="#deep" data-i18n="nav.deep">四大深挖</a>
+      <a href="#path" data-i18n="nav.path">零预算路径</a>
+      <a href="#lesson" data-i18n="nav.lesson">财富三课</a>
+      <a href="#use" data-i18n="nav.use">EACO 能做什么</a>
+      <a href="#links" data-i18n="nav.links">链接</a>
+    </nav>
+    <div class="tools">
+      <div class="seg" id="themeSeg">
+        <button data-t="green" class="on"><i class="dotc" style="background:#3f9d3f"></i><span data-i18n="th.green">苹果绿</span></button>
+        <button data-t="blue"><i class="dotc" style="background:#2563eb"></i><span data-i18n="th.blue">宇宙蓝</span></button>
+        <button data-t="classic"><i class="dotc" style="background:#9e2b25"></i><span data-i18n="th.classic">华夏古典</span></button>
+      </div>
+      <select class="lang" id="langSel" aria-label="language"></select>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <span class="tagline">EACO · Earth's Best Coin · Youth Industries</span>
+    <h1 data-i18n="hero.title">地球村未来年轻人最喜欢的十大行业</h1>
+    <p class="lead" data-i18n="hero.lead">电竞、潮玩、文创、打卡业态、短视频、宠物、户外、二次元、新餐饮、AI 创作与数字游民——每个行业都写明：年轻人为什么喜欢、有哪些细分业态、零成本怎么起步、以及 EACO 能怎么用。</p>
+    <div class="ca-row">
+      <div class="ca">
+        <b>EACO CA</b>
+        <code>DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+        <button data-copy="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH">复制</button>
+      </div>
+      <div class="ca">
+        <b>SOL</b>
+        <code>So11111111111111111111111111111111111111112</code>
+        <button data-copy="So11111111111111111111111111111111111111112">复制</button>
+      </div>
+    </div>
+    <div class="hstats">
+      <div class="hstat"><div class="k">INDUSTRIES</div><div class="v">10</div><div class="s" data-i18n="hero.s1">年轻人最愿意投入时间</div></div>
+      <div class="hstat"><div class="k">START COST</div><div class="v">$0</div><div class="s" data-i18n="hero.s2">六成可从零成本起步</div></div>
+      <div class="hstat"><div class="k">LANGUAGES</div><div class="v">6</div><div class="s" data-i18n="hero.s3">华语 / EN / 日 / 西 / 法 / 德</div></div>
+      <div class="hstat"><div class="k">THEMES</div><div class="v">3</div><div class="s" data-i18n="hero.s4">苹果绿 / 宇宙蓝 / 华夏古典</div></div>
+    </div>
+    <div class="chips">
+      <a href="#top10" data-i18n="chip.1">① 十大行业</a>
+      <a href="#compare" data-i18n="chip.2">② 对比表</a>
+      <a href="#deep" data-i18n="chip.3">③ 电竞 · 潮玩 · 文创 · 打卡</a>
+      <a href="#path" data-i18n="chip.4">④ 零预算起步</a>
+      <a href="#lesson" data-i18n="chip.5">⑤ 财富三课</a>
+      <a href="#use" data-i18n="chip.6">⑥ EACO 用途</a>
+      <a href="#links" data-i18n="chip.7">⑦ 链接与合约</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 01 十大行业 ========== -->
+<section class="block" id="top10">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">01</span><span data-i18n="s1.title">十大行业 · 年轻人用时间和钱投票的结果</span></h2>
+      <div class="desc" data-i18n="s1.desc">排序依据是「年轻人愿意主动投入时间、愿意为之付费、且能形成职业」三件事，不是市场规模排名。每个行业都给出细分业态、起步成本与 EACO 结合点。</div>
+    </div>
+    <div class="grid g2" id="indGrid" style="margin-top:16px"></div>
+  </div>
+</section>
+
+<!-- ========== 02 对比表 ========== -->
+<section class="block" id="compare">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">02</span><span data-i18n="s2.title">一张表看清楚：成本、周期、技能、适配国家</span></h2>
+      <div class="desc" data-i18n="s2.desc">启动成本分三档：零成本（只要时间与手机）、低（几百元内）、中（需要场地或设备）。变现周期指从开始到第一笔收入的常见时间，不是承诺。</div>
+    </div>
+    <div class="tablewrap" style="margin-top:14px">
+      <table style="min-width:940px">
+        <thead>
+          <tr>
+            <th data-i18n="t.h1">行业</th>
+            <th data-i18n="t.h2">启动成本</th>
+            <th data-i18n="t.h3">变现周期</th>
+            <th data-i18n="t.h4">核心技能</th>
+            <th data-i18n="t.h5">九国适配</th>
+            <th data-i18n="t.h6">EACO 结合点</th>
+          </tr>
+        </thead>
+        <tbody id="cmpBody"></tbody>
+      </table>
+    </div>
+    <div class="note" data-i18n="s2.note">读法：先把「启动成本」这一列看一遍——零成本的那几个行业，是没有任何资金的人唯一现实的入口；需要场地与设备的，先用零成本行业赚到第一笔钱再进入。</div>
+  </div>
+</section>
+
+<!-- ========== 03 四大深挖 ========== -->
+<section class="block" id="deep">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">03</span><span data-i18n="s3.title">四个重点行业的细分业态清单</span></h2>
+      <div class="desc" data-i18n="s3.desc">电竞、潮玩、文创、打卡业态——这四类被问得最多。下面每类列出具体业态，中英对照，方便跨语言沟通与招商。清单可以照着抄，也可以照着改。</div>
+    </div>
+    <div class="dgrid" id="deepGrid" style="margin-top:14px"></div>
+    <div class="note" data-i18n="s3.note">这些业态的共同点：先有人愿意「到场」或「拍照」，才有后面的消费。所有生意的第一性问题都是同一个——人家为什么来？</div>
+  </div>
+</section>
+
+<!-- ========== 04 零预算路径 ========== -->
+<section class="block" id="path">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">04</span><span data-i18n="s4.title">零预算起步路径 · 七步</span></h2>
+      <div class="desc" data-i18n="s4.desc">没有钱不等于没有路。下面七步全部不需要投入资金，只需要时间与一部能上网的设备。每一步都写明产出物——没有产出物的步骤等于没做。</div>
+    </div>
+    <div class="steps" id="pathGrid" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- ========== 05 财富三课 ========== -->
+<section class="block" id="lesson">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">05</span><span data-i18n="s5.title">财富三课 · 从货币灾难里学到的常识</span></h2>
+      <div class="desc" data-i18n="s5.desc">历史上多次出现的货币剧烈贬值提醒我们同一件事：把全部身家压在单一资产上，等于把命运交给别人。这里只讲常识与纪律，不推荐任何具体投资行为。</div>
+    </div>
+    <div class="lgrid" id="lessonGrid" style="margin-top:14px"></div>
+    <div class="note warn" data-i18n="s5.note">本页不构成投资建议，不承诺任何收益。加密资产价格波动剧烈，可能损失全部本金；任何配置决策请基于自身情况并咨询当地执业专业人士。</div>
+  </div>
+</section>
+
+<!-- ========== 06 EACO 能做什么 ========== -->
+<section class="block" id="use">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">06</span><span data-i18n="s6.title">地球 EACO 能做什么 · 十件具体的事</span></h2>
+      <div class="desc" data-i18n="s6.desc">EACO = Energy × Attitude × Cooperation × Optimization。它不承诺价格，只承诺一件事：让跨语言、跨国界的小额协作与结算变得便宜、可验证。下面是十个已经有人在做、你也可以立刻复制的用法。</div>
+    </div>
+    <div class="grid g2" id="useGrid" style="margin-top:14px"></div>
+    <div class="note" data-i18n="s6.note">诚实标注：EACO 目前全链流动性仍在数百美元级，池子极薄，单笔较大金额就会出现明显滑点。这意味着它今天适合「小额、高频、跨国」的场景，不适合作为大额储值工具。</div>
+  </div>
+</section>
+
+<!-- ========== 07 链接 ========== -->
+<section class="block" id="links">
+  <div class="wrap">
+    <div class="shead">
+      <h2><span class="num">07</span><span data-i18n="s7.title">链接与合约 · 一页找齐</span></h2>
+      <div class="desc" data-i18n="s7.desc">行情、兑换、社区、内容、代码。所有外部链接在新窗口打开；合约地址以本页与 Solscan 为准，任何同名代币一律按假币处理。</div>
+    </div>
+    <div class="linkgrid" style="margin-top:14px">
+      <div class="lbox">
+        <h4 data-i18n="l1">行情 · 交易 · 流动性</h4>
+        <a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Orb Markets · EACO<span>EACO 行情页</span></a>
+        <a href="https://orbmarkets.io/token/So11111111111111111111111111111111111111112" target="_blank" rel="noopener">Orb Markets · SOL<span>计价货币</span></a>
+        <a href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Solscan<span>核对 CA 真伪</span></a>
+        <a href="https://jup.ag/swap/SOL-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Jupiter<span>最优路由兑换</span></a>
+        <a href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" rel="noopener">eaco-dao-pool 202601<span>DAMM v2 池</span></a>
+        <a href="https://app.meteora.ag/dlmm/create" target="_blank" rel="noopener">Meteora DLMM<span>新建做市池</span></a>
+        <a href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34/tokens" target="_blank" rel="noopener">eaco-DOGE market<span>社区实验池行情</span></a>
+      </div>
+      <div class="lbox">
+        <h4 data-i18n="l2">免费领取 · 社区</h4>
+        <a href="https://ucoingroup.github.io/eaco-faucet/" target="_blank" rel="noopener">EACO 水龙头<span>零成本领取</span></a>
+        <a href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener">EACO 50 汇率页<span>多币种换算</span></a>
+        <a href="https://github.com/ucoingroup/FreeToken-eaco" target="_blank" rel="noopener">FreeToken-eaco<span>免费发放工具</span></a>
+        <a href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">Discord 社区<span>地球村入口</span></a>
+        <a href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" rel="noopener">Earth's Best 100 Friends<span>100 个朋友计划</span></a>
+        <a href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" rel="noopener">100 Ways to Wealth<span>财富认知</span></a>
+      </div>
+      <div class="lbox">
+        <h4 data-i18n="l3">站点矩阵</h4>
+        <a href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener">Earth's Best Coin<span>主站</span></a>
+        <a href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" rel="noopener">eacoSWAP<span>兑换页</span></a>
+        <a href="https://ucoingroup.github.io/eaco-web3/" target="_blank" rel="noopener">EACO Web3<span>系列总览</span></a>
+        <a href="https://github.com/ucoingroup/eacoswap2025" target="_blank" rel="noopener">GitHub · eacoswap2025<span>兑换前端</span></a>
+        <a href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank" rel="noopener">GitHub · eacoweb3-2026<span>源代码</span></a>
+        <a href="https://github.com/ucoingroup/earths-best-coin" target="_blank" rel="noopener">GitHub · earths-best-coin<span>源代码</span></a>
+        <a href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener">EACO Build World<span>共建世界</span></a>
+        <a href="https://eaco-web3.base44.app" target="_blank" rel="noopener">EACO Web3 App<span>应用入口</span></a>
+      </div>
+      <div class="lbox">
+        <h4 data-i18n="l4">九国 · 文明 · 语言资本</h4>
+        <a href="https://ucoingroup.github.io/eacoweb3-2026/eaco-nine-nations2025.html" target="_blank" rel="noopener">EACO NINE 九国页<span>九语与汇率</span></a>
+        <a href="https://ucoingroup.github.io/eur-eaco/" target="_blank" rel="noopener">EUR · EACO<span>欧元区</span></a>
+        <a href="https://ucoingroup.github.io/au-trade/" target="_blank" rel="noopener">AU Trade<span>澳大利亚</span></a>
+        <a href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" rel="noopener">Mohist Tech<span>墨家科技</span></a>
+        <a href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank" rel="noopener">Footsteps of Civilization<span>文明的足迹</span></a>
+        <a href="https://ucoingroup.github.io/linguistic-capital/" target="_blank" rel="noopener">Linguistic Capital<span>语言资本</span></a>
+        <a href="https://ucoingroup.github.io/good-books/" target="_blank" rel="noopener">Good Books<span>书单</span></a>
+        <a href="https://earth-eaco-web3.base44.app/eaco-team" target="_blank" rel="noopener">EACO Team<span>团队页</span></a>
+        <a href="https://eaco.freedev.app/eaco_web3_series/" target="_blank" rel="noopener">Web3 Series（镜像）<span>备用访问</span></a>
+        <a href="https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/" target="_blank" rel="noopener">Web3 Series 2025<span>系列文档</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h5>EACO · Earth's Best Coin</h5>
+        <p>EACO = Energy × Attitude × Cooperation × Optimization。人类生于群星，暂居于地球，现在终于开始了漫长的返乡之旅。</p>
+        <div class="fca"><span>CA DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</span><button data-copy="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH">复制</button></div>
+        <div class="fca"><span>SOL So11111111111111111111111111111111111111112</span><button data-copy="So11111111111111111111111111111111111111112">复制</button></div>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul class="dlist" style="border:0">
+          <li><a href="https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Orb Markets · EACO</a></li>
+          <li><a href="https://jup.ag/swap/SOL-DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Jupiter 兑换</a></li>
+          <li><a href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">Discord 社区</a></li>
+          <li><a href="https://github.com/ucoingroup/eacoweb3-2026" target="_blank" rel="noopener">GitHub · eacoweb3-2026</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>本页</h5>
+        <p style="font-size:.82rem;opacity:.92">地球村青年十大行业 · 六语切换 · 三套设计风格 · 单文件离线可用。</p>
+        <p style="font-size:.82rem;opacity:.92">配套：<a href="https://ucoingroup.github.io/eacoweb3-2026/eaco-nine-nations2025.html" target="_blank" rel="noopener">九国语言与流通页</a></p>
+      </div>
+    </div>
+    <div class="fmarket">
+      <span class="flabel">eaco-DOGE market</span>
+      <a href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34/tokens" target="_blank" rel="noopener">https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34/tokens</a>
+    </div>
+    <div class="fbot">
+      <span>© 2026 EACO YOUTH · 地球村青年十大行业 · 仅供社区协作与信息参考，不构成投资建议、要约或收益承诺。</span>
+      <span>Single static HTML · 离线可用 · 6 语 · 3 风格</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">已复制</div>
+
+<script>
+/* ==================== 多语言 UI 文案 ==================== */
+const LANGS = [
+  ['zh','华语'], ['en','English'], ['ja','日本語'], ['es','Español'], ['fr','Français'], ['de','Deutsch']
+];
+const T = {
+  zh:{
+    'nav.top10':'十大行业','nav.compare':'对比表','nav.deep':'四大深挖','nav.path':'零预算路径','nav.lesson':'财富三课','nav.use':'EACO 能做什么','nav.links':'链接',
+    'th.green':'苹果绿','th.blue':'宇宙蓝','th.classic':'华夏古典',
+    'hero.title':'地球村未来年轻人最喜欢的十大行业',
+    'hero.lead':'电竞、潮玩、文创、打卡业态、短视频、宠物、户外、二次元、新餐饮、AI 创作与数字游民——每个行业都写明：年轻人为什么喜欢、有哪些细分业态、零成本怎么起步、以及 EACO 能怎么用。',
+    'hero.s1':'年轻人最愿意投入时间','hero.s2':'六成可从零成本起步','hero.s3':'华语 / EN / 日 / 西 / 法 / 德','hero.s4':'苹果绿 / 宇宙蓝 / 华夏古典',
+    'chip.1':'① 十大行业','chip.2':'② 对比表','chip.3':'③ 电竞 · 潮玩 · 文创 · 打卡','chip.4':'④ 零预算起步','chip.5':'⑤ 财富三课','chip.6':'⑥ EACO 用途','chip.7':'⑦ 链接与合约',
+    's1.title':'十大行业 · 年轻人用时间和钱投票的结果',
+    's1.desc':'排序依据是「年轻人愿意主动投入时间、愿意为之付费、且能形成职业」三件事，不是市场规模排名。每个行业都给出细分业态、起步成本与 EACO 结合点。',
+    's2.title':'一张表看清楚：成本、周期、技能、适配国家',
+    's2.desc':'启动成本分三档：零成本（只要时间与手机）、低（几百元内）、中（需要场地或设备）。变现周期指从开始到第一笔收入的常见时间，不是承诺。',
+    's2.note':'读法：先看「启动成本」这一列——零成本的行业，是没有任何资金的人唯一现实的入口；需要场地与设备的，先用零成本行业赚到第一笔钱再进入。',
+    's3.title':'四个重点行业的细分业态清单',
+    's3.desc':'电竞、潮玩、文创、打卡业态——这四类被问得最多。每类列出具体业态，中英对照，方便跨语言沟通与招商。清单可以照着抄，也可以照着改。',
+    's3.note':'这些业态的共同点：先有人愿意「到场」或「拍照」，才有后面的消费。所有生意的第一性问题都是同一个——人家为什么来？',
+    's4.title':'零预算起步路径 · 七步',
+    's4.desc':'没有钱不等于没有路。下面七步全部不需要投入资金，只需要时间与一部能上网的设备。每一步都写明产出物——没有产出物的步骤等于没做。',
+    's5.title':'财富三课 · 从货币灾难里学到的常识',
+    's5.desc':'历史上多次出现的货币剧烈贬值提醒我们同一件事：把全部身家压在单一资产上，等于把命运交给别人。这里只讲常识与纪律，不推荐任何具体投资行为。',
+    's5.note':'本页不构成投资建议，不承诺任何收益。加密资产价格波动剧烈，可能损失全部本金；任何配置决策请基于自身情况并咨询当地执业专业人士。',
+    's6.title':'地球 EACO 能做什么 · 十件具体的事',
+    's6.desc':'EACO = Energy × Attitude × Cooperation × Optimization。它不承诺价格，只承诺一件事：让跨语言、跨国界的小额协作与结算变得便宜、可验证。下面是十个已经有人在做、你也可以立刻复制的用法。',
+    's6.note':'诚实标注：EACO 目前全链流动性仍在数百美元级，池子极薄，单笔较大金额就会出现明显滑点。这意味着它今天适合「小额、高频、跨国」的场景，不适合作为大额储值工具。',
+    's7.title':'链接与合约 · 一页找齐',
+    's7.desc':'行情、兑换、社区、内容、代码。所有外部链接在新窗口打开；合约地址以本页与 Solscan 为准，任何同名代币一律按假币处理。',
+    't.h1':'行业','t.h2':'启动成本','t.h3':'变现周期','t.h4':'核心技能','t.h5':'九国适配','t.h6':'EACO 结合点',
+    'l1':'行情 · 交易 · 流动性','l2':'免费领取 · 社区','l3':'站点矩阵','l4':'九国 · 文明 · 语言资本',
+    'lb.why':'年轻人为什么喜欢','lb.forms':'细分业态','lb.money':'怎么赚钱','lb.eaco':'EACO 怎么用',
+    'cost.free':'零成本','cost.low':'低','cost.mid':'中',
+    'cycle':'变现周期','skill':'核心技能','fit':'适配','copy':'复制','copied':'已复制'
+  },
+  en:{
+    'nav.top10':'Top 10','nav.compare':'Compare','nav.deep':'Deep Dive','nav.path':'Zero Budget','nav.lesson':'3 Lessons','nav.use':'What EACO Does','nav.links':'Links',
+    'th.green':'Apple Green','th.blue':'Cosmic Blue','th.classic':'Huaxia Classic',
+    'hero.title':'Top 10 Industries the Earth Village Youth Love Most',
+    'hero.lead':'Esports, designer toys, cultural & creative, check-in economy, short video, pets, outdoor, ACG, new F&B, AI creation and digital nomads — each with why young people love it, its sub-formats, how to start at zero cost, and how EACO fits in.',
+    'hero.s1':'Where youth spend their time','hero.s2':'Six of ten start at zero cost','hero.s3':'ZH / EN / JA / ES / FR / DE','hero.s4':'Green / Blue / Classic',
+    'chip.1':'① Top 10','chip.2':'② Compare','chip.3':'③ Esports · Toys · IP · Check-in','chip.4':'④ Start at zero','chip.5':'⑤ 3 Lessons','chip.6':'⑥ What EACO does','chip.7':'⑦ Links & contract',
+    's1.title':'Top 10 Industries · voted by time and money',
+    's1.desc':'Ranked by three things: youth spend time on it voluntarily, pay for it, and can build a career in it. Not a market-size ranking. Each entry lists sub-formats, start-up cost and the EACO angle.',
+    's2.title':'One table: cost, cycle, skills, best-fit countries',
+    's2.desc':'Start-up cost has three tiers: zero (time and a phone), low (under a few hundred), medium (needs a venue or gear). Time-to-income is the common interval to a first payment — not a promise.',
+    's2.note':'How to read it: scan the cost column first. The zero-cost industries are the only realistic entry for someone with no capital; enter the venue-based ones after earning your first money elsewhere.',
+    's3.title':'Sub-format lists for four key industries',
+    's3.desc':'Esports, designer toys, cultural & creative, and the check-in economy — the four asked about most. Each list is bilingual so it can be used across languages for pitching and partnerships. Copy it or adapt it.',
+    's3.note':'What these formats share: someone has to show up or take a photo before any spending happens. Every business answers the same first question — why would people come?',
+    's4.title':'Start at zero budget · seven steps',
+    's4.desc':'No money does not mean no path. All seven steps need no capital, only time and one connected device. Each step names its deliverable — a step with no deliverable was never done.',
+    's5.title':'Three lessons on wealth · common sense from currency disasters',
+    's5.desc':'Repeated episodes of sharp currency devaluation teach the same thing: putting everything into one asset hands your fate to someone else. This section covers common sense and discipline only — no specific investment is recommended.',
+    's5.note':'This page is not investment advice and promises no return. Crypto assets are highly volatile and you may lose your entire principal. Base any decision on your own situation and consult licensed professionals locally.',
+    's6.title':'What Earth EACO can do · ten concrete things',
+    's6.desc':'EACO = Energy × Attitude × Cooperation × Optimization. It promises no price; it promises one thing: making small cross-border, cross-language collaboration and settlement cheap and verifiable. Ten usages people already run today.',
+    's6.note':'Honest note: EACO liquidity is still in the hundreds of dollars range; the pool is thin and larger orders slip badly. Today it fits small, frequent, cross-border use — not large-value storage.',
+    's7.title':'Links & contract · all on one page',
+    's7.desc':'Market data, swaps, community, content, code. External links open in a new tab. Trust only the contract address shown here and on Solscan; treat any same-name token as fake.',
+    't.h1':'Industry','t.h2':'Start cost','t.h3':'Time to income','t.h4':'Core skill','t.h5':'Best-fit','t.h6':'EACO angle',
+    'l1':'Market · trading · liquidity','l2':'Free claim · community','l3':'Site matrix','l4':'Nine nations · civilization · language capital',
+    'lb.why':'Why youth love it','lb.forms':'Sub-formats','lb.money':'How it earns','lb.eaco':'How EACO fits',
+    'cost.free':'Zero','cost.low':'Low','cost.mid':'Medium',
+    'cycle':'Time to income','skill':'Core skill','fit':'Best-fit','copy':'Copy','copied':'Copied'
+  },
+  ja:{
+    'nav.top10':'10業種','nav.compare':'比較表','nav.deep':'深掘り','nav.path':'ゼロ予算','nav.lesson':'3つの教訓','nav.use':'EACOの用途','nav.links':'リンク',
+    'th.green':'アップルグリーン','th.blue':'コズミックブルー','th.classic':'華夏クラシック',
+    'hero.title':'地球村の若者が最も好む10の業種',
+    'hero.lead':'eスポーツ、デザイナーズトイ、文創、打卡（チェックイン）経済、短尺動画、ペット、アウトドア、二次元、新飲食、AI創作とデジタルノマド——なぜ好まれるのか、細分業態、ゼロ円の始め方、EACOの使い道まで。',
+    'hero.s1':'若者が時間を注ぐ場所','hero.s2':'6割はゼロ円で開始可','hero.s3':'中日英西仏独の6言語','hero.s4':'グリーン / ブルー / クラシック',
+    'chip.1':'① 10業種','chip.2':'② 比較表','chip.3':'③ eスポ・トイ・文創・打卡','chip.4':'④ ゼロ円スタート','chip.5':'⑤ 3つの教訓','chip.6':'⑥ EACOの用途','chip.7':'⑦ リンクとCA',
+    's1.title':'10の業種 · 時間とお金で投票された結果',
+    's1.desc':'並び順は「自発的に時間を使う」「お金を払う」「職業になる」の3点が基準で、市場規模の順ではありません。各業種に細分業態、開始コスト、EACOの接点を挙げます。',
+    's2.title':'一枚で分かる：コスト・周期・スキル・適国',
+    's2.desc':'開始コストは3段階：ゼロ（時間とスマホのみ）、低（数百円〜数千円）、中（場所や機材が必要）。収益化周期は最初の入金までの一般的な目安で、約束ではありません。',
+    's2.note':'読み方：まずコスト列を見てください。ゼロ円の業種は資金ゼロの人にとって唯一現実的な入口です。場所や機材が必要な業種は、他の業種で初収益を得てから。',
+    's3.title':'重点4業種の細分業態リスト',
+    's3.desc':'eスポーツ、デザイナーズトイ、文創、打卡経済——最もよく聞かれる4分野。各リストは中英併記で、跨国の提案や提携にそのまま使えます。写しても改しても構いません。',
+    's3.note':'共通点は「来場」か「撮影」が先で、消費はその後だということ。どんな商売も最初の問いは同じ——なぜ人が来るのか？',
+    's4.title':'ゼロ予算で始める · 7ステップ',
+    's4.desc':'お金がないことは道がないことではありません。7ステップはすべて資金不要、時間とネット端末だけ。各ステップに成果物を明記——成果物のない工程はやっていないのと同じです。',
+    's5.title':'富の3つの教訓 · 通貨危機から学ぶ常識',
+    's5.desc':'繰り返されてきた通貨の急落が教えるのは同じこと：すべてを単一資産に賭ければ、運命を他人に預けるのと同じ。ここでは常識と規律だけを述べ、具体的な投資は推奨しません。',
+    's5.note':'本頁は投資助言ではなく収益の保証もありません。暗号資産は価格変動が激しく、元本を全損する可能性があります。判断は自身の状況に基づき、現地の専門家にご相談ください。',
+    's6.title':'地球EACOにできること · 具体的な10の使い方',
+    's6.desc':'EACO = Energy × Attitude × Cooperation × Optimization。価格は約束しません。約束するのは、言語と国境を越える少額の協働と決済を安く検証可能にすること。すでに実践されている10の用法です。',
+    's6.note':'正直な注記：EACOの流動性は依然として数百ドル規模でプールは極めて薄く、やや大きい取引で明確なスリッページが出ます。今は「少額・高頻度・跨国」向きで、 large な価値保存には不向きです。',
+    's7.title':'リンクとコントラクト · この1頁に集約',
+    's7.desc':'相場・交換・コミュニティ・コンテンツ・コード。外部リンクは新タブで開きます。コントラクトは本頁とSolscanの記載のみを信頼し、同名トークンは偽物として扱ってください。',
+    't.h1':'業種','t.h2':'開始コスト','t.h3':'収益化周期','t.h4':'中核スキル','t.h5':'適国','t.h6':'EACOの接点',
+    'l1':'相場 · 取引 · 流動性','l2':'無料受取 · コミュニティ','l3':'サイト群','l4':'九か国 · 文明 · 言語資本',
+    'lb.why':'若者に愛される理由','lb.forms':'細分業態','lb.money':'収益化の道','lb.eaco':'EACOの使い方',
+    'cost.free':'ゼロ','cost.low':'低','cost.mid':'中',
+    'cycle':'収益化周期','skill':'中核スキル','fit':'適国','copy':'コピー','copied':'コピー済'
+  },
+  es:{
+    'nav.top10':'Top 10','nav.compare':'Comparar','nav.deep':'Profundizar','nav.path':'Presupuesto cero','nav.lesson':'3 lecciones','nav.use':'Qué hace EACO','nav.links':'Enlaces',
+    'th.green':'Verde manzana','th.blue':'Azul cósmico','th.classic':'Huaxia clásico',
+    'hero.title':'Las 10 industrias que más aman los jóvenes de la aldea global',
+    'hero.lead':'Esports, juguetes de diseño, creación cultural, economía del check-in, video corto, mascotas, aire libre, ACG, nueva restauración, creación con IA y nómadas digitales: por qué gustan, sus subcategorías, cómo empezar sin dinero y cómo encaja EACO.',
+    'hero.s1':'Donde los jóvenes ponen su tiempo','hero.s2':'Seis de diez empiezan sin costo','hero.s3':'ZH / EN / JA / ES / FR / DE','hero.s4':'Verde / Azul / Clásico',
+    'chip.1':'① Top 10','chip.2':'② Comparar','chip.3':'③ Esports · Juguetes · IP · Check-in','chip.4':'④ Empezar sin dinero','chip.5':'⑤ 3 lecciones','chip.6':'⑥ Qué hace EACO','chip.7':'⑦ Enlaces y contrato',
+    's1.title':'Las 10 industrias · votadas con tiempo y dinero',
+    's1.desc':'El orden se basa en tres cosas: los jóvenes dedican tiempo voluntariamente, pagan por ello y pueden construir una carrera. No es un ranking por tamaño de mercado. Cada una incluye subcategorías, costo inicial y el ángulo EACO.',
+    's2.title':'Una tabla: costo, plazo, habilidades, países afines',
+    's2.desc':'El costo inicial tiene tres niveles: cero (tiempo y un teléfono), bajo (menos de unos cientos), medio (requiere local o equipo). El plazo es el intervalo habitual hasta el primer ingreso, no una promesa.',
+    's2.note':'Cómo leerlo: mire primero la columna de costo. Las industrias de costo cero son la única entrada realista para quien no tiene capital; deje las que requieren local para después del primer ingreso.',
+    's3.title':'Listas de subcategorías de cuatro industrias clave',
+    's3.desc':'Esports, juguetes de diseño, creación cultural y economía del check-in: las cuatro más preguntadas. Cada lista es bilingüe para usarla en propuestas y alianzas. Cópiela o adáptela.',
+    's3.note':'Lo que comparten: primero alguien tiene que asistir o fotografiar, y después viene el consumo. Todo negocio responde la misma pregunta inicial: ¿por qué vendría la gente?',
+    's4.title':'Empezar con presupuesto cero · siete pasos',
+    's4.desc':'No tener dinero no significa no tener camino. Los siete pasos no requieren capital, solo tiempo y un dispositivo conectado. Cada paso indica su entregable: un paso sin entregable nunca se hizo.',
+    's5.title':'Tres lecciones sobre la riqueza · sentido común de las crisis monetarias',
+    's5.desc':'Las repetidas devaluaciones bruscas enseñan lo mismo: poner todo en un solo activo es entregar tu destino a otros. Aquí solo hay sentido común y disciplina; no se recomienda ninguna inversión concreta.',
+    's5.note':'Esta página no es asesoramiento de inversión ni promete rendimiento. Los criptoactivos son muy volátiles y puede perderse todo el capital. Decida según su situación y consulte a profesionales locales.',
+    's6.title':'Qué puede hacer EACO · diez cosas concretas',
+    's6.desc':'EACO = Energy × Attitude × Cooperation × Optimization. No promete precio; promete una cosa: que la colaboración y el pago transfronterizo de pequeño importe sean baratos y verificables. Diez usos que ya se practican.',
+    's6.note':'Nota honesta: la liquidez de EACO sigue en el orden de cientos de dólares; el pool es muy fino y las órdenes grandes sufren deslizamiento. Hoy sirve para usos pequeños, frecuentes y transfronterizos, no para guardar grandes valores.',
+    's7.title':'Enlaces y contrato · todo en una página',
+    's7.desc':'Datos de mercado, intercambio, comunidad, contenido y código. Los enlaces externos abren en pestaña nueva. Confíe solo en el contrato de esta página y de Solscan; cualquier token con el mismo nombre es falso.',
+    't.h1':'Industria','t.h2':'Costo inicial','t.h3':'Plazo de ingreso','t.h4':'Habilidad clave','t.h5':'Países afines','t.h6':'Ángulo EACO',
+    'l1':'Mercado · trading · liquidez','l2':'Reclamar gratis · comunidad','l3':'Matriz de sitios','l4':'Nueve naciones · civilización · capital lingüístico',
+    'lb.why':'Por qué gusta','lb.forms':'Subcategorías','lb.money':'Cómo gana','lb.eaco':'Cómo encaja EACO',
+    'cost.free':'Cero','cost.low':'Bajo','cost.mid':'Medio',
+    'cycle':'Plazo de ingreso','skill':'Habilidad clave','fit':'Países afines','copy':'Copiar','copied':'Copiado'
+  },
+  fr:{
+    'nav.top10':'Top 10','nav.compare':'Comparer','nav.deep':'Approfondir','nav.path':'Budget zéro','nav.lesson':'3 leçons','nav.use':'Rôle de EACO','nav.links':'Liens',
+    'th.green':'Vert pomme','th.blue':'Bleu cosmique','th.classic':'Huaxia classique',
+    'hero.title':'Les 10 secteurs préférés des jeunes du village global',
+    'hero.lead':'Esport, jouets de designer, création culturelle, économie du check-in, vidéo courte, animaux, plein air, ACG, nouvelle restauration, création IA et nomades numériques : pourquoi ils plaisent, leurs sous-formats, comment démarrer sans argent, et le rôle de EACO.',
+    'hero.s1':'Où les jeunes passent leur temps','hero.s2':'Six sur dix démarrent à coût nul','hero.s3':'ZH / EN / JA / ES / FR / DE','hero.s4':'Vert / Bleu / Classique',
+    'chip.1':'① Top 10','chip.2':'② Comparer','chip.3':'③ Esport · Jouets · IP · Check-in','chip.4':'④ Démarrer sans argent','chip.5':'⑤ 3 leçons','chip.6':'⑥ Rôle de EACO','chip.7':'⑦ Liens et contrat',
+    's1.title':'Les 10 secteurs · votés par le temps et l argent',
+    's1.desc':'Le classement repose sur trois critères : les jeunes y consacrent du temps volontairement, ils paient pour cela, et un métier peut en naître. Ce n est pas un classement par taille de marché. Chaque fiche donne sous-formats, coût de départ et angle EACO.',
+    's2.title':'Un tableau : coût, délai, compétences, pays adaptés',
+    's2.desc':'Le coût de départ a trois niveaux : zéro (temps et téléphone), faible (quelques centaines au plus), moyen (local ou matériel requis). Le délai est l intervalle courant avant un premier revenu, pas une promesse.',
+    's2.note':'Lecture : regardez d abord la colonne coût. Les secteurs à coût nul sont la seule entrée réaliste sans capital ; gardez ceux qui exigent un local pour après le premier revenu.',
+    's3.title':'Listes de sous-formats de quatre secteurs clés',
+    's3.desc':'Esport, jouets de designer, création culturelle et économie du check-in : les quatre les plus demandés. Chaque liste est bilingue pour servir en prospection et partenariats. Copiez-la ou adaptez-la.',
+    's3.note':'Leur point commun : il faut d abord que quelqu un vienne ou prenne une photo, la dépense vient ensuite. Toute activité répond à la même question : pourquoi les gens viendraient-ils ?',
+    's4.title':'Démarrer avec un budget zéro · sept étapes',
+    's4.desc':'Pas d argent ne veut pas dire pas de chemin. Les sept étapes ne demandent aucun capital, seulement du temps et un appareil connecté. Chacune précise son livrable : une étape sans livrable n a jamais été faite.',
+    's5.title':'Trois leçons sur la richesse · le bon sens des crises monétaires',
+    's5.desc':'Les dévaluations brutales répétées enseignent la même chose : tout miser sur un seul actif, c est confier son destin à autrui. Ce chapitre ne donne que du bon sens et de la discipline, aucun placement précis.',
+    's5.note':'Cette page n est pas un conseil en investissement et ne promet aucun rendement. Les crypto-actifs sont très volatils et la perte totale du capital est possible. Décidez selon votre situation et consultez des professionnels locaux.',
+    's6.title':'Ce que EACO peut faire · dix usages concrets',
+    's6.desc':'EACO = Energy × Attitude × Cooperation × Optimization. Aucune promesse de prix ; une seule promesse : rendre la collaboration et le paiement transfrontaliers de petit montant bon marché et vérifiables. Dix usages déjà pratiqués.',
+    's6.note':'Note honnête : la liquidité de EACO reste de l ordre de quelques centaines de dollars ; le pool est très mince et les ordres importants glissent fortement. Aujourd hui, cela convient aux usages petits, fréquents et transfrontaliers, pas au stockage de valeurs importantes.',
+    's7.title':'Liens et contrat · tout sur une page',
+    's7.desc':'Données de marché, échanges, communauté, contenu, code. Les liens externes s ouvrent dans un nouvel onglet. Ne faites confiance qu au contrat affiché ici et sur Solscan ; tout jeton homonyme est une contrefaçon.',
+    't.h1':'Secteur','t.h2':'Coût départ','t.h3':'Délai revenu','t.h4':'Compétence clé','t.h5':'Pays adaptés','t.h6':'Angle EACO',
+    'l1':'Marché · trading · liquidité','l2':'Réclamer gratuit · communauté','l3':'Matrice de sites','l4':'Neuf nations · civilisation · capital linguistique',
+    'lb.why':'Pourquoi ça plaît','lb.forms':'Sous-formats','lb.money':'Comment ça gagne','lb.eaco':'Rôle de EACO',
+    'cost.free':'Zéro','cost.low':'Faible','cost.mid':'Moyen',
+    'cycle':'Délai revenu','skill':'Compétence clé','fit':'Pays adaptés','copy':'Copier','copied':'Copié'
+  },
+  de:{
+    'nav.top10':'Top 10','nav.compare':'Vergleich','nav.deep':'Vertiefung','nav.path':'Nullbudget','nav.lesson':'3 Lektionen','nav.use':'Was EACO kann','nav.links':'Links',
+    'th.green':'Apfelgrün','th.blue':'Kosmosblau','th.classic':'Huaxia Klassik',
+    'hero.title':'Die 10 Branchen, die die Jugend des Erddorfes am meisten liebt',
+    'hero.lead':'E-Sport, Designer Toys, Kreativkultur, Check-in-Ökonomie, Kurzvideos, Haustiere, Outdoor, ACG, neue Gastronomie, KI-Kreation und digitale Nomaden: warum sie gefallen, ihre Teilformate, der Start ohne Geld und die Rolle von EACO.',
+    'hero.s1':'Wofür Jugendliche Zeit geben','hero.s2':'Sechs von zehn starten kostenlos','hero.s3':'ZH / EN / JA / ES / FR / DE','hero.s4':'Grün / Blau / Klassik',
+    'chip.1':'① Top 10','chip.2':'② Vergleich','chip.3':'③ E-Sport · Toys · IP · Check-in','chip.4':'④ Ohne Geld starten','chip.5':'⑤ 3 Lektionen','chip.6':'⑥ Was EACO kann','chip.7':'⑦ Links und Vertrag',
+    's1.title':'Die 10 Branchen · gewählt mit Zeit und Geld',
+    's1.desc':'Die Reihenfolge folgt drei Kriterien: freiwillige Zeit, Zahlungsbereitschaft und Berufstauglichkeit. Kein Ranking nach Marktgröße. Jeder Eintrag nennt Teilformate, Startkosten und den EACO-Winkel.',
+    's2.title':'Eine Tabelle: Kosten, Dauer, Fähigkeiten, passende Länder',
+    's2.desc':'Startkosten in drei Stufen: null (Zeit und Handy), niedrig (wenige Hundert), mittel (Ort oder Gerät nötig). Zeit bis zum Einkommen ist der übliche Abstand bis zur ersten Zahlung, kein Versprechen.',
+    's2.note':'Leseweise: zuerst die Kostenspalte. Null-Kosten-Branchen sind der einzige realistische Einstieg ohne Kapital; solche mit Ort oder Gerät erst nach dem ersten Einkommen.',
+    's3.title':'Teilformat-Listen für vier Schlüsselbranchen',
+    's3.desc':'E-Sport, Designer Toys, Kreativkultur und Check-in-Ökonomie: die vier am häufigsten gefragten. Alle Listen sind zweisprachig und für Akquise und Partnerschaften nutzbar. Kopieren oder anpassen.',
+    's3.note':'Gemeinsam ist allen: erst kommt jemand oder macht ein Foto, dann folgt der Umsatz. Jedes Geschäft beantwortet dieselbe erste Frage: Warum sollten Leute kommen?',
+    's4.title':'Mit Nullbudget starten · sieben Schritte',
+    's4.desc':'Kein Geld heißt nicht kein Weg. Alle sieben Schritte brauchen kein Kapital, nur Zeit und ein vernetztes Gerät. Jeder Schritt nennt sein Ergebnis: ein Schritt ohne Ergebnis wurde nie gemacht.',
+    's5.title':'Drei Lektionen über Vermögen · der gesunde Menschenverstand aus Währungskrisen',
+    's5.desc':'Wiederholte scharfe Abwertungen lehren dasselbe: alles auf ein Gut zu setzen heißt, das eigene Schicksal anderen zu übergeben. Hier stehen nur gesunder Menschenverstand und Disziplin, keine konkrete Anlageempfehlung.',
+    's5.note':'Diese Seite ist keine Anlageberatung und verspricht keine Rendite. Kryptowerte sind stark schwankend, Totalverlust ist möglich. Entscheiden Sie nach Ihrer Lage und fragen Sie lokale Fachleute.',
+    's6.title':'Was EACO kann · zehn konkrete Dinge',
+    's6.desc':'EACO = Energy × Attitude × Cooperation × Optimization. Kein Preisversprechen, nur eines: kleine grenz- und sprachüberschreitende Zusammenarbeit und Abrechnung billig und prüfbar machen. Zehn Anwendungen, die heute schon laufen.',
+    's6.note':'Ehrlicher Hinweis: Die Liquidität von EACO liegt weiter im Bereich einiger Hundert Dollar; der Pool ist sehr dünn, größere Orders rutschen deutlich. Heute passt das für kleine, häufige, grenzüberschreitende Nutzung, nicht zum Verwahren großer Werte.',
+    's7.title':'Links und Vertrag · alles auf einer Seite',
+    's7.desc':'Marktdaten, Tausch, Community, Inhalte, Code. Externe Links öffnen in neuem Tab. Vertrauen Sie nur dem Vertrag hier und auf Solscan; gleichnamige Token sind Fälschungen.',
+    't.h1':'Branche','t.h2':'Startkosten','t.h3':'Zeit bis Einkommen','t.h4':'Kernfähigkeit','t.h5':'Passende Länder','t.h6':'EACO-Winkel',
+    'l1':'Markt · Handel · Liquidität','l2':'Gratis beziehen · Community','l3':'Websites','l4':'Neun Länder · Zivilisation · Sprachkapital',
+    'lb.why':'Warum es gefällt','lb.forms':'Teilformate','lb.money':'Wie es verdient','lb.eaco':'Rolle von EACO',
+    'cost.free':'Null','cost.low':'Niedrig','cost.mid':'Mittel',
+    'cycle':'Zeit bis Einkommen','skill':'Kernfähigkeit','fit':'Passende Länder','copy':'Kopieren','copied':'Kopiert'
+  }
+};
+
+/* ==================== 十大行业数据（六语） ==================== */
+const IND = [
+{
+  icon:'🎮', cost:'free', cycle:'2–6 个月',
+  n:{zh:'电子竞技与游戏生态',en:'Esports & Gaming',ja:'eスポーツとゲーム',es:'Esports y videojuegos',fr:'Esport et jeux vidéo',de:'E-Sport und Gaming'},
+  t:{zh:'从打游戏到办赛事、做内容、运营战队，一条完整产业链。',en:'From playing to running events, content and teams: a full value chain.',ja:'プレイから大会運営・配信・チーム運営まで続く産業チェーン。',es:'De jugar a organizar torneos, crear contenido y gestionar equipos.',fr:'Du jeu à l organisation d événements, au contenu et aux équipes.',de:'Vom Spielen über Events und Content bis zum Team-Betrieb.'},
+  w:{zh:['门槛低，一部手机就能开始','观众年轻、打赏与付费意愿强','赛事、赞助、俱乐部体系成熟'],
+     en:['Low barrier: one phone is enough','Young audience, high willingness to pay','Mature event, sponsor and club structures'],
+     ja:['参入障壁が低くスマホ一台で始まる','観客が若く投げ銭志向が強い','大会・スポンサー・チーム体系が成熟'],
+     es:['Barrera baja: basta un teléfono','Audiencia joven con alta disposición a pagar','Estructuras maduras de torneos y patrocinio'],
+     fr:['Barrière basse : un téléphone suffit','Public jeune, fortement disposé à payer','Écosystème d événements et de sponsoring mature'],
+     de:['Niedrige Hürde: ein Handy genügt','Junges Publikum, hohe Zahlungsbereitschaft','Reife Strukturen für Events und Sponsoring']},
+  f:{zh:['职业选手','赛事执行','游戏直播','陪练教学','电竞场馆','战队运营'],
+     en:['Pro player','Event operations','Game streaming','Coaching','Esports venue','Team management'],
+     ja:['プロ選手','大会運営','ゲーム配信','コーチング','eスポ施設','チーム運営'],
+     es:['Jugador pro','Operación de torneos','Streaming','Entrenamiento','Sede de esports','Gestión de equipo'],
+     fr:['Joueur pro','Organisation d événements','Streaming','Coaching','Salle d esport','Gestion d équipe'],
+     de:['Pro-Spieler','Event-Betrieb','Streaming','Coaching','E-Sport-Arena','Team-Management']},
+  m:{zh:['直播打赏与平台分成','赛事奖金与商业赞助','周边、会员与粉丝订阅'],
+     en:['Tips and platform revenue share','Prize money and sponsorship','Merch, membership and fan subscriptions'],
+     ja:['投げ銭とプラットフォーム分配','賞金とスポンサー収入','グッズ・会員・ファン課金'],
+     es:['Propinas y reparto de plataforma','Premios y patrocinio','Merch, membresías y suscripciones'],
+     fr:['Pourboires et part de plateforme','Prix et sponsoring','Merch, adhésions et abonnements'],
+     de:['Tips und Plattformanteil','Preisgelder und Sponsoring','Merch, Mitgliedschaft, Abos']},
+  e:{zh:'门票、打赏、战队会员卡用 EACO 计价，海外观众无需换汇即可支持喜欢的选手。',
+     en:'Price tickets, tips and team memberships in EACO so overseas fans can support players without FX friction.',
+     ja:'チケット・投げ銭・会員証をEACO建てにし、海外ファンが両替なしで応援できる。',
+     es:'Precio de entradas, propinas y membresías en EACO para que los fans extranjeros apoyen sin fricción cambiaria.',
+     fr:'Tarifer billets, pourboires et adhésions en EACO pour que les fans étrangers soutiennent sans friction de change.',
+     de:'Tickets, Tipps und Mitgliedschaften in EACO bepreisen, damit Fans im Ausland ohne Wechselkursreibung unterstützen.'}
+},
+{
+  icon:'🧸', cost:'mid', cycle:'3–9 个月',
+  n:{zh:'潮玩与收藏玩具',en:'Designer Toys & Collectibles',ja:'デザイナーズトイと収集玩具',es:'Juguetes de diseño y colección',fr:'Jouets de designer et collection',de:'Designer Toys und Sammlerstücke'},
+  t:{zh:'盲盒、手办、限定联名、二手收藏与交换，情绪价值驱动的消费品。',en:'Blind boxes, figures, limited collabs, second-hand trading: emotion-driven consumption.',ja:'ブラインドボックス、フィギュア、限定コラボ、二次流通まで、感情価値で動く消費。',es:'Cajas ciegas, figuras, colaboraciones limitadas y reventa: consumo impulsado por la emoción.',fr:'Blind boxes, figurines, collaborations limitées et revente : une consommation portée par l émotion.',de:'Blind Boxes, Figuren, limitierte Kollaborationen und Zweitmarkt: konsumgetrieben durch Emotion.'},
+  w:{zh:['单价低、复购高、社交属性强','开箱与收藏天然适合短视频传播','二手市场让收藏具备流通价值'],
+     en:['Low unit price, high repeat buys, strong social layer','Unboxing fits short video perfectly','Second-hand market gives collections liquidity'],
+     ja:['単価が低くリピートと社交性が高い','開封動画が短尺動画と相性抜群','二次市場がコレクションに流通性を与える'],
+     es:['Precio bajo, recompra alta, fuerte capa social','El unboxing encaja en el video corto','El mercado de reventa da liquidez a la colección'],
+     fr:['Prix unitaire bas, forte récurrence, forte dimension sociale','Le unboxing est fait pour la vidéo courte','Le marché de l occasion donne de la liquidité'],
+     de:['Niedriger Preis, hohe Wiederkaufsrate, starke soziale Ebene','Unboxing passt perfekt zu Kurzvideos','Zweitmarkt gibt Sammlungen Liquidität']},
+  f:{zh:['盲盒与抽选','限量手办','艺术家联名','改娃定制','二手交换平台','展会与市集'],
+     en:['Blind boxes','Limited figures','Artist collabs','Custom figures','Resale platforms','Conventions and fairs'],
+     ja:['ブラインドボックス','限定フィギュア','作家コラボ','カスタム塗装','二次流通アプリ','展示会と即売会'],
+     es:['Cajas ciegas','Figuras limitadas','Colaboraciones de artistas','Figuras custom','Plataformas de reventa','Convenciones y ferias'],
+     fr:['Blind boxes','Figurines limitées','Collabs d artistes','Figurines custom','Plateformes de revente','Salons et conventions'],
+     de:['Blind Boxes','Limitierte Figuren','Künstler-Kollabs','Custom-Figuren','Wiederverkaufsplattformen','Conventions und Messen']},
+  m:{zh:['自有设计与预售','代购、鉴定与代售','展会摊位与社群运营'],
+     en:['Own design and pre-orders','Proxy buying, authentication, consignment','Convention booths and community ops'],
+     ja:['自社デザインと予約販売','代行購入・鑑定・委託販売','イベント出店とコミュニティ運営'],
+     es:['Diseño propio y preventas','Compra por encargo, autenticación, consignación','Puestos en ferias y comunidad'],
+     fr:['Design propre et préventes','Achat pour compte, authentification, dépôt-vente','Stands en salon et animation de communauté'],
+     de:['Eigenes Design und Vorbestellungen','Proxy-Kauf, Authentifizierung, Kommissionsverkauf','Messestände und Community-Betrieb']},
+  e:{zh:'限定款用 EACO 抽签与预售，海外买家同价参与；藏品证书上链，真伪可查。',
+     en:'Run limited drops and raffles in EACO so overseas buyers join at the same price; put certificates on-chain for verifiable authenticity.',
+     ja:'限定品の抽選と予約をEACOで行い、海外 buyer が同条件で参加。証明書をオンチェーンで検証可能に。',
+     es:'Sorteos y preventas limitadas en EACO para que compradores extranjeros participen igual; certificados on-chain verificables.',
+     fr:'Drops et tirages limités en EACO pour que les acheteurs étrangers participent à égalité ; certificats on-chain vérifiables.',
+     de:'Limitierte Drops und Verlosungen in EACO, damit Käufer im Ausland gleich teilnehmen; Zertifikate on-chain prüfbar.'}
+},
+{
+  icon:'🎨', cost:'free', cycle:'1–4 个月',
+  n:{zh:'文创与 IP 衍生',en:'Cultural & Creative IP',ja:'文創とIP派生',es:'Creación cultural e IP',fr:'Création culturelle et PI',de:'Kreativkultur und IP'},
+  t:{zh:'把文化符号做成产品：文具、周边、展览、联名授权、城市礼物。',en:'Turning cultural symbols into products: stationery, merchandise, exhibitions, licensing, city gifts.',ja:'文化記号を製品にする：文具、グッズ、展示、ライセンス、都市ギフト。',es:'Convertir símbolos culturales en productos: papelería, merch, exposiciones, licencias, regalos urbanos.',fr:'Transformer des symboles culturels en produits : papeterie, merchandising, expositions, licences, cadeaux de ville.',de:'Kulturelle Symbole zu Produkten machen: Papeterie, Merch, Ausstellungen, Lizenzen, Stadtgeschenke.'},
+  w:{zh:['零成本可从设计与内容起步','地方文化与博物馆资源开放','政府采购与文旅需求稳定'],
+     en:['Start with design and content at zero cost','Local culture and museum assets are open','Public and tourism procurement is steady'],
+     ja:['デザインとコンテンツからゼロ円で始まる','地域文化と博物館の資源が公開されている','行政と観光の需要が安定している'],
+     es:['Se empieza con diseño y contenido sin costo','Los recursos culturales y de museos son abiertos','La demanda pública y turística es estable'],
+     fr:['On démarre par le design et le contenu, sans coût','Les ressources culturelles et muséales sont ouvertes','La demande publique et touristique est stable'],
+     de:['Start mit Design und Content zum Nullkosten','Kultur- und Museumsressourcen sind offen','Öffentliche und Tourismus-Nachfrage ist stabil']},
+  f:{zh:['文具与纸品','博物馆文创','城市伴手礼','插画授权','展览策划','非遗手作'],
+     en:['Stationery','Museum merchandise','City souvenirs','Illustration licensing','Exhibition curation','Heritage crafts'],
+     ja:['文具と紙製品','博物館グッズ','都市の土産物','イラスト許諾','展示企画','伝統工芸'],
+     es:['Papelería','Merch de museo','Souvenirs de ciudad','Licencias de ilustración','Curaduría de exposiciones','Artesanía tradicional'],
+     fr:['Papeterie','Produits de musée','Souvenirs de ville','Licences d illustration','Commissariat d exposition','Artisanat patrimonial'],
+     de:['Papeterie','Museums-Merch','Stadt-Souvenirs','Illustrationslizenzen','Ausstellungskuration','Traditionelles Handwerk']},
+  m:{zh:['设计稿授权与分成','自有小批量生产','文旅项目与展陈服务'],
+     en:['Design licensing and revenue share','Own small-batch production','Tourism and exhibition services'],
+     ja:['デザイン許諾と分配','自社小ロット生産','観光プロジェクトと展示制作'],
+     es:['Licencias de diseño y reparto','Producción propia en pequeños lotes','Servicios de turismo y exposiciones'],
+     fr:['Licences de design et part de revenus','Petite production propre','Services tourisme et exposition'],
+     de:['Designlizenzen und Umsatzbeteiligung','Eigene Kleinserienproduktion','Tourismus- und Ausstellungsleistungen']},
+  e:{zh:'IP 授权费与分成用 EACO 结算，跨国联名不再被银行手续费吃掉小额收入。',
+     en:'Settle licensing fees and revenue share in EACO so cross-border collabs are not eaten by bank fees.',
+     ja:'ライセンス料と分配をEACOで決済し、跨国コラボの少額収入を銀行手数料に食われない。',
+     es:'Liquidar licencias y repartos en EACO para que las colaboraciones no pierdan ingresos en comisiones bancarias.',
+     fr:'Régler licences et parts en EACO pour que les collaborations ne perdent pas de revenus en frais bancaires.',
+     de:'Lizenzgebühren und Beteiligungen in EACO abrechnen, damit Bankgebühren kleine Beträge nicht auffressen.'}
+},
+{
+  icon:'📸', cost:'mid', cycle:'1–6 个月',
+  n:{zh:'打卡业态与沉浸体验',en:'Check-in Economy & Immersive',ja:'打卡経済と没入体験',es:'Economía del check-in e inmersión',fr:'Économie du check-in et immersion',de:'Check-in-Ökonomie und Immersion'},
+  t:{zh:'网红店、沉浸式展览、密室、剧本杀、城市漫步、快闪店与营地。',en:'Instagrammable venues, immersive exhibitions, escape rooms, murder mystery, city walks, pop-ups and camps.',ja:'映え店舗、没入型展示、脱出ゲーム、マーダーミステリー、街歩き、ポップアップとキャンプ。',es:'Locales fotogénicos, exposiciones inmersivas, escape rooms, misterio, rutas urbanas, pop-ups y campamentos.',fr:'Lieux instagrammables, expositions immersives, escape games, murder party, balades urbaines, pop-ups et camps.',de:'Fotogene Locations, immersive Ausstellungen, Escape Rooms, Krimi-Dinner, Stadtspaziergänge, Pop-ups und Camps.'},
+  w:{zh:['一次体验就是一次内容素材','客单价适中、复购来自更新频率','与本地文化结合最紧密'],
+     en:['Every visit produces content','Moderate ticket, repeat visits come from renewal','Closest tie to local culture'],
+     ja:['一回の体験がそのまま素材になる','客単価は中程度、更新頻度でリピート','地域文化との結びつきが最も強い'],
+     es:['Cada visita genera contenido','Ticket moderado, la repetición viene de la renovación','Vínculo más estrecho con la cultura local'],
+     fr:['Chaque visite produit du contenu','Ticket modéré, la récurrence vient du renouvellement','Lien le plus fort avec la culture locale'],
+     de:['Jeder Besuch erzeugt Content','Moderates Ticket, Wiederholung durch Erneuerung','Engste Bindung an lokale Kultur']},
+  f:{zh:['网红餐饮与甜品','沉浸式展览','密室与剧本杀','城市漫步路线','快闪店','营地与市集'],
+     en:['Photo-worthy F&B','Immersive exhibitions','Escape rooms and murder mystery','City walk routes','Pop-up stores','Camps and markets'],
+     ja:['映え飲食とスイーツ','没入型展示','脱出ゲームとマーダーミステリー','街歩きルート','ポップアップ','キャンプと市'],
+     es:['Gastronomía fotogénica','Exposiciones inmersivas','Escape rooms y misterio','Rutas urbanas','Pop-ups','Campamentos y mercados'],
+     fr:['Restauration photogénique','Expositions immersives','Escape games et murder party','Parcours urbains','Pop-ups','Camps et marchés'],
+     de:['Fotogene Gastronomie','Immersive Ausstellungen','Escape Rooms und Krimi-Spiele','City-Walk-Routen','Pop-up-Stores','Camps und Märkte']},
+  m:{zh:['门票与套餐销售','场地时段与品牌合作','拍摄服务与约拍'],
+     en:['Tickets and packages','Venue slots and brand partnerships','Photography and photo-tour services'],
+     ja:['チケットとパッケージ販売','場所の時間貸しとブランド協賛','撮影サービスと出張撮影'],
+     es:['Entradas y paquetes','Franjas de espacio y alianzas de marca','Servicios de fotografía'],
+     fr:['Billets et forfaits','Créneaux de lieu et partenariats de marque','Services photo'],
+     de:['Tickets und Pakete','Slot-Vermietung und Markenpartner','Foto- und Shooting-Services']},
+  e:{zh:'门票、押金与约拍小费用 EACO 结算，外国游客不用换汇、不用绑卡。',
+     en:'Settle tickets, deposits and photo-tour fees in EACO so foreign visitors skip FX and card binding.',
+     ja:'チケット・デポジット・撮影料をEACOで、外国人観光客は両替もカード登録も不要。',
+     es:'Entradas, depósitos y fotos en EACO para que el visitante extranjero evite cambio y tarjeta.',
+     fr:'Billets, caution et séances photo en EACO : le visiteur étranger évite change et carte bancaire.',
+     de:'Tickets, Kaution und Foto-Gebühren in EACO, damit ausländische Gäste Wechsel und Kartenbindung sparen.'}
+},
+{
+  icon:'📱', cost:'free', cycle:'1–3 个月',
+  n:{zh:'短视频与直播电商',en:'Short Video & Live Commerce',ja:'短尺動画とライブコマース',es:'Video corto y comercio en vivo',fr:'Vidéo courte et commerce en direct',de:'Kurzvideo und Live-Commerce'},
+  t:{zh:'内容即货架：一条视频或一场直播就能完成从种草到成交。',en:'Content is the shelf: one clip or one livestream moves from discovery to checkout.',ja:'コンテンツが棚になる：1本の動画や1回の配信で認知から購入まで完結。',es:'El contenido es el estante: un clip o un directo va del descubrimiento a la compra.',fr:'Le contenu est le rayon : une vidéo ou un direct mène de la découverte à l achat.',de:'Content ist die Verkaufsfläche: ein Clip oder ein Livestream führt von Entdeckung bis Kauf.'},
+  w:{zh:['零成本起步，手机即可开播','反馈最快，今天发今天看数据','可直接带动本地商户销售'],
+     en:['Zero cost to start, a phone is enough','Fastest feedback loop: post today, read data today','Can drive sales for local merchants directly'],
+     ja:['ゼロ円で始まりスマホで配信できる','反応が最速。出した当日に数字が見える','地元店舗の売上に直結する'],
+     es:['Se empieza sin costo, basta un teléfono','Retroalimentación más rápida: publicas hoy y ves datos hoy','Puede impulsar ventas de comercios locales'],
+     fr:['Démarrage gratuit, un téléphone suffit','Boucle de retour la plus rapide : on publie et on lit les chiffres le jour même','Peut générer des ventes pour les commerces locaux'],
+     de:['Kostenloser Start, ein Handy genügt','Schnellstes Feedback: heute posten, heute Daten sehen','Kann Verkäufe lokaler Händler direkt treiben']},
+  f:{zh:['口播与测评','带货直播','剧情短剧','知识付费','本地探店','代运营'],
+     en:['Talking-head and reviews','Livestream selling','Short drama','Paid knowledge','Local store visits','Agency operations'],
+     ja:['トークとレビュー','ライブ販売','ショートドラマ','有料知識','地元店レポ','運用代行'],
+     es:['Opinión y reseñas','Venta en vivo','Minidrama','Conocimiento de pago','Visitas a locales','Gestión de cuentas'],
+     fr:['Talking-head et tests','Vente en direct','Mini-fiction','Contenu payant','Visites de commerces','Gestion pour compte'],
+     de:['Talking-Head und Reviews','Live-Verkauf','Kurzdrama','Bezahltes Wissen','Ladenbesuche','Account-Betreuung']},
+  m:{zh:['平台分成与广告','佣金与坑位费','自有课程与社群'],
+     en:['Platform share and ads','Commission and slot fees','Own courses and community'],
+     ja:['プラットフォーム分配と広告','成果報酬と枠料','自社講座とコミュニティ'],
+     es:['Reparto de plataforma y publicidad','Comisiones y tarifas de espacio','Cursos propios y comunidad'],
+     fr:['Part de plateforme et publicité','Commissions et emplacements','Cours propres et communauté'],
+     de:['Plattformanteil und Werbung','Provision und Slot-Gebühren','Eigene Kurse und Community']},
+  e:{zh:'跨境带货的佣金与小费以 EACO 结算，小额高频不必被跨境手续费吃掉。',
+     en:'Cross-border commissions and tips in EACO: small and frequent payments survive the fee structure.',
+     ja:'越境ECの手数料や投げ銭をEACOで。少額高頻度でも手数料に消えない。',
+     es:'Comisiones y propinas transfronterizas en EACO: pagos pequeños y frecuentes sin perder en comisiones.',
+     fr:'Commissions et pourboires transfrontaliers en EACO : les petits paiements fréquents survivent aux frais.',
+     de:'Grenzüberschreitende Provisionen und Tipps in EACO: kleine, häufige Zahlungen überleben die Gebühren.'}
+},
+{
+  icon:'🐾', cost:'mid', cycle:'3–12 个月',
+  n:{zh:'宠物经济',en:'Pet Economy',ja:'ペット経済',es:'Economía de mascotas',fr:'Économie des animaux de compagnie',de:'Haustier-Ökonomie'},
+  t:{zh:'食品、医疗、美容、寄养、训练、殡葬与宠物友好空间，全链条消费。',en:'Food, vet care, grooming, boarding, training, aftercare and pet-friendly spaces: a full chain.',ja:'フード、医療、美容、預かり、訓練、供養、ペット可空間まで全链条の消費。',es:'Alimentos, veterinaria, estética, guardería, adiestramiento, despedida y espacios pet-friendly.',fr:'Alimentation, soins vétérinaires, toilettage, garde, éducation, après-décès et lieux pet-friendly.',de:'Futter, Tierarzt, Pflege, Pension, Training, Abschied und tierfreundliche Orte.'},
+  w:{zh:['情感绑定强，价格敏感度相对低','服务型业态难以被纯电商替代','社区口碑传播效率极高'],
+     en:['Strong emotional bond, lower price sensitivity','Service formats resist pure e-commerce','Community word of mouth spreads fast'],
+     ja:['情緒的な結びつきが強く価格感度が低め','サービス型は純ECに置き換わりにくい','地域の口コミが極めて速く広がる'],
+     es:['Vínculo emocional fuerte, menor sensibilidad al precio','Los servicios resisten al e-commerce puro','El boca a boca local se propaga rápido'],
+     fr:['Fort lien émotionnel, moindre sensibilité au prix','Les services résistent au pur e-commerce','Le bouche-à-oreille local se propage vite'],
+     de:['Starke emotionale Bindung, geringere Preissensibilität','Dienstleistungen widerstehen reinem E-Commerce','Lokale Mundpropaganda verbreitet sich schnell']},
+  f:{zh:['宠物食品与零食','美容与洗护','寄养与上门喂养','训练与行为矫正','宠物摄影','宠物友好咖啡馆'],
+     en:['Pet food and treats','Grooming','Boarding and home visits','Training and behaviour','Pet photography','Pet-friendly cafés'],
+     ja:['ペットフードとおやつ','トリミング','預かりと訪問世話','しつけと行動矯正','ペット撮影','ペット可カフェ'],
+     es:['Alimentos y snacks','Estética y baño','Guardería y visitas a domicilio','Adiestramiento y conducta','Fotografía de mascotas','Cafés pet-friendly'],
+     fr:['Alimentation et friandises','Toilettage','Garde et visites à domicile','Éducation et comportement','Photo animalière','Cafés pet-friendly'],
+     de:['Futter und Snacks','Fellpflege','Pension und Hausbesuche','Training und Verhalten','Tierfotografie','Tierfreundliche Cafés']},
+  m:{zh:['服务预约与会员卡','自有品牌零食与用品','寄养与上门服务'],
+     en:['Service bookings and memberships','Own-brand treats and supplies','Boarding and home services'],
+     ja:['予約と会員証','自社ブランドのおやつと用品','預かりと訪問サービス'],
+     es:['Reservas y membresías','Snacks y productos de marca propia','Guardería y servicios a domicilio'],
+     fr:['Réservations et adhésions','Friandises et produits de marque propre','Garde et services à domicile'],
+     de:['Terminbuchungen und Mitgliedskarten','Eigene Snacks und Produkte','Pension und Hausbesuche']},
+  e:{zh:'宠物寄养押金、上门服务费与跨国领养捐赠用 EACO 结算，爱心不被手续阻断。',
+     en:'Boarding deposits, home-visit fees and cross-border adoption donations in EACO: goodwill without paperwork friction.',
+     ja:'預かりの保証金、訪問料、越境譲渡の寄付をEACOで。善意が手続きで止まらない。',
+     es:'Depósitos de guardería, visitas y donaciones de adopción transfronteriza en EACO: buena voluntad sin fricción.',
+     fr:'Caution de garde, visites et dons d adoption transfrontaliers en EACO : la bonne volonté sans friction.',
+     de:'Pensionskaution, Besuchsgebühren und grenzüberschreitende Adoptionsspenden in EACO: Hilfsbereitschaft ohne Reibung.'}
+},
+{
+  icon:'🏕️', cost:'low', cycle:'2–8 个月',
+  n:{zh:'户外运动与轻探险',en:'Outdoor & Light Adventure',ja:'アウトドアと軽冒険',es:'Aire libre y aventura ligera',fr:'Plein air et aventure légère',de:'Outdoor und leichte Abenteuer'},
+  t:{zh:'露营、徒步、骑行、滑雪、路跑、桨板与City Walk，健康与社交叠加。',en:'Camping, hiking, cycling, skiing, running, paddleboarding and city walks: health plus social.',ja:'キャンプ、ハイク、自転車、スキー、ラン、SUP、街歩き。健康と社交の掛け合わせ。',es:'Camping, senderismo, ciclismo, esquí, running, paddle y rutas urbanas: salud más social.',fr:'Camping, randonnée, vélo, ski, course, paddle et balades urbaines : santé plus social.',de:'Camping, Wandern, Radfahren, Skifahren, Laufen, Paddle und City Walks: Gesundheit plus Soziales.'},
+  w:{zh:['低成本参与，装备可租可借','社群黏性极强，活动即内容','与文旅、装备、培训天然联动'],
+     en:['Low participation cost, gear can be rented','Strong community stickiness; every event is content','Natural link to tourism, gear and training'],
+     ja:['参加費が低く装備はレンタル可能','コミュニティの粘着性が強く、活動自体が素材','観光・装備・講習と自然に連動'],
+     es:['Bajo costo, el equipo se puede alquilar','Comunidad muy fiel; cada actividad es contenido','Enlace natural con turismo, equipo y formación'],
+     fr:['Coût faible, le matériel se loue','Forte fidélité communautaire ; chaque sortie est du contenu','Lien naturel avec tourisme, matériel et formation'],
+     de:['Geringe Teilnahmekosten, Ausrüstung mietbar','Starke Community-Bindung, jede Aktivität ist Content','Natürliche Verbindung zu Tourismus, Ausrüstung, Training']},
+  f:{zh:['露营与营地','徒步与越野跑','骑行通勤与长途','滑雪与桨板','户外装备租赁','亲子自然教育'],
+     en:['Camping and campsites','Hiking and trail running','Cycling commute and touring','Skiing and paddleboarding','Gear rental','Family nature education'],
+     ja:['キャンプと場','ハイクとトレイルラン','通勤自転車と長距離','スキーとSUP','装備レンタル','親子自然教育'],
+     es:['Camping y campamentos','Senderismo y trail running','Ciclismo urbano y de ruta','Esquí y paddle','Alquiler de equipo','Educación natural familiar'],
+     fr:['Camping et terrains','Randonnée et trail','Vélo urbain et voyage','Ski et paddle','Location de matériel','Éducation nature en famille'],
+     de:['Camping und Plätze','Wandern und Trailrunning','Pendeln und Radreisen','Skifahren und Paddle','Ausrüstungsverleih','Naturpädagogik für Familien']},
+  m:{zh:['活动组织与带队费','装备租赁与代购','培训与认证课程'],
+     en:['Event organization and guide fees','Gear rental and proxy buying','Training and certification courses'],
+     ja:['イベント運営とガイド料','装備レンタルと代行購入','講習と認定講座'],
+     es:['Organización de eventos y guías','Alquiler y compra por encargo','Formación y certificaciones'],
+     fr:['Organisation d événements et guidage','Location et achat pour compte','Formation et certifications'],
+     de:['Eventorganisation und Guide-Gebühren','Verleih und Proxy-Kauf','Training und Zertifikatskurse']},
+  e:{zh:'跨国徒步活动的报名费与向导小费用 EACO 结算，多国队友统一收款、按贡献分配。',
+     en:'Cross-border hike registrations and guide tips in EACO: one collection point for a multinational team, split by contribution.',
+     ja:'越境ハイクの参加費とガイドへの心付けをEACOで。多国籍チームが一本化して受領し貢献で分配。',
+     es:'Inscripciones y propinas de guías transfronterizas en EACO: una sola cobranza para equipos multinacionales.',
+     fr:'Inscriptions et pourboires de guides transfrontaliers en EACO : une seule collecte pour une équipe multinationale.',
+     de:'Anmeldungen und Guide-Tipps grenzüberschreitend in EACO: eine Sammelstelle für multinationale Teams.'}
+},
+{
+  icon:'🌸', cost:'free', cycle:'3–9 个月',
+  n:{zh:'二次元与虚拟人',en:'ACG & Virtual Humans',ja:'二次元とバーチャル人間',es:'ACG y humanos virtuales',fr:'ACG et humains virtuels',de:'ACG und virtuelle Menschen'},
+  t:{zh:'动漫、同人、Cosplay、VTuber、虚拟直播与虚拟社交，身份可创造。',en:'Anime, doujin, cosplay, VTubers, virtual streaming and virtual social spaces: identity can be created.',ja:'アニメ、同人、コスプレ、VTuber、バーチャル配信と仮想社交。アイデンティティを創れる。',es:'Anime, doujin, cosplay, VTubers, streaming virtual y sociales virtuales: la identidad se crea.',fr:'Anime, doujin, cosplay, VTubers, streaming virtuel et social virtuel : l identité se crée.',de:'Anime, Doujin, Cosplay, VTuber, virtuelles Streaming und virtuelle Räume: Identität wird erschaffen.'},
+  w:{zh:['创作门槛低，一个形象即可出道','粉丝付费意愿强、打赏文化成熟','跨语言障碍最小，表情与音乐通用'],
+     en:['Low creation barrier: one avatar is enough','Strong fan payment culture','Least language friction: expressions and music travel'],
+     ja:['創作の壁が低く、一個のキャラでデビュー可能','ファンの課金志向が強い','言語の壁が最も小さく表情と音楽が共通'],
+     es:['Barrera de creación baja: basta un avatar','Fuerte cultura de pago de los fans','Mínima fricción de idioma: gestos y música son universales'],
+     fr:['Barrière de création basse : un avatar suffit','Forte culture du paiement chez les fans','Moindre friction linguistique : gestes et musique sont universels'],
+     de:['Niedrige Schöpfungshürde: ein Avatar genügt','Starke Zahlungskultur der Fans','Geringste Sprachbarriere: Mimik und Musik sind universell']},
+  f:{zh:['VTuber 与虚拟主播','同人创作与周边','Cosplay 与摄影','虚拟演唱会','语音与配音','虚拟社交空间'],
+     en:['VTubers and virtual streamers','Doujin works and merch','Cosplay and photography','Virtual concerts','Voice acting','Virtual social spaces'],
+     ja:['VTuberとバーチャル配信者','同人作品とグッズ','コスプレと撮影','バーチャルライブ','ナレーションと声優','仮想社交空間'],
+     es:['VTubers y streamers virtuales','Obras doujin y merch','Cosplay y fotografía','Conciertos virtuales','Actuación de voz','Espacios sociales virtuales'],
+     fr:['VTubers et streamers virtuels','Œuvres doujin et merchandising','Cosplay et photographie','Concerts virtuels','Doublage','Espaces sociaux virtuels'],
+     de:['VTuber und virtuelle Streamer','Doujin-Werke und Merch','Cosplay und Fotografie','Virtuelle Konzerte','Synchronsprechen','Virtuelle soziale Räume']},
+  m:{zh:['打赏与会员订阅','周边与数字藏品','B端虚拟形象定制'],
+     en:['Tips and memberships','Merch and digital collectibles','B2B avatar design'],
+     ja:['投げ銭と会員課金','グッズとデジタル収蔵品','法人向けアバター制作'],
+     es:['Propinas y membresías','Merch y coleccionables digitales','Diseño de avatares B2B'],
+     fr:['Pourboires et adhésions','Merch et collectionnables numériques','Création d avatars B2B'],
+     de:['Tipps und Mitgliedschaften','Merch und digitale Sammlerstücke','Avatar-Design im B2B']},
+  e:{zh:'海外粉丝打赏与会员订阅用 EACO，跨国小额付款不再被最低手续费卡住。',
+     en:'Overseas tips and memberships in EACO: cross-border micro-payments no longer blocked by minimum fees.',
+     ja:'海外ファンの投げ銭と会員課金をEACOで。最低手数料に阻まれない越境少額決済。',
+     es:'Propinas y membresías del extranjero en EACO: micropagos transfronterizos sin mínimos que bloqueen.',
+     fr:'Pourboires et adhésions étrangers en EACO : micropaiements transfrontaliers sans minimum bloquant.',
+     de:'Tipps und Abos aus dem Ausland in EACO: grenzüberschreitende Kleinstzahlungen ohne Sperre durch Mindestgebühren.'}
+},
+{
+  icon:'☕', cost:'mid', cycle:'3–12 个月',
+  n:{zh:'新餐饮与新茶饮',en:'New F&B and Tea Drinks',ja:'新飲食と新茶飲',es:'Nueva restauración y bebidas',fr:'Nouvelle restauration et boissons',de:'Neue Gastronomie und Teedrinks'},
+  t:{zh:'咖啡、茶饮、烘焙、轻食与小酒馆，高频低价、强社交、强迭代。',en:'Coffee, tea, bakery, light meals and small bars: high frequency, low ticket, strong social pull, fast iteration.',ja:'コーヒー、茶飲、ベーカリー、軽食、小さなバー。高頻度・低単価・強社交・高速改善。',es:'Café, té, panadería, comida ligera y pequeños bares: alta frecuencia, ticket bajo y mucha rotación.',fr:'Café, thé, boulangerie, restauration légère et petits bars : forte fréquence, ticket bas, forte rotation.',
+     de:'Kaffee, Tee, Bakery, leichte Küche und kleine Bars: hohe Frequenz, kleines Ticket, schnelle Rotation.'},
+  w:{zh:['高频刚需，现金流最直观','产品线迭代快，试错成本可控','与打卡业态天然互补'],
+     en:['High-frequency necessity, clearest cash flow','Fast product iteration, controllable trial cost','Natural complement to the check-in economy'],
+     ja:['高頻度の必需でキャッシュフローが最も明確','商品の改善サイクルが速く試行錯誤が可能な範囲','打卡経済と自然に補完し合う'],
+     es:['Necesidad de alta frecuencia, flujo de caja claro','Iteración rápida de producto, costo de prueba controlable','Complemento natural de la economía del check-in'],
+     fr:['Besoin à haute fréquence, trésorerie la plus lisible','Itération produit rapide, coût d essai maîtrisable','Complément naturel de l économie du check-in'],
+     de:['Hohe Frequenz, klarster Cashflow','Schnelle Produktiteration, kontrollierbare Testkosten','Natürliche Ergänzung zur Check-in-Ökonomie']},
+  f:{zh:['精品咖啡','新茶饮与果茶','烘焙与甜品','轻食与沙拉','小酒馆','移动餐车'],
+     en:['Specialty coffee','New-style tea and fruit tea','Bakery and desserts','Light meals and salads','Small bars','Food trucks'],
+     ja:['スペシャルティコーヒー','新茶飲とフルーツティー','ベーカリーとスイーツ','軽食とサラダ','小さなバー','フードトラック'],
+     es:['Café de especialidad','Té nuevo y té de frutas','Panadería y postres','Comida ligera y ensaladas','Pequeños bares','Food trucks'],
+     fr:['Café de spécialité','Thé nouvelle génération','Boulangerie et desserts','Repas légers et salades','Petits bars','Food trucks'],
+     de:['Specialty Coffee','Neue Teegetränke','Bakery und Desserts','Leichte Küche und Salate','Kleine Bars','Food Trucks']},
+  m:{zh:['门店销售与外卖','会员储值与订阅','品牌加盟与供应链'],
+     en:['In-store and delivery sales','Stored-value memberships and subscriptions','Franchising and supply chain'],
+     ja:['店舗販売とデリバリー','チャージ会員と定期便','FC展開とサプライチェーン'],
+     es:['Venta en local y delivery','Membresías con saldo y suscripciones','Franquicias y cadena de suministro'],
+     fr:['Vente en salle et livraison','Cartes rechargeables et abonnements','Franchise et chaîne logistique'],
+     de:['Verkauf im Laden und Lieferung','Guthabenkarten und Abos','Franchise und Lieferkette']},
+  e:{zh:'会员储值、小费与联名分成可用 EACO 记账，跨国连锁的分账一天内完成对账。',
+     en:'Stored value, tips and collab splits can be booked in EACO; cross-border chains reconcile within a day.',
+     ja:'チャージ、心付け、コラボ分配をEACOで記帳。越境チェーンの精算が一日で完了。',
+     es:'Saldo, propinas y reparto de colaboraciones en EACO; cadenas transfronterizas concilian en un día.',
+     fr:'Soldes, pourboires et répartitions en EACO ; les chaînes transfrontalières réconcilient en un jour.',
+     de:'Guthaben, Trinkgeld und Kollaborationsanteile in EACO; grenzüberschreitende Ketten stimmen in einem Tag ab.'}
+},
+{
+  icon:'🤖', cost:'free', cycle:'1–4 个月',
+  n:{zh:'AI 创作与数字游民服务',en:'AI Creation & Digital Nomads',ja:'AI創作とデジタルノマド',es:'Creación con IA y nómadas digitales',fr:'Création IA et nomades numériques',de:'KI-Kreation und digitale Nomaden'},
+  t:{zh:'用 AI 工具做设计、写作、剪辑、翻译；用远程协作换取地点自由。',en:'Use AI to design, write, edit and translate; trade remote work for location freedom.',ja:'AIツールでデザイン・執筆・編集・翻訳。リモート協働で場所の自由を得る。',es:'Usar IA para diseñar, escribir, editar y traducir; cambiar trabajo remoto por libertad de lugar.',fr:'Utiliser l IA pour concevoir, écrire, monter et traduire ; échanger le travail à distance contre la liberté de lieu.',
+     de:'KI nutzen für Design, Text, Schnitt und Übersetzung; Fernarbeit gegen Ortsfreiheit tauschen.'},
+  w:{zh:['零成本可用主流 AI 工具','交付物数字化，跨境交付无物流','时间自由，最符合年轻人的价值排序'],
+     en:['Mainstream AI tools are usable at zero cost','Deliverables are digital: no logistics across borders','Time freedom matches youth values best'],
+     ja:['主要AIツールはゼロ円で使える','成果物がデジタルで越境物流が不要','時間の自由が若者の価値観に最も合う'],
+     es:['Las herramientas de IA se usan sin costo','Los entregables son digitales: sin logística','La libertad de tiempo encaja con los valores juveniles'],
+     fr:['Les outils d IA s utilisent gratuitement','Les livrables sont numériques : pas de logistique','La liberté de temps correspond aux valeurs des jeunes'],
+     de:['Gängige KI-Tools kostenlos nutzbar','Ergebnisse sind digital: keine Logistik','Zeitfreiheit passt zu den Werten der Jugend']},
+  f:{zh:['AI 设计与绘图','AI 写作与翻译','AI 剪辑与配音','远程助理与外包','共享办公与旅居','AI 教学与咨询'],
+     en:['AI design and illustration','AI writing and translation','AI editing and voice-over','Remote assistant and outsourcing','Coworking and coliving','AI teaching and consulting'],
+     ja:['AIデザインと作画','AI執筆と翻訳','AI編集とナレーション','リモート秘書と外注','コワーキングと暮らす拠点','AI講師と相談'],
+     es:['Diseño e ilustración con IA','Escritura y traducción con IA','Edición y voz con IA','Asistente remoto y outsourcing','Coworking y coliving','Docencia y consultoría de IA'],
+     fr:['Design et illustration IA','Rédaction et traduction IA','Montage et voix off IA','Assistant à distance et externalisation','Coworking et coliving','Formation et conseil IA'],
+     de:['KI-Design und Illustration','KI-Text und Übersetzung','KI-Schnitt und Voice-over','Remote-Assistenz und Outsourcing','Coworking und Coliving','KI-Schulung und Beratung']},
+  m:{zh:['按项目或按时计费','订阅制工具与模板','远程团队分包'],
+     en:['Per project or hourly billing','Subscription tools and templates','Subcontracting inside remote teams'],
+     ja:['案件単価または時間課金','サブスク型ツールとテンプレ','リモートチーム内の下請け'],
+     es:['Facturación por proyecto u hora','Herramientas y plantillas por suscripción','Subcontratación en equipos remotos'],
+     fr:['Facturation au projet ou à l heure','Outils et modèles par abonnement','Sous-traitance au sein d équipes distantes'],
+     de:['Abrechnung pro Projekt oder Stunde','Tools und Vorlagen im Abo','Subvergabe in Remote-Teams']},
+  e:{zh:'远程协作的按次结算与赏金用 EACO，跨国团队当天分账，不必等银行与汇率。',
+     en:'Per-task settlement and bounties in EACO: remote teams split revenue the same day, no bank or FX wait.',
+     ja:'リモート協働の都度決済と報奨金をEACOで。跨国チームが当日分配、銀行も為替も待たない。',
+     es:'Pagos por tarea y recompensas en EACO: equipos remotos reparten el mismo día, sin banco ni cambio.',
+     fr:'Paiement à la tâche et primes en EACO : les équipes distantes partagent le jour même, sans banque ni change.',
+     de:'Abrechnung pro Aufgabe und Bountys in EACO: Remote-Teams teilen am selben Tag, ohne Bank und ohne Wechselkurs.'}
+}
+];
+
+/* 对比表：成本 / 周期 / 技能 / 适配 / EACO */
+const CMP = {
+  fit:{zh:'美、日、德、法、澳、加、菲、荷、新西兰均可',en:'US, JP, DE, FR, AU, CA, PH, NL, NZ',ja:'米日独仏豪加比蘭NZいずれも可',es:'EE. UU., Japón, Alemania, Francia, Australia, Canadá, Filipinas, Países Bajos, Nueva Zelanda',fr:'États-Unis, Japon, Allemagne, France, Australie, Canada, Philippines, Pays-Bas, Nouvelle-Zélande',de:'USA, Japan, Deutschland, Frankreich, Australien, Kanada, Philippinen, Niederlande, Neuseeland'},
+  skill:{
+    zh:['赛事组织与内容运营','设计与供应链管理','文化理解与授权谈判','场景设计与动线运营','选题、剪辑与直播转化','护理技能与服务管理','路线设计与安全管理','形象设计与粉丝运营','出品稳定性与选址','AI 工具链与交付管理'],
+    en:['Event ops and content','Design and supply chain','Cultural insight and licensing','Scene design and flow operations','Topic choice, editing, conversion','Care skills and service management','Route design and safety','Character design and fan ops','Consistency and location','AI toolchain and delivery'],
+    ja:['大会運営とコンテンツ','デザインと供給網','文化理解と許諾交渉','空間設計と動線運営','企画・編集・成約','ケア技術とサービス管理','ルート設計と安全管理','キャラ設計とファン運営','品質安定と立地','AIツールと納品管理'],
+    es:['Operación de eventos y contenido','Diseño y cadena de suministro','Comprensión cultural y licencias','Diseño de escena y flujo','Tema, edición y conversión','Cuidado y gestión de servicio','Diseño de rutas y seguridad','Diseño de personaje y fans','Consistencia y ubicación','Toolchain de IA y entregas'],
+    fr:['Organisation d événements et contenu','Design et chaîne logistique','Compréhension culturelle et licences','Scénographie et gestion des flux','Sujet, montage et conversion','Soins et gestion de service','Itinéraires et sécurité','Design de personnage et fans','Régularité et emplacement','Chaîne d outils IA et livrables'],
+    de:['Eventbetrieb und Content','Design und Lieferkette','Kulturverständnis und Lizenzen','Szenografie und Ablauf','Thema, Schnitt, Conversion','Pflege und Servicemanagement','Routenplanung und Sicherheit','Charakterdesign und Fans','Konstanz und Standort','KI-Werkzeuge und Lieferung']},
+  eaco:{
+    zh:['门票与打赏','抽签与藏品证书','授权费与分成','门票与约拍费','佣金与小费','寄养与捐赠','报名费与向导费','打赏与订阅','储值与联名分账','按次结算与赏金'],
+    en:['Tickets and tips','Raffles and certificates','Licensing and revenue share','Tickets and photo fees','Commissions and tips','Boarding and donations','Registration and guide fees','Tips and subscriptions','Stored value and splits','Per-task payouts and bounties'],
+    ja:['チケットと投げ銭','抽選と証明書','許諾料と分配','チケットと撮影料','手数料と心付け','預かりと寄付','参加費とガイド料','投げ銭と会員課金','チャージと分配','都度決済と報奨金'],
+    es:['Entradas y propinas','Sorteos y certificados','Licencias y reparto','Entradas y fotos','Comisiones y propinas','Guardería y donaciones','Inscripción y guías','Propinas y suscripciones','Saldo y repartos','Pagos por tarea y recompensas'],
+    fr:['Billets et pourboires','Tirages et certificats','Licences et répartition','Billets et séances photo','Commissions et pourboires','Garde et dons','Inscription et guides','Pourboires et abonnements','Soldes et répartitions','Paiements à la tâche et primes'],
+    de:['Tickets und Tipps','Verlosung und Zertifikate','Lizenzen und Beteiligung','Tickets und Fotogebühren','Provisionen und Tipps','Pension und Spenden','Anmeldung und Guide-Gebühren','Tipps und Abos','Guthaben und Aufteilung','Abrechnung pro Aufgabe und Bountys']},
+  cycle:{
+    zh:['2–6 个月','3–9 个月','1–4 个月','1–6 个月','1–3 个月','3–12 个月','2–8 个月','3–9 个月','3–12 个月','1–4 个月'],
+    en:['2–6 months','3–9 months','1–4 months','1–6 months','1–3 months','3–12 months','2–8 months','3–9 months','3–12 months','1–4 months'],
+    ja:['2〜6か月','3〜9か月','1〜4か月','1〜6か月','1〜3か月','3〜12か月','2〜8か月','3〜9か月','3〜12か月','1〜4か月'],
+    es:['2–6 meses','3–9 meses','1–4 meses','1–6 meses','1–3 meses','3–12 meses','2–8 meses','3–9 meses','3–12 meses','1–4 meses'],
+    fr:['2–6 mois','3–9 mois','1–4 mois','1–6 mois','1–3 mois','3–12 mois','2–8 mois','3–9 mois','3–12 mois','1–4 mois'],
+    de:['2–6 Monate','3–9 Monate','1–4 Monate','1–6 Monate','1–3 Monate','3–12 Monate','2–8 Monate','3–9 Monate','3–12 Monate','1–4 Monate']}
+};
+
+/* ==================== 四大深挖（中英对照术语） ==================== */
+const DEEP = [
+  {ico:'🎮', zh:'电子竞技 · 细分业态', en:'Esports sub-formats', items:[
+    ['职业选手与青训','Pro player & academy'],['赛事执行与裁判','Event ops & refereeing'],['游戏直播与解说','Streaming & casting'],
+    ['陪练与教学','Coaching & tutoring'],['电竞场馆与网咖','Esports venues'],['战队经纪与运营','Team management'],
+    ['数据分析与战术板','Analytics & tactics'],['周边与应援商品','Merch & fan goods'],['高校联赛与社团','Campus leagues'],['电竞旅游与观赛团','Esports tourism']
+  ]},
+  {ico:'🧸', zh:'潮玩 · 细分业态', en:'Designer toys sub-formats', items:[
+    ['盲盒与抽选','Blind boxes & raffles'],['限量手办与雕像','Limited figures & statues'],['艺术家联名','Artist collaborations'],
+    ['改娃与定制涂装','Custom figures'],['二手交易与鉴定','Resale & authentication'],['展会与市集摊位','Conventions & fairs'],
+    ['IP 授权与衍生','IP licensing'],['收藏社群与换娃','Collector communities'],['潮玩租赁与展示','Rental & display'],['包装与配件','Packaging & accessories']
+  ]},
+  {ico:'🎨', zh:'文创 · 细分业态', en:'Cultural & creative sub-formats', items:[
+    ['文具与纸品','Stationery & paper'],['博物馆文创','Museum merchandise'],['城市伴手礼','City souvenirs'],
+    ['插画与字体授权','Illustration & font licensing'],['展览策划与执行','Exhibition production'],['非遗手作体验','Heritage craft workshops'],
+    ['出版与独立刊物','Publishing & zines'],['文旅导视与标识','Wayfinding & signage'],['礼盒与定制','Gift boxes & customization'],['公共艺术与壁画','Public art & murals']
+  ]},
+  {ico:'📸', zh:'打卡业态 · 细分业态', en:'Check-in economy sub-formats', items:[
+    ['网红餐饮与甜品','Photo-worthy F&B'],['沉浸式展览','Immersive exhibitions'],['密室与剧本杀','Escape rooms & murder mystery'],
+    ['城市漫步路线','City walk routes'],['快闪店与限时空间','Pop-up stores'],['天台与露营营地','Rooftops & campsites'],
+    ['美术馆与独立书店','Galleries & bookstores'],['运动场馆打卡','Sports venues'],['夜市与创意市集','Night markets'],
+    ['旅拍与约拍服务','Travel & portrait photography'],['主题街区与商场','Themed districts'],['灯光秀与夜游','Light shows & night tours']
+  ]}
+];
+
+/* ==================== 零预算七步 ==================== */
+const PATH = [
+  {zh:['第一步 · 选一个零成本行业','从十大行业里挑一个启动成本为零的：短视频、文创设计、AI 创作、二次元、电竞内容。不要一开始就选需要场地与设备的行业，那是第二笔钱之后的事。','产出物：一张写清楚「我做什么、给谁看」的 A4 说明。'],
+   en:['Step 1 · Pick a zero-cost industry','Choose one that starts at zero: short video, cultural design, AI creation, ACG, esports content. Skip venue-based ones for now; they come after your second paycheck.','Deliverable: one page stating what you make and for whom.'],
+   ja:['ステップ1 · ゼロ円の業種を選ぶ','短尺動画、文創デザイン、AI創作、二次元、eスポコンテンツなど開始コストゼロの業種から選ぶ。場所や機材が要る業種は二回目の収入の後。','成果物：何を誰に届けるかを書いた一枚。'],
+   es:['Paso 1 · Elige una industria sin costo','Elige una que empiece en cero: video corto, diseño cultural, creación IA, ACG, contenido de esports. Deja las que requieren local para después del segundo ingreso.','Entregable: una hoja con qué haces y para quién.'],
+   fr:['Étape 1 · Choisir une branche gratuite','Choisissez une branche à coût nul : vidéo courte, design culturel, création IA, ACG, contenu esport. Gardez celles avec local pour après le deuxième revenu.','Livrable : une page disant quoi et pour qui.'],
+   de:['Schritt 1 · Null-Kosten-Branche wählen','Wählen Sie eine mit Nullkosten: Kurzvideo, Kulturdesign, KI-Kreation, ACG, E-Sport-Content. Die mit Location kommen nach dem zweiten Einkommen.','Ergebnis: eine Seite, was Sie machen und für wen.']},
+  {zh:['第二步 · 免费领第一笔 EACO','用水龙头领取少量 EACO，走完「钱包—领取—查看余额」全流程。目的不是金额，是熟悉工具：只有自己跑通过一次，才教得会别人。','产出物：一次成功的领取记录 + 一份给新手的九语截图教程。'],
+   en:['Step 2 · Claim your first EACO free','Use the faucet and finish the full loop: wallet, claim, balance. The point is not the amount but knowing the tool; you can only teach what you have done.','Deliverable: one successful claim record and a beginner guide.'],
+   ja:['ステップ2 · 最初のEACOを無料で受け取る',' faucet で受領し「ウォレット→受取→残高確認」を通しで経験。目的は金額ではなく道具に慣れること。','成果物：受領記録と初心者向け手順。'],
+   es:['Paso 2 · Reclama tu primer EACO gratis','Usa el faucet y completa el ciclo: billetera, reclamo, saldo. El objetivo no es el monto sino dominar la herramienta.','Entregable: un registro de reclamo y una guía para principiantes.'],
+   fr:['Étape 2 · Réclamer son premier EACO','Utilisez le faucet et faites la boucle complète : portefeuille, réclamation, solde. Le but n est pas le montant mais la maîtrise de l outil.','Livrable : une preuve de réclamation et un guide débutant.'],
+   de:['Schritt 2 · Erstes EACO gratis beziehen','Nutzen Sie den Faucet und gehen Sie den Kreislauf: Wallet, Bezug, Saldo. Es geht nicht um den Betrag, sondern das Werkzeug zu kennen.','Ergebnis: ein Bezugsnachweis und ein Anfängerleitfaden.']},
+  {zh:['第三步 · 做十件小作品','不发广告、不谈价格，只做十件能被人看见的小作品：十条视频、十张图、十篇短文、十份模板。十件之后你才知道自己适合什么。','产出物：十件作品的公开链接清单。'],
+   en:['Step 3 · Make ten small works','No ads, no price talk: ten visible small works — ten clips, ten images, ten short texts, ten templates. After ten you know what fits you.','Deliverable: a public list of ten works.'],
+   ja:['ステップ3 · 小さな作品を十個つくる','広告も価格の話もせず、見られる小作品を十個。動画十本、画像十枚、短文十本、テンプレ十個。','成果物：十作品の公開リスト。'],
+   es:['Paso 3 · Crea diez obras pequeñas','Sin anuncios ni precios: diez obras visibles — diez clips, diez imágenes, diez textos, diez plantillas.','Entregable: lista pública de diez obras.'],
+   fr:['Étape 3 · Créer dix petites œuvres','Sans pub ni prix : dix créations visibles — dix clips, dix images, dix textes, dix modèles.','Livrable : une liste publique de dix créations.'],
+   de:['Schritt 4 Vorarbeit · Zehn kleine Werke','Keine Werbung, keine Preise: zehn sichtbare kleine Werke — zehn Clips, zehn Bilder, zehn Texte, zehn Vorlagen.','Ergebnis: öffentliche Liste von zehn Werken.']},
+  {zh:['第四步 · 找一个真实的人付费','把作品发给一个真实的人，请他为其中一件付一点钱——哪怕只是一杯咖啡的钱。第一笔来自陌生人的付款，比一百个赞更有价值。','产出物：第一笔真实收款记录（金额、时间、对方说明）。'],
+   en:['Step 4 · Get one real person to pay','Send your work to one real person and ask them to pay for one piece, even the price of a coffee. A first payment from a stranger beats a hundred likes.','Deliverable: record of the first real payment.'],
+   ja:['ステップ4 · 本当の人に払ってもらう','作品を一人の実在の人に送り、一つに少しだけ払ってもらう。他人からの初入金は百のいいねより価値がある。','成果物：初の実際の入金記録。'],
+   es:['Paso 4 · Consigue que una persona real pague','Envía tu obra a alguien real y pídele que pague por una pieza, aunque sea un café. El primer pago de un desconocido vale más que cien likes.','Entregable: registro del primer pago real.'],
+   fr:['Étape 4 · Faire payer une vraie personne','Envoyez votre création à une vraie personne et demandez un paiement, même le prix d un café. Le premier paiement d un inconnu vaut cent likes.','Livrable : trace du premier paiement réel.'],
+   de:['Schritt 4 · Eine echte Person zahlen lassen','Senden Sie Ihr Werk an eine echte Person und bitten Sie um Bezahlung, und sei es ein Kaffee. Die erste Zahlung eines Fremden zählt mehr als hundert Likes.','Ergebnis: Nachweis der ersten echten Zahlung.']},
+  {zh:['第五步 · 把流程写成模板','把「接单—交付—收款—交付凭证」写成一份模板，让别人能照抄。模板是你第一份真正的资产：它可以在你睡觉时被人使用。','产出物：一份可公开的 SOP 模板。'],
+   en:['Step 5 · Turn the flow into a template','Write the order-deliver-pay-receipt flow as a template others can copy. A template is your first real asset: it works while you sleep.','Deliverable: one public SOP template.'],
+   ja:['ステップ5 · 流れをテンプレにする','受注→納品→入金→領収の流れを他人が写せる形に。テンプレは寝ている間も働く最初の資産。','成果物：公開できるSOPテンプレ。'],
+   es:['Paso 5 · Convierte el flujo en plantilla','Escribe el flujo pedido-entrega-pago-recibo como plantilla copiable. Una plantilla es tu primer activo real.','Entregable: una plantilla de procedimiento pública.'],
+   fr:['Étape 5 · Transformer le flux en modèle','Écrivez le flux commande-livraison-paiement-reçu comme un modèle copiable. Un modèle est votre premier vrai actif.','Livrable : un modèle de procédure public.'],
+   de:['Schritt 5 · Ablauf als Vorlage','Schreiben Sie den Ablauf Bestellung-Lieferung-Zahlung-Beleg als kopierbare Vorlage. Eine Vorlage ist Ihr erstes echtes Asset.','Ergebnis: eine öffentliche SOP-Vorlage.']},
+  {zh:['第六步 · 找到三个同路人','一个小组至少要三个人：一个做内容、一个做交付、一个做记录。记录员常被忽略，但没有记录就没有复盘，没有复盘就没有迭代。','产出物：三人名单 + 第一次分工会议纪要。'],
+   en:['Step 6 · Find three companions','A group needs at least three: one makes content, one delivers, one records. The recorder is often skipped, but without records there is no review, and without review no iteration.','Deliverable: a three-name list and first meeting notes.'],
+   ja:['ステップ6 · 三人の仲間を見つける','最低三人：制作、納品、記録。記録係は軽視されがちだが、記録なければ振り返りも改善もない。','成果物：三人の名簿と初回議事録。'],
+   es:['Paso 6 · Encuentra tres compañeros','Un grupo necesita tres: contenido, entrega y registro. Sin registro no hay revisión ni mejora.','Entregable: lista de tres nombres y acta de la primera reunión.'],
+   fr:['Étape 6 · Trouver trois compagnons','Un groupe a besoin de trois : contenu, livraison, registre. Sans registre, pas de revue ni d itération.','Livrable : liste de trois noms et compte rendu.'],
+   de:['Schritt 6 · Drei Mitstreiter finden','Ein Team braucht drei: Content, Lieferung, Protokoll. Ohne Protokoll keine Review, ohne Review keine Iteration.','Ergebnis: Dreier-Liste und erstes Protokoll.']},
+  {zh:['第七步 · 每周复盘 15 分钟','只写两件事：本周发生了什么事实、下周只改一个点。不写感受，不写抱怨，不写宏大计划。十五分钟，一周一次，一年五十二次。','产出物：52 份复盘记录，年底一眼看得出你走了多远。'],
+   en:['Step 7 · Review 15 minutes each week','Write only two things: facts of this week, one change for next week. No feelings, no complaints, no grand plans. Fifteen minutes, once a week, fifty-two times a year.','Deliverable: 52 weekly reviews that show how far you came.'],
+   ja:['ステップ7 · 毎週15分の振り返り','書くのは二つだけ：今週の事実と来週の改善一点。感想も不満も大計画も書かない。週1回15分、年52回。','成果物：52枚の振り返り記録。'],
+   es:['Paso 7 · Revisa 15 minutos por semana','Escribe solo dos cosas: hechos de la semana y un cambio para la próxima. Sin sentimientos ni grandes planes.','Entregable: 52 revisiones que muestran el camino recorrido.'],
+   fr:['Étape 7 · Revue de 15 minutes par semaine','N écrivez que deux choses : les faits de la semaine et un changement pour la suivante. Pas de sentiments ni de grands plans.','Livrable : 52 revues qui montrent le chemin parcouru.'],
+   de:['Schritt 7 · 15 Minuten Review pro Woche','Nur zwei Dinge: Fakten der Woche, eine Änderung für die nächste. Keine Gefühle, keine großen Pläne.','Ergebnis: 52 Reviews, die zeigen, wie weit Sie gekommen sind.']}
+];
+
+/* ==================== 财富三课 ==================== */
+const LESSON = [
+  {zh:['第一课 · 和平与稳定是最被低估的资产','战争与剧烈动荡首先摧毁的不是建筑，而是中产阶级的储蓄与信心。能长期做一件事的环境，本身就是最大的复利来源。年轻人能做的，是珍惜稳定、把时间投在能积累的事情上。'],
+   en:['Lesson 1 · Peace and stability are the most underrated assets','War and upheaval destroy savings and confidence before they destroy buildings. An environment where you can work for a decade is itself the biggest source of compounding.'],
+   ja:['第1課 · 平和と安定は最も過小評価された資産','戦争と激動が最初に壊すのは建物ではなく中産階級の貯蓄と信頼。十年続けられる環境こそ最大の複利源。'],
+   es:['Lección 1 · La paz y la estabilidad son los activos más subestimados','La guerra destruye primero el ahorro y la confianza de la clase media, no los edificios. Un entorno donde puedes trabajar diez años es la mayor fuente de interés compuesto.'],
+   fr:['Leçon 1 · La paix et la stabilité sont les actifs les plus sous-estimés','La guerre détruit d abord l épargne et la confiance des classes moyennes, pas les bâtiments. Un environnement où l on peut travailler dix ans est la plus grande source de capitalisation.'],
+   de:['Lektion 1 · Frieden und Stabilität sind die unterschätztesten Werte','Krieg zerstört zuerst Ersparnisse und Vertrauen der Mittelschicht, nicht Gebäude. Ein Umfeld, in dem man zehn Jahre arbeiten kann, ist die größte Quelle des Zinseszinses.']},
+  {zh:['第二课 · 单一押注等于全部梭哈','把全部身家压在一种货币、一种资产、一份工作、一个平台上，命运就交到了别人的印钞机手里。分散不是保守，而是承认自己无法预测未来。真正的分散包括：能力、语言、人脉，以及不同形态的资产。'],
+   en:['Lesson 2 · One single bet is an all-in','Putting everything in one currency, one asset, one job or one platform hands your fate to someone else s printing press. Diversifying is not timid; it admits you cannot predict. Real diversification includes skills, languages, relationships and asset types.'],
+   ja:['第2課 · 一点賭けは全額ベットと同じ','全財産を一つの通貨・資産・仕事・基盤に賭ければ、運命は他人の印刷機に。分散は臆病ではなく予測不能の承認。真の分散は能力・言語・人脈・資産形態を含む。'],
+   es:['Lección 2 · Una sola apuesta es un all-in','Poner todo en una moneda, un activo, un empleo o una plataforma entrega tu destino a la imprenta de otro. Diversificar no es cobardía, es aceptar que no puedes predecir.'],
+   fr:['Leçon 2 · Un seul pari vaut un all-in','Tout miser sur une devise, un actif, un emploi ou une plateforme confie votre destin à la planche à billets d autrui. Diversifier n est pas de la couardise.'],
+   de:['Lektion 2 · Ein einziger Einsatz ist ein All-in','Alles in eine Währung, ein Asset, einen Job oder eine Plattform zu legen, gibt das Schicksal an die Druckerpresse eines anderen ab. Streuung ist keine Feigheit.']},
+  {zh:['第三课 · 抗风险的是能力，不是口号','危机时刻真正保命的，是别人愿意为之付费的能力、能被验证的记录、以及跨语言跨国界的朋友网络。这些东西不会一夜归零，也不会被任何一台印钞机稀释。'],
+   en:['Lesson 3 · What survives is ability, not slogans','What protects you in a crisis is a skill others will pay for, a verifiable track record, and a cross-border network of friends. These do not go to zero overnight and cannot be diluted by any printing press.'],
+   ja:['第3課 · リスクに耐えるのは能力であってスローガンではない','危機に効くのは、他人が金を払う能力、検証可能な記録、国境を越える友人の網。これらは一夜でゼロにならず希釈もされない。'],
+   es:['Lección 3 · Lo que resiste es la capacidad, no los eslóganes','En una crisis protege una habilidad por la que otros pagan, un historial verificable y una red de amigos transfronteriza.'],
+   fr:['Leçon 3 · Ce qui résiste, c est la capacité, pas les slogans','En crise, ce qui protège est une compétence que d autres paient, un historique vérifiable et un réseau d amis transfrontalier.'],
+   de:['Lektion 3 · Was überlebt, ist Fähigkeit, nicht Parolen','In einer Krise schützt eine Fähigkeit, für die andere zahlen, ein prüfbarer Leistungsnachweis und ein grenzüberschreitendes Netzwerk.']}
+];
+
+/* ==================== EACO 十件具体的事 ==================== */
+const USE = [
+  {i:'01', zh:['跨国小额打赏','海外粉丝给你喜欢的主播、译者、画手打赏，不再被最低手续费与换汇成本挡住。'],
+   en:['Cross-border micro-tipping','Fans abroad tip streamers, translators and artists without minimum fees or FX friction.'],
+   ja:['越境の少額投げ銭','海外ファンが配信者や訳者に、最低手数料や両替コストなしで投げ銭。'],
+   es:['Propinas pequeñas transfronterizas','Fans en el extranjero dan propinas sin mínimos ni costos de cambio.'],
+   fr:['Micro-pourboires transfrontaliers','Les fans étrangers donnent des pourboires sans minimum ni frais de change.'],
+   de:['Grenzüberschreitende Kleinst-Tipps','Fans im Ausland geben Tipps ohne Mindestgebühren und Wechselkosten.']},
+  {i:'02', zh:['翻译与本地化赏金','一条术语、一篇短文、一个字幕文件，交付即结算，贡献留有记录。'],
+   en:['Translation and localization bounties','A term, a short text, a subtitle file: settle on delivery and keep a contribution record.'],
+   ja:['翻訳とローカライズの報奨金','用語一つ、短文一本、字幕一つ。納品即決済で貢献が記録に残る。'],
+   es:['Recompensas de traducción','Un término, un texto, un subtítulo: se liquida al entregar y queda registrado.'],
+   fr:['Primes de traduction','Un terme, un texte, un sous-titre : paiement à la livraison et trace de contribution.'],
+   de:['Übersetzungs-Bountys','Ein Terminus, ein Text, ein Untertitel: Abrechnung bei Lieferung, Beitrag bleibt dokumentiert.']},
+  {i:'03', zh:['课程与内容解锁','一门课、一份模板、一套素材，用 EACO 按次或按订阅解锁，全球同价。'],
+   en:['Course and content unlocks','A course, a template, an asset pack: unlock per item or by subscription, same price worldwide.'],
+   ja:['講座とコンテンツの解除','講座、テンプレ、素材集をEACOで都度または定期で解除、世界同一価格。'],
+   es:['Desbloqueo de cursos y contenido','Un curso, una plantilla, un pack: por uso o suscripción, mismo precio global.'],
+   fr:['Déverrouillage de cours et contenus','Un cours, un modèle, un pack : à l unité ou par abonnement, prix mondial identique.'],
+   de:['Kurs- und Content-Freischaltung','Ein Kurs, eine Vorlage, ein Asset-Paket: einzeln oder im Abo, weltweit gleicher Preis.']},
+  {i:'04', zh:['活动门票与押金','线下Meetup、展览、比赛的门票与押金，扫码即付，跨国 attendees 无卡可用。'],
+   en:['Event tickets and deposits','Meetups, exhibitions, contests: scan and pay; overseas attendees need no card.'],
+   ja:['イベントのチケットと保証金','オフライン集会、展示、大会のチケットと保証金をスキャンで。海外参加者はカード不要。'],
+   es:['Entradas y depósitos de eventos','Meetups, exposiciones y concursos: escanea y paga, sin tarjeta para asistentes extranjeros.'],
+   fr:['Billets et caution d événements','Meetups, expositions, concours : scannez et payez, sans carte pour les participants étrangers.'],
+   de:['Tickets und Kaution','Meetups, Ausstellungen, Wettbewerbe: scannen und zahlen, Gäste im Ausland brauchen keine Karte.']},
+  {i:'05', zh:['商户收款与折扣','咖啡馆、理发店、民宿接受 EACO，本地消费也能用；折扣与积分一并记账。'],
+   en:['Merchant payments and discounts','Cafés, barbers and B&Bs accept EACO for local spending; discounts and points booked together.'],
+   ja:['店舗決済と割引','カフェ、理容店、民宿がEACOを受け入れ、地域消費にも使える。割引とポイントも一緒に記帳。'],
+   es:['Pagos y descuentos en comercios','Cafés, barberías y alojamientos aceptan EACO; descuentos y puntos en el mismo registro.'],
+   fr:['Paiements et remises chez les commerçants','Cafés, barbiers et hébergements acceptent EACO ; remises et points dans le même registre.'],
+   de:['Händlerzahlungen und Rabatte','Cafés, Friseure, Unterkünfte akzeptieren EACO; Rabatte und Punkte im selben Buch.']},
+  {i:'06', zh:['IP 授权与分成','插画、字体、音乐、设计的授权费与销售分成，按链上记录自动分配。'],
+   en:['IP licensing and revenue share','Licensing fees and sales splits for illustration, fonts, music and design, allocated by on-chain records.'],
+   ja:['IP許諾と収益分配','イラスト、フォント、音楽、デザインの許諾料と売上分配をオンチェーン記録で自動配分。'],
+   es:['Licencias de PI y reparto','Derechos de ilustración, tipografías, música y diseño, repartidos según registros on-chain.'],
+   fr:['Licences de PI et répartition','Droits d illustration, polices, musique et design, répartis selon les registres on-chain.'],
+   de:['IP-Lizenzen und Umsatzbeteiligung','Lizenzgebühren für Illustration, Fonts, Musik und Design, verteilt nach On-Chain-Daten.']},
+  {i:'07', zh:['DAO 提案与预算','提案、投票、预算支出全部上链可查；九国各一席，多签决定大额支出。'],
+   en:['DAO proposals and budgets','Proposals, votes and spending are all on-chain; one seat per nation, multisig for large outlays.'],
+   ja:['DAO提案と予算','提案・投票・支出がすべてオンチェーンで検証可能。九か国が各一議席、大额はマルチシグ。'],
+   es:['Propuestas y presupuestos DAO','Propuestas, votos y gastos verificables on-chain; un asiento por país y multisig para gastos grandes.'],
+   fr:['Propositions et budgets DAO','Propositions, votes et dépenses vérifiables on-chain ; un siège par pays, multisig pour les gros montants.'],
+   de:['DAO-Anträge und Budgets','Anträge, Abstimmungen und Ausgaben on-chain prüfbar; ein Sitz pro Land, Multisig für große Summen.']},
+  {i:'08', zh:['公益与捐赠记录','救灾、助学、动物救助的捐赠与流向公开可查，善意也需要审计。'],
+   en:['Charity and donation records','Donations for relief, education and animal rescue are traceable; good intentions need auditing too.'],
+   ja:['公益と寄付の記録','災害支援、奨学、動物保護の寄付と使途を公開検証可能に。善意にも監査が必要。'],
+   es:['Registros de caridad y donaciones','Donaciones para emergencias, educación y rescate animal, con trazabilidad pública.'],
+   fr:['Registres de dons et de charité','Dons pour les secours, l éducation et la protection animale, traçables publiquement.'],
+   de:['Spenden- und Hilfsnachweise','Spenden für Hilfe, Bildung und Tierschutz öffentlich nachvollziehbar.']},
+  {i:'09', zh:['语言资本与翻译市场','翻译者把母语能力变成可结算的服务；术语库越用越值钱，贡献者共享收益。'],
+   en:['Language capital and translation market','Translators turn native ability into a billable service; the termbase grows more valuable with use.'],
+   ja:['言語資本と翻訳市場','翻訳者が母語能力を決済可能なサービスに。用語集は使うほど価値が増し貢献者が益を分け合う。'],
+   es:['Capital lingüístico y mercado de traducción','Los traductores convierten su lengua materna en un servicio facturable.'],
+   fr:['Capital linguistique et marché de la traduction','Les traducteurs transforment leur langue maternelle en service facturable.'],
+   de:['Sprachkapital und Übersetzungsmarkt','Übersetzer machen ihre Muttersprache zu einer abrechnungsfähigen Leistung.']},
+  {i:'10', zh:['地球村身份与贡献档案','DID + 贡献记录，跨國可携带；不公开隐私，只公开「做过什么、被谁验证」。'],
+   en:['Global-village identity and contribution file','DID plus contribution records, portable across countries: no private data, only what you did and who verified it.'],
+   ja:['地球村のIDと貢献記録','DIDと貢献記録で国を越えて持ち運び可能。個人情報は出さず「何を誰に検証されたか」だけを公開。'],
+   es:['Identidad y archivo de contribución','DID más registros de contribución, portátil entre países: sin datos privados, solo qué hiciste y quién lo validó.'],
+   fr:['Identité et dossier de contribution','DID plus registres de contribution, portables : aucune donnée privée, seulement ce qui a été fait et validé.'],
+   de:['Identität und Beitragsdossier','DID plus Beitragsnachweise, länderübergreifend portabel: keine Privatdaten, nur was getan und verifiziert wurde.']}
+];
+
+/* ==================== 渲染 ==================== */
+let LANG = 'zh';
+const t = k => (T[LANG] && T[LANG][k]) || (T.zh[k]) || k;
+const pick = o => (o && (o[LANG] || o.zh)) || '';
+const arr = o => (o && (o[LANG] || o.zh)) || [];
+
+function renderIndustries(){
+  const costTag = c => c==='free' ? '<span class="tag free">'+t('cost.free')+'</span>'
+                     : c==='low' ? '<span class="tag">'+t('cost.low')+'</span>'
+                     : '<span class="tag mid">'+t('cost.mid')+'</span>';
+  document.getElementById('indGrid').innerHTML = IND.map((x,i)=>`
+    <article class="icard">
+      <div class="irank">${String(i+1).padStart(2,'0')}</div>
+      <div class="iico">${x.icon}</div>
+      <h3>${pick(x.n)}</h3>
+      <p class="itag">${pick(x.t)}</p>
+      <div class="imet"><span>${t('t.h2')} <b>${costTag(x.cost)}</b></span><span>${t('cycle')} <b>${x.cycle}</b></span></div>
+      <div class="ilabel">${t('lb.why')}</div>
+      <ul class="ilist">${arr(x.w).map(s=>'<li>'+s+'</li>').join('')}</ul>
+      <div class="ilabel">${t('lb.forms')}</div>
+      <div class="pills">${arr(x.f).map(s=>'<span class="pill">'+s+'</span>').join('')}</div>
+      <div class="ilabel">${t('lb.money')}</div>
+      <ul class="ilist">${arr(x.m).map(s=>'<li>'+s+'</li>').join('')}</ul>
+      <div class="eaco-line"><b>${t('lb.eaco')}：</b>${pick(x.e)}</div>
+    </article>`).join('');
+}
+
+function renderCompare(){
+  document.getElementById('cmpBody').innerHTML = IND.map((x,i)=>`
+    <tr>
+      <td><b>${pick(x.n)}</b></td>
+      <td>${x.cost==='free'?'<span class="tag free">'+t('cost.free')+'</span>':x.cost==='low'?'<span class="tag">'+t('cost.low')+'</span>':'<span class="tag mid">'+t('cost.mid')+'</span>'}</td>
+      <td class="num">${arr(CMP.cycle)[i]}</td>
+      <td>${arr(CMP.skill)[i]}</td>
+      <td class="small">${pick(CMP.fit)}</td>
+      <td class="small">${arr(CMP.eaco)[i]}</td>
+    </tr>`).join('');
+}
+
+function renderDeep(){
+  document.getElementById('deepGrid').innerHTML = DEEP.map(d=>`
+    <div class="dcard">
+      <h4><span class="dico">${d.ico}</span>${d.zh}</h4>
+      <div class="small muted" style="margin:-4px 0 8px;font-size:.72rem">${d.en}</div>
+      <ul class="dlist">${d.items.map(([z,e])=>'<li><span>'+z+'</span><span class="en">'+e+'</span></li>').join('')}</ul>
+    </div>`).join('');
+}
+
+function renderPath(){
+  document.getElementById('pathGrid').innerHTML = PATH.map((p,i)=>`
+    <div class="step">
+      <div class="n">${String(i+1).padStart(2,'0')}</div>
+      <div><h4>${p[LANG]? p[LANG][0] : p.zh[0]}</h4><p>${(p[LANG]||p.zh)[1]}<br><b style="color:var(--primary-2)">${(p[LANG]||p.zh)[2]}</b></p></div>
+    </div>`).join('');
+}
+
+function renderLesson(){
+  document.getElementById('lessonGrid').innerHTML = LESSON.map(l=>{
+    const v = l[LANG] || l.zh;
+    return `<div class="lcard"><h4>${v[0]}</h4><p>${v[1]}</p></div>`;
+  }).join('');
+}
+
+function renderUse(){
+  document.getElementById('useGrid').innerHTML = USE.map(u=>{
+    const v = u[LANG] || u.zh;
+    return `<div class="lcard"><h4><span class="mono" style="color:var(--primary-2)">${u.i}</span> · ${v[0]}</h4><p>${v[1]}</p></div>`;
+  }).join('');
+}
+
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  const btn = document.querySelector('.ca button'); if (btn) btn.textContent = t('copy');
+  document.documentElement.lang = LANG==='zh' ? 'zh-Hans' : LANG;
+}
+
+function renderAll(){ renderIndustries(); renderCompare(); renderDeep(); renderPath(); renderLesson(); renderUse(); applyI18n(); }
+
+/* ==================== 交互 ==================== */
+function bindTheme(){
+  const body = document.body;
+  const saved = localStorage.getItem('eacoY.theme');
+  if (saved) body.dataset.theme = saved;
+  document.querySelectorAll('#themeSeg button').forEach(b=>{
+    b.classList.toggle('on', b.dataset.t === body.dataset.theme);
+    b.addEventListener('click', ()=>{
+      body.dataset.theme = b.dataset.t;
+      localStorage.setItem('eacoY.theme', b.dataset.t);
+      document.querySelectorAll('#themeSeg button').forEach(x=>x.classList.toggle('on', x===b));
+    });
+  });
+}
+function bindLang(){
+  const sel = document.getElementById('langSel');
+  sel.innerHTML = LANGS.map(([c,n])=>'<option value="'+c+'">'+n+'</option>').join('');
+  const saved = localStorage.getItem('eacoY.lang');
+  LANG = saved || 'zh';
+  sel.value = LANG;
+  sel.addEventListener('change', ()=>{
+    LANG = sel.value;
+    localStorage.setItem('eacoY.lang', LANG);
+    renderAll();
+  });
+}
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('on');
+  clearTimeout(el._h); el._h = setTimeout(()=>el.classList.remove('on'), 1600);
+}
+document.querySelectorAll('[data-copy]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    const v = b.dataset.copy;
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(v).catch(()=>{}); }
+    else { const ta=document.createElement('textarea'); ta.value=v; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} ta.remove(); }
+    toast(t('copied'));
+  });
+});
+
+bindTheme(); bindLang(); renderAll();
+</script>
+</body>
+</html>
