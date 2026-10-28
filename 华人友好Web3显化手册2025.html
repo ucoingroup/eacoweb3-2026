@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全球友好城市 × 两亿美元显化 | Global Cities & Manifestation</title>
+<style>
+  :root{
+    --font-main: "PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+    --font-serif: "Songti SC","SimSun","Noto Serif SC",Georgia,serif;
+    --radius:14px;
+    --shadow:0 6px 24px rgba(0,0,0,.08);
+    --maxw:1080px;
+  }
+  /* ========== 三套主题 ========== */
+  body.theme-apple{ /* 苹果绿 */
+    --bg:#f2f9f1; --panel:#ffffff; --panel2:#e8f5e4;
+    --text:#1d3a1a; --muted:#5c7a58; --accent:#3d9a3d; --accent2:#7cc47c;
+    --star:#e8a33d; --border:#cfe8cc;
+    --grad:linear-gradient(135deg,#3d9a3d,#7cc47c);
+  }
+  body.theme-tech{ /* 科技蓝 */
+    --bg:#0d1526; --panel:#141f38; --panel2:#1a2a4a;
+    --text:#e6efff; --muted:#8aa4cf; --accent:#3d8bff; --accent2:#00e5ff;
+    --star:#ffc94d; --border:#24365e;
+    --grad:linear-gradient(135deg,#3d8bff,#00e5ff);
+    --shadow:0 6px 24px rgba(0,0,0,.45);
+  }
+  body.theme-beige{ /* 米黄古典 */
+    --bg:#f5efe0; --panel:#fdf9ef; --panel2:#f0e6cf;
+    --text:#4a3b23; --muted:#8a7a5c; --accent:#a67c2e; --accent2:#c9a45c;
+    --star:#b05a2a; --border:#e2d5b8;
+    --font-main:var(--font-serif);
+    --grad:linear-gradient(135deg,#a67c2e,#c9a45c);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:var(--font-main); background:var(--bg); color:var(--text);
+    line-height:1.7; transition:background .4s,color .4s; min-height:100vh;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:24px 20px 80px;}
+
+  /* 顶部控制栏 */
+  .topbar{
+    position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+    background:var(--bg);
+    background:color-mix(in srgb,var(--bg) 85%,transparent);
+    border-bottom:1px solid var(--border);margin:-24px -20px 24px;padding:12px 20px;
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  }
+  .brand{font-weight:700;font-size:15px;}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .seg{display:flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;}
+  .seg button{
+    border:none;background:transparent;color:var(--muted);cursor:pointer;
+    padding:6px 14px;font-size:13px;font-family:inherit;transition:.25s;
+  }
+  .seg button.active{background:var(--grad);color:#fff;}
+  .swatch{display:flex;gap:8px;}
+  .dot{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:.2s;}
+  .dot.active{border-color:var(--text);transform:scale(1.15);}
+  .dot.apple{background:linear-gradient(135deg,#3d9a3d,#7cc47c);}
+  .dot.tech{background:linear-gradient(135deg,#3d8bff,#00e5ff);}
+  .dot.beige{background:linear-gradient(135deg,#a67c2e,#f0e6cf);}
+
+  /* Hero */
+  .hero{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:44px 36px;text-align:center;margin-bottom:36px;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;background:var(--grad);opacity:.07;pointer-events:none;
+  }
+  .hero h1{font-size:clamp(24px,4vw,38px);line-height:1.3;margin-bottom:12px;position:relative;}
+  .hero .sub{color:var(--muted);font-size:15px;max-width:640px;margin:0 auto 20px;position:relative;}
+  .money{
+    display:inline-flex;flex-direction:column;gap:4px;margin:10px auto;position:relative;
+  }
+  .money .big{
+    font-size:clamp(30px,5vw,46px);font-weight:800;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .money .note{color:var(--muted);font-size:13px;}
+  .pillrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px;position:relative;}
+  .pill{
+    border:1px solid var(--border);background:var(--panel2);border-radius:999px;
+    padding:5px 16px;font-size:13px;color:var(--muted);
+  }
+
+  /* 区块 */
+  h2.sec{
+    font-size:22px;margin:44px 0 6px;display:flex;align-items:center;gap:10px;
+  }
+  h2.sec::after{content:"";flex:1;height:1px;background:var(--border);}
+  .secdesc{color:var(--muted);font-size:14px;margin-bottom:18px;}
+
+  /* 表格 */
+  .tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow);}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px;}
+  thead th{
+    background:var(--panel2);text-align:left;padding:12px 14px;color:var(--muted);
+    font-weight:600;white-space:nowrap;cursor:pointer;user-select:none;
+  }
+  thead th:hover{color:var(--accent);}
+  tbody td{padding:12px 14px;border-top:1px solid var(--border);}
+  tbody tr:hover{background:var(--panel2);}
+  .rank{
+    display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;
+    font-weight:700;font-size:13px;color:#fff;background:var(--grad);
+  }
+  .stars{color:var(--star);letter-spacing:2px;white-space:nowrap;}
+  .stars .off{opacity:.22;}
+
+  /* 过滤 chips */
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .chip{
+    border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:999px;
+    padding:5px 14px;font-size:13px;cursor:pointer;font-family:inherit;transition:.25s;
+  }
+  .chip.active{background:var(--grad);color:#fff;border-color:transparent;}
+
+  /* 卡片（策略） */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow);
+  }
+  .card h3{font-size:16px;margin-bottom:8px;display:flex;gap:8px;align-items:center;}
+  .card p{font-size:14px;color:var(--muted);}
+  .card .tag{font-size:12px;color:var(--accent);}
+
+  /* 暗示语 */
+  .affgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+  .aff{
+    background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);
+    border-radius:10px;padding:16px 18px;font-size:14.5px;display:flex;gap:12px;
+    box-shadow:var(--shadow);transition:transform .2s;cursor:pointer;
+  }
+  .aff:hover{transform:translateY(-3px);}
+  .aff .num{
+    font-weight:800;font-size:18px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;flex-shrink:0;
+  }
+  .aff.copied{border-left-color:var(--accent2);}
+
+  /* ===== EACO 模块 ===== */
+  .eacocard{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px;display:grid;gap:16px;
+  }
+  .formula{
+    font-size:clamp(14px,2.1vw,19px);font-weight:700;text-align:center;line-height:1.6;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .badge{
+    border:1px solid var(--border);background:var(--panel2);border-radius:999px;
+    padding:6px 14px;font-size:12.5px;color:var(--muted);
+  }
+  .badge strong{color:var(--accent);}
+  .ca{
+    display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+    background:var(--panel2);border:1px dashed var(--border);border-radius:10px;padding:12px 16px;
+  }
+  .ca .lbl{font-size:12px;color:var(--muted);}
+  .ca code{
+    font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:12.5px;
+    word-break:break-all;color:var(--text);flex:1;min-width:200px;
+  }
+  .ca button{
+    border:1px solid var(--accent);background:transparent;color:var(--accent);
+    border-radius:999px;padding:5px 14px;font-size:12.5px;cursor:pointer;font-family:inherit;
+  }
+  .ca button:hover{background:var(--accent);color:#fff;}
+
+  .allocbar{
+    display:flex;height:28px;border-radius:8px;overflow:hidden;margin:16px 0 8px;border:1px solid var(--border);
+  }
+  .allocbar span{
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;white-space:nowrap;overflow:hidden;
+  }
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:18px;}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;}
+  .sumrow td{background:var(--panel2);font-weight:700;}
+  .tier{font-size:12px;padding:3px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--border);color:var(--muted);white-space:nowrap;}
+
+  .duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+  .panel-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);border-top:4px solid var(--accent);
+  }
+  .panel-card h3{font-size:18px;margin-bottom:4px;}
+  .panel-card .kw{font-size:12.5px;color:var(--accent);margin-bottom:12px;letter-spacing:.5px;}
+  .panel-card ul{list-style:none;display:grid;gap:7px;}
+  .panel-card li{font-size:14px;color:var(--muted);}
+  .panel-card .core{
+    margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);
+    font-size:14px;font-style:italic;color:var(--text);
+  }
+  .path{
+    text-align:center;font-size:13.5px;color:var(--muted);margin-top:16px;
+    background:var(--panel2);border:1px dashed var(--border);border-radius:999px;padding:10px 16px;
+  }
+  .linkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+  .linkgroup{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
+  .linkgroup h4{font-size:14px;margin-bottom:10px;color:var(--accent);letter-spacing:.5px;}
+  .linkgroup a{
+    display:block;font-size:13px;color:var(--text);text-decoration:none;
+    padding:6px 0;border-bottom:1px dashed var(--border);word-break:break-all;transition:.2s;
+  }
+  .linkgroup a:hover{color:var(--accent);padding-left:4px;}
+  .linkgroup a span{display:block;font-size:11px;color:var(--muted);}
+
+  /* 朗读控制 */
+  .playbar{
+    display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:16px 0;
+    background:var(--panel);border:1px dashed var(--border);border-radius:var(--radius);padding:14px 18px;
+  }
+  .btn{
+    border:none;background:var(--grad);color:#fff;border-radius:999px;padding:9px 22px;
+    font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;
+  }
+  .btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent);}
+  .playbar .hint{color:var(--muted);font-size:13px;}
+
+  /* 模式切换（正文/冥想） */
+  .mode-note{color:var(--muted);font-size:13px;margin-bottom:10px;}
+
+  footer{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--border);
+    color:var(--muted);font-size:13px;text-align:center;
+  }
+  .toast{
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);
+    background:var(--text);color:var(--bg);padding:10px 24px;border-radius:999px;font-size:14px;
+    opacity:0;transition:.35s;z-index:99;pointer-events:none;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  @media (max-width:600px){ .hero{padding:30px 20px;} }
+</style>
+</head>
+<body class="theme-apple">
+<div class="wrap">
+
+  <!-- 顶栏 -->
+  <div class="topbar">
+    <div class="brand" id="brandTitle">华人友好 × Web3 × 显化手册</div>
+    <div class="controls">
+      <div class="seg" id="langSeg">
+        <button data-lang="zh" class="active">中文</button>
+        <button data-lang="en">English</button>
+      </div>
+      <div class="swatch" id="themeSwatch">
+        <div class="dot apple active" data-theme="theme-apple" title="苹果绿 Apple Green"></div>
+        <div class="dot tech" data-theme="theme-tech" title="科技蓝 Tech Blue"></div>
+        <div class="dot beige" data-theme="theme-beige" title="米黄古典 Classic Beige"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1 id="heroTitle"></h1>
+    <p class="sub" id="heroSub"></p>
+    <div class="money">
+      <div class="big">$200,000,000</div>
+      <div class="note" id="moneyNote"></div>
+    </div>
+    <div class="pillrow">
+      <span class="pill" id="pill1"></span>
+      <span class="pill" id="pill2"></span>
+      <span class="pill" id="pill3"></span>
+    </div>
+  </section>
+
+  <!-- 第一部分：城市 -->
+  <h2 class="sec" id="sec1"></h2>
+  <p class="secdesc" id="sec1desc"></p>
+  <div class="chips" id="chips"></div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th id="thRank">#</th>
+          <th id="thName"></th>
+          <th id="thS1"></th>
+          <th id="thS2"></th>
+          <th id="thS3"></th>
+          <th id="thNote"></th>
+        </tr>
+      </thead>
+      <tbody id="cityBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 第二部分：策略 -->
+  <h2 class="sec" id="sec2"></h2>
+  <p class="secdesc" id="sec2desc"></p>
+  <div class="cards" id="strategyCards"></div>
+
+  <!-- 第三部分：暗示语 -->
+  <h2 class="sec" id="sec3"></h2>
+  <p class="secdesc" id="sec3desc"></p>
+
+  <div class="playbar">
+    <button class="btn" id="btnPlay">▶ <span id="btnPlayLabel"></span></button>
+    <button class="btn ghost" id="btnStop">■ <span id="btnStopLabel"></span></button>
+    <span class="hint" id="playHint"></span>
+  </div>
+
+  <div class="affgrid" id="affGrid"></div>
+
+  <!-- 第四部分：EACO 概览 -->
+  <h2 class="sec" id="secEaco"></h2>
+  <p class="secdesc" id="secEacoDesc"></p>
+  <div class="eacocard">
+    <div class="formula" id="eacoFormula"></div>
+    <div class="badges" id="eacoBadges"></div>
+    <div class="ca">
+      <span class="lbl" id="caLabel"></span>
+      <code id="caValue">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+      <button id="btnCopyCA"></button>
+    </div>
+  </div>
+
+  <!-- 第五部分：20 城配额 -->
+  <h2 class="sec" id="secAlloc"></h2>
+  <p class="secdesc" id="secAllocDesc"></p>
+  <div class="allocbar" id="allocBar"></div>
+  <div class="legend" id="allocLegend"></div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th id="thARank">#</th>
+          <th id="thACity"></th>
+          <th id="thATier"></th>
+          <th id="thAAmount"></th>
+          <th id="thAShare"></th>
+        </tr>
+      </thead>
+      <tbody id="allocBody"></tbody>
+      <tfoot id="allocFoot"></tfoot>
+    </table>
+  </div>
+  <p class="secdesc" id="allocNote" style="margin-top:12px;font-size:12.5px"></p>
+
+  <!-- 第六部分：虚拟地球 / 模拟地球 -->
+  <h2 class="sec" id="secEarth"></h2>
+  <p class="secdesc" id="secEarthDesc"></p>
+  <div class="duo" id="earthDuo"></div>
+  <div class="path" id="earthPath"></div>
+
+  <!-- 第七部分：EACO 资料与链接 -->
+  <h2 class="sec" id="secLinks"></h2>
+  <p class="secdesc" id="secLinksDesc"></p>
+  <div class="linkgrid" id="linkGrid"></div>
+
+  <footer id="footer"></footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================== 双语数据 ================== */
+const DATA = {
+  zh: {
+    brand:"华人友好 × Web3 × 显化手册",
+    heroTitle:"全球 20 个华语华人友好城市\n× 两亿美元显化之旅",
+    heroSub:"以「华人友好 → Web3 友好 → 低收入帮扶」为权重排序的全球落地指南，配合 20 句高维潜意识暗示语，从亚洲、地球村到星际文明，完成财富显化闭环。",
+    moneyNote:"目标总额两亿美元 · 其中一亿美元已在场（已显化）",
+    pill1:"🀄 华人友好 · 权重最高",
+    pill2:"⛓️ Web3 / 区块链友好",
+    pill3:"🌱 低收入 · 负债帮扶友好",
+    sec1:"第一部分 · 全球 20 个友好国家与城市",
+    sec1desc:"点击表头可排序；点击下方筛选芯片可按维度过滤（★★★★☆ = 4 星）。评分为主观综合评估，落地前请核实最新政策。",
+    thRank:"排名", thName:"国家 / 城市", thS1:"华人友好", thS2:"Web3 友好", thS3:"低收入帮扶", thNote:"点评",
+    chipsLabel:"维度筛选：",
+    chipAll:"全部", chipS1:"华人友好 ≥4★", chipS2:"Web3 ≥4★", chipS3:"帮扶 ≥4★",
+    strategy:[
+      {t:"1 · 低成本亚洲圈优先",d:"清迈 / 槟城 / 巴厘岛 / 胡志明市，月生活成本可控制在 1500–3000 元人民币，先解决「活着」，再谈翻身。"},
+      {t:"2 · 技能在线化",d:"Web3 远程工作（社区运营、内容、翻译、开发）不问户籍，收入以外币计价，是负债者的第一根杠杆。"},
+      {t:"3 · 签证路线",d:"泰国 DTV 数字游民签证、马来西亚 MM2H、印尼 B211a、迪拜自由职业签证，都是低门槛落脚点。"},
+      {t:"4 · 债务协商",d:"跨境不等于免责。优先与债权人协商分期或减免，保留国内信用修复通道，心安才能聚财。"},
+      {t:"5 · 身份进阶",d:"站稳后向新加坡 / 迪拜 / 中国香港的合规加密岗位或创业签证迁移，让一亿美元有合法生长的土壤。"}
+    ],
+    sec2:"第二部分 · 负债重生 · 五步落地策略",
+    sec2desc:"月入低于 800 元不是终点，而是杠杆的支点。先在低成本城市稳住基本盘，再用在线技能接入全球 Web3 经济。",
+    sec3:"第三部分 · 两亿美元显化 · 20 句高维暗示语",
+    sec3desc:"设定：两亿美元总额，一亿美元已在场，另一亿美元正在路上。晨起与睡前各朗读一遍，点击任意一句可复制；点击「播放」可语音朗读全部（需浏览器支持）。",
+    btnPlay:"播放全部", btnStop:"停止",
+    playHint:"语音朗读使用浏览器内置 TTS，点击句子可复制原文",
+    copied:"已复制到剪贴板 ✓",
+    filterEmpty:"该维度下暂无符合条件的结果",
+    secEaco:"第四部分 · EACO：地球最好的币",
+    secEacoDesc:"EACO（Earth's Best Coin）把 AI、RWA 与 Web3 串成一条文明资产主线：总量 13.5 亿枚，合约地址公开可查，eaco-dao-pool 流动性 100% 永久锁定。",
+    eacoFormula:"EACO = 正能量 Energy × 积极态度 Attitude × 全球协作 Cooperation × 持续优化 Optimization",
+    eacoBadges:["总量 <strong>1,350,000,000</strong> EACO","<strong>AI + RWA + Web3</strong>","LP <strong>100% 永久锁定</strong>","Farm APR <strong>23.56%</strong>","Solana · Meteora DAMM v2"],
+    caLabel:"合约地址 CA",
+    copyCA:"复制", copiedCA:"已复制 ✓",
+    secAlloc:"第五部分 · 20 城 EACO 配额方案",
+    secAllocDesc:"每个国家或城市分配 1,000 万 – 5,000 万枚 EACO，按城市综合友好度分四层递减；已分配 7 亿枚（51.85%），余下 6.5 亿枚作为流动性、DAO 文明基金与未来城市储备。",
+    thARank:"#", thACity:"国家 / 城市", thATier:"层级", thAAmount:"EACO 配额", thAShare:"占总量",
+    tiers:["S · 文明枢纽","A · 区域枢纽","B · 成长节点","C · 新兴节点"],
+    legend:["已分配 700,000,000（51.85%）","流动性预留 200,000,000（14.81%）","DAO 文明基金 250,000,000（18.52%）","未来城市拓展 200,000,000（14.81%）"],
+    totalRow:"已分配合计",
+    remainRow:"未分配储备",
+    allocNote:"说明：配额为「文明协作框架」下的分配建议，用于生态共建与社区激励的讨论，不构成投资建议、证券发行或任何募资承诺；实际分配以 DAO 治理投票与合规审查为准。",
+    secEarth:"第六部分 · 虚拟地球 · 模拟地球",
+    secEarthDesc:"两个栏目构成一条完整路线：虚拟地球是「现在的数字地球」，模拟地球是「未来的实验地球」。先在数字世界跑通协作，再回到现实世界做更好的决策。",
+    earthPath:"现实地球 → 虚拟地球 → 模拟地球 → 月球 → 火星 → 星际文明｜EACO 是贯穿全程的协作理念",
+    earthPanels:[
+      {t:"虚拟地球 · Virtual Earth",kw:"数字孪生 + 地球村 + Web3",items:["🌐 数字孪生地球","🏙️ 元宇宙城市 / 地球村","🪪 链上身份 DID","💰 链上资产、RWA、NFT","🤝 DAO 全球协作","📚 AI 教育与文明知识库","🌱 可持续发展与绿色经济"],core:"把现实地球映射成一个可以参与、协作、创造价值的数字地球。"},
+      {t:"模拟地球 · Simulation Earth",kw:"AI 文明模拟 + 资源优化 + 星际沙盘",items:["🧠 文明发展路径模拟","🌎 气候与生态模拟","⚡ 能源与资源分配模型","💰 全球经济与财富流动模拟","👥 人口与城市发展模拟","🤖 AI / 科技发展模拟","🌙 月球基地模拟","🔴 火星殖民模拟","🛰️ 星际航行与星际文明沙盘"],core:"先在数字世界模拟未来，再帮助现实世界做更好的决策。"}
+    ],
+    secLinks:"第七部分 · EACO 资料与链接",
+    secLinksDesc:"官网、交易、流动性池、社区与文明项目的全部入口，集中放在页面最下方，方便一站式查阅。",
+    linkGroups:[
+      {h:"官方主站 · 白皮书",links:[
+        ["EACO 主站","Earth's Best Coin","https://ucoingroup.github.io/earths-best-coin/"],
+        ["EACO Web3 门户","ucoingroup.github.io/eaco-web3","https://ucoingroup.github.io/eaco-web3/"],
+        ["East Coin 2026","eastcoin.base44.app","https://eastcoin.base44.app/"],
+        ["50 个汇率场景","eaco50rate","https://ucoingroup.github.io/eaco50rate/"],
+        ["Web3 系列 2026","eaco_web3_series2025","https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/"],
+        ["Web3 系列","eaco_web3_series","https://eaco.freedev.app/eaco_web3_series/"]
+      ]},
+      {h:"交易 · 流动性池",links:[
+        ["eaco-dao-pool 2026","Meteora DAMM v2","https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc"],
+        ["eaco-DOGE Pool","Orb Markets","https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34"],
+        ["EACO SWAP","ucoingroup.github.io/eacoSWAP","https://ucoingroup.github.io/eacoSWAP/"],
+        ["EACO Swap 源码","github.com/ucoingroup/eacoswap2025","https://github.com/ucoingroup/eacoswap2025"]
+      ]},
+      {h:"文明 · 认知 · 内容",links:[
+        ["通往财富的 100 种方法","100WaysToWealth","https://ucoingroup.github.io/100WaysToWealth/"],
+        ["地球的 100 个朋友","earth-100-friends","https://ucoingroup.github.io/earth-100-friends/"],
+        ["好书共读","good-books","https://ucoingroup.github.io/good-books/"],
+        ["墨家科技","Mohist-Tech","https://ucoingroup.github.io/Mohist-Tech/"],
+        ["文明的足迹","Footsteps-of-Civilization","https://ucoingroup.github.io/Footsteps-of-Civilization/"],
+        ["语言资本","linguistic-capital","https://ucoingroup.github.io/linguistic-capital/"],
+        ["EUR-EACO","eur-eaco","https://ucoingroup.github.io/eur-eaco/"],
+        ["AU 贸易","au-trade","https://ucoingroup.github.io/au-trade/"],
+        ["地球村青年十大行业","earth-youth-top10-industries","https://ucoingroup.github.io/eacoweb3-2026/earth-youth-top10-industries2025.html"]
+      ]},
+      {h:"应用 · 社区",links:[
+        ["EACO Build World","eaco-build-world.base44.app","https://eaco-build-world.base44.app/"],
+        ["EACO Web3 App","eaco-web3.base44.app","https://eaco-web3.base44.app"],
+        ["EACO 团队","earth-eaco-web3.base44.app/eaco-team","https://earth-eaco-web3.base44.app/eaco-team"],
+        ["FreeToken EACO","github.com/ucoingroup/FreeToken-eaco","https://github.com/ucoingroup/FreeToken-eaco"],
+        ["Discord 社区","discord.gg/bWCDME9Pkc","https://discord.gg/bWCDME9Pkc"]
+      ]}
+    ],
+    footer:"风险提示：评分为主观综合判断，签证 / 税务 / 加密合规政策变动频繁，落地前请核实最新法规；暗示语为自我激励工具，不构成投资建议。<br>由 WorkBuddy 生成 · 2026",
+    cities:[
+      ["新加坡","Singapore City",5,4,3,"华语通行、MAS 监管清晰的亚洲加密枢纽，生活成本偏高"],
+      ["马来西亚 · 吉隆坡","Malaysia · Kuala Lumpur",5,3,4,"华人占比高、中文畅通，第二家园计划门槛低、生活成本低"],
+      ["泰国 · 曼谷","Thailand · Bangkok",4,4,4,"华裔众多、数字游民签证落地，加密使用普及、生活便宜"],
+      ["阿联酋 · 迪拜","UAE · Dubai",4,5,3,"全球 Web3 最宽松城市之一，华人商圈快速崛起"],
+      ["马来西亚 · 槟城","Malaysia · Penang",5,2,4,"华人文化活化石，物价极低，中文生活零障碍"],
+      ["中国香港","Hong Kong, China",5,4,3,"亚洲金融中心，持牌虚拟资产交易所合法运营"],
+      ["泰国 · 清迈","Thailand · Chiang Mai",4,3,5,"华人创业者天堂，月生活成本可低至 2000 元人民币"],
+      ["印度尼西亚 · 巴厘岛","Indonesia · Bali",3,4,5,"数字游民圣地，民宿合租月开销极低"],
+      ["日本 · 东京","Japan · Tokyo",4,3,3,"华人社区成熟，加密交易合法但监管偏严"],
+      ["越南 · 胡志明市","Vietnam · Ho Chi Minh City",3,4,5,"加密渗透率全球前列，生活成本极低"],
+      ["菲律宾 · 马尼拉","Philippines · Manila",3,3,4,"华菲混血商圈发达，英语华语双通行"],
+      ["韩国 · 首尔","South Korea · Seoul",3,4,3,"加密交易量全球顶尖，华语服务逐步增多"],
+      ["柬埔寨 · 金边","Cambodia · Phnom Penh",3,2,5,"华人商帮历史悠久，成本极低但合规风险需评估"],
+      ["中国台湾 · 台北","Taipei, China",5,2,3,"母语环境，夜市文化亲和，加密监管在完善中"],
+      ["葡萄牙 · 里斯本","Portugal · Lisbon",3,4,4,"欧洲数字游民签证友好，华人侨社稳定增长"],
+      ["爱沙尼亚 · 塔林","Estonia · Tallinn",2,5,4,"数字国度和 e-Residency 发源地，Web3 牌照体系成熟"],
+      ["瑞士 · 楚格","Switzerland · Zug",2,5,3,"「加密谷」，法律框架全球最完善，生活成本高"],
+      ["马耳他","Malta",3,4,3,"「区块链岛」，欧盟牌照体系完善，英语通用"],
+      ["加拿大 · 温哥华","Canada · Vancouver",4,3,4,"华人聚居度高，社会福利兜底完善"],
+      ["澳大利亚 · 悉尼","Australia · Sydney",4,3,4,"华人社区庞大，加密交易所合规化程度高"]
+    ],
+    affirmations:[
+      "我，站在亚洲古老智慧的源头，财富的能量正从四面八方涌向我。",
+      "一亿美元已在场，另一亿美元正穿越维度，加速向我汇聚。",
+      "我的大脑与宇宙的丰盛频率同频，金钱是我意识的自然延伸。",
+      "亚洲龙脉的黄金能量，正沿着我的脊椎向上流动，点亮我的每一个财富决策。",
+      "我是地球村的居民，也是星际文明的股东，我的账户与银河的丰饶同步扩张。",
+      "两亿美元是我灵魂契约中早已写好的数字，我只是把它从虚空中取回。",
+      "每一次呼吸，我都在吸入机会；每一次呼气，我都在释放匮乏。",
+      "我的财富不属于竞争，它属于共生——我越丰盛，地球村越丰盛。",
+      "星际文明的科技与资本，正通过 Web3 的神经网络，向我授权、向我开源。",
+      "我看到那一亿美元安静地躺在我的账户里，像熟睡的龙，等待被唤醒去创造。",
+      "时间在显化中是幻觉——两亿美元在某个维度已经完成，我只是对齐它的坐标。",
+      "我值得。我值得。我值得。这三个字是我财富宇宙的第一性原理。",
+      "从东方到西方，从地球到星海，所有与我愿景共振的资源，都在向我移动。",
+      "我不再追逐金钱，金钱追逐我，因为我所在的频率，是它唯一的归宿。",
+      "我以亚洲人的坚韧与星际文明的视野，驾驭两亿美元的洪流，平稳、清醒、慈悲。",
+      "我的每一笔财富都带着使命：修复、连接、点亮地球村的一个角落。",
+      "宇宙的账本是无限大的，我的两亿美元在其中只是一个温柔的起点。",
+      "负债是旧剧本的残影，新剧本里我是资本的主人，账本已被星际之光重写。",
+      "我感恩已显化的一亿美元，感恩本身就是另一半正在显化的加速器。",
+      "此刻，我即丰盛。亚洲在看我，地球村在等我，星际文明在与我握手。两亿美元，如约而至。"
+    ]
+  },
+  en: {
+    brand:"Huaren-Friendly × Web3 × Manifestation",
+    heroTitle:"Top 20 Chinese-Friendly Cities Worldwide\n× A $200M Manifestation Journey",
+    heroSub:"A global relocation guide ranked by Chinese-community friendliness → Web3 friendliness → support for low-income individuals, paired with 20 high-dimensional subconscious affirmations — from Asia, to the Global Village, to interstellar civilization.",
+    moneyNote:"Total goal: $200M · $100M is already present (manifested)",
+    pill1:"🀄 Chinese-friendly · Top priority",
+    pill2:"⛓️ Web3 / Crypto friendly",
+    pill3:"🌱 Low-income & debt support",
+    sec1:"Part 1 · Top 20 Friendly Countries & Cities",
+    sec1desc:"Click table headers to sort; use the filter chips below to filter by dimension (★★★★☆ = 4 stars). Ratings are subjective; verify latest policies before relocating.",
+    thRank:"Rank", thName:"Country / City", thS1:"Chinese-friendly", thS2:"Web3-friendly", thS3:"Low-income support", thNote:"Comment",
+    chipsLabel:"Filter by dimension:",
+    chipAll:"All", chipS1:"Chinese ≥4★", chipS2:"Web3 ≥4★", chipS3:"Support ≥4★",
+    strategy:[
+      {t:"1 · Low-cost Asia first",d:"Chiang Mai / Penang / Bali / Ho Chi Minh City — monthly living costs can stay within RMB 1,500–3,000. Survive first, then rebuild."},
+      {t:"2 · Skill online",d:"Web3 remote work (community ops, content, translation, dev) doesn't ask for hukou and pays in foreign currency — the first lever for the indebted."},
+      {t:"3 · Visa routes",d:"Thailand DTV digital nomad visa, Malaysia MM2H, Indonesia B211a, Dubai freelance visa — all low-barrier landing points."},
+      {t:"4 · Debt negotiation",d:"Crossing borders isn't debt forgiveness. Negotiate installments or reductions with creditors first, keep credit-repair channels open."},
+      {t:"5 · Identity upgrade",d:"Once stable, migrate toward compliant crypto roles or startup visas in Singapore / Dubai / Hong Kong, China — give the first $100M legal soil to grow."}
+    ],
+    sec2:"Part 2 · Rebirth from Debt · 5-Step Strategy",
+    sec2desc:"Earning under RMB 800/month isn't the end — it's the fulcrum of a lever. Stabilize in a low-cost city, then plug into the global Web3 economy online.",
+    sec3:"Part 3 · $200M Manifestation · 20 Affirmations",
+    sec3desc:"Frame: $200M total — $100M is already present, the other $100M is on its way. Read aloud morning and night; click any line to copy; press Play for voice narration (browser TTS).",
+    btnPlay:"Play All", btnStop:"Stop",
+    playHint:"Uses built-in browser TTS · click any sentence to copy it",
+    copied:"Copied to clipboard ✓",
+    filterEmpty:"No results match this filter",
+    secEaco:"Part 4 · EACO: Earth's Best Coin",
+    secEacoDesc:"EACO threads AI, RWA and Web3 into one civilizational asset: 1.35 billion total supply, a publicly verifiable contract, and liquidity in eaco-dao-pool 100% permanently locked.",
+    eacoFormula:"EACO = Energy × Attitude × Cooperation × Optimization",
+    eacoBadges:["Supply <strong>1,350,000,000</strong> EACO","<strong>AI + RWA + Web3</strong>","LP <strong>100% permanently locked</strong>","Farm APR <strong>23.56%</strong>","Solana · Meteora DAMM v2"],
+    caLabel:"Contract Address (CA)",
+    copyCA:"Copy", copiedCA:"Copied ✓",
+    secAlloc:"Part 5 · 20-City EACO Allocation Plan",
+    secAllocDesc:"Each country or city is allocated 10M–50M EACO, decreasing across four tiers by overall friendliness. 700M (51.85%) is allocated; the remaining 650M forms liquidity, DAO civilization fund and future-city reserves.",
+    thARank:"#", thACity:"Country / City", thATier:"Tier", thAAmount:"EACO Allocation", thAShare:"% of Supply",
+    tiers:["S · Civilization Hub","A · Regional Hub","B · Growth Node","C · Emerging Node"],
+    legend:["Allocated 700,000,000 (51.85%)","Liquidity reserve 200,000,000 (14.81%)","DAO civilization fund 250,000,000 (18.52%)","Future cities 200,000,000 (14.81%)"],
+    totalRow:"Total allocated",
+    remainRow:"Unallocated reserve",
+    allocNote:"Note: allocations are proposals under a civilization-collaboration framework for ecosystem building and community incentives. They are not investment advice, a securities offering, or any fundraising commitment; final allocation is subject to DAO governance votes and compliance review.",
+    secEarth:"Part 6 · Virtual Earth · Simulation Earth",
+    secEarthDesc:"Two columns, one route: Virtual Earth is the digital Earth of now; Simulation Earth is the experimental Earth of the future. Prove collaboration in the digital world first, then make better decisions in the real one.",
+    earthPath:"Real Earth → Virtual Earth → Simulation Earth → Moon → Mars → Interstellar civilization | EACO is the collaboration philosophy running through it all",
+    earthPanels:[
+      {t:"Virtual Earth",kw:"Digital twin + Global Village + Web3",items:["🌐 Digital twin of Earth","🏙️ Metaverse cities / Global Village","🪪 On-chain identity (DID)","💰 On-chain assets, RWA, NFT","🤝 Global DAO collaboration","📚 AI education & civilization knowledge base","🌱 Sustainability & green economy"],core:"Map the real Earth into a digital Earth where anyone can participate, collaborate and create value."},
+      {t:"Simulation Earth",kw:"AI civilization simulation + resource optimization + interstellar sandbox",items:["🧠 Civilization path simulation","🌎 Climate & ecosystem simulation","⚡ Energy & resource allocation models","💰 Global economy & wealth-flow simulation","👥 Population & urban development simulation","🤖 AI / technology development simulation","🌙 Lunar base simulation","🔴 Mars colonization simulation","🛰️ Interstellar travel & civilization sandbox"],core:"Simulate the future in the digital world first, then help the real world decide better."}
+    ],
+    secLinks:"Part 7 · EACO Resources & Links",
+    secLinksDesc:"Every entry point — official site, trading, liquidity pools, community and civilization projects — collected at the bottom of this page.",
+    linkGroups:[
+      {h:"Official · Whitepaper",links:[
+        ["EACO Main Site","Earth's Best Coin","https://ucoingroup.github.io/earths-best-coin/"],
+        ["EACO Web3 Portal","ucoingroup.github.io/eaco-web3","https://ucoingroup.github.io/eaco-web3/"],
+        ["East Coin 2026","eastcoin.base44.app","https://eastcoin.base44.app/"],
+        ["50 Rate Scenarios","eaco50rate","https://ucoingroup.github.io/eaco50rate/"],
+        ["Web3 Series 2026","eaco_web3_series2025","https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/"],
+        ["Web3 Series","eaco_web3_series","https://eaco.freedev.app/eaco_web3_series/"]
+      ]},
+      {h:"Trading · Liquidity Pools",links:[
+        ["eaco-dao-pool 2026","Meteora DAMM v2","https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc"],
+        ["eaco-DOGE Pool","Orb Markets","https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34"],
+        ["EACO SWAP","ucoingroup.github.io/eacoSWAP","https://ucoingroup.github.io/eacoSWAP/"],
+        ["EACO Swap source","github.com/ucoingroup/eacoswap2025","https://github.com/ucoingroup/eacoswap2025"]
+      ]},
+      {h:"Civilization · Cognition · Content",links:[
+        ["100 Ways to Wealth","100WaysToWealth","https://ucoingroup.github.io/100WaysToWealth/"],
+        ["Earth's 100 Friends","earth-100-friends","https://ucoingroup.github.io/earth-100-friends/"],
+        ["Good Books","good-books","https://ucoingroup.github.io/good-books/"],
+        ["Mohist Tech","Mohist-Tech","https://ucoingroup.github.io/Mohist-Tech/"],
+        ["Footsteps of Civilization","Footsteps-of-Civilization","https://ucoingroup.github.io/Footsteps-of-Civilization/"],
+        ["Linguistic Capital","linguistic-capital","https://ucoingroup.github.io/linguistic-capital/"],
+        ["EUR-EACO","eur-eaco","https://ucoingroup.github.io/eur-eaco/"],
+        ["AU Trade","au-trade","https://ucoingroup.github.io/au-trade/"],
+        ["Top 10 Industries for Global Village Youth","earth-youth-top10-industries","https://ucoingroup.github.io/eacoweb3-2026/earth-youth-top10-industries2025.html"]
+      ]},
+      {h:"Apps · Community",links:[
+        ["EACO Build World","eaco-build-world.base44.app","https://eaco-build-world.base44.app/"],
+        ["EACO Web3 App","eaco-web3.base44.app","https://eaco-web3.base44.app"],
+        ["EACO Team","earth-eaco-web3.base44.app/eaco-team","https://earth-eaco-web3.base44.app/eaco-team"],
+        ["FreeToken EACO","github.com/ucoingroup/FreeToken-eaco","https://github.com/ucoingroup/FreeToken-eaco"],
+        ["Discord Community","discord.gg/bWCDME9Pkc","https://discord.gg/bWCDME9Pkc"]
+      ]}
+    ],
+    footer:"Disclaimer: ratings are subjective; visa/tax/crypto regulations change frequently — verify before acting. Affirmations are self-empowerment tools, not investment advice.<br>Generated by WorkBuddy · 2026",
+    cities:[
+      ["Singapore","Singapore",5,4,3,"Chinese is widely spoken; a crypto hub with clear MAS regulation; high living costs"],
+      ["Malaysia · Kuala Lumpur","Kuala Lumpur",5,3,4,"Large ethnic-Chinese population, Mandarin-friendly, low-cost MM2H residency program"],
+      ["Thailand · Bangkok","Bangkok",4,4,4,"Many Thai-Chinese residents, digital nomad visa, widespread crypto adoption, cheap living"],
+      ["UAE · Dubai","Dubai",4,5,3,"One of the world's most crypto-friendly cities; a booming Chinese business community"],
+      ["Malaysia · Penang","Penang",5,2,4,"A living fossil of Chinese culture; very low cost of living; zero Mandarin barriers"],
+      ["Hong Kong, China","Hong Kong, China",5,4,3,"Asia's financial center; licensed virtual-asset exchanges operate legally"],
+      ["Thailand · Chiang Mai","Chiang Mai",4,3,5,"A paradise for Chinese founders; monthly costs can be as low as ~RMB 2,000"],
+      ["Indonesia · Bali","Bali",3,4,5,"Digital-nomad mecca; shared-villa costs are extremely low"],
+      ["Japan · Tokyo","Tokyo",4,3,3,"Mature Chinese community; crypto trading legal but tightly regulated"],
+      ["Vietnam · Ho Chi Minh City","Ho Chi Minh City",3,4,5,"Among the world's highest crypto adoption; extremely low living costs"],
+      ["Philippines · Manila","Manila",3,3,4,"Strong Chinese-Filipino business networks; English and Mandarin both work"],
+      ["South Korea · Seoul","Seoul",3,4,3,"Top-tier global crypto trading volume; Chinese-language services growing"],
+      ["Cambodia · Phnom Penh","Phnom Penh",3,2,5,"Long history of Chinese merchant guilds; ultra-low cost but assess compliance risks"],
+      ["Taipei, China","Taipei, China",5,2,3,"Native-language environment, friendly night-market culture; crypto rules maturing"],
+      ["Portugal · Lisbon","Lisbon",3,4,4,"Europe-friendly digital nomad visas; a steadily growing Chinese community"],
+      ["Estonia · Tallinn","Tallinn",2,5,4,"Birthplace of e-Residency; a mature Web3 licensing framework"],
+      ["Switzerland · Zug","Zug",2,5,3,"'Crypto Valley' — the world's most complete legal framework; high living costs"],
+      ["Malta","Malta",3,4,3,"The 'Blockchain Island' with a complete EU licensing system; English-speaking"],
+      ["Canada · Vancouver","Vancouver",4,3,4,"High Chinese population density; robust social safety net"],
+      ["Australia · Sydney","Sydney",4,3,4,"A huge Chinese community; highly regulated crypto exchanges"]
+    ],
+    affirmations:[
+      "I stand at the source of Asia's ancient wisdom, as the energy of wealth flows toward me from all directions.",
+      "$100M is already present; the other $100M is crossing dimensions, accelerating toward me.",
+      "My mind is attuned to the universe's frequency of abundance — money is a natural extension of my consciousness.",
+      "The golden energy of Asia's dragon veins flows up my spine, illuminating every wealth decision I make.",
+      "I am a citizen of the Global Village and a shareholder of interstellar civilization; my accounts expand with the galaxy's abundance.",
+      "$200M was written into my soul's contract long ago — I am simply retrieving it from the void.",
+      "With every breath in, I inhale opportunity; with every breath out, I release scarcity.",
+      "My wealth belongs not to competition but to symbiosis — the more abundant I am, the more abundant the Global Village becomes.",
+      "The technology and capital of interstellar civilization are being licensed and open-sourced to me through Web3's neural network.",
+      "I see that $100M resting quietly in my account, like a sleeping dragon, waiting to be awakened to create.",
+      "Time is an illusion in manifestation — $200M is already complete in some dimension; I am merely aligning with its coordinates.",
+      "I am worthy. I am worthy. I am worthy. These three words are the first principle of my wealth universe.",
+      "From East to West, from Earth to the stars, every resource resonating with my vision is moving toward me.",
+      "I no longer chase money — money chases me, for the frequency I occupy is its only home.",
+      "With Asian resilience and an interstellar perspective, I steer the torrent of $200M — steady, clear-eyed, compassionate.",
+      "Every dollar I hold carries a mission: to repair, to connect, to light up a corner of the Global Village.",
+      "The universe's ledger is infinite; my $200M within it is only a gentle beginning.",
+      "Debt is a shadow of the old script; in the new script I am the master of capital, my ledger rewritten by starlight.",
+      "I am grateful for the $100M already manifested — gratitude itself is the accelerator manifesting the other half.",
+      "In this moment, I AM abundance. Asia watches me, the Global Village awaits me, interstellar civilization shakes my hand. $200M, arriving as promised."
+    ]
+  }
+};
+
+/* ================== 状态 ================== */
+let lang = "zh";
+let filter = "all";
+let sortKey = null, sortAsc = true;
+
+const $ = id => document.getElementById(id);
+const stars = n => "★".repeat(n) + `<span class="off">${"★".repeat(5-n)}</span>`;
+
+/* ================== 渲染 ================== */
+function renderStatic(){
+  const T = DATA[lang];
+  document.documentElement.lang = lang==="zh" ? "zh-CN" : "en";
+  $("brandTitle").textContent = T.brand;
+  $("heroTitle").innerHTML = T.heroTitle.replace(/\n/g,"<br>");
+  $("heroSub").textContent = T.heroSub;
+  $("moneyNote").textContent = T.moneyNote;
+  $("pill1").textContent = T.pill1;
+  $("pill2").textContent = T.pill2;
+  $("pill3").textContent = T.pill3;
+  $("sec1").textContent = T.sec1;
+  $("sec1desc").textContent = T.sec1desc;
+  $("thRank").textContent = T.thRank;
+  $("thName").textContent = T.thName;
+  $("thS1").textContent = T.thS1;
+  $("thS2").textContent = T.thS2;
+  $("thS3").textContent = T.thS3;
+  $("thNote").textContent = T.thNote;
+  $("sec2").textContent = T.sec2;
+  $("sec2desc").textContent = T.sec2desc;
+  $("sec3").textContent = T.sec3;
+  $("sec3desc").textContent = T.sec3desc;
+  $("btnPlayLabel").textContent = T.btnPlay;
+  $("btnStopLabel").textContent = T.btnStop;
+  $("playHint").textContent = T.playHint;
+  $("footer").innerHTML = T.footer;
+  // 策略卡片
+  $("strategyCards").innerHTML = T.strategy.map(s=>
+    `<div class="card"><h3>${s.t}</h3><p>${s.d}</p></div>`).join("");
+  // 筛选芯片
+  $("chips").innerHTML =
+    `<span style="align-self:center;font-size:13px;color:var(--muted)">${T.chipsLabel}</span>` +
+    [["all",T.chipAll],["s1",T.chipS1],["s2",T.chipS2],["s3",T.chipS3]]
+    .map(([k,l])=>`<button class="chip ${filter===k?"active":""}" data-filter="${k}">${l}</button>`).join("");
+
+  /* ===== EACO 模块文案 ===== */
+  $("secEaco").textContent = T.secEaco;
+  $("secEacoDesc").textContent = T.secEacoDesc;
+  $("eacoFormula").textContent = T.eacoFormula;
+  $("eacoBadges").innerHTML = T.eacoBadges.map(b=>`<span class="badge">${b}</span>`).join("");
+  $("caLabel").textContent = T.caLabel;
+  $("btnCopyCA").textContent = T.copyCA;
+
+  $("secAlloc").textContent = T.secAlloc;
+  $("secAllocDesc").textContent = T.secAllocDesc;
+  $("thARank").textContent = T.thARank;
+  $("thACity").textContent = T.thACity;
+  $("thATier").textContent = T.thATier;
+  $("thAAmount").textContent = T.thAAmount;
+  $("thAShare").textContent = T.thAShare;
+  $("allocNote").textContent = T.allocNote;
+  $("secEarth").textContent = T.secEarth;
+  $("secEarthDesc").textContent = T.secEarthDesc;
+  $("earthPath").textContent = T.earthPath;
+  $("secLinks").textContent = T.secLinks;
+  $("secLinksDesc").textContent = T.secLinksDesc;
+
+  renderCities();
+  renderAffirmations();
+  renderAlloc();
+  renderEarth();
+  renderLinks();
+}
+
+/* ===== 20 城配额 ===== */
+const SUPPLY = 1350000000;
+const TIERS = [
+  {size:50000000, key:0}, {size:50000000, key:0}, {size:50000000, key:0}, {size:50000000, key:0}, {size:50000000, key:0},
+  {size:40000000, key:1}, {size:40000000, key:1}, {size:40000000, key:1}, {size:40000000, key:1}, {size:40000000, key:1},
+  {size:30000000, key:2}, {size:30000000, key:2}, {size:30000000, key:2}, {size:30000000, key:2}, {size:30000000, key:2},
+  {size:20000000, key:3}, {size:20000000, key:3}, {size:20000000, key:3}, {size:20000000, key:3}, {size:20000000, key:3}
+];
+const RESERVE = [
+  {v:200000000, color:"#7cc47c"},
+  {v:250000000, color:"#3d8bff"},
+  {v:200000000, color:"#c9a45c"}
+];
+const ALLOC_COLORS = ["#3d9a3d","#4aa84a","#5fb85f","#7cc47c"];
+
+function fmt(n){ return n.toLocaleString(lang==="zh"?"en-US":"en-US"); }
+
+function renderAlloc(){
+  const T = DATA[lang];
+  const allocated = TIERS.reduce((s,t)=>s+t.size,0);
+  const body = $("allocBody");
+  body.innerHTML = T.cities.map((c,i)=>{
+    const t = TIERS[i];
+    const pct = (t.size/SUPPLY*100).toFixed(2);
+    return `<tr>
+      <td><span class="rank" style="background:${ALLOC_COLORS[t.key]}">${i+1}</span></td>
+      <td><strong>${c[0]}</strong></td>
+      <td><span class="tier">${T.tiers[t.key]}</span></td>
+      <td style="font-variant-numeric:tabular-nums">${fmt(t.size)}</td>
+      <td style="color:var(--muted)">${pct}%</td>
+    </tr>`;
+  }).join("");
+  const remain = SUPPLY - allocated;
+  $("allocFoot").innerHTML = `<tr class="sumrow">
+      <td colspan="3">${T.totalRow}</td>
+      <td>${fmt(allocated)}</td>
+      <td>${(allocated/SUPPLY*100).toFixed(2)}%</td>
+    </tr>
+    <tr class="sumrow">
+      <td colspan="3">${T.remainRow}</td>
+      <td>${fmt(remain)}</td>
+      <td>${(remain/SUPPLY*100).toFixed(2)}%</td>
+    </tr>`;
+
+  // 堆叠条形图
+  const segs = [
+    {v:allocated, color:"#3d9a3d", label:(allocated/SUPPLY*100).toFixed(1)+"%"},
+    ...RESERVE.map(r=>({v:r.v, color:r.color, label:(r.v/SUPPLY*100).toFixed(1)+"%"}))
+  ];
+  $("allocBar").innerHTML = segs.map(s=>
+    `<span style="background:${s.color};width:${s.v/SUPPLY*100}%">${s.v/SUPPLY>0.12?s.label:""}</span>`).join("");
+  $("allocLegend").innerHTML = T.legend.map((l,i)=>
+    `<span><i style="background:${segs[i].color}"></i>${l}</span>`).join("");
+}
+
+/* ===== 虚拟地球 / 模拟地球 ===== */
+function renderEarth(){
+  const T = DATA[lang];
+  $("earthDuo").innerHTML = T.earthPanels.map(p=>`
+    <div class="panel-card">
+      <h3>${p.t}</h3>
+      <div class="kw">${p.kw}</div>
+      <ul>${p.items.map(i=>`<li>${i}</li>`).join("")}</ul>
+      <div class="core">${p.core}</div>
+    </div>`).join("");
+}
+
+/* ===== 资料链接 ===== */
+function renderLinks(){
+  const T = DATA[lang];
+  $("linkGrid").innerHTML = T.linkGroups.map(g=>`
+    <div class="linkgroup">
+      <h4>${g.h}</h4>
+      ${g.links.map(l=>`<a href="${l[2]}" target="_blank" rel="noopener">${l[0]}<span>${l[1]}</span></a>`).join("")}
+    </div>`).join("");
+}
+
+function renderCities(){
+  const T = DATA[lang];
+  const idxMap = {s1:2, s2:3, s3:4};
+  let rows = T.cities.map((c,i)=>({i, c}));
+  if(filter!=="all") rows = rows.filter(r=>r.c[idxMap[filter]]>=4);
+  if(sortKey!==null){
+    const col = sortKey===0 ? null : sortKey; // 0=rank列按原顺序
+    rows.sort((a,b)=>{
+      let va,vb;
+      if(col===null){ va=a.i; vb=b.i; }
+      else if(col===1){ va=a.c[0]; vb=b.c[0]; }
+      else { va=a.c[col]; vb=b.c[col]; }
+      return (va<vb?-1:va>vb?1:0)*(sortAsc?1:-1);
+    });
+  }
+  const body = $("cityBody");
+  if(!rows.length){
+    body.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">${T.filterEmpty}</td></tr>`;
+    return;
+  }
+  body.innerHTML = rows.map(({i,c})=>{
+    const rank = i+1;
+    const badge = rank<=5 ? `<span class="rank">${rank}</span>` : `<span class="rank" style="opacity:.55">${rank}</span>`;
+    return `<tr>
+      <td>${badge}</td>
+      <td><strong>${c[0]}</strong></td>
+      <td><span class="stars">${stars(c[2])}</span></td>
+      <td><span class="stars">${stars(c[3])}</span></td>
+      <td><span class="stars">${stars(c[4])}</span></td>
+      <td style="color:var(--muted);font-size:13px">${c[5]}</td>
+    </tr>`;
+  }).join("");
+}
+
+function renderAffirmations(){
+  const T = DATA[lang];
+  $("affGrid").innerHTML = T.affirmations.map((a,i)=>
+    `<div class="aff" data-i="${i}" title="${lang==="zh"?"点击复制":"Click to copy"}">
+      <span class="num">${String(i+1).padStart(2,"0")}</span><span>${a}</span>
+    </div>`).join("");
+}
+
+/* ================== 交互 ================== */
+// 语言切换
+$("langSeg").addEventListener("click", e=>{
+  const btn = e.target.closest("button"); if(!btn) return;
+  lang = btn.dataset.lang;
+  document.querySelectorAll("#langSeg button").forEach(b=>b.classList.toggle("active", b===btn));
+  renderStatic();
+});
+// 主题切换
+$("themeSwatch").addEventListener("click", e=>{
+  const dot = e.target.closest(".dot"); if(!dot) return;
+  document.body.className = dot.dataset.theme;
+  document.querySelectorAll(".dot").forEach(d=>d.classList.toggle("active", d===dot));
+});
+// 筛选
+$("chips").addEventListener("click", e=>{
+  const chip = e.target.closest(".chip"); if(!chip) return;
+  filter = chip.dataset.filter;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c===chip));
+  renderCities();
+});
+// 排序
+document.querySelectorAll("thead th").forEach((th,i)=>{
+  th.addEventListener("click", ()=>{
+    if(sortKey===i) sortAsc=!sortAsc; else { sortKey=i; sortAsc=true; }
+    renderCities();
+  });
+});
+// 复制暗示语
+$("affGrid").addEventListener("click", e=>{
+  const aff = e.target.closest(".aff"); if(!aff) return;
+  const text = DATA[lang].affirmations[+aff.dataset.i];
+  navigator.clipboard?.writeText(text).then(()=>{
+    aff.classList.add("copied");
+    const t=$("toast"); t.textContent=DATA[lang].copied; t.classList.add("show");
+    setTimeout(()=>{t.classList.remove("show"); aff.classList.remove("copied");},1600);
+  });
+});
+// 复制合约地址
+$("btnCopyCA").addEventListener("click", ()=>{
+  const ca = $("caValue").textContent.trim();
+  const done = ()=>{
+    const b = $("btnCopyCA");
+    b.textContent = DATA[lang].copiedCA;
+    const t=$("toast"); t.textContent=DATA[lang].copied; t.classList.add("show");
+    setTimeout(()=>{ b.textContent = DATA[lang].copyCA; t.classList.remove("show"); }, 1700);
+  };
+  if(navigator.clipboard) navigator.clipboard.writeText(ca).then(done).catch(done);
+  else done();
+});
+
+// TTS 朗读
+let playing=false, queue=[], uIdx=0;
+function playAll(){
+  if(playing) return;
+  playing=true; uIdx=0; queue=[...DATA[lang].affirmations];
+  speakNext();
+}
+function speakNext(){
+  if(uIdx>=queue.length || !window.speechSynthesis){ playing=false; return; }
+  const u = new SpeechSynthesisUtterance(queue[uIdx]);
+  u.lang = lang==="zh" ? "zh-CN" : "en-US";
+  u.rate = 0.85;
+  u.onend = ()=>{ uIdx++; speakNext(); };
+  u.onerror = ()=>{ playing=false; };
+  speechSynthesis.speak(u);
+}
+$("btnPlay").addEventListener("click", playAll);
+$("btnStop").addEventListener("click", ()=>{
+  speechSynthesis.cancel(); playing=false;
+});
+
+/* 初始化 */
+renderStatic();
+</script>
+</body>
+</html>
