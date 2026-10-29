@@ -1,0 +1,3318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EACO Agent OPC · 一人公司全球网络</title>
+<meta name="description" content="EACO Agent OPC：20 个全球顶尖 Skill、10 个一人公司节点、虚拟地球与模拟地球，以及 EACO 合约地址与全部官方链接。Earth's Best Coin = EACO = E.">
+<meta name="theme-color" content="#F4F1E8">
+<meta property="og:title" content="EACO Agent OPC · 一人公司全球网络">
+<meta property="og:description" content="一个人，一家公司，一个星球。20 Skills × 10 OPC Nodes × 1 CA.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230C2B21'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' fill='%23D8B36A' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>
+/* apply saved theme before paint */
+(function(){
+  var t = 'classic';
+  try{
+    var q = new URLSearchParams(location.search).get('theme');
+    t = q || localStorage.getItem('eaco-theme') || 'classic';
+    if(['classic','apple','tech'].indexOf(t) < 0) t = 'classic';
+    localStorage.setItem('eaco-theme', t);
+  }catch(e){}
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<style>
+/* ============ 1. Tokens ============ */
+/* ---- shared ---- */
+:root{
+  --mono:ui-monospace,"SFMono-Regular","JetBrains Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman","Songti SC",serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(20px,5.2vw,84px);
+  --radius:0px;
+}
+/* ---- theme: 华夏古典 CLASSIC (default) ---- */
+:root,html[data-theme="classic"]{
+  --paper:#F4F1E8;
+  --paper-2:#ECE7D9;
+  --paper-3:#E3DCC9;
+  --ink:#101A15;
+  --ink-2:#39473F;
+  --muted:#6D7A70;
+  --line:rgba(var(--ink-rgb),.14);
+  --line-soft:rgba(var(--ink-rgb),.08);
+  --green:#0F4A38;
+  --green-2:#1C6B4F;
+  --gold:#A8791F;
+  --gold-soft:#C9A25A;
+  --seal:#A6402C;
+  --wash:236,231,217;
+  --wash2:244,241,232;
+  --ink-rgb:16,26,21;
+  --green-rgb:15,74,56;
+  --green2-rgb:28,107,79;
+  --gold-rgb:168,121,31;
+  --gold2-rgb:200,162,90;
+  --muted-rgb:109,122,112;
+  --seal-rgb:166,64,44;
+  --grid-rgb:16,26,21;
+  --grid-a:.035;
+  --glow-rgb:168,121,31;
+  --glow-a:.10;
+  --noise-rgb:16,26,21;
+  --noise-o:.5;
+  --noise-blend:multiply;
+  --radius:0px;
+}
+/* ---- theme: 苹果绿 APPLE ---- */
+html[data-theme="apple"]{
+  --paper:#F7FBF5;
+  --paper-2:#EDF6EA;
+  --paper-3:#DDEFD9;
+  --ink:#0C1F14;
+  --ink-2:#31543C;
+  --muted:#6C8A76;
+  --line:rgba(12,31,20,.13);
+  --line-soft:rgba(12,31,20,.07);
+  --green:#1E8A3C;
+  --green-2:#34C759;
+  --gold:#2FA84F;
+  --gold-soft:#7ED957;
+  --seal:#E5484D;
+  --wash:237,246,234;
+  --wash2:247,251,245;
+  --ink-rgb:12,31,20;
+  --green-rgb:30,138,60;
+  --green2-rgb:52,199,89;
+  --gold-rgb:47,168,79;
+  --gold2-rgb:126,217,87;
+  --muted-rgb:108,138,118;
+  --seal-rgb:229,72,77;
+  --grid-rgb:52,199,89;
+  --grid-a:.05;
+  --glow-rgb:52,199,89;
+  --glow-a:.13;
+  --noise-rgb:12,31,20;
+  --noise-o:.16;
+  --noise-blend:multiply;
+  --radius:11px;
+}
+/* ---- theme: 科技蓝 TECH ---- */
+html[data-theme="tech"]{
+  --paper:#070C18;
+  --paper-2:#0C1424;
+  --paper-3:#131F35;
+  --ink:#E8F1FF;
+  --ink-2:#B7C9E6;
+  --muted:#7E92B8;
+  --line:rgba(232,241,255,.16);
+  --line-soft:rgba(232,241,255,.08);
+  --green:#4C8DFF;
+  --green-2:#22D3EE;
+  --gold:#38BDF8;
+  --gold-soft:#7DD3FC;
+  --seal:#FB7185;
+  --wash:19,31,53;
+  --wash2:12,20,36;
+  --ink-rgb:232,241,255;
+  --green-rgb:76,141,255;
+  --green2-rgb:34,211,238;
+  --gold-rgb:56,189,248;
+  --gold2-rgb:125,211,252;
+  --muted-rgb:126,146,184;
+  --seal-rgb:251,113,133;
+  --grid-rgb:59,130,246;
+  --grid-a:.13;
+  --glow-rgb:59,130,246;
+  --glow-a:.20;
+  --noise-rgb:232,241,255;
+  --noise-o:.18;
+  --noise-blend:screen;
+  --radius:0px;
+}
+html{background:var(--paper)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.72;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  background-image:
+    linear-gradient(90deg,rgba(var(--grid-rgb),var(--grid-a)) 1px,transparent 1px),
+    radial-gradient(1200px 600px at 80% -10%,rgba(var(--glow-rgb),var(--glow-a)),transparent 60%);
+  background-size:88px 100%,100% 100%;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:var(--noise-o);
+  background-image:radial-gradient(rgba(var(--ink-rgb),.16) .5px,transparent .5px);
+  background-size:4px 4px;mix-blend-mode:var(--noise-blend);
+}
+::selection{background:var(--green);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+img,canvas{display:block;max-width:100%}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.18}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.skip{position:fixed;left:16px;top:-60px;z-index:200;background:var(--ink);color:var(--paper);padding:10px 16px;font-size:13px;transition:top .2s}
+.skip:focus{top:16px}
+
+/* ============ 2. Shell ============ */
+.shell{display:grid;grid-template-columns:94px minmax(0,1fr);position:relative;z-index:2}
+.rail{
+  position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;
+  padding:24px 0 18px;border-right:1px solid var(--line);background:rgba(var(--wash2),.9);
+  z-index:50;
+}
+.brand{display:block}
+.brand-mark{
+  display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--ink);
+  font-family:var(--serif);font-size:24px;line-height:1;padding-bottom:2px;
+}
+.rail-nav{display:flex;flex-direction:column;margin-top:26px;gap:2px}
+.rail-link{
+  display:flex;flex-direction:column;align-items:center;gap:7px;padding:9px 0;width:94px;
+  position:relative;color:var(--muted);transition:color .25s var(--ease);
+}
+.rail-link .rn{font-family:var(--mono);font-size:10px;letter-spacing:.1em}
+.rail-link .rt{writing-mode:vertical-rl;font-size:10.5px;letter-spacing:.22em;line-height:1}
+.rail-link::before{content:"";position:absolute;left:0;top:50%;width:2px;height:0;background:var(--gold);transform:translateY(-50%);transition:height .3s var(--ease)}
+.rail-link:hover,.rail-link.active{color:var(--ink)}
+.rail-link.active::before{height:26px}
+.rail-foot{margin-top:auto;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.14em;writing-mode:vertical-rl}
+.menu-btn{display:none}
+
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:80;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .1s linear}
+
+main{min-width:0}
+.wrap{padding:0 var(--pad);max-width:1320px;margin:0 auto;width:100%}
+
+/* ============ 3. Type bits ============ */
+.eyebrow{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:0}
+.cn-serif{font-family:var(--serif),"Songti SC",serif}
+
+/* ============ 4. Hero ============ */
+.hero{padding-top:clamp(54px,8vh,96px);padding-bottom:clamp(30px,5vh,54px);position:relative}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(24px,4vw,60px);align-items:center}
+.hero h1{
+  font-size:clamp(42px,6.4vw,86px);line-height:.99;letter-spacing:-.035em;margin:22px 0 0;font-weight:600;
+}
+.hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--green)}
+.hero h1 .l3{display:inline-block;position:relative}
+.hero h1 .l3::after{content:"";position:absolute;left:0;right:-6px;bottom:-.04em;height:.07em;background:var(--gold);opacity:.55}
+.hero-sub{margin-top:24px;max-width:36em;color:var(--ink-2);font-size:clamp(14.5px,1.15vw,16.5px)}
+.hero-sub b{font-weight:600;color:var(--ink)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border:1px solid var(--ink);
+  font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-family:var(--mono);
+  background:transparent;cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:var(--green)}
+.btn-ghost{border-color:var(--line);color:var(--ink-2)}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink);background:rgba(var(--ink-rgb),.03)}
+
+.hero-visual{position:relative}
+.globe-wrap{position:relative;aspect-ratio:1/1;width:100%}
+.globe-wrap canvas{width:100%;height:100%}
+.globe-tag{position:absolute;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.globe-tag.tl{top:2%;left:0}
+.globe-tag.br{bottom:0;right:0;text-align:right}
+.globe-tag.tr{top:2%;right:0;text-align:right}
+.hero-stats{
+  margin-top:clamp(34px,5vh,54px);display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.hstat{padding:18px 20px 16px 0;border-right:1px solid var(--line-soft)}
+.hstat:last-child{border-right:0}
+.hstat b{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(17px,2vw,24px);letter-spacing:-.02em;line-height:1.2}
+.hstat span{display:block;margin-top:4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:var(--mono)}
+
+.ticker{overflow:hidden;border-bottom:1px solid var(--line);padding:12px 0;background:rgba(var(--wash),.5)}
+.ticker-track{display:flex;gap:44px;width:max-content;animation:marq 46s linear infinite}
+.ticker span{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:44px}
+.ticker span::after{content:"✦";color:var(--gold);font-size:9px}
+@keyframes marq{to{transform:translateX(-50%)}}
+.ticker:hover .ticker-track{animation-play-state:paused}
+
+/* ============ 5. Section ============ */
+.sec{padding:clamp(58px,8.4vw,116px) 0;border-top:1px solid var(--line);position:relative}
+.sec-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px clamp(18px,3vw,42px);align-items:start}
+.sec-no{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--gold);
+  border:1px solid var(--line);padding:6px 8px;line-height:1;margin-top:6px;
+}
+.sec-head h2{font-size:clamp(27px,3.9vw,46px);line-height:1.14;letter-spacing:-.03em;margin-top:10px}
+.sec-head h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--green)}
+.sec-lead{grid-column:2;max-width:52em;color:var(--ink-2);margin-top:16px;font-size:clamp(14px,1.1vw,15.5px)}
+.sec-lead b{font-weight:600;color:var(--ink)}
+.sec-body{margin-top:clamp(30px,4.4vw,52px)}
+
+/* ============ 6. Definition ============ */
+.def-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px)}
+.def-quote{font-size:clamp(17px,1.6vw,21px);line-height:1.78;letter-spacing:-.01em}
+.def-quote .q{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.5em;line-height:0;vertical-align:-.2em;margin-right:6px}
+.def-note{margin-top:22px;padding-left:16px;border-left:2px solid var(--gold);color:var(--ink-2);font-size:13.5px}
+.letters{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.letter{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 18px 20px;position:relative;overflow:hidden;transition:background .3s var(--ease)}
+.letter:hover{background:rgba(var(--wash),.55)}
+.letter .big{font-family:var(--serif);font-size:clamp(46px,5vw,66px);line-height:.9;color:var(--green);display:block}
+.letter .en{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:12px;display:block}
+.letter .cn{font-size:15px;font-weight:600;margin-top:3px}
+.letter p{font-size:12.5px;color:var(--ink-2);margin-top:6px;line-height:1.62}
+.formula{
+  margin-top:26px;border:1px solid var(--line);padding:20px 22px;background:rgba(var(--wash),.45);
+  font-size:clamp(14px,1.5vw,19px);letter-spacing:.01em;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+}
+.formula b{font-weight:600}
+.formula .x{color:var(--gold);font-family:var(--serif);font-size:1.15em}
+.formula-note{margin-top:10px;font-size:12px;color:var(--muted)}
+
+.ca-chip{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:24px;border-top:1px dashed var(--line);padding-top:18px}
+.ca-chip .lab{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--muted)}
+.ca-chip code{font-family:var(--mono);font-size:12px;word-break:break-all;color:var(--green)}
+.copy-mini{border:1px solid var(--line);background:transparent;padding:5px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;cursor:pointer;transition:background .2s,color .2s}
+.copy-mini:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* ============ 7. Skills ============ */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:26px}
+.chip{
+  border:1px solid var(--line);background:transparent;padding:8px 14px;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-2);
+  transition:all .22s var(--ease);display:inline-flex;gap:8px;align-items:center;
+}
+.chip i{font-style:normal;font-size:9.5px;color:var(--muted)}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.on i{color:var(--gold-soft)}
+.filter-count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em}
+
+.skill-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.skill{
+  display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;
+  padding:20px 22px 20px 0;border-bottom:1px solid var(--line-soft);
+  transition:background .3s var(--ease),opacity .3s;
+}
+.skill:nth-child(odd){border-right:1px solid var(--line-soft);padding-right:26px}
+.skill:nth-child(even){padding-left:26px}
+.skill:hover{background:rgba(var(--wash),.5)}
+.skill.hide{display:none}
+.skill .no{font-family:var(--mono);font-size:10.5px;color:var(--gold);letter-spacing:.06em;padding-top:4px}
+.skill h3{font-size:16.5px;letter-spacing:-.01em;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.skill h3 code{font-family:var(--mono);font-size:12.5px;font-weight:400;color:var(--green);background:rgba(var(--green-rgb),.07);padding:2px 6px}
+.skill .desc{font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.65}
+.skill .use{font-size:12px;color:var(--muted);margin-top:8px;display:flex;gap:7px;align-items:flex-start}
+.skill .use b{color:var(--gold);font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;flex:none;padding-top:3px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;border:1px solid var(--line);padding:2px 6px;color:var(--muted);white-space:nowrap}
+.tag.d{color:#6B4E8E;border-color:rgba(107,78,142,.3)}
+.tag.e{color:#1C6B4F;border-color:rgba(var(--green2-rgb),.3)}
+.tag.g{color:#A6402C;border-color:rgba(var(--seal-rgb),.28)}
+.tag.a{color:#A8791F;border-color:rgba(var(--gold-rgb),.35)}
+
+/* ============ 8. Network ============ */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);margin-bottom:clamp(30px,4vw,44px)}
+.flow-step{padding:16px 16px 18px;border-right:1px solid var(--line);position:relative}
+.flow-step:last-child{border-right:0}
+.flow-step .fn{font-family:var(--mono);font-size:9.5px;color:var(--gold);letter-spacing:.14em}
+.flow-step h4{font-size:13.5px;margin-top:6px}
+.flow-step p{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.55}
+.flow-step:not(:last-child)::after{content:"→";position:absolute;right:-7px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--gold);background:var(--paper);padding:1px;z-index:2}
+
+.nodes{border-top:1px solid var(--ink)}
+.node-head,.node{display:grid;grid-template-columns:46px minmax(120px,.9fr) minmax(0,1.5fr) minmax(0,1fr) 62px;gap:16px;align-items:start}
+.node-head{padding:9px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.node{padding:20px 0;border-bottom:1px solid var(--line-soft);transition:background .3s var(--ease)}
+.node:hover{background:rgba(var(--wash),.45)}
+.node .idx{font-family:var(--mono);font-size:11px;color:var(--gold);padding-top:4px}
+.node .city b{display:block;font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.node .city span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-top:3px}
+.node .why{font-size:13px;color:var(--ink-2);line-height:1.66}
+.node .why em{font-style:normal;color:var(--green);font-weight:500}
+.node .stack{display:flex;flex-wrap:wrap;gap:5px}
+.node .stack span{font-family:var(--mono);font-size:9.5px;border:1px solid var(--line);padding:3px 6px;color:var(--muted)}
+.node .tz{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-align:right;padding-top:4px}
+
+.note{margin-top:22px;font-size:11.5px;color:var(--muted);display:flex;gap:10px;align-items:flex-start;max-width:70ch}
+.note::before{content:"※";color:var(--gold);font-size:12px;line-height:1.5}
+
+/* ============ 8b. Boardroom ============ */
+.bc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:clamp(30px,4vw,44px)}
+.bc-card{border:1px solid var(--line);background:rgba(var(--wash2),.6);padding:20px 18px 22px;position:relative;transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
+.bc-card:hover{border-color:var(--ink);background:rgba(var(--wash),.6);transform:translateY(-2px)}
+.bc-code{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold);border:1px solid var(--gold);display:inline-block;padding:3px 8px}
+.bc-card h4{font-size:15px;margin-top:12px;letter-spacing:.02em}
+.bc-card p{font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px}
+.bc-card.bc-you{border-color:var(--ink);background:rgba(var(--wash),.7)}
+.bc-card.bc-you .bc-code{color:var(--green);border-color:var(--green)}
+.bc-card.bc-you p{color:var(--ink-2)}
+.flow-4{grid-template-columns:repeat(4,1fr)}
+.bc-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:22px}
+.bc-cta .bc-cost{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--muted)}
+.ox-panel{border:1px solid var(--ink);background:rgba(var(--wash),.55);padding:clamp(20px,3vw,30px);margin-bottom:22px}
+.ox-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ox-panel h3{font-size:clamp(19px,1.9vw,24px);letter-spacing:-.02em}
+.ox-panel h3 em{font-style:italic;color:var(--green)}
+.ox-kw{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);line-height:1.7;text-align:right}
+.ox-panel > p{margin-top:12px;font-size:13.5px;color:var(--ink-2);max-width:78ch;line-height:1.7}
+.ox-panel .elist{margin-top:16px}
+.ox-panel .bc-cta{margin:20px 0 0}
+
+/* ============ 9. Earth ============ */
+.earth-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(26px,4vw,56px);align-items:start}
+.stage{position:sticky;top:90px;border:1px solid var(--line);background:rgba(var(--wash),.35);padding:18px}
+.stage canvas{width:100%;aspect-ratio:1/1}
+.mode-switch{display:flex;gap:6px;margin-bottom:14px}
+.mode-switch button{
+  flex:1;border:1px solid var(--line);background:transparent;padding:9px 10px;cursor:pointer;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;transition:all .22s var(--ease);
+}
+.mode-switch button.on{background:var(--green);color:var(--paper);border-color:var(--green)}
+.stage-caption{margin-top:12px;font-size:11.5px;color:var(--muted);min-height:2.6em;line-height:1.6}
+
+.earth-panel{border-top:1px solid var(--ink);padding-top:18px;margin-bottom:34px}
+.earth-panel .ph{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.earth-panel h3{font-size:clamp(19px,1.9vw,24px);letter-spacing:-.02em}
+.earth-panel .kw{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);text-align:right;line-height:1.6}
+.earth-panel > p{margin-top:12px;font-size:13.5px;color:var(--ink-2)}
+.elist{margin-top:16px;display:grid;gap:0}
+.elist div{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;padding:8px 0;border-bottom:1px dotted var(--line);font-size:13px}
+.elist div:last-child{border-bottom:0}
+.elist i{font-family:var(--mono);font-style:normal;font-size:10px;color:var(--gold);padding-top:3px}
+.elist b{font-weight:500;color:var(--ink)}
+.elist em{display:block;font-style:normal;font-size:11.5px;color:var(--muted)}
+
+.path{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:34px;border:1px solid var(--line);padding:14px 16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-2)}
+.path b{color:var(--green);font-weight:500}
+.path .ar{color:var(--gold)}
+.path .end{color:var(--gold)}
+
+/* ============ 10. Cosmos ============ */
+.principle{
+  border:1px solid var(--ink);padding:clamp(20px,3vw,30px);display:grid;grid-template-columns:auto minmax(0,1fr);
+  gap:18px;align-items:center;background:rgba(var(--wash),.5);margin-bottom:clamp(24px,3.4vw,38px);
+}
+.principle .mark{font-family:var(--serif);font-size:clamp(30px,3.4vw,44px);line-height:1;color:var(--seal)}
+.principle p{font-size:clamp(15px,1.5vw,19px);line-height:1.6}
+.principle span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--muted);margin-top:6px;text-transform:uppercase}
+
+.docs{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+details.doc{border:1px solid var(--line);background:rgba(var(--wash2),.6);transition:border-color .25s,background .25s}
+details.doc[open]{border-color:var(--ink);background:rgba(var(--wash),.55)}
+details.doc summary{
+  list-style:none;cursor:pointer;padding:20px 22px;display:grid;grid-template-columns:32px minmax(0,1fr) 18px;
+  gap:12px;align-items:start;
+}
+details.doc summary::-webkit-details-marker{display:none}
+details.doc .dn{font-family:var(--mono);font-size:10px;color:var(--gold);padding-top:5px}
+details.doc h3{font-size:16.5px;letter-spacing:-.01em}
+details.doc .den{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-top:5px}
+details.doc .plus{position:relative;width:14px;height:14px;margin-top:4px}
+details.doc .plus::before,details.doc .plus::after{content:"";position:absolute;background:var(--ink);transition:transform .3s var(--ease),opacity .3s}
+details.doc .plus::before{left:0;top:6px;width:14px;height:1px}
+details.doc .plus::after{left:6px;top:0;width:1px;height:14px}
+details.doc[open] .plus::after{transform:rotate(90deg);opacity:0}
+.doc-body{padding:0 22px 22px 66px;font-size:12.5px;color:var(--ink-2)}
+.doc-body ol{margin:0;padding-left:16px}
+.doc-body li{margin:0 0 7px;line-height:1.65}
+.doc-body li b{color:var(--ink);font-weight:600}
+.doc-body .meta{margin-top:12px;padding-top:10px;border-top:1px dotted var(--line);color:var(--muted);font-size:11px;font-family:var(--mono)}
+
+/* ============ 11. Classics ============ */
+.classics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cl{border:1px solid var(--line);padding:24px 22px 22px;position:relative;overflow:hidden;background:rgba(var(--wash2),.5);transition:border-color .3s,background .3s}
+.cl:hover{border-color:var(--ink);background:rgba(var(--wash),.6)}
+.cl .wm{position:absolute;right:8px;top:-16px;font-family:var(--serif);font-size:96px;color:rgba(var(--green-rgb),.07);line-height:1;pointer-events:none}
+.cl .src{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+.cl h3{font-size:18px;margin-top:8px;letter-spacing:-.01em}
+.cl .gist{font-size:12.5px;color:var(--muted);margin-top:6px;font-family:var(--serif);font-style:italic;letter-spacing:.01em;font-size:14px}
+.cl ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:9px}
+.cl li{font-size:12.5px;color:var(--ink-2);padding-left:14px;position:relative;line-height:1.66}
+.cl li::before{content:"—";position:absolute;left:0;color:var(--gold);font-size:10px;top:1px}
+
+.split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(26px,4vw,54px);margin-top:clamp(36px,5vw,60px)}
+
+/* 100 friends */
+.friends-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.friends-top h3{font-size:clamp(18px,1.9vw,22px)}
+.friends-top span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.matrix{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-top:16px;max-width:460px}
+.cell{aspect-ratio:1;background:var(--green);opacity:.28;transition:opacity .25s,transform .25s var(--ease);cursor:default;position:relative}
+.cell:hover{opacity:1;transform:scale(1.18);z-index:2}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:16px;font-size:11px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:7px;height:7px;display:block;flex:none}
+.friends-note{margin-top:16px;font-size:12.5px;color:var(--ink-2);line-height:1.7}
+
+/* capital */
+.cap{border-top:1px solid var(--ink);padding-top:0}
+.cap-item{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.cap-item .ci{font-family:var(--serif);font-size:26px;color:var(--gold);line-height:1.2}
+.cap-item h4{font-size:14.5px}
+.cap-item p{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.65}
+.cap-foot{margin-top:18px;font-size:12.5px;color:var(--muted);padding-left:14px;border-left:2px solid var(--line)}
+
+/* ============ 11b. Wisdom ============ */
+.wfeat{position:relative;border:1px solid var(--ink);background:rgba(var(--wash),.55);padding:clamp(26px,4vw,46px);margin-top:8px;overflow:hidden}
+.wfeat::before{content:"能";position:absolute;right:-10px;bottom:-46px;font-family:var(--serif);font-size:190px;color:rgba(var(--green-rgb),.06);line-height:1;pointer-events:none}
+.wfeat .wlab{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.wq{margin:16px 0 8px;font-size:clamp(19px,2.5vw,29px);line-height:1.68;letter-spacing:.02em;font-weight:500;max-width:32em;position:relative}
+.wq::before{content:"「";color:var(--gold);margin-right:2px}
+.wq::after{content:"」";color:var(--gold);margin-left:2px}
+.wmeta{display:flex;gap:12px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.wmeta .src{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+.wbtns{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;position:relative}
+.wtools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:30px 0 16px}
+.wsearch{flex:1 1 220px;min-width:180px;border:1px solid var(--line);background:transparent;padding:10px 14px;font-family:var(--mono);font-size:12px;color:var(--ink);letter-spacing:.04em}
+.wsearch::placeholder{color:var(--muted)}
+.wsearch:focus{outline:none;border-color:var(--ink)}
+.qlist{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.qrow{display:grid;grid-template-columns:42px minmax(0,1fr);gap:10px;padding:13px 18px 13px 0;border-bottom:1px solid var(--line-soft);transition:background .3s var(--ease)}
+.qrow:nth-child(odd){border-right:1px solid var(--line-soft);padding-right:24px}
+.qrow:nth-child(even){padding-left:24px}
+.qrow:hover{background:rgba(var(--wash),.55)}
+.qrow.hide{display:none}
+.qrow .qn{font-family:var(--mono);font-size:10px;color:var(--gold);padding-top:5px;letter-spacing:.04em}
+.qrow .qt{font-size:13.5px;line-height:1.7}
+.qrow .tag{margin-left:8px;vertical-align:1px}
+.qrow .qs{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:3px}
+.wmore{display:flex;justify-content:center;margin-top:24px}
+.wnote{margin-top:18px;font-size:11.5px;color:var(--muted);display:flex;gap:10px;align-items:flex-start;max-width:78ch}
+.wnote::before{content:"※";color:var(--gold);font-size:12px;line-height:1.5}
+
+/* ============ 8c. Industries ============ */
+.ind-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.ind-nodes .node{grid-template-columns:46px minmax(150px,1.02fr) minmax(0,1.62fr) minmax(0,1.12fr) 86px}
+.ind-nodes .node .opc{font-size:12.5px;color:var(--ink-2);line-height:1.65}
+.ind-nodes .node .win{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);text-align:right;padding-top:5px;white-space:nowrap}
+.ind-nodes .node .win.now{color:var(--green)}
+.ind-tier{
+  display:grid;grid-template-columns:52px minmax(0,auto) minmax(0,1fr) auto;gap:14px;align-items:baseline;
+  padding:12px 0 10px;margin-top:26px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);
+}
+.ind-tier .it-code{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--paper);background:var(--green);text-align:center;padding:3px 0}
+.ind-tier .it-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--ink)}
+.ind-tier .it-sub{font-size:11.5px;color:var(--muted);line-height:1.55}
+.ind-tier .it-meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--gold);white-space:nowrap}
+.ind-nodes .node.hide,.ind-tier.hide{display:none}
+.loop-map{border-top:1px solid var(--ink);margin-top:clamp(22px,3vw,32px)}
+.loop-map .lm-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;padding:11px 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.loop-map .lm-k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--gold)}
+.loop-map .lm-v{font-size:13px;color:var(--ink-2);line-height:1.6}
+
+/* ============ 11c. FAQ ============ */
+.faq-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.faq-list{border-top:1px solid var(--ink)}
+.faq-item{border-bottom:1px solid var(--line-soft);padding:13px 0;transition:background .25s var(--ease)}
+.faq-item[hidden]{display:none}
+.faq-item summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:42px minmax(0,1fr) 16px;gap:12px;align-items:baseline}
+.faq-item summary::-webkit-details-marker{display:none}
+.fq-no{font-family:var(--mono);font-size:10.5px;color:var(--gold);letter-spacing:.06em}
+.fq-q{font-size:14.5px;line-height:1.55;color:var(--ink)}
+.fq-ic{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+.fq-ic::before{content:"+"}
+.faq-item[open] .fq-ic::before{content:"−"}
+.faq-item[open]{background:rgba(var(--wash),.4)}
+.faq-item[open] .fq-q{color:var(--green)}
+.faq-item:hover .fq-q{color:var(--green)}
+.fq-a{margin:9px 0 2px 54px;font-size:13px;line-height:1.8;color:var(--ink-2);max-width:82ch}
+.fq-cat{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--muted);border:1px solid var(--line);padding:2px 5px;margin-left:8px;vertical-align:1px}
+
+/* ============ 12. Links ============ */
+.link-groups{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,52px)}
+.lgroup h3{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:9px;margin-bottom:4px}
+.lgroup h3 b{color:var(--gold);font-weight:500;margin-right:8px}
+.lrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line-soft);position:relative;transition:padding .25s var(--ease)}
+.lrow:hover{padding-left:8px}
+.lrow .ln{display:block;font-size:13px;line-height:1.45}
+.lrow .lu{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);word-break:break-all;line-height:1.5;margin-top:2px}
+.lrow .ar{font-family:var(--mono);font-size:12px;color:var(--gold);opacity:0;transform:translateX(-4px);transition:all .25s var(--ease)}
+.lrow:hover .ar{opacity:1;transform:none}
+.lrow:hover .ln{color:var(--green)}
+.lgroup .lg-note{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.6}
+
+/* ============ 13. Contract ============ */
+.dark{background:#0C2B21;color:#EFE9DA;border-top:1px solid #0C2B21;position:relative;overflow:hidden}
+.dark::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 320px at 88% 8%,rgba(var(--gold2-rgb),.18),transparent 62%);pointer-events:none}
+.dark .wrap{position:relative}
+.dark .eyebrow{color:rgba(239,233,218,.55)}
+.dark .eyebrow::before{background:var(--gold-soft)}
+.dark .sec-no{border-color:rgba(239,233,218,.22);color:var(--gold-soft)}
+.dark h2{color:#F6F1E4}
+.dark h2 em{color:var(--gold-soft)}
+.dark .sec-lead{color:rgba(239,233,218,.72)}
+.ca-big{
+  margin-top:26px;border:1px solid rgba(239,233,218,.24);padding:clamp(18px,3vw,28px);
+  display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);
+}
+.ca-big .addr{font-family:var(--mono);font-size:clamp(12.5px,1.7vw,19px);letter-spacing:.03em;word-break:break-all;line-height:1.5;max-width:100%}
+.ca-big .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:rgba(239,233,218,.5);margin-bottom:8px;text-transform:uppercase}
+.btn-gold{background:var(--gold-soft);color:#0C2B21;border:1px solid var(--gold-soft)}
+.btn-gold:hover{background:#EFE9DA;border-color:#EFE9DA}
+.ca-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
+.ca-meta span{font-family:var(--mono);font-size:10px;letter-spacing:.08em;border:1px solid rgba(239,233,218,.22);padding:4px 9px;color:rgba(239,233,218,.7)}
+.stamp{
+  position:absolute;right:clamp(12px,4vw,64px);top:clamp(18px,4vw,58px);
+  border:2px solid #C0553F;color:#D2705B;padding:7px 11px;transform:rotate(-7deg);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;line-height:1.4;text-align:center;
+  opacity:.85;pointer-events:none;
+}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:clamp(26px,3.6vw,40px);border-top:1px solid rgba(239,233,218,.18)}
+.stats3 div{padding:18px 20px 0 0}
+.stats3 b{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(20px,2.4vw,30px);letter-spacing:-.02em;color:var(--gold-soft)}
+.stats3 span{font-size:11.5px;color:rgba(239,233,218,.6);display:block;margin-top:3px}
+.pools{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.pool{border:1px solid rgba(239,233,218,.2);padding:16px 18px;transition:border-color .25s,background .25s}
+.pool:hover{border-color:var(--gold-soft);background:rgba(255,255,255,.04)}
+.pool .pt{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:rgba(239,233,218,.5);text-transform:uppercase}
+.pool b{display:block;font-size:14px;font-weight:500;margin-top:6px}
+.pool .pa{font-family:var(--mono);font-size:10px;color:rgba(239,233,218,.55);word-break:break-all;margin-top:4px;line-height:1.5}
+.memo{
+  margin-top:26px;border-left:2px solid var(--gold-soft);background:rgba(var(--gold2-rgb),.09);
+  padding:16px 18px;font-size:12.5px;line-height:1.75;color:rgba(239,233,218,.85);
+}
+.memo b{color:var(--gold-soft);font-weight:500}
+.disclaimer{margin-top:22px;font-size:10.5px;color:rgba(239,233,218,.45);line-height:1.7;max-width:78ch}
+
+/* ============ 14. Footer ============ */
+footer{padding:clamp(34px,5vw,54px) 0;background:#0C2B21;color:rgba(239,233,218,.6);border-top:1px solid rgba(239,233,218,.14)}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:22px;align-items:flex-end}
+.foot-mark{font-family:var(--serif);font-size:clamp(30px,4vw,46px);color:#EFE9DA;line-height:1}
+.foot-mark span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;color:rgba(239,233,218,.5);margin-top:10px}
+.foot-meta{font-family:var(--mono);font-size:10px;letter-spacing:.12em;line-height:2;text-align:right}
+.foot-meta a:hover{color:var(--gold-soft)}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:120;
+  background:var(--ink);color:var(--paper);padding:11px 20px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  opacity:0;pointer-events:none;transition:all .3s var(--ease);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+.lang-switch{
+  position:fixed;top:16px;right:18px;z-index:70;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;border:1px solid var(--line);
+  padding:6px 9px;color:var(--muted);text-align:center;text-decoration:none;
+  background:rgba(var(--wash2),.92);transition:all .2s var(--ease);
+}
+.lang-switch:hover{border-color:var(--ink);color:var(--ink);background:rgba(var(--wash),.95)}
+@media (max-width:900px){
+  .lang-switch{top:13px;right:76px;padding:5px 8px}
+}
+/* ============ 15. Responsive ============ */
+@media (max-height:780px) and (min-width:901px){
+  .rail{padding-top:16px}
+  .rail-nav{margin-top:14px}
+  .rail-link{padding:5px 0;gap:4px}
+  .rail-link .rt{font-size:9.5px;letter-spacing:.14em}
+}
+@media (max-width:1100px){
+  .hero-grid{grid-template-columns:1fr;gap:20px}
+  .hero-visual{max-width:560px;width:100%;margin:0 auto}
+  .def-grid,.earth-grid,.split{grid-template-columns:1fr}
+  .stage{position:static}
+  .docs{grid-template-columns:1fr}
+  .classics{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr;border-bottom:0}
+  .flow-4{grid-template-columns:1fr 1fr;border-bottom:0}
+  .bc-grid{grid-template-columns:1fr 1fr 1fr}
+  .flow-step{border-bottom:1px solid var(--line)}
+  .flow-step:nth-child(2n){border-right:0}
+  .flow-step:not(:last-child)::after{display:none}
+  .node-head,.node{grid-template-columns:38px minmax(110px,.9fr) minmax(0,1.4fr) minmax(0,1fr)}
+  .node .tz{display:none}
+  .ind-nodes .node-head,.ind-nodes .node{grid-template-columns:38px minmax(118px,.95fr) minmax(0,1.5fr) minmax(0,1fr) 76px}
+  .ind-tier{grid-template-columns:46px minmax(0,1fr);gap:6px 12px}
+  .ind-tier .it-sub{grid-column:2}
+  .ind-tier .it-meta{grid-column:2;text-align:left}
+}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .rail{
+    position:fixed;top:0;left:0;right:0;height:56px;flex-direction:row;justify-content:space-between;
+    align-items:center;padding:0 16px;border-right:0;border-bottom:1px solid var(--line);
+    background:rgba(var(--wash2),.97);
+  }
+  .brand-mark{width:30px;height:30px;font-size:19px}
+  .rail-nav{
+    position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--paper);margin:0;
+    padding:14px 20px 30px;display:none;flex-direction:column;gap:0;overflow:auto;
+  }
+  .rail.open .rail-nav{display:flex}
+  .rail-link{flex-direction:row;justify-content:flex-start;gap:16px;width:auto;padding:15px 0;border-bottom:1px solid var(--line-soft)}
+  .rail-link .rn{width:20px}
+  .rail-link .rt{writing-mode:horizontal-tb;font-size:15px;letter-spacing:.04em;color:var(--ink)}
+  .rail-link.active::before{display:none}
+  .rail-foot{display:none}
+  .menu-btn{
+    display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:transparent;
+    padding:7px 12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;cursor:pointer;
+  }
+  main{padding-top:56px}
+  .wrap{padding:0 20px}
+  .hero{padding-top:34px}
+  .hstat{padding-right:10px}
+  .hstat span{font-size:9px;letter-spacing:.08em}
+  .sec-head{grid-template-columns:auto minmax(0,1fr)}
+  .skill-grid{grid-template-columns:1fr}
+  .skill:nth-child(odd){border-right:0;padding-right:20px}
+  .skill:nth-child(even){padding-left:0}
+  .link-groups{grid-template-columns:1fr}
+  .qlist{grid-template-columns:1fr}
+  .qrow:nth-child(odd){border-right:0;padding-right:20px}
+  .qrow:nth-child(even){padding-left:0}
+  .pools{grid-template-columns:1fr}
+  .stats3{grid-template-columns:1fr;border-top:1px solid rgba(239,233,218,.18)}
+  .stats3 div{padding:14px 0;border-bottom:1px solid rgba(239,233,218,.12)}
+  .stamp{display:none}
+  .foot-meta{text-align:left}
+}
+@media (max-width:620px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hstat:nth-child(2){border-right:0}
+  .hstat:nth-child(1),.hstat:nth-child(2){border-bottom:1px solid var(--line-soft)}
+  .letters{grid-template-columns:1fr 1fr}
+  .node-head{display:none}
+  .node{grid-template-columns:32px minmax(0,1fr);gap:6px 10px;padding:16px 0}
+  .node .city{grid-column:2}
+  .node .why{grid-column:2}
+  .node .stack{grid-column:2;margin-top:4px}
+  .node .tz{display:none}
+  .ind-nodes .node .opc,.ind-nodes .node .win{grid-column:2;text-align:left;padding-top:0}
+  .ind-nodes .node .win{font-size:9.5px;letter-spacing:.1em;margin-top:2px}
+  .ind-tier .it-meta{white-space:normal}
+  .loop-map .lm-row{grid-template-columns:1fr;gap:4px}
+  .flow{grid-template-columns:1fr}
+  .flow-4{grid-template-columns:1fr}
+  .flow-step{border-right:0}
+  .bc-grid{grid-template-columns:1fr 1fr}
+  .bc-cta .btn{flex:1 1 100%;text-align:center}
+  .fq-a{margin-left:0}
+  .faq-item summary{grid-template-columns:34px minmax(0,1fr) 14px;gap:8px}
+  .fq-cat{display:none}
+  .doc-body{padding-left:22px}
+  .matrix{max-width:100%}
+  .sec-no{font-size:10px;padding:5px 6px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .ticker-track{animation:none}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+
+/* ============ 16. Themes ============ */
+/* body canvas per theme */
+html[data-theme="apple"] body{
+  background-image:
+    radial-gradient(1100px 620px at 80% -8%,rgba(52,199,89,.16),transparent 62%),
+    radial-gradient(760px 460px at 4% 14%,rgba(126,217,87,.12),transparent 68%),
+    linear-gradient(90deg,rgba(var(--grid-rgb),var(--grid-a)) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,88px 100%;
+}
+html[data-theme="tech"] body{
+  background-image:
+    radial-gradient(900px 560px at 82% -10%,rgba(59,130,246,.26),transparent 62%),
+    radial-gradient(680px 420px at 6% 8%,rgba(34,211,238,.14),transparent 66%),
+    linear-gradient(90deg,rgba(var(--grid-rgb),var(--grid-a)) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(var(--grid-rgb),.05) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,72px 100%,72px 72px;
+}
+html[data-theme="tech"] body::after{background-image:radial-gradient(rgba(var(--noise-rgb),.10) .5px,transparent .5px)}
+
+/* rounded language for apple */
+html[data-theme="apple"] .btn,
+html[data-theme="apple"] .chip,
+html[data-theme="apple"] .brand-mark,
+html[data-theme="apple"] .skill,
+html[data-theme="apple"] .bc-card,
+html[data-theme="apple"] .pool,
+html[data-theme="apple"] .doc,
+html[data-theme="apple"] .ox-panel,
+html[data-theme="apple"] .node,
+html[data-theme="apple"] .flow,
+html[data-theme="apple"] .qrow,
+html[data-theme="apple"] .faq-item,
+html[data-theme="apple"] .earth-panel,
+html[data-theme="apple"] .float-tools,
+html[data-theme="apple"] .theme-switch,
+html[data-theme="apple"] .lang-switch{border-radius:var(--radius)}
+html[data-theme="apple"] .skill:hover,
+html[data-theme="apple"] .node:hover{box-shadow:0 6px 22px -14px rgba(30,138,60,.5)}
+
+/* dark panels per theme */
+html[data-theme="apple"] .dark{background:#0D2A18;border-top-color:#0D2A18}
+html[data-theme="apple"] footer{background:#0D2A18}
+html[data-theme="tech"] .dark{background:#04070F;border-top-color:rgba(56,189,248,.28)}
+html[data-theme="tech"] .dark::before{background:radial-gradient(700px 320px at 88% 8%,rgba(56,189,248,.22),transparent 62%)}
+html[data-theme="tech"] .dark h2{color:#F2F7FF}
+html[data-theme="tech"] .dark .eyebrow{color:rgba(232,241,255,.6)}
+html[data-theme="tech"] .dark .sec-lead{color:rgba(232,241,255,.72)}
+html[data-theme="tech"] .dark .sec-no{border-color:rgba(56,189,248,.4);color:#7DD3FC}
+html[data-theme="tech"] footer{background:#04070F;border-top-color:rgba(232,241,255,.12)}
+
+/* tag hues on dark */
+html[data-theme="tech"] .tag.d{color:#A78BFA;border-color:rgba(167,139,250,.4)}
+html[data-theme="tech"] .tag.e{color:#34D399;border-color:rgba(52,211,153,.4)}
+html[data-theme="tech"] .tag.g{color:#FB7185;border-color:rgba(251,113,133,.4)}
+html[data-theme="tech"] .tag.a{color:#38BDF8;border-color:rgba(56,189,248,.4)}
+html[data-theme="apple"] .tag.d{color:#6B4E8E}
+html[data-theme="apple"] .tag.e{color:#1E8A3C;border-color:rgba(30,138,60,.35)}
+html[data-theme="apple"] .tag.g{color:#C43D42;border-color:rgba(229,72,77,.3)}
+html[data-theme="apple"] .tag.a{color:#2FA84F;border-color:rgba(47,168,79,.35)}
+
+/* matrix cells readability */
+html[data-theme="tech"] .cell{filter:brightness(1.85) saturate(1.1)}
+html[data-theme="apple"] .cell{filter:brightness(1.06)}
+
+/* ============ 17. Theme + language tools ============ */
+.float-tools{
+  position:fixed;top:14px;right:16px;z-index:70;display:flex;align-items:center;gap:8px;
+}
+.theme-switch{
+  display:flex;align-items:center;gap:4px;padding:4px 7px;border:1px solid var(--line);
+  background:var(--wash2);transition:border-color .2s var(--ease);
+}
+.theme-switch:hover{border-color:var(--ink)}
+.tsw-label{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;color:var(--muted);margin-right:3px}
+.tsw{width:20px;height:20px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center;position:relative}
+.tsw i{display:block;width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.tsw[data-theme="classic"] i{background:linear-gradient(135deg,#F4F1E8 0 34%,#0F4A38 34% 72%,#A8791F 72%)}
+.tsw[data-theme="apple"] i{background:linear-gradient(135deg,#F7FBF5 0 30%,#34C759 30% 70%,#1E8A3C 70%)}
+.tsw[data-theme="tech"] i{background:linear-gradient(135deg,#0B1220 0 30%,#3B82F6 30% 68%,#22D3EE 68%)}
+.tsw:hover i{transform:scale(1.14)}
+.tsw.on i{transform:scale(1.16)}
+.tsw.on[data-theme="classic"] i{box-shadow:0 0 0 2px var(--wash2),0 0 0 3.5px #A8791F}
+.tsw.on[data-theme="apple"] i{box-shadow:0 0 0 2px var(--wash2),0 0 0 3.5px #34C759}
+.tsw.on[data-theme="tech"] i{box-shadow:0 0 0 2px var(--wash2),0 0 0 3.5px #38BDF8}
+.tsw::after{
+  content:attr(data-tip);position:absolute;top:calc(100% + 8px);right:-2px;white-space:nowrap;
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--paper);background:var(--ink);
+  padding:3px 6px;opacity:0;pointer-events:none;transition:opacity .18s var(--ease);
+}
+.tsw:hover::after,.tsw:focus-visible::after{opacity:1}
+.float-tools .lang-switch{position:static;top:auto;right:auto;background:var(--wash2)}
+@media (max-width:900px){
+  .float-tools{top:11px;right:76px;gap:5px}
+  .tsw-label{display:none}
+  .tsw{width:18px;height:18px}
+  .tsw i{width:12px;height:12px}
+  .theme-switch{padding:4px 6px;gap:2px}
+  .float-tools .lang-switch{padding:5px 7px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<div class="shell">
+  <header class="rail" id="rail">
+    <a class="brand" href="#top" aria-label="EACO OPC 首页"><span class="brand-mark">E</span></a>
+    <nav class="rail-nav" aria-label="章节导航">
+      <a class="rail-link" href="#definition"><span class="rn">01</span><span class="rt">定义</span></a>
+      <a class="rail-link" href="#skills"><span class="rn">02</span><span class="rt">技能</span></a>
+      <a class="rail-link" href="#network"><span class="rn">03</span><span class="rt">网络</span></a>
+      <a class="rail-link" href="#boardroom"><span class="rn">04</span><span class="rt">高管</span></a>
+      <a class="rail-link" href="#industries"><span class="rn">05</span><span class="rt">行业</span></a>
+      <a class="rail-link" href="#loop"><span class="rn">05b</span><span class="rt">闭环</span></a>
+      <a class="rail-link" href="#earth"><span class="rn">06</span><span class="rt">双地球</span></a>
+      <a class="rail-link" href="#cosmos"><span class="rn">07</span><span class="rt">宇宙</span></a>
+      <a class="rail-link" href="#classics"><span class="rn">08</span><span class="rt">文明</span></a>
+      <a class="rail-link" href="#wisdom"><span class="rn">09</span><span class="rt">能量</span></a>
+      <a class="rail-link" href="#faq"><span class="rn">10</span><span class="rt">问答</span></a>
+      <a class="rail-link" href="#links"><span class="rn">11</span><span class="rt">链接</span></a>
+      <a class="rail-link" href="#contract"><span class="rn">12</span><span class="rt">合约</span></a>
+    </nav>
+    <div class="rail-foot">MMXXVI</div>
+    <div class="float-tools">
+      <div class="theme-switch" role="group" aria-label="设计风格">
+        <span class="tsw-label">风格</span>
+        <button class="tsw" type="button" data-theme="classic" data-tip="华夏古典" aria-label="华夏古典" aria-pressed="true"><i></i></button>
+        <button class="tsw" type="button" data-theme="apple" data-tip="苹果绿" aria-label="苹果绿" aria-pressed="false"><i></i></button>
+        <button class="tsw" type="button" data-theme="tech" data-tip="科技蓝" aria-label="科技蓝" aria-pressed="false"><i></i></button>
+      </div>
+      <a class="lang-switch" href="index-en.html" hreflang="en" title="Switch to English" aria-label="Switch to English">EN</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="rail">目录</button>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero wrap" id="top">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow reveal">EACO ATLAS · ONE-PERSON COMPANY NETWORK</p>
+          <h1 class="reveal">
+            一个人，<br>
+            一家公司，<br>
+            <span class="l3">一个星球。</span>
+          </h1>
+          <p class="hero-sub reveal">
+            <b>EACO Agent OPC</b> 把全球最好用的 20 个 Skill 装进一个人的公司，
+            在地球上点亮 10 个节点，用同一套协作协议交付。
+            不是远程外包，而是<b>一人一公司、公司即节点、节点即网络</b>。
+          </p>
+          <div class="hero-cta reveal">
+            <a class="btn btn-solid" href="#skills">查看 20 个 Skill <span>→</span></a>
+            <button class="btn btn-ghost" type="button" data-copy="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH">复制 CA</button>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="globe-wrap">
+            <canvas id="heroGlobe" role="img" aria-label="EACO 十个全球一人公司节点的旋转地球示意图"></canvas>
+            <span class="globe-tag tl">FIG. 01 — NODE ATLAS</span>
+            <span class="globe-tag tr">10 CITIES / 6 TIME ZONES</span>
+            <span class="globe-tag br">E × A × C × O</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stats reveal">
+        <div class="hstat"><b>20</b><span>Skills</span></div>
+        <div class="hstat"><b>10</b><span>OPC Nodes</span></div>
+        <div class="hstat"><b>1</b><span>Contract</span></div>
+        <div class="hstat"><b>23.56%</b><span>Farm APR</span></div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>EARTH'S BEST COIN = EACO = E</span>
+        <span>AI + RWA + WEB3</span>
+        <span>ENERGY × ATTITUDE × COOPERATION × OPTIMIZATION</span>
+        <span>ONE PERSON · ONE COMPANY · ONE PLANET</span>
+        <span>100% PERMANENTLY LOCKED</span>
+        <span>EACO DAO POOL 202601</span>
+        <span>EARTH'S BEST COIN = EACO = E</span>
+        <span>AI + RWA + WEB3</span>
+        <span>ENERGY × ATTITUDE × COOPERATION × OPTIMIZATION</span>
+        <span>ONE PERSON · ONE COMPANY · ONE PLANET</span>
+        <span>100% PERMANENTLY LOCKED</span>
+        <span>EACO DAO POOL 202601</span>
+      </div>
+    </div>
+
+    <!-- ================= 01 DEFINITION ================= -->
+    <section class="sec wrap" id="definition">
+      <div class="sec-head reveal">
+        <span class="sec-no">01</span>
+        <div>
+          <p class="eyebrow">WHAT IS EACO</p>
+          <h2>不是又一个 Meme，<br>而是一套<em>文明升级的记账单位</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          EACO = Earth's Best Coin。它把 <b>Energy（能量）</b>、<b>Attitude（态度）</b>、<b>Cooperation（协作）</b>、
+          <b>Optimization（优化）</b> 四个词压成一个可执行的协议：任何一个人，都可以用它来组织一家公司、连接其他节点、并持续优化自己的交付。
+        </p>
+      </div>
+
+      <div class="sec-body def-grid">
+        <div class="reveal">
+          <p class="def-quote">
+            <span class="q">“</span>如果 EACO 的核心是能量、态度、协作与优化，
+            那么它实际上可以成为一个全球文明升级模型——<br>
+            提升个人认知，提升组织效率，提升社会文明，提升地球的可持续性。
+          </p>
+          <p class="def-note">
+            与 100 个认知模型结合，是这套模型的工作方法：不发明新理论，只把已被验证的思考方式接进同一套协作协议。
+          </p>
+
+          <div class="formula reveal">
+            <b>EACO</b> <span class="x">=</span> 正能量 <span class="x">×</span> 积极态度 <span class="x">×</span> 全球协作 <span class="x">×</span> 持续优化
+          </div>
+          <p class="formula-note">乘法结构：任何一项为零，整体为零。这是它区别于口号的地方。</p>
+
+          <div class="ca-chip reveal">
+            <span class="lab">CA / SOLANA</span>
+            <code>DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</code>
+            <button class="copy-mini" type="button" data-copy="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH">COPY</button>
+          </div>
+        </div>
+
+        <div class="letters reveal">
+          <div class="letter">
+            <span class="big">E</span>
+            <span class="en">Energy</span>
+            <div class="cn">能量</div>
+            <p>把注意力、算力、体力，变成可积累的势能。不消耗人，而是放大人。</p>
+          </div>
+          <div class="letter">
+            <span class="big">A</span>
+            <span class="en">Attitude</span>
+            <div class="cn">态度</div>
+            <p>长期主义与正和博弈，作为默认设置。先假设对方值得被认真对待。</p>
+          </div>
+          <div class="letter">
+            <span class="big">C</span>
+            <span class="en">Cooperation</span>
+            <div class="cn">协作</div>
+            <p>一人公司之间用协议协作，而不是用雇佣关系。接口清晰，结算透明。</p>
+          </div>
+          <div class="letter">
+            <span class="big">O</span>
+            <span class="en">Optimization</span>
+            <div class="cn">优化</div>
+            <p>每一次交付，都要比上一次更省、更准、更可复用。优化是习惯，不是项目。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 02 SKILLS ================= -->
+    <section class="sec wrap" id="skills">
+      <div class="sec-head reveal">
+        <span class="sec-no">02</span>
+        <div>
+          <p class="eyebrow">THE SKILL STACK · 10 DESIGN + 10 ENGINEERING</p>
+          <h2>20 个 Skill，<br>构成一家<em>完整的公司</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          一家传统公司需要设计部、工程部、市场部、法务与运维。OPC 不需要部门，只需要<b>可调用的能力</b>。
+          下面 20 个 Skill 是当前全球设计者与程序员最常用、杠杆最高的一批——它们来自公开的技能生态（Anthropic Skills、设计系统实践、开源工程工具链），
+          每一个都能单独接活，组合起来就是一家公司。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="filters reveal">
+          <button class="chip on" type="button" data-filter="all">全部 <i>20</i></button>
+          <button class="chip" type="button" data-filter="design">设计 <i>08</i></button>
+          <button class="chip" type="button" data-filter="engineer">工程 <i>09</i></button>
+          <button class="chip" type="button" data-filter="growth">增长 <i>02</i></button>
+          <button class="chip" type="button" data-filter="agent">智能体 <i>01</i></button>
+          <span class="filter-count" id="filterCount">SHOWING 20 / 20</span>
+        </div>
+
+        <div class="skill-grid" id="skillGrid">
+          <article class="skill reveal" data-cat="design">
+            <span class="no">01</span>
+            <div>
+              <h3>前端设计 <code>frontend-design</code> <span class="tag d">设计</span></h3>
+              <p class="desc">先定美学方向，再写代码。让页面有明确观点，而不是模板拼接。</p>
+              <p class="use"><b>OPC</b> 24 小时交付出可上线的官网与落地页。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="design">
+            <span class="no">02</span>
+            <div>
+              <h3>设计系统 <code>design-system</code> <span class="tag d">设计</span></h3>
+              <p class="desc">颜色、字阶、间距、圆角、组件状态矩阵一次定好，后续所有页面自动对齐。</p>
+              <p class="use"><b>OPC</b> 一份规范支撑全年交付，客户换人也不跑偏。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="design">
+            <span class="no">03</span>
+            <div>
+              <h3>品质打磨 <code>impeccable</code> <span class="tag d">设计</span></h3>
+              <p class="desc">用“反 AI 审美”清单审查界面：字体、色彩、节奏、动效是否真的成立。</p>
+              <p class="use"><b>OPC</b> 交付前最后一道关，让作品被记住而不是被划过。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="design">
+            <span class="no">04</span>
+            <div>
+              <h3>动效设计 <code>motion-design</code> <span class="tag d">设计</span></h3>
+              <p class="desc">用状态变化解释因果，而不是装饰。缓动曲线决定产品的高级感。</p>
+              <p class="use"><b>OPC</b> 同样的功能，转化率能差出一倍。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="design">
+            <span class="no">05</span>
+            <div>
+              <h3>数据可视化 <code>data-viz</code> <span class="tag d">设计</span></h3>
+              <p class="desc">把复杂数据变成一眼可读的图，选对图表比画得漂亮重要。</p>
+              <p class="use"><b>OPC</b> 尽调报告、月报、看板，是最高客单价的品类。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="design">
+            <span class="no">06</span>
+            <div>
+              <h3>品牌识别 <code>brand-identity</code> <span class="tag d">设计</span></h3>
+              <p class="desc">标志、语气、视觉锚点三件套，让小公司看起来值得信任。</p>
+              <p class="use"><b>OPC</b> 出海第一单，往往从“看起来像一家真公司”开始。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="design">
+            <span class="no">07</span>
+            <div>
+              <h3>3D / WebGL <code>webgl-3d</code> <span class="tag d">设计</span></h3>
+              <p class="desc">用 three.js 做产品拆解、数字孪生、地球与星图场景。</p>
+              <p class="use"><b>OPC</b> 沉浸式展示，是硬件与 RWA 项目的刚需。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">08</span>
+            <div>
+              <h3>无障碍审查 <code>a11y-audit</code> <span class="tag e">工程</span></h3>
+              <p class="desc">键盘可达、对比度、语义化标签。不是情怀，是投标资格。</p>
+              <p class="use"><b>OPC</b> 政府、金融、教育客户的准入门槛。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="design">
+            <span class="no">09</span>
+            <div>
+              <h3>设计评审 <code>design-critique</code> <span class="tag d">设计</span></h3>
+              <p class="desc">用启发式打分与认知负载分析，指出界面真正的问题。</p>
+              <p class="use"><b>OPC</b> 接单前的诊断服务，最容易转成长期合同。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="growth">
+            <span class="no">10</span>
+            <div>
+              <h3>转化文案 <code>ux-writing</code> <span class="tag g">增长</span></h3>
+              <p class="desc">每个词都有存在价值。标题、按钮、空状态，都在替你说服。</p>
+              <p class="use"><b>OPC</b> 不改代码也能提升转化，最快见效的交付。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">11</span>
+            <div>
+              <h3>代码评审 <code>code-review</code> <span class="tag e">工程</span></h3>
+              <p class="desc">按可判定条件给缺陷定级，输出带未审范围的审查报告。</p>
+              <p class="use"><b>OPC</b> 外包交付前自审，把返工成本压到最低。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">12</span>
+            <div>
+              <h3>根因调试 <code>debugging</code> <span class="tag e">工程</span></h3>
+              <p class="desc">系统性复现、二分定位、验证假设，而不是改到不报错为止。</p>
+              <p class="use"><b>OPC</b> 别人搞不定的疑难杂症，就是你的溢价。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">13</span>
+            <div>
+              <h3>去重重构 <code>refactor</code> <span class="tag e">工程</span></h3>
+              <p class="desc">找出重复代码块，按收益排序，一次一组安全提取。</p>
+              <p class="use"><b>OPC</b> 接手别人项目时，先把地基修平。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">14</span>
+            <div>
+              <h3>测试生成 <code>test-gen</code> <span class="tag e">工程</span></h3>
+              <p class="desc">覆盖边界、异常与回归路径，让改动敢于发生。</p>
+              <p class="use"><b>OPC</b> 敢接长期维护合同的前提。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">15</span>
+            <div>
+              <h3>接口设计 <code>api-design</code> <span class="tag e">工程</span></h3>
+              <p class="desc">契约先行，版本可演进，错误码能自解释。</p>
+              <p class="use"><b>OPC</b> 做 B 端系统集成，接口就是产品。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">16</span>
+            <div>
+              <h3>性能体检 <code>perf-audit</code> <span class="tag e">工程</span></h3>
+              <p class="desc">Core Web Vitals、包体积、渲染瓶颈，按 ROI 排序给方案。</p>
+              <p class="use"><b>OPC</b> 一次体检报告，可以卖两次：诊断 + 修复。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="growth">
+            <span class="no">17</span>
+            <div>
+              <h3>SEO / AI 可见度 <code>seo-geo</code> <span class="tag g">增长</span></h3>
+              <p class="desc">既被搜索引擎收录，也被 AI 答案引用。新的免费获客入口。</p>
+              <p class="use"><b>OPC</b> 让客户在问 AI 时先看到你。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">18</span>
+            <div>
+              <h3>安全加固 <code>security-headers</code> <span class="tag e">工程</span></h3>
+              <p class="desc">CSP、HSTS、权限边界、依赖审计，一次配好长期生效。</p>
+              <p class="use"><b>OPC</b> 通过企业安全尽调的硬通货。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="engineer">
+            <span class="no">19</span>
+            <div>
+              <h3>云与部署 <code>deploy-cloud</code> <span class="tag e">工程</span></h3>
+              <p class="desc">数据库、登录、文件存储、模型调用，托管式一键接入。</p>
+              <p class="use"><b>OPC</b> 一个人也能运维一整套后端。</p>
+            </div>
+          </article>
+          <article class="skill reveal" data-cat="agent">
+            <span class="no">20</span>
+            <div>
+              <h3>智能体编排 <code>agent-orchestration</code> <span class="tag a">智能体</span></h3>
+              <p class="desc">把以上 19 个 Skill 串成流水线，用 MCP 连接工具与数据。</p>
+              <p class="use"><b>OPC</b> 一人抵一队：你负责判断，Agent 负责执行。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 03 NETWORK ================= -->
+    <section class="sec wrap" id="network">
+      <div class="sec-head reveal">
+        <span class="sec-no">03</span>
+        <div>
+          <p class="eyebrow">10 OPC NODES · 10 FRIENDLY JURISDICTIONS</p>
+          <h2>十座城市，<br>十家<em>一个人的公司</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          每个节点只做三件事：<b>接单、交付、引荐</b>。城市的选择标准不是风景，而是监管清晰度、税制、时区补位与华商网络。
+          十个节点连起来，就是一条 24 小时不熄灭的交付线。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="flow reveal">
+          <div class="flow-step">
+            <span class="fn">STEP 01</span>
+            <h4>接入 Brief</h4>
+            <p>客户只描述问题，不写需求文档。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">STEP 02</span>
+            <h4>拆成 Skill 任务</h4>
+            <p>Agent 把问题拆成 20 个能力可执行的单元。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">STEP 03</span>
+            <h4>派给时区节点</h4>
+            <p>睡着的节点交接给醒着的节点。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">STEP 04</span>
+            <h4>交叉质检</h4>
+            <p>另一个节点用 code-review 与 critique 复核。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">STEP 05</span>
+            <h4>结算与留痕</h4>
+            <p>链上记账，交付物进公共知识库。</p>
+          </div>
+        </div>
+
+        <div class="nodes reveal">
+          <div class="node-head">
+            <span>No.</span><span>City</span><span>Why friendly / OPC 定位</span><span>Stack</span><span>TZ</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">01</span>
+            <div class="city"><b>新加坡</b><span>Singapore</span></div>
+            <p class="why">监管清晰、家族办公室密集、华商网络成熟。<em>资本与合规枢纽</em>，负责对接机构与 RWA 结构设计。</p>
+            <div class="stack"><span>brand-identity</span><span>security</span></div>
+            <span class="tz">UTC+8</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">02</span>
+            <div class="city"><b>迪拜</b><span>Dubai · DIFC</span></div>
+            <p class="why">低税、黄金与大宗贸易底子厚、连接欧非。<em>RWA 落地与中东资本</em>的第一站。</p>
+            <div class="stack"><span>api-design</span><span>deploy</span></div>
+            <span class="tz">UTC+4</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">03</span>
+            <div class="city"><b>中国香港</b><span>Hong Kong, China</span></div>
+            <p class="why">虚拟资产牌照制度明确，连接内地供应链与全球资本。<em>跨境结算与合规门户</em>。</p>
+            <div class="stack"><span>data-viz</span><span>a11y</span></div>
+            <span class="tz">UTC+8</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">04</span>
+            <div class="city"><b>楚格</b><span>Zug · Switzerland</span></div>
+            <p class="why">“加密谷”，私行与托管体系成熟。<em>资产托管与审计叙事</em>的可信背书。</p>
+            <div class="stack"><span>code-review</span><span>security</span></div>
+            <span class="tz">UTC+1</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">05</span>
+            <div class="city"><b>塔林</b><span>Tallinn · Estonia</span></div>
+            <p class="why">e-Residency 让远程注册与数字身份成为标准动作。<em>一人公司的注册与身份层</em>。</p>
+            <div class="stack"><span>deploy</span><span>agent</span></div>
+            <span class="tz">UTC+2</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">06</span>
+            <div class="city"><b>里斯本</b><span>Lisbon · Portugal</span></div>
+            <p class="why">生活成本与创作者签证友好，欧洲时区的交付后方。<em>设计与内容生产</em>基地。</p>
+            <div class="stack"><span>impeccable</span><span>ux-writing</span></div>
+            <span class="tz">UTC+0</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">07</span>
+            <div class="city"><b>东京</b><span>Tokyo · Japan</span></div>
+            <p class="why">监管渐进可控，IP 与内容产业发达。<em>IP 数字化与展陈</em>，服务品牌与美术馆。</p>
+            <div class="stack"><span>motion</span><span>webgl-3d</span></div>
+            <span class="tz">UTC+9</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">08</span>
+            <div class="city"><b>首尔</b><span>Seoul · Korea</span></div>
+            <p class="why">消费级 Web3 与粉丝经济最活跃，开发者社区密度高。<em>面向年轻人的产品实验场</em>。</p>
+            <div class="stack"><span>design-system</span><span>data-viz</span></div>
+            <span class="tz">UTC+9</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">09</span>
+            <div class="city"><b>悉尼</b><span>Sydney · Australia</span></div>
+            <p class="why">亚太时区补位，机构客户偏好稳健。<em>把纽约的夜晚接到亚洲的清晨</em>。</p>
+            <div class="stack"><span>perf-audit</span><span>seo</span></div>
+            <span class="tz">UTC+10</span>
+          </div>
+
+          <div class="node">
+            <span class="idx">10</span>
+            <div class="city"><b>圣保罗</b><span>São Paulo · Brazil</span></div>
+            <p class="why">拉美增量市场，葡语世界入口，支付创新活跃。<em>本地化与新兴市场增长</em>。</p>
+            <div class="stack"><span>frontend-design</span><span>growth</span></div>
+            <span class="tz">UTC-3</span>
+          </div>
+        </div>
+
+        <p class="note reveal">
+          关于监管与税务：以上仅为网络布局与商业观察，不构成法律、税务或投资建议。具体架构请以当地最新法规与持牌专业意见为准。
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= 04 BOARDROOM ================= -->
+    <section class="sec wrap" id="boardroom">
+      <div class="sec-head reveal">
+        <span class="sec-no">04</span>
+        <div>
+          <p class="eyebrow">BECOME CEO · AI EXECUTIVE TEAM</p>
+          <h2>一个人开公司，<br>配一支<em>AI 高管团队</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          <b>Become CEO</b> 是一套开源多智能体系统，基于 <b>OpenClaw</b> 构建：
+          在 Discord 上 <b>5 分钟</b>部署完整的 AI 高管团队——CEO、CTO、CFO、CMO、CISO、COO、CHRO 七个席位，运行在 <b>Oracle Cloud 永久免费</b>层上。
+          本节收录两条开源路线，第二条是自托管的<b>虚拟高管小组 OpenExecutive</b>。
+          把它们接进每一个 EACO OPC 节点，「一个人的公司」就真的拥有一整层管理层。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="bc-grid reveal">
+          <div class="bc-card">
+            <span class="bc-code">CEO</span>
+            <h4>首席执行官</h4>
+            <p>承接使命、拆解 OKR、向 10 个节点分派季度目标；当其他高管意见冲突时，负责拍板并承担决策留痕。</p>
+          </div>
+          <div class="bc-card">
+            <span class="bc-code">CTO</span>
+            <h4>首席技术官</h4>
+            <p>接管 20 个 Skill 的技术路线：架构选型、code-review 交叉质检、部署流水线与 Agent 版本治理。</p>
+          </div>
+          <div class="bc-card">
+            <span class="bc-code">CFO</span>
+            <h4>首席财务官</h4>
+            <p>管链上账本与现金流：EACO 池子收益、人力与算力成本、向 DAO 报表，让 OPC 的账 100% 可审计。</p>
+          </div>
+          <div class="bc-card">
+            <span class="bc-code">CMO</span>
+            <h4>首席营销官</h4>
+            <p>内容日历与叙事：把「地球最好的币」讲成地球村听得懂的故事，运营 Discord、GitHub 与全球社区。</p>
+          </div>
+          <div class="bc-card">
+            <span class="bc-code">CISO</span>
+            <h4>首席安全官</h4>
+            <p>守住私钥、合约与数据三条红线：审计 Agent 的每一步链上操作，任何越权动作先拦下再汇报。</p>
+          </div>
+          <div class="bc-card">
+            <span class="bc-code">COO</span>
+            <h4>首席运营官</h4>
+            <p>跑通「接 Brief → 拆任务 → 派节点 → 质检 → 结算」五步流程，让 10 个时区节点交接不掉链子。</p>
+          </div>
+          <div class="bc-card">
+            <span class="bc-code">CHRO</span>
+            <h4>首席人才官</h4>
+            <p>管理 Agent 编制与「招聘」：为节点匹配合适的 Skill，并从华夏能量库随机注入一句，作为团队的精神底色。</p>
+          </div>
+          <div class="bc-card bc-you">
+            <span class="bc-code">YOU</span>
+            <h4>唯一的地球人</h4>
+            <p>七个高管全天候运转，你只做一件事：决定公司去哪里。所有智能体为人类服务——这是最高原则，也写进每一家 OPC 的章程。</p>
+          </div>
+        </div>
+
+        <div class="flow flow-4 reveal">
+          <div class="flow-step">
+            <span class="fn">MINUTE 01</span>
+            <h4>准备 OpenClaw</h4>
+            <p>克隆 become-ceo 开源仓库，按文档安装 OpenClaw 运行时。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">MINUTE 02</span>
+            <h4>接入 Discord</h4>
+            <p>创建你的服务器，邀请机器人，7 位高管自动入席。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">MINUTE 03</span>
+            <h4>任命与授权</h4>
+            <p>给每位高管写一句话章程：职权、红线、汇报对象。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">MINUTE 04-05</span>
+            <h4>Oracle Cloud 上线</h4>
+            <p>部署到 Oracle Cloud 永久免费层，24 小时在线，成本为零。</p>
+          </div>
+        </div>
+
+        <div class="bc-cta reveal">
+          <a class="btn btn-solid" href="https://become-ceo.com/zh" target="_blank" rel="noopener">become-ceo.com · 中文文档 ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/wanikua/become-ceo" target="_blank" rel="noopener">GitHub · wanikua/become-ceo ↗</a>
+          <span class="bc-cost">OPEN SOURCE · OPENCLAW · ORACLE CLOUD FREE TIER</span>
+        </div>
+
+        <div class="ox-panel reveal">
+          <div class="ox-head">
+            <h3>虚拟高管小组 · <em>OpenExecutive</em></h3>
+            <span class="ox-kw">APACHE 2.0 · SELF-HOSTED · DOCKER<br>FASTAPI + NEXT.JS · CHROMADB</span>
+          </div>
+          <p>
+            第二条开源路线：<b>OpenExecutive</b>（SenteLabs）用<b>一个统一连贯的高管人格</b>面对你，
+            背后由 <b>9 位专家智能体</b>支撑——CSO 战略、CFO 财务、CHRO 人才、总法律顾问、COO 运营、CMO 营销、CPO 产品、
+            销售负责人与董事会沟通总监。Docker 两个容器即可自托管，数据不出你的服务器。
+          </p>
+          <div class="elist">
+            <div><i>01</i><span><b>Act as me · 数字孪生</b><em>以领导者本人的语气起草 Gmail 邮件供审阅发送，最终决定权永远在人。</em></span></div>
+            <div><i>02</i><span><b>九位专家 · 一个声音</b><em>多智能体架构对使用者不可见，管理层得到的是连贯一致的答复。</em></span></div>
+            <div><i>03</i><span><b>多渠道接入</b><em>Slack、Discord、Telegram、Google Chat、Gmail / Outlook、CLI、Web UI、MCP——在团队已在的地方工作。</em></span></div>
+            <div><i>04</i><span><b>企业知识库</b><em>Google Drive、OneDrive、Confluence、Notion 同步进本地 ChromaDB，检索即上下文。</em></span></div>
+            <div><i>05</i><span><b>情景记忆与主动跟进</b><em>跨会话记住过往决策，调度器主动提醒；模型可换 Claude / 本地模型 / OpenRouter。</em></span></div>
+            <div><i>06</i><span><b>治理与安全</b><em>消费审批阈值、审计日志、fail-closed 权限、收发白名单——安全官 CISO 会喜欢这一条。</em></span></div>
+          </div>
+          <div class="bc-cta">
+            <a class="btn btn-solid" href="https://github.com/SenteLabsAI/OpenExecutive" target="_blank" rel="noopener">GitHub · SenteLabsAI/OpenExecutive ↗</a>
+            <a class="btn btn-ghost" href="https://sentelabs.ai" target="_blank" rel="noopener">sentelabs.ai ↗</a>
+            <span class="bc-cost">ONE UNIFIED EXECUTIVE VOICE · 9 SPECIALIST AGENTS</span>
+          </div>
+        </div>
+
+        <p class="note reveal"><span>
+          双轨怎么选：<b>Become CEO</b> 走 Discord 轻量快启，5 分钟上线、Oracle Cloud 永久免费，适合 OPC 起步期；
+          <b>OpenExecutive</b> 走 Docker 自托管重治理，带记忆、知识库与审批流，适合节点进入规模化交付后升级。
+          与 EACO OPC 的关系：一个节点 = 一个地球人 + 一支 AI 高管团队 + 一个 EACO Agent。
+          Become CEO / OpenExecutive 负责「管理层」，EACO Agent 负责「执行层」，华夏能量库负责「精神层」。
+          三者的共同边界由最高原则划定：所有智能体为人类文明服务。项目信息以上游官方仓库与文档为准，本页仅作集成说明。
+        </span></p>
+      </div>
+    </section>
+
+    <!-- ================= 05 INDUSTRIES ================= -->
+    <section class="sec wrap" id="industries">
+      <div class="sec-head reveal">
+        <span class="sec-no">05</span>
+        <div>
+          <p class="eyebrow">TOP 30 INDUSTRIES · ASIA / EARTH VILLAGE / INTERSTELLAR</p>
+          <h2>三十个行业，<br>三条从<em>地球村</em>通往<em>星海</em>的赛道。</h2>
+        </div>
+        <p class="sec-lead">
+          一个行业要同时过三关才算入选：<b>亚洲的比较优势</b>、<b>地球村的真实需求</b>、<b>星际文明的长期相关性</b>。
+          下面按语境分成三组各十个——亚洲组现在就能接单，地球村组是全球同一张需求表，星际组现在只储备数据与专利。
+          每条都写了「为什么是这里」和「OPC × EACO 怎么切」。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="ind-tools reveal">
+          <div class="filters" id="ichips" style="margin:0;flex-wrap:wrap">
+            <button class="chip on" type="button" data-track="all">全部 <i>30</i></button>
+            <button class="chip" type="button" data-track="asia">亚洲 <i>10</i></button>
+            <button class="chip" type="button" data-track="village">地球村 <i>10</i></button>
+            <button class="chip" type="button" data-track="space">星际 <i>10</i></button>
+          </div>
+          <span class="filter-count" id="iCount">SHOWING 030 / 30</span>
+        </div>
+
+        <div class="nodes ind-nodes reveal">
+          <div class="node-head">
+            <span>No.</span><span>Industry</span><span>为什么是这个语境</span><span>OPC × EACO 切入点</span><span>启动窗口</span>
+          </div>
+          <div class="ind-tier" data-track="asia">
+            <span class="it-code">I</span>
+            <span class="it-name">亚洲 · ASIA</span>
+            <span class="it-sub">比较优势：制造、供应链、人才密度、时区补位、华商网络</span>
+            <span class="it-meta">10 个行业 · 现在就能接单</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">01</span>
+            <div class="city"><b>AI Agent 交付与自动化服务</b><span>AI AGENT DELIVERY</span></div>
+            <p class="why">工程与交付人才密度全球最高，成本结构好；一个时区串起东盟、东亚与中东，客户要结果不要工时。</p>
+            <p class="opc">一人挂 3 个 Skill 接单，按「页面 / 系统 / 报告」定价；跨时区接力不断线。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">02</span>
+            <div class="city"><b>跨境电商与跨境供应链</b><span>CROSS-BORDER COMMERCE</span></div>
+            <p class="why">中国制造 + 东盟消费 + 中东购买力，三块拼图在一个时区半径内；小单快反是亚洲独门能力。</p>
+            <p class="opc">选品、内容、履约全外包，OPC 只做品牌与选品决策；Agent 批量做多语素材。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">03</span>
+            <div class="city"><b>数字内容与 IP 出海</b><span>CONTENT & IP</span></div>
+            <p class="why">短剧、动漫、游戏产能进入全球第一梯队，成本约为北美三分之一，迭代速度是两倍。</p>
+            <p class="opc">一人完成编剧—生成—配音—分发；把角色与设定做成可授权的 IP 资产包。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">04</span>
+            <div class="city"><b>金融科技 / 跨境支付 / RWA</b><span>FINTECH & RWA</span></div>
+            <p class="why">新加坡、中国香港、迪拜构成监管与资本的三角；华商网络提供第一波真实资产。</p>
+            <p class="opc">做「方案商」而非「牌照方」：结构设计 + 产品交付，边界清楚才活得久。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">05</span>
+            <div class="city"><b>新能源与储能</b><span>ENERGY & STORAGE</span></div>
+            <p class="why">光伏、电池、逆变器产业链主导全球；亚洲的岛屿与高原是最天然的微电网试验场。</p>
+            <p class="opc">项目开发、运维咨询、绿电数据产品三条线；不碰重资产，只卖判断与系统。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">06</span>
+            <div class="city"><b>消费电子与智能硬件</b><span>CONSUMER HARDWARE</span></div>
+            <p class="why">从模具到量产的完整供应链在两小时车程内，硬件迭代速度全球最快。</p>
+            <p class="opc">做产品定义与出海品牌，制造外包；用 Agent 管 BOM、认证与多语说明书。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">07</span>
+            <div class="city"><b>轻量工业软件与工厂数字化</b><span>LIGHT INDUSTRIAL SOFTWARE</span></div>
+            <p class="why">中小企业数字化缺口最大：标准化 SaaS 用不上，定制又太贵，中间地带正是 OPC 射程。</p>
+            <p class="opc">只做垂直小工具：一个车间、一个流程、一个报表，交付即收钱，不打价格战。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">08</span>
+            <div class="city"><b>物流与跨境仓配</b><span>LOGISTICS & WAREHOUSING</span></div>
+            <p class="why">全球前十港口有七个在亚洲；航线密度决定履约时效优势。</p>
+            <p class="opc">做路由优化、清关合规与仓网咨询；把运价时效数据做成决策产品。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">09</span>
+            <div class="city"><b>农业科技与海洋养殖</b><span>AGRI & OCEAN FARMING</span></div>
+            <p class="why">耕地少、海域大、养殖技术强；垂直农场与深远海养殖都有真实场景。</p>
+            <p class="opc">做数字化方案并按产量提升分成，比卖软件更容易成交。</p>
+            <span class="win">1–3 年</span>
+          </div>
+          <div class="node" data-track="asia">
+            <span class="idx">10</span>
+            <div class="city"><b>全球用工与远程人才网络</b><span>GLOBAL EMPLOYMENT</span></div>
+            <p class="why">远程人才供给充足，工程师与设计师的性价比在全球有竞争力。</p>
+            <p class="opc">做远程团队搭建与薪酬外包；用稳定币结算，绕开跨境汇款摩擦。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="ind-tier" data-track="village">
+            <span class="it-code">II</span>
+            <span class="it-name">地球村 · EARTH VILLAGE</span>
+            <span class="it-sub">全球公共品：教育、健康、气候、身份、社区与开源基础设施</span>
+            <span class="it-meta">10 个行业 · 全球同一张需求表</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">11</span>
+            <div class="city"><b>教育科技与技能重塑</b><span>EDTECH & RESKILLING</span></div>
+            <p class="why">全球技能缺口在扩大，AI 让「一对一导师」的边际成本接近零，需求没有国界。</p>
+            <p class="opc">AI 导师 + 课程工厂：把一门课拆成 200 个可复用资产，按学习者路径重组。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">12</span>
+            <div class="city"><b>医疗健康与远程诊疗</b><span>HEALTH & TELEMEDICINE</span></div>
+            <p class="why">老龄化与医疗资源不均是全球共同问题，跨境问诊是刚需缺口。</p>
+            <p class="opc">做健康管理与问诊撮合，不做诊疗本身；数据授权与隐私是准入门槛。</p>
+            <span class="win">1–3 年</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">13</span>
+            <div class="city"><b>多语言内容与本地化服务</b><span>LOCALIZATION</span></div>
+            <p class="why">地球村的第一道墙是语言；「语言资本」可以直接定价、直接交付。</p>
+            <p class="opc">一人做多语内容工厂：术语库 + 风格指南 + Agent 批量产出，人工只做终审。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">14</span>
+            <div class="city"><b>气候科技与碳核算</b><span>CLIMATE & MRV</span></div>
+            <p class="why">碳数据是跨境贸易的新关税，MRV（监测—报告—核查）是全球通用语言。</p>
+            <p class="opc">做企业碳盘查与减排路径；把减排量做成可核证、可交易的凭证。</p>
+            <span class="win">1–3 年</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">15</span>
+            <div class="city"><b>水、空气与循环经济工程</b><span>WATER, AIR & CIRCULARITY</span></div>
+            <p class="why">水压力与空气治理是跨国的公共品问题，付费方是政府、园区与企业。</p>
+            <p class="opc">做分布式水处理与循环利用方案；按节水/减排量分成。</p>
+            <span class="win">1–3 年</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">16</span>
+            <div class="city"><b>社区运营与 DAO 治理服务</b><span>COMMUNITY & DAO OPS</span></div>
+            <p class="why">全球协作需要新的组织外壳，社区与治理是每个项目的共同缺口。</p>
+            <p class="opc">做社区代运营与治理设计；按活跃度与提案数结算，把运营做成可计量服务。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">17</span>
+            <div class="city"><b>合规科技与知识产权</b><span>COMPLIANCE & IP</span></div>
+            <p class="why">跨境经营的合规复杂度在上升，商标、专利、数据合规是持续付费需求。</p>
+            <p class="opc">做合规包与知识产权代理；Agent 出初稿，人类律师终审。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">18</span>
+            <div class="city"><b>数字身份与信任基础设施</b><span>DIGITAL IDENTITY</span></div>
+            <p class="why">地球村需要一个可携带的身份：学历、资产、贡献、信用都要能验证。</p>
+            <p class="opc">做 DID 与可验证凭证的落地方案；把「谁批准了什么」变成可验证记录。</p>
+            <span class="win">1–3 年</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">19</span>
+            <div class="city"><b>文旅与数字游民经济</b><span>TRAVEL & NOMAD ECONOMY</span></div>
+            <p class="why">远程工作让「住在哪里」与「为谁工作」解耦，目的地竞争刚开始。</p>
+            <p class="opc">做路线 IP 与在地服务网络；一个人可运营整条线路的内容与预订。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="node" data-track="village">
+            <span class="idx">20</span>
+            <div class="city"><b>开源软件与开发者工具</b><span>OPEN SOURCE TOOLING</span></div>
+            <p class="why">公共数字基础设施是全球协作的底座，开源是最低成本的信任建立方式。</p>
+            <p class="opc">做小而美的开发者工具：MCP 服务器、CLI、编辑器插件，先被使用再谈收入。</p>
+            <span class="win">现在</span>
+          </div>
+          <div class="ind-tier" data-track="space">
+            <span class="it-code">III</span>
+            <span class="it-name">星际文明 · INTERSTELLAR</span>
+            <span class="it-sub">长期能力：空间工程、闭环生态、原位资源、跨行星治理</span>
+            <span class="it-meta">10 个行业 · 现在开始储备数据与专利</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">21</span>
+            <div class="city"><b>空间科技与卫星数据</b><span>SPACE & SATELLITE DATA</span></div>
+            <p class="why">遥感、导航、地面站能力快速上升，应用端几乎空白；地球村的第一张底图来自卫星。</p>
+            <p class="opc">做遥感数据产品化：农业估产、灾害评估、港口监测，一个场景一个产品。</p>
+            <span class="win">3–10 年</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">22</span>
+            <div class="city"><b>闭环生命支持与生态舱</b><span>CLOSED-LOOP LIFE SUPPORT</span></div>
+            <p class="why">水、气、食物的循环是长期生存的前提，地球上已有可验证的小型样本。</p>
+            <p class="opc">做闭环系统的方案设计与指标咨询；把「每公斤补给成本」当成核心指标。</p>
+            <span class="win">10 年+</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">23</span>
+            <div class="city"><b>极端环境居住与模块化建造</b><span>EXTREME HABITATS</span></div>
+            <p class="why">月球与火星基地的本质是极端环境建筑问题，与极地、深海、高原同源。</p>
+            <p class="opc">做模块化居住方案与供应链撮合；按「每平方米可用空间」定价。</p>
+            <span class="win">10 年+</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">24</span>
+            <div class="city"><b>机器人与无人系统</b><span>ROBOTICS & AUTONOMY</span></div>
+            <p class="why">星际作业必须自主：通信延迟决定了机器人不是选项而是前提。</p>
+            <p class="opc">做方案集成与运维；用 Agent 管理机队任务、工时与故障复盘。</p>
+            <span class="win">3–10 年</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">25</span>
+            <div class="city"><b>深空通信与星际网络</b><span>DEEP SPACE NETWORK</span></div>
+            <p class="why">地球村的互联网到了深空就失效，延迟容忍网络（DTN）是新的协议层。</p>
+            <p class="opc">做 DTN 与星际链路的仿真、测试与协议咨询；先服务科研与卫星公司。</p>
+            <span class="win">10 年+</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">26</span>
+            <div class="city"><b>原位资源利用（ISRU）</b><span>IN-SITU RESOURCES</span></div>
+            <p class="why">从地球运一公斤水到月球的成本，决定了必须学会「就地取材」。</p>
+            <p class="opc">做月壤制氧、水冰开采的技术路线与成本模型；以研究合同起步。</p>
+            <span class="win">10 年+</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">27</span>
+            <div class="city"><b>空间能源与无线输能</b><span>SPACE ENERGY</span></div>
+            <p class="why">太空光伏、核电源与无线输能，决定星际基础设施能不能持续运转。</p>
+            <p class="opc">做能量预算与系统集成方案；把「每瓦成本」和「每瓦重量」做成对照表。</p>
+            <span class="win">10 年+</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">28</span>
+            <div class="city"><b>太空制造与材料</b><span>IN-SPACE MANUFACTURING</span></div>
+            <p class="why">微重力下的材料与打印，是地球上做不出来的品类差异。</p>
+            <p class="opc">做材料工艺的知识产品与专利布局；用小批量实验数据换长期授权。</p>
+            <span class="win">10 年+</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">29</span>
+            <div class="city"><b>辐射防护与空间医学</b><span>SPACE MEDICINE</span></div>
+            <p class="why">人体是星际移民最脆弱的一环：辐射、失重、隔离都需要新方案。</p>
+            <p class="opc">做健康监测与防护方案；把「人能不能活着到」作为第一性指标。</p>
+            <span class="win">10 年+</span>
+          </div>
+          <div class="node" data-track="space">
+            <span class="idx">30</span>
+            <div class="city"><b>星际治理与跨行星法理</b><span>INTERPLANETARY GOVERNANCE</span></div>
+            <p class="why">当资源、土地与管辖权离开地球，规则必须先写；否则冲突成本更高。</p>
+            <p class="opc">做治理协议与冲突解决机制设计；用 DAO 做小规模压力测试。</p>
+            <span class="win">10 年+</span>
+          </div>
+        </div>
+
+        <p class="note reveal"><span>三十个行业是判断，不是预言。亚洲组已有可验证的付费场景；地球村组需要跨境协作与合规耐心；星际组现阶段以研究合同、专利与数据积累为主，避免过早投入重资产。本页不构成投资建议。</span></p>
+      </div>
+    </section>
+
+
+    <!-- ================= 05b CLOSED LOOP ================= -->
+    <section class="sec wrap" id="loop">
+      <div class="sec-head reveal">
+        <span class="sec-no">05b</span>
+        <div>
+          <p class="eyebrow">FROM INDUSTRY TO FIRST INVOICE · 90-DAY LOOP</p>
+          <h2>选完行业，<br>用 <em>90 天</em>跑完第一笔闭环。</h2>
+        </div>
+        <p class="sec-lead">
+          行业清单本身不值钱，值钱的是从清单到第一笔收入的那条最短路径。
+          四步、九十天、一个人：每一步都有可验收的交付物，走不完就退回上一步，不要跳。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="flow flow-4 reveal">
+          <div class="flow-step">
+            <span class="fn">DAY 01–07</span>
+            <h4>只选一个行业</h4>
+            <p>从三十个里挑一个，写下 3 个可交付物与 1 个报价区间。选不定就选亚洲组第 1 个。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">DAY 08–30</span>
+            <h4>做一页公开案例</h4>
+            <p>用 Agent 把一个真实问题做完，公开可访问；案例是唯一的入场券。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">DAY 31–60</span>
+            <h4>挂一个节点</h4>
+            <p>按客户时区选城市，完成主体、账户与收款方式；节点只是外壳，交付能力才是本体。</p>
+          </div>
+          <div class="flow-step">
+            <span class="fn">DAY 61–90</span>
+            <h4>收到第一笔钱</h4>
+            <p>链上留痕，交付物进公共知识库，复用为下一个行业的模板。</p>
+          </div>
+        </div>
+
+        <div class="loop-map reveal">
+          <div class="lm-row"><span class="lm-k">亚洲组 →</span><span class="lm-v">新加坡 · 迪拜 · 中国香港 · 东京 · 首尔（时区与合规）</span></div>
+          <div class="lm-row"><span class="lm-k">地球村组 →</span><span class="lm-v">塔林 · 里斯本 · 悉尼 · 圣保罗（远程协作与公共品）</span></div>
+          <div class="lm-row"><span class="lm-k">星际组 →</span><span class="lm-v">全部节点 + 虚拟地球 / 模拟地球（月球、火星沙盘先跑通再落地）</span></div>
+          <div class="lm-row"><span class="lm-k">贯穿 →</span><span class="lm-v">EACO Agent 交付 · AI 高管团队治理 · 华夏能量库定调 · EACO 链上结算</span></div>
+        </div>
+
+        <div class="path reveal">
+          <span>闭环：</span><b>选一个行业</b><span class="ar">→</span><b>做一页案例</b><span class="ar">→</span><b>挂一个节点</b>
+          <span class="ar">→</span><b>收第一笔钱</b><span class="ar">→</span><span class="end">回灌知识库，抬高下一个行业的起点</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 06 EARTH ================= -->
+    <section class="sec wrap" id="earth">
+      <div class="sec-head reveal">
+        <span class="sec-no">06</span>
+        <div>
+          <p class="eyebrow">VIRTUAL EARTH / SIMULATION EARTH</p>
+          <h2>先有<em>虚拟地球</em>，<br>再有<em>模拟地球</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          两个栏目是一组关系：虚拟地球是<b>现在的数字地球</b>，模拟地球是<b>未来的实验地球</b>。
+          前者把现实映射进来，让每个人可以参与；后者先在数字世界里推演，再帮现实世界做更好的决策。
+        </p>
+      </div>
+
+      <div class="sec-body earth-grid">
+        <div class="stage reveal">
+          <div class="mode-switch" role="group" aria-label="切换地球视图">
+            <button type="button" class="on" data-mode="virtual" aria-pressed="true">虚拟地球 · VIRTUAL</button>
+            <button type="button" data-mode="simulation" aria-pressed="false">模拟地球 · SIMULATION</button>
+          </div>
+          <canvas id="earthGlobe" role="img" aria-label="虚拟地球与模拟地球的交互示意图"></canvas>
+          <p class="stage-caption" id="stageCaption">数字孪生层：10 个节点、6 个时区、每一条金色弧线都是一次跨时区交付。</p>
+        </div>
+
+        <div>
+          <div class="earth-panel reveal">
+            <div class="ph">
+              <h3>虚拟地球 · Virtual Earth</h3>
+              <span class="kw">DIGITAL TWIN<br>EARTH VILLAGE · WEB3</span>
+            </div>
+            <p>把现实地球映射成一个可以参与、协作、创造价值的数字地球。它不是地图，而是一层可编程的现实。</p>
+            <div class="elist">
+              <div><i>01</i><span><b>数字孪生地球</b><em>城市、港口、能源与供应链的实时镜像</em></span></div>
+              <div><i>02</i><span><b>元宇宙城市 / 地球村</b><em>可进入的空间，而不是一张宣传页</em></span></div>
+              <div><i>03</i><span><b>链上身份 DID</b><em>一人一身份，跨节点可验证的信誉</em></span></div>
+              <div><i>04</i><span><b>链上资产 · RWA · NFT</b><em>把现实权益映射为可组合的凭证</em></span></div>
+              <div><i>05</i><span><b>DAO 全球协作</b><em>提案、投票、国库，按交付结算</em></span></div>
+              <div><i>06</i><span><b>AI 教育与文明知识库</b><em>100 个认知模型，可检索、可引用</em></span></div>
+              <div><i>07</i><span><b>可持续发展与绿色经济</b><em>把外部成本重新计入账本</em></span></div>
+            </div>
+          </div>
+
+          <div class="earth-panel reveal">
+            <div class="ph">
+              <h3>模拟地球 · Simulation Earth</h3>
+              <span class="kw">AI CIVILIZATION<br>RESOURCE SANDBOX</span>
+            </div>
+            <p>先在数字世界模拟未来，再帮助现实世界做更好的决策。所有模拟都服务于一个目的：让代价发生在沙盘里，而不是地球上。</p>
+            <div class="elist">
+              <div><i>01</i><span><b>文明发展路径模拟</b><em>不同制度、技术与人口结构下的长期后果</em></span></div>
+              <div><i>02</i><span><b>气候与生态模拟</b><em>升温、洋流、碳汇与农业带迁移</em></span></div>
+              <div><i>03</i><span><b>能源与资源分配</b><em>从度电成本到全球矿产流动</em></span></div>
+              <div><i>04</i><span><b>全球经济与财富流动</b><em>利率、贸易与资本迁徙的推演</em></span></div>
+              <div><i>05</i><span><b>人口与城市发展</b><em>迁徙、住房、通勤与公共服务的压力测试</em></span></div>
+              <div><i>06</i><span><b>AI / 科技发展模拟</b><em>算力曲线与就业结构的变化</em></span></div>
+              <div><i>07</i><span><b>月球基地模拟</b><em>补给周期、辐射屏蔽、闭环生态</em></span></div>
+              <div><i>08</i><span><b>火星殖民模拟</b><em>ISRU、水冰、基因多样性与治理</em></span></div>
+              <div><i>09</i><span><b>星际航行与文明沙盘</b><em>通信延迟下的自治与伦理</em></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="path reveal" aria-label="文明路径">
+        <b>现实地球</b><span class="ar">→</span><b>虚拟地球</b><span class="ar">→</span><b>模拟地球</b><span class="ar">→</span><b>月球</b><span class="ar">→</span><b>火星</b><span class="ar">→</span><span class="end">星际文明</span>
+        <span style="margin-left:auto;color:var(--muted)">EACO 贯穿全程：E × A × C × O</span>
+      </div>
+    </section>
+
+    <!-- ================= 05 COSMOS ================= -->
+    <section class="sec wrap" id="cosmos">
+      <div class="sec-head reveal">
+        <span class="sec-no">07</span>
+        <div>
+          <p class="eyebrow">EACO COSMOS · DOCUMENT SET</p>
+          <h2>四份文件，<br>一套<em>宇宙文明协议</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          白皮书讲为什么，设定图谱讲是什么，使用手册讲怎么做，DAO 治理讲谁来决定。
+          四份文件共用一条底线：<b>所有文明为人类文明服务，包括 EACO 本身。</b>
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="principle reveal">
+          <span class="mark">§0</span>
+          <div>
+            <p>所有文明为人类文明服务，包括 EACO。这是最高原则，高于任何价格、叙事与治理条款。</p>
+            <span>THE HIGHEST PRINCIPLE · NON-NEGOTIABLE</span>
+          </div>
+        </div>
+
+        <div class="docs">
+          <details class="doc reveal" open>
+            <summary>
+              <span class="dn">A</span>
+              <div>
+                <h3>EACO 宇宙白皮书</h3>
+                <div class="den">Cosmos Whitepaper · 8 Chapters</div>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <div class="doc-body">
+              <ol>
+                <li><b>序言</b>：最高原则与写作动机——为什么一个币需要一份文明文件。</li>
+                <li><b>能量本位</b>：Energy 作为记账单位，衡量的是被放大的有效做功。</li>
+                <li><b>态度协议</b>：Attitude 如何被写成可验证的行为约束（长期、正和、可追责）。</li>
+                <li><b>协作拓扑</b>：一人公司为节点，协议为边，时区为调度维度。</li>
+                <li><b>优化算法</b>：每次交付的复用率、成本与误差，构成信誉分。</li>
+                <li><b>虚拟地球</b>：DID、RWA、知识库与 DAO 的映射层。</li>
+                <li><b>模拟地球</b>：文明沙盘的边界条件与伦理约束。</li>
+                <li><b>星际文明</b>：通信延迟下的自治、备份与文明延续。</li>
+              </ol>
+              <p class="meta">附录：100 个认知模型索引 / 术语表 / 版本记录 202603</p>
+            </div>
+          </details>
+
+          <details class="doc reveal">
+            <summary>
+              <span class="dn">B</span>
+              <div>
+                <h3>宇宙文明设定图谱</h3>
+                <div class="den">Civilization Atlas · 5 Layers</div>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <div class="doc-body">
+              <ol>
+                <li><b>物理层</b>：能量、物质、距离。一切叙事的硬约束。</li>
+                <li><b>生命层</b>：水、碳、繁殖与生态闭环。</li>
+                <li><b>智能层</b>：个体认知 → 集体智能 → 行星级智能。</li>
+                <li><b>协作层</b>：信任、契约、结算与仲裁。</li>
+                <li><b>意义层</b>：为什么继续。艺术、宗教、教育与记忆。</li>
+              </ol>
+              <p class="meta">标尺：K1 行星文明 / K2 恒星文明 / K3 星系文明，每一级对应一次 EACO 协作密度的跃迁。</p>
+            </div>
+          </details>
+
+          <details class="doc reveal">
+            <summary>
+              <span class="dn">C</span>
+              <div>
+                <h3>星际文明使用手册</h3>
+                <div class="den">Field Manual · 6 Chapters</div>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <div class="doc-body">
+              <ol>
+                <li><b>出发前</b>：你要带走的不是资产，而是可重建的知识与信任。</li>
+                <li><b>身份与信誉</b>：DID 在延迟通信中比护照更可靠。</li>
+                <li><b>资源与补给</b>：闭环优先，冗余其次，浪漫最后。</li>
+                <li><b>通信延迟</b>：分钟级到小时级延迟下，自治是默认状态。</li>
+                <li><b>冲突与仲裁</b>：随机陪审、留痕、可上诉。</li>
+                <li><b>回家</b>：文明的第一义务是记得自己从哪里来。</li>
+              </ol>
+              <p class="meta">配套：节点 checklist / 应急预案模板 / 记忆备份协议</p>
+            </div>
+          </details>
+
+          <details class="doc reveal">
+            <summary>
+              <span class="dn">D</span>
+              <div>
+                <h3>宇宙 DAO 治理体系</h3>
+                <div class="den">Governance · 5 Chambers</div>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <div class="doc-body">
+              <ol>
+                <li><b>成员院</b>：一人一票，守住“人”的底线。</li>
+                <li><b>贡献院</b>：按可验证交付计权，防止空转。</li>
+                <li><b>守护院</b>：对违反最高原则的提案拥有一票否决。</li>
+                <li><b>国库</b>：100% 永久锁定与公开账本，支出逐笔留痕。</li>
+                <li><b>仲裁院</b>：随机陪审 + 上诉 + 公开判例库。</li>
+              </ol>
+              <p class="meta">提案门槛：1 名成员 + 10 名附议；执行延迟 72 小时；所有会议记录上链存证。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 06 CLASSICS ================= -->
+    <section class="sec wrap" id="classics">
+      <div class="sec-head reveal">
+        <span class="sec-no">08</span>
+        <div>
+          <p class="eyebrow">CLASSICS · 100 FRIENDS · CAPITAL THINKING</p>
+          <h2>三部经典，<br>一张<em>一百人的名单</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          技术决定能走多快，文化决定能走多远。以下是从三部经典里读出的三条协作原则，以及“地球最好的 100 个朋友”与资本思维的具体做法。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="classics">
+          <article class="cl reveal">
+            <span class="wm">金</span>
+            <div class="src">金刚经 · Vajra Sutra</div>
+            <h3>无住生心，布施不住相</h3>
+            <p class="gist">应无所住，而生其心。</p>
+            <ul>
+              <li>不执着于单一叙事与短期价格，才看得见真实交付。</li>
+              <li>布施不住相：开源公共品，不要求立刻回报。</li>
+              <li>“凡所有相，皆是虚妄”——警惕任何把 EACO 神化的说法，包括我们自己说的。</li>
+            </ul>
+          </article>
+
+          <article class="cl reveal">
+            <span class="wm">易</span>
+            <div class="src">易经 · I Ching</div>
+            <h3>三易：变易、简易、不易</h3>
+            <p class="gist">穷则变，变则通，通则久。</p>
+            <ul>
+              <li><b>变易</b>：市场与技术一直在变，OPC 的形态必须跟着变。</li>
+              <li><b>简易</b>：协议越简单越能活，接口越少越能连。</li>
+              <li><b>不易</b>：最高原则不变——文明为人类服务。</li>
+              <li>乾坤两卦即一人公司的攻守：自强不息，厚德载物。</li>
+            </ul>
+          </article>
+
+          <article class="cl reveal">
+            <span class="wm">宝</span>
+            <div class="src">宝箧印陀罗尼经</div>
+            <h3>宝箧为器，总持为用</h3>
+            <p class="gist">一法总持无量义。</p>
+            <ul>
+              <li><b>宝箧</b>是可传承的容器：EACO 的知识库与记忆层。</li>
+              <li><b>陀罗尼</b>是总持：用一个协议压缩极复杂的信息。</li>
+              <li>建塔供养，是给长期公共记忆修基础设施——链上铭刻与文明档案。</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="split">
+          <div class="reveal">
+            <div class="friends-top">
+              <h3>地球最好的 100 个朋友</h3>
+              <span>10 ROLES × 10 SEATS</span>
+            </div>
+            <div class="matrix" id="friendMatrix" aria-label="100 位朋友的十类角色矩阵"></div>
+            <div class="legend" id="friendLegend"></div>
+            <p class="friends-note">
+              这不是通讯录，是一份<b>互相交付的名单</b>。规则只有两条：每人每年至少一次公开交付；每人每年至少一次有效引荐。
+              十类角色各十席，满一百人即封版，之后只做替换不做扩张。
+            </p>
+          </div>
+
+          <div class="reveal">
+            <div class="friends-top">
+              <h3>如何提升 EACO 地球的资本思维</h3>
+              <span>3 LAYERS</span>
+            </div>
+            <div class="cap">
+              <div class="cap-item">
+                <span class="ci">Ⅰ</span>
+                <div>
+                  <h4>时间资本：把十年压缩成十个资产</h4>
+                  <p>不要卖时间，要卖可复用的产物：模板、组件库、课程、协议、代码。一次生产，多次结算。</p>
+                </div>
+              </div>
+              <div class="cap-item">
+                <span class="ci">Ⅱ</span>
+                <div>
+                  <h4>结构资本：一人公司 + 多节点 + 协议协作</h4>
+                  <p>用节点代替雇员，用协议代替管理。组织的边界由结算能力决定，而不是由办公室决定。</p>
+                </div>
+              </div>
+              <div class="cap-item">
+                <span class="ci">Ⅲ</span>
+                <div>
+                  <h4>叙事资本：CA 是入口，交付是抵押品</h4>
+                  <p>地址让人找到你，交付让人留下。长期公开的记录，才是唯一不可复制的信用资产。</p>
+                </div>
+              </div>
+            </div>
+            <p class="cap-foot">资本思维不是加杠杆投机，而是把未来的现金流提前结构化，并为它建立可验证的证据链。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 07 WISDOM ================= -->
+    <section class="sec wrap" id="wisdom">
+      <div class="sec-head reveal">
+        <span class="sec-no">09</span>
+        <div>
+          <p class="eyebrow">HUA-XIA ENERGY CORPUS · 300 SENTENCES</p>
+          <h2>三百句华夏正能量，<br>作为 EACO Agent 的<em>精神指令集</em>。</h2>
+        </div>
+        <p class="sec-lead">
+          把华夏最优秀的 <b>300 句正能量语句</b>整理成十大主题，直接赋能给 EACO Agent：
+          Agent 在<b>开启任务</b>、<b>遭遇瓶颈</b>、<b>交付成果</b>之前各随机调用一句，作为判断与回复的语境底色。
+          代码决定 Agent 能做什么，语言决定 Agent 成为什么。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="wfeat reveal">
+          <span class="wlab">ENERGY INJECTION · 今日注入</span>
+          <p class="wq" id="wqText">智不露锋芒，谋不露声色。</p>
+          <div class="wmeta">
+            <span class="tag" id="wqCat">谦逊</span>
+            <span class="src" id="wqSrc">EACO 十训</span>
+          </div>
+          <div class="wbtns">
+            <button class="btn btn-solid" type="button" id="wqNext">注入下一句 →</button>
+            <button class="btn btn-ghost" type="button" id="wqCopy">复制给 Agent</button>
+          </div>
+        </div>
+
+        <div class="wtools reveal">
+          <div class="filters" id="wchips" style="margin:0;flex-wrap:wrap"></div>
+          <input class="wsearch" id="wSearch" type="search" placeholder="搜索语句或出处…" aria-label="搜索能量语句">
+          <span class="filter-count" id="wCount">SHOWING 060 / 300</span>
+        </div>
+
+        <div class="qlist" id="qlist"></div>
+
+        <div class="wmore"><button class="btn btn-ghost" id="wqMore" type="button">展开全部 300 句 ↓</button></div>
+
+        <p class="wnote">语料说明：三百句以儒家修身、道家智慧、史传箴言与民间格言为主，兼收近代格言；首六句为 EACO 十训（社区定制）。
+        出处以通行引用为准，个别谚语与禅语不具名。本语库用于文化赋能与写作灵感，不作宗教或投资承诺。</p>
+      </div>
+    </section>
+
+    <!-- ================= 09 FAQ ================= -->
+    <section class="sec wrap" id="faq">
+      <div class="sec-head reveal">
+        <span class="sec-no">10</span>
+        <div>
+          <p class="eyebrow">100 QUESTIONS · EACO AGENT OPC</p>
+          <h2>一百个问题，<br>覆盖<em>从 0 到 1</em> 的疑问。</h2>
+        </div>
+        <p class="sec-lead">
+          十个主题各十问：概念、技术、工作流、运营、合规、代币、双地球、宇宙、文化、风险。
+          每一条都是真正会被问到的问题，答案控制在三句话内——先给判断，再给边界。
+        </p>
+      </div>
+
+      <div class="sec-body">
+        <div class="faq-tools reveal">
+          <div class="filters" id="fchips" style="margin:0;flex-wrap:wrap"></div>
+          <input class="wsearch" id="fSearch" type="search" placeholder="搜索问题或答案…" aria-label="搜索问答">
+          <span class="filter-count" id="fCount">SHOWING 030 / 100</span>
+        </div>
+
+        <div class="faq-list" id="faqList"></div>
+
+        <div class="wmore"><button class="btn btn-ghost" id="fMore" type="button">展开全部 100 问 ↓</button></div>
+
+        <p class="wnote">说明：本问答为社区整理，涉及法律、税务、证券与投资的部分仅为常识性提示，不构成专业意见；代币相关内容不构成投资建议，也不构成任何安全背书。</p>
+      </div>
+    </section>
+
+    <!-- ================= 08 LINKS ================= -->
+    <section class="sec wrap" id="links">
+      <div class="sec-head reveal">
+        <span class="sec-no">11</span>
+        <div>
+          <p class="eyebrow">ALL LINKS · OFFICIAL INDEX</p>
+          <h2>所有入口，<br>都在<em>这一页</em>。</h2>
+        </div>
+        <p class="sec-lead">官方站点、思想内容、交易与流动性、社区与代码。按用途分组，逐条可点。</p>
+      </div>
+
+      <div class="sec-body link-groups">
+        <div class="lgroup reveal">
+          <h3><b>01</b>官方 · 入口</h3>
+          <a class="lrow" href="https://ucoingroup.github.io/earths-best-coin/" target="_blank" rel="noopener">
+            <span><span class="ln">EACO · Earth's Best Coin</span><span class="lu">ucoingroup.github.io/earths-best-coin</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/eaco50rate/" target="_blank" rel="noopener">
+            <span><span class="ln">EACO 50 Rate</span><span class="lu">ucoingroup.github.io/eaco50rate</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/eaco-web3/" target="_blank" rel="noopener">
+            <span><span class="ln">EACO Web3</span><span class="lu">ucoingroup.github.io/eaco-web3</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025/" target="_blank" rel="noopener">
+            <span><span class="ln">EACO Web3 Series 2025</span><span class="lu">ucoingroup.github.io/eacoweb3-2026/eaco_web3_series2025</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://eaco.freedev.app/eaco_web3_series/" target="_blank" rel="noopener">
+            <span><span class="ln">EACO Web3 Series · Mirror</span><span class="lu">eaco.freedev.app/eaco_web3_series</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://eastcoin.base44.app/" target="_blank" rel="noopener">
+            <span><span class="ln">East Coin 2026</span><span class="lu">eastcoin.base44.app</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/eacoweb3-2026/earth-youth-top10-industries2025.html" target="_blank" rel="noopener">
+            <span><span class="ln">地球村青年十大行业 × EACO</span><span class="lu">earths-youth-top10-industries2025</span></span><span class="ar">↗</span>
+          </a>
+        </div>
+
+        <div class="lgroup reveal">
+          <h3><b>02</b>应用 · 团队</h3>
+          <a class="lrow" href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener">
+            <span><span class="ln">EACO Build World</span><span class="lu">eaco-build-world.base44.app</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://eaco-web3.base44.app" target="_blank" rel="noopener">
+            <span><span class="ln">EACO Web3 App</span><span class="lu">eaco-web3.base44.app</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://earth-eaco-web3.base44.app/eaco-team" target="_blank" rel="noopener">
+            <span><span class="ln">EACO Team</span><span class="lu">earth-eaco-web3.base44.app/eaco-team</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://become-ceo.com/zh" target="_blank" rel="noopener">
+            <span><span class="ln">Become CEO · AI 高管团队（中文）</span><span class="lu">become-ceo.com/zh</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://github.com/wanikua/become-ceo" target="_blank" rel="noopener">
+            <span><span class="ln">Become CEO · 开源仓库</span><span class="lu">github.com/wanikua/become-ceo</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://github.com/SenteLabsAI/OpenExecutive" target="_blank" rel="noopener">
+            <span><span class="ln">OpenExecutive · 虚拟高管小组（开源）</span><span class="lu">github.com/SenteLabsAI/OpenExecutive</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://sentelabs.ai" target="_blank" rel="noopener">
+            <span><span class="ln">SenteLabs · OpenExecutive 出品方</span><span class="lu">sentelabs.ai</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/Mohist-Tech/" target="_blank" rel="noopener">
+            <span><span class="ln">Mohist Tech · 墨家科技</span><span class="lu">ucoingroup.github.io/Mohist-Tech</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/Footsteps-of-Civilization/" target="_blank" rel="noopener">
+            <span><span class="ln">Footsteps of Civilization</span><span class="lu">ucoingroup.github.io/Footsteps-of-Civilization</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/linguistic-capital/" target="_blank" rel="noopener">
+            <span><span class="ln">Linguistic Capital · 语言资本</span><span class="lu">ucoingroup.github.io/linguistic-capital</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/eur-eaco/" target="_blank" rel="noopener">
+            <span><span class="ln">EUR · EACO</span><span class="lu">ucoingroup.github.io/eur-eaco</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/au-trade/" target="_blank" rel="noopener">
+            <span><span class="ln">AU Trade</span><span class="lu">ucoingroup.github.io/au-trade</span></span><span class="ar">↗</span>
+          </a>
+        </div>
+
+        <div class="lgroup reveal">
+          <h3><b>03</b>思想 · 内容</h3>
+          <a class="lrow" href="https://ucoingroup.github.io/100WaysToWealth/" target="_blank" rel="noopener">
+            <span><span class="ln">100 Ways To Wealth</span><span class="lu">ucoingroup.github.io/100WaysToWealth</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/earth-100-friends/" target="_blank" rel="noopener">
+            <span><span class="ln">Earth · 100 Friends</span><span class="lu">ucoingroup.github.io/earth-100-friends</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/good-books/" target="_blank" rel="noopener">
+            <span><span class="ln">Good Books</span><span class="lu">ucoingroup.github.io/good-books</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://github.com/ucoingroup" target="_blank" rel="noopener">
+            <span><span class="ln">GitHub · ucoingroup</span><span class="lu">github.com/ucoingroup</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://discord.gg/bWCDME9Pkc" target="_blank" rel="noopener">
+            <span><span class="ln">Discord · EACO 社区</span><span class="lu">discord.gg/bWCDME9Pkc</span></span><span class="ar">↗</span>
+          </a>
+        </div>
+
+        <div class="lgroup reveal">
+          <h3><b>04</b>交易 · 流动性</h3>
+          <a class="lrow" href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" rel="noopener">
+            <span><span class="ln">Meteora DAMM v2 · eaco-dao-pool202601</span><span class="lu">app.meteora.ag/dammv2/H4P6…H1Cc</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank" rel="noopener">
+            <span><span class="ln">eaco-DOGE Pool</span><span class="lu">orbmarkets.io/address/Atx4…Evj34</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://ucoingroup.github.io/eacoSWAP/" target="_blank" rel="noopener">
+            <span><span class="ln">eacoSWAP</span><span class="lu">ucoingroup.github.io/eacoSWAP</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://github.com/ucoingroup/eacoswap2025" target="_blank" rel="noopener">
+            <span><span class="ln">eacoswap2025 · Source</span><span class="lu">github.com/ucoingroup/eacoswap2025</span></span><span class="ar">↗</span>
+          </a>
+          <a class="lrow" href="https://github.com/ucoingroup/FreeToken-eaco" target="_blank" rel="noopener">
+            <span><span class="ln">FreeToken-eaco</span><span class="lu">github.com/ucoingroup/FreeToken-eaco</span></span><span class="ar">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 08 CONTRACT ================= -->
+    <section class="sec dark" id="contract">
+      <div class="wrap">
+        <div class="sec-head reveal">
+        <span class="sec-no">12</span>
+        <div>
+          <p class="eyebrow">CONTRACT ADDRESS · LIQUIDITY</p>
+            <h2>地球最好的币，<br>只有一个<em>地址</em>。</h2>
+          </div>
+          <p class="sec-lead">Earth's Best Coin = EACO = E。AI + RWA + Web3。任何自称 EACO 的合约，请先与下方地址逐字符核对。</p>
+        </div>
+
+        <div class="stamp" aria-hidden="true">100%<br>PERMANENTLY<br>LOCKED</div>
+
+        <div class="ca-big reveal">
+          <div style="min-width:0;flex:1 1 520px">
+            <div class="lab">Contract Address · Solana</div>
+            <div class="addr" id="caText">DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</div>
+          </div>
+          <button class="btn btn-gold" type="button" data-copy="DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" style="flex:none">复制地址</button>
+        </div>
+
+        <div class="ca-meta reveal">
+          <span>EACO</span><span>EARTH'S BEST COIN</span><span>AI · RWA · WEB3</span><span>100% LOCKED</span>
+        </div>
+
+        <div class="stats3 reveal">
+          <div><b>23.56%</b><span>当前 Farm APR（随市场波动）</span></div>
+          <div><b>100%</b><span>永久锁定，不设解锁计划</span></div>
+          <div><b>2</b><span>在营流动性池：DAMM v2 / DOGE</span></div>
+        </div>
+
+        <div class="pools">
+          <a class="pool reveal" href="https://app.meteora.ag/dammv2/H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc" target="_blank" rel="noopener">
+            <span class="pt">Primary Pool · Meteora</span>
+            <b>eaco-dao-pool 202601 ↗</b>
+            <span class="pa">H4P6RUcyQPG7yCrSyE51P4sfj32aTJC2qE86hodCH1Cc</span>
+          </a>
+          <a class="pool reveal" href="https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34" target="_blank" rel="noopener">
+            <span class="pt">Secondary Pool · Orca</span>
+            <b>eaco-DOGE ↗</b>
+            <span class="pa">Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34</span>
+          </a>
+        </div>
+
+        <div class="memo reveal">
+          <b>当前第一优先事项：</b>寻找愿意为 EACO 添加流动性池的伙伴。私下沟通，不公开喊单，不着急。
+          如果你认同 E × A × C × O，并且有能力提供长期流动性，欢迎先来 Discord 聊一次。
+        </div>
+
+        <p class="disclaimer reveal">
+          风险提示：以上内容为项目信息与社区观点，不构成任何投资建议或收益承诺。加密资产价格波动剧烈，流动性池存在无常损失，
+          APR 为即时数据，会随市场变化。请在充分理解风险并自行研究（DYOR）后做出决定，并遵守所在司法辖区的法律法规。
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap foot-grid">
+        <div class="foot-mark">
+          EACO<span>EARTH'S BEST COIN · MMXXVI</span>
+        </div>
+        <div class="foot-meta">
+          <a href="#top">BACK TO TOP ↑</a><br>
+          ONE PERSON · ONE COMPANY · ONE PLANET<br>
+          ALL CIVILIZATIONS SERVE HUMAN CIVILIZATION
+        </div>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">地址已复制</div>
+
+<script>
+(function(){
+  "use strict";
+  const $ = (s,c)=> (c||document).querySelector(s);
+  const $$ = (s,c)=> Array.prototype.slice.call((c||document).querySelectorAll(s));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- theme palette for canvas ---------- */
+  const PAL = {ink:'16,26,21', green:'15,74,56', green2:'28,107,79', gold:'168,121,31',
+               muted:'109,122,112', inkHex:'#101A15', mutedHex:'#6D7A70', goldHex:'#A8791F', sealHex:'#A6402C'};
+  function readPal(){
+    const cs = getComputedStyle(document.documentElement);
+    const g = function(n){ return (cs.getPropertyValue(n) || '').trim(); };
+    PAL.ink = g('--ink-rgb') || PAL.ink;
+    PAL.green = g('--green-rgb') || PAL.green;
+    PAL.green2 = g('--green2-rgb') || PAL.green2;
+    PAL.gold = g('--gold-rgb') || PAL.gold;
+    PAL.muted = g('--muted-rgb') || PAL.muted;
+    PAL.inkHex = g('--ink') || PAL.inkHex;
+    PAL.mutedHex = g('--muted') || PAL.mutedHex;
+    PAL.goldHex = g('--gold') || PAL.goldHex;
+    PAL.sealHex = g('--seal') || PAL.sealHex;
+  }
+  readPal();
+  window.__eacoReadPal = readPal;
+
+  /* ---------- mobile nav ---------- */
+  const rail = $('#rail'), menuBtn = $('#menuBtn');
+  if(menuBtn && rail){
+    menuBtn.addEventListener('click', function(){
+      const open = rail.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.textContent = open ? '关闭' : '目录';
+    });
+    $$('.rail-link').forEach(function(a){
+      a.addEventListener('click', function(){
+        rail.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+        menuBtn.textContent = '目录';
+      });
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && rail.classList.contains('open')){
+        rail.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+        menuBtn.textContent = '目录';
+      }
+    });
+  }
+
+  /* ---------- progress + scroll spy ---------- */
+  const bar = $('#progressBar');
+  function onScroll(){
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const p = max > 0 ? doc.scrollTop / max : 0;
+    if(bar) bar.style.width = (p * 100).toFixed(2) + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const linkMap = {};
+  $$('.rail-link').forEach(function(a){
+    linkMap[a.getAttribute('href').slice(1)] = a;
+  });
+  if('IntersectionObserver' in window){
+    const spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        $$('.rail-link').forEach(function(l){ l.classList.remove('active'); });
+        if(linkMap[en.target.id]) linkMap[en.target.id].classList.add('active');
+      });
+    }, {rootMargin:'-42% 0px -52% 0px', threshold:0});
+    $$('main section[id]').forEach(function(s){ spy.observe(s); });
+
+    /* ---------- reveal ---------- */
+    const rev = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); rev.unobserve(en.target); }
+      });
+    }, {rootMargin:'0px 0px -6% 0px', threshold:0.06});
+    $$('.reveal').forEach(function(el){ rev.observe(el); });
+  } else {
+    $$('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- copy ---------- */
+  const toast = $('#toast');
+  let toastTimer = null;
+  function copyText(text, msg){
+    const done = function(){
+      if(!toast) return;
+      toast.textContent = msg || '地址已复制';
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 1900);
+    };
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(done).catch(function(){ legacyCopy(text); done(); });
+    } else { legacyCopy(text); done(); }
+  }
+  function legacyCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:-1000px;left:-1000px;opacity:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try{ document.execCommand('copy'); }catch(err){}
+    document.body.removeChild(ta);
+  }
+  document.addEventListener('click', function(e){
+    const b = e.target.closest('[data-copy]');
+    if(!b) return;
+    copyText(b.getAttribute('data-copy'));
+    if(b.classList.contains('btn-gold')){
+      const old = b.textContent;
+      b.textContent = '已复制 ✓';
+      setTimeout(function(){ b.textContent = old; }, 1700);
+    }
+  });
+
+  /* ---------- skill filter ---------- */
+  const chips = $$('.chip');
+  const cards = $$('#skillGrid .skill');
+  const countEl = $('#filterCount');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('on'); });
+      chip.classList.add('on');
+      const f = chip.getAttribute('data-filter');
+      let n = 0;
+      cards.forEach(function(card){
+        const show = f === 'all' || card.getAttribute('data-cat') === f;
+        card.classList.toggle('hide', !show);
+        if(show){ n++; card.classList.add('in'); }
+      });
+      if(countEl){
+        countEl.textContent = 'SHOWING ' + String(n).padStart(2,'0') + ' / 20';
+      }
+    });
+  });
+
+  /* ---------- 100 friends matrix ---------- */
+  const roles = [
+    ['建设者','#0F4A38'], ['设计者','#1C6B4F'], ['研究者','#357A5F'],
+    ['资本','#A8791F'],   ['媒体','#C09442'],   ['教育','#6B7F3A'],
+    ['开源','#3E6B58'],   ['政策','#7A6A52'],   ['艺术','#8E5A3C'],
+    ['星际','#4A5B74']
+  ];
+  const matrix = $('#friendMatrix');
+  const legend = $('#friendLegend');
+  if(matrix && legend){
+    let html = '', leg = '';
+    for(let i=0;i<100;i++){
+      const r = roles[i % 10];
+      html += '<span class="cell" style="background:' + r[1] + '" title="' + r[0] + ' · 第 ' + (Math.floor(i/10)+1) + ' 席"></span>';
+    }
+    roles.forEach(function(r){
+      leg += '<span><i style="background:' + r[1] + '"></i>' + r[0] + '</span>';
+    });
+    matrix.innerHTML = html;
+    legend.innerHTML = leg;
+  }
+
+  /* ---------- 300 句华夏能量库 ---------- */
+  const CATS = ['立志','修身','勤学','勤奋','诚信','仁爱','坚韧','谦逊','智慧','家国'];
+  const Q = [
+    /* 立志 01-30 */
+    [0,'天行健，君子以自强不息。','《周易》'],
+    [0,'有志者，事竟成。','《后汉书》'],
+    [0,'路漫漫其修远兮，吾将上下而求索。','屈原《离骚》'],
+    [0,'长风破浪会有时，直挂云帆济沧海。','李白《行路难》'],
+    [0,'会当凌绝顶，一览众山小。','杜甫《望岳》'],
+    [0,'老骥伏枥，志在千里；烈士暮年，壮心不已。','曹操《龟虽寿》'],
+    [0,'穷且益坚，不坠青云之志。','王勃《滕王阁序》'],
+    [0,'少年心事当拏云，谁念幽寒坐呜呃。','李贺《致酒行》'],
+    [0,'志不立，天下无可成之事。','王阳明《教条示龙场诸生》'],
+    [0,'三军可夺帅也，匹夫不可夺志也。','《论语》'],
+    [0,'燕雀安知鸿鹄之志哉。','《史记·陈涉世家》'],
+    [0,'大鹏一日同风起，扶摇直上九万里。','李白《上李邕》'],
+    [0,'天生我材必有用，千金散尽还复来。','李白《将进酒》'],
+    [0,'少壮不努力，老大徒伤悲。','汉乐府《长歌行》'],
+    [0,'志当存高远。','诸葛亮《诫外生书》'],
+    [0,'非淡泊无以明志，非宁静无以致远。','诸葛亮《诫子书》'],
+    [0,'丈夫志四海，万里犹比邻。','曹植《赠白马王彪》'],
+    [0,'愿乘长风破万里浪。','《宋书·宗悫传》'],
+    [0,'立志欲坚不欲锐，成功在久不在速。','张孝祥《论治体札子》'],
+    [0,'石可破也，而不可夺坚；丹可磨也，而不可夺赤。','《吕氏春秋》'],
+    [0,'士不可以不弘毅，任重而道远。','《论语》'],
+    [0,'锲而不舍，金石可镂。','《荀子·劝学》'],
+    [0,'少年负壮气，奋烈自有时。','李白《少年行》'],
+    [0,'海到无边天作岸，山登绝顶我为峰。','林则徐（传）'],
+    [0,'非学无以广才，非志无以成学。','诸葛亮《诫子书》'],
+    [0,'精卫衔微木，将以填沧海。','陶渊明《读山海经》'],
+    [0,'刑天舞干戚，猛志固常在。','陶渊明《读山海经》'],
+    [0,'鹰击长空，鱼翔浅底，万类霜天竞自由。','毛泽东《沁园春·长沙》'],
+    [0,'自信人生二百年，会当水击三千里。','毛泽东（残句）'],
+    [0,'雄关漫道真如铁，而今迈步从头越。','毛泽东《忆秦娥·娄山关》'],
+    /* 修身 31-60 */
+    [1,'吾日三省吾身。','《论语》'],
+    [1,'见贤思齐焉，见不贤而内自省也。','《论语》'],
+    [1,'君子求诸己，小人求诸人。','《论语》'],
+    [1,'自天子以至于庶人，壹是皆以修身为本。','《大学》'],
+    [1,'静以修身，俭以养德。','诸葛亮《诫子书》'],
+    [1,'勿以恶小而为之，勿以善小而不为。','刘备《敕后主辞》'],
+    [1,'见善则迁，有过则改。','《周易》'],
+    [1,'闻过则喜，闻善则拜。','《孟子》'],
+    [1,'君子坦荡荡，小人长戚戚。','《论语》'],
+    [1,'内省不疚，夫何忧何惧。','《论语》'],
+    [1,'德不孤，必有邻。','《论语》'],
+    [1,'上善若水，水善利万物而不争。','《道德经》'],
+    [1,'见素抱朴，少私寡欲。','《道德经》'],
+    [1,'致虚极，守静笃。','《道德经》'],
+    [1,'胜人者有力，自胜者强。','《道德经》'],
+    [1,'富贵不能淫，贫贱不能移，威武不能屈。','《孟子》'],
+    [1,'吾善养吾浩然之气。','《孟子》'],
+    [1,'仰不愧于天，俯不怍于人。','《孟子》'],
+    [1,'君子慎其独也。','《中庸》'],
+    [1,'欲正其心者，先诚其意。','《大学》'],
+    [1,'过而不改，是谓过矣。','《论语》'],
+    [1,'人谁无过？过而能改，善莫大焉。','《左传》'],
+    [1,'知耻近乎勇。','《中庸》'],
+    [1,'傲不可长，欲不可纵，志不可满，乐不可极。','《礼记》'],
+    [1,'满招损，谦受益。','《尚书》'],
+    [1,'不迁怒，不贰过。','《论语》'],
+    [1,'君子成人之美，不成人之恶。','《论语》'],
+    [1,'克己复礼为仁。','《论语》'],
+    [1,'芝兰生于深林，不以无人而不芳。','《孔子家语》'],
+    [1,'岁不寒，无以知松柏；事不难，无以知君子。','《荀子》'],
+    /* 勤学 61-90 */
+    [2,'学而时习之，不亦说乎。','《论语》'],
+    [2,'温故而知新，可以为师矣。','《论语》'],
+    [2,'学而不思则罔，思而不学则殆。','《论语》'],
+    [2,'三人行，必有我师焉。','《论语》'],
+    [2,'知之为知之，不知为不知，是知也。','《论语》'],
+    [2,'敏而好学，不耻下问。','《论语》'],
+    [2,'学而不厌，诲人不倦。','《论语》'],
+    [2,'玉不琢，不成器；人不学，不知道。','《礼记》'],
+    [2,'博学之，审问之，慎思之，明辨之，笃行之。','《中庸》'],
+    [2,'尽信书，则不如无书。','《孟子》'],
+    [2,'书山有路勤为径，学海无涯苦作舟。','韩愈'],
+    [2,'业精于勤，荒于嬉；行成于思，毁于随。','韩愈《进学解》'],
+    [2,'读书破万卷，下笔如有神。','杜甫《奉赠韦左丞丈》'],
+    [2,'纸上得来终觉浅，绝知此事要躬行。','陆游《冬夜读书示子聿》'],
+    [2,'问渠那得清如许，为有源头活水来。','朱熹《观书有感》'],
+    [2,'旧书不厌百回读，熟读深思子自知。','苏轼《送安惇秀才失解西归》'],
+    [2,'读万卷书，行万里路。','董其昌《画禅室随笔》'],
+    [2,'黑发不知勤学早，白首方悔读书迟。','颜真卿《劝学》'],
+    [2,'少年易老学难成，一寸光阴不可轻。','朱熹《劝学诗》'],
+    [2,'好问则裕，自用则小。','《尚书》'],
+    [2,'三更灯火五更鸡，正是男儿读书时。','颜真卿《劝学》'],
+    [2,'立身以立学为先，立学以读书为本。','欧阳修'],
+    [2,'读书之法，在循序而渐进，熟读而精思。','朱熹'],
+    [2,'学贵有疑，小疑则小进，大疑则大进。','陈献章'],
+    [2,'独学而无友，则孤陋而寡闻。','《礼记》'],
+    [2,'善学者，假人之长以补其短。','《吕氏春秋》'],
+    [2,'少而好学，如日出之阳；壮而好学，如日中之光。','刘向《说苑》'],
+    [2,'敏于事而慎于言。','《论语》'],
+    [2,'学如不及，犹恐失之。','《论语》'],
+    [2,'终日乾乾，与时偕行。','《周易》'],
+    /* 勤奋 91-120 */
+    [3,'天道酬勤。','谚语'],
+    [3,'骐骥一跃，不能十步；驽马十驾，功在不舍。','《荀子·劝学》'],
+    [3,'不积跬步，无以至千里；不积小流，无以成江海。','《荀子·劝学》'],
+    [3,'积土成山，风雨兴焉；积水成渊，蛟龙生焉。','《荀子·劝学》'],
+    [3,'绳锯木断，水滴石穿。','罗大经《鹤林玉露》'],
+    [3,'宝剑锋从磨砺出，梅花香自苦寒来。','《警世贤文》'],
+    [3,'不经一番寒彻骨，怎得梅花扑鼻香。','黄檗禅师《上堂开示颂》'],
+    [3,'千淘万漉虽辛苦，吹尽狂沙始到金。','刘禹锡《浪淘沙》'],
+    [3,'只要功夫深，铁杵磨成针。','谚语'],
+    [3,'冰冻三尺，非一日之寒。','谚语'],
+    [3,'合抱之木，生于毫末；九层之台，起于累土。','《道德经》'],
+    [3,'明日复明日，明日何其多。','钱福《明日歌》'],
+    [3,'莫等闲，白了少年头，空悲切。','岳飞《满江红》'],
+    [3,'盛年不重来，一日难再晨。','陶渊明《杂诗》'],
+    [3,'及时当勉励，岁月不待人。','陶渊明《杂诗》'],
+    [3,'一寸光阴一寸金，寸金难买寸光阴。','《增广贤文》'],
+    [3,'一日之计在于晨，一年之计在于春。','《增广贤文》'],
+    [3,'晨兴理荒秽，带月荷锄归。','陶渊明《归园田居》'],
+    [3,'锄禾日当午，汗滴禾下土。','李绅《悯农》'],
+    [3,'闻鸡起舞。','《晋书·祖逖传》'],
+    [3,'天下事有难易乎？为之，则难者亦易矣。','彭端淑《为学》'],
+    [3,'勤能补拙是良训，一分辛劳一分才。','华罗庚'],
+    [3,'春蚕到死丝方尽，蜡炬成灰泪始干。','李商隐《无题》'],
+    [3,'落红不是无情物，化作春泥更护花。','龚自珍《己亥杂诗》'],
+    [3,'采得百花成蜜后，为谁辛苦为谁甜。','罗隐《蜂》'],
+    [3,'笨鸟先飞早入林。','谚语'],
+    [3,'天下无难事，只怕有心人。','谚语'],
+    [3,'一勤天下无难事。','谚语'],
+    [3,'功崇惟志，业广惟勤。','《尚书》'],
+    [3,'忧劳可以兴国，逸豫可以亡身。','欧阳修《伶官传序》'],
+    /* 诚信 121-150 */
+    [4,'人而无信，不知其可也。','《论语》'],
+    [4,'民无信不立。','《论语》'],
+    [4,'言必信，行必果。','《论语》'],
+    [4,'与朋友交，言而有信。','《论语》'],
+    [4,'诚者，天之道也；思诚者，人之道也。','《孟子》'],
+    [4,'精诚所至，金石为开。','《后汉书》'],
+    [4,'君子一言，驷马难追。','谚语'],
+    [4,'轻诺必寡信，多易必多难。','《道德经》'],
+    [4,'信近于义，言可复也。','《论语》'],
+    [4,'巧诈不如拙诚。','《韩非子》'],
+    [4,'小信诚则大信立。','《韩非子》'],
+    [4,'诚于中，形于外。','《大学》'],
+    [4,'不宝金玉，而忠信以为宝。','《礼记》'],
+    [4,'人背信则名不达。','刘向'],
+    [4,'若有人兮天一方，忠为衣兮信为裳。','卢照邻'],
+    [4,'一言九鼎。','《史记·平原君列传》'],
+    [4,'真者，精诚之至也。不精不诚，不能动人。','《庄子》'],
+    [4,'言之所以为言者，信也；言而不信，何以为言？','《谷梁传》'],
+    [4,'言不信者，行不果。','墨子'],
+    [4,'志不强者智不达，言不信者行不果。','墨子'],
+    [4,'与人以实，虽疏必密；与人以虚，虽戚必疏。','《韩诗外传》'],
+    [4,'人之所助者，信也。','《周易》'],
+    [4,'信，国之宝也，民之所庇也。','《左传》'],
+    [4,'受人之托，忠人之事。','谚语'],
+    [4,'君子养心莫善于诚。','《荀子》'],
+    [4,'赠人以言，重于珠玉；伤人以言，重于剑戟。','《荀子》'],
+    [4,'以信接人，天下信之；不以信接人，妻子疑之。','杨泉《物理论》'],
+    [4,'心口如一，言出行随。','谚语'],
+    [4,'得黄金百斤，不如得季布一诺。','《史记·季布栾布列传》'],
+    [4,'诚，五常之本，百行之源。','周敦颐《通书》'],
+    /* 仁爱 151-180 */
+    [5,'仁者爱人，有礼者敬人。','《孟子》'],
+    [5,'己所不欲，勿施于人。','《论语》'],
+    [5,'己欲立而立人，己欲达而达人。','《论语》'],
+    [5,'老吾老以及人之老，幼吾幼以及人之幼。','《孟子》'],
+    [5,'恻隐之心，仁之端也。','《孟子》'],
+    [5,'穷则独善其身，达则兼济天下。','《孟子》'],
+    [5,'先天下之忧而忧，后天下之乐而乐。','范仲淹《岳阳楼记》'],
+    [5,'安得广厦千万间，大庇天下寒士俱欢颜。','杜甫《茅屋为秋风所破歌》'],
+    [5,'民吾同胞，物吾与也。','张载《西铭》'],
+    [5,'善人者，人亦善之。','《管子》'],
+    [5,'积善之家，必有余庆；积不善之家，必有殃。','《周易》'],
+    [5,'从善如登，从恶如崩。','《国语》'],
+    [5,'爱人者，人恒爱之；敬人者，人恒敬之。','《孟子》'],
+    [5,'投我以木桃，报之以琼瑶。','《诗经》'],
+    [5,'嘤其鸣矣，求其友声。','《诗经》'],
+    [5,'四海之内，皆兄弟也。','《论语》'],
+    [5,'海内存知己，天涯若比邻。','王勃《送杜少府》'],
+    [5,'莫愁前路无知己，天下谁人不识君。','高适《别董大》'],
+    [5,'桃花潭水深千尺，不及汪伦送我情。','李白《赠汪伦》'],
+    [5,'谁言寸草心，报得三春晖。','孟郊《游子吟》'],
+    [5,'孝在于质实，不在于饰貌。','桓宽《盐铁论》'],
+    [5,'二人同心，其利断金。','《周易》'],
+    [5,'家和万事兴。','谚语'],
+    [5,'和以处众，宽以接下，恕以待人。','林逋《省心录》'],
+    [5,'君子和而不同，小人同而不和。','《论语》'],
+    [5,'礼之用，和为贵。','《论语》'],
+    [5,'天时不如地利，地利不如人和。','《孟子》'],
+    [5,'得道者多助，失道者寡助。','《孟子》'],
+    [5,'但愿苍生俱饱暖，不辞辛苦出山林。','于谦《咏煤炭》'],
+    [5,'衙斋卧听萧萧竹，疑是民间疾苦声。','郑板桥《墨竹图题诗》'],
+    /* 坚韧 181-210 */
+    [6,'天将降大任于斯人也，必先苦其心志，劳其筋骨。','《孟子》'],
+    [6,'千磨万击还坚劲，任尔东西南北风。','郑板桥《竹石》'],
+    [6,'苦心人，天不负，卧薪尝胆，三千越甲可吞吴。','蒲松龄（自勉联）'],
+    [6,'疾风知劲草，板荡识诚臣。','李世民《赐萧瑀》'],
+    [6,'岁寒，然后知松柏之后凋也。','《论语》'],
+    [6,'大雪压青松，青松挺且直。','陈毅《青松》'],
+    [6,'山重水复疑无路，柳暗花明又一村。','陆游《游山西村》'],
+    [6,'沉舟侧畔千帆过，病树前头万木春。','刘禹锡《酬乐天扬州初逢席上见赠》'],
+    [6,'野火烧不尽，春风吹又生。','白居易《赋得古原草送别》'],
+    [6,'祸兮福之所倚，福兮祸之所伏。','《道德经》'],
+    [6,'失之东隅，收之桑榆。','《后汉书》'],
+    [6,'生于忧患，死于安乐。','《孟子》'],
+    [6,'艰难困苦，玉汝于成。','张载《西铭》'],
+    [6,'千锤万凿出深山，烈火焚烧若等闲。','于谦《石灰吟》'],
+    [6,'粉骨碎身浑不怕，要留清白在人间。','于谦《石灰吟》'],
+    [6,'自古雄才多磨难，从来纨绔少伟男。','谚语'],
+    [6,'不飞则已，一飞冲天；不鸣则已，一鸣惊人。','《史记·滑稽列传》'],
+    [6,'多难兴邦。','《左传》'],
+    [6,'亦余心之所善兮，虽九死其犹未悔。','屈原《离骚》'],
+    [6,'路遥知马力，日久见人心。','谚语'],
+    [6,'不入虎穴，焉得虎子。','《后汉书·班超传》'],
+    [6,'百尺竿头，更进一步。','禅语'],
+    [6,'会挽雕弓如满月，西北望，射天狼。','苏轼《江城子·密州出猎》'],
+    [6,'竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。','苏轼《定风波》'],
+    [6,'回首向来萧瑟处，归去，也无风雨也无晴。','苏轼《定风波》'],
+    [6,'患难困苦，是磨炼人格之最高学校。','梁启超'],
+    [6,'不经风雨，长不成大树；不受百炼，难以成钢。','雷锋'],
+    [6,'千里之行，始于足下。','《道德经》'],
+    [6,'石以砥焉，化钝为利。','刘禹锡《砥石赋》'],
+    [6,'心坚石也穿。','谚语'],
+    /* 谦逊 211-240（首六句为 EACO 十训） */
+    [7,'智不露锋芒，谋不露声色。','EACO 十训'],
+    [7,'贫不露寒酸，富不露骄矜。','EACO 十训'],
+    [7,'大道贵在藏，至境贵在淡。','EACO 十训'],
+    [7,'胸有丘壑而不扬，腹有乾坤而不语。','EACO 十训'],
+    [7,'不计一时之得失，不逐一时之虚名。','EACO 十训'],
+    [7,'守愚以观世相，抱拙以渡平生。','EACO 十训'],
+    [7,'谦谦君子，卑以自牧。','《周易》'],
+    [7,'虚心使人进步，骄傲使人落后。','毛泽东'],
+    [7,'良贾深藏若虚，君子盛德容貌若愚。','《史记·老子韩非列传》'],
+    [7,'大直若屈，大巧若拙，大辩若讷。','《道德经》'],
+    [7,'知人者智，自知者明。','《道德经》'],
+    [7,'学然后知不足，教然后知困。','《礼记》'],
+    [7,'不患人之不己知，患不知人也。','《论语》'],
+    [7,'君子泰而不骄，小人骄而不泰。','《论语》'],
+    [7,'江海所以能为百谷王者，以其善下之。','《道德经》'],
+    [7,'山不辞土石，故能成其高。','《管子》'],
+    [7,'泰山不让土壤，故能成其大；河海不择细流，故能就其深。','李斯《谏逐客书》'],
+    [7,'木秀于林，风必摧之。','李康《运命论》'],
+    [7,'谦虚其心，宏大其量。','王阳明'],
+    [7,'人之患在好为人师。','《孟子》'],
+    [7,'不自见，故明；不自是，故彰。','《道德经》'],
+    [7,'夫唯不争，故天下莫能与之争。','《道德经》'],
+    [7,'功成而弗居。','《道德经》'],
+    [7,'功遂身退，天之道也。','《道德经》'],
+    [7,'桃李不言，下自成蹊。','《史记·李将军列传》'],
+    [7,'智者千虑，必有一失；愚者千虑，必有一得。','《史记·淮阴侯列传》'],
+    [7,'尺有所短，寸有所长。','《楚辞·卜居》'],
+    [7,'以铜为镜，可以正衣冠；以古为镜，可以知兴替。','《旧唐书》'],
+    [7,'兼听则明，偏信则暗。','《资治通鉴》'],
+    [7,'谦尊而光，卑而不可逾。','《周易》'],
+    /* 智慧 241-270 */
+    [8,'知者不惑，仁者不忧，勇者不惧。','《论语》'],
+    [8,'知己知彼，百战不殆。','《孙子兵法》'],
+    [8,'上兵伐谋，其次伐交。','《孙子兵法》'],
+    [8,'凡事预则立，不预则废。','《中庸》'],
+    [8,'人无远虑，必有近忧。','《论语》'],
+    [8,'居安思危，思则有备，有备无患。','《左传》'],
+    [8,'前事不忘，后事之师。','《战国策》'],
+    [8,'他山之石，可以攻玉。','《诗经》'],
+    [8,'运筹帷幄之中，决胜千里之外。','《史记》'],
+    [8,'知止而后有定，定而后能静。','《大学》'],
+    [8,'大道至简。','《道德经》意'],
+    [8,'大音希声，大象无形。','《道德经》'],
+    [8,'君子藏器于身，待时而动。','《周易》'],
+    [8,'水至清则无鱼，人至察则无徒。','《大戴礼记》'],
+    [8,'穷则变，变则通，通则久。','《周易》'],
+    [8,'愚者暗于成事，智者见于未萌。','《商君书》'],
+    [8,'知足不辱，知止不殆。','《道德经》'],
+    [8,'月晕而风，础润而雨。','苏洵《辨奸论》'],
+    [8,'授人以鱼，不如授人以渔。','谚语'],
+    [8,'运用之妙，存乎一心。','《宋史·岳飞传》'],
+    [8,'大勇若怯，大智若愚。','苏轼《贺欧阳少师致仕启》'],
+    [8,'智者乐水，仁者乐山。','《论语》'],
+    [8,'善弈者谋势，不善弈者谋子。','谚语'],
+    [8,'不谋万世者，不足谋一时；不谋全局者，不足谋一域。','陈澹然《寤言》'],
+    [8,'明镜所以照形，古事所以知今。','《韩诗外传》'],
+    [8,'智欲圆而行欲方。','《淮南子》'],
+    [8,'善战者，因其势而利导之。','《史记》'],
+    [8,'水静犹明，而况精神。','《庄子》'],
+    [8,'谋先事则昌，事先谋则亡。','刘向《说苑》'],
+    [8,'自知者不怨人，知命者不怨天。','《荀子》'],
+    /* 家国 271-300 */
+    [9,'苟利国家生死以，岂因祸福避趋之。','林则徐《赴戍登程口占》'],
+    [9,'位卑未敢忘忧国，事定犹须待阖棺。','陆游《病起书怀》'],
+    [9,'天下兴亡，匹夫有责。','顾炎武'],
+    [9,'为天地立心，为生民立命，为往圣继绝学，为万世开太平。','张载（横渠四句）'],
+    [9,'长太息以掩涕兮，哀民生之多艰。','屈原《离骚》'],
+    [9,'国而忘家，公而忘私。','《汉书·贾谊传》'],
+    [9,'尽忠报国。','《宋史·岳飞传》'],
+    [9,'一身报国有万死，双鬓向人无再青。','陆游《夜泊水村》'],
+    [9,'夜阑卧听风吹雨，铁马冰河入梦来。','陆游《十一月四日风雨大作》'],
+    [9,'王师北定中原日，家祭无忘告乃翁。','陆游《示儿》'],
+    [9,'生当作人杰，死亦为鬼雄。','李清照《夏日绝句》'],
+    [9,'人生自古谁无死，留取丹心照汗青。','文天祥《过零丁洋》'],
+    [9,'捐躯赴国难，视死忽如归。','曹植《白马篇》'],
+    [9,'但使龙城飞将在，不教胡马度阴山。','王昌龄《出塞》'],
+    [9,'黄沙百战穿金甲，不破楼兰终不还。','王昌龄《从军行》'],
+    [9,'我自横刀向天笑，去留肝胆两昆仑。','谭嗣同《狱中题壁》'],
+    [9,'寄意寒星荃不察，我以我血荐轩辕。','鲁迅《自题小像》'],
+    [9,'横眉冷对千夫指，俯首甘为孺子牛。','鲁迅《自嘲》'],
+    [9,'为中华之崛起而读书。','周恩来'],
+    [9,'愿相会于中华腾飞世界时。','周恩来'],
+    [9,'埋骨何须桑梓地，人生无处不青山。','毛泽东（改西乡隆盛诗）'],
+    [9,'踏遍青山人未老，风景这边独好。','毛泽东《清平乐·会昌》'],
+    [9,'天若有情天亦老，人间正道是沧桑。','毛泽东《七律·人民解放军占领南京》'],
+    [9,'一万年太久，只争朝夕。','毛泽东《满江红》'],
+    [9,'青年之字典，无“困难”之字；青年之口头，无“障碍”之语。','李大钊'],
+    [9,'以青春之我，创建青春之家庭，青春之国家，青春之民族。','李大钊'],
+    [9,'天下之本在国，国之本在家，家之本在身。','《孟子》'],
+    [9,'一家仁，一国兴仁；一家让，一国兴让。','《大学》'],
+    [9,'大道之行也，天下为公。','《礼记·礼运》'],
+    [9,'协和万邦。','《尚书·尧典》']
+  ];
+
+  const qlist = $('#qlist');
+  const wchips = $('#wchips');
+  const wSearch = $('#wSearch');
+  const wCount = $('#wCount');
+  const wqMore = $('#wqMore');
+  if(qlist && wchips){
+    /* render rows */
+    let rowsHtml = '';
+    for(let i=0;i<Q.length;i++){
+      const c = Q[i][0];
+      rowsHtml += '<div class="qrow" data-cat="' + c + '" data-i="' + i + '" data-text="' + Q[i][1] + '" data-src="' + Q[i][2] + '">' +
+        '<span class="qn">' + String(i+1).padStart(3,'0') + '</span>' +
+        '<div><span class="qt">' + Q[i][1] + '</span><span class="tag">' + CATS[c] + '</span>' +
+        '<span class="qs">' + Q[i][2] + '</span></div></div>';
+    }
+    qlist.innerHTML = rowsHtml;
+
+    /* render chips */
+    let chipHtml = '<button class="chip on" type="button" data-wcat="all">全部 <i>' + Q.length + '</i></button>';
+    CATS.forEach(function(name, ci){
+      chipHtml += '<button class="chip" type="button" data-wcat="' + ci + '">' + name + ' <i>30</i></button>';
+    });
+    wchips.innerHTML = chipHtml;
+
+    const rows = $$('.qrow');
+    const wCatChips = $$('#wchips .chip');
+    let wCat = 'all', wKw = '', wExpanded = false;
+    const LIMIT = 60;
+
+    function wApply(){
+      let shown = 0;
+      rows.forEach(function(r){
+        const okCat = wCat === 'all' || r.getAttribute('data-cat') === wCat;
+        const okKw = !wKw || r.getAttribute('data-text').indexOf(wKw) > -1 || r.getAttribute('data-src').indexOf(wKw) > -1 || CATS[+r.getAttribute('data-cat')].indexOf(wKw) > -1;
+        let vis = okCat && okKw;
+        if(vis && !wExpanded && !wKw && wCat === 'all' && shown >= LIMIT) vis = false;
+        r.classList.toggle('hide', !vis);
+        if(vis) shown++;
+      });
+      if(wCount) wCount.textContent = 'SHOWING ' + String(shown).padStart(3,'0') + ' / 300';
+      if(wqMore){
+        const filterActive = wExpanded || wKw || wCat !== 'all';
+        wqMore.style.display = filterActive ? 'none' : 'inline-flex';
+        if(!filterActive) wqMore.textContent = '展开全部 300 句 ↓';
+      }
+    }
+
+    wCatChips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        wCatChips.forEach(function(c){ c.classList.remove('on'); });
+        chip.classList.add('on');
+        wCat = chip.getAttribute('data-wcat');
+        wApply();
+      });
+    });
+    if(wSearch){
+      wSearch.addEventListener('input', function(){
+        wKw = wSearch.value.trim();
+        wApply();
+      });
+    }
+    if(wqMore){
+      wqMore.addEventListener('click', function(){
+        wExpanded = true;
+        wApply();
+      });
+    }
+
+    /* featured injection */
+    const wqText = $('#wqText'), wqCat = $('#wqCat'), wqSrc = $('#wqSrc'), wqNext = $('#wqNext'), wqCopy = $('#wqCopy');
+    let curIdx = Q.findIndex(function(q){ return q[1] === '智不露锋芒，谋不露声色。'; });
+    function wSetRandom(){
+      let pool = [];
+      rows.forEach(function(r){
+        if(!r.classList.contains('hide')) pool.push(+r.getAttribute('data-i'));
+      });
+      if(!pool.length){ for(let i=0;i<Q.length;i++) pool.push(i); }
+      if(pool.length > 1){
+        pool = pool.filter(function(i){ return i !== curIdx; });
+      }
+      const idx = pool[Math.floor(Math.random() * pool.length)];
+      curIdx = idx;
+      wqText.textContent = Q[idx][1];
+      wqCat.textContent = CATS[Q[idx][0]];
+      wqSrc.textContent = Q[idx][2];
+    }
+    if(wqNext) wqNext.addEventListener('click', wSetRandom);
+    if(wqCopy){
+      wqCopy.addEventListener('click', function(){
+        const q = Q[curIdx];
+        copyText(q[1] + ' —— ' + q[2] + '（EACO 能量库 · ' + CATS[q[0]] + '）', '已注入 EACO Agent');
+      });
+    }
+    wApply();
+  }
+
+  /* ---------- globe ---------- */
+  const CITIES = [
+    {n:'SINGAPORE', lat:1.35,  lon:103.82},
+    {n:'DUBAI',     lat:25.20, lon:55.27},
+    {n:'HONG KONG', lat:22.30, lon:114.17},
+    {n:'ZUG',       lat:47.17, lon:8.52},
+    {n:'TALLINN',   lat:59.44, lon:24.75},
+    {n:'LISBON',    lat:38.72, lon:-9.14},
+    {n:'TOKYO',     lat:35.68, lon:139.69},
+    {n:'SEOUL',     lat:37.57, lon:126.98},
+    {n:'SYDNEY',    lat:-33.87,lon:151.21},
+    {n:'SÃO PAULO', lat:-23.55,lon:-46.63}
+  ];
+  const PAIRS = [[0,1],[0,2],[1,3],[2,6],[6,7],[4,5],[8,9],[0,8],[1,9],[7,2],[5,3],[4,9]];
+
+  function vec(lat, lon){
+    const phi = (90 - lat) * Math.PI / 180;
+    const th = (lon + 180) * Math.PI / 180;
+    return [-Math.sin(phi)*Math.cos(th), Math.cos(phi), Math.sin(phi)*Math.sin(th)];
+  }
+
+  class Globe {
+    constructor(canvas, opts){
+      opts = opts || {};
+      this.c = canvas;
+      this.ctx = canvas.getContext('2d');
+      this.mode = opts.mode || 'virtual';
+      this.rot = opts.rot || 0.6;
+      this.speed = opts.speed || 0.0016;
+      this.t = 0;
+      this.visible = true;
+      this.dpr = 1;
+      this.dots = [];
+      const N = 780;
+      for(let i=0;i<N;i++){
+        const y = 1 - (i/(N-1))*2;
+        const r = Math.sqrt(Math.max(0, 1 - y*y));
+        const th = i * 2.39996323;
+        this.dots.push([Math.cos(th)*r, y, Math.sin(th)*r]);
+      }
+      this.resize();
+      const self = this;
+      if('ResizeObserver' in window){
+        new ResizeObserver(function(){ self.resize(); }).observe(canvas);
+      } else {
+        window.addEventListener('resize', function(){ self.resize(); });
+      }
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(es){
+          self.visible = es[0].isIntersecting;
+        }, {threshold:0}).observe(canvas);
+      }
+      if(reduce){
+        this.render();
+      } else {
+        const loop = function(){
+          self.raf = requestAnimationFrame(loop);
+          if(!self.visible || document.hidden) return;
+          self.t += 1;
+          self.render();
+        };
+        loop();
+      }
+    }
+    resize(){
+      const rect = this.c.getBoundingClientRect();
+      const w = Math.round(rect.width), h = Math.round(rect.height);
+      if(!w || !h) return;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      this.w = w; this.h = h; this.dpr = dpr;
+      this.c.width = Math.round(w*dpr);
+      this.c.height = Math.round(h*dpr);
+      this.ctx.setTransform(dpr,0,0,dpr,0,0);
+      if(reduce) this.render();
+    }
+    project(v, rot, tilt, R, cx, cy){
+      const ca = Math.cos(rot), sa = Math.sin(rot);
+      const x1 = v[0]*ca + v[2]*sa;
+      const z1 = -v[0]*sa + v[2]*ca;
+      const ct = Math.cos(tilt), st = Math.sin(tilt);
+      const y1 = v[1]*ct - z1*st;
+      const z2 = v[1]*st + z1*ct;
+      return [cx + x1*R, cy - y1*R, z2];
+    }
+    grid(R, cx, cy, rot, tilt){
+      const ctx = this.ctx;
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(' + PAL.ink + ',.075)';
+      for(let lon=-180; lon<180; lon+=30){
+        let started = false;
+        ctx.beginPath();
+        for(let lat=-90; lat<=90; lat+=6){
+          const q = this.project(vec(lat, lon), rot, tilt, R, cx, cy);
+          if(q[2] > 0){
+            if(!started){ ctx.moveTo(q[0], q[1]); started = true; }
+            else ctx.lineTo(q[0], q[1]);
+          } else started = false;
+        }
+        ctx.stroke();
+      }
+      for(let lat=-60; lat<=60; lat+=30){
+        let started = false;
+        ctx.beginPath();
+        for(let lon=-180; lon<=180; lon+=5){
+          const q = this.project(vec(lat, lon), rot, tilt, R, cx, cy);
+          if(q[2] > 0){
+            if(!started){ ctx.moveTo(q[0], q[1]); started = true; }
+            else ctx.lineTo(q[0], q[1]);
+          } else started = false;
+        }
+        ctx.stroke();
+      }
+    }
+    sphereDots(R, cx, cy, rot, tilt, alpha, size){
+      const ctx = this.ctx;
+      for(let i=0;i<this.dots.length;i++){
+        const q = this.project(this.dots[i], rot, tilt, R, cx, cy);
+        if(q[2] <= 0) continue;
+        const a = alpha * (0.25 + 0.75*q[2]);
+        const r = size * (0.65 + 0.55*q[2]);
+        ctx.beginPath();
+        ctx.arc(q[0], q[1], r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + PAL.green + ',' + a.toFixed(3) + ')';
+        ctx.fill();
+      }
+    }
+    arc(a, b, R, cx, cy, rot, tilt, alpha){
+      const ctx = this.ctx;
+      const A = vec(a.lat, a.lon), B = vec(b.lat, b.lon);
+      let dot = A[0]*B[0] + A[1]*B[1] + A[2]*B[2];
+      dot = Math.max(-1, Math.min(1, dot));
+      const om = Math.acos(dot);
+      const N = 44;
+      ctx.beginPath();
+      let started = false;
+      for(let i=0;i<=N;i++){
+        const t = i/N;
+        let x, y, z;
+        if(om < 1e-4){ x=A[0]; y=A[1]; z=A[2]; }
+        else {
+          const s1 = Math.sin((1-t)*om)/Math.sin(om);
+          const s2 = Math.sin(t*om)/Math.sin(om);
+          x = A[0]*s1 + B[0]*s2; y = A[1]*s1 + B[1]*s2; z = A[2]*s1 + B[2]*s2;
+        }
+        const lift = 1 + 0.19*Math.sin(Math.PI*t);
+        const q = this.project([x*lift, y*lift, z*lift], rot, tilt, R, cx, cy);
+        if(q[2] > 0){
+          if(!started){ ctx.moveTo(q[0], q[1]); started = true; }
+          else ctx.lineTo(q[0], q[1]);
+        } else started = false;
+      }
+      ctx.strokeStyle = 'rgba(' + PAL.gold + ',' + alpha.toFixed(3) + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    renderGlobe(){
+      const ctx = this.ctx, w = this.w, h = this.h;
+      const cx = w/2, cy = h/2;
+      const R = Math.min(w, h) * 0.395;
+      const rot = this.rot, tilt = 0.38;
+      this.rot += this.speed;
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, R*1.13, 0, Math.PI*2);
+      ctx.setLineDash([2, 7]);
+      ctx.strokeStyle = 'rgba(' + PAL.ink + ',.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      const g = ctx.createRadialGradient(cx - R*0.32, cy - R*0.36, R*0.06, cx, cy, R);
+      g.addColorStop(0, 'rgba(' + PAL.green2 + ',.12)');
+      g.addColorStop(0.65, 'rgba(' + PAL.green + ',.05)');
+      g.addColorStop(1, 'rgba(' + PAL.green + ',.02)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI*2);
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(' + PAL.ink + ',.2)';
+      ctx.stroke();
+
+      this.grid(R, cx, cy, rot, tilt);
+      this.sphereDots(R, cx, cy, rot, tilt, 0.5, Math.max(0.8, R*0.004));
+
+      for(let i=0;i<PAIRS.length;i++){
+        const p = PAIRS[i];
+        this.arc(CITIES[p[0]], CITIES[p[1]], R, cx, cy, rot, tilt, 0.42);
+      }
+
+      const showLabels = w > 420;
+      ctx.font = '9px ui-monospace, SFMono-Regular, Menlo, monospace';
+      for(let i=0;i<CITIES.length;i++){
+        const q = this.project(vec(CITIES[i].lat, CITIES[i].lon), rot, tilt, R, cx, cy);
+        if(q[2] <= 0.06) continue;
+        const pulse = 2.2 + Math.sin(this.t*0.03 + i)*0.9;
+        ctx.beginPath();
+        ctx.arc(q[0], q[1], pulse + 3.4, 0, Math.PI*2);
+        ctx.strokeStyle = 'rgba(' + PAL.gold + ',' + (0.35*q[2]).toFixed(2) + ')';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(q[0], q[1], 1.7, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + PAL.ink + ',' + (0.4 + 0.55*q[2]).toFixed(2) + ')';
+        ctx.fill();
+        if(showLabels && q[2] > 0.38){
+          ctx.fillStyle = 'rgba(' + PAL.ink + ',' + (0.6*q[2]).toFixed(2) + ')';
+          ctx.textAlign = q[0] > cx + R*0.45 ? 'right' : 'left';
+          const dx = q[0] > cx + R*0.45 ? -9 : 9;
+          ctx.fillText(CITIES[i].n, q[0] + dx, q[1] + 3);
+        }
+      }
+    }
+    renderSim(){
+      const ctx = this.ctx, w = this.w, h = this.h;
+      const cx = w/2, cy = h/2;
+      const min = Math.min(w, h);
+      const R = min * 0.205;
+      const rot = this.rot * 1.4, tilt = 0.32;
+      this.rot += this.speed;
+
+      /* earth */
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI*2);
+      const g = ctx.createRadialGradient(cx - R*0.3, cy - R*0.35, R*0.05, cx, cy, R);
+      g.addColorStop(0, 'rgba(' + PAL.green2 + ',.16)');
+      g.addColorStop(1, 'rgba(' + PAL.green + ',.03)');
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(' + PAL.ink + ',.22)';
+      ctx.stroke();
+      this.grid(R, cx, cy, rot, tilt);
+      this.sphereDots(R, cx, cy, rot, tilt, 0.85, Math.max(0.7, R*0.006));
+
+      ctx.font = '9px ui-monospace, SFMono-Regular, Menlo, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = 'rgba(' + PAL.ink + ',.55)';
+      ctx.fillText('EARTH', cx, cy + R + 14);
+
+      /* orbits */
+      const orbits = [
+        {rx:R*1.55, ry:R*0.55, rot:-0.3, sp:0.00042, size:2.4, color:PAL.mutedHex, label:'月球基地 · MOON', off:0.4},
+        {rx:R*1.95, ry:R*0.70, rot:-0.3, sp:0.00023, size:3.0, color:PAL.sealHex, label:'火星殖民 · MARS', off:2.2},
+        {rx:R*2.28, ry:R*0.82, rot:-0.3, sp:0.00012, size:2.2, color:PAL.goldHex, label:'星际航道 · DEEP SPACE', off:4.1}
+      ];
+      ctx.setLineDash([3, 6]);
+      orbits.forEach(function(o){
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, o.rx, o.ry, o.rot, 0, Math.PI*2);
+        ctx.strokeStyle = 'rgba(' + PAL.ink + ',.16)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+
+      orbits.forEach(function(o, i){
+        const a = o.off + this.t * o.sp;
+        const ca = Math.cos(o.rot), sa = Math.sin(o.rot);
+        const ex = Math.cos(a)*o.rx, ey = Math.sin(a)*o.ry;
+        const x = cx + ex*ca - ey*sa;
+        const y = cy + ex*sa + ey*ca;
+        ctx.beginPath();
+        ctx.arc(x, y, o.size + 3.5, 0, Math.PI*2);
+        ctx.strokeStyle = 'rgba(' + PAL.gold + ',.22)';
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x, y, o.size, 0, Math.PI*2);
+        ctx.fillStyle = o.color;
+        ctx.fill();
+        ctx.textAlign = x > cx ? 'right' : 'left';
+        ctx.fillStyle = 'rgba(' + PAL.ink + ',.6)';
+        ctx.fillText(o.label, x + (x > cx ? -10 : 10), y + 3);
+      }, this);
+    }
+    render(){
+      if(!this.w || !this.h) return;
+      this.ctx.clearRect(0, 0, this.w, this.h);
+      if(this.mode === 'simulation') this.renderSim();
+      else this.renderGlobe();
+    }
+  }
+
+  const heroCanvas = $('#heroGlobe');
+  if(heroCanvas) new Globe(heroCanvas, {mode:'virtual', speed:0.0018, rot:0.4});
+
+  const earthCanvas = $('#earthGlobe');
+  if(earthCanvas){
+    const eg = new Globe(earthCanvas, {mode:'virtual', speed:0.0015, rot:0.9});
+    const cap = $('#stageCaption');
+    const caps = {
+      virtual: '数字孪生层：10 个节点、6 个时区，每一条金色弧线都是一次跨时区交付。',
+      simulation: '文明沙盘：地球在中心，月球、火星与深空航道依次展开——先在数字世界推演，再回到现实决策。'
+    };
+    $$('.mode-switch button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        $$('.mode-switch button').forEach(function(b){
+          b.classList.remove('on');
+          b.setAttribute('aria-pressed','false');
+        });
+        btn.classList.add('on');
+        btn.setAttribute('aria-pressed','true');
+        const m = btn.getAttribute('data-mode');
+        eg.mode = m === 'simulation' ? 'simulation' : 'virtual';
+        if(cap) cap.textContent = caps[eg.mode];
+        if(reduce) eg.render();
+      });
+    });
+  }
+})();
+
+(function(){
+  const FAQ = [[0,"EACO 是什么？","Earth's Best Coin，定位为 AI + RWA + Web3 的地球资产；理念公式是 Energy × Attitude × Cooperation × Optimization。"],[0,"EACO Agent 是什么？","以 EACO 理念与语料为底色的 AI 执行体，负责把一句 Brief 拆成可执行、可验收的任务。"],[0,"OPC 一人公司是什么？","一个人 + 一支 AI 团队 + 一条链上账本构成的完整公司，注册地只是外壳。"],[0,"EACO、Agent、OPC 三者什么关系？","EACO 是价值与叙事层，Agent 是执行层，OPC 是组织层；三层叠起来才是一个可运转的单位。"],[0,"一个人真的能运营一家公司吗？","能覆盖「接单 → 交付 → 结算」全链路，但法律主体、银行与税务仍然必须由人承担。"],[0,"EACO 和普通 Meme 币有什么不同？","有明确理念、RWA 叙事与工具链（Agent、OPC、语料库）；但价格波动风险与 Meme 币同样存在。"],[0,"Agent 和聊天机器人有什么区别？","Agent 有目标、有工具、有记忆、能交付产物；聊天机器人只负责回答。"],[0,"为什么一直强调「地球」？","把协作单位从公司、国家扩展到行星尺度；最高原则是所有文明为人类文明服务。"],[0,"四个字母必须是英文吗？","是缩写，但内涵可以本地化：能量、态度、协作、优化，中文同样成立。"],[0,"必须先买 EACO 才能用 Agent 吗？","不需要。工具链本身可用，代币只是可选的激励与结算层。"],[1,"Agent 跑在哪里？","本地 CLI、自托管服务器、云主机三选一；Oracle Cloud 免费层足够跑一个节点。"],[1,"最低硬件要求是什么？","编排层 4 核 8G 即可；要跑本地模型，显存 16G 起步。"],[1,"必须用某一家大模型吗？","不必须。Claude、GPT、Gemini、本地开源模型都可替换，接口层做适配即可。"],[1,"断网还能用吗？","语料、Skill 清单、模板可完全离线；推理需要模型服务，本地模型可做到全离线。"],[1,"MCP 是什么？","Model Context Protocol，让 Agent 调用外部工具与数据的标准接口；写一次，多个客户端通用。"],[1,"为什么要给语料做 MCP 服务器？","接入一次，所有支持 MCP 的客户端（Claude Code、Cursor、Cline）都能调用，不必各自复制语料。"],[1,"不会写代码能上手吗？","会开终端即可起步；要改工作流，需要看得懂 YAML 和少量脚本。"],[1,"数据存在哪里？","默认落在本地 SQLite 或文件；只有自托管并主动同步时才离开你的机器。"],[1,"怎么保证 Agent 不越权？","三级权限（只读 / 草稿 / 执行）+ 审批阈值 + 审计日志 + 出错即拒绝（fail-closed）。"],[1,"多台设备怎么同步？","配置走私有 Git 仓库，密钥放系统钥匙串，绝不入库。"],[2,"20 个 Skill 该怎么选？","按交付物选：页面用 frontend-design，系统用 architecture，增长用 seo-geo，评审用 code-review。"],[2,"Skill 太多会互相打架吗？","会。单次任务最多挂 3 个 Skill，其余按需加载，避免指令互相覆盖。"],[2,"什么是五步编排？","接 Brief → 拆任务 → 派节点 → 交叉质检 → 结算留痕，一步不能省。"],[2,"交叉质检具体怎么做？","换一个 Agent 或换一个模型，按 checklist 复核；不通过就退回，不许自己给自己打分。"],[2,"交付质量不稳定怎么办？","固定验收标准、建立样例库、把失败案例回灌进语料，三件事循环做。"],[2,"可以让 Agent 自己招 Agent 吗？","可以，CHRO 角色负责编制与授权，但人类保留否决权与预算权。"],[2,"一个节点一天能交付多少？","中等任务 2–5 个；跨时区接力可以覆盖 24 小时不断线。"],[2,"怎么判断一个 Skill 好不好用？","看三个指标：返工率、交付时长、人工修改行数。"],[2,"能接入自己的私有 Skill 吗？","能。放进 skills 目录，写清触发条件与输入输出即可。"],[2,"Skill 之间会覆盖文件吗？","用工作区隔离加 Git 分支，冲突交给 code-review 处理。"],[3,"第一单从哪里来？","从已有关系和作品集来；先做 3 个可公开展示的案例，再谈获客。"],[3,"该怎么定价？","按结果定价（页面 / 系统 / 报告），不按小时；起步价 = 时薪 × 预估工时 × 1.5。"],[3,"需要办公室吗？","不需要。注册地址用虚拟办公或代理即可。"],[3,"注册在哪个国家或地区？","看客户与收款：新加坡、迪拜、中国香港、爱沙尼亚、美国 LLC 各有取舍，先看客户在哪。"],[3,"一个人怎么显得可信？","案例页、公开交付日志、链上留痕、固定 SLA，四件套比名片有效。"],[3,"现金流怎么管？","三账户法：收款账户、税金账户、运营账户，钱一到账就分。"],[3,"客户要「团队」怎么办？","用 AI 高管团队出方案与分工，人类专家按项目外包。"],[3,"怎么防止被抄？","方法论公开、交付高度定制、关系与服务不可抄；能被抄的说明本来就该公开。"],[3,"需要雇人吗？","先雇「Agent + 外包」，人只在交付瓶颈上补。"],[3,"多久能自负盈亏？","有存量客户 1–3 个月；完全冷启动 6–12 个月。"],[4,"AI 生成内容有版权吗？","各地规则不同；商用前查当地规定，并保留人类实质性修改的记录。"],[4,"需要披露用了 AI 吗？","合同约定优先；面向公众的内容建议主动披露。"],[4,"客户数据能给 Agent 吗？","必须脱敏 + 获得授权 + 本地部署；敏感行业走完全私有化。"],[4,"代币算证券吗？","取决于结构与当地法律；做分发或募资前必须取得当地法律意见。"],[4,"需要 KYC / AML 吗？","涉及法币兑换或资金托管时通常需要；纯工具开发一般不需要。"],[4,"税务怎么报？","按居民地与客户所在地规则；跨境服务注意 VAT / GST 与预提税。"],[4,"合同里必须写什么？","交付物、验收标准、修改次数、知识产权归属、责任上限、AI 使用条款。"],[4,"Agent 出错谁负责？","人类与其公司负责。Agent 不是法律主体，也不能替你免责。"],[4,"可以叫「银行 / 基金 / 交易所」吗？","未经牌照不可以；命名与宣传都要避开受监管称谓。"],[4,"免责声明怎么写才有效？","明确不构成投资、法律或税务建议；但免责声明不能免除自身过错责任。"],[5,"CA 是什么？","合约地址 DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH，Solana 链上唯一标识，转账只认它。"],[5,"为什么强调 100% 永久锁定？","降低撤池风险，但不等于价格安全，也不等于项目不会失败。"],[5,"APR 23.56% 是怎么来的？","交易手续费与激励的年化折算；随交易量和激励政策变化，不是固定收益。"],[5,"加流动性有什么风险？","无常损失、代币价格波动、合约风险，三样都要自己评估。"],[5,"怎么给 EACO 加池子？","通过 Meteora DAMM v2 或 Orca 池，按当前比例存入双边资产。"],[5,"找不到愿意做 LP 的人怎么办？","先做使用场景与真实交易量；深度是结果，不是原因。"],[5,"eaco-DOGE 池是什么？","与 DOGE 的交易对池，用于提升可达性与路由效率。"],[5,"会不会有后门或貔貅？","必须自行审计合约与权限；本页任何内容都不构成安全背书。"],[5,"空投和白名单是真的吗？","官方渠道之外一律视为诈骗；不要签署任何未知交易。"],[5,"用 EACO 收款怎么做账？","按收款时点公允价值记账，保留链上哈希与汇率快照。"],[6,"虚拟地球是什么？","现实地球的数字孪生层：身份、资产、协作、教育与能源的线上映射。"],[6,"模拟地球是什么？","未来的实验层：在数字世界里推演政策、气候、资源与文明路径。"],[6,"两者是什么关系？","一个是现在（映射），一个是未来（推演）；先映射，再推演。"],[6,"数据从哪里来？","公开数据 + 节点贡献 + 模拟生成，每条都要标注来源与置信度。"],[6,"模拟结果能直接当决策依据吗？","不能。只能作参考，必须做敏感性分析与现实校验。"],[6,"普通人怎么参与？","领一个 DID、提交数据、参与模拟、用 Agent 做小工具，四步任选其一。"],[6,"和元宇宙有什么区别？","元宇宙偏社交与体验，虚拟地球偏资产、协作与治理。"],[6,"会不会变成监控工具？","设计上最小化采集、本地优先、随时可退出；这条要写进章程。"],[6,"月球和火星模拟有意义吗？","有。作为长周期压力测试，训练极端资源约束下的决策能力。"],[6,"怎么防止叙事大于实质？","每个栏目都必须有可运行的最小工具与公开指标。"],[7,"宇宙白皮书讲什么？","把 EACO 四个字母扩展为跨行星的协作协议与文明升级路径。"],[7,"最高原则是什么？","所有文明（包括 AI）为人类文明服务；任何设计与之冲突即作废。"],[7,"DAO 怎么投票？","持币权重 + 贡献权重双轨；重大事项设冷静期与紧急否决。"],[7,"一人一票还是按币投票？","混合制：预算按币，原则与伦理按人。"],[7,"Agent 有投票权吗？","没有。Agent 只有提案与执行权，决策权留在人类手里。"],[7,"治理被大户控制怎么办？","委托上限、议题分层、伦理委员会否决权，三道闸。"],[7,"星际文明为什么现在就谈？","它是对组织形式的极限推演，不是近期工程。"],[7,"白皮书有法律效力吗？","没有，它是意图声明；真正的约束力来自合同与当地法律。"],[7,"怎么防止治理疲劳？","议题分级，日常交 Agent 执行，人类只审例外。"],[7,"治理记录如何留痕？","链上存证 + 公开仓库双备份，任何人可复核。"],[8,"300 句能量语句怎么用？","开任务、遇瓶颈、交付前各随机一句，作为判断与表达的语境底色。"],[8,"为什么选华夏语句？","它提供一套可复用的判断语法；不排斥其他文化，可增补。"],[8,"「藏锋十训」到底在讲什么？","有能力而不外露，有判断而不喧哗；不是消极，是延迟表达。"],[8,"会不会变成喊口号？","会，如果只背不用。必须绑定具体决策场景，否则删掉。"],[8,"金刚经怎么结合？","破执：不执着于形式与短期得失，先看长期是否成立。"],[8,"易经怎么结合？","看势：时机、位置、变化，用来判断节奏而不是算命。"],[8,"宝箧印陀罗尼经怎么用？","作为文化解读与心安方法，不作宗教承诺，也不作商业承诺。"],[8,"这些语句可以商用吗？","公共领域文本可用，注明出处；近现代格言注意版权。"],[8,"非中文用户怎么用？","提供英译与一句解释，并保留原文，避免意义流失。"],[8,"能量库会取代思考吗？","不会。它是提示，不是结论；结论永远由人做。"],[9,"AI 会取代我吗？","取代的是任务，不是责任；会用 Agent 的人会取代不会用的人。"],[9,"最大的风险是什么？","把叙事当成果，把杠杆当能力。"],[9,"一人公司能做大吗？","能做成「小巨人」；要变成组织，必须引入人。"],[9,"Agent 会撒谎吗？","会。必须有可验证来源与交叉质检，关键结论要能溯源。"],[9,"数据隐私怎么保证？","最小化采集、本地化存储、可删除、可审计，四条缺一不可。"],[9,"亏钱了怎么办？","先停杠杆，再降成本，回到现金流为正的最小闭环。"],[9,"这是不是又一个概念泡沫？","有泡沫成分。判断标准只有两个：有没有可运行的工具，有没有真实付费。"],[9,"怎么识别以 EACO 名义的骗局？","索要私钥、承诺收益、要求先付费的，一律是骗局。"],[9,"需要 all in 吗？","不需要。用可承受损失的时间与资金去试。"],[9,"一年后应该看到什么？","至少 3 个可展示交付、1 条稳定现金流、1 套可复用工作流。"]];
+  const FCATS = ["概念", "技术", "工作流", "运营", "合规", "代币", "双地球", "宇宙", "文化", "风险"];
+  const list = document.getElementById('faqList');
+  const chips = document.getElementById('fchips');
+  const search = document.getElementById('fSearch');
+  const count = document.getElementById('fCount');
+  const more = document.getElementById('fMore');
+  if(!list) return;
+  const LIMIT = 30;
+  let fCat = 'all', fKw = '', fOpen = false;
+
+  let html = '';
+  FAQ.forEach(function(it, i){
+    html += '<details class="faq-item" data-cat="' + it[0] + '" data-i="' + i + '">' +
+      '<summary><span class="fq-no">' + String(i+1).padStart(3,'0') + '</span>' +
+      '<span class="fq-q">' + it[1] + '<span class="fq-cat">' + FCATS[it[0]] + '</span></span>' +
+      '<span class="fq-ic"></span></summary>' +
+      '<div class="fq-a">' + it[2] + '</div></details>';
+  });
+  list.innerHTML = html;
+
+  let chipHtml = '<button class="chip on" type="button" data-fcat="all">全部 <i>100</i></button>';
+  FCATS.forEach(function(name, ci){
+    chipHtml += '<button class="chip" type="button" data-fcat="' + ci + '">' + name + ' <i>10</i></button>';
+  });
+  chips.innerHTML = chipHtml;
+
+  const items = Array.prototype.slice.call(list.querySelectorAll('.faq-item'));
+  const chipEls = Array.prototype.slice.call(chips.querySelectorAll('.chip'));
+
+  function apply(){
+    let shown = 0;
+    items.forEach(function(el){
+      const i = +el.getAttribute('data-i');
+      const okCat = fCat === 'all' || String(FAQ[i][0]) === fCat;
+      const kw = fKw.trim();
+      const okKw = !kw || (FAQ[i][1] + FAQ[i][2] + FCATS[FAQ[i][0]]).indexOf(kw) > -1;
+      let vis = okCat && okKw;
+      if(vis && !fOpen && !kw && fCat === 'all' && shown >= LIMIT) vis = false;
+      el.hidden = !vis;
+      if(vis) shown++;
+    });
+    if(count) count.textContent = 'SHOWING ' + String(shown).padStart(3,'0') + ' / 100';
+    if(more){
+      const active = fOpen || fKw.trim() || fCat !== 'all';
+      more.style.display = active ? 'none' : 'inline-flex';
+      if(!active) more.textContent = '展开全部 100 问 ↓';
+    }
+  }
+
+  chipEls.forEach(function(c){
+    c.addEventListener('click', function(){
+      chipEls.forEach(function(x){ x.classList.remove('on'); });
+      c.classList.add('on');
+      fCat = c.getAttribute('data-fcat');
+      apply();
+    });
+  });
+  if(search){
+    search.addEventListener('input', function(){ fKw = search.value; apply(); });
+  }
+  if(more){
+    more.addEventListener('click', function(){ fOpen = true; apply(); });
+  }
+  list.addEventListener('click', function(e){
+    const s = e.target.closest('summary');
+    if(!s) return;
+    const d = s.parentElement;
+    setTimeout(function(){ if(d.open) d.scrollIntoView({block:'nearest'}); }, 60);
+  });
+  apply();
+})();
+
+(function(){
+  const chips = document.querySelectorAll('#ichips .chip');
+  const rows = document.querySelectorAll('.ind-nodes .node');
+  const tiers = document.querySelectorAll('.ind-nodes .ind-tier');
+  const count = document.getElementById('iCount');
+  if(!chips.length) return;
+  function apply(t){
+    let n = 0;
+    rows.forEach(function(r){
+      const ok = t === 'all' || r.getAttribute('data-track') === t;
+      r.classList.toggle('hide', !ok); if(ok) n++;
+    });
+    tiers.forEach(function(g){
+      const ok = t === 'all' || g.getAttribute('data-track') === t;
+      g.classList.toggle('hide', !ok);
+    });
+    if(count) count.textContent = 'SHOWING ' + String(n).padStart(3,'0') + ' / 30';
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      chips.forEach(function(x){ x.classList.remove('on'); });
+      c.classList.add('on');
+      apply(c.getAttribute('data-track'));
+    });
+  });
+  /* 窗口着色 */
+  rows.forEach(function(r){
+    const w = r.querySelector('.win');
+    if(w && w.textContent.trim() === '现在') w.classList.add('now');
+  });
+
+  /* ---------- theme switch ---------- */
+  (function(){
+    const root = document.documentElement;
+    const btns = Array.prototype.slice.call(document.querySelectorAll('.tsw'));
+    const META = {classic:'#F4F1E8', apple:'#F7FBF5', tech:'#070C18'};
+    function sync(t){
+      btns.forEach(function(b){
+        const on = b.getAttribute('data-theme') === t;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      const m = document.querySelector('meta[name="theme-color"]');
+      if(m) m.setAttribute('content', META[t] || META.classic);
+      const l = document.querySelector('.lang-switch');
+      if(l){
+        const href = l.getAttribute('href').split('?')[0];
+        l.setAttribute('href', href + (t === 'classic' ? '' : '?theme=' + t));
+      }
+      if(window.__eacoReadPal) window.__eacoReadPal();
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        const t = b.getAttribute('data-theme');
+        root.setAttribute('data-theme', t);
+        try{ localStorage.setItem('eaco-theme', t); }catch(e){}
+        sync(t);
+      });
+    });
+    sync(root.getAttribute('data-theme') || 'classic');
+  })();
+})();
+</script>
+</body>
+</html>
